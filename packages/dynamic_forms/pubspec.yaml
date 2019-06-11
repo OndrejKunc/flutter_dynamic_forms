@@ -1,0 +1,18 @@
+name: dynamic_forms
+description: A flutter project with dynamic forms functionality
+version: 0.0.1
+
+environment:
+  sdk: ">=2.2.0 <3.0.0"
+
+dependencies:
+  xml: ^3.3.1
+  uuid: ^2.0.1
+  quiver: ^2.0.1
+  expression_language:
+    git:
+        url: https://github.com/OndrejKunc/flutter_dynamic_forms.git
+        path: packages/expression_language
+
+dev_dependencies:
+  test: ^1.5.3
