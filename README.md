@@ -1,6 +1,8 @@
 # flutter_dynamic_forms
 
-Dart libraries allowing you to consume complex external forms at runtime.
+[![Build Status](https://travis-ci.com/OndrejKunc/flutter_dynamic_forms.svg?branch=master)](https://travis-ci.com/OndrejKunc/flutter_dynamic_forms)
+
+A collection of flutter and dart libraries allowing you to consume complex external forms at runtime.
 
 ## Main goal
 
