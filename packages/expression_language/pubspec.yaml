@@ -11,4 +11,5 @@ dependencies:
 
 dev_dependencies:
   test: ^1.6.3
+  test_coverage: ^0.3.0+1
   gherkin: ^0.0.4

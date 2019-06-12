@@ -14,6 +14,7 @@ pubspec.lock
 coverage/
 .test_coverage.dart
 *.log
+coverage_badge.svg
 
 packages/expression_language/test/report.json
 

@@ -16,3 +16,4 @@ dependencies:
 
 dev_dependencies:
   test: ^1.5.3
+  test_coverage: ^0.3.0+1
