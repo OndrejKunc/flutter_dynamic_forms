@@ -22,7 +22,7 @@ script:
   - dart test/expressions_test.dart
   - pub run test_coverage
   - cp coverage/lcov.info ../../expression_language.lcov
-  - cd ../../dynamic_forms
+  - cd ../dynamic_forms
   - pub get
   - dart test/parser_test.dart.dart
   - pub run test_coverage
