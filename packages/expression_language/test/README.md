@@ -5,10 +5,7 @@ To run this example:
 1. Ensure dart is accessible in the command line (on your path variable)
 2. In a command prompt (from the root of this library):
     ```bash
-    cd test
-    cd parser_expression_test
-
-    dart test.dart
+    dart test/expressions_test.dart
     ```
 This will run the features files found in the folder `features`.
 
