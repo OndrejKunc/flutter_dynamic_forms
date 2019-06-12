@@ -7,9 +7,11 @@ A collection of flutter and dart libraries allowing you to consume complex exter
 
 ## Main goal
 
-The idea behind this project is to be able define your forms with all the inputs, validation logic and other rules on the server and consume it on the client without redeploying the app.
+The idea behind this project is to be able define your forms with all the inputs, validation logic and other rules on the server and consume it on the flutter client without redeploying the app.
 
 This is achieved by defining form via XML using XAML like syntax. It has its own expression language to define all the relationships between properties of each element.
+
+See [example project](packages/flutter_dynamic_forms/example) which contains working demo
 
 ## Form definition example
 
@@ -74,7 +76,7 @@ This is achieved by defining form via XML using XAML like syntax. It has its own
         <checkBox
             id="hideWelcomeCheckBox"
             value="false"
-            label="Hide welcome message"
-            />
+            label="Hide welcome message"/>
+    </formGroup >
 </form>
 ```
