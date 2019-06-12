@@ -1,0 +1,29 @@
+language: dart
+os:
+  - linux
+sudo: required
+dist: trusty
+dart:
+- 2.1.0
+addons:
+  chrome: stable
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - libstdc++6
+      - fonts-droid
+before_script:
+  - git clone https://github.com/flutter/flutter.git -b stable --depth 1
+  - ./flutter/bin/flutter doctor
+script:
+  - cd packages/expression_language
+  - pub get
+  - cd test
+  - dart test.dart
+  - cd ../../dynamic_forms
+  - pub get
+  - dart test/test.dart
+cache:
+  directories:
+    - $HOME/.pub-cache
