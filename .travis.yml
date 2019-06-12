@@ -24,7 +24,7 @@ script:
   - cp coverage/lcov.info ../../expression_language.lcov
   - cd ../dynamic_forms
   - pub get
-  - dart test/parser_test.dart.dart
+  - dart test/parser_test.dart
   - pub run test_coverage
   - cp coverage/lcov.info ../../dynamic_forms.lcov
 after_success:
