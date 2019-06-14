@@ -1,9 +1,9 @@
-import 'package:dynamic_forms/src/element_values/form_element_value.dart';
+import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/form_elements/form_elements.dart';
 import 'package:dynamic_forms/src/form_manager/form_item_value.dart';
 import 'package:dynamic_forms/src/iterators/form_element_iterator.dart';
+import 'package:dynamic_forms/src/iterators/form_element_value_iterator.dart';
 import 'package:expression_language/expression_language.dart';
-
 
 class FormManager {
   Form form;
@@ -21,24 +21,22 @@ class FormManager {
     return formValidations.values.every((v) => (v.isValid.value));
   }
 
-  List<FormItemValue> getFormData(){
-
+  List<FormItemValue> getFormData() {
     List<FormItemValue> result = List<FormItemValue>();
     var formElements = getFormElementIterator<FormElement>(form).toList();
 
     print("Form result:");
 
-    formElements.forEach((fe)
-    {  
+    formElements.forEach((fe) {
       var properties = fe.getProperties();
-      properties.forEach((name, propVal) 
-      { 
-        if (propVal is PrimitiveMutableElementValue && !(propVal is ElementValue<ExpressionProviderElement>) && !(propVal is ElementValue<List<ExpressionProviderElement>>)) 
-        {
-          result.add(FormItemValue(fe.id, name , propVal.value.toString()));
+      properties.forEach((name, propVal) {
+        if (propVal is PrimitiveMutableElementValue &&
+            !(propVal is ElementValue<ExpressionProviderElement>) &&
+            !(propVal is ElementValue<List<ExpressionProviderElement>>)) {
+          result.add(FormItemValue(fe.id, name, propVal.value.toString()));
           print("${fe.id} ${name} ${propVal.value.toString()}");
         }
-      }); 
+      });
     });
 
     return result;
@@ -65,5 +63,25 @@ class FormManager {
     mutableValue.setValue(value);
 
     return;
+  }
+
+  Form cloneForm() {
+    var clonedForm = form.clone(null);
+    var formElementMap = Map<String, FormElement>.fromIterable(
+        getFormElementIterator<FormElement>(form),
+        key: (x) => x.id,
+        value: (x) => x);
+    _buildCloneableExpressions(clonedForm, formElementMap);
+    return clonedForm;
+  }
+
+  void _buildCloneableExpressions(
+      Form form, Map<String, FormElement> expressionProviderElementMap) {
+    var formElementExpressions =
+        getFormElementValueIterator<CloneableExpressionElementValue>(form);
+
+    for (var expressionValue in formElementExpressions) {
+      expressionValue.buildExpression(expressionProviderElementMap);
+    }
   }
 }

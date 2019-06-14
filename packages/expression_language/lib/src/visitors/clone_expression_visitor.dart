@@ -2,11 +2,11 @@ import 'dart:collection';
 import 'package:expression_language/expression_language.dart';
 import 'package:expression_language/src/visitors/expression_visitor.dart';
 
-class CopyExpressionVisitor extends ExpressionVisitor {
+class CloneExpressionVisitor extends ExpressionVisitor {
   final Map<String, ExpressionProviderElement> _expressionProviderElementMap;
   final Queue<Expression> _expressionStack = Queue<Expression>();
 
-  CopyExpressionVisitor(this._expressionProviderElementMap);
+  CloneExpressionVisitor(this._expressionProviderElementMap);
 
   void push(Expression expression) {
     _expressionStack.addLast(expression);

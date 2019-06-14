@@ -19,4 +19,18 @@ class DropdownButton extends FormElement {
     this.options = registerElementValue("options", options);
     this.value = registerElementValue("value", value);
   }
+
+  @override
+  ExpressionProviderElement clone(
+      ExpressionProvider<ExpressionProviderElement> parent) {
+    var result = DropdownButton();
+    result.fillDropdownButton(
+      id: this.id,
+      parent: parent,
+      isVisible: this.isVisible.clone(),
+      options: cloneChildren(this.options, result),
+      value: this.value.clone(),
+    );
+    return result;
+  }
 }

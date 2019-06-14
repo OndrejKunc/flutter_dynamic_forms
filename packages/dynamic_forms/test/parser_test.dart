@@ -304,4 +304,10 @@ class TestFormElement extends FormElement {
         "value": PrimitiveMutableElementValue<Integer>(Integer(27)),
         "label": PrimitiveMutableElementValue<String>("LabelText")
       };
+
+  @override
+  ExpressionProviderElement clone(ExpressionProvider<ExpressionProviderElement> parent) {
+    //Nothing to do
+    return null;
+  }
 }

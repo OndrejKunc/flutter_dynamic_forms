@@ -17,4 +17,17 @@ class FormGroup extends FormElement {
     this.children = registerElementValue("children", children);
     this.name = registerElementValue("name", name);
   }
+
+  @override
+  ExpressionProviderElement clone(ExpressionProvider<ExpressionProviderElement> parent) {
+    var result = FormGroup();
+    result.fillFormGroup(
+      id: this.id,
+      parent: parent,
+      isVisible: this.isVisible.clone(),
+      children: cloneChildren(children, result),
+      name: this.name.clone(),
+    );
+    return result;
+  }
 }

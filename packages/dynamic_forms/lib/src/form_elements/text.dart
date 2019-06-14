@@ -25,4 +25,20 @@ class Text extends FormElement {
     this.textInputType = registerElementValue("textInputType", textInputType);
     this.validations = registerElementValue("validations", validations);
   }
+
+  @override
+  ExpressionProviderElement clone(
+      ExpressionProvider<ExpressionProviderElement> parent) {
+    var result = Text();
+    result.fillText(
+      id: this.id,
+      parent: parent,
+      isVisible: this.isVisible.clone(),
+      value: this.value.clone(),
+      label: this.label.clone(),
+      textInputType: this.textInputType.clone(),
+      validations: cloneChildren(this.validations, result),
+    );
+    return result;
+  }
 }

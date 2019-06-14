@@ -104,6 +104,12 @@ class TestElement extends ExpressionProviderElement {
     }
     return properties[propertyName];
   }
+
+  @override
+  ExpressionProviderElement clone(ExpressionProvider<ExpressionProviderElement> parent) {
+    //Nothing to do
+    return null;
+  }
 }
 
 class ConstantExpressionProvider<T> extends ExpressionProvider<T> {

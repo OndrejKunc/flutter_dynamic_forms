@@ -1,6 +1,6 @@
 library dynamic_forms;
 
-export './src/element_values/form_element_value.dart';
+export './src/element_values/element_values.dart';
 export './src/form_elements/form_elements.dart';
 export './src/form_manager/form_manager.dart';
 export './src/form_manager/form_item_value.dart';

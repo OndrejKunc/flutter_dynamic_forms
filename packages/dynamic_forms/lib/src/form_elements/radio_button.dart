@@ -18,4 +18,18 @@ class RadioButton extends FormElement {
     this.label = registerElementValue("label", label);
     this.value = registerElementValue("value", value);
   }
+
+  @override
+  ExpressionProviderElement clone(
+      ExpressionProvider<ExpressionProviderElement> parent) {
+    var result = RadioButton();
+    result.fillRadioButton(
+      id: this.id,
+      parent: parent,
+      isVisible: this.isVisible.clone(),
+      label: this.label.clone(),
+      value: this.value.clone(),
+    );
+    return result;
+  }
 }

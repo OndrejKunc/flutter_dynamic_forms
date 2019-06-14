@@ -18,4 +18,18 @@ class Validation extends FormElement {
     this.isValid = registerElementValue("isValid", isValid);
     this.message = registerElementValue("message", message);
   }
+
+  @override
+  ExpressionProviderElement clone(
+      ExpressionProvider<ExpressionProviderElement> parent) {
+    var result = Validation();
+    result.fillValidation(
+      id: this.id,
+      parent: parent,
+      isVisible: this.isVisible.clone(),
+      isValid: this.isValid.clone(),
+      message: this.message.clone(),
+    );
+    return result;
+  }
 }

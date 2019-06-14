@@ -1,4 +1,4 @@
-import 'package:dynamic_forms/src/element_values/form_element_value.dart';
+import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/form_elements/form_elements.dart';
 import 'package:dynamic_forms/src/form_manager/form_manager.dart';
 import 'package:dynamic_forms/src/iterators/form_element_iterator.dart';
@@ -21,7 +21,7 @@ class FormManagerBuilder {
         value: (x) => x);
     var expressionGrammarDefinition = ExpressionGrammarParser(formElementMap);
     var parser = expressionGrammarDefinition.build();
-    buildElementsExpressions(form, parser);
+    _buildStringExpressions(form, parser);
     buildElementsSubscriptionDependencies(form);
 
     var formValidations = Map<String, Validation>.fromIterable(
@@ -30,27 +30,25 @@ class FormManagerBuilder {
         value: (x) => x);
 
     var formPrimitiveMutableValues =
-        getFormElementValueIterator<PrimitiveMutableElementValue>(form).toList();
+        getFormElementValueIterator<PrimitiveMutableElementValue>(form)
+            .toList();
 
     return FormManager(
         form, formElementMap, formValidations, formPrimitiveMutableValues);
   }
 
-  void buildElementsExpressions(Form form, Parser parser) {
+  void _buildStringExpressions(Form form, Parser parser) {
     var formElementExpressions =
-        getFormElementValueIterator<ExpressionElementValue>(form);
-    
+        getFormElementValueIterator<StringExpressionElementValue>(form);
+
     for (var expressionValue in formElementExpressions) {
-      if (expressionValue is StringExpressionElementValue) {
-        expressionValue.buildExpression(parser);
-      }
+      expressionValue.buildExpression(parser);
     }
   }
 
-
   void buildElementsSubscriptionDependencies(Form form) {
     var formElementValues = getFormElementValueIterator<ElementValue>(form);
-    
+
     for (var elementValue in formElementValues) {
       var elementsValuesCollectorVisitor = ExpressionProviderCollectorVisitor();
       elementValue.getExpression().accept(elementsValuesCollectorVisitor);

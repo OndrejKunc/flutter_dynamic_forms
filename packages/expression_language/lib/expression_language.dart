@@ -6,6 +6,7 @@ export './src/parser/expression_grammar_parser.dart';
 export './src/visitors/expression_visitor.dart';
 export './src/visitors/expression_provider_collector_visitor.dart';
 export './src/visitors/traversal_expression_visitor.dart';
+export './src/visitors/clone_expression_visitor.dart';
 export './src/expressions/expression_provider.dart';
 export './src/expressions/expressions.dart';
 export './src/number_type/decimal.dart';
