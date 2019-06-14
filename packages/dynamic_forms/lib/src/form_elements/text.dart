@@ -37,7 +37,7 @@ class Text extends FormElement {
       value: this.value.clone(),
       label: this.label.clone(),
       textInputType: this.textInputType.clone(),
-      validations: cloneChildren(this.validations, result),
+      validations: cloneChildren<Validation>(this.validations, result),
     );
     return result;
   }

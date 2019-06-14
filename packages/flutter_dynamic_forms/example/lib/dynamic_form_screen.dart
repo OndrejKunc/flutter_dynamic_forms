@@ -46,7 +46,10 @@ class _DynamicFormScreenState extends State<DynamicFormScreen> {
       bloc: BlocProvider.of<DynamicFormBloc>(context),
       builder: (context, state) {
         if (state.form == null) {
-          return Center(child: CircularProgressIndicator());
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(child: CircularProgressIndicator()),
+          );
         }
         return Center(
           child: SingleChildScrollView(

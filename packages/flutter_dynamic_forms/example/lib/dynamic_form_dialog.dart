@@ -21,36 +21,33 @@ class _DynamicFormDialogState extends State<DynamicFormDialog> {
     var bloc = BlocProvider.of<DynamicFormBloc>(context);
 
     return Scaffold(
-        body: Stack(
-      children: [
-        Center(
-          child: SingleChildScrollView(
-            child: BlocListener<FormElementEvent, DynamicFormState>(
+      body: Center(
+        child: SingleChildScrollView(
+          child: BlocListener<FormElementEvent, DynamicFormState>(
+            bloc: bloc,
+            listener: (context, state) {
+              if (state.resultItemValues != null &&
+                  state.resultItemValues.isNotEmpty) {
+                _displayDialog(context, state.resultItemValues);
+              }
+            },
+            child: BlocBuilder<FormElementEvent, DynamicFormState>(
               bloc: bloc,
-              listener: (context, state) {
-                if (state.resultItemValues != null &&
-                    state.resultItemValues.isNotEmpty) {
-                  _displayDialog(context, state.resultItemValues);
-                }
-              },
-              child: BlocBuilder<FormElementEvent, DynamicFormState>(
-                bloc: bloc,
-                builder: (context, state) {
-                  Column result = Column(children: <Widget>[
-                    DynamicFormScreen(),
-                  ]);
+              builder: (context, state) {
+                Column result = Column(children: <Widget>[
+                  DynamicFormScreen(),
+                ]);
 
-                  if (!state.isLoading) {
-                    result.children.add(OkCancelButtonRow(bloc, state));
-                  }
-                  return result;
-                },
-              ),
+                if (!state.isLoading) {
+                  result.children.add(OkCancelButtonRow(bloc, state));
+                }
+                return result;
+              },
             ),
           ),
-        )
-      ],
-    ));
+        ),
+      ),
+    );
   }
 
   void _displayDialog(

@@ -22,6 +22,20 @@ class FormManagerBuilder {
     var expressionGrammarDefinition = ExpressionGrammarParser(formElementMap);
     var parser = expressionGrammarDefinition.build();
     _buildStringExpressions(form, parser);
+    return _build(form, formElementMap);
+  }
+
+  FormManager buildFromForm(Form form) {
+    var clonedForm = form.clone(null);
+    var formElementMap = Map<String, FormElement>.fromIterable(
+        getFormElementIterator<FormElement>(form),
+        key: (x) => x.id,
+        value: (x) => x);
+    _buildCloneableExpressions(clonedForm, formElementMap);
+    return _build(form, formElementMap);
+  }
+
+  FormManager _build(Form form, Map<String, FormElement> formElementMap) {
     buildElementsSubscriptionDependencies(form);
 
     var formValidations = Map<String, Validation>.fromIterable(
@@ -35,6 +49,16 @@ class FormManagerBuilder {
 
     return FormManager(
         form, formElementMap, formValidations, formPrimitiveMutableValues);
+  }
+
+  void _buildCloneableExpressions(
+      Form form, Map<String, FormElement> expressionProviderElementMap) {
+    var formElementExpressions =
+        getFormElementValueIterator<CloneableExpressionElementValue>(form);
+
+    for (var expressionValue in formElementExpressions) {
+      expressionValue.buildExpression(expressionProviderElementMap);
+    }
   }
 
   void _buildStringExpressions(Form form, Parser parser) {

@@ -9,7 +9,7 @@ class PrimitiveMutableElementValue<T> extends ElementValue<T> {
 
   PrimitiveMutableElementValue(T _value, [T _initialValue]) {
     _cachedValue = _value;
-    _initialValue = _initialValue ?? _value;
+    this._initialValue = _initialValue ?? _value;
     expression = MutableExpression(_value);
   }
 

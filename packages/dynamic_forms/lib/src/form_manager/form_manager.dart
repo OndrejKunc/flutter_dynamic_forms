@@ -65,16 +65,6 @@ class FormManager {
     return;
   }
 
-  Form cloneForm() {
-    var clonedForm = form.clone(null);
-    var formElementMap = Map<String, FormElement>.fromIterable(
-        getFormElementIterator<FormElement>(form),
-        key: (x) => x.id,
-        value: (x) => x);
-    _buildCloneableExpressions(clonedForm, formElementMap);
-    return clonedForm;
-  }
-
   void _buildCloneableExpressions(
       Form form, Map<String, FormElement> expressionProviderElementMap) {
     var formElementExpressions =
