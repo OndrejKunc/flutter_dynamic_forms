@@ -20,7 +20,7 @@ class RequiredValidation extends Validation {
         LessThanExpression(
           ConstantExpression(Integer(0)),
           LengthFunctionExpression(
-            DelegateExpression(
+            DelegateExpression(["parent"],
               parent.value.getExpressionProvider(),
             ),
           ),
