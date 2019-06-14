@@ -52,10 +52,10 @@ class FormManagerBuilder {
     var formElementValues = getFormElementValueIterator<ElementValue>(form);
     
     for (var elementValue in formElementValues) {
-      var elementsValuesCollectorVisitor = ElementsValueCollectorVisitor();
+      var elementsValuesCollectorVisitor = ExpressionProviderCollectorVisitor();
       elementValue.getExpression().accept(elementsValuesCollectorVisitor);
       for (var sourceElementValue
-          in elementsValuesCollectorVisitor.elementsValues) {
+          in elementsValuesCollectorVisitor.expressionProviders) {
         (sourceElementValue as ElementValue).addSubscriber(elementValue);
       }
     }

@@ -16,6 +16,8 @@ class CopyExpressionVisitor extends ExpressionVisitor {
     return _expressionStack.removeLast();
   }
 
+  Expression get result => _expressionStack.first;
+
   @override
   void visitConditionalExpression<T>(ConditionalExpression<T> expression) {
     expression.condition.accept(this);
