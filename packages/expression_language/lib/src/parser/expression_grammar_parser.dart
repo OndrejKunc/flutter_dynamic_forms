@@ -170,24 +170,27 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
       });
 
   Parser reference() => super.reference().map((c) {
+        var expressionPath = List<String>();
         String elementId = c[1];
+        expressionPath.add(elementId);
         var expressionProviderElement = expressionProviderElementMap[elementId];
         if(expressionProviderElement == null) throw NullReferenceException("Reference named {$elementId} does not exist.");
         ExpressionProvider expressionProvider;
         if (c[2].length == 0) {
           expressionProvider =
               expressionProviderElement.getExpressionProvider();
-          return createDelegateExpression(expressionProvider);
+          return createDelegateExpression(expressionPath, expressionProvider);
         }
         for (var i = 0; i < c[2].length; i ++) {
           var propertyName = c[2][i][1];
+          expressionPath.add(propertyName);
           expressionProvider =
             expressionProviderElement.getExpressionProvider(propertyName);
             if (expressionProvider is ExpressionProvider<ExpressionProviderElement>){
               expressionProviderElement = expressionProvider.getExpression().evaluate();
             }
         }
-        return createDelegateExpression(expressionProvider);
+        return createDelegateExpression(expressionPath, expressionProvider);
       });
 
   Parser integerNumber() => super
