@@ -2,7 +2,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class DynamicFormState {
+class TransitionFormState {
   final Form form;
 
   final bool isLoading;
@@ -13,18 +13,18 @@ class DynamicFormState {
 
   bool get isEmpty => form.children.value.length == 0;
 
-  DynamicFormState(
+  TransitionFormState(
       {this.form,
       this.isLoading = false,
       this.isValid = false,
       this.resultItemValues});
 
-  DynamicFormState copyWith(
+  TransitionFormState copyWith(
       {Form form,
       bool isLoading,
       bool isValid,
       List<FormItemValue> resultItemValues}) {
-    return DynamicFormState(
+    return TransitionFormState(
         form: form ?? this.form,
         isLoading: isLoading ?? this.isLoading,
         isValid: isValid ?? this.isValid,
