@@ -61,5 +61,4 @@
             label="Hide welcome message"
             />
     </formGroup>
-    <address id="testaddress" label="Dorucovaci adresa:" />
 </form>

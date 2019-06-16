@@ -13,66 +13,26 @@ class TransitionFormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var bloc = BlocProvider.of<TransitionFormBloc>(context);
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: BlocListener<FormElementEvent, TransitionFormState>(
+      appBar: AppBar(
+        title: flutter.Text('Transition dynamic forms'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: BlocBuilder<FormElementEvent, TransitionFormState>(
             bloc: bloc,
-            listener: (context, state) {
-              if (state.resultItemValues != null &&
-                  state.resultItemValues.isNotEmpty) {
-                _displayDialog(context, state.resultItemValues);
-              }
-            },
-            child: BlocBuilder<FormElementEvent, TransitionFormState>(
-              bloc: bloc,
-              builder: (context, state) {
-                Column result = Column(children: <Widget>[
+            builder: (context, state) {
+              return Column(
+                children: <Widget>[
+                  TransitionFormButtonRow(bloc, state),
                   TransitionFormContainer(),
-                ]);
-
-                if (!state.isLoading) {
-                  result.children.add(TransitionFormButtonRow(bloc, state));
-                }
-                return result;
-              },
-            ),
+                ],
+              );
+            },
           ),
         ),
       ),
     );
-  }
-
-  void _displayDialog(
-      BuildContext context, List<FormItemValue> resultItemValues) async {
-    var bloc = BlocProvider.of<TransitionFormBloc>(context);
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: flutter.Text('Form data'),
-            content: Container(
-              width: double.maxFinite,
-              height: 300.0,
-              child: ListView(
-                padding: EdgeInsets.all(8.0),
-                //map List of our data to the ListView
-                children: resultItemValues
-                    .map((riv) => flutter.Text(
-                        "${riv.name} ${riv.property} ${riv.value}"))
-                    .toList(),
-              ),
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                child: flutter.Text('Ok'),
-                onPressed: () {
-                  bloc.dispatch(ClearFormDataEvent());
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
-        });
   }
 }
 
@@ -95,46 +55,49 @@ class TransitionFormButtonRow extends StatelessWidget {
         OutlineButton(
           child: Row(
             children: <Widget>[
-              flutter.Text("Cancel"),
-              SizedBox(width: 10),
-              Icon(Icons.cancel, color: Colors.red),
-            ],
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        SizedBox(width: 10),
-        OutlineButton(
-          child: Row(
-            children: <Widget>[
-              flutter.Text("Clear"),
-              SizedBox(width: 10),
-              Icon(Icons.clear_all, color: Colors.red),
-            ],
-          ),
-          onPressed: () {
-            bloc.dispatch(ClearFormEvent());
-          },
-        ),
-        SizedBox(width: 10),
-        OutlineButton(
-          child: Row(
-            children: <Widget>[
-              flutter.Text("Ok"),
+              flutter.Text("Form 1"),
               SizedBox(width: 10),
               Icon(
-                Icons.check_circle,
-                color: Colors.green,
+                Icons.list,
+                color: Colors.red,
               ),
             ],
           ),
-          onPressed: state.isValid
-              ? () {
-                  bloc.dispatch(RequestFormDataEvent());
-                }
-              : null,
-        )
+          onPressed: () {
+            bloc.dispatch(LoadFormEvent(1));
+          },
+        ),
+        SizedBox(width: 10),
+        OutlineButton(
+          child: Row(
+            children: <Widget>[
+              flutter.Text("Form 2"),
+              SizedBox(width: 10),
+              Icon(
+                Icons.list,
+                color: Colors.blue,
+              ),
+            ],
+          ),
+          onPressed: () {
+            bloc.dispatch(LoadFormEvent(2));
+          },
+        ),
+        SizedBox(width: 10),
+        OutlineButton(
+            child: Row(
+              children: <Widget>[
+                flutter.Text("Form 3"),
+                SizedBox(width: 10),
+                Icon(
+                  Icons.list,
+                  color: Colors.green,
+                ),
+              ],
+            ),
+            onPressed: () {
+              bloc.dispatch(LoadFormEvent(3));
+            })
       ],
     );
   }

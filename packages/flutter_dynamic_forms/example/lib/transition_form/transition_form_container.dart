@@ -38,7 +38,7 @@ class _TransitionFormContainerState extends State<TransitionFormContainer> {
       ],
       dispatcher: BlocProvider.of<TransitionFormBloc>(context).dispatch,
     );
-    BlocProvider.of<TransitionFormBloc>(context).dispatch(LoadFormEvent());
+    BlocProvider.of<TransitionFormBloc>(context).dispatch(LoadFormEvent(1));
   }
 
   @override

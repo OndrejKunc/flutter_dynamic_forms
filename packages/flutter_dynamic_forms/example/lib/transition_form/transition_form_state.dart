@@ -9,15 +9,10 @@ class TransitionFormState {
 
   final bool isValid;
 
-  final List<FormItemValue> resultItemValues;
-
   bool get isEmpty => form.children.value.length == 0;
 
   TransitionFormState(
-      {this.form,
-      this.isLoading = false,
-      this.isValid = false,
-      this.resultItemValues});
+      {this.form, this.isLoading = false, this.isValid = false});
 
   TransitionFormState copyWith(
       {Form form,
@@ -27,7 +22,6 @@ class TransitionFormState {
     return TransitionFormState(
         form: form ?? this.form,
         isLoading: isLoading ?? this.isLoading,
-        isValid: isValid ?? this.isValid,
-        resultItemValues: resultItemValues ?? this.resultItemValues);
+        isValid: isValid ?? this.isValid);
   }
 }

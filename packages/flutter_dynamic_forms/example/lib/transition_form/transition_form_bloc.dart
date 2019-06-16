@@ -18,11 +18,9 @@ class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
   @override
   Stream<TransitionFormState> mapEventToState(FormElementEvent event) async* {
     if (event is LoadFormEvent) {
-      yield currentState.copyWith(isLoading: true);
-
-      await Future.delayed(Duration(seconds: 1));
-      var xml =
-          await rootBundle.loadString("assets/test_form1.xml", cache: false);
+      var xml = await rootBundle.loadString(
+          "assets/transition_form${event.formNumber}.xml",
+          cache: false);
       formManager = formManagerBuilder.build(xml);
 
       yield currentState.copyWith(
@@ -38,24 +36,6 @@ class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
           isLoading: false,
           isValid: formManager.isFormValid,
           form: formManager.form);
-      return;
-    }
-
-    if (event is RequestFormDataEvent) {
-      yield currentState.copyWith(
-          isLoading: false,
-          isValid: formManager.isFormValid,
-          form: formManager.form,
-          resultItemValues: formManager.getFormData());
-      return;
-    }
-
-    if (event is ClearFormDataEvent) {
-      yield currentState.copyWith(
-          isLoading: false,
-          isValid: formManager.isFormValid,
-          form: formManager.form,
-          resultItemValues: List<FormItemValue>());
       return;
     }
 
