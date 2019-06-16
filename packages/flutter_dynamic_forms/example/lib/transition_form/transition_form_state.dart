@@ -5,23 +5,24 @@ import 'package:meta/meta.dart';
 class TransitionFormState {
   final Form form;
 
-  final bool isLoading;
-
+  final bool isInTranstion;
+  final int selectedForm;
   final bool isValid;
 
   bool get isEmpty => form.children.value.length == 0;
 
   TransitionFormState(
-      {this.form, this.isLoading = false, this.isValid = false});
+      {this.form,
+      this.isInTranstion = false,
+      this.isValid = false,
+      this.selectedForm = 1});
 
   TransitionFormState copyWith(
-      {Form form,
-      bool isLoading,
-      bool isValid,
-      List<FormItemValue> resultItemValues}) {
+      {Form form, bool isInTransition, bool isValid, int selectedForm}) {
     return TransitionFormState(
         form: form ?? this.form,
-        isLoading: isLoading ?? this.isLoading,
-        isValid: isValid ?? this.isValid);
+        isInTranstion: isInTransition ?? this.isInTranstion,
+        isValid: isValid ?? this.isValid,
+        selectedForm: selectedForm ?? this.selectedForm);
   }
 }

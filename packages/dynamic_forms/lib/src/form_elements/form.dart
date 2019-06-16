@@ -18,7 +18,8 @@ class Form extends FormGroup {
   }
 
   @override
-  ExpressionProviderElement clone(ExpressionProvider<ExpressionProviderElement> parent) {
+  ExpressionProviderElement clone(
+      ExpressionProvider<ExpressionProviderElement> parent) {
     var result = Form();
     result.fillForm(
       id: this.id,

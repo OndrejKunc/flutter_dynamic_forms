@@ -1,16 +1,20 @@
 import 'package:bloc/bloc.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
+import 'package:example/transition_form/transition_form_builder.dart';
 import 'package:example/transition_form/transition_form_event.dart';
 import 'package:example/transition_form/transition_form_state.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
 class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
+  static const Duration transitionDuration = Duration(seconds: 1);
+
   final FormManagerBuilder formManagerBuilder;
+  final TransitionFormBuilder transitionFormBuilder;
 
   FormManager formManager;
 
-  TransitionFormBloc(this.formManagerBuilder);
+  TransitionFormBloc(this.formManagerBuilder, this.transitionFormBuilder);
 
   @override
   TransitionFormState get initialState => TransitionFormState();
@@ -21,21 +25,36 @@ class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
       var xml = await rootBundle.loadString(
           "assets/transition_form${event.formNumber}.xml",
           cache: false);
+      var oldForm = formManager?.form;
       formManager = formManagerBuilder.build(xml);
+      var state = currentState;
+      if (oldForm != null) {
+        var transitionForm =
+            transitionFormBuilder.buildTranstionForm(oldForm, formManager.form);
+        state = currentState.copyWith(
+            isInTransition: true,
+            isValid: true,
+            form: transitionForm,
+            selectedForm: event.formNumber);
+        yield state;
+        await Future.delayed(transitionDuration);
+      }
 
-      yield currentState.copyWith(
-          isLoading: false,
+      yield state.copyWith(
+          isInTransition: false,
           isValid: formManager.isFormValid,
-          form: formManager.form);
+          form: formManager.form,
+          selectedForm: event.formNumber);
       return;
     }
 
     if (event is ClearFormEvent) {
       formManager.resetForm();
       yield currentState.copyWith(
-          isLoading: false,
-          isValid: formManager.isFormValid,
-          form: formManager.form);
+        isInTransition: false,
+        isValid: formManager.isFormValid,
+        form: formManager.form,
+      );
       return;
     }
 

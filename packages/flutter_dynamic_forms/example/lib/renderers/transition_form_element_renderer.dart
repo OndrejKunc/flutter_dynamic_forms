@@ -1,4 +1,5 @@
 import 'package:example/models/transition_form_element.dart';
+import 'package:example/transition_form/transition_form_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
@@ -11,17 +12,34 @@ class TransitionFormElementRenderer
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
     var child = renderer(element.child, context);
+    //   switch (element.transitionType) {
+    //     case FormElementTransitionType.show:
+    //       return ExpandedSection(
+    //         child: child,
+    //         expand: true,
+    //       );
+    //       break;
+    //     case FormElementTransitionType.hide:
+    //       return ExpandedSection(
+    //         child: child,
+    //         expand: false,
+    //       );
+    //       break;
+    //     default:
+    //       throw Exception("Unknown transition type");
+    //   }
+    // }
     switch (element.transitionType) {
       case FormElementTransitionType.show:
-        return ExpandedSection(
+        return Container(
           child: child,
-          expand: true,
+          color: Colors.green,
         );
         break;
       case FormElementTransitionType.hide:
-        return ExpandedSection(
+        return Container(
           child: child,
-          expand: false,
+          color: Colors.red,
         );
         break;
       default:
@@ -53,7 +71,7 @@ class _ExpandedSectionState extends State<ExpandedSection>
   ///Setting up the animation
   void prepareAnimations() {
     expandController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 3000));
+        vsync: this, duration: TransitionFormBloc.transitionDuration);
     Animation curve = CurvedAnimation(
       parent: expandController,
       curve: Curves.linear,

@@ -8,3 +8,5 @@ export './src/form_manager/form_manager_builder.dart';
 export './src/parser/parsing_helpers.dart';
 export './src/parser/parser.dart';
 export './src/parser/parsing_helpers.dart';
+export './src/iterators/form_element_iterator.dart';
+export './src/iterators/form_element_value_iterator.dart';

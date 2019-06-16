@@ -20,21 +20,13 @@
                 <requiredValidation
                   message="First name is required"/>
             </text.validations>
-        </text>
-        <text
-            id="lastName"
-            label="Enter your last name">
-            <text.validations>
-                <requiredValidation
-                  message="Last name is required"/>
-            </text.validations>
-        </text>
+        </text>        
         <label
             id="fullNameLabel">
             <label.value>
                 <expression>
                     <![CDATA[
-                        @firstName + (length(@firstName) > 0 && length(@lastName) > 0 ? " " : "") + @lastName
+                        @firstName
                     ]]>
                 </expression>
             </label.value>

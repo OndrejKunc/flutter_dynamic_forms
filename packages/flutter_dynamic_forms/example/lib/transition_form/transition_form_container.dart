@@ -6,6 +6,7 @@ import 'package:example/renderers/label_renderer.dart';
 import 'package:example/renderers/radio_button_group_renderer.dart';
 import 'package:example/renderers/radio_button_widget.dart';
 import 'package:example/renderers/text_renderer.dart';
+import 'package:example/renderers/transition_form_element_renderer.dart';
 import 'package:example/transition_form/transition_form_bloc.dart';
 import 'package:example/transition_form/transition_form_event.dart';
 import 'package:example/transition_form/transition_form_state.dart';
@@ -34,7 +35,8 @@ class _TransitionFormContainerState extends State<TransitionFormContainer> {
         TextRenderer(),
         RadioButtonGroupRenderer(),
         RadioButtonRenderer(),
-        DropdownButtonRenderer()
+        DropdownButtonRenderer(),
+        TransitionFormElementRenderer(),
       ],
       dispatcher: BlocProvider.of<TransitionFormBloc>(context).dispatch,
     );

@@ -18,6 +18,6 @@ class PrimitiveImmutableElementValue<T> extends ElementValue<T> {
 
   @override
   ElementValue<T> clone() {
-    return PrimitiveImmutableElementValue(this._value);
+    return PrimitiveImmutableElementValue(_value);
   }
 }

@@ -32,7 +32,7 @@ class FormManagerBuilder {
         key: (x) => x.id,
         value: (x) => x);
     _buildCloneableExpressions(clonedForm, formElementMap);
-    return _build(form, formElementMap);
+    return _build(clonedForm, formElementMap);
   }
 
   FormManager _build(Form form, Map<String, FormElement> formElementMap) {

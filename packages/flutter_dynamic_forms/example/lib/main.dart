@@ -2,6 +2,7 @@ import 'package:dynamic_forms/dynamic_forms.dart' as forms;
 import 'package:example/dynamic_form/dynamic_form_bloc.dart';
 import 'package:example/dynamic_form/dynamic_form_screen.dart';
 import 'package:example/transition_form/transition_form_bloc.dart';
+import 'package:example/transition_form/transition_form_builder.dart';
 import 'package:example/transition_form/transition_form_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_extensions/flutter_bloc_extensions.dart';
@@ -77,17 +78,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     padding: const EdgeInsets.only(top: 16),
                     child: RaisedButton(
                       onPressed: () {
+                        var formManagerBuilder = forms.FormManagerBuilder(
+                          forms.FormParserService(
+                            forms.getDefaultParserList(),
+                          ),
+                        );
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => DisposableBlocProvider(
                                   blocFactory: () {
                                     return TransitionFormBloc(
-                                      forms.FormManagerBuilder(
-                                        forms.FormParserService(
-                                          forms.getDefaultParserList(),
-                                        ),
-                                      ),
+                                      formManagerBuilder,
+                                      TransitionFormBuilder(formManagerBuilder),
                                     );
                                   },
                                   child: TransitionFormScreen(),
