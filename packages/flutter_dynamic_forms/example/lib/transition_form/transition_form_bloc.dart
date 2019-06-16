@@ -7,7 +7,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
 class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
-  static const Duration transitionDuration = Duration(seconds: 1);
+  static const Duration transitionDuration = Duration(milliseconds: 600);
 
   final FormManagerBuilder formManagerBuilder;
   final TransitionFormBuilder transitionFormBuilder;

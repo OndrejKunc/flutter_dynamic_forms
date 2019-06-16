@@ -24,7 +24,8 @@ Iterable<TFormElement> getFormElementIterator<TFormElement extends FormElement>(
         .getProperties()
         .values
         .where((v) => v is ElementValue<List<ExpressionProviderElement>>)
-        .map((v) => (v.value as List<ExpressionProviderElement>).cast<FormElement>())
+        .map((v) =>
+            (v.value as List<ExpressionProviderElement>).cast<FormElement>())
         .expand((x) => x);
     formElements.addAll(formListElements);
 

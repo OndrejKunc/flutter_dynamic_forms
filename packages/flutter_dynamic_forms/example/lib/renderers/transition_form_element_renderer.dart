@@ -12,34 +12,17 @@ class TransitionFormElementRenderer
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
     var child = renderer(element.child, context);
-    //   switch (element.transitionType) {
-    //     case FormElementTransitionType.show:
-    //       return ExpandedSection(
-    //         child: child,
-    //         expand: true,
-    //       );
-    //       break;
-    //     case FormElementTransitionType.hide:
-    //       return ExpandedSection(
-    //         child: child,
-    //         expand: false,
-    //       );
-    //       break;
-    //     default:
-    //       throw Exception("Unknown transition type");
-    //   }
-    // }
     switch (element.transitionType) {
       case FormElementTransitionType.show:
-        return Container(
+        return ExpandableSection(
           child: child,
-          color: Colors.green,
+          expand: true,
         );
         break;
       case FormElementTransitionType.hide:
-        return Container(
+        return ExpandableSection(
           child: child,
-          color: Colors.red,
+          expand: false,
         );
         break;
       default:
@@ -48,16 +31,16 @@ class TransitionFormElementRenderer
   }
 }
 
-class ExpandedSection extends StatefulWidget {
+class ExpandableSection extends StatefulWidget {
   final Widget child;
   final bool expand;
-  ExpandedSection({this.expand = false, this.child});
+  ExpandableSection({this.expand = false, this.child});
 
   @override
-  _ExpandedSectionState createState() => _ExpandedSectionState();
+  _ExpandableSectionState createState() => _ExpandableSectionState();
 }
 
-class _ExpandedSectionState extends State<ExpandedSection>
+class _ExpandableSectionState extends State<ExpandableSection>
     with SingleTickerProviderStateMixin {
   AnimationController expandController;
   Animation<double> animation;
@@ -68,7 +51,6 @@ class _ExpandedSectionState extends State<ExpandedSection>
     prepareAnimations();
   }
 
-  ///Setting up the animation
   void prepareAnimations() {
     expandController = AnimationController(
         vsync: this, duration: TransitionFormBloc.transitionDuration);
@@ -80,11 +62,6 @@ class _ExpandedSectionState extends State<ExpandedSection>
       ..addListener(() {
         setState(() {});
       });
-  }
-
-  @override
-  void didUpdateWidget(ExpandedSection oldWidget) {
-    super.didUpdateWidget(oldWidget);
     if (widget.expand) {
       expandController.value = 0;
       expandController.forward();
@@ -102,7 +79,14 @@ class _ExpandedSectionState extends State<ExpandedSection>
 
   @override
   Widget build(BuildContext context) {
-    return SizeTransition(
-        axisAlignment: 1.0, sizeFactor: animation, child: widget.child);
+    return FadeTransition(
+      opacity: animation,
+      child: SizeTransition(
+        sizeFactor: animation,
+        child: Container(
+            color: widget.expand ? Colors.green[50] : Colors.red[50],
+            child: widget.child),
+      ),
+    );
   }
 }

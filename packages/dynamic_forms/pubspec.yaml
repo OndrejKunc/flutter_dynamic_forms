@@ -10,11 +10,9 @@ dependencies:
   uuid: ^2.0.1
   quiver: ^2.0.1
   expression_language:
-    path: ../expression_language
-  # expression_language:
-  #   git:
-  #       url: https://github.com/OndrejKunc/flutter_dynamic_forms.git
-  #       path: packages/expression_language
+    git:
+        url: https://github.com/OndrejKunc/flutter_dynamic_forms.git
+        path: packages/expression_language
 
 dev_dependencies:
   test: ^1.5.3
