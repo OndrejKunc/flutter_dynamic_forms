@@ -1,4 +1,4 @@
-import 'package:example/dynamic_form_models/transition_form_element.dart';
+import 'package:example/models/transition_form_element.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 

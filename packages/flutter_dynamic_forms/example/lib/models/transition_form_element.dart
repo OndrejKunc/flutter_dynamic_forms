@@ -10,7 +10,8 @@ class TransitionFormElement extends FormElement {
   }
 
   @override
-  ExpressionProviderElement clone(ExpressionProvider<ExpressionProviderElement> parent) {
+  ExpressionProviderElement clone(
+      ExpressionProvider<ExpressionProviderElement> parent) {
     return TransitionFormElement(this.child.clone(parent), this.transitionType);
   }
 }

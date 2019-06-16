@@ -1,25 +1,17 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:example/dynamic_form_bloc.dart';
-import 'package:example/dynamic_form_event.dart';
-import 'package:example/dynamic_form_state.dart';
+import 'package:example/dynamic_form/dynamic_form_bloc.dart';
+import 'package:example/dynamic_form/dynamic_form_container.dart';
+import 'package:example/dynamic_form/dynamic_form_event.dart';
+import 'package:example/dynamic_form/dynamic_form_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart' as flutter;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
-import 'dynamic_form_screen.dart';
 
-class DynamicFormDialog extends StatefulWidget {
-  @override
-  _DynamicFormDialogState createState() {
-    return new _DynamicFormDialogState();
-  }
-}
-
-class _DynamicFormDialogState extends State<DynamicFormDialog> {
+class DynamicFormScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var bloc = BlocProvider.of<DynamicFormBloc>(context);
-
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -35,11 +27,11 @@ class _DynamicFormDialogState extends State<DynamicFormDialog> {
               bloc: bloc,
               builder: (context, state) {
                 Column result = Column(children: <Widget>[
-                  DynamicFormScreen(),
+                  DynamicFormContainer(),
                 ]);
 
                 if (!state.isLoading) {
-                  result.children.add(OkCancelButtonRow(bloc, state));
+                  result.children.add(DynamicFormButtonRow(bloc, state));
                 }
                 return result;
               },
@@ -84,11 +76,11 @@ class _DynamicFormDialogState extends State<DynamicFormDialog> {
   }
 }
 
-class OkCancelButtonRow extends StatelessWidget {
+class DynamicFormButtonRow extends StatelessWidget {
   final DynamicFormState state;
   final DynamicFormBloc bloc;
 
-  const OkCancelButtonRow(
+  const DynamicFormButtonRow(
     this.bloc,
     this.state, {
     Key key,

@@ -1,6 +1,6 @@
-import 'package:example/dynamic_form_bloc.dart';
-import 'package:example/dynamic_form_event.dart';
-import 'package:example/dynamic_form_state.dart';
+import 'package:example/dynamic_form/dynamic_form_bloc.dart';
+import 'package:example/dynamic_form/dynamic_form_event.dart';
+import 'package:example/dynamic_form/dynamic_form_state.dart';
 import 'package:example/renderers/check_box_renderer.dart';
 import 'package:example/renderers/dropdown_button_renderer.dart';
 import 'package:example/renderers/form_group_renderer.dart';
@@ -13,12 +13,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
-class DynamicFormScreen extends StatefulWidget {
+class DynamicFormContainer extends StatefulWidget {
   @override
-  _DynamicFormScreenState createState() => _DynamicFormScreenState();
+  _DynamicFormContainerState createState() => _DynamicFormContainerState();
 }
 
-class _DynamicFormScreenState extends State<DynamicFormScreen> {
+class _DynamicFormContainerState extends State<DynamicFormContainer> {
   FormRenderService _formRenderService;
 
   @override
