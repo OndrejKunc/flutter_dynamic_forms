@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form id="form1">
+    <formGroup 
+        id="formgroup1"
+        name="From section 1">
+        <text
+            id="firstName"
+            label="Enter your first name" value="John">
+            <text.validations>
+                <validation
+                  message="Name is too long">
+                    <validation.isValid>
+                        <expression>
+                            <![CDATA[
+                                length(@firstName) < 15
+                            ]]>
+                        </expression>
+                    </validation.isValid>
+                </validation>
+                <requiredValidation
+                  message="First name is required"/>
+            </text.validations>
+        </text>
+        <text
+            id="lastName"
+            label="Enter your last name">
+            <text.validations>
+                <requiredValidation
+                  message="Last name is required"/>
+            </text.validations>
+        </text>
+        <label
+            id="fullNameLabel">
+            <label.value>
+                <expression>
+                    <![CDATA[
+                        @firstName + (length(@firstName) > 0 && length(@lastName) > 0 ? " " : "") + @lastName
+                    ]]>
+                </expression>
+            </label.value>
+        </label>
+        <formGroup id="formgroup2" name="Form section 2">
+            <radioButtonGroup id="radioGroup1" value="-1">
+                <radioButton label="Option 1" value="1" />
+                <radioButton label="Option 2" value="2" />
+            </radioButtonGroup>
+        </formGroup>
+    </formGroup>
+</form>

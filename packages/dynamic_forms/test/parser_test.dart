@@ -246,10 +246,10 @@ void main() {
     var formElementValues = getFormElementValueIterator<ElementValue>(result);
 
     for (var elementValue in formElementValues) {
-      var elementsValuesCollectorVisitor = ElementsValueCollectorVisitor();
+      var elementsValuesCollectorVisitor = ExpressionProviderCollectorVisitor();
       elementValue.getExpression().accept(elementsValuesCollectorVisitor);
       for (var sourceElementValue
-          in elementsValuesCollectorVisitor.elementsValues) {
+          in elementsValuesCollectorVisitor.expressionProviders) {
         (sourceElementValue as ElementValue).addSubscriber(elementValue);
       }
     }
@@ -304,4 +304,10 @@ class TestFormElement extends FormElement {
         "value": PrimitiveMutableElementValue<Integer>(Integer(27)),
         "label": PrimitiveMutableElementValue<String>("LabelText")
       };
+
+  @override
+  ExpressionProviderElement clone(ExpressionProvider<ExpressionProviderElement> parent) {
+    //Nothing to do
+    return null;
+  }
 }

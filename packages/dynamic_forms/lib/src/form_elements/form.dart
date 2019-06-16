@@ -16,4 +16,17 @@ class Form extends FormGroup {
         children: children,
         name: name);
   }
+
+  @override
+  ExpressionProviderElement clone(
+      ExpressionProvider<ExpressionProviderElement> parent) {
+    var result = Form();
+    result.fillForm(
+      id: this.id,
+      isVisible: this.isVisible.clone(),
+      children: cloneChildren(children, result),
+      name: this.name.clone(),
+    );
+    return result;
+  }
 }

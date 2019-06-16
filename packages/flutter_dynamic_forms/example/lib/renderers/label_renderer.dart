@@ -9,9 +9,11 @@ class LabelRenderer extends FormElementRenderer<model.Label> {
       BuildContext context,
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(element.value.value),
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(element.value.value),
+      ),
     );
   }
 }

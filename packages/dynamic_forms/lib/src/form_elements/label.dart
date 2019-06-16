@@ -14,4 +14,17 @@ class Label extends FormElement {
     super.fillFormElement(id: id, parent: parent, isVisible: isVisible);
     this.value = registerElementValue("value", value);
   }
+
+  @override
+  ExpressionProviderElement clone(
+      ExpressionProvider<ExpressionProviderElement> parent) {
+    var result = Label();
+    result.fillLabel(
+      id: this.id,
+      parent: parent,
+      isVisible: this.isVisible.clone(),
+      value: this.value.clone(),
+    );
+    return result;
+  }
 }

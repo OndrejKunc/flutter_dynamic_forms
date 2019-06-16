@@ -4,24 +4,24 @@ import 'package:expression_language/src/number_type/decimal.dart';
 import 'package:expression_language/src/number_type/integer.dart';
 import 'package:expression_language/src/parser/expression_parser_exceptions.dart';
 
-DelegateExpression createDelegateExpression(ExpressionProvider elementValue) {
+DelegateExpression createDelegateExpression(List<String> expressionPath, ExpressionProvider elementValue) {
   if (elementValue is ExpressionProvider<Integer>) {
-    return DelegateExpression<Integer>(elementValue);
+    return DelegateExpression<Integer>(expressionPath, elementValue);
   }
   if (elementValue is ExpressionProvider<bool>) {
-    return DelegateExpression<bool>(elementValue);
+    return DelegateExpression<bool>(expressionPath, elementValue);
   }
   if (elementValue is ExpressionProvider<String>) {
-    return DelegateExpression<String>(elementValue);
+    return DelegateExpression<String>(expressionPath, elementValue);
   }
   if (elementValue is ExpressionProvider<Decimal>) {
-    return DelegateExpression<Decimal>(elementValue);
+    return DelegateExpression<Decimal>(expressionPath, elementValue);
   }
   if (elementValue is ExpressionProvider<ExpressionProviderElement>) {
-    return DelegateExpression<ExpressionProviderElement>(elementValue);
+    return DelegateExpression<ExpressionProviderElement>(expressionPath, elementValue);
   }
   if (elementValue is ExpressionProvider<List<ExpressionProviderElement>>) {
-    return DelegateExpression<List<ExpressionProviderElement>>(elementValue);
+    return DelegateExpression<List<ExpressionProviderElement>>(expressionPath, elementValue);
   }
   throw UnknownExpressionFactory("Unknown expression factory");
 }

@@ -394,9 +394,10 @@ class LessThanOrEqualExpression extends Expression<bool> {
 }
 
 class DelegateExpression<T> extends Expression<T> {
-  ExpressionProvider<T> expressionProvider;
+  final ExpressionProvider<T> expressionProvider;
+  final List<String> expressionPath;
 
-  DelegateExpression(this.expressionProvider);
+  DelegateExpression(this.expressionPath, this.expressionProvider);
 
   @override
   T evaluate() {

@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:dynamic_forms/src/element_values/form_element_value.dart';
 import 'package:expression_language/expression_language.dart';
 import 'package:xml/xml.dart';
 

@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "Test",
-            "program": "test.dart",
+            "program": "parser_test.dart",
             "cwd": "test",
             "request": "launch",
             "type": "dart"

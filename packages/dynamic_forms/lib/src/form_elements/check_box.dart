@@ -18,4 +18,18 @@ class CheckBox extends FormElement {
     this.value = registerElementValue("value", value);
     this.label = registerElementValue("label", label);
   }
+
+  @override
+  ExpressionProviderElement clone(
+      ExpressionProvider<ExpressionProviderElement> parent) {
+    var result = CheckBox();
+    result.fillCheckBox(
+      id: this.id,
+      parent: parent,
+      isVisible: this.isVisible.clone(),
+      label: this.label.clone(),
+      value: this.value.clone(),
+    );
+    return result;
+  }
 }
