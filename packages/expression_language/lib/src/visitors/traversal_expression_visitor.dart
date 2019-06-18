@@ -145,4 +145,11 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   void visitListCountFunction<T>(ListCountFunctionExpression<T> expression) {
     expression.value.accept(this);
   }
+
+  @override
+  void visitRoundFunction(RoundFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.precision.accept(this);
+    expression.roundingMode.accept(this);
+  }
 }

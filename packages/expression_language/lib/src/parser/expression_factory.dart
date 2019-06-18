@@ -63,5 +63,11 @@ Expression createFunctionExpression(
     }
     return ListCountFunctionExpression(parameters[0]);
   }
+  if (functionName == "round") {
+    if (parameters.length != 3) {
+      throw InvalidParameterCount("Function $functionName expect only 3 parameters");
+    }
+    return RoundFunctionExpression(parameters[0],parameters[1],parameters[2]);
+  }
   throw UnknownFunction("Unknown function name $functionName");
 }

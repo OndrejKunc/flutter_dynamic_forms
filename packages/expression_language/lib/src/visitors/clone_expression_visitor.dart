@@ -240,4 +240,15 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     expression.value.accept(this);
     push(ListCountFunctionExpression(pop()));
   }
+
+  @override
+  void visitRoundFunction(RoundFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.precision.accept(this);
+    expression.roundingMode.accept(this);
+    var roundingMode = pop();
+    var precision = pop();
+    var value = pop();
+    push(RoundFunctionExpression(value,precision,roundingMode));
+  }
 }
