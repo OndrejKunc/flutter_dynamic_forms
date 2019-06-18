@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<!-- XSD Schema for XAML dynamic forms -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+           targetNamespace="https://dynamic-forms.homecredit.net"
+           xmlns="https://dynamic-forms.homecredit.net"
+           elementFormDefault="qualified"
+           vc:minVersion="1.1">
+           
+	<xs:element name="form" type="form_Type">
+		<xs:unique name="unique-id">
+		  <xs:selector xpath=".//*" />
+		  <xs:field xpath="@id" />
+		</xs:unique>
+    </xs:element>
+	<!-- Definition of "form" element-->
+	<xs:complexType name="form_Type">
+		<xs:choice maxOccurs="unbounded">
+			<xs:element name="formGroup" type="formGroup_Type"/>
+			<xs:element name="address" type="address_Type"/>
+		</xs:choice>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+	</xs:complexType>
+	<!-- Definition of "formGroup" element-->
+	<xs:complexType name="formGroup_Type">
+		<xs:choice maxOccurs="unbounded">
+			<xs:element name="text" type="text_Type"/>
+			<xs:element name="label" type="label_Type"/>
+			<xs:element name="checkBox" type="checkBox_Type"/>
+			<xs:element name="radioButtonGroup" type="radioButtonGroup_Type"/>
+			<xs:element name="dropdownButton" type="dropdownButton_Type"/>
+			<xs:element name="formGroup" type="formGroup_Type"/>
+			<xs:element name="formGroup.name" type="canInvolveExpression_Type"/>
+		</xs:choice>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<!-- Definition of "address" element-->
+	<xs:complexType name="address_Type">
+		<xs:all>
+			<xs:element name="address.label" type="canInvolveExpression_Type" minOccurs="0"/>
+			<xs:element name="address.isVisible" type="canInvolveExpression_Type" minOccurs="0"/>
+		</xs:all>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="label" type="xs:string" use="optional"/>
+		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+	</xs:complexType>
+	<!-- Definition of "text" element-->
+	<xs:complexType name="text_Type">
+		<xs:all>
+			<xs:element name="text.validations" type="validations_Type" minOccurs="0"/>
+			<xs:element name="text.label" type="canInvolveExpression_Type" minOccurs="0"/>
+			<xs:element name="text.value" type="canInvolveExpression_Type" minOccurs="0"/>
+			<xs:element name="text.isVisible" type="canInvolveExpression_Type" minOccurs="0"/>
+		</xs:all>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="label" type="xs:string" use="optional"/>
+		<xs:attribute name="value" type="xs:string" use="optional"/>
+		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+	</xs:complexType>
+	<!-- Definition of "label" element-->
+	<xs:complexType name="label_Type">
+		<xs:all>
+			<xs:element name="label.value" type="canInvolveExpression_Type" minOccurs="0"/>
+			<xs:element name="label.isVisible" type="canInvolveExpression_Type" minOccurs="0"/>
+		</xs:all>
+		<xs:attribute name="id" type="xs:string" use="optional"/>
+		<xs:attribute name="value" type="xs:string" use="optional"/>
+		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+	</xs:complexType>
+	<!-- Definition of "checkBox" element-->
+	<xs:complexType name="checkBox_Type">
+		<xs:all>
+			<xs:element name="checkBox.value" type="canInvolveExpression_Type" minOccurs="0"/>
+			<xs:element name="checkBox.validations" type="validations_Type" minOccurs="0"/>
+			<xs:element name="checkBox.label" type="canInvolveExpression_Type" minOccurs="0"/>
+			<xs:element name="checkBox.isVisible" type="canInvolveExpression_Type" minOccurs="0"/>
+		</xs:all>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="value" type="xs:boolean" use="optional"/>
+		<xs:attribute name="label" type="xs:string" use="optional"/>
+		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+	</xs:complexType>
+	<!-- Definition of "radioButtonGroup" element -->
+	<xs:complexType name="radioButtonGroup_Type">
+		<xs:all>
+			<xs:element name="radioButtonGroup.isVisible" type="canInvolveExpression_Type" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="radioButtonGroup.value" type="canInvolveExpression_Type" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="radioButtonGroup.validations" type="validations_Type" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="radioButton" type="radioButton_Type" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:all>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="value" type="xs:string" use="optional"/>
+		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+	</xs:complexType>
+	<!-- Definition of "radioButton" element -->
+	<xs:complexType name="radioButton_Type">
+		<xs:all>
+			<xs:element name="radioButton.value" type="canInvolveExpression_Type" minOccurs="0"/>
+			<xs:element name="radioButton.label" type="canInvolveExpression_Type" minOccurs="0"/>
+			<xs:element name="radioButton.isVisible" type="canInvolveExpression_Type" minOccurs="0"/>
+			<xs:element name="radioButton.validations" type="validations_Type" minOccurs="0"/>
+		</xs:all>
+		<xs:attribute name="label" type="xs:string" use="optional"/>
+		<xs:attribute name="value" type="xs:string" use="optional"/>
+		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+	</xs:complexType>
+	<!-- Definition of "dropdownButton" element -->
+	<xs:complexType name="dropdownButton_Type">
+		<xs:all>
+			<xs:element name="dropdownButton.isVisible" type="canInvolveExpression_Type" minOccurs="0"/>
+			<xs:element name="dropdownButton.value" type="canInvolveExpression_Type" minOccurs="0"/>
+			<xs:element name="dropdownButton.validations" type="validations_Type" minOccurs="0"/>
+			<xs:element name="dropdownButton.options" type="dropdownButton.options_Type" minOccurs="0" maxOccurs="1"/>
+		</xs:all>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="value" type="xs:string" use="optional"/>
+		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+		<xs:attribute name="options" type="xs:string" use="optional"/> <!-- Maybe not needed -->
+	</xs:complexType>
+	<!-- Definition of "dropdownButton.options" element -->
+	<xs:complexType name="dropdownButton.options_Type">
+		<xs:sequence>
+			<xs:element name="dropdownButton.validations" type="validations_Type" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="dropdownOption" type="dropdownOption_Type" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Definition of "dropdownOption" element -->
+	<xs:complexType name="dropdownOption_Type">
+		<xs:all>
+			<xs:element name="dropdownOption.isVisible" type="canInvolveExpression_Type" minOccurs="0"/>
+			<xs:element name="dropdownOption.validations" type="validations_Type" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="dropdownOption.value" type="canInvolveExpression_Type" minOccurs="0"/>
+			<xs:element name="dropdownOption.label" type="canInvolveExpression_Type" minOccurs="0"/>
+		</xs:all>
+		<xs:attribute name="value" type="xs:string" use="optional"/>
+		<xs:attribute name="label" type="xs:string" use="optional"/>
+		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+	</xs:complexType>
+	<!-- Definition of validations type -->
+	<xs:complexType name="validations_Type">
+		<xs:sequence>
+			<xs:element name="validation" type="validation_Type" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="requiredValidation" type="requiredValidation_Type" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Definition of "validation" element -->
+	<xs:complexType name="validation_Type">
+		<xs:sequence>
+			<xs:element name="validation.isValid" type="canInvolveExpression_Type" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="message" type="xs:string" use="optional"/>
+		<xs:attribute name="isValid" type="xs:boolean" use="optional"/>
+	</xs:complexType>
+	<!-- Definition of "requiredValidation element -->
+	<xs:complexType name="requiredValidation_Type">
+		<xs:sequence>
+			<xs:element name="requiredValidation.message" type="canInvolveExpression_Type" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="message" type="xs:string"/>
+	</xs:complexType>
+	<!-- Definition of "canInvolveExpression" type -->
+	<xs:complexType name="canInvolveExpression_Type" mixed="true">
+		<xs:sequence>
+			<xs:element name="expression" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
