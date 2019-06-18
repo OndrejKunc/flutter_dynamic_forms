@@ -16,16 +16,15 @@ Iterable<TFormElement> getFormElementIterator<TFormElement extends FormElement>(
     var formElements = formElement
         .getProperties()
         .values
-        .where((v) => v is ElementValue<ExpressionProviderElement>)
+        .whereType<ElementValue<ExpressionProviderElement>>()
         .map((v) => v.value as FormElement)
         .toList();
 
     var formListElements = formElement
         .getProperties()
         .values
-        .where((v) => v is ElementValue<List<ExpressionProviderElement>>)
-        .map((v) =>
-            (v.value as List<ExpressionProviderElement>).cast<FormElement>())
+        .whereType<ElementValue<List<ExpressionProviderElement>>>()
+        .map((v) => v.value.cast<FormElement>())
         .expand((x) => x);
     formElements.addAll(formListElements);
 

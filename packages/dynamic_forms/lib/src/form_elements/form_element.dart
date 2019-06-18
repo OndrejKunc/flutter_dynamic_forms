@@ -50,16 +50,15 @@ abstract class FormElement implements ExpressionProviderElement {
   Map<String, ElementValue> getProperties() => _properties;
 
   ElementValue<List<T>> cloneChildren<T extends ExpressionProviderElement>(
-      ElementValue<List<T>> children,
-      ExpressionProviderElement parent) {
+      ElementValue<List<T>> children, ExpressionProviderElement parent) {
     var childrenElements = children.value;
-    var childrenCopy = childrenElements
-        .map(
-          (c) => c.clone(
-                getParentValue(parent),
-              ),
-        )
-        .toList().cast<T>();
+    var childrenCopy = List<T>.from(
+      childrenElements.map(
+        (c) => c.clone(
+              getParentValue(parent),
+            ),
+      ),
+    );
     return PrimitiveImmutableElementValue<List<T>>(childrenCopy);
   }
 }
