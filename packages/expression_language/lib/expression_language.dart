@@ -1,4 +1,4 @@
-library bloc;
+library expression_language;
 
 export './src/grammar/expression_grammar_definition.dart';
 export './src/parser/expression_factory.dart';
