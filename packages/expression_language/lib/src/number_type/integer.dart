@@ -118,4 +118,16 @@ class Integer extends Number {
 
   @override
   Integer truncate() => new Integer(value.truncate());
+
+  @override
+  Number preciseRound(int precision,
+      [RoundingMode mode = RoundingMode.NEAREST_EVEN]) {
+    if (precision >= 0)
+      return Integer(value);
+    else {
+      int multiplier = 10^(-precision);
+      int adder = 5*(multiplier ~/ 10);
+      return Integer(((value + adder) ~/ multiplier) * multiplier);
+    }
+  }
 }
