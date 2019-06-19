@@ -1,7 +1,7 @@
 import 'package:expression_language/src/number_type/decimal.dart';
 import 'package:expression_language/src/number_type/integer.dart';
 
-enum RoundingMode { nearest_even,nearest_from_zero,towards_zero,from_zero,up,down }
+enum RoundingMode { nearestEven,nearestFromZero,towardsZero,fromZero,up,down }
 
 abstract class Number implements Comparable<Number> {
   /**
@@ -151,7 +151,7 @@ abstract class Number implements Comparable<Number> {
    * Rounding modes are from IEEE 754 - https://en.wikipedia.org/wiki/IEEE_754#Rounding_rules
    */
   Number roundWithPrecision(int precision,
-      [RoundingMode mode = RoundingMode.nearest_even]);
+      [RoundingMode mode = RoundingMode.nearestEven]);
 
 
   /**

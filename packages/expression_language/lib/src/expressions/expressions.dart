@@ -578,7 +578,7 @@ class RoundFunctionStringRoundingModeExpression extends Expression<Number> {
   @override
   Number evaluate() {
     String roundingModeString = roundingMode.evaluate();
-    String nameOfEnum = RoundingMode.nearest_even.toString().split('.').first;
+    String nameOfEnum = RoundingMode.nearestEven.toString().split('.').first;
     RoundingMode mode = RoundingMode.values.firstWhere(
         (e) => e.toString() == nameOfEnum + '.' + roundingModeString,
         orElse: () => throw InvalidParameter("Rounding mode $roundingModeString does not exist"));

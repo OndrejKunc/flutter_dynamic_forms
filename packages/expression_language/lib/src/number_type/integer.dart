@@ -123,7 +123,7 @@ class Integer extends Number {
 
   @override
   Number roundWithPrecision(int precision,
-      [RoundingMode mode = RoundingMode.nearest_even]) {
+      [RoundingMode mode = RoundingMode.nearestEven]) {
     if (precision >= 0) {
       return Integer(value);
     } else {
