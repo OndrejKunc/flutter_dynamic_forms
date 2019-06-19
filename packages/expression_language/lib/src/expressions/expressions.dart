@@ -537,12 +537,33 @@ class ListCountFunctionExpression<T> extends Expression<int> {
   }
 }
 
-class RoundFunctionExpression extends Expression<Number> {
+class RoundFunctionWithRoundingModeExpression extends Expression<Number> {
   final Expression<Number> value;
   final Expression<Integer> precision;
   final Expression<Integer> roundingMode;
 
-  RoundFunctionExpression(this.value, this.precision, this.roundingMode);
+  RoundFunctionWithRoundingModeExpression(this.value, this.precision, this.roundingMode);
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitRoundFunctionWithRoundingMode(this);
+  }
+
+  @override
+  Number evaluate() {
+    int roundingModeInt = roundingMode.evaluate().value;
+    if ((roundingModeInt >= RoundingMode.values.length) || (roundingModeInt < 0))
+      throw InvalidParameter("Rounding mode has to be integer in range [0,${RoundingMode.values.length-1}");
+    return value.evaluate().roundWithPrecision(precision.evaluate().value,
+        RoundingMode.values[roundingMode.evaluate().value]);
+  }
+}
+
+class RoundFunctionExpression extends Expression<Number> {
+  final Expression<Number> value;
+  final Expression<Number> precision;
+
+  RoundFunctionExpression(this.value, this.precision);
 
   @override
   void accept(ExpressionVisitor visitor) {
@@ -551,11 +572,7 @@ class RoundFunctionExpression extends Expression<Number> {
 
   @override
   Number evaluate() {
-    int roundingModeInt = roundingMode.evaluate().value;
-    if ((roundingModeInt > 4) || (roundingModeInt < 0))
-      throw InvalidParameter("Rounding mode has to be integer in range [0,4]");
-    return value.evaluate().preciseRound(precision.evaluate().value,
-        RoundingMode.values[roundingMode.evaluate().value]);
+    return value.evaluate().roundWithPrecision(precision.evaluate().toInteger().value);
   }
 }
 

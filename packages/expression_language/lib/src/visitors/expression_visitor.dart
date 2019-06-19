@@ -29,5 +29,6 @@ abstract class ExpressionVisitor {
   void visitLengthFunction(LengthFunctionExpression expression);
   void visitToStringFunction(ToStringFunctionExpression expression);
   void visitListCountFunction<T>(ListCountFunctionExpression<T> expression);
+  void visitRoundFunctionWithRoundingMode(RoundFunctionWithRoundingModeExpression expression);
   void visitRoundFunction(RoundFunctionExpression expression);
 }

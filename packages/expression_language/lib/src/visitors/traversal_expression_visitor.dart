@@ -147,9 +147,15 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitRoundFunction(RoundFunctionExpression expression) {
+  void visitRoundFunctionWithRoundingMode(RoundFunctionWithRoundingModeExpression expression) {
     expression.value.accept(this);
     expression.precision.accept(this);
     expression.roundingMode.accept(this);
+  }
+
+  @override
+  void visitRoundFunction(RoundFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.precision.accept(this);
   }
 }
