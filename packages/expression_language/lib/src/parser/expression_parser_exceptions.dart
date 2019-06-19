@@ -32,6 +32,9 @@ class UnknownExpressionFactory extends ExpressionParserException {
   UnknownExpressionFactory(String message) : super(message);
 }
 
+class InvalidParameter extends ExpressionParserException {
+  InvalidParameter(String message) : super(message);
+}
 
 class InvalidParameterCount extends ExpressionParserException {
   InvalidParameterCount(String message) : super(message);

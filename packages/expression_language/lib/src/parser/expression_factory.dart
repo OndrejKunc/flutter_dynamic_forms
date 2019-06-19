@@ -4,7 +4,8 @@ import 'package:expression_language/src/number_type/decimal.dart';
 import 'package:expression_language/src/number_type/integer.dart';
 import 'package:expression_language/src/parser/expression_parser_exceptions.dart';
 
-DelegateExpression createDelegateExpression(List<String> expressionPath, ExpressionProvider elementValue) {
+DelegateExpression createDelegateExpression(
+    List<String> expressionPath, ExpressionProvider elementValue) {
   if (elementValue is ExpressionProvider<Integer>) {
     return DelegateExpression<Integer>(expressionPath, elementValue);
   }
@@ -18,10 +19,12 @@ DelegateExpression createDelegateExpression(List<String> expressionPath, Express
     return DelegateExpression<Decimal>(expressionPath, elementValue);
   }
   if (elementValue is ExpressionProvider<ExpressionProviderElement>) {
-    return DelegateExpression<ExpressionProviderElement>(expressionPath, elementValue);
+    return DelegateExpression<ExpressionProviderElement>(
+        expressionPath, elementValue);
   }
   if (elementValue is ExpressionProvider<List<ExpressionProviderElement>>) {
-    return DelegateExpression<List<ExpressionProviderElement>>(expressionPath, elementValue);
+    return DelegateExpression<List<ExpressionProviderElement>>(
+        expressionPath, elementValue);
   }
   throw UnknownExpressionFactory("Unknown expression factory");
 }
@@ -40,28 +43,49 @@ ConditionalExpression createConditionalExpression(
   if (trueValue is Expression<Decimal>) {
     return ConditionalExpression<Decimal>(condition, trueValue, falseValue);
   }
-  throw UnknownExpressionTypeException("Unknown expression in conditional expression");
+  throw UnknownExpressionTypeException(
+      "Unknown expression in conditional expression");
 }
 
 Expression createFunctionExpression(
     String functionName, List<Expression> parameters) {
   if (functionName == "length") {
     if (parameters.length != 1) {
-      throw InvalidParameterCount("Function $functionName expect only 1 parameter");
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
     }
     return LengthFunctionExpression(parameters[0]);
   }
   if (functionName == "toString") {
     if (parameters.length != 1) {
-      throw InvalidParameterCount("Function $functionName expect only 1 parameter");
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
     }
     return ToStringFunctionExpression(parameters[0]);
   }
   if (functionName == "count") {
     if (parameters.length != 1) {
-      throw InvalidParameterCount("Function $functionName expect only 1 parameter");
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
     }
     return ListCountFunctionExpression(parameters[0]);
+  }
+  if (functionName == "round") {
+    if (parameters.length == 3) {
+      if (parameters[2] is Expression<Integer>) {
+        return RoundFunctionIntRoundingModeExpression(
+            parameters[0], parameters[1], parameters[2]);
+      } else if (parameters[2] is Expression<String>) {
+        return RoundFunctionStringRoundingModeExpression(
+            parameters[0], parameters[1], parameters[2]);
+      }else{
+        throw InvalidParameter("Function $functionName expects integer or string as third parameter");
+      }
+    } else if (parameters.length == 2)
+      return RoundFunctionExpression(parameters[0], parameters[1]);
+    else
+      throw InvalidParameterCount(
+          "Function $functionName expects only 2 or 3 parameters");
   }
   throw UnknownFunction("Unknown function name $functionName");
 }
