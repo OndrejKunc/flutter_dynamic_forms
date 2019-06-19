@@ -1,18 +1,17 @@
 <?xml version="1.0"?>
 <!-- XSD Schema for XAML dynamic forms -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-		   xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
-           targetNamespace="https://dynamic-forms.homecredit.net"
-           xmlns="https://dynamic-forms.homecredit.net"
-           elementFormDefault="qualified"
-           vc:minVersion="1.1">
-           
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" 
+	xmlns="https://dynamic-forms.homecredit.net" 
+	targetNamespace="https://dynamic-forms.homecredit.net" 
+	elementFormDefault="qualified" vc:minVersion="1.1">
+	
 	<xs:element name="form" type="form_Type">
 		<xs:unique name="unique-id">
-		  <xs:selector xpath=".//*" />
-		  <xs:field xpath="@id" />
+			<xs:selector xpath=".//*"/>
+			<xs:field xpath="@id"/>
 		</xs:unique>
-    </xs:element>
+	</xs:element>
 	<!-- Definition of "form" element-->
 	<xs:complexType name="form_Type">
 		<xs:choice maxOccurs="unbounded">
@@ -43,7 +42,7 @@
 		</xs:all>
 		<xs:attribute name="id" type="xs:string" use="required"/>
 		<xs:attribute name="label" type="xs:string" use="optional"/>
-		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+		<xs:attribute name="isVisible" type="bool" use="optional"/>
 	</xs:complexType>
 	<!-- Definition of "text" element-->
 	<xs:complexType name="text_Type">
@@ -56,7 +55,7 @@
 		<xs:attribute name="id" type="xs:string" use="required"/>
 		<xs:attribute name="label" type="xs:string" use="optional"/>
 		<xs:attribute name="value" type="xs:string" use="optional"/>
-		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+		<xs:attribute name="isVisible" type="bool" use="optional"/>
 	</xs:complexType>
 	<!-- Definition of "label" element-->
 	<xs:complexType name="label_Type">
@@ -66,7 +65,7 @@
 		</xs:all>
 		<xs:attribute name="id" type="xs:string" use="optional"/>
 		<xs:attribute name="value" type="xs:string" use="optional"/>
-		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+		<xs:attribute name="isVisible" type="bool" use="optional"/>
 	</xs:complexType>
 	<!-- Definition of "checkBox" element-->
 	<xs:complexType name="checkBox_Type">
@@ -77,9 +76,9 @@
 			<xs:element name="checkBox.isVisible" type="canInvolveExpression_Type" minOccurs="0"/>
 		</xs:all>
 		<xs:attribute name="id" type="xs:string" use="required"/>
-		<xs:attribute name="value" type="xs:boolean" use="optional"/>
+		<xs:attribute name="value" type="bool" use="optional"/>
 		<xs:attribute name="label" type="xs:string" use="optional"/>
-		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+		<xs:attribute name="isVisible" type="bool" use="optional"/>
 	</xs:complexType>
 	<!-- Definition of "radioButtonGroup" element -->
 	<xs:complexType name="radioButtonGroup_Type">
@@ -91,7 +90,7 @@
 		</xs:all>
 		<xs:attribute name="id" type="xs:string" use="required"/>
 		<xs:attribute name="value" type="xs:string" use="optional"/>
-		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+		<xs:attribute name="isVisible" type="bool" use="optional"/>
 	</xs:complexType>
 	<!-- Definition of "radioButton" element -->
 	<xs:complexType name="radioButton_Type">
@@ -103,7 +102,7 @@
 		</xs:all>
 		<xs:attribute name="label" type="xs:string" use="optional"/>
 		<xs:attribute name="value" type="xs:string" use="optional"/>
-		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+		<xs:attribute name="isVisible" type="bool" use="optional"/>
 	</xs:complexType>
 	<!-- Definition of "dropdownButton" element -->
 	<xs:complexType name="dropdownButton_Type">
@@ -115,8 +114,9 @@
 		</xs:all>
 		<xs:attribute name="id" type="xs:string" use="required"/>
 		<xs:attribute name="value" type="xs:string" use="optional"/>
-		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
-		<xs:attribute name="options" type="xs:string" use="optional"/> <!-- Maybe not needed -->
+		<xs:attribute name="isVisible" type="bool" use="optional"/>
+		<xs:attribute name="options" type="xs:string" use="optional"/>
+		<!-- Maybe not needed -->
 	</xs:complexType>
 	<!-- Definition of "dropdownButton.options" element -->
 	<xs:complexType name="dropdownButton.options_Type">
@@ -135,7 +135,7 @@
 		</xs:all>
 		<xs:attribute name="value" type="xs:string" use="optional"/>
 		<xs:attribute name="label" type="xs:string" use="optional"/>
-		<xs:attribute name="isVisible" type="xs:boolean" use="optional"/>
+		<xs:attribute name="isVisible" type="bool" use="optional"/>
 	</xs:complexType>
 	<!-- Definition of validations type -->
 	<xs:complexType name="validations_Type">
@@ -150,7 +150,7 @@
 			<xs:element name="validation.isValid" type="canInvolveExpression_Type" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 		<xs:attribute name="message" type="xs:string" use="optional"/>
-		<xs:attribute name="isValid" type="xs:boolean" use="optional"/>
+		<xs:attribute name="isValid" type="bool" use="optional"/>
 	</xs:complexType>
 	<!-- Definition of "requiredValidation element -->
 	<xs:complexType name="requiredValidation_Type">
@@ -165,4 +165,11 @@
 			<xs:element name="expression" type="xs:string" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
+	
+	<xs:simpleType name="bool">
+		<xs:restriction base="xs:boolean">
+			<xs:pattern value="true|false" />
+		</xs:restriction>
+	</xs:simpleType>
+
 </xs:schema>
