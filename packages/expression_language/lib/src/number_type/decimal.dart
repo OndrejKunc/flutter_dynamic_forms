@@ -162,20 +162,20 @@ class Decimal extends Number {
   Integer truncate() => Decimal._fromRational(_rational.truncate()).toInteger();
 
   Number roundWithPrecision(int precision,
-      [RoundingMode mode = RoundingMode.NEAREST_EVEN]) {
+      [RoundingMode mode = RoundingMode.nearest_even]) {
     if (precision >= 0) {
       switch (mode) {
-        case RoundingMode.NEAREST_EVEN:
+        case RoundingMode.nearest_even:
           return _roundNearestEven(precision);
-        case RoundingMode.NEAREST_FROM_ZERO:
+        case RoundingMode.nearest_from_zero:
           return _roundNearestFromZero(precision);
-        case RoundingMode.TOWARDS_ZERO:
+        case RoundingMode.towards_zero:
           return _roundTowardsZero(precision);
-        case RoundingMode.FROM_ZERO:
+        case RoundingMode.from_zero:
           return _roundFromZero(precision);
-        case RoundingMode.UP:
+        case RoundingMode.up:
           return _roundUp(precision);
-        case RoundingMode.DOWN:
+        case RoundingMode.down:
           return _roundDown(precision);
       }
       return null; //to suppress warning
