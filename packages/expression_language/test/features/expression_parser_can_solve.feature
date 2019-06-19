@@ -1,6 +1,30 @@
 Feature: Expression
   Tests an expression
 
+  Scenario: rounding test 1 - string rounding mode
+    When expression "round(13.5,0,"nearest_even")" is evaluated
+    Then decimal expression result is "14"
+
+  Scenario: rounding test 2 - string rounding mode
+    When expression "round(13.5,0,"nearest_from_zero")" is evaluated
+    Then decimal expression result is "14"
+
+  Scenario: rounding test 3 - string rounding mode
+    When expression "round(13.5,0,"towards_zero")" is evaluated
+    Then decimal expression result is "13"
+
+  Scenario: rounding test 4 - string rounding mode
+    When expression "round(13.5,0,"from_zero")" is evaluated
+    Then decimal expression result is "14"
+
+  Scenario: rounding test 5 - string rounding mode
+    When expression "round(13.5,0,"up")" is evaluated
+    Then decimal expression result is "14"
+
+  Scenario: rounding test 6 - string rounding mode
+    When expression "round(13.5,0,"down")" is evaluated
+    Then decimal expression result is "13"
+
   Scenario: rounding test - no rounding mode
     When expression "round(13.5,0)" is evaluated
     Then decimal expression result is "14"
