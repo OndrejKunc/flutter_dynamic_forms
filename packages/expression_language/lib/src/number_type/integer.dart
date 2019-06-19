@@ -124,11 +124,11 @@ class Integer extends Number {
   @override
   Number roundWithPrecision(int precision,
       [RoundingMode mode = RoundingMode.nearest_even]) {
-    if (precision >= 0)
+    if (precision >= 0) {
       return Integer(value);
-    else {
-      final int multiplier = pow(10,-precision);
-      final int adder = 5*(multiplier ~/ 10) * ((value < 0) ? -1 : 1);
+    } else {
+      final int multiplier = pow(10, -precision);
+      final int adder = 5 * (multiplier ~/ 10) * ((value < 0) ? -1 : 1);
       return Integer(((value + adder) ~/ multiplier) * multiplier);
     }
   }
