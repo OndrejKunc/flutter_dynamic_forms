@@ -223,6 +223,10 @@ Feature: Expression
     When expression " 2*3 - 4*5 + 6/3 " is evaluated
     Then int expression result is "-12"
 
+  Scenario: it should treat dot separated floating point numbers as a valid input
+    When expression "5.0005 + 0.0095" is evaluated
+    Then decimal expression result is "5.01"
+
 #Scenario: it should calculate long, mixed additive and multiplicative expressions from left to right
 #  When expression "2*3*4/8 -   5/2*4 +  6 + 0/3   " is evaluated
 #  Then int expression result is "-1"
@@ -259,13 +263,9 @@ Feature: Expression
 #  When expression "" is evaluated
 #  Then int expression result is "ERROR"
 
-#Scenario: it should return float pointing numbers when division result is not an integer
+# Scenario: it should return float pointing numbers when division result is not an integer
 #  When expression "5/3" is evaluated
-#  Then int expression result is "be_close(1.66, 0.01)"
-
-#Scenario: it should treat dot separated floating point numbers as a valid input
-#  When expression "5.0005 + 0.0095" is evaluated
-#  Then int expression result is "be_close(5.01, 0.01)"
+#  Then decimal expression result is "1.66"
 
 #Scenario: it should return float pointing numbers when division result is not an integer
 #  When expression "3 + 8/5 -1 -2*5" is evaluated
