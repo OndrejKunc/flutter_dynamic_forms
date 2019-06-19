@@ -537,25 +537,54 @@ class ListCountFunctionExpression<T> extends Expression<int> {
   }
 }
 
-class RoundFunctionWithRoundingModeExpression extends Expression<Number> {
+class RoundFunctionIntRoundingModeExpression extends Expression<Number> {
   final Expression<Number> value;
   final Expression<Integer> precision;
   final Expression<Integer> roundingMode;
 
-  RoundFunctionWithRoundingModeExpression(this.value, this.precision, this.roundingMode);
+  RoundFunctionIntRoundingModeExpression(
+      this.value, this.precision, this.roundingMode);
 
   @override
   void accept(ExpressionVisitor visitor) {
-    visitor.visitRoundFunctionWithRoundingMode(this);
+    visitor.visitRoundFunctionIntRoundingMode(this);
   }
 
   @override
   Number evaluate() {
     int roundingModeInt = roundingMode.evaluate().value;
-    if ((roundingModeInt >= RoundingMode.values.length) || (roundingModeInt < 0))
-      throw InvalidParameter("Rounding mode has to be integer in range [0,${RoundingMode.values.length-1}");
+    if ((roundingModeInt >= RoundingMode.values.length) ||
+        (roundingModeInt < 0))
+      throw InvalidParameter(
+          "Rounding mode has to be integer in range [0,${RoundingMode.values.length - 1}");
     return value.evaluate().roundWithPrecision(precision.evaluate().value,
         RoundingMode.values[roundingMode.evaluate().value]);
+  }
+}
+
+class RoundFunctionStringRoundingModeExpression extends Expression<Number> {
+  final Expression<Number> value;
+  final Expression<Integer> precision;
+  final Expression<String> roundingMode;
+
+  RoundFunctionStringRoundingModeExpression(
+      this.value, this.precision, this.roundingMode);
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitRoundFunctionStringRoundingMode(this);
+  }
+
+  @override
+  Number evaluate() {
+    String roundingModeString = roundingMode.evaluate();
+    String nameOfEnum = RoundingMode.nearest_even.toString().split('.').first;
+    RoundingMode mode = RoundingMode.values.firstWhere(
+        (e) => e.toString() == nameOfEnum + '.' + roundingModeString,
+        orElse: () => throw InvalidParameter("Rounding mode $roundingModeString does not exist"));
+    return value
+        .evaluate()
+        .roundWithPrecision(precision.evaluate().value, mode);
   }
 }
 
@@ -572,7 +601,9 @@ class RoundFunctionExpression extends Expression<Number> {
 
   @override
   Number evaluate() {
-    return value.evaluate().roundWithPrecision(precision.evaluate().toInteger().value);
+    return value
+        .evaluate()
+        .roundWithPrecision(precision.evaluate().toInteger().value);
   }
 }
 

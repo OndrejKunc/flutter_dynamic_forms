@@ -1,4 +1,3 @@
-
 import 'package:expression_language/expression_language.dart';
 import '../expressions/expressions.dart';
 
@@ -35,7 +34,6 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
     expression.left.accept(this);
     expression.right.accept(this);
   }
-
 
   @override
   void visitEqualString(EqualStringExpression expression) {
@@ -147,7 +145,16 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitRoundFunctionWithRoundingMode(RoundFunctionWithRoundingModeExpression expression) {
+  void visitRoundFunctionIntRoundingMode(
+      RoundFunctionIntRoundingModeExpression expression) {
+    expression.value.accept(this);
+    expression.precision.accept(this);
+    expression.roundingMode.accept(this);
+  }
+
+  @override
+  void visitRoundFunctionStringRoundingMode(
+      RoundFunctionStringRoundingModeExpression expression) {
     expression.value.accept(this);
     expression.precision.accept(this);
     expression.roundingMode.accept(this);

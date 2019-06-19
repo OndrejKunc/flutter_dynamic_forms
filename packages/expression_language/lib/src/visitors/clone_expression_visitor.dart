@@ -242,14 +242,25 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitRoundFunctionWithRoundingMode(RoundFunctionWithRoundingModeExpression expression) {
+  void visitRoundFunctionIntRoundingMode(RoundFunctionIntRoundingModeExpression expression) {
     expression.value.accept(this);
     expression.precision.accept(this);
     expression.roundingMode.accept(this);
     var roundingMode = pop();
     var precision = pop();
     var value = pop();
-    push(RoundFunctionWithRoundingModeExpression(value,precision,roundingMode));
+    push(RoundFunctionIntRoundingModeExpression(value,precision,roundingMode));
+  }
+
+  @override
+  void visitRoundFunctionStringRoundingMode(RoundFunctionStringRoundingModeExpression expression) {
+    expression.value.accept(this);
+    expression.precision.accept(this);
+    expression.roundingMode.accept(this);
+    var roundingMode = pop();
+    var precision = pop();
+    var value = pop();
+    push(RoundFunctionStringRoundingModeExpression(value,precision,roundingMode));
   }
 
   @override

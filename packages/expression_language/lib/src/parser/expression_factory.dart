@@ -71,10 +71,17 @@ Expression createFunctionExpression(
     return ListCountFunctionExpression(parameters[0]);
   }
   if (functionName == "round") {
-    if (parameters.length == 3)
-      return RoundFunctionWithRoundingModeExpression(
-          parameters[0], parameters[1], parameters[2]);
-    else if (parameters.length == 2)
+    if (parameters.length == 3) {
+      if (parameters[2] is Expression<Integer>) {
+        return RoundFunctionIntRoundingModeExpression(
+            parameters[0], parameters[1], parameters[2]);
+      } else if (parameters[2] is Expression<String>) {
+        return RoundFunctionStringRoundingModeExpression(
+            parameters[0], parameters[1], parameters[2]);
+      }else{
+        throw InvalidParameter("Function $functionName expects integer or string as third parameter");
+      }
+    } else if (parameters.length == 2)
       return RoundFunctionExpression(parameters[0], parameters[1]);
     else
       throw InvalidParameterCount(
