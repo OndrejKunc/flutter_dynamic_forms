@@ -1,7 +1,7 @@
 import 'package:expression_language/src/number_type/decimal.dart';
 import 'package:expression_language/src/number_type/integer.dart';
 
-enum RoundingMode { NEAREST_EVEN,NEAREST_FROM_ZERO,TOWARDS_ZERO,UP,DOWN }
+enum RoundingMode { NEAREST_EVEN,NEAREST_FROM_ZERO,TOWARDS_ZERO,FROM_ZERO,UP,DOWN }
 
 abstract class Number implements Comparable<Number> {
   /**
@@ -145,12 +145,12 @@ abstract class Number implements Comparable<Number> {
   Integer round();
 
   /**Returns number rounded according to precision and rounding mode.
-   * If precision is negative, number is rounded to hundreds (-2), thousands (-3), etc.
+   * If precision is negative, number is rounded to hundreds (-2), thousands (-3), etc. In that case, it rounds to nearest, ties away from zero.
    * 
    * If rounded number is integer, rounding mode NEAREST_EVEN is automatically used and cannot be changed.\
    * Rounding modes are from IEEE 754 - https://en.wikipedia.org/wiki/IEEE_754#Rounding_rules
    */
-  Number preciseRound(int precision,
+  Number roundWithPrecision(int precision,
       [RoundingMode mode = RoundingMode.NEAREST_EVEN]);
 
 

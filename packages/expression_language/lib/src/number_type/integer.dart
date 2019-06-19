@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:expression_language/src/number_type/decimal.dart';
 import 'package:expression_language/src/number_type/number.dart';
 
@@ -120,13 +122,13 @@ class Integer extends Number {
   Integer truncate() => new Integer(value.truncate());
 
   @override
-  Number preciseRound(int precision,
+  Number roundWithPrecision(int precision,
       [RoundingMode mode = RoundingMode.NEAREST_EVEN]) {
     if (precision >= 0)
       return Integer(value);
     else {
-      int multiplier = 10^(-precision);
-      int adder = 5*(multiplier ~/ 10);
+      final int multiplier = pow(10,-precision);
+      final int adder = 5*(multiplier ~/ 10) * ((value < 0) ? -1 : 1);
       return Integer(((value + adder) ~/ multiplier) * multiplier);
     }
   }

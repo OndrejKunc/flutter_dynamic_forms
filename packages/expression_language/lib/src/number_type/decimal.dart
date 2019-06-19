@@ -161,7 +161,7 @@ class Decimal extends Number {
   @override
   Integer truncate() => Decimal._fromRational(_rational.truncate()).toInteger();
 
-  Number preciseRound(int precision,
+  Number roundWithPrecision(int precision,
       [RoundingMode mode = RoundingMode.NEAREST_EVEN]) {
     if (precision >= 0) {
       switch (mode) {
@@ -171,6 +171,8 @@ class Decimal extends Number {
           return _roundNearestFromZero(precision);
         case RoundingMode.TOWARDS_ZERO:
           return _roundTowardsZero(precision);
+        case RoundingMode.FROM_ZERO:
+          return _roundFromZero(precision);
         case RoundingMode.UP:
           return _roundUp(precision);
         case RoundingMode.DOWN:
@@ -178,11 +180,11 @@ class Decimal extends Number {
       }
       return null; //to suppress warning
     }
-    else return toInteger().preciseRound(precision);
+    else return toInteger().roundWithPrecision(precision);
   }
 
   Number _roundTowardsZero(int precision) {
-    Integer multiplier = Integer(pow(10,precision));
+    final Integer multiplier = Integer(pow(10,precision));
     Number tempNumber = this * multiplier;
     tempNumber =
         (tempNumber >= Integer(0)) ? tempNumber.floor() : tempNumber.ceil();
@@ -190,7 +192,7 @@ class Decimal extends Number {
   }
 
   Number _roundFromZero(int precision) {
-    Integer multiplier = Integer(pow(10,precision));
+    final Integer multiplier = Integer(pow(10,precision));
     Number tempNumber = this * multiplier;
     tempNumber =
         (tempNumber >= Integer(0)) ? tempNumber.ceil() : tempNumber.floor();
@@ -198,21 +200,21 @@ class Decimal extends Number {
   }
 
   Number _roundUp(int precision) {
-    Integer multiplier = Integer(pow(10,precision));
+    final Integer multiplier = Integer(pow(10,precision));
     return (this * multiplier).ceil() / multiplier;
   }
 
   Number _roundDown(int precision) {
-    Integer multiplier = Integer(pow(10,precision));
+    final Integer multiplier = Integer(pow(10,precision));
     return (this * multiplier).floor() / multiplier;
   }
 
   Number _roundNearestEven(int precision){
-    Integer multiplier = Integer(pow(10,precision));
-    Number tempNumber = this * multiplier;
-    String integerPart = tempNumber.toInt().toString();
+    final Integer multiplier = Integer(pow(10,precision));
+    final Number tempNumber = this * multiplier;
+    final String integerPart = tempNumber.toInt().toString();
     var parts = tempNumber.toString().split('.'); 
-    String decimalPart = (parts.length == 2) ? parts[1] : "";
+    final String decimalPart = (parts.length == 2) ? parts[1] : "";
 
     if(decimalPart.length > 0 && decimalPart[0] == '5'){
       int lastDigit = int.tryParse(integerPart[integerPart.length-1]);
@@ -222,7 +224,7 @@ class Decimal extends Number {
   }
 
   Number _roundNearestFromZero(int precision){
-    Integer multiplier = Integer(pow(10,precision));
+    final Integer multiplier = Integer(pow(10,precision));
     return (this * multiplier).round() / multiplier;
   }
 }
