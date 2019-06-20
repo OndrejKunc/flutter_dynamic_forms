@@ -242,25 +242,29 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitRoundFunctionIntRoundingMode(RoundFunctionIntRoundingModeExpression expression) {
+  void visitRoundFunctionIntRoundingMode(
+      RoundFunctionIntRoundingModeExpression expression) {
     expression.value.accept(this);
     expression.precision.accept(this);
     expression.roundingMode.accept(this);
     var roundingMode = pop();
     var precision = pop();
     var value = pop();
-    push(RoundFunctionIntRoundingModeExpression(value,precision,roundingMode));
+    push(
+        RoundFunctionIntRoundingModeExpression(value, precision, roundingMode));
   }
 
   @override
-  void visitRoundFunctionStringRoundingMode(RoundFunctionStringRoundingModeExpression expression) {
+  void visitRoundFunctionStringRoundingMode(
+      RoundFunctionStringRoundingModeExpression expression) {
     expression.value.accept(this);
     expression.precision.accept(this);
     expression.roundingMode.accept(this);
     var roundingMode = pop();
     var precision = pop();
     var value = pop();
-    push(RoundFunctionStringRoundingModeExpression(value,precision,roundingMode));
+    push(RoundFunctionStringRoundingModeExpression(
+        value, precision, roundingMode));
   }
 
   @override
@@ -269,6 +273,12 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     expression.precision.accept(this);
     var precision = pop();
     var value = pop();
-    push(RoundFunctionExpression(value,precision));
+    push(RoundFunctionExpression(value, precision));
+  }
+
+  @override
+  void visitDateTimeFunction(DateTimeFunctionExpression expression) {
+    expression.value.accept(this);
+    push(DateTimeFunctionExpression(pop()));
   }
 }

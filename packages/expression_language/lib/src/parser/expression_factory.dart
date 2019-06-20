@@ -78,14 +78,22 @@ Expression createFunctionExpression(
       } else if (parameters[2] is Expression<String>) {
         return RoundFunctionStringRoundingModeExpression(
             parameters[0], parameters[1], parameters[2]);
-      }else{
-        throw InvalidParameter("Function $functionName expects integer or string as third parameter");
+      } else {
+        throw InvalidParameter(
+            "Function $functionName expects integer or string as third parameter");
       }
     } else if (parameters.length == 2)
       return RoundFunctionExpression(parameters[0], parameters[1]);
     else
       throw InvalidParameterCount(
           "Function $functionName expects only 2 or 3 parameters");
+  }
+  if (functionName == "dateTime") {
+    if (parameters.length != 1) {
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
+    }
+    return DateTimeFunctionExpression(parameters[0]);
   }
   throw UnknownFunction("Unknown function name $functionName");
 }

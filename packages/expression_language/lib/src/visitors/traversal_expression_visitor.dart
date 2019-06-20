@@ -165,4 +165,9 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
     expression.value.accept(this);
     expression.precision.accept(this);
   }
+
+  @override
+  void visitDateTimeFunction(DateTimeFunctionExpression expression) {
+    expression.value.accept(this);
+  }
 }

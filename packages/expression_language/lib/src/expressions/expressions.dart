@@ -581,7 +581,8 @@ class RoundFunctionStringRoundingModeExpression extends Expression<Number> {
     String nameOfEnum = RoundingMode.nearestEven.toString().split('.').first;
     RoundingMode mode = RoundingMode.values.firstWhere(
         (e) => e.toString() == nameOfEnum + '.' + roundingModeString,
-        orElse: () => throw InvalidParameter("Rounding mode $roundingModeString does not exist"));
+        orElse: () => throw InvalidParameter(
+            "Rounding mode $roundingModeString does not exist"));
     return value
         .evaluate()
         .roundWithPrecision(precision.evaluate().value, mode);
@@ -604,6 +605,26 @@ class RoundFunctionExpression extends Expression<Number> {
     return value
         .evaluate()
         .roundWithPrecision(precision.evaluate().toInteger().value);
+  }
+}
+
+class DateTimeFunctionExpression extends Expression<DateTime> {
+  final Expression<String> value;
+
+  DateTimeFunctionExpression(this.value);
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitDateTimeFunction(this);
+  }
+
+  @override
+  DateTime evaluate() {
+    DateTime returnValue = DateTime.tryParse(value.evaluate());
+    if (returnValue == null) {
+      throw InvalidParameter("Invalid format of date-time string");
+    }
+    return returnValue;
   }
 }
 
