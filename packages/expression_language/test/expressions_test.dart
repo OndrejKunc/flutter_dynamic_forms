@@ -24,7 +24,8 @@ void main() async {
         ThenIntExpressionResult(),
         ThenDecimalExpressionResult(),
         ThenBoolExpressionResult(),
-        ThenExceptionThrownResult()
+        ThenExceptionThrownResult(),
+        ThenDateTimeExpressionResult(),
       ];
 
     var runner = GherkinRunner();
