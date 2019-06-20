@@ -281,4 +281,10 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     expression.value.accept(this);
     push(DateTimeFunctionExpression(pop()));
   }
+
+  @override
+  void visitDurationFunction(DurationFunctionExpression expression) {
+    expression.value.accept(this);
+    push(DurationFunctionExpression(pop()));
+  }
 }

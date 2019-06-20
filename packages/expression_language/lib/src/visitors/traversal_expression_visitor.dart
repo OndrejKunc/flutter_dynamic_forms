@@ -170,4 +170,9 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   void visitDateTimeFunction(DateTimeFunctionExpression expression) {
     expression.value.accept(this);
   }
+
+  @override
+  void visitDurationFunction(DurationFunctionExpression expression) {
+    expression.value.accept(this);
+  }
 }

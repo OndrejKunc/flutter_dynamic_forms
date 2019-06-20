@@ -95,5 +95,12 @@ Expression createFunctionExpression(
     }
     return DateTimeFunctionExpression(parameters[0]);
   }
+  if (functionName == "duration") {
+    if (parameters.length != 1) {
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
+    }
+    return DurationFunctionExpression(parameters[0]);
+  }
   throw UnknownFunction("Unknown function name $functionName");
 }

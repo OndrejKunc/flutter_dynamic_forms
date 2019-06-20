@@ -33,4 +33,5 @@ abstract class ExpressionVisitor {
   void visitRoundFunctionStringRoundingMode(RoundFunctionStringRoundingModeExpression expression);
   void visitRoundFunction(RoundFunctionExpression expression);
   void visitDateTimeFunction(DateTimeFunctionExpression expression);
+  void visitDurationFunction(DurationFunctionExpression expression);
 }
