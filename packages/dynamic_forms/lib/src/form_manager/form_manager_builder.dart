@@ -28,7 +28,7 @@ class FormManagerBuilder {
   FormManager buildFromForm(Form form) {
     var clonedForm = form.clone(null);
     var formElementMap = Map<String, FormElement>.fromIterable(
-        getFormElementIterator<FormElement>(form),
+        getFormElementIterator<FormElement>(clonedForm),
         key: (x) => x.id,
         value: (x) => x);
     _buildCloneableExpressions(clonedForm, formElementMap);
