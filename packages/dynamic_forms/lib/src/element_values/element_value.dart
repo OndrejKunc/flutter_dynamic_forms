@@ -8,7 +8,9 @@ abstract class ElementValue<T> implements ExpressionProvider<T> {
 
   Expression<T> getExpression();
 
-  Stream<T> get valueChanged => behaviorSubject == null ? behaviorSubject = BehaviorSubject<T>.seeded(value) : behaviorSubject;
+  Stream<T> get valueChanged => behaviorSubject == null
+      ? behaviorSubject = BehaviorSubject<T>.seeded(value)
+      : behaviorSubject;
 
   @protected
   BehaviorSubject<T> behaviorSubject;
