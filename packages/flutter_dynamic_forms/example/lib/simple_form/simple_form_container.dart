@@ -59,7 +59,8 @@ class _SimpleFormContainerState extends State<SimpleFormContainer> {
       _formManager.changeValue(
           event.value, event.formElementId, event.propertyName);
     }
-    //No need to call setState, because renderers already listen to the changes
+    //No need to call setState, because reactive renderers already listen to the changes.
+    //Call setState when using regular renderers, but note that the whole form will be re-rendered.
   }
 
   @override

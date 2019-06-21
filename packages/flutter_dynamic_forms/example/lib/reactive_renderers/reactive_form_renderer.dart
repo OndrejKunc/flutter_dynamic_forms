@@ -2,6 +2,7 @@ import 'package:dynamic_forms/dynamic_forms.dart' as model;
 import 'package:expression_language/expression_language.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ReactiveFormRenderer extends FormElementRenderer<model.Form> {
   @override
@@ -14,14 +15,24 @@ class ReactiveFormRenderer extends FormElementRenderer<model.Form> {
       initialData: element.children.value,
       stream: element.children.valueChanged,
       builder: (context, snapshot) {
-        List<Widget> childrenWidgets = [];
-        for (var child in snapshot.data) {
-          if ((child as model.FormElement).isVisible.value) {
-            childrenWidgets.add(renderer(child, context));
-          }
-        }
-        return Column(
-          children: childrenWidgets,
+        return StreamBuilder(
+          stream: Observable.merge(
+            snapshot.data
+                .whereType<model.FormElement>()
+                .map((child) => child.isVisible.valueChanged),
+          ),
+          builder: (context, _) {
+            List<Widget> childrenWidgets = snapshot.data
+                .whereType<model.FormElement>()
+                .where((f) => f.isVisible.value)
+                .map(
+                  (child) => renderer(child, context),
+                )
+                .toList();
+            return Column(
+              children: childrenWidgets,
+            );
+          },
         );
       },
     );
