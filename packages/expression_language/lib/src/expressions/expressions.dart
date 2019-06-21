@@ -17,12 +17,12 @@ class MutableExpression<T> extends Expression<T> {
   MutableExpression(this.value);
 
   @override
-  T evaluate() {                            
+  T evaluate() {
     return value;
   }
 
   @override
-  Type getType(){
+  Type getType() {
     return value.runtimeType;
   }
 
@@ -38,12 +38,12 @@ class ImmutableExpression<T> extends Expression<T> {
   ImmutableExpression(this.value);
 
   @override
-  T evaluate() {                            
+  T evaluate() {
     return value;
   }
 
   @override
-  Type getType(){
+  Type getType() {
     return value.runtimeType;
   }
 
@@ -91,7 +91,7 @@ class PlusNumberExpression extends Expression<Number> {
   }
 
   @override
-  Type getType(){
+  Type getType() {
     return getTypeOfNumberExpression(left.getType(), right.getType());
   }
 
@@ -140,7 +140,7 @@ class MinusNumberExpression extends Expression<Number> {
   }
 
   @override
-  Type getType(){
+  Type getType() {
     return getTypeOfNumberExpression(left.getType(), right.getType());
   }
 
@@ -149,7 +149,6 @@ class MinusNumberExpression extends Expression<Number> {
     visitor.visitMinusNumber(this);
   }
 }
-
 
 class NegateNumberExpression extends Expression<Number> {
   final Expression<Number> value;
@@ -189,7 +188,7 @@ class MultiplyExpression extends Expression<Number> {
   }
 
   @override
-  Type getType(){
+  Type getType() {
     return getTypeOfNumberExpression(left.getType(), right.getType());
   }
 
@@ -254,7 +253,6 @@ class NegateBoolExpression extends Expression<bool> {
   }
 }
 
-
 class EqualNumberExpression extends Expression<bool> {
   final Expression<Number> left;
   final Expression<Number> right;
@@ -305,7 +303,6 @@ class EqualStringExpression extends Expression<bool> {
     visitor.visitEqualString(this);
   }
 }
-
 
 class NotEqualNumberExpression extends Expression<bool> {
   final Expression<Number> left;
@@ -358,7 +355,6 @@ class NotEqualStringExpression extends Expression<bool> {
   }
 }
 
-
 class LessThanExpression extends Expression<bool> {
   final Expression<Number> left;
   final Expression<Number> right;
@@ -405,7 +401,8 @@ class DelegateExpression<T> extends Expression<T> {
   }
 
   ExpressionProvider<T> getExpressionProvider<T>() {
-    return expressionProvider as ExpressionProvider<T>; //Doesn't work without as, probably compiler error
+    return expressionProvider as ExpressionProvider<
+        T>; //Doesn't work without as, probably compiler error
   }
 
   @override
@@ -479,12 +476,15 @@ class DivisionExpression extends Expression<Number> {
   Number evaluate() {
     Number rightValue = right.evaluate();
     Decimal epsilon = Decimal.parse("1e-15");
-    if(rightValue.abs() < epsilon) throw DivideByZeroException("Division by zero");
-    return (left.getType() == Integer && right.getType() == Integer) ? left.evaluate() ~/ right.evaluate() : left.evaluate() / right.evaluate();
+    if (rightValue.abs() < epsilon)
+      throw DivideByZeroException("Division by zero");
+    return (left.getType() == Integer && right.getType() == Integer)
+        ? left.evaluate() ~/ right.evaluate()
+        : left.evaluate() / right.evaluate();
   }
 
   @override
-  Type getType(){
+  Type getType() {
     return getTypeOfNumberExpression(left.getType(), right.getType());
   }
 
@@ -511,7 +511,7 @@ class ModuloExpression extends Expression<Number> {
   }
 
   @override
-  Type getType(){
+  Type getType() {
     return getTypeOfNumberExpression(left.getType(), right.getType());
   }
 
@@ -520,7 +520,6 @@ class ModuloExpression extends Expression<Number> {
     visitor.visitModulo(this);
   }
 }
-
 
 class ListCountFunctionExpression<T> extends Expression<int> {
   final Expression<List<T>> value;
@@ -538,8 +537,79 @@ class ListCountFunctionExpression<T> extends Expression<int> {
   }
 }
 
-Type getTypeOfNumberExpression(Type left, Type right){
-  if(left != right){ //One of them has to be decimal => whole expr is decimal
+class RoundFunctionIntRoundingModeExpression extends Expression<Number> {
+  final Expression<Number> value;
+  final Expression<Integer> precision;
+  final Expression<Integer> roundingMode;
+
+  RoundFunctionIntRoundingModeExpression(
+      this.value, this.precision, this.roundingMode);
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitRoundFunctionIntRoundingMode(this);
+  }
+
+  @override
+  Number evaluate() {
+    int roundingModeInt = roundingMode.evaluate().value;
+    if ((roundingModeInt >= RoundingMode.values.length) ||
+        (roundingModeInt < 0))
+      throw InvalidParameter(
+          "Rounding mode has to be integer in range [0,${RoundingMode.values.length - 1}");
+    return value.evaluate().roundWithPrecision(precision.evaluate().value,
+        RoundingMode.values[roundingMode.evaluate().value]);
+  }
+}
+
+class RoundFunctionStringRoundingModeExpression extends Expression<Number> {
+  final Expression<Number> value;
+  final Expression<Integer> precision;
+  final Expression<String> roundingMode;
+
+  RoundFunctionStringRoundingModeExpression(
+      this.value, this.precision, this.roundingMode);
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitRoundFunctionStringRoundingMode(this);
+  }
+
+  @override
+  Number evaluate() {
+    String roundingModeString = roundingMode.evaluate();
+    String nameOfEnum = RoundingMode.nearestEven.toString().split('.').first;
+    RoundingMode mode = RoundingMode.values.firstWhere(
+        (e) => e.toString() == nameOfEnum + '.' + roundingModeString,
+        orElse: () => throw InvalidParameter("Rounding mode $roundingModeString does not exist"));
+    return value
+        .evaluate()
+        .roundWithPrecision(precision.evaluate().value, mode);
+  }
+}
+
+class RoundFunctionExpression extends Expression<Number> {
+  final Expression<Number> value;
+  final Expression<Number> precision;
+
+  RoundFunctionExpression(this.value, this.precision);
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitRoundFunction(this);
+  }
+
+  @override
+  Number evaluate() {
+    return value
+        .evaluate()
+        .roundWithPrecision(precision.evaluate().toInteger().value);
+  }
+}
+
+Type getTypeOfNumberExpression(Type left, Type right) {
+  if (left != right) {
+    //One of them has to be decimal => whole expr is decimal
     return Decimal;
   }
   return left;
