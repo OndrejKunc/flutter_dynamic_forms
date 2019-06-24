@@ -18,6 +18,7 @@ class PrimitiveMutableElementValue<T> extends ElementValue<T> {
     _cachedValue = value;
     expression.value = value;
     if (_cachedValue != oldValue) {
+      behaviorSubject?.add(_cachedValue);
       notifySubscribers();
     }
   }

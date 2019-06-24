@@ -60,22 +60,8 @@ class DynamicFormBloc extends Bloc<FormElementEvent, DynamicFormState> {
     }
 
     if (event is ChangeValueEvent) {
-      if (event is ChangeValueEvent<int>) {
-        formManager.changeValue(
-            event.value, event.formElementId, event.propertyName);
-      }
-      if (event is ChangeValueEvent<String>) {
-        formManager.changeValue(
-            event.value, event.formElementId, event.propertyName);
-      }
-      if (event is ChangeValueEvent<bool>) {
-        formManager.changeValue(
-            event.value, event.formElementId, event.propertyName);
-      }
-      if (event is ChangeValueEvent<double>) {
-        formManager.changeValue(
-            event.value, event.formElementId, event.propertyName);
-      }
+      formManager.changeValue(
+          event.value, event.formElementId, event.propertyName);
       yield currentState.copyWith(isValid: formManager.isFormValid);
     }
   }
