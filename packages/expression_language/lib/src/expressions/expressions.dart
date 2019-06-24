@@ -645,8 +645,8 @@ class DurationFunctionExpression extends Expression<Duration> {
 
   Duration convertIso8601DurationToDuration(String input) {
     List<int> values = List(4);
-    RegExp validator = RegExp(
-        r"^P(([0-9]+D)?T?([0-9]+H)?([0-9]+M)?([0-9]+S)?)$");
+    RegExp validator =
+        RegExp(r"^P(([0-9]+D)?T?([0-9]+H)?([0-9]+M)?([0-9]+S)?)$");
     if (!validator.hasMatch(input)) {
       throw InvalidParameter("Invalid format of duration string");
     }
@@ -671,8 +671,22 @@ class DurationFunctionExpression extends Expression<Duration> {
         values[i] = 0;
       }
     }
-    return Duration(days: values[0],hours: values[1],minutes: values[2],seconds: values[3]);
+    return Duration(
+        days: values[0],
+        hours: values[1],
+        minutes: values[2],
+        seconds: values[3]);
   }
+}
+
+class NowFunctionExpression extends Expression<DateTime> {
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitNowFunction(this);
+  }
+
+  @override
+  DateTime evaluate() => DateTime.now();
 }
 
 Type getTypeOfNumberExpression(Type left, Type right) {

@@ -287,4 +287,9 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     expression.value.accept(this);
     push(DurationFunctionExpression(pop()));
   }
+
+  @override
+  void visitNowFunction(NowFunctionExpression expression) {
+    push(NowFunctionExpression());
+  }
 }

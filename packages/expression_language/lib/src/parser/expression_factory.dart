@@ -102,5 +102,12 @@ Expression createFunctionExpression(
     }
     return DurationFunctionExpression(parameters[0]);
   }
+  if (functionName == "now") {
+    if (parameters.length != 0) {
+      throw InvalidParameterCount(
+          "Function $functionName does not expect any parameter");
+    }
+    return NowFunctionExpression();
+  }
   throw UnknownFunction("Unknown function name $functionName");
 }
