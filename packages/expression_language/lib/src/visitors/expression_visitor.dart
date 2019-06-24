@@ -36,4 +36,5 @@ abstract class ExpressionVisitor {
   void visitDurationFunction(DurationFunctionExpression expression);
   void visitNowFunction(NowFunctionExpression expression);
   void visitNowInUtcFunction(NowInUtcFunctionExpression expression);
+  void visitDiffDateTimeFunction(DiffDateTimeFunctionExpression expression);
 }

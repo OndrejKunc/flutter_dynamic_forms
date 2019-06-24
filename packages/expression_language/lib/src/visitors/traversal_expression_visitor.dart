@@ -181,4 +181,10 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
 
   @override
   void visitNowInUtcFunction(NowInUtcFunctionExpression expression) {}
+
+  @override
+  void visitDiffDateTimeFunction(DiffDateTimeFunctionExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
 }

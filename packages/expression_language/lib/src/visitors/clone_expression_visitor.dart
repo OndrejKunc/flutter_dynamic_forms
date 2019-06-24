@@ -297,4 +297,13 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   void visitNowInUtcFunction(NowInUtcFunctionExpression expression) {
     push(NowInUtcFunctionExpression());
   }
+
+  @override
+  void visitDiffDateTimeFunction(DiffDateTimeFunctionExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(DiffDateTimeFunctionExpression(left,right));
+  }
 }

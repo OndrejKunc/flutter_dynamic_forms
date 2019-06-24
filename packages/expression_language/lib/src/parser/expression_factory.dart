@@ -116,5 +116,12 @@ Expression createFunctionExpression(
     }
     return NowInUtcFunctionExpression();
   }
+  if (functionName == "diffDateTime") {
+    if (parameters.length != 2) {
+      throw InvalidParameterCount(
+          "Function $functionName expects only 2 parameters");
+    }
+    return DiffDateTimeFunctionExpression(parameters[0],parameters[1]);
+  }
   throw UnknownFunction("Unknown function name $functionName");
 }
