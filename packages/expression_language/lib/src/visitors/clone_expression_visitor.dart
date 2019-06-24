@@ -292,4 +292,9 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   void visitNowFunction(NowFunctionExpression expression) {
     push(NowFunctionExpression());
   }
+
+  @override
+  void visitNowInUtcFunction(NowInUtcFunctionExpression expression) {
+    push(NowInUtcFunctionExpression());
+  }
 }

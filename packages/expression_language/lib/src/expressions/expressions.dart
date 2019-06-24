@@ -689,6 +689,16 @@ class NowFunctionExpression extends Expression<DateTime> {
   DateTime evaluate() => DateTime.now();
 }
 
+class NowInUtcFunctionExpression extends Expression<DateTime> {
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitNowInUtcFunction(this);
+  }
+
+  @override
+  DateTime evaluate() => DateTime.now().toUtc();
+}
+
 Type getTypeOfNumberExpression(Type left, Type right) {
   if (left != right) {
     //One of them has to be decimal => whole expr is decimal

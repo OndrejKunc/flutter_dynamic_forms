@@ -177,6 +177,8 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitNowFunction(NowFunctionExpression expression) {
-  }
+  void visitNowFunction(NowFunctionExpression expression) {}
+
+  @override
+  void visitNowInUtcFunction(NowInUtcFunctionExpression expression) {}
 }

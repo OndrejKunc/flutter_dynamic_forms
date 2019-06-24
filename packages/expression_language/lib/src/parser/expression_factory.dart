@@ -109,5 +109,12 @@ Expression createFunctionExpression(
     }
     return NowFunctionExpression();
   }
+  if (functionName == "nowInUtc") {
+    if (parameters.length != 0) {
+      throw InvalidParameterCount(
+          "Function $functionName does not expect any parameter");
+    }
+    return NowInUtcFunctionExpression();
+  }
   throw UnknownFunction("Unknown function name $functionName");
 }

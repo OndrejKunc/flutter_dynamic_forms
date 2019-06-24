@@ -5,10 +5,6 @@ Feature: Expression
     When expression "dateTime("1997-07-16T19:20")" is evaluated
     Then DateTime expression result is "1997-07-16T19:20"
 
-  Scenario: DateTime constructor test
-    When expression "now()" is evaluated
-    Then DateTime expression result is "1997-07-16T19:20"
-
   Scenario: rounding test 1 - string rounding mode
     When expression "round(13.5,0,"nearestEven")" is evaluated
     Then decimal expression result is "14"
