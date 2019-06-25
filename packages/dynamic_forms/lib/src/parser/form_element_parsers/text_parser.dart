@@ -18,7 +18,7 @@ class TextParser extends FormElementParser<Text> {
         value: getStringValue(element, "value", isImmutable: false),
         label: getStringValue(element, "label"),
         textInputType: getStringValue(element, "textInputType"),
-        validations: getChildrenElement(element, text, "validations", parser));
+        validations: getChildrenFromElement<Validation>(element, text, "validations", parser));
     return text;
   }
 }

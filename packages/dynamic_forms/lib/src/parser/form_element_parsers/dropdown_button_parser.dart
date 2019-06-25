@@ -16,7 +16,7 @@ class DropdownButtonParser extends FormElementParser<DropdownButton> {
       isVisible: getIsVisible(element),
       parent: getParentValue(parent),
       value: getStringValue(element, "value", isImmutable: false),
-      options: getChildrenElement(element, dropdownButton, "options", parser),
+      options: getChildren<DropdownOption>(element, dropdownButton, parser),
     );
     return dropdownButton;
   }

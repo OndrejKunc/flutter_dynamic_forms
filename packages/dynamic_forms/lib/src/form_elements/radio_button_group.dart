@@ -6,17 +6,17 @@ import 'package:meta/meta.dart';
 
 class RadioButtonGroup extends FormElement {
   ElementValue<String> value;
-  ElementValue<List<RadioButton>> children;
+  ElementValue<List<RadioButton>> radioButtons;
 
   void fillRadioButtonGroup({
     @required String id,
     @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
-    @required ElementValue<List<RadioButton>> children,
+    @required ElementValue<List<RadioButton>> radioButtons,
     @required ElementValue<String> value,
   }) {
     fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    this.children = registerElementValue("children", children);
+    this.radioButtons = registerElementValue("radioButtons", radioButtons);
     this.value = registerElementValue("value", value);
   }
 
@@ -28,7 +28,7 @@ class RadioButtonGroup extends FormElement {
       id: this.id,
       parent: parent,
       isVisible: this.isVisible.clone(),
-      children: cloneChildren(this.children, result),
+      radioButtons: cloneChildren(this.radioButtons, result),
       value: this.value.clone(),
     );
     return result;
