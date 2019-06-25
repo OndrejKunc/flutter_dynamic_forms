@@ -9,7 +9,7 @@ class CheckBox extends FormElement {
 
   void fillCheckBox({
     @required String id,
-    @required ElementValue<ExpressionProviderElement> parent,
+    @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
     @required ElementValue<bool> value,
     @required ElementValue<String> label,

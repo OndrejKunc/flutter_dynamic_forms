@@ -10,7 +10,7 @@ class DropdownButton extends FormElement {
 
   void fillDropdownButton({
     @required String id,
-    @required ElementValue<ExpressionProviderElement> parent,
+    @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
     @required ElementValue<List<DropdownOption>> options,
     @required ElementValue<String> value,

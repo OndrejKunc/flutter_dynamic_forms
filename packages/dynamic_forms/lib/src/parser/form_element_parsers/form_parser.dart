@@ -16,7 +16,7 @@ class FormParser extends FormElementParser<Form> {
       id: getAttribute(element, "id"),
       isVisible: getIsVisible(element),
       name: getStringValue(element, "name"),
-      children: getChildren(element, form, parser),
+      children: getChildren<FormElement>(element, form, parser),
     );
     return form;
   }

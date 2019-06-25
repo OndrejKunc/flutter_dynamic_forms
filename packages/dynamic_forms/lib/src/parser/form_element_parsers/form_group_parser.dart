@@ -16,7 +16,7 @@ class FormGroupParser extends FormElementParser<FormGroup> {
       isVisible: getIsVisible(element),
       parent: getParentValue(parent),
       name: getStringValue(element, "name"),
-      children: getChildren(element, formGroup, parser),
+      children: getChildren<FormElement>(element, formGroup, parser),
     );
     return formGroup;
   }

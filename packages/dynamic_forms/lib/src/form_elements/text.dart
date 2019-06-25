@@ -12,7 +12,7 @@ class Text extends FormElement {
 
   void fillText({
     @required String id,
-    @required ElementValue<ExpressionProviderElement> parent,
+    @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
     @required ElementValue<String> value,
     @required ElementValue<String> label,
