@@ -9,7 +9,7 @@ abstract class FormElement implements ExpressionProviderElement {
   static const String DEFAULT_PROPERTY_NAME = "value";
 
   String id;
-  ElementValue<ExpressionProviderElement> parent;
+  ElementValue<FormElement> parent;
   Map<String, ElementValue> _properties = {};
   ElementValue<bool> isVisible;
 
@@ -17,7 +17,7 @@ abstract class FormElement implements ExpressionProviderElement {
 
   void fillFormElement(
       {@required String id,
-      @required ElementValue<ExpressionProviderElement> parent,
+      @required ElementValue<FormElement> parent,
       @required ElementValue<bool> isVisible}) {
     this.id = id;
     this.isVisible = registerElementValue("isVisible", isVisible);
@@ -49,7 +49,7 @@ abstract class FormElement implements ExpressionProviderElement {
 
   Map<String, ElementValue> getProperties() => _properties;
 
-  ElementValue<List<T>> cloneChildren<T extends ExpressionProviderElement>(
+  ElementValue<List<T>> cloneChildren<T extends FormElement>(
       ElementValue<List<T>> children, ExpressionProviderElement parent) {
     var childrenElements = children.value;
     var childrenCopy = List<T>.from(

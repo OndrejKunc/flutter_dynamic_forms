@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:expression_language/expression_language.dart';
 import 'package:xml/xml.dart';
 
 typedef FormElementParserFunction = FormElement Function(
@@ -57,14 +56,14 @@ ElementValue<T> _createPrimitiveElementValue<T>(T value, bool isImmutable) {
       : PrimitiveMutableElementValue<T>(value);
 }
 
-ElementValue<List<ExpressionProviderElement>> getChildren(XmlElement element,
+ElementValue<List<FormElement>> getChildren(XmlElement element,
         FormElement parent, FormElementParserFunction parser, {bool isImmutable = true}) =>
     _createPrimitiveElementValue(element.children
         .where((c) => c is XmlElement)
         .map((c) => parser(c, parent))
         .toList(), isImmutable);
 
-ElementValue<ExpressionProviderElement> getParentValue(FormElement parent) {
+ElementValue<FormElement> getParentValue(FormElement parent) {
   return PrimitiveImmutableElementValue(parent);
 }
 

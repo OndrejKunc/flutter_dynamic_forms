@@ -9,7 +9,7 @@ class Validation extends FormElement {
 
   void fillValidation({
     @required String id,
-    @required ElementValue<ExpressionProviderElement> parent,
+    @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
     @required ElementValue<bool> isValid,
     @required ElementValue<String> message,

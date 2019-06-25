@@ -1,7 +1,6 @@
 import 'dart:collection';
 
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:expression_language/expression_language.dart';
 
 Iterable<TFormElement> getFormElementIterator<TFormElement extends FormElement>(
     FormElement formElement) sync* {
@@ -16,15 +15,15 @@ Iterable<TFormElement> getFormElementIterator<TFormElement extends FormElement>(
     var formElements = formElement
         .getProperties()
         .values
-        .whereType<ElementValue<ExpressionProviderElement>>()
-        .map((v) => v.value as FormElement)
+        .whereType<ElementValue<FormElement>>()
+        .map((v) => v.value)
         .toList();
 
     var formListElements = formElement
         .getProperties()
         .values
-        .whereType<ElementValue<List<ExpressionProviderElement>>>()
-        .map((v) => v.value.cast<FormElement>())
+        .whereType<ElementValue<List<FormElement>>>()
+        .map((v) => v.value)
         .expand((x) => x);
     formElements.addAll(formListElements);
 

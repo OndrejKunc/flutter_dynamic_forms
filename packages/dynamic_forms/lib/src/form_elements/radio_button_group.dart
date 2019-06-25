@@ -10,7 +10,7 @@ class RadioButtonGroup extends FormElement {
 
   void fillRadioButtonGroup({
     @required String id,
-    @required ElementValue<ExpressionProviderElement> parent,
+    @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
     @required ElementValue<List<RadioButton>> children,
     @required ElementValue<String> value,

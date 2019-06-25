@@ -9,7 +9,7 @@ class DropdownOption extends FormElement {
 
   void fillDropdownOption({
     @required String id,
-    @required ElementValue<ExpressionProviderElement> parent,
+    @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
     @required ElementValue<String> label,
     @required ElementValue<String> value,
