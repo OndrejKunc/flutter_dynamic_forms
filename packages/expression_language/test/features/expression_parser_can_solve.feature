@@ -1,6 +1,224 @@
 Feature: Expression
   Tests an expression
 
+# -> Even
+  Scenario: basic rounding test Even method 1
+    When expression "round(2.6,0,"nearestEven")" is evaluated
+    Then decimal expression result is "3"
+
+  Scenario: basic rounding test Even method 2
+    When expression "round(1.5,0,"nearestEven")" is evaluated
+    Then decimal expression result is "2"
+
+  Scenario: basic rounding test Even method 3
+    When expression "round(2.0,0,"nearestEven")" is evaluated
+    Then decimal expression result is "2"
+
+  Scenario: basic rounding test Even method 4
+    When expression "round(2.5,0,"nearestEven")" is evaluated
+    Then decimal expression result is "2"
+
+  Scenario: basic rounding test Even method 5
+    When expression "round(1.4,0,"nearestEven")" is evaluated
+    Then decimal expression result is "1"
+
+  Scenario: basic rounding test Even method 6
+    When expression "round(-2.0,0,"nearestEven")" is evaluated
+    Then decimal expression result is "-2"
+
+  Scenario: basic rounding test Even method 7
+    When expression "round(-1.5,0,"nearestEven")" is evaluated
+    Then decimal expression result is "-2"
+
+  Scenario: basic rounding test Even method 8
+    When expression "round(-1.4,0,"nearestEven")" is evaluated
+    Then decimal expression result is "-1"
+
+  Scenario: basic rounding test Even method 9
+    When expression "round(-1.0,0,"nearestEven")" is evaluated
+    Then decimal expression result is "-1"
+
+  Scenario: basic rounding test Even method 10
+    When expression "round(-0.5,0,"nearestEven")" is evaluated
+    Then decimal expression result is "0"
+
+# -> Zero, nearestFromZero 
+
+  Scenario: basic rounding test FromZero method 1
+    When expression "round(2.6,0,"nearestFromZero")" is evaluated
+    Then decimal expression result is "3"
+
+  # Scenario: basic rounding test FromZero method 2
+  #   When expression "round(1.5,0,"nearestFromZero")" is evaluated
+  #   Then decimal expression result is "1"
+
+  Scenario: basic rounding test FromZero method 3
+    When expression "round(2.0,0,"nearestFromZero")" is evaluated
+    Then decimal expression result is "2"
+
+  # Scenario: basic rounding test FromZero method 4
+  #   When expression "round(2.5,0,"nearestFromZero")" is evaluated
+  #   Then decimal expression result is "2"
+
+  Scenario: basic rounding test FromZero method 5
+    When expression "round(1.4,0,"nearestFromZero")" is evaluated
+    Then decimal expression result is "1"
+
+  Scenario: basic rounding test FromZero method 6
+    When expression "round(-2.0,0,"nearestFromZero")" is evaluated
+    Then decimal expression result is "-2"
+
+  # Scenario: basic rounding test FromZero method 7
+  #   When expression "round(-1.5,0,"nearestFromZero")" is evaluated
+  #   Then decimal expression result is "-1"
+
+  Scenario: basic rounding test FromZero method 8
+    When expression "round(-1.4,0,"nearestFromZero")" is evaluated
+    Then decimal expression result is "-1"
+
+  Scenario: basic rounding test FromZero method 9
+    When expression "round(-1.0,0,"nearestFromZero")" is evaluated
+    Then decimal expression result is "-1"
+
+  # Scenario: basic rounding test FromZero method 10
+  #   When expression "round(-0.5,0,"nearestFromZero")" is evaluated
+  #   Then decimal expression result is "0"
+
+
+# Round -> zero, roundTowardsZero
+
+  Scenario: basic rounding test Round -> zero method 1
+    When expression "round(2.6,0,"towardsZero")" is evaluated
+    Then decimal expression result is "2"
+
+  Scenario: basic rounding test Round -> zero method 2
+    When expression "round(1.5,0,"towardsZero")" is evaluated
+    Then decimal expression result is "1"
+
+  Scenario: basic rounding test Round -> zero method 3
+    When expression "round(2.0,0,"towardsZero")" is evaluated
+    Then decimal expression result is "2"
+
+  Scenario: basic rounding test Round -> zero method 4
+    When expression "round(2.5,0,"towardsZero")" is evaluated
+    Then decimal expression result is "2"
+
+  Scenario: basic rounding test Round -> zero method 5
+    When expression "round(1.4,0,"towardsZero")" is evaluated
+    Then decimal expression result is "1"
+
+  Scenario: basic rounding test Round -> zero method 6
+    When expression "round(-2.0,0,"towardsZero")" is evaluated
+    Then decimal expression result is "-2"
+
+  Scenario: basic rounding test Round -> zero method 7
+    When expression "round(-1.5,0,"towardsZero")" is evaluated
+    Then decimal expression result is "-1"
+
+  Scenario: basic rounding test Round -> zero method 8
+    When expression "round(-1.4,0,"towardsZero")" is evaluated
+    Then decimal expression result is "-1"
+
+  Scenario: basic rounding test Round -> zero method 9
+    When expression "round(-1.0,0,"towardsZero")" is evaluated
+    Then decimal expression result is "-1"
+
+  Scenario: basic rounding test Round -> zero method 10
+    When expression "round(-0.9,0,"towardsZero")" is evaluated
+    Then decimal expression result is "0"
+
+  Scenario: basic rounding test Round -> zero method 11
+    When expression "round(0.9,0,"towardsZero")" is evaluated
+    Then decimal expression result is "0"
+
+
+# Round up
+ 
+Scenario: basic rounding test Round up method 1
+    When expression "round(2.6,0,"up")" is evaluated
+    Then decimal expression result is "3"
+
+  Scenario: basic rounding test Round up method 2
+    When expression "round(1.5,0,"up")" is evaluated
+    Then decimal expression result is "2"
+
+  Scenario: basic rounding test Round up method 3
+    When expression "round(2.0,0,"up")" is evaluated
+    Then decimal expression result is "2"
+
+  Scenario: basic rounding test Round up method 4
+    When expression "round(2.5,0,"up")" is evaluated
+    Then decimal expression result is "3"
+
+  Scenario: basic rounding test Round up method 5
+    When expression "round(1.4,0,"up")" is evaluated
+    Then decimal expression result is "2"
+
+  # Scenario: basic rounding test Round up method 6
+  #   When expression "round(-2.0,0,"up")" is evaluated
+  #   Then decimal expression result is "-1"
+
+  Scenario: basic rounding test Round up method 7
+    When expression "round(-1.5,0,"up")" is evaluated
+    Then decimal expression result is "-1"
+
+  Scenario: basic rounding test Round up method 8
+    When expression "round(-1.4,0,"up")" is evaluated
+    Then decimal expression result is "-1"
+
+  Scenario: basic rounding test Round up method 9
+    When expression "round(-1.0,0,"up")" is evaluated
+    Then decimal expression result is "-1"
+
+  Scenario: basic rounding test Round up method 10
+    When expression "round(-0.5,0,"up")" is evaluated
+    Then decimal expression result is "0"
+
+
+# Round down
+ 
+Scenario: basic rounding test Round down method 1
+    When expression "round(2.6,0,"down")" is evaluated
+    Then decimal expression result is "2"
+
+  Scenario: basic rounding test Round down method 2
+    When expression "round(1.5,0,"down")" is evaluated
+    Then decimal expression result is "1"
+
+  Scenario: basic rounding test Round down method 3
+    When expression "round(2.0,0,"down")" is evaluated
+    Then decimal expression result is "2"
+
+  Scenario: basic rounding test Round down method 4
+    When expression "round(2.5,0,"down")" is evaluated
+    Then decimal expression result is "2"
+
+  Scenario: basic rounding test Round down method 5
+    When expression "round(1.4,0,"down")" is evaluated
+    Then decimal expression result is "1"
+
+  Scenario: basic rounding test Round down method 6
+    When expression "round(-2.0,0,"down")" is evaluated
+    Then decimal expression result is "-2"
+
+  Scenario: basic rounding test Round down method 7
+    When expression "round(-1.5,0,"down")" is evaluated
+    Then decimal expression result is "-2"
+
+  Scenario: basic rounding test Round down method 8
+    When expression "round(-1.4,0,"down")" is evaluated
+    Then decimal expression result is "-2"
+
+  Scenario: basic rounding test Round down method 9
+    When expression "round(-1.0,0,"down")" is evaluated
+    Then decimal expression result is "-1"
+
+  Scenario: basic rounding test Round down method 10
+    When expression "round(-0.5,0,"down")" is evaluated
+    Then decimal expression result is "-1"
+
+###
+
   Scenario: rounding test 1 - string rounding mode
     When expression "round(13.5,0,"nearestEven")" is evaluated
     Then decimal expression result is "14"
