@@ -30,7 +30,7 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitDivision(DivisionExpression expression) {
+  void visitDivision(DivisionNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
   }
@@ -94,7 +94,7 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitMultiply(MultiplyExpression expression) {
+  void visitMultiply(MultiplyNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
   }
@@ -131,6 +131,47 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
 
   @override
   void visitNegateNumber(NegateNumberExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
+  void visitDateTimePlusDuration(DateTimePlusDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitDateTimeMinusDuration(DateTimeMinusDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitPlusDuration(PlusDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitMinusDuration(MinusDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitMultiplyDuration(MultiplyDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitDivisionDuration(DivisionDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitNegateDuration(NegateDurationExpression expression) {
     expression.value.accept(this);
   }
 

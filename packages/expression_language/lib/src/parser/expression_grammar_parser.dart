@@ -14,10 +14,10 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
   ExpressionGrammarParser(this.expressionProviderElementMap);
 
   Parser failureState() => super.failureState().map((c) {
-        var lastSeenSymbol = (c is List && c.length >= 2)? c[1] : c;
-        throw InvalidSyntaxException("Invalid syntax, last seen symbol: {$lastSeenSymbol} ");
+        var lastSeenSymbol = (c is List && c.length >= 2) ? c[1] : c;
+        throw InvalidSyntaxException(
+            "Invalid syntax, last seen symbol: {$lastSeenSymbol} ");
       });
-
 
   Parser additiveExpression() => super.additiveExpression().map((c) {
         Expression left = c[0];
@@ -33,44 +33,83 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
               continue;
             }
             if (left is Expression<String> && right is Expression<Number>) {
-              left = PlusStringExpression(
-                  left, ToStringFunctionExpression(right));
+              left =
+                  PlusStringExpression(left, ToStringFunctionExpression(right));
               continue;
             }
             if (left is Expression<Number> && right is Expression<String>) {
-              left = PlusStringExpression(
-                  ToStringFunctionExpression(left), right);
+              left =
+                  PlusStringExpression(ToStringFunctionExpression(left), right);
+              continue;
+            }
+            if (left is Expression<Duration> && right is Expression<DateTime>) {
+              left = DateTimePlusDurationExpression(right, left);
+              continue;
+            }
+            if (left is Expression<DateTime> && right is Expression<Duration>) {
+              left = DateTimePlusDurationExpression(left, right);
+              continue;
+            }
+            if (left is Expression<Duration> && right is Expression<Duration>) {
+              left = PlusDurationExpression(left, right);
               continue;
             }
           }
           if (item[0].value == "-") {
-            if (left is Expression<Number>) {
-              left = MinusNumberExpression(left, item[1]);
+            if ((left is Expression<Number>) && (right is Expression<Number>)) {
+              left = MinusNumberExpression(left, right);
+              continue;
+            }
+            if ((left is Expression<DateTime>) &&
+                (right is Expression<Duration>)) {
+              left = DateTimeMinusDurationExpression(left, right);
+              continue;
+            }
+            if ((left is Expression<Duration>) &&
+                (right is Expression<Duration>)) {
+              left = MinusDurationExpression(left, right);
               continue;
             }
           }
-          throw UnknownExpressionTypeException("Unknown additive expression type");
+          throw UnknownExpressionTypeException(
+              "Unknown additive expression type");
         }
         return left;
       });
 
   Parser multiplicativeExpression() =>
       super.multiplicativeExpression().map((c) {
-        Expression expression = c[0];
+        Expression left = c[0];
         for (var item in c[1]) {
+          Expression right = item[1];
           if (item[0].value == "*") {
-            expression = MultiplyExpression(expression, item[1]);
-            continue;
+            if (left is Expression<Number> && right is Expression<Number>) {
+              left = MultiplyNumberExpression(left, right);
+              continue;
+            }
+            if (left is Expression<Duration> && right is Expression<Integer>) {
+              left = MultiplyDurationExpression(left, right);
+              continue;
+            }
           }
           if (item[0].value == "/") {
-            expression = DivisionExpression(expression, item[1]);
+            if (left is Expression<Number> && right is Expression<Number>) {
+              left = DivisionNumberExpression(left, right);
+              continue;
+            }
+            if (left is Expression<Duration> && right is Expression<Integer>) {
+              left = DivisionDurationExpression(left, right);
+              continue;
+            }
+
             continue;
           }
           if (item[0].value == "%") {
-            expression = ModuloExpression(expression, item[1]);
+            left = ModuloExpression(left, right);
             continue;
           }
-          throw UnknownExpressionTypeException("Unknown multiplicative expression type");
+          throw UnknownExpressionTypeException(
+              "Unknown multiplicative expression type");
         }
         return expression;
       });
@@ -83,6 +122,9 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
           if (c[0].value == "-") {
             if (c[1] is Expression<Number>) {
               return NegateNumberExpression(c[1]);
+            }
+            if (c[1] is Expression<Duration>) {
+              return NegateDurationExpression(c[1]);
             }
           } else if (c[0].value == "!") {
             if (c[1] is Expression<bool>) {
@@ -107,7 +149,8 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
             expression = LogicalOrExpression(expression, item[1]);
             continue;
           }
-          throw UnknownExpressionTypeException("Unknown logical-or expression type");
+          throw UnknownExpressionTypeException(
+              "Unknown logical-or expression type");
         }
         return expression;
       });
@@ -118,7 +161,8 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
             expression = LogicalAndExpression(expression, item[1]);
             continue;
           }
-          throw UnknownExpressionTypeException("Unknown logical-and expression type");
+          throw UnknownExpressionTypeException(
+              "Unknown logical-and expression type");
         }
         return expression;
       });
@@ -144,8 +188,9 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
             expression = NotEqualBoolExpression(expression, item[1]);
           } else if (expression is Expression<String>) {
             expression = NotEqualStringExpression(expression, item[1]);
-          }
-          else throw UnknownExpressionTypeException("Unknown equality expression type");
+          } else
+            throw UnknownExpressionTypeException(
+                "Unknown equality expression type");
         }
         return expression;
       });
@@ -164,8 +209,9 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
           expression = LessThanExpression(item[1], expression);
         } else if (item[0].value == ">=") {
           expression = LessThanOrEqualExpression(item[1], expression);
-        }
-        else throw UnknownExpressionTypeException("Unknown relational expression type");
+        } else
+          throw UnknownExpressionTypeException(
+              "Unknown relational expression type");
         return expression;
       });
 
@@ -174,21 +220,25 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
         String elementId = c[1];
         expressionPath.add(elementId);
         var expressionProviderElement = expressionProviderElementMap[elementId];
-        if(expressionProviderElement == null) throw NullReferenceException("Reference named {$elementId} does not exist.");
+        if (expressionProviderElement == null)
+          throw NullReferenceException(
+              "Reference named {$elementId} does not exist.");
         ExpressionProvider expressionProvider;
         if (c[2].length == 0) {
           expressionProvider =
               expressionProviderElement.getExpressionProvider();
           return createDelegateExpression(expressionPath, expressionProvider);
         }
-        for (var i = 0; i < c[2].length; i ++) {
+        for (var i = 0; i < c[2].length; i++) {
           var propertyName = c[2][i][1];
           expressionPath.add(propertyName);
           expressionProvider =
-            expressionProviderElement.getExpressionProvider(propertyName);
-            if (expressionProvider is ExpressionProvider<ExpressionProviderElement>){
-              expressionProviderElement = expressionProvider.getExpression().evaluate();
-            }
+              expressionProviderElement.getExpressionProvider(propertyName);
+          if (expressionProvider
+              is ExpressionProvider<ExpressionProviderElement>) {
+            expressionProviderElement =
+                expressionProvider.getExpression().evaluate();
+          }
         }
         return createDelegateExpression(expressionPath, expressionProvider);
       });
