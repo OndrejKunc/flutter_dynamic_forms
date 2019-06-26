@@ -1,6 +1,54 @@
 Feature: Expression
   Tests an expression
 
+  Scenario: DurationInDays function test 1
+    When expression "durationInDays(duration("P5D1H"))" is evaluated
+    Then int expression result is "5"
+
+  Scenario: DurationInDays function test 2
+    When expression "durationInDays(duration("P3H"))" is evaluated
+    Then int expression result is "0"
+
+  Scenario: DurationInDays function test 3
+    When expression "durationInDays(duration("P25H"))" is evaluated
+    Then int expression result is "1"
+
+  Scenario: DurationInHours function test 1
+    When expression "durationInHours(duration("P5D1H"))" is evaluated
+    Then int expression result is "121"
+
+  Scenario: DurationInHours function test 2
+    When expression "durationInHours(duration("P3H"))" is evaluated
+    Then int expression result is "3"
+
+  Scenario: DurationInHours function test 3
+    When expression "durationInHours(duration("P8S"))" is evaluated
+    Then int expression result is "0"
+
+  Scenario: DurationInMinutes function test 1
+    When expression "durationInMinutes(duration("P5H61S"))" is evaluated
+    Then int expression result is "301"
+
+  Scenario: DurationInMinutes function test 2
+    When expression "durationInMinutes(duration("P3H"))" is evaluated
+    Then int expression result is "180"
+
+  Scenario: DurationInMinutes function test 3
+    When expression "durationInMinutes(duration("P8S"))" is evaluated
+    Then int expression result is "0"
+
+  Scenario: DurationInSeconds function test 1
+    When expression "durationInSeconds(duration("P5H61S"))" is evaluated
+    Then int expression result is "18061"
+
+  Scenario: DurationInSeconds function test 2
+    When expression "durationInSeconds(duration("P3H"))" is evaluated
+    Then int expression result is "10800"
+
+  Scenario: DurationInSeconds function test 3
+    When expression "durationInSeconds(duration("P8S"))" is evaluated
+    Then int expression result is "8"
+
   Scenario: it should add Duration to DateTime
     When expression "dateTime("1997-07-16T19:20") + duration("P5D1H")" is evaluated
     Then DateTime expression result is "1997-07-21T20:20"

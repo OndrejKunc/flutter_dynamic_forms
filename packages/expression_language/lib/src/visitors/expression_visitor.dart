@@ -52,4 +52,8 @@ abstract class ExpressionVisitor {
   void visitNowFunction(NowFunctionExpression expression);
   void visitNowInUtcFunction(NowInUtcFunctionExpression expression);
   void visitDiffDateTimeFunction(DiffDateTimeFunctionExpression expression);
+  void visitDurationInDaysFunction(DurationInDaysFunctionExpression expression);
+  void visitDurationInHoursFunction(DurationInHoursFunctionExpression expression);
+  void visitDurationInMinutesFunction(DurationInMinutesFunctionExpression expression);
+  void visitDurationInSecondsFunction(DurationInSecondsFunctionExpression expression);
 }

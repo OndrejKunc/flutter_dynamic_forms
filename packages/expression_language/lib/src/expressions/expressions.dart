@@ -972,6 +972,70 @@ class DiffDateTimeFunctionExpression extends Expression<Duration> {
   }
 }
 
+class DurationInDaysFunctionExpression extends Expression<Integer> {
+  final Expression<Duration> value;
+
+  DurationInDaysFunctionExpression(this.value);
+
+  @override
+  Integer evaluate() {
+    return Integer(value.evaluate().inDays);
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitDurationInDaysFunction(this);
+  }
+}
+
+class DurationInHoursFunctionExpression extends Expression<Integer> {
+  final Expression<Duration> value;
+
+  DurationInHoursFunctionExpression(this.value);
+
+  @override
+  Integer evaluate() {
+    return Integer(value.evaluate().inHours);
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitDurationInHoursFunction(this);
+  }
+}
+
+class DurationInMinutesFunctionExpression extends Expression<Integer> {
+  final Expression<Duration> value;
+
+  DurationInMinutesFunctionExpression(this.value);
+
+  @override
+  Integer evaluate() {
+    return Integer(value.evaluate().inMinutes);
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitDurationInMinutesFunction(this);
+  }
+}
+
+class DurationInSecondsFunctionExpression extends Expression<Integer> {
+  final Expression<Duration> value;
+
+  DurationInSecondsFunctionExpression(this.value);
+
+  @override
+  Integer evaluate() {
+    return Integer(value.evaluate().inSeconds);
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitDurationInSecondsFunction(this);
+  }
+}
+
 Type getTypeOfNumberExpression(Type left, Type right) {
   if (left != right) {
     //One of them has to be decimal => whole expr is decimal

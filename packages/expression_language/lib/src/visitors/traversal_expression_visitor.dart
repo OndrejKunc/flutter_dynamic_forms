@@ -278,4 +278,28 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
     expression.left.accept(this);
     expression.right.accept(this);
   }
+
+  @override
+  void visitDurationInDaysFunction(
+      DurationInDaysFunctionExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
+  void visitDurationInHoursFunction(
+      DurationInHoursFunctionExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
+  void visitDurationInMinutesFunction(
+      DurationInMinutesFunctionExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
+  void visitDurationInSecondsFunction(
+      DurationInSecondsFunctionExpression expression) {
+    expression.value.accept(this);
+  }
 }

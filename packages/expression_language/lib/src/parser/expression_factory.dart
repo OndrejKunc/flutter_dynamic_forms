@@ -121,7 +121,35 @@ Expression createFunctionExpression(
       throw InvalidParameterCount(
           "Function $functionName expects only 2 parameters");
     }
-    return DiffDateTimeFunctionExpression(parameters[0],parameters[1]);
+    return DiffDateTimeFunctionExpression(parameters[0], parameters[1]);
+  }
+  if (functionName == "durationInDays") {
+    if (parameters.length != 1) {
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
+    }
+    return DurationInDaysFunctionExpression(parameters[0]);
+  }
+  if (functionName == "durationInHours") {
+    if (parameters.length != 1) {
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
+    }
+    return DurationInHoursFunctionExpression(parameters[0]);
+  }
+  if (functionName == "durationInMinutes") {
+    if (parameters.length != 1) {
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
+    }
+    return DurationInMinutesFunctionExpression(parameters[0]);
+  }
+  if (functionName == "durationInSeconds") {
+    if (parameters.length != 1) {
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
+    }
+    return DurationInSecondsFunctionExpression(parameters[0]);
   }
   throw UnknownFunction("Unknown function name $functionName");
 }

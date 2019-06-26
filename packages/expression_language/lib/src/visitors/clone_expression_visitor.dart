@@ -440,4 +440,32 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     var left = pop();
     push(DiffDateTimeFunctionExpression(left, right));
   }
+
+  @override
+  void visitDurationInDaysFunction(
+      DurationInDaysFunctionExpression expression) {
+    expression.value.accept(this);
+    push(DurationInDaysFunctionExpression(pop()));
+  }
+
+  @override
+  void visitDurationInHoursFunction(
+      DurationInHoursFunctionExpression expression) {
+    expression.value.accept(this);
+    push(DurationInHoursFunctionExpression(pop()));
+  }
+
+  @override
+  void visitDurationInMinutesFunction(
+      DurationInMinutesFunctionExpression expression) {
+    expression.value.accept(this);
+    push(DurationInMinutesFunctionExpression(pop()));
+  }
+
+  @override
+  void visitDurationInSecondsFunction(
+      DurationInSecondsFunctionExpression expression) {
+    expression.value.accept(this);
+    push(DurationInSecondsFunctionExpression(pop()));
+  }
 }
