@@ -461,7 +461,33 @@ class ToStringFunctionExpression<T> extends Expression<String> {
   }
 }
 
-class DivisionExpression extends Expression<Number> {
+class IntegerDivisionNumberExpression extends Expression<Integer> {
+  final Expression<Number> left;
+  final Expression<Number> right;
+
+  IntegerDivisionNumberExpression(this.left, this.right);
+
+  @override
+  Integer evaluate() {
+    Number rightValue = right.evaluate();
+    Decimal epsilon = Decimal.parse("1e-15");
+    if (rightValue.abs() < epsilon)
+      throw DivideByZeroException("Division by zero");
+    return left.evaluate() ~/ right.evaluate();
+  }
+
+  @override
+  Type getType() {
+    return getTypeOfNumberExpression(left.getType(), right.getType());
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitIntegerDivisionNumber(this);
+  }
+}
+
+class DivisionExpression extends Expression<Decimal> {
   final Expression<Number> left;
   final Expression<Number> right;
 
@@ -473,14 +499,12 @@ class DivisionExpression extends Expression<Number> {
   }
 
   @override
-  Number evaluate() {
+  Decimal evaluate() {
     Number rightValue = right.evaluate();
     Decimal epsilon = Decimal.parse("1e-15");
     if (rightValue.abs() < epsilon)
       throw DivideByZeroException("Division by zero");
-    return (left.getType() == Integer && right.getType() == Integer)
-        ? left.evaluate() ~/ right.evaluate()
-        : left.evaluate() / right.evaluate();
+    return left.evaluate() / right.evaluate();
   }
 
   @override
@@ -581,7 +605,8 @@ class RoundFunctionStringRoundingModeExpression extends Expression<Number> {
     String nameOfEnum = RoundingMode.nearestEven.toString().split('.').first;
     RoundingMode mode = RoundingMode.values.firstWhere(
         (e) => e.toString() == nameOfEnum + '.' + roundingModeString,
-        orElse: () => throw InvalidParameter("Rounding mode $roundingModeString does not exist"));
+        orElse: () => throw InvalidParameter(
+            "Rounding mode $roundingModeString does not exist"));
     return value
         .evaluate()
         .roundWithPrecision(precision.evaluate().value, mode);

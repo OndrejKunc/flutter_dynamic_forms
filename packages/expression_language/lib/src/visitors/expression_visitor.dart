@@ -19,6 +19,7 @@ abstract class ExpressionVisitor {
   void visitEqualString(EqualStringExpression expression);
   void visitNotEqualNumber(NotEqualNumberExpression expression);
   void visitDivision(DivisionExpression expression);
+  void visitIntegerDivisionNumber(IntegerDivisionNumberExpression expression);
   void visitModulo(ModuloExpression expression);
   void visitNotEqualBool(NotEqualBoolExpression expression);
   void visitNotEqualString(NotEqualStringExpression expression);
