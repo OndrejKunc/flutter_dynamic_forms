@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 class RequiredValidation extends Validation {
   void fillRequiredValidation({
     @required String id,
-    @required ElementValue<ExpressionProviderElement> parent,
+    @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
     @required ElementValue<String> message,
   }) {

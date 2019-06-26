@@ -8,7 +8,7 @@ class Label extends FormElement {
 
   void fillLabel(
       {@required String id,
-      @required ElementValue<ExpressionProviderElement> parent,
+      @required ElementValue<FormElement> parent,
       @required ElementValue<bool> isVisible,
       @required ElementValue<String> value}) {
     super.fillFormElement(id: id, parent: parent, isVisible: isVisible);

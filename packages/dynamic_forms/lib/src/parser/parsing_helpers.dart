@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:expression_language/expression_language.dart';
 import 'package:xml/xml.dart';
 
 typedef FormElementParserFunction = FormElement Function(
@@ -57,18 +56,19 @@ ElementValue<T> _createPrimitiveElementValue<T>(T value, bool isImmutable) {
       : PrimitiveMutableElementValue<T>(value);
 }
 
-ElementValue<List<ExpressionProviderElement>> getChildren(XmlElement element,
+ElementValue<List<TFormElement>> getChildren<TFormElement extends FormElement>(XmlElement element,
         FormElement parent, FormElementParserFunction parser, {bool isImmutable = true}) =>
     _createPrimitiveElementValue(element.children
-        .where((c) => c is XmlElement)
+        .where((c) => c is XmlElement && !c.name.qualified.startsWith(element.name.qualified + "."))
         .map((c) => parser(c, parent))
+        .cast<TFormElement>()
         .toList(), isImmutable);
 
-ElementValue<ExpressionProviderElement> getParentValue(FormElement parent) {
+ElementValue<FormElement> getParentValue(FormElement parent) {
   return PrimitiveImmutableElementValue(parent);
 }
 
-ElementValue<List<T>> getChildrenElement<T>(
+ElementValue<List<TFormElement>> getChildrenFromElement<TFormElement>(
     XmlElement element,
     FormElement parent,
     String childrenElementName,
@@ -76,10 +76,11 @@ ElementValue<List<T>> getChildrenElement<T>(
     {bool isImmutable = true}) {
   var childrenXmlElement = getPropertyAsElement(element, childrenElementName);
   var children = childrenXmlElement == null
-      ? List<T>()
+      ? List<TFormElement>()
       : childrenXmlElement.children
           .where((c) => c is XmlElement)
-          .map((c) => parser(c, parent) as T)
+          .map((c) => parser(c, parent))
+          .cast<TFormElement>()
           .toList();
   var validations = _createPrimitiveElementValue(children, isImmutable);
   return validations;

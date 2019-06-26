@@ -50,7 +50,7 @@ class DynamicFormScreen extends StatelessWidget {
         builder: (context) {
           return AlertDialog(
             title: flutter.Text('Form data'),
-            content: Container(
+            content: flutter.Container(
               width: double.maxFinite,
               height: 300.0,
               child: ListView(

@@ -7,7 +7,7 @@ class Form extends FormGroup {
   void fillForm(
       {@required String id,
       @required ElementValue<bool> isVisible,
-      @required ElementValue<List<ExpressionProviderElement>> children,
+      @required ElementValue<List<FormElement>> children,
       @required ElementValue<String> name}) {
     fillFormGroup(
         id: id,
