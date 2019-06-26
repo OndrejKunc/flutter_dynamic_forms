@@ -111,7 +111,7 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
           throw UnknownExpressionTypeException(
               "Unknown multiplicative expression type");
         }
-        return expression;
+        return left;
       });
 
   Parser expressionInParentheses() =>
