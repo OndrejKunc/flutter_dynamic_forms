@@ -16,6 +16,7 @@ abstract class ExpressionVisitor {
   void visitLogicalOr(LogicalOrExpression expression);
   void visitEqualNumber(EqualNumberExpression expression);
   void visitEqualBool(EqualBoolExpression expression);
+  void visitEqualDuration(EqualDurationExpression expression);
   void visitEqualDateTime(EqualDateTimeExpression expression);
   void visitEqualString(EqualStringExpression expression);
   void visitNotEqualNumber(NotEqualNumberExpression expression);
@@ -30,10 +31,13 @@ abstract class ExpressionVisitor {
   void visitDivisionDuration(DivisionDurationExpression expression);
   void visitNegateDuration(NegateDurationExpression expression);
   void visitNotEqualBool(NotEqualBoolExpression expression);
+  void visitNotEqualDuration(NotEqualDurationExpression expression);
   void visitNotEqualString(NotEqualStringExpression expression);
   void visitLessThanNumber(LessThanNumberExpression expression);
+  void visitLessThanDuration(LessThanDurationExpression expression);
   void visitLessThanDateTime(LessThanDateTimeExpression expression);
   void visitLessThanOrEqualNumber(LessThanOrEqualNumberExpression expression);
+  void visitLessThanOrEqualDuration(LessThanOrEqualDurationExpression expression);
   void visitLessThanOrEqualDateTime(LessThanOrEqualDateTimeExpression expression);
   void visitDelegate<T>(DelegateExpression<T> expression);
   void visitConditionalExpression<T>(ConditionalExpression<T> expression);

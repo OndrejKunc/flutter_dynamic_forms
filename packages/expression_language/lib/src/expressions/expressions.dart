@@ -321,6 +321,23 @@ class EqualDateTimeExpression extends Expression<bool> {
   }
 }
 
+class EqualDurationExpression extends Expression<bool> {
+  final Expression<Duration> left;
+  final Expression<Duration> right;
+
+  EqualDurationExpression(this.left, this.right);
+
+  @override
+  bool evaluate() {
+    return left.evaluate() == right.evaluate();
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitEqualDuration(this);
+  }
+}
+
 class NotEqualNumberExpression extends Expression<bool> {
   final Expression<Number> left;
   final Expression<Number> right;
@@ -335,6 +352,23 @@ class NotEqualNumberExpression extends Expression<bool> {
   @override
   void accept(ExpressionVisitor visitor) {
     visitor.visitNotEqualNumber(this);
+  }
+}
+
+class NotEqualDurationExpression extends Expression<bool> {
+  final Expression<Duration> left;
+  final Expression<Duration> right;
+
+  NotEqualDurationExpression(this.left, this.right);
+
+  @override
+  bool evaluate() {
+    return left.evaluate() != right.evaluate();
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitNotEqualDuration(this);
   }
 }
 
@@ -406,6 +440,23 @@ class LessThanNumberExpression extends Expression<bool> {
   }
 }
 
+class LessThanDurationExpression extends Expression<bool> {
+  final Expression<Duration> left;
+  final Expression<Duration> right;
+
+  LessThanDurationExpression(this.left, this.right);
+
+  @override
+  bool evaluate() {
+    return left.evaluate() < right.evaluate();
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitLessThanDuration(this);
+  }
+}
+
 class LessThanDateTimeExpression extends Expression<bool> {
   final Expression<DateTime> left;
   final Expression<DateTime> right;
@@ -437,6 +488,23 @@ class LessThanOrEqualNumberExpression extends Expression<bool> {
   @override
   void accept(ExpressionVisitor visitor) {
     visitor.visitLessThanOrEqualNumber(this);
+  }
+}
+
+class LessThanOrEqualDurationExpression extends Expression<bool> {
+  final Expression<Duration> left;
+  final Expression<Duration> right;
+
+  LessThanOrEqualDurationExpression(this.left, this.right);
+
+  @override
+  bool evaluate() {
+    return left.evaluate() <= right.evaluate();
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitLessThanOrEqualDuration(this);
   }
 }
 
@@ -681,6 +749,8 @@ class DivisionDurationExpression extends Expression<Duration> {
 
   @override
   Duration evaluate() {
+    if (right.evaluate().value == 0)
+      throw DivideByZeroException("Division by zero");
     return left.evaluate() ~/ right.evaluate().value;
   }
 

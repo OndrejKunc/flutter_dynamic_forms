@@ -186,6 +186,9 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
           } else if ((left is Expression<DateTime>) &&
               (right is Expression<DateTime>)) {
             left = EqualDateTimeExpression(left, right);
+          } else if ((left is Expression<Duration>) &&
+              (right is Expression<Duration>)) {
+            left = EqualDurationExpression(left, right);
           }
         } else if (item[0].value == "!=") {
           if ((left is Expression<Number>) && (right is Expression<Number>)) {
@@ -199,6 +202,9 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
           } else if ((left is Expression<DateTime>) &&
               (right is Expression<DateTime>)) {
             left = NotEqualDateTimeExpression(left, right);
+          } else if ((left is Expression<Duration>) &&
+              (right is Expression<Duration>)) {
+            left = NotEqualDurationExpression(left, right);
           } else
             throw UnknownExpressionTypeException(
                 "Unknown equality expression type");
@@ -219,6 +225,9 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
           } else if ((left is Expression<DateTime>) &&
               (right is Expression<DateTime>)) {
             left = LessThanDateTimeExpression(left, right);
+          } else if ((left is Expression<Duration>) &&
+              (right is Expression<Duration>)) {
+            left = LessThanDurationExpression(left, right);
           }
         } else if (item[0].value == "<=") {
           if ((left is Expression<Number>) && (right is Expression<Number>)) {
@@ -226,6 +235,9 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
           } else if ((left is Expression<DateTime>) &&
               (right is Expression<DateTime>)) {
             left = LessThanOrEqualDateTimeExpression(left, right);
+          } else if ((left is Expression<Duration>) &&
+              (right is Expression<Duration>)) {
+            left = LessThanOrEqualDurationExpression(left, right);
           }
         } else if (item[0].value == ">") {
           if ((left is Expression<Number>) && (right is Expression<Number>)) {
@@ -233,6 +245,9 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
           } else if ((left is Expression<DateTime>) &&
               (right is Expression<DateTime>)) {
             left = LessThanDateTimeExpression(right, left);
+          } else if ((left is Expression<Duration>) &&
+              (right is Expression<Duration>)) {
+            left = LessThanDurationExpression(right, left);
           }
         } else if (item[0].value == ">=") {
           if ((left is Expression<Number>) && (right is Expression<Number>)) {
@@ -240,6 +255,9 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
           } else if ((left is Expression<DateTime>) &&
               (right is Expression<DateTime>)) {
             left = LessThanOrEqualDateTimeExpression(right, left);
+          } else if ((left is Expression<Duration>) &&
+              (right is Expression<Duration>)) {
+            left = LessThanOrEqualDurationExpression(right, left);
           }
         } else
           throw UnknownExpressionTypeException(

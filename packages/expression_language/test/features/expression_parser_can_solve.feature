@@ -2,8 +2,64 @@ Feature: Expression
   Tests an expression
 
   Scenario: it should add Duration to DateTime
-    When expression "dateTime("1997-07-16T19:20") + duration("P5D")" is evaluated
-    Then DateTime expression result is "1997-07-21T19:20"
+    When expression "dateTime("1997-07-16T19:20") + duration("P5D1H")" is evaluated
+    Then DateTime expression result is "1997-07-21T20:20"
+
+  Scenario: it should subtract Duration from DateTime
+    When expression "dateTime("1997-07-16T19:20") - duration("P5D1H")" is evaluated
+    Then DateTime expression result is "1997-07-11T18:20"
+
+  Scenario: it should add Duration to Duration
+    When expression "dateTime("1997-07-16T19:20") + (duration("P5D") + duration("P1D"))" is evaluated
+    Then DateTime expression result is "1997-07-22T19:20"
+
+  Scenario: it should subtract Duration from Duration
+    When expression "dateTime("1997-07-16T19:20") + (duration("P5D") - duration("P1D"))" is evaluated
+    Then DateTime expression result is "1997-07-20T19:20"
+
+  Scenario: it should multiply Duration with Integer
+    When expression "dateTime("1997-07-16T19:20") + (duration("P5D") * 2)" is evaluated
+    Then DateTime expression result is "1997-07-26T19:20"
+
+  Scenario: it should multiply Duration by Integer
+    When expression "dateTime("1997-07-16T19:20") + (duration("P6D") / 3)" is evaluated
+    Then DateTime expression result is "1997-07-18T19:20"
+
+  Scenario: it should compare DateTimes - test 1
+    When expression "dateTime("1997-07-16T19:20") < now()" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: it should compare DateTimes - test 2
+    When expression "dateTime("1997-07-16T19:20") > now()" is evaluated
+    Then bool expression result is "false"
+
+  Scenario: it should compare DateTimes - test 3
+    When expression "now() == nowInUtc()" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: it should compare DateTimes - complex - test 4
+    When expression "dateTime("1997-07-16T19:20") == (dateTime("1997-07-16T19:20") + duration("P1S"))" is evaluated
+    Then bool expression result is "false"
+
+  Scenario: it should compare DateTimes - complex - test 5
+    When expression "dateTime("1997-07-16T19:20") <= (dateTime("1997-07-16T19:20") + duration("P1S"))" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: it should compare Durations - test 1
+    When expression "duration("P5D1H3S") > duration("P5D1H")" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: it should compare Durations - test 2
+    When expression "duration("P5D1H3S") == duration("P5D1H3S")" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: it should compare Durations - test 3
+    When expression "duration("P5D1H3S") == duration("P5D1H2S") + duration("P1S")" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: it should compare Durations - test 4
+    When expression "duration("P5D1H3S") >= duration("P5D1H3S") - duration("P1S")" is evaluated
+    Then bool expression result is "true"
 
   Scenario: DateTime constructor test
     When expression "dateTime("1997-07-16T19:20")" is evaluated

@@ -85,6 +85,15 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitEqualDuration(EqualDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(EqualDurationExpression(left, right));
+  }
+
+  @override
   void visitDivision(DivisionNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
@@ -109,6 +118,15 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     var right = pop();
     var left = pop();
     push(NotEqualBoolExpression(left, right));
+  }
+
+  @override
+  void visitNotEqualDuration(NotEqualDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(NotEqualDurationExpression(left, right));
   }
 
   @override
@@ -154,6 +172,15 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitLessThanDuration(LessThanDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(LessThanDurationExpression(left, right));
+  }
+
+  @override
   void visitLessThanDateTime(LessThanDateTimeExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
@@ -169,6 +196,16 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     var right = pop();
     var left = pop();
     push(LessThanOrEqualNumberExpression(left, right));
+  }
+
+  @override
+  void visitLessThanOrEqualDuration(
+      LessThanOrEqualDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(LessThanOrEqualDurationExpression(left, right));
   }
 
   @override
