@@ -168,51 +168,83 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
       });
 
   Parser equalityExpression() => super.equalityExpression().map((c) {
-        Expression expression = c[0];
+        Expression left = c[0];
         if (c[1] == null) {
-          return expression;
+          return left;
         }
         var item = c[1];
+        var right = item[1];
         if (item[0].value == "==") {
-          if (expression is Expression<Number>) {
-            expression = EqualNumberExpression(expression, item[1]);
-          } else if (expression is Expression<bool>) {
-            expression = EqualBoolExpression(expression, item[1]);
-          } else if (expression is Expression<String>) {
-            expression = EqualStringExpression(expression, item[1]);
+          if ((left is Expression<Number>) && (right is Expression<Number>)) {
+            left = EqualNumberExpression(left, right);
+          } else if ((left is Expression<bool>) &&
+              (right is Expression<bool>)) {
+            left = EqualBoolExpression(left, right);
+          } else if ((left is Expression<String>) &&
+              (right is Expression<String>)) {
+            left = EqualStringExpression(left, right);
+          } else if ((left is Expression<DateTime>) &&
+              (right is Expression<DateTime>)) {
+            left = EqualDateTimeExpression(left, right);
           }
         } else if (item[0].value == "!=") {
-          if (expression is Expression<Number>) {
-            expression = NotEqualNumberExpression(expression, item[1]);
-          } else if (expression is Expression<bool>) {
-            expression = NotEqualBoolExpression(expression, item[1]);
-          } else if (expression is Expression<String>) {
-            expression = NotEqualStringExpression(expression, item[1]);
+          if ((left is Expression<Number>) && (right is Expression<Number>)) {
+            left = NotEqualNumberExpression(left, right);
+          } else if ((left is Expression<bool>) &&
+              (right is Expression<bool>)) {
+            left = NotEqualBoolExpression(left, right);
+          } else if ((left is Expression<String>) &&
+              (right is Expression<String>)) {
+            left = NotEqualStringExpression(left, right);
+          } else if ((left is Expression<DateTime>) &&
+              (right is Expression<DateTime>)) {
+            left = NotEqualDateTimeExpression(left, right);
           } else
             throw UnknownExpressionTypeException(
                 "Unknown equality expression type");
         }
-        return expression;
+        return left;
       });
 
   Parser relationalExpression() => super.relationalExpression().map((c) {
-        Expression expression = c[0];
+        Expression left = c[0];
         if (c[1] == null) {
-          return expression;
+          return left;
         }
         var item = c[1];
+        var right = item[1];
         if (item[0].value == "<") {
-          expression = LessThanExpression(expression, item[1]);
+          if ((left is Expression<Number>) && (right is Expression<Number>)) {
+            left = LessThanNumberExpression(left, right);
+          } else if ((left is Expression<DateTime>) &&
+              (right is Expression<DateTime>)) {
+            left = LessThanDateTimeExpression(left, right);
+          }
         } else if (item[0].value == "<=") {
-          expression = LessThanOrEqualExpression(expression, item[1]);
+          if ((left is Expression<Number>) && (right is Expression<Number>)) {
+            left = LessThanOrEqualNumberExpression(left, right);
+          } else if ((left is Expression<DateTime>) &&
+              (right is Expression<DateTime>)) {
+            left = LessThanOrEqualDateTimeExpression(left, right);
+          }
         } else if (item[0].value == ">") {
-          expression = LessThanExpression(item[1], expression);
+          if ((left is Expression<Number>) && (right is Expression<Number>)) {
+            left = LessThanNumberExpression(right, left);
+          } else if ((left is Expression<DateTime>) &&
+              (right is Expression<DateTime>)) {
+            left = LessThanDateTimeExpression(right, left);
+          }
         } else if (item[0].value == ">=") {
-          expression = LessThanOrEqualExpression(item[1], expression);
+          if ((left is Expression<Number>) && (right is Expression<Number>)) {
+            left = LessThanOrEqualNumberExpression(right, left);
+          } else if ((left is Expression<DateTime>) &&
+              (right is Expression<DateTime>)) {
+            left = LessThanOrEqualDateTimeExpression(right, left);
+          }
         } else
           throw UnknownExpressionTypeException(
               "Unknown relational expression type");
-        return expression;
+        return left;
       });
 
   Parser reference() => super.reference().map((c) {

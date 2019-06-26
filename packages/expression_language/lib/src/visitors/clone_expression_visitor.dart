@@ -67,6 +67,15 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitEqualDateTime(EqualDateTimeExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(EqualDateTimeExpression(left, right));
+  }
+
+  @override
   void visitEqualNumber(EqualNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
@@ -121,27 +130,55 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitNotEqualDateTime(NotEqualDateTimeExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(NotEqualDateTimeExpression(left, right));
+  }
+
+  @override
   void visitLengthFunction(LengthFunctionExpression expression) {
     expression.value.accept(this);
     push(LengthFunctionExpression(pop()));
   }
 
   @override
-  void visitLessThan(LessThanExpression expression) {
+  void visitLessThanNumber(LessThanNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
     var right = pop();
     var left = pop();
-    push(LessThanExpression(left, right));
+    push(LessThanNumberExpression(left, right));
   }
 
   @override
-  void visitLessThanOrEqual(LessThanOrEqualExpression expression) {
+  void visitLessThanDateTime(LessThanDateTimeExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
     var right = pop();
     var left = pop();
-    push(LessThanOrEqualExpression(left, right));
+    push(LessThanDateTimeExpression(left, right));
+  }
+
+  @override
+  void visitLessThanOrEqualNumber(LessThanOrEqualNumberExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(LessThanOrEqualNumberExpression(left, right));
+  }
+
+  @override
+  void visitLessThanOrEqualDateTime(
+      LessThanOrEqualDateTimeExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(LessThanOrEqualDateTimeExpression(left, right));
   }
 
   @override

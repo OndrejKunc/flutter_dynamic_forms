@@ -304,6 +304,23 @@ class EqualStringExpression extends Expression<bool> {
   }
 }
 
+class EqualDateTimeExpression extends Expression<bool> {
+  final Expression<DateTime> left;
+  final Expression<DateTime> right;
+
+  EqualDateTimeExpression(this.left, this.right);
+
+  @override
+  bool evaluate() {
+    return left.evaluate().isAtSameMomentAs(right.evaluate());
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitEqualDateTime(this);
+  }
+}
+
 class NotEqualNumberExpression extends Expression<bool> {
   final Expression<Number> left;
   final Expression<Number> right;
@@ -318,6 +335,23 @@ class NotEqualNumberExpression extends Expression<bool> {
   @override
   void accept(ExpressionVisitor visitor) {
     visitor.visitNotEqualNumber(this);
+  }
+}
+
+class NotEqualDateTimeExpression extends Expression<bool> {
+  final Expression<DateTime> left;
+  final Expression<DateTime> right;
+
+  NotEqualDateTimeExpression(this.left, this.right);
+
+  @override
+  bool evaluate() {
+    return !left.evaluate().isAtSameMomentAs(right.evaluate());
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitNotEqualDateTime(this);
   }
 }
 
@@ -355,11 +389,11 @@ class NotEqualStringExpression extends Expression<bool> {
   }
 }
 
-class LessThanExpression extends Expression<bool> {
+class LessThanNumberExpression extends Expression<bool> {
   final Expression<Number> left;
   final Expression<Number> right;
 
-  LessThanExpression(this.left, this.right);
+  LessThanNumberExpression(this.left, this.right);
 
   @override
   bool evaluate() {
@@ -368,15 +402,32 @@ class LessThanExpression extends Expression<bool> {
 
   @override
   void accept(ExpressionVisitor visitor) {
-    visitor.visitLessThan(this);
+    visitor.visitLessThanNumber(this);
   }
 }
 
-class LessThanOrEqualExpression extends Expression<bool> {
+class LessThanDateTimeExpression extends Expression<bool> {
+  final Expression<DateTime> left;
+  final Expression<DateTime> right;
+
+  LessThanDateTimeExpression(this.left, this.right);
+
+  @override
+  bool evaluate() {
+    return left.evaluate().isBefore(right.evaluate());
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitLessThanDateTime(this);
+  }
+}
+
+class LessThanOrEqualNumberExpression extends Expression<bool> {
   final Expression<Number> left;
   final Expression<Number> right;
 
-  LessThanOrEqualExpression(this.left, this.right);
+  LessThanOrEqualNumberExpression(this.left, this.right);
 
   @override
   bool evaluate() {
@@ -385,7 +436,25 @@ class LessThanOrEqualExpression extends Expression<bool> {
 
   @override
   void accept(ExpressionVisitor visitor) {
-    visitor.visitLessThanOrEqual(this);
+    visitor.visitLessThanOrEqualNumber(this);
+  }
+}
+
+class LessThanOrEqualDateTimeExpression extends Expression<bool> {
+  final Expression<DateTime> left;
+  final Expression<DateTime> right;
+
+  LessThanOrEqualDateTimeExpression(this.left, this.right);
+
+  @override
+  bool evaluate() {
+    return (left.evaluate().isBefore(right.evaluate()) ||
+        (left.evaluate().isAtSameMomentAs(right.evaluate())));
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitLessThanOrEqualDateTime(this);
   }
 }
 

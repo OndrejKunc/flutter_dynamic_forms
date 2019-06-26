@@ -3,7 +3,7 @@ Feature: Expression
 
   Scenario: it should add Duration to DateTime
     When expression "dateTime("1997-07-16T19:20") + duration("P5D")" is evaluated
-    Then DateTime expression result is "1997-07-16T19:20"
+    Then DateTime expression result is "1997-07-21T19:20"
 
   Scenario: DateTime constructor test
     When expression "dateTime("1997-07-16T19:20")" is evaluated

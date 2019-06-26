@@ -24,6 +24,12 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitEqualDateTime(EqualDateTimeExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
   void visitEqualNumber(EqualNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
@@ -54,6 +60,12 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitNotEqualDateTime(NotEqualDateTimeExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
   void visitNotEqualString(NotEqualStringExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
@@ -65,13 +77,25 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitLessThan(LessThanExpression expression) {
+  void visitLessThanNumber(LessThanNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
   }
 
   @override
-  void visitLessThanOrEqual(LessThanOrEqualExpression expression) {
+  void visitLessThanDateTime(LessThanDateTimeExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitLessThanOrEqualNumber(LessThanOrEqualNumberExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitLessThanOrEqualDateTime(LessThanOrEqualDateTimeExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
   }
