@@ -171,11 +171,11 @@ class NegateNumberExpression extends Expression<Number> {
   }
 }
 
-class MultiplyExpression extends Expression<Number> {
+class MultiplyNumberExpression extends Expression<Number> {
   final Expression<Number> left;
   final Expression<Number> right;
 
-  MultiplyExpression(this.left, this.right);
+  MultiplyNumberExpression(this.left, this.right);
 
   @override
   String toString() {
@@ -461,11 +461,11 @@ class ToStringFunctionExpression<T> extends Expression<String> {
   }
 }
 
-class DivisionExpression extends Expression<Number> {
+class DivisionNumberExpression extends Expression<Number> {
   final Expression<Number> left;
   final Expression<Number> right;
 
-  DivisionExpression(this.left, this.right);
+  DivisionNumberExpression(this.left, this.right);
 
   @override
   String toString() {
@@ -518,6 +518,122 @@ class ModuloExpression extends Expression<Number> {
   @override
   void accept(ExpressionVisitor visitor) {
     visitor.visitModulo(this);
+  }
+}
+
+class DateTimePlusDurationExpression extends Expression<DateTime> {
+  final Expression<DateTime> left;
+  final Expression<Duration> right;
+
+  DateTimePlusDurationExpression(this.left, this.right);
+  @override
+  DateTime evaluate() {
+    return left.evaluate().add(right.evaluate());
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitDateTimePlusDuration(this);
+  }
+}
+
+class DateTimeMinusDurationExpression extends Expression<DateTime> {
+  final Expression<DateTime> left;
+  final Expression<Duration> right;
+
+  DateTimeMinusDurationExpression(this.left, this.right);
+  @override
+  DateTime evaluate() {
+    return left.evaluate().subtract(right.evaluate());
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitDateTimeMinusDuration(this);
+  }
+}
+
+class PlusDurationExpression extends Expression<Duration> {
+  final Expression<Duration> left;
+  final Expression<Duration> right;
+
+  PlusDurationExpression(this.left, this.right);
+
+  @override
+  Duration evaluate() {
+    return left.evaluate() + right.evaluate();
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitPlusDuration(this);
+  }
+}
+
+class MinusDurationExpression extends Expression<Duration> {
+  final Expression<Duration> left;
+  final Expression<Duration> right;
+
+  MinusDurationExpression(this.left, this.right);
+
+  @override
+  Duration evaluate() {
+    return left.evaluate() - right.evaluate();
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitMinusDuration(this);
+  }
+}
+
+class MultiplyDurationExpression extends Expression<Duration> {
+  final Expression<Duration> left;
+  final Expression<Integer> right;
+
+  MultiplyDurationExpression(this.left, this.right);
+
+  @override
+  Duration evaluate() {
+    return left.evaluate() * right.evaluate().value;
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitMultiplyDuration(this);
+  }
+}
+
+class DivisionDurationExpression extends Expression<Duration> {
+  final Expression<Duration> left;
+  final Expression<Integer> right;
+
+  DivisionDurationExpression(this.left, this.right);
+
+  @override
+  Duration evaluate() {
+    return left.evaluate() ~/ right.evaluate().value;
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitDivisionDuration(this);
+  }
+}
+
+class NegateDurationExpression extends Expression<Duration> {
+  final Expression<Duration> value;
+
+  NegateDurationExpression(this.value);
+
+  @override
+  Duration evaluate() {
+    return -value.evaluate();
+  }
+
+  @override
+  void accept(ExpressionVisitor visitor) {
+    visitor.visitNegateDuration(this);
   }
 }
 
