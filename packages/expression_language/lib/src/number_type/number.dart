@@ -1,7 +1,15 @@
 import 'package:expression_language/src/number_type/decimal.dart';
 import 'package:expression_language/src/number_type/integer.dart';
 
-enum RoundingMode { nearestEven,nearestFromZero,towardsZero,fromZero,up,down }
+enum RoundingMode {
+  nearestEven,
+  nearestOdd,
+  nearestFromZero,
+  towardsZero,
+  fromZero,
+  up,
+  down
+}
 
 abstract class Number implements Comparable<Number> {
   /**
@@ -145,14 +153,22 @@ abstract class Number implements Comparable<Number> {
   Integer round();
 
   ///Returns number rounded according to [precision] and [RoundingMode].
-  /// 
+  ///
   /// If [precision] is negative, number is rounded to hundreds (-2), thousands (-3), etc. In that case, it rounds to nearest, ties away from zero.\
   /// If rounded number is integer, rounding mode `nearestEven` is automatically used and cannot be changed.
-  /// 
+  ///
   /// Rounding modes are from IEEE 754 (https://en.wikipedia.org/wiki/IEEE_754#Rounding_rules)
+  /// * nearestEven (0) - rounds to the nearest value; if the number falls midway, it is rounded to the nearest value with an even least significant digit
+  /// * nearestOdd (1) - rounds to the nearest value; if the number falls midway, it is rounded to the nearest value with an odd least significant digit
+  /// * nearestFromZero (2) - rounds to the nearest value; it is rounded to the value which is farthest from zero
+  /// * towardsZero (3) - directed rounding towards zero
+  /// * fromZero (4) - directed rounding from zero
+  /// * up (5) - directed rounding towards positive infinity
+  /// * down (6) - directed rounding towards negative infinity
   Number roundWithPrecision(int precision,
       [RoundingMode mode = RoundingMode.nearestEven]);
 
+//enum RoundingMode { nearestEven,nearestOdd,nearestFromZero,towardsZero,fromZero,up,down }
 
   /**
    * Returns the greatest integer no greater than `this`.
@@ -269,7 +285,8 @@ abstract class Number implements Comparable<Number> {
     Integer intResult = new Integer(int.tryParse(source));
     if (intResult.value != null) return intResult;
 
-    Decimal decimalResult = Decimal.parse(source); //this throws FormatException, if input is not decimal number
+    Decimal decimalResult = Decimal.parse(
+        source); //this throws FormatException, if input is not decimal number
     return decimalResult;
   }
 }

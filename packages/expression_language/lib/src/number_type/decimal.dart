@@ -167,6 +167,8 @@ class Decimal extends Number {
       switch (mode) {
         case RoundingMode.nearestEven:
           return _roundNearestEven(precision);
+        case RoundingMode.nearestOdd:
+          return _roundNearestOdd(precision);
         case RoundingMode.nearestFromZero:
           return _roundNearestFromZero(precision);
         case RoundingMode.towardsZero:
@@ -220,6 +222,22 @@ class Decimal extends Number {
     if (decimalPart.length > 0 && decimalPart[0] == '5') {
       int lastDigit = int.tryParse(integerPart[integerPart.length - 1]);
       return (lastDigit % 2 == 0)
+          ? _roundTowardsZero(precision)
+          : _roundFromZero(precision);
+    } else
+      return _roundNearestFromZero(precision);
+  }
+
+  Number _roundNearestOdd(int precision) {
+    final Integer multiplier = Integer(pow(10, precision));
+    final Number tempNumber = this * multiplier;
+    final String integerPart = tempNumber.toInt().toString();
+    var parts = tempNumber.toString().split('.');
+    final String decimalPart = (parts.length == 2) ? parts[1] : "";
+
+    if (decimalPart.length > 0 && decimalPart[0] == '5') {
+      int lastDigit = int.tryParse(integerPart[integerPart.length - 1]);
+      return (lastDigit % 2 == 1)
           ? _roundTowardsZero(precision)
           : _roundFromZero(precision);
     } else
