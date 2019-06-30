@@ -81,10 +81,6 @@ Feature: Expression
     When expression "dateTime("1997-07-16T19:20") > now()" is evaluated
     Then bool expression result is "false"
 
-  Scenario: it should compare DateTimes - test 3
-    When expression "now() == nowInUtc()" is evaluated
-    Then bool expression result is "true"
-
   Scenario: it should compare DateTimes - complex - test 4
     When expression "dateTime("1997-07-16T19:20") == (dateTime("1997-07-16T19:20") + duration("P1S"))" is evaluated
     Then bool expression result is "false"
