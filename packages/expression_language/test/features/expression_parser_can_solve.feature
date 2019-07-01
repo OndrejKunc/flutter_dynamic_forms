@@ -433,7 +433,7 @@ Feature: Expression
     When expression "5/2" is evaluated
     Then decimal expression result is "2.5"
 
-  Scenario: it should compute 3 when given 7/2
+  Scenario: it should compute 3.5 when given 7/2
     When expression "7/2" is evaluated
     Then decimal expression result is "3.5"
 
