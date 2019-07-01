@@ -171,6 +171,12 @@ class Decimal extends Number {
           return _roundNearestOdd(precision);
         case RoundingMode.nearestFromZero:
           return _roundNearestFromZero(precision);
+        case RoundingMode.nearestToZero:
+          return _roundNearestToZero(precision);
+        case RoundingMode.nearestDownward:
+          return _roundNearestDownward(precision);
+        case RoundingMode.nearestUpward:
+          return _roundNearestUpward(precision);
         case RoundingMode.towardsZero:
           return _roundTowardsZero(precision);
         case RoundingMode.fromZero:
@@ -248,4 +254,30 @@ class Decimal extends Number {
     final Integer multiplier = Integer(pow(10, precision));
     return (this * multiplier).round() / multiplier;
   }
+
+  Number _roundNearestDownward(int precision) {
+    final Integer multiplier = Integer(pow(10, precision));
+    final Number tempNumber = this * multiplier;
+    var parts = tempNumber.toString().split('.');
+    final String decimalPart = (parts.length == 2) ? parts[1] : "";
+
+    return (decimalPart.length > 0 && decimalPart[0] == '5')
+        ? tempNumber.floor() / multiplier
+        : _roundNearestFromZero(precision);
+  }
+
+  Number _roundNearestUpward(int precision) {
+    final Integer multiplier = Integer(pow(10, precision));
+    final Number tempNumber = this * multiplier;
+    var parts = tempNumber.toString().split('.');
+    final String decimalPart = (parts.length == 2) ? parts[1] : "";
+
+    return (decimalPart.length > 0 && decimalPart[0] == '5')
+        ? tempNumber.ceil() / multiplier
+        : _roundNearestFromZero(precision);
+  }
+
+  Number _roundNearestToZero(int precision) => (this >= Integer(0))
+      ? _roundNearestDownward(precision)
+      : _roundNearestUpward(precision);
 }

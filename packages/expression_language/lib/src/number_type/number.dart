@@ -5,6 +5,9 @@ enum RoundingMode {
   nearestEven,
   nearestOdd,
   nearestFromZero,
+  nearestToZero,
+  nearestDownward,
+  nearestUpward,
   towardsZero,
   fromZero,
   up,
@@ -157,18 +160,19 @@ abstract class Number implements Comparable<Number> {
   /// If [precision] is negative, number is rounded to hundreds (-2), thousands (-3), etc. In that case, it rounds to nearest, ties away from zero.\
   /// If rounded number is integer, rounding mode `nearestEven` is automatically used and cannot be changed.
   ///
-  /// Rounding modes are from IEEE 754 (https://en.wikipedia.org/wiki/IEEE_754#Rounding_rules)
-  /// * nearestEven (0) - rounds to the nearest value; if the number falls midway, it is rounded to the nearest value with an even least significant digit
-  /// * nearestOdd (1) - rounds to the nearest value; if the number falls midway, it is rounded to the nearest value with an odd least significant digit
-  /// * nearestFromZero (2) - rounds to the nearest value; it is rounded to the value which is farthest from zero
-  /// * towardsZero (3) - directed rounding towards zero
-  /// * fromZero (4) - directed rounding from zero
-  /// * up (5) - directed rounding towards positive infinity
-  /// * down (6) - directed rounding towards negative infinity
+  /// Rounding modes: (https://en.wikipedia.org/wiki/IEEE_754#Rounding_rules, https://upload.wikimedia.org/wikipedia/commons/8/8a/Comparison_rounding_graphs_SMIL.svg)
+  /// * `nearestEven` (0) - rounds to the nearest value; if the number falls midway, it is rounded to the nearest value with an even least significant digit
+  /// * `nearestOdd` (1) - rounds to the nearest value; if the number falls midway, it is rounded to the nearest value with an odd least significant digit
+  /// * `nearestFromZero` (2) - rounds to the nearest value; if the number falls midway, it is rounded to the value which is the farthest from zero
+  /// * `nearestToZero` (3) - rounds to the nearest value; if the number falls midway, it is rounded to the value which is the closest to zero
+  /// * `nearestDownward` (4) - rounds to the nearest value; if the number falls midway, it rounds down
+  /// * `nearestUpward` (5) - rounds to the nearest value; if the number falls midway, it rounds down
+  /// * `towardsZero` (6) - directed rounding towards zero
+  /// * `fromZero` (7) - directed rounding from zero
+  /// * `up` (8) - directed rounding towards positive infinity
+  /// * `down` (9) - directed rounding towards negative infinity
   Number roundWithPrecision(int precision,
       [RoundingMode mode = RoundingMode.nearestEven]);
-
-//enum RoundingMode { nearestEven,nearestOdd,nearestFromZero,towardsZero,fromZero,up,down }
 
   /**
    * Returns the greatest integer no greater than `this`.

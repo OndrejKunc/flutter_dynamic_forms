@@ -42,227 +42,323 @@ Feature: Expression
     Then int expression result is "13300"
 
   Scenario: rounding test 1 - rounding to nearest, ties to even
-    When expression "round(11.5,0,0)" is evaluated
+    When expression "round(11.5,0,"nearestEven")" is evaluated
     Then decimal expression result is "12"
 
   Scenario: rounding test 2 - rounding to nearest, ties to even
-    When expression "round(12.5,0,0)" is evaluated
+    When expression "round(12.5,0,"nearestEven")" is evaluated
     Then decimal expression result is "12"
 
   Scenario: rounding test 3 - rounding to nearest, ties to even
-    When expression "round(-11.5,0,0)" is evaluated
+    When expression "round(-11.5,0,"nearestEven")" is evaluated
     Then decimal expression result is "-12"
 
   Scenario: rounding test 4 - rounding to nearest, ties to even
-    When expression "round(-12.5,0,0)" is evaluated
+    When expression "round(-12.5,0,"nearestEven")" is evaluated
     Then decimal expression result is "-12"
 
   Scenario: rounding test 5 - rounding to nearest, ties to even - higher precision
-    When expression "round(-12.54855,4,0)" is evaluated
+    When expression "round(-12.54855,4,"nearestEven")" is evaluated
     Then decimal expression result is "-12.5486"
 
   Scenario: rounding test 6 - rounding to nearest, ties to even - higher precision
-    When expression "round(-12.54865,4,0)" is evaluated
+    When expression "round(-12.54865,4,"nearestEven")" is evaluated
     Then decimal expression result is "-12.5486"
 
   Scenario: rounding test 7 - rounding to nearest, ties to even - higher precision
-    When expression "round(12.54855,4,0)" is evaluated
+    When expression "round(12.54855,4,"nearestEven")" is evaluated
     Then decimal expression result is "12.5486"
 
   Scenario: rounding test 8 - rounding to nearest, ties to even - higher precision
-    When expression "round(12.54855,4,0)" is evaluated
+    When expression "round(12.54855,4,"nearestEven")" is evaluated
     Then decimal expression result is "12.5486"
 
   Scenario: rounding test 1 - rounding to nearest, ties to odd
-    When expression "round(11.5,0,1)" is evaluated
+    When expression "round(11.5,0,"nearestOdd")" is evaluated
     Then decimal expression result is "11"
 
   Scenario: rounding test 2 - rounding to nearest, ties to odd
-    When expression "round(12.5,0,1)" is evaluated
+    When expression "round(12.5,0,"nearestOdd")" is evaluated
     Then decimal expression result is "13"
 
   Scenario: rounding test 3 - rounding to nearest, ties to odd
-    When expression "round(-11.5,0,1)" is evaluated
+    When expression "round(-11.5,0,"nearestOdd")" is evaluated
     Then decimal expression result is "-11"
 
   Scenario: rounding test 4 - rounding to nearest, ties to odd
-    When expression "round(-12.5,0,1)" is evaluated
+    When expression "round(-12.5,0,"nearestOdd")" is evaluated
     Then decimal expression result is "-13"
 
   Scenario: rounding test 5 - rounding to nearest, ties to odd - higher precision
-    When expression "round(-12.54855,4,1)" is evaluated
+    When expression "round(-12.54855,4,"nearestOdd")" is evaluated
     Then decimal expression result is "-12.5485"
 
   Scenario: rounding test 6 - rounding to nearest, ties to odd - higher precision
-    When expression "round(-12.54865,4,1)" is evaluated
+    When expression "round(-12.54865,4,"nearestOdd")" is evaluated
     Then decimal expression result is "-12.5487"
 
   Scenario: rounding test 7 - rounding to nearest, ties to odd - higher precision
-    When expression "round(12.54855,4,1)" is evaluated
+    When expression "round(12.54855,4,"nearestOdd")" is evaluated
     Then decimal expression result is "12.5485"
 
   Scenario: rounding test 8 - rounding to nearest, ties to odd - higher precision
-    When expression "round(12.54855,4,1)" is evaluated
+    When expression "round(12.54855,4,"nearestOdd")" is evaluated
     Then decimal expression result is "12.5485"
 
   Scenario: rounding test 1 - rounding to nearest, ties away from zero
-    When expression "round(11.5,0,2)" is evaluated
+    When expression "round(11.5,0,"nearestFromZero")" is evaluated
     Then decimal expression result is "12"
 
   Scenario: rounding test 2 - rounding to nearest, ties away from zero
-    When expression "round(12.5,0,2)" is evaluated
+    When expression "round(12.5,0,"nearestFromZero")" is evaluated
     Then decimal expression result is "13"
 
   Scenario: rounding test 3 - rounding to nearest, ties away from zero
-    When expression "round(-11.5,0,2)" is evaluated
+    When expression "round(-11.5,0,"nearestFromZero")" is evaluated
     Then decimal expression result is "-12"
 
   Scenario: rounding test 4 - rounding to nearest, ties away from zero
-    When expression "round(-12.5,0,2)" is evaluated
+    When expression "round(-12.5,0,"nearestFromZero")" is evaluated
     Then decimal expression result is "-13"
 
   Scenario: rounding test 5 - rounding to nearest, ties away from zero - higher precision
-    When expression "round(-12.54855,4,2)" is evaluated
+    When expression "round(-12.54855,4,"nearestFromZero")" is evaluated
     Then decimal expression result is "-12.5486"
 
   Scenario: rounding test 6 - rounding to nearest, ties away from zero - higher precision
-    When expression "round(-12.54865,4,2)" is evaluated
+    When expression "round(-12.54865,4,"nearestFromZero")" is evaluated
     Then decimal expression result is "-12.5487"
 
   Scenario: rounding test 7 - rounding to nearest, ties away from zero - higher precision
-    When expression "round(12.54855,4,2)" is evaluated
+    When expression "round(12.54855,4,"nearestFromZero")" is evaluated
     Then decimal expression result is "12.5486"
 
   Scenario: rounding test 8 - rounding to nearest, ties away from zero - higher precision
-    When expression "round(12.54855,4,2)" is evaluated
+    When expression "round(12.54865,4,"nearestFromZero")" is evaluated
+    Then decimal expression result is "12.5487"
+
+  Scenario: rounding test 1 - rounding nearest downward
+    When expression "round(11.5,0,"nearestDownward")" is evaluated
+    Then decimal expression result is "11"
+
+  Scenario: rounding test 2 - rounding nearest downward
+    When expression "round(12.5,0,"nearestDownward")" is evaluated
+    Then decimal expression result is "12"
+
+  Scenario: rounding test 3 - rounding nearest downward
+    When expression "round(-11.5,0,"nearestDownward")" is evaluated
+    Then decimal expression result is "-12"
+
+  Scenario: rounding test 4 - rounding nearest downward
+    When expression "round(-12.5,0,"nearestDownward")" is evaluated
+    Then decimal expression result is "-13"
+
+  Scenario: rounding test 5 - rounding nearest downward - higher precision
+    When expression "round(-12.54855,4,"nearestDownward")" is evaluated
+    Then decimal expression result is "-12.5486"
+
+  Scenario: rounding test 6 - rounding nearest downward - higher precision
+    When expression "round(-12.54865,4,"nearestDownward")" is evaluated
+    Then decimal expression result is "-12.5487"
+
+  Scenario: rounding test 7 - rounding nearest downward - higher precision
+    When expression "round(12.54855,4,"nearestDownward")" is evaluated
+    Then decimal expression result is "12.5485"
+
+  Scenario: rounding test 8 - rounding nearest downward - higher precision
+    When expression "round(12.54865,4,"nearestDownward")" is evaluated
+    Then decimal expression result is "12.5486"
+
+  Scenario: rounding test 1 - rounding nearest upward
+    When expression "round(11.5,0,"nearestUpward")" is evaluated
+    Then decimal expression result is "12"
+
+  Scenario: rounding test 2 - rounding nearest upward
+    When expression "round(12.5,0,"nearestUpward")" is evaluated
+    Then decimal expression result is "13"
+
+  Scenario: rounding test 3 - rounding nearest upward
+    When expression "round(-11.5,0,"nearestUpward")" is evaluated
+    Then decimal expression result is "-11"
+
+  Scenario: rounding test 4 - rounding nearest upward
+    When expression "round(-12.5,0,"nearestUpward")" is evaluated
+    Then decimal expression result is "-12"
+
+  Scenario: rounding test 5 - rounding nearest upward - higher precision
+    When expression "round(-12.54855,4,"nearestUpward")" is evaluated
+    Then decimal expression result is "-12.5485"
+
+  Scenario: rounding test 6 - rounding nearest upward - higher precision
+    When expression "round(-12.54865,4,"nearestUpward")" is evaluated
+    Then decimal expression result is "-12.5486"
+
+  Scenario: rounding test 7 - rounding nearest upward - higher precision
+    When expression "round(12.54855,4,"nearestUpward")" is evaluated
+    Then decimal expression result is "12.5486"
+
+  Scenario: rounding test 8 - rounding nearest upward - higher precision
+    When expression "round(12.54865,4,"nearestUpward")" is evaluated
+    Then decimal expression result is "12.5487"
+
+  Scenario: rounding test 1 - rounding nearest to zero
+    When expression "round(11.5,0,"nearestToZero")" is evaluated
+    Then decimal expression result is "11"
+
+  Scenario: rounding test 2 - rounding nearest to zero
+    When expression "round(12.5,0,"nearestToZero")" is evaluated
+    Then decimal expression result is "12"
+
+  Scenario: rounding test 3 - rounding nearest to zero
+    When expression "round(-11.5,0,"nearestToZero")" is evaluated
+    Then decimal expression result is "-11"
+
+  Scenario: rounding test 4 - rounding nearest to zero
+    When expression "round(-12.5,0,"nearestToZero")" is evaluated
+    Then decimal expression result is "-12"
+
+  Scenario: rounding test 5 - rounding nearest to zero - higher precision
+    When expression "round(-12.54855,4,"nearestToZero")" is evaluated
+    Then decimal expression result is "-12.5485"
+
+  Scenario: rounding test 6 - rounding nearest to zero - higher precision
+    When expression "round(-12.54865,4,"nearestToZero")" is evaluated
+    Then decimal expression result is "-12.5486"
+
+  Scenario: rounding test 7 - rounding nearest to zero - higher precision
+    When expression "round(12.54855,4,"nearestToZero")" is evaluated
+    Then decimal expression result is "12.5485"
+
+  Scenario: rounding test 8 - rounding nearest to zero - higher precision
+    When expression "round(12.54865,4,"nearestToZero")" is evaluated
     Then decimal expression result is "12.5486"
 
   Scenario: rounding test 1 - rounding towards zero
-    When expression "round(11.5,0,3)" is evaluated
+    When expression "round(11.5,0,"towardsZero")" is evaluated
     Then decimal expression result is "11"
 
   Scenario: rounding test 2 - rounding towards zero
-    When expression "round(12.5,0,3)" is evaluated
+    When expression "round(12.5,0,"towardsZero")" is evaluated
     Then decimal expression result is "12"
 
   Scenario: rounding test 3 - rounding towards zero
-    When expression "round(-11.5,0,3)" is evaluated
+    When expression "round(-11.5,0,"towardsZero")" is evaluated
     Then decimal expression result is "-11"
 
   Scenario: rounding test 4 - rounding towards zero
-    When expression "round(-12.5,0,3)" is evaluated
+    When expression "round(-12.5,0,"towardsZero")" is evaluated
     Then decimal expression result is "-12"
 
   Scenario: rounding test 5 - rounding towards zero - higher precision
-    When expression "round(-12.54855,4,3)" is evaluated
+    When expression "round(-12.54855,4,"towardsZero")" is evaluated
     Then decimal expression result is "-12.5485"
 
   Scenario: rounding test 6 - rounding towards zero - higher precision
-    When expression "round(-12.54865,4,3)" is evaluated
+    When expression "round(-12.54865,4,"towardsZero")" is evaluated
     Then decimal expression result is "-12.5486"
 
   Scenario: rounding test 7 - rounding towards zero - higher precision
-    When expression "round(12.54855,4,3)" is evaluated
+    When expression "round(12.54855,4,"towardsZero")" is evaluated
     Then decimal expression result is "12.5485"
 
   Scenario: rounding test 8 - rounding towards zero - higher precision
-    When expression "round(12.54855,4,3)" is evaluated
+    When expression "round(12.54855,4,"towardsZero")" is evaluated
     Then decimal expression result is "12.5485"
 
   Scenario: rounding test 1 - rounding from zero
-    When expression "round(11.5,0,4)" is evaluated
+    When expression "round(11.5,0,"fromZero")" is evaluated
     Then decimal expression result is "12"
 
   Scenario: rounding test 2 - rounding from zero
-    When expression "round(12.5,0,4)" is evaluated
+    When expression "round(12.5,0,"fromZero")" is evaluated
     Then decimal expression result is "13"
 
   Scenario: rounding test 3 - rounding from zero
-    When expression "round(-11.5,0,4)" is evaluated
+    When expression "round(-11.5,0,"fromZero")" is evaluated
     Then decimal expression result is "-12"
 
   Scenario: rounding test 4 - rounding from zero
-    When expression "round(-12.5,0,4)" is evaluated
+    When expression "round(-12.5,0,"fromZero")" is evaluated
     Then decimal expression result is "-13"
 
   Scenario: rounding test 5 - rounding from zero - higher precision
-    When expression "round(-12.54855,4,4)" is evaluated
+    When expression "round(-12.54855,4,"fromZero")" is evaluated
     Then decimal expression result is "-12.5486"
 
   Scenario: rounding test 6 - rounding from zero - higher precision
-    When expression "round(-12.54865,4,4)" is evaluated
+    When expression "round(-12.54865,4,"fromZero")" is evaluated
     Then decimal expression result is "-12.5487"
 
   Scenario: rounding test 7 - rounding from zero - higher precision
-    When expression "round(12.54855,4,4)" is evaluated
+    When expression "round(12.54855,4,"fromZero")" is evaluated
     Then decimal expression result is "12.5486"
 
   Scenario: rounding test 8 - rounding from zero - higher precision
-    When expression "round(12.54855,4,4)" is evaluated
+    When expression "round(12.54855,4,"fromZero")" is evaluated
     Then decimal expression result is "12.5486"
 
   Scenario: rounding test 1 - rounding up
-    When expression "round(11.5,0,5)" is evaluated
+    When expression "round(11.5,0,"up")" is evaluated
     Then decimal expression result is "12"
 
   Scenario: rounding test 2 - rounding up
-    When expression "round(12.5,0,5)" is evaluated
+    When expression "round(12.5,0,"up")" is evaluated
     Then decimal expression result is "13"
 
   Scenario: rounding test 3 - rounding up
-    When expression "round(-11.5,0,5)" is evaluated
+    When expression "round(-11.5,0,"up")" is evaluated
     Then decimal expression result is "-11"
 
   Scenario: rounding test 4 - rounding up
-    When expression "round(-12.5,0,5)" is evaluated
+    When expression "round(-12.5,0,"up")" is evaluated
     Then decimal expression result is "-12"
 
   Scenario: rounding test 5 - rounding up - higher precision
-    When expression "round(-12.54855,4,5)" is evaluated
+    When expression "round(-12.54855,4,"up")" is evaluated
     Then decimal expression result is "-12.5485"
 
   Scenario: rounding test 6 - rounding up - higher precision
-    When expression "round(-12.54865,4,5)" is evaluated
+    When expression "round(-12.54865,4,"up")" is evaluated
     Then decimal expression result is "-12.5486"
 
   Scenario: rounding test 7 - rounding up - higher precision
-    When expression "round(12.54855,4,5)" is evaluated
+    When expression "round(12.54855,4,"up")" is evaluated
     Then decimal expression result is "12.5486"
 
   Scenario: rounding test 8 - rounding up - higher precision
-    When expression "round(12.54855,4,5)" is evaluated
+    When expression "round(12.54855,4,"up")" is evaluated
     Then decimal expression result is "12.5486"
 
   Scenario: rounding test 1 - rounding down
-    When expression "round(11.5,0,6)" is evaluated
+    When expression "round(11.5,0,"down")" is evaluated
     Then decimal expression result is "11"
 
   Scenario: rounding test 2 - rounding down
-    When expression "round(12.5,0,6)" is evaluated
+    When expression "round(12.5,0,"down")" is evaluated
     Then decimal expression result is "12"
 
   Scenario: rounding test 3 - rounding down
-    When expression "round(-11.5,0,6)" is evaluated
+    When expression "round(-11.5,0,"down")" is evaluated
     Then decimal expression result is "-12"
 
   Scenario: rounding test 4 - rounding down
-    When expression "round(-12.5,0,6)" is evaluated
+    When expression "round(-12.5,0,"down")" is evaluated
     Then decimal expression result is "-13"
 
   Scenario: rounding test 5 - rounding down - higher precision
-    When expression "round(-12.54855,4,6)" is evaluated
+    When expression "round(-12.54855,4,"down")" is evaluated
     Then decimal expression result is "-12.5486"
 
   Scenario: rounding test 6 - rounding down - higher precision
-    When expression "round(-12.54865,4,6)" is evaluated
+    When expression "round(-12.54865,4,"down")" is evaluated
     Then decimal expression result is "-12.5487"
 
   Scenario: rounding test 7 - rounding down - higher precision
-    When expression "round(12.54855,4,6)" is evaluated
+    When expression "round(12.54855,4,"down")" is evaluated
     Then decimal expression result is "12.5485"
 
   Scenario: rounding test 8 - rounding down - higher precision
-    When expression "round(12.54855,4,6)" is evaluated
+    When expression "round(12.54855,4,"down")" is evaluated
     Then decimal expression result is "12.5485"
 
   Scenario: it should solve an mixed expression
