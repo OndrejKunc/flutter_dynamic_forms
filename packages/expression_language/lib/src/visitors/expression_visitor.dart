@@ -20,6 +20,7 @@ abstract class ExpressionVisitor {
   void visitEqualDateTime(EqualDateTimeExpression expression);
   void visitEqualString(EqualStringExpression expression);
   void visitNotEqualNumber(NotEqualNumberExpression expression);
+  void visitIntegerDivisionNumber(IntegerDivisionNumberExpression expression);
   void visitNotEqualDateTime(NotEqualDateTimeExpression expression);
   void visitDivision(DivisionNumberExpression expression);
   void visitModulo(ModuloExpression expression);

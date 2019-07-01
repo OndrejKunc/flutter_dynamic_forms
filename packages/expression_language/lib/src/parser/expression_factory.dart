@@ -26,7 +26,7 @@ DelegateExpression createDelegateExpression(
     return DelegateExpression<List<ExpressionProviderElement>>(
         expressionPath, elementValue);
   }
-  throw UnknownExpressionFactory("Unknown expression factory");
+  throw UnknownExpressionFactoryException("Unknown expression factory");
 }
 
 ConditionalExpression createConditionalExpression(
@@ -79,7 +79,7 @@ Expression createFunctionExpression(
         return RoundFunctionStringRoundingModeExpression(
             parameters[0], parameters[1], parameters[2]);
       } else {
-        throw InvalidParameter(
+        throw InvalidParameterException(
             "Function $functionName expects integer or string as third parameter");
       }
     } else if (parameters.length == 2)
@@ -151,5 +151,5 @@ Expression createFunctionExpression(
     }
     return DurationInSecondsFunctionExpression(parameters[0]);
   }
-  throw UnknownFunction("Unknown function name $functionName");
+  throw UnknownFunctionException("Unknown function name $functionName");
 }

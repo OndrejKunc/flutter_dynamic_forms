@@ -42,6 +42,12 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitIntegerDivisionNumber(IntegerDivisionNumberExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
   void visitEqualString(EqualStringExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);

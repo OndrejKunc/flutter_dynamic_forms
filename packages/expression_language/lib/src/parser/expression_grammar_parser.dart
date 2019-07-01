@@ -56,7 +56,7 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
             }
           }
           if (item[0].value == "-") {
-            if ((left is Expression<Number>) && (right is Expression<Number>)) {
+           if ((left is Expression<Number>) && (right is Expression<Number>)) {
               left = MinusNumberExpression(left, right);
               continue;
             }
@@ -82,6 +82,12 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
         Expression left = c[0];
         for (var item in c[1]) {
           Expression right = item[1];
+          if ((item[0] is List) &&
+              (item[0][0].value == '~') &&
+              (item[0][1].value == '/')) {
+            left = IntegerDivisionNumberExpression(left, right);
+            continue;
+          }
           if (item[0].value == "*") {
             if (left is Expression<Number> && right is Expression<Number>) {
               left = MultiplyNumberExpression(left, right);

@@ -7,17 +7,27 @@ class ExpressionGrammarDefinition extends GrammarDefinition {
   Parser TRUE() => ref(token, 'true');
   Parser LETTER() => letter();
   Parser DIGIT() => digit();
-  Parser failureState() => (ref(expression).trim() & ref(fail).trim()) | ref(fail).trim();
+  Parser failureState() =>
+      (ref(expression).trim() & ref(fail).trim()) | ref(fail).trim();
   Parser fail() => any();
 
-
-  Parser decimalNumber() => ref(DIGIT) & ref(DIGIT).star() & char('.') & ref(DIGIT) & ref(DIGIT).star();
+  Parser decimalNumber() =>
+      ref(DIGIT) &
+      ref(DIGIT).star() &
+      char('.') &
+      ref(DIGIT) &
+      ref(DIGIT).star();
   Parser integerNumber() => ref(DIGIT) & ref(DIGIT).star();
   Parser singleLineString() =>
       char('"') & ref(stringContent).star() & char('"');
   Parser stringContent() => pattern('^\\"\n\r') | char('\\') & pattern('\n\r');
-  Parser literal() =>
-      ref(token,ref(decimalNumber) | ref(integerNumber) | ref(TRUE) | ref(FALSE) | ref(singleLineString));
+  Parser literal() => ref(
+      token,
+      ref(decimalNumber) |
+          ref(integerNumber) |
+          ref(TRUE) |
+          ref(FALSE) |
+          ref(singleLineString));
   Parser identifier() => ref(LETTER) & (ref(LETTER) | ref(DIGIT)).star();
 
   Parser function() =>
@@ -34,7 +44,10 @@ class ExpressionGrammarDefinition extends GrammarDefinition {
 
   Parser equalityOperator() => ref(token, '==') | ref(token, '!=');
   Parser multiplicativeOperator() =>
-      ref(token, '*') | ref(token, '/') | ref(token, '%');
+      ref(token, '*') |
+      ref(token, '/') |
+      ref(token, '~') & ref(token, '/') |
+      ref(token, '%');
 
   Parser unaryNegateOperator() => ref(token, '-') | ref(token, '!');
 

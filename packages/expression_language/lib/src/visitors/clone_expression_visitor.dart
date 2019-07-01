@@ -103,6 +103,15 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitIntegerDivisionNumber(IntegerDivisionNumberExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(IntegerDivisionNumberExpression(left, right));
+  }
+
+  @override
   void visitEqualString(EqualStringExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);

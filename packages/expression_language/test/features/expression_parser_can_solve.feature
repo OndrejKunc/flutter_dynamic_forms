@@ -421,17 +421,21 @@ Feature: Expression
     When expression "10 % 3.5" is evaluated
     Then decimal expression result is "3.0"
 
+  Scenario: it should compute 2 when given 5.0~/2
+    When expression "5.0 ~/ 2" is evaluated
+    Then int expression result is "2"
+
   Scenario: it should compute 5 when given 50/10
     When expression "50/10" is evaluated
     Then int expression result is "5"
 
-  Scenario: it should compute 2.5 when given 5.0/2
-    When expression "5.0/2" is evaluated
+  Scenario: it should compute 2.5 when given 5/2
+    When expression "5/2" is evaluated
     Then decimal expression result is "2.5"
 
-  Scenario: it should compute 3 when given 7/2
+  Scenario: it should compute 3.5 when given 7/2
     When expression "7/2" is evaluated
-    Then int expression result is "3"
+    Then decimal expression result is "3.5"
 
   Scenario: it should omit white spaces
     When expression "   12        -  8   " is evaluated
