@@ -834,7 +834,7 @@ class RoundFunctionIntRoundingModeExpression extends Expression<Number> {
     int roundingModeInt = roundingMode.evaluate().value;
     if ((roundingModeInt >= RoundingMode.values.length) ||
         (roundingModeInt < 0))
-      throw InvalidParameter(
+      throw InvalidParameterException(
           "Rounding mode has to be integer in range [0,${RoundingMode.values.length - 1}");
     return value.evaluate().roundWithPrecision(precision.evaluate().value,
         RoundingMode.values[roundingMode.evaluate().value]);
@@ -860,7 +860,7 @@ class RoundFunctionStringRoundingModeExpression extends Expression<Number> {
     String nameOfEnum = RoundingMode.nearestEven.toString().split('.').first;
     RoundingMode mode = RoundingMode.values.firstWhere(
         (e) => e.toString() == nameOfEnum + '.' + roundingModeString,
-        orElse: () => throw InvalidParameter(
+        orElse: () => throw InvalidParameterException(
             "Rounding mode $roundingModeString does not exist"));
     return value
         .evaluate()
@@ -901,7 +901,7 @@ class DateTimeFunctionExpression extends Expression<DateTime> {
   DateTime evaluate() {
     DateTime returnValue = DateTime.tryParse(value.evaluate());
     if (returnValue == null) {
-      throw InvalidParameter("Invalid format of date-time string");
+      throw InvalidParameterException("Invalid format of date-time string");
     }
     return returnValue;
   }
@@ -927,7 +927,7 @@ class DurationFunctionExpression extends Expression<Duration> {
     RegExp validator =
         RegExp(r"^P(([0-9]+D)?T?([0-9]+H)?([0-9]+M)?([0-9]+S)?)$");
     if (!validator.hasMatch(input)) {
-      throw InvalidParameter("Invalid format of duration string");
+      throw InvalidParameterException("Invalid format of duration string");
     }
     List<RegExp> regularExpressions = [
       RegExp(r"[0-9]+D"),

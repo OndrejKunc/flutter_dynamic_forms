@@ -422,7 +422,7 @@ Feature: Expression
     Then decimal expression result is "3.0"
 
   Scenario: it should compute 2 when given 5.0~/2
-    When expression "5.0~/2" is evaluated
+    When expression "5.0 ~/ 2" is evaluated
     Then int expression result is "2"
 
   Scenario: it should compute 5 when given 50/10
