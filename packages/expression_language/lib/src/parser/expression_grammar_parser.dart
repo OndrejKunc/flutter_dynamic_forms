@@ -44,8 +44,18 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
             }
           }
           if (item[0].value == "-") {
-            if (left is Expression<Number>) {
-              left = MinusNumberExpression(left, item[1]);
+            if ((left is Expression<Number>) && (right is Expression<Number>)) {
+              left = MinusNumberExpression(left, right);
+              continue;
+            }
+            if ((left is Expression<DateTime>) &&
+                (right is Expression<Duration>)) {
+              left = DateTimeMinusDurationExpression(left, right);
+              continue;
+            }
+            if ((left is Expression<Duration>) &&
+                (right is Expression<Duration>)) {
+              left = MinusDurationExpression(left, right);
               continue;
             }
           }
@@ -57,28 +67,43 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
 
   Parser multiplicativeExpression() =>
       super.multiplicativeExpression().map((c) {
-        Expression expression = c[0];
+        Expression left = c[0];
         for (var item in c[1]) {
+          Expression right = item[1];
           if ((item[0] is List) && (item[0][0].value == '~') && (item[0][1].value == '/')) {
-            expression = IntegerDivisionNumberExpression(expression, item[1]);
+            left = IntegerDivisionNumberExpression(left, right);
             continue;
           }
           if (item[0].value == "*") {
-            expression = MultiplyExpression(expression, item[1]);
-            continue;
+            if (left is Expression<Number> && right is Expression<Number>) {
+              left = MultiplyNumberExpression(left, right);
+              continue;
+            }
+            if (left is Expression<Duration> && right is Expression<Integer>) {
+              left = MultiplyDurationExpression(left, right);
+              continue;
+            }
           }
           if (item[0].value == "/") {
-            expression = DivisionExpression(expression, item[1]);
+            if (left is Expression<Number> && right is Expression<Number>) {
+              left = DivisionNumberExpression(left, right);
+              continue;
+            }
+            if (left is Expression<Duration> && right is Expression<Integer>) {
+              left = DivisionDurationExpression(left, right);
+              continue;
+            }
+
             continue;
           }
           if (item[0].value == "%") {
-            expression = ModuloExpression(expression, item[1]);
+            left = ModuloExpression(left, right);
             continue;
           }
           throw UnknownExpressionTypeException(
               "Unknown multiplicative expression type");
         }
-        return expression;
+        return left;
       });
 
   Parser expressionInParentheses() =>
@@ -89,6 +114,9 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
           if (c[0].value == "-") {
             if (c[1] is Expression<Number>) {
               return NegateNumberExpression(c[1]);
+            }
+            if (c[1] is Expression<Duration>) {
+              return NegateDurationExpression(c[1]);
             }
           } else if (c[0].value == "!") {
             if (c[1] is Expression<bool>) {
@@ -132,51 +160,101 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
       });
 
   Parser equalityExpression() => super.equalityExpression().map((c) {
-        Expression expression = c[0];
+        Expression left = c[0];
         if (c[1] == null) {
-          return expression;
+          return left;
         }
         var item = c[1];
+        var right = item[1];
         if (item[0].value == "==") {
-          if (expression is Expression<Number>) {
-            expression = EqualNumberExpression(expression, item[1]);
-          } else if (expression is Expression<bool>) {
-            expression = EqualBoolExpression(expression, item[1]);
-          } else if (expression is Expression<String>) {
-            expression = EqualStringExpression(expression, item[1]);
+          if ((left is Expression<Number>) && (right is Expression<Number>)) {
+            left = EqualNumberExpression(left, right);
+          } else if ((left is Expression<bool>) &&
+              (right is Expression<bool>)) {
+            left = EqualBoolExpression(left, right);
+          } else if ((left is Expression<String>) &&
+              (right is Expression<String>)) {
+            left = EqualStringExpression(left, right);
+          } else if ((left is Expression<DateTime>) &&
+              (right is Expression<DateTime>)) {
+            left = EqualDateTimeExpression(left, right);
+          } else if ((left is Expression<Duration>) &&
+              (right is Expression<Duration>)) {
+            left = EqualDurationExpression(left, right);
           }
         } else if (item[0].value == "!=") {
-          if (expression is Expression<Number>) {
-            expression = NotEqualNumberExpression(expression, item[1]);
-          } else if (expression is Expression<bool>) {
-            expression = NotEqualBoolExpression(expression, item[1]);
-          } else if (expression is Expression<String>) {
-            expression = NotEqualStringExpression(expression, item[1]);
+          if ((left is Expression<Number>) && (right is Expression<Number>)) {
+            left = NotEqualNumberExpression(left, right);
+          } else if ((left is Expression<bool>) &&
+              (right is Expression<bool>)) {
+            left = NotEqualBoolExpression(left, right);
+          } else if ((left is Expression<String>) &&
+              (right is Expression<String>)) {
+            left = NotEqualStringExpression(left, right);
+          } else if ((left is Expression<DateTime>) &&
+              (right is Expression<DateTime>)) {
+            left = NotEqualDateTimeExpression(left, right);
+          } else if ((left is Expression<Duration>) &&
+              (right is Expression<Duration>)) {
+            left = NotEqualDurationExpression(left, right);
           } else
             throw UnknownExpressionTypeException(
                 "Unknown equality expression type");
         }
-        return expression;
+        return left;
       });
 
   Parser relationalExpression() => super.relationalExpression().map((c) {
-        Expression expression = c[0];
+        Expression left = c[0];
         if (c[1] == null) {
-          return expression;
+          return left;
         }
         var item = c[1];
+        var right = item[1];
         if (item[0].value == "<") {
-          expression = LessThanExpression(expression, item[1]);
+          if ((left is Expression<Number>) && (right is Expression<Number>)) {
+            left = LessThanNumberExpression(left, right);
+          } else if ((left is Expression<DateTime>) &&
+              (right is Expression<DateTime>)) {
+            left = LessThanDateTimeExpression(left, right);
+          } else if ((left is Expression<Duration>) &&
+              (right is Expression<Duration>)) {
+            left = LessThanDurationExpression(left, right);
+          }
         } else if (item[0].value == "<=") {
-          expression = LessThanOrEqualExpression(expression, item[1]);
+          if ((left is Expression<Number>) && (right is Expression<Number>)) {
+            left = LessThanOrEqualNumberExpression(left, right);
+          } else if ((left is Expression<DateTime>) &&
+              (right is Expression<DateTime>)) {
+            left = LessThanOrEqualDateTimeExpression(left, right);
+          } else if ((left is Expression<Duration>) &&
+              (right is Expression<Duration>)) {
+            left = LessThanOrEqualDurationExpression(left, right);
+          }
         } else if (item[0].value == ">") {
-          expression = LessThanExpression(item[1], expression);
+          if ((left is Expression<Number>) && (right is Expression<Number>)) {
+            left = LessThanNumberExpression(right, left);
+          } else if ((left is Expression<DateTime>) &&
+              (right is Expression<DateTime>)) {
+            left = LessThanDateTimeExpression(right, left);
+          } else if ((left is Expression<Duration>) &&
+              (right is Expression<Duration>)) {
+            left = LessThanDurationExpression(right, left);
+          }
         } else if (item[0].value == ">=") {
-          expression = LessThanOrEqualExpression(item[1], expression);
+          if ((left is Expression<Number>) && (right is Expression<Number>)) {
+            left = LessThanOrEqualNumberExpression(right, left);
+          } else if ((left is Expression<DateTime>) &&
+              (right is Expression<DateTime>)) {
+            left = LessThanOrEqualDateTimeExpression(right, left);
+          } else if ((left is Expression<Duration>) &&
+              (right is Expression<Duration>)) {
+            left = LessThanOrEqualDurationExpression(right, left);
+          }
         } else
           throw UnknownExpressionTypeException(
               "Unknown relational expression type");
-        return expression;
+        return left;
       });
 
   Parser reference() => super.reference().map((c) {

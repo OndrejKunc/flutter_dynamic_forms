@@ -57,6 +57,16 @@ class ThenDecimalExpressionResult extends Then1WithWorld<String, ExpressionWorld
 
 }
 
+class ThenDateTimeExpressionResult extends Then1WithWorld<String, ExpressionWorld> {
+  @override
+  Future<void> executeStep(String result) async {
+    expectMatch(world.result, DateTime.parse(result));
+  }
+
+  RegExp get pattern => RegExp(r"DateTime expression result is {string}");
+
+}
+
 class ThenBoolExpressionResult extends Then1WithWorld<String, ExpressionWorld> {
   @override
   Future<void> executeStep(String result) async {

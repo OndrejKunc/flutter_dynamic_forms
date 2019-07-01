@@ -3,7 +3,7 @@ description: Library for parsing and evaluating simple expression language with 
 version: 0.0.1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   petitparser: ^2.1.1
@@ -12,4 +12,4 @@ dependencies:
 dev_dependencies:
   test: ^1.6.3
   test_coverage: ^0.2.3 #Bump to higher version when dart sdk 2.3.0 is available with flutter stable
-  gherkin: ^0.0.4
+  gherkin: ^1.0.3

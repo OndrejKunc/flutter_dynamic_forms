@@ -67,6 +67,15 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitEqualDateTime(EqualDateTimeExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(EqualDateTimeExpression(left, right));
+  }
+
+  @override
   void visitEqualNumber(EqualNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
@@ -76,12 +85,21 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitDivision(DivisionExpression expression) {
+  void visitEqualDuration(EqualDurationExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
     var right = pop();
     var left = pop();
-    push(DivisionExpression(left, right));
+    push(EqualDurationExpression(left, right));
+  }
+
+  @override
+  void visitDivision(DivisionNumberExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(DivisionNumberExpression(left, right));
   }
 
   @override
@@ -112,6 +130,15 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitNotEqualDuration(NotEqualDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(NotEqualDurationExpression(left, right));
+  }
+
+  @override
   void visitNotEqualNumber(NotEqualNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
@@ -130,27 +157,74 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitNotEqualDateTime(NotEqualDateTimeExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(NotEqualDateTimeExpression(left, right));
+  }
+
+  @override
   void visitLengthFunction(LengthFunctionExpression expression) {
     expression.value.accept(this);
     push(LengthFunctionExpression(pop()));
   }
 
   @override
-  void visitLessThan(LessThanExpression expression) {
+  void visitLessThanNumber(LessThanNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
     var right = pop();
     var left = pop();
-    push(LessThanExpression(left, right));
+    push(LessThanNumberExpression(left, right));
   }
 
   @override
-  void visitLessThanOrEqual(LessThanOrEqualExpression expression) {
+  void visitLessThanDuration(LessThanDurationExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
     var right = pop();
     var left = pop();
-    push(LessThanOrEqualExpression(left, right));
+    push(LessThanDurationExpression(left, right));
+  }
+
+  @override
+  void visitLessThanDateTime(LessThanDateTimeExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(LessThanDateTimeExpression(left, right));
+  }
+
+  @override
+  void visitLessThanOrEqualNumber(LessThanOrEqualNumberExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(LessThanOrEqualNumberExpression(left, right));
+  }
+
+  @override
+  void visitLessThanOrEqualDuration(
+      LessThanOrEqualDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(LessThanOrEqualDurationExpression(left, right));
+  }
+
+  @override
+  void visitLessThanOrEqualDateTime(
+      LessThanOrEqualDateTimeExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(LessThanOrEqualDateTimeExpression(left, right));
   }
 
   @override
@@ -178,12 +252,12 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitMultiply(MultiplyExpression expression) {
+  void visitMultiply(MultiplyNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
     var right = pop();
     var left = pop();
-    push(MultiplyExpression(left, right));
+    push(MultiplyNumberExpression(left, right));
   }
 
   @override
@@ -239,6 +313,66 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitDateTimePlusDuration(DateTimePlusDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(DateTimePlusDurationExpression(left, right));
+  }
+
+  @override
+  void visitDateTimeMinusDuration(DateTimeMinusDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(DateTimeMinusDurationExpression(left, right));
+  }
+
+  @override
+  void visitPlusDuration(PlusDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(PlusDurationExpression(left, right));
+  }
+
+  @override
+  void visitMinusDuration(MinusDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(MinusDurationExpression(left, right));
+  }
+
+  @override
+  void visitMultiplyDuration(MultiplyDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(MultiplyDurationExpression(left, right));
+  }
+
+  @override
+  void visitDivisionDuration(DivisionDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(DivisionDurationExpression(left, right));
+  }
+
+  @override
+  void visitNegateDuration(NegateDurationExpression expression) {
+    expression.value.accept(this);
+    push(NegateDurationExpression(pop()));
+  }
+
+  @override
   void visitToStringFunction(ToStringFunctionExpression expression) {
     expression.value.accept(this);
     push(ToStringFunctionExpression(pop()));
@@ -283,5 +417,64 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     var precision = pop();
     var value = pop();
     push(RoundFunctionExpression(value, precision));
+  }
+
+  @override
+  void visitDateTimeFunction(DateTimeFunctionExpression expression) {
+    expression.value.accept(this);
+    push(DateTimeFunctionExpression(pop()));
+  }
+
+  @override
+  void visitDurationFunction(DurationFunctionExpression expression) {
+    expression.value.accept(this);
+    push(DurationFunctionExpression(pop()));
+  }
+
+  @override
+  void visitNowFunction(NowFunctionExpression expression) {
+    push(NowFunctionExpression());
+  }
+
+  @override
+  void visitNowInUtcFunction(NowInUtcFunctionExpression expression) {
+    push(NowInUtcFunctionExpression());
+  }
+
+  @override
+  void visitDiffDateTimeFunction(DiffDateTimeFunctionExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+    var right = pop();
+    var left = pop();
+    push(DiffDateTimeFunctionExpression(left, right));
+  }
+
+  @override
+  void visitDurationInDaysFunction(
+      DurationInDaysFunctionExpression expression) {
+    expression.value.accept(this);
+    push(DurationInDaysFunctionExpression(pop()));
+  }
+
+  @override
+  void visitDurationInHoursFunction(
+      DurationInHoursFunctionExpression expression) {
+    expression.value.accept(this);
+    push(DurationInHoursFunctionExpression(pop()));
+  }
+
+  @override
+  void visitDurationInMinutesFunction(
+      DurationInMinutesFunctionExpression expression) {
+    expression.value.accept(this);
+    push(DurationInMinutesFunctionExpression(pop()));
+  }
+
+  @override
+  void visitDurationInSecondsFunction(
+      DurationInSecondsFunctionExpression expression) {
+    expression.value.accept(this);
+    push(DurationInSecondsFunctionExpression(pop()));
   }
 }
