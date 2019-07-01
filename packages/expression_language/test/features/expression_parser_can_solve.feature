@@ -1,6 +1,114 @@
 Feature: Expression
   Tests an expression
 
+  Scenario: DurationInDays function test 1
+    When expression "durationInDays(duration("P5D1H"))" is evaluated
+    Then int expression result is "5"
+
+  Scenario: DurationInDays function test 2
+    When expression "durationInDays(duration("P3H"))" is evaluated
+    Then int expression result is "0"
+
+  Scenario: DurationInDays function test 3
+    When expression "durationInDays(duration("P25H"))" is evaluated
+    Then int expression result is "1"
+
+  Scenario: DurationInHours function test 1
+    When expression "durationInHours(duration("P5D1H"))" is evaluated
+    Then int expression result is "121"
+
+  Scenario: DurationInHours function test 2
+    When expression "durationInHours(duration("P3H"))" is evaluated
+    Then int expression result is "3"
+
+  Scenario: DurationInHours function test 3
+    When expression "durationInHours(duration("P8S"))" is evaluated
+    Then int expression result is "0"
+
+  Scenario: DurationInMinutes function test 1
+    When expression "durationInMinutes(duration("P5H61S"))" is evaluated
+    Then int expression result is "301"
+
+  Scenario: DurationInMinutes function test 2
+    When expression "durationInMinutes(duration("P3H"))" is evaluated
+    Then int expression result is "180"
+
+  Scenario: DurationInMinutes function test 3
+    When expression "durationInMinutes(duration("P8S"))" is evaluated
+    Then int expression result is "0"
+
+  Scenario: DurationInSeconds function test 1
+    When expression "durationInSeconds(duration("P5H61S"))" is evaluated
+    Then int expression result is "18061"
+
+  Scenario: DurationInSeconds function test 2
+    When expression "durationInSeconds(duration("P3H"))" is evaluated
+    Then int expression result is "10800"
+
+  Scenario: DurationInSeconds function test 3
+    When expression "durationInSeconds(duration("P8S"))" is evaluated
+    Then int expression result is "8"
+
+  Scenario: it should add Duration to DateTime
+    When expression "dateTime("1997-07-16T19:20") + duration("P5D1H")" is evaluated
+    Then DateTime expression result is "1997-07-21T20:20"
+
+  Scenario: it should subtract Duration from DateTime
+    When expression "dateTime("1997-07-16T19:20") - duration("P5D1H")" is evaluated
+    Then DateTime expression result is "1997-07-11T18:20"
+
+  Scenario: it should add Duration to Duration
+    When expression "dateTime("1997-07-16T19:20") + (duration("P5D") + duration("P1D"))" is evaluated
+    Then DateTime expression result is "1997-07-22T19:20"
+
+  Scenario: it should subtract Duration from Duration
+    When expression "dateTime("1997-07-16T19:20") + (duration("P5D") - duration("P1D"))" is evaluated
+    Then DateTime expression result is "1997-07-20T19:20"
+
+  Scenario: it should multiply Duration with Integer
+    When expression "dateTime("1997-07-16T19:20") + (duration("P5D") * 2)" is evaluated
+    Then DateTime expression result is "1997-07-26T19:20"
+
+  Scenario: it should multiply Duration by Integer
+    When expression "dateTime("1997-07-16T19:20") + (duration("P6D") / 3)" is evaluated
+    Then DateTime expression result is "1997-07-18T19:20"
+
+  Scenario: it should compare DateTimes - test 1
+    When expression "dateTime("1997-07-16T19:20") < now()" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: it should compare DateTimes - test 2
+    When expression "dateTime("1997-07-16T19:20") > now()" is evaluated
+    Then bool expression result is "false"
+
+  Scenario: it should compare DateTimes - complex - test 4
+    When expression "dateTime("1997-07-16T19:20") == (dateTime("1997-07-16T19:20") + duration("P1S"))" is evaluated
+    Then bool expression result is "false"
+
+  Scenario: it should compare DateTimes - complex - test 5
+    When expression "dateTime("1997-07-16T19:20") <= (dateTime("1997-07-16T19:20") + duration("P1S"))" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: it should compare Durations - test 1
+    When expression "duration("P5D1H3S") > duration("P5D1H")" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: it should compare Durations - test 2
+    When expression "duration("P5D1H3S") == duration("P5D1H3S")" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: it should compare Durations - test 3
+    When expression "duration("P5D1H3S") == duration("P5D1H2S") + duration("P1S")" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: it should compare Durations - test 4
+    When expression "duration("P5D1H3S") >= duration("P5D1H3S") - duration("P1S")" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: DateTime constructor test
+    When expression "dateTime("1997-07-16T19:20")" is evaluated
+    Then DateTime expression result is "1997-07-16T19:20"
+
   Scenario: rounding test 1 - string rounding mode
     When expression "round(13.5,0,"nearestEven")" is evaluated
     Then decimal expression result is "14"
@@ -441,17 +549,21 @@ Feature: Expression
     When expression "10 % 3.5" is evaluated
     Then decimal expression result is "3.0"
 
+  Scenario: it should compute 2 when given 5.0~/2
+    When expression "5.0 ~/ 2" is evaluated
+    Then int expression result is "2"
+
   Scenario: it should compute 5 when given 50/10
     When expression "50/10" is evaluated
     Then int expression result is "5"
 
-  Scenario: it should compute 2.5 when given 5.0/2
-    When expression "5.0/2" is evaluated
+  Scenario: it should compute 2.5 when given 5/2
+    When expression "5/2" is evaluated
     Then decimal expression result is "2.5"
 
-  Scenario: it should compute 3 when given 7/2
+  Scenario: it should compute 3.5 when given 7/2
     When expression "7/2" is evaluated
-    Then int expression result is "3"
+    Then decimal expression result is "3.5"
 
   Scenario: it should omit white spaces
     When expression "   12        -  8   " is evaluated

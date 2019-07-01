@@ -20,20 +20,20 @@ class UnknownExpressionTypeException extends ExpressionParserException {
   UnknownExpressionTypeException(String message) : super(message);
 }
 
-class UnknownFunction extends ExpressionParserException {
-  UnknownFunction(String message) : super(message);
+class UnknownFunctionException extends ExpressionParserException {
+  UnknownFunctionException(String message) : super(message);
 }
 
-class UnknownConstantType extends ExpressionParserException {
-  UnknownConstantType(String message) : super(message);
+class UnknownConstantTypeException extends ExpressionParserException {
+  UnknownConstantTypeException(String message) : super(message);
 }
 
-class UnknownExpressionFactory extends ExpressionParserException {
-  UnknownExpressionFactory(String message) : super(message);
+class UnknownExpressionFactoryException extends ExpressionParserException {
+  UnknownExpressionFactoryException(String message) : super(message);
 }
 
-class InvalidParameter extends ExpressionParserException {
-  InvalidParameter(String message) : super(message);
+class InvalidParameterException extends ExpressionParserException {
+  InvalidParameterException(String message) : super(message);
 }
 
 class InvalidParameterCount extends ExpressionParserException {

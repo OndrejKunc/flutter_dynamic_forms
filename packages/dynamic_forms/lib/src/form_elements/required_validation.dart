@@ -32,10 +32,11 @@ class RequiredValidation extends Validation {
     );
     return result;
   }
-  
-  LazyExpressionElementValue<bool> getIsValid(ElementValue<ExpressionProviderElement> parent) {
+
+  LazyExpressionElementValue<bool> getIsValid(
+      ElementValue<ExpressionProviderElement> parent) {
     return LazyExpressionElementValue(
-      () => LessThanExpression(
+      () => LessThanNumberExpression(
             ConstantExpression(Integer(0)),
             LengthFunctionExpression(
               DelegateExpression(
@@ -46,5 +47,4 @@ class RequiredValidation extends Validation {
           ),
     );
   }
-
 }

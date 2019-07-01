@@ -24,13 +24,25 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitEqualDateTime(EqualDateTimeExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
   void visitEqualNumber(EqualNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
   }
 
   @override
-  void visitDivision(DivisionExpression expression) {
+  void visitDivision(DivisionNumberExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitIntegerDivisionNumber(IntegerDivisionNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
   }
@@ -42,13 +54,31 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitEqualDuration(EqualDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
   void visitNotEqualBool(NotEqualBoolExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
   }
 
   @override
+  void visitNotEqualDuration(NotEqualDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
   void visitNotEqualNumber(NotEqualNumberExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitNotEqualDateTime(NotEqualDateTimeExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
   }
@@ -65,13 +95,39 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitLessThan(LessThanExpression expression) {
+  void visitLessThanNumber(LessThanNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
   }
 
   @override
-  void visitLessThanOrEqual(LessThanOrEqualExpression expression) {
+  void visitLessThanDuration(LessThanDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitLessThanDateTime(LessThanDateTimeExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitLessThanOrEqualNumber(LessThanOrEqualNumberExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitLessThanOrEqualDuration(
+      LessThanOrEqualDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitLessThanOrEqualDateTime(
+      LessThanOrEqualDateTimeExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
   }
@@ -94,7 +150,7 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitMultiply(MultiplyExpression expression) {
+  void visitMultiply(MultiplyNumberExpression expression) {
     expression.left.accept(this);
     expression.right.accept(this);
   }
@@ -135,6 +191,47 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitDateTimePlusDuration(DateTimePlusDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitDateTimeMinusDuration(DateTimeMinusDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitPlusDuration(PlusDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitMinusDuration(MinusDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitMultiplyDuration(MultiplyDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitDivisionDuration(DivisionDurationExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitNegateDuration(NegateDurationExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
   void visitToStringFunction(ToStringFunctionExpression expression) {
     expression.value.accept(this);
   }
@@ -164,5 +261,51 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   void visitRoundFunction(RoundFunctionExpression expression) {
     expression.value.accept(this);
     expression.precision.accept(this);
+  }
+
+  @override
+  void visitDateTimeFunction(DateTimeFunctionExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
+  void visitDurationFunction(DurationFunctionExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
+  void visitNowFunction(NowFunctionExpression expression) {}
+
+  @override
+  void visitNowInUtcFunction(NowInUtcFunctionExpression expression) {}
+
+  @override
+  void visitDiffDateTimeFunction(DiffDateTimeFunctionExpression expression) {
+    expression.left.accept(this);
+    expression.right.accept(this);
+  }
+
+  @override
+  void visitDurationInDaysFunction(
+      DurationInDaysFunctionExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
+  void visitDurationInHoursFunction(
+      DurationInHoursFunctionExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
+  void visitDurationInMinutesFunction(
+      DurationInMinutesFunctionExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
+  void visitDurationInSecondsFunction(
+      DurationInSecondsFunctionExpression expression) {
+    expression.value.accept(this);
   }
 }

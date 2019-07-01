@@ -26,7 +26,7 @@ DelegateExpression createDelegateExpression(
     return DelegateExpression<List<ExpressionProviderElement>>(
         expressionPath, elementValue);
   }
-  throw UnknownExpressionFactory("Unknown expression factory");
+  throw UnknownExpressionFactoryException("Unknown expression factory");
 }
 
 ConditionalExpression createConditionalExpression(
@@ -78,8 +78,9 @@ Expression createFunctionExpression(
       } else if (parameters[2] is Expression<String>) {
         return RoundFunctionStringRoundingModeExpression(
             parameters[0], parameters[1], parameters[2]);
-      }else{
-        throw InvalidParameter("Function $functionName expects integer or string as third parameter");
+      } else {
+        throw InvalidParameterException(
+            "Function $functionName expects integer or string as third parameter");
       }
     } else if (parameters.length == 2)
       return RoundFunctionExpression(parameters[0], parameters[1]);
@@ -87,5 +88,68 @@ Expression createFunctionExpression(
       throw InvalidParameterCount(
           "Function $functionName expects only 2 or 3 parameters");
   }
-  throw UnknownFunction("Unknown function name $functionName");
+  if (functionName == "dateTime") {
+    if (parameters.length != 1) {
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
+    }
+    return DateTimeFunctionExpression(parameters[0]);
+  }
+  if (functionName == "duration") {
+    if (parameters.length != 1) {
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
+    }
+    return DurationFunctionExpression(parameters[0]);
+  }
+  if (functionName == "now") {
+    if (parameters.length != 0) {
+      throw InvalidParameterCount(
+          "Function $functionName does not expect any parameter");
+    }
+    return NowFunctionExpression();
+  }
+  if (functionName == "nowInUtc") {
+    if (parameters.length != 0) {
+      throw InvalidParameterCount(
+          "Function $functionName does not expect any parameter");
+    }
+    return NowInUtcFunctionExpression();
+  }
+  if (functionName == "diffDateTime") {
+    if (parameters.length != 2) {
+      throw InvalidParameterCount(
+          "Function $functionName expects only 2 parameters");
+    }
+    return DiffDateTimeFunctionExpression(parameters[0], parameters[1]);
+  }
+  if (functionName == "durationInDays") {
+    if (parameters.length != 1) {
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
+    }
+    return DurationInDaysFunctionExpression(parameters[0]);
+  }
+  if (functionName == "durationInHours") {
+    if (parameters.length != 1) {
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
+    }
+    return DurationInHoursFunctionExpression(parameters[0]);
+  }
+  if (functionName == "durationInMinutes") {
+    if (parameters.length != 1) {
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
+    }
+    return DurationInMinutesFunctionExpression(parameters[0]);
+  }
+  if (functionName == "durationInSeconds") {
+    if (parameters.length != 1) {
+      throw InvalidParameterCount(
+          "Function $functionName expects only 1 parameter");
+    }
+    return DurationInSecondsFunctionExpression(parameters[0]);
+  }
+  throw UnknownFunctionException("Unknown function name $functionName");
 }
