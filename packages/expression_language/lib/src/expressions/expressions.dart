@@ -1,9 +1,3 @@
-library expressions;
-
-import '../visitors/expression_visitor.dart';
-
-import 'package:expression_language/src/number_type/decimal.dart';
-
 export 'expression_provider.dart';
 export 'package:expression_language/src/parser/expression_parser_exceptions.dart';
 export './mutable_expression.dart';
@@ -52,17 +46,5 @@ export './less_than_number.dart';
 export './less_than_or_equal_datetime.dart';
 export './less_than_or_equal_duration.dart';
 export './less_than_or_equal_number.dart';
-
-abstract class Expression<T> {
-  T evaluate();
-  void accept(ExpressionVisitor visitor);
-  Type getType() => T;
-}
-
-Type getTypeOfNumberExpression(Type left, Type right) {
-  if (left != right) {
-    //One of them has to be decimal => whole expr is decimal
-    return Decimal;
-  }
-  return left;
-}
+export './utils.dart';
+export './expression_base.dart';
