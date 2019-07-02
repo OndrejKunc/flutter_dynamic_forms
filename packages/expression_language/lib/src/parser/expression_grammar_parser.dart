@@ -198,19 +198,19 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
           }
         } else if (item[0].value == "!=") {
           if ((left is Expression<Number>) && (right is Expression<Number>)) {
-            left = NotEqualNumberExpression(left, right);
+            left = NegateBoolExpression(EqualNumberExpression(left, right));
           } else if ((left is Expression<bool>) &&
               (right is Expression<bool>)) {
-            left = NotEqualBoolExpression(left, right);
+            left = NegateBoolExpression(EqualBoolExpression(left, right));
           } else if ((left is Expression<String>) &&
               (right is Expression<String>)) {
-            left = NotEqualStringExpression(left, right);
+            left = NegateBoolExpression(EqualStringExpression(left, right));
           } else if ((left is Expression<DateTime>) &&
               (right is Expression<DateTime>)) {
-            left = NotEqualDateTimeExpression(left, right);
+            left = NegateBoolExpression(EqualDateTimeExpression(left, right));
           } else if ((left is Expression<Duration>) &&
               (right is Expression<Duration>)) {
-            left = NotEqualDurationExpression(left, right);
+            left = NegateBoolExpression(EqualDurationExpression(left, right));
           } else
             throw UnknownExpressionTypeException(
                 "Unknown equality expression type");

@@ -121,51 +121,6 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitNotEqualBool(NotEqualBoolExpression expression) {
-    expression.left.accept(this);
-    expression.right.accept(this);
-    var right = pop();
-    var left = pop();
-    push(NotEqualBoolExpression(left, right));
-  }
-
-  @override
-  void visitNotEqualDuration(NotEqualDurationExpression expression) {
-    expression.left.accept(this);
-    expression.right.accept(this);
-    var right = pop();
-    var left = pop();
-    push(NotEqualDurationExpression(left, right));
-  }
-
-  @override
-  void visitNotEqualNumber(NotEqualNumberExpression expression) {
-    expression.left.accept(this);
-    expression.right.accept(this);
-    var right = pop();
-    var left = pop();
-    push(NotEqualNumberExpression(left, right));
-  }
-
-  @override
-  void visitNotEqualString(NotEqualStringExpression expression) {
-    expression.left.accept(this);
-    expression.right.accept(this);
-    var right = pop();
-    var left = pop();
-    push(NotEqualStringExpression(left, right));
-  }
-
-  @override
-  void visitNotEqualDateTime(NotEqualDateTimeExpression expression) {
-    expression.left.accept(this);
-    expression.right.accept(this);
-    var right = pop();
-    var left = pop();
-    push(NotEqualDateTimeExpression(left, right));
-  }
-
-  @override
   void visitLengthFunction(LengthFunctionExpression expression) {
     expression.value.accept(this);
     push(LengthFunctionExpression(pop()));

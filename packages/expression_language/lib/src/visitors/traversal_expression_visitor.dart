@@ -60,36 +60,6 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitNotEqualBool(NotEqualBoolExpression expression) {
-    expression.left.accept(this);
-    expression.right.accept(this);
-  }
-
-  @override
-  void visitNotEqualDuration(NotEqualDurationExpression expression) {
-    expression.left.accept(this);
-    expression.right.accept(this);
-  }
-
-  @override
-  void visitNotEqualNumber(NotEqualNumberExpression expression) {
-    expression.left.accept(this);
-    expression.right.accept(this);
-  }
-
-  @override
-  void visitNotEqualDateTime(NotEqualDateTimeExpression expression) {
-    expression.left.accept(this);
-    expression.right.accept(this);
-  }
-
-  @override
-  void visitNotEqualString(NotEqualStringExpression expression) {
-    expression.left.accept(this);
-    expression.right.accept(this);
-  }
-
-  @override
   void visitLengthFunction(LengthFunctionExpression expression) {
     expression.value.accept(this);
   }
