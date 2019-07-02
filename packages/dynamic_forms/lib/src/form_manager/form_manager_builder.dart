@@ -13,20 +13,20 @@ class FormManagerBuilder {
   FormManagerBuilder(this.formParserService);
 
   FormManager build(String xml) {
-    var form = formParserService.parse(xml);
+    var root = formParserService.parse(xml);
 
     var formElementMap = Map<String, FormElement>.fromIterable(
-        getFormElementIterator<FormElement>(form),
+        getFormElementIterator<FormElement>(root),
         key: (x) => x.id,
         value: (x) => x);
     var expressionGrammarDefinition = ExpressionGrammarParser(formElementMap);
     var parser = expressionGrammarDefinition.build();
-    _buildStringExpressions(form, parser);
-    return _build(form, formElementMap);
+    _buildStringExpressions(root, parser);
+    return _build(root, formElementMap);
   }
 
-  FormManager buildFromForm(Form form) {
-    var clonedForm = form.clone(null);
+  FormManager buildFromForm(FormElement root) {
+    var clonedForm = root.clone(null);
     var formElementMap = Map<String, FormElement>.fromIterable(
         getFormElementIterator<FormElement>(clonedForm),
         key: (x) => x.id,
@@ -35,24 +35,25 @@ class FormManagerBuilder {
     return _build(clonedForm, formElementMap);
   }
 
-  FormManager _build(Form form, Map<String, FormElement> formElementMap) {
-    buildElementsSubscriptionDependencies(form);
+  FormManager _build(
+      FormElement root, Map<String, FormElement> formElementMap) {
+    _buildElementsSubscriptionDependencies(root);
 
     var formValidations = Map<String, Validation>.fromIterable(
-        getFormElementIterator<Validation>(form),
+        getFormElementIterator<Validation>(root),
         key: (x) => x.id,
         value: (x) => x);
 
     var formPrimitiveMutableValues =
-        getFormElementValueIterator<PrimitiveMutableElementValue>(form)
+        getFormElementValueIterator<PrimitiveMutableElementValue>(root)
             .toList();
 
     return FormManager(
-        form, formElementMap, formValidations, formPrimitiveMutableValues);
+        root, formElementMap, formValidations, formPrimitiveMutableValues);
   }
 
   void _buildCloneableExpressions(
-      Form form, Map<String, FormElement> expressionProviderElementMap) {
+      FormElement form, Map<String, FormElement> expressionProviderElementMap) {
     var formElementExpressions =
         getFormElementValueIterator<CloneableExpressionElementValue>(form);
 
@@ -61,17 +62,17 @@ class FormManagerBuilder {
     }
   }
 
-  void _buildStringExpressions(Form form, Parser parser) {
+  void _buildStringExpressions(FormElement root, Parser parser) {
     var formElementExpressions =
-        getFormElementValueIterator<StringExpressionElementValue>(form);
+        getFormElementValueIterator<StringExpressionElementValue>(root);
 
     for (var expressionValue in formElementExpressions) {
       expressionValue.buildExpression(parser);
     }
   }
 
-  void buildElementsSubscriptionDependencies(Form form) {
-    var formElementValues = getFormElementValueIterator<ElementValue>(form);
+  void _buildElementsSubscriptionDependencies(FormElement root) {
+    var formElementValues = getFormElementValueIterator<ElementValue>(root);
 
     for (var elementValue in formElementValues) {
       var elementsValuesCollectorVisitor = ExpressionProviderCollectorVisitor();
