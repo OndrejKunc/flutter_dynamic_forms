@@ -1,8 +1,9 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:meta/meta.dart';
-import 'property_names.dart';
 
 class Container extends FormElement {
+  final String CHILDREN_PROPERTY_NAME = "children";
+
   List<FormElement> get children => properties[CHILDREN_PROPERTY_NAME].value;
   Stream get childrenChanged => properties[CHILDREN_PROPERTY_NAME].valueChanged;
 

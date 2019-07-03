@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:dynamic_forms/src/form_elements/property_names.dart';
 import 'package:expression_language/expression_language.dart';
 import 'package:meta/meta.dart';
 import 'package:uuid/uuid.dart';
