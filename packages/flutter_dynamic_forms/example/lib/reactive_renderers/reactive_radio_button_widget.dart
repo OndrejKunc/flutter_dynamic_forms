@@ -16,17 +16,17 @@ class ReactiveRadioButtonRenderer
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: StreamBuilder<String>(
-        initialData: parent.value.value,
-        stream: parent.value.valueChanged,
+        initialData: parent.value,
+        stream: parent.valueChanged,
         builder: (context, parentValue) {
           return StreamBuilder<String>(
-            initialData: element.value.value,
-            stream: element.value.valueChanged,
+            initialData: element.value,
+            stream: element.valueChanged,
             builder: (context, buttonValue) {
               return RadioListTile(
                 title: StreamBuilder<String>(
-                    initialData: element.label.value,
-                    stream: element.label.valueChanged,
+                    initialData: element.label,
+                    stream: element.labelChanged,
                     builder: (context, labelValue) {
                       return Text(labelValue.data);
                     }),

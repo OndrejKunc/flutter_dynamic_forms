@@ -14,6 +14,7 @@ abstract class FormElement implements ExpressionProviderElement {
   String id;
   ElementValue<FormElement> get parent => properties[PARENT_PROPERTY_NAME];
   ElementValue<bool> get isVisible => properties[IS_VISIBLE_PROPERTY_NAME];
+  set isVisible(ElementValue<bool> value) => properties[IS_VISIBLE_PROPERTY_NAME] = value;
   @protected
   Map<String, ElementValue> properties = {};
 

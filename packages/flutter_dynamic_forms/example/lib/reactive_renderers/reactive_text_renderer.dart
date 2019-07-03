@@ -56,23 +56,23 @@ class _TextWidgetState extends State<TextWidget> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<model.Validation>>(
-      initialData: widget.text.validations.value,
-      stream: widget.text.validations.valueChanged,
+      initialData: widget.text.validations,
+      stream: widget.text.validationsChanged,
       builder: (context, validations) {
         return StreamBuilder<String>(
-          initialData: widget.text.value.value,
-          stream: widget.text.value.valueChanged,
+          initialData: widget.text.value,
+          stream: widget.text.valueChanged,
           builder: (context, textValue) {
             return StreamBuilder<String>(
-              initialData: widget.text.label.value,
-              stream: widget.text.label.valueChanged,
+              initialData: widget.text.label,
+              stream: widget.text.labelChanged,
               builder: (context, labelValue) {
                 return StreamBuilder<String>(
-                  initialData: widget.text.textInputType?.value ?? "text",
-                  stream: widget.text.textInputType?.valueChanged,
+                  initialData: widget.text?.textInputType ?? "text",
+                  stream: widget.text?.textInputTypeChanged,
                   builder: (context, inputType) {
                     var validation = validations.data.firstWhere(
-                        (v) => !v.isValid.value,
+                        (v) => !v.isValid,
                         orElse: () => null);
                     if (_controller.text != textValue.data) {
                       _controller.text = textValue.data;
@@ -82,7 +82,7 @@ class _TextWidgetState extends State<TextWidget> {
                       child: TextField(
                         decoration: InputDecoration(
                             labelText: labelValue.data,
-                            errorText: validation?.message?.value),
+                            errorText: validation?.message),
                         keyboardType: getTextInputType(inputType.data),
                         controller: _controller,
                       ),

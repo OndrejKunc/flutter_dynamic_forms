@@ -11,7 +11,7 @@ class FormRenderer extends FormElementRenderer<model.Form> {
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
     List<Widget> childrenWidgets = [];
-    for (var child in element.children.value) {
+    for (var child in element.children) {
       if ((child as model.FormElement).isVisible.value) {
         childrenWidgets.add(renderer(child, context));
       }

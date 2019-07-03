@@ -14,6 +14,11 @@ class TransitionFormElement extends FormElement {
       ExpressionProvider<ExpressionProviderElement> parent) {
     return TransitionFormElement(this.child.clone(parent), this.transitionType);
   }
+
+  @override
+  FormElement getInstance() {
+    return TransitionFormElement(child,transitionType);
+  }
 }
 
 enum FormElementTransitionType {

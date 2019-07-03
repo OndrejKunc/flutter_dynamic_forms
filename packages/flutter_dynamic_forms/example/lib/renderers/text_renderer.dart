@@ -55,20 +55,20 @@ class _TextWidgetState extends State<TextWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var validation = widget.text.validations.value
-        .firstWhere((v) => !v.isValid.value, orElse: () => null);
+    var validation = widget.text.validations
+        .firstWhere((v) => !v.isValid, orElse: () => null);
 
-    if (_controller.text != widget.text.value.value) {
-      _controller.text = widget.text.value.value;
+    if (_controller.text != widget.text.value) {
+      _controller.text = widget.text.value;
     }
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
         decoration: InputDecoration(
-            labelText: widget.text.label.value,
-            errorText: validation?.message?.value),
-        keyboardType: getTextInputType(widget.text.textInputType?.value),
+            labelText: widget.text.label,
+            errorText: validation?.message),
+        keyboardType: getTextInputType(widget.text?.textInputType),
         controller: _controller,
       ),
     );

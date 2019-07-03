@@ -15,9 +15,9 @@ class RadioButtonRenderer extends FormElementRenderer<model.RadioButton> {
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: RadioListTile(
-          title: Text(element.label.value),
-          value: element.value.value,
-          groupValue: parent.value.value,
+          title: Text(element.label),
+          value: element.value,
+          groupValue: parent.value,
           onChanged: (String value) => dispatcher(ChangeValueEvent(
               value, parent.id, model.SELECTED_VALUE_PROPERTY)),
         ));

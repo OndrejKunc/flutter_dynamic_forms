@@ -12,13 +12,13 @@ class ReactiveDropdownButtonRenderer
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
     return StreamBuilder<String>(
-      initialData: element.value.value,
-      stream: element.value.valueChanged,
+      initialData: element.value,
+      stream: element.valueChanged,
       builder: (context, dropDownValue) {
         return Center(
           child: StreamBuilder<List<model.DropdownOption>>(
-            initialData: element.options.value,
-            stream: element.options.valueChanged,
+            initialData: element.options,
+            stream: element.optionsChanged,
             builder: (context, options) {
               return StreamBuilder(
                 stream: Observable.merge(
@@ -34,8 +34,8 @@ class ReactiveDropdownButtonRenderer
                         .map<DropdownMenuItem<String>>(
                             (model.DropdownOption option) {
                       return DropdownMenuItem<String>(
-                        value: option.value.value,
-                        child: Text(option.label.value),
+                        value: option.value,
+                        child: Text(option.label),
                       );
                     }).toList(),
                   );

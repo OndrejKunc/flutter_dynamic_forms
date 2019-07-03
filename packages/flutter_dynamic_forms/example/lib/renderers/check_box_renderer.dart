@@ -17,11 +17,11 @@ class CheckBoxRenderer extends FormElementRenderer<model.CheckBox> {
           Checkbox(
             onChanged: (value) =>
                 dispatcher(ChangeValueEvent(value, element.id)),
-            value: element.value.value,
+            value: element.value,
           ),
           Padding(
             padding: EdgeInsets.only(left: 8),
-            child: Text(element.label.value),
+            child: Text(element.label),
           )
         ],
       ),

@@ -11,14 +11,14 @@ class DropdownButtonRenderer extends FormElementRenderer<model.DropdownButton> {
       FormElementRendererFunction renderer) {
     return Center(
       child: DropdownButton<String>(
-        value: element.value.value,
+        value: element.value,
         onChanged: (String newValue) => dispatcher(ChangeValueEvent(
             newValue, element.id, model.SELECTED_VALUE_PROPERTY)),
-        items: element.options.value
+        items: element.options
             .map<DropdownMenuItem<String>>((model.DropdownOption option) {
           return DropdownMenuItem<String>(
-            value: option.value.value,
-            child: Text(option.label.value),
+            value: option.value,
+            child: Text(option.label),
           );
         }).toList(),
       ),

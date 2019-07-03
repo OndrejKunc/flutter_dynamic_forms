@@ -28,8 +28,8 @@ class TransitionFormBuilder {
 
   void addTransitionElementsToFormGroup(
       FormGroup oldFormGroup, FormGroup resultFormGroup) {
-    var oldList = oldFormGroup.children.value;
-    var resultList = resultFormGroup.children.value;
+    var oldList = oldFormGroup.children;
+    var resultList = resultFormGroup.children;
     var resultListCopy = List.from(resultList);
 
     int indexOfPrevious = 0;
@@ -43,7 +43,6 @@ class TransitionFormBuilder {
       if (itemInResultList == null) {
         resultList.insert(indexOfPrevious + addedElements,
             TransitionFormElement(formElement, FormElementTransitionType.hide));
-        addedElements++;
       } else {
         indexOfPrevious = i;
       }
