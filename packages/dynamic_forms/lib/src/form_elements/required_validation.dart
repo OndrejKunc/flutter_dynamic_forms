@@ -38,4 +38,15 @@ class RequiredValidation extends Validation {
   FormElement getInstance() {
     return RequiredValidation();
   }
+
+  @override
+  ElementValue cloneProperty(
+      String key,
+      ElementValue oldProperty,
+      ExpressionProvider<ExpressionProviderElement> parent,
+      ExpressionProviderElement instance) {
+    return (key == IS_VALID_PROPERTY_NAME)
+        ? getIsValid(parent)
+        : super.cloneProperty(key, oldProperty, parent, instance);
+  }
 }

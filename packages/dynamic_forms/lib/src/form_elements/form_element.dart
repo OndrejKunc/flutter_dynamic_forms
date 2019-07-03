@@ -13,7 +13,8 @@ abstract class FormElement implements ExpressionProviderElement {
   String id;
   ElementValue<FormElement> get parent => properties[PARENT_PROPERTY_NAME];
   ElementValue<bool> get isVisible => properties[IS_VISIBLE_PROPERTY_NAME];
-  set isVisible(ElementValue<bool> value) => properties[IS_VISIBLE_PROPERTY_NAME] = value;
+  set isVisible(ElementValue<bool> value) =>
+      properties[IS_VISIBLE_PROPERTY_NAME] = value;
   @protected
   Map<String, ElementValue> properties = {};
 
@@ -56,14 +57,19 @@ abstract class FormElement implements ExpressionProviderElement {
       ExpressionProviderElement instance,
       ExpressionProvider<ExpressionProviderElement> parent) {
     var formElementProperties = formElement.getProperties();
-    formElementProperties.forEach((k, v) {
-      if (v is List) properties[k] = cloneChildren(v, instance);
-      if ((this is RequiredValidation) && (k == IS_VALID_PROPERTY_NAME))
-        properties[k] = (this as RequiredValidation).getIsValid(parent);
-      else
-        properties[k] = v.clone();
-    });
+    formElementProperties.forEach(
+        (k, v) => properties[k] = cloneProperty(k, v, parent, instance));
   }
+
+  @protected
+  ElementValue cloneProperty(
+          String key,
+          ElementValue oldProperty,
+          ExpressionProvider<ExpressionProviderElement> parent,
+          ExpressionProviderElement instance) =>
+      (oldProperty is List)
+          ? cloneChildren(oldProperty, instance)
+          : oldProperty.clone();
 
   ExpressionProvider getExpressionProvider([String propertyName]) =>
       getElementValue(propertyName);
