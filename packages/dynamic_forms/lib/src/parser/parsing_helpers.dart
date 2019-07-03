@@ -65,6 +65,9 @@ ElementValue<List<TFormElement>> getChildren<TFormElement extends FormElement>(X
         .toList(), isImmutable);
 
 ElementValue<FormElement> getParentValue(FormElement parent) {
+  if (parent == null){
+    return null;
+  }
   return PrimitiveImmutableElementValue(parent);
 }
 

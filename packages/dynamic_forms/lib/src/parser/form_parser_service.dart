@@ -15,7 +15,7 @@ class FormParserService {
         Map.fromIterable(_parsers, key: (p) => p.name, value: (p) => p);
   }
 
-  Form parse(String formString) {
+  FormElement parse(String formString) {
     var document = xml.parse(formString);
     document.accept(RemoveBlankElementsVisitor());
     document.accept(TrimElementsVisitor());

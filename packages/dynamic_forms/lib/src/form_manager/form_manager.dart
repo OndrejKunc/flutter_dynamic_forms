@@ -2,14 +2,11 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/form_elements/form_elements.dart';
 import 'package:dynamic_forms/src/form_manager/form_item_value.dart';
 import 'package:dynamic_forms/src/iterators/form_element_iterator.dart';
-import 'package:dynamic_forms/src/iterators/form_element_value_iterator.dart';
 import 'package:expression_language/expression_language.dart';
 
 class FormManager {
-  Form form;
-
+  FormElement form;
   Map<String, FormElement> formElementMap;
-
   Map<String, Validation> formValidations;
 
   List<PrimitiveMutableElementValue> primitiveMutableValues;
@@ -63,15 +60,5 @@ class FormManager {
     mutableValue.setValue(value);
 
     return;
-  }
-
-  void _buildCloneableExpressions(
-      Form form, Map<String, FormElement> expressionProviderElementMap) {
-    var formElementExpressions =
-        getFormElementValueIterator<CloneableExpressionElementValue>(form);
-
-    for (var expressionValue in formElementExpressions) {
-      expressionValue.buildExpression(expressionProviderElementMap);
-    }
   }
 }
