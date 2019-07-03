@@ -1,6 +1,5 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/form_elements/form_group.dart';
-import 'package:expression_language/expression_language.dart';
 import 'package:meta/meta.dart';
 
 class Form extends FormGroup {
@@ -18,15 +17,7 @@ class Form extends FormGroup {
   }
 
   @override
-  ExpressionProviderElement clone(
-      ExpressionProvider<ExpressionProviderElement> parent) {
-    var result = Form();
-    result.fillForm(
-      id: this.id,
-      isVisible: this.isVisible.clone(),
-      children: cloneChildren(children, result),
-      name: this.name.clone(),
-    );
-    return result;
+  FormElement getInstance() {
+    return Form();
   }
 }

@@ -1,11 +1,13 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/form_elements/form_element.dart';
-import 'package:expression_language/expression_language.dart';
 import 'package:meta/meta.dart';
+import 'property_names.dart';
 
 class CheckBox extends FormElement {
-  ElementValue<bool> value;
-  ElementValue<String> label;
+  bool get value => properties[VALUE_PROPERTY_NAME].value;
+  Stream get valueChanged => properties[VALUE_PROPERTY_NAME].valueChanged;
+  String get label => properties[LABEL_PROPERTY_NAME].value;
+  Stream get labelChanged => properties[LABEL_PROPERTY_NAME].valueChanged;
 
   void fillCheckBox({
     @required String id,
@@ -15,21 +17,12 @@ class CheckBox extends FormElement {
     @required ElementValue<String> label,
   }) {
     fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    this.value = registerElementValue("value", value);
-    this.label = registerElementValue("label", label);
+    registerElementValue(VALUE_PROPERTY_NAME, value);
+    registerElementValue(LABEL_PROPERTY_NAME, label);
   }
 
   @override
-  ExpressionProviderElement clone(
-      ExpressionProvider<ExpressionProviderElement> parent) {
-    var result = CheckBox();
-    result.fillCheckBox(
-      id: this.id,
-      parent: parent,
-      isVisible: this.isVisible.clone(),
-      label: this.label.clone(),
-      value: this.value.clone(),
-    );
-    return result;
+  FormElement getInstance() {
+    return CheckBox();
   }
 }

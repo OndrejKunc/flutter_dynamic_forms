@@ -1,0 +1,9 @@
+final String VALUE_PROPERTY_NAME = "value";
+final String LABEL_PROPERTY_NAME = "label";
+final String CHILDREN_PROPERTY_NAME = "children";
+final String RADIO_BUTTONS_PROPERTY_NAME = "radioButtons";
+final OPTIONS_PROPERTY_NAME = "options";
+final IS_VALID_PROPERTY_NAME = "isValid";
+final MESSAGE_PROPERTY_NAME = "message";
+final TEXT_INPUT_TYPE_PROPERTY_NAME = "textInputType";
+final VALIDATIONS_PROPERTY_NAME = "validations";

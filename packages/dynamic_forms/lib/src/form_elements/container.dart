@@ -1,10 +1,10 @@
-
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:expression_language/expression_language.dart';
 import 'package:meta/meta.dart';
+import 'property_names.dart';
 
 class Container extends FormElement {
-  ElementValue<List<FormElement>> children;
+  List<FormElement> get children => properties[CHILDREN_PROPERTY_NAME].value;
+  Stream get childrenChanged => properties[CHILDREN_PROPERTY_NAME].valueChanged;
 
   void fillContainer(
       {@required String id,
@@ -12,18 +12,11 @@ class Container extends FormElement {
       @required ElementValue<bool> isVisible,
       @required ElementValue<List<FormElement>> children}) {
     fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    this.children = registerElementValue("children", children);
+    registerElementValue(CHILDREN_PROPERTY_NAME, children);
   }
 
   @override
-  ExpressionProviderElement clone(ExpressionProvider<ExpressionProviderElement> parent) {
-    var result = Container();
-    result.fillContainer(
-      id: this.id,
-      parent: parent,
-      isVisible: this.isVisible.clone(),
-      children: cloneChildren(children, result),
-    );
-    return result;
+  FormElement getInstance() {
+    return Container();
   }
 }

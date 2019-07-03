@@ -1,12 +1,14 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/form_elements/form_element.dart';
-import 'package:expression_language/expression_language.dart';
 import 'package:meta/meta.dart';
+import 'property_names.dart';
 
 class Validation extends FormElement {
-  ElementValue<bool> isValid;
-  ElementValue<String> message;
-
+  bool get isValid => properties[IS_VALID_PROPERTY_NAME].value;
+  Stream get isValidChanged => properties[IS_VALID_PROPERTY_NAME].valueChanged;
+  String get message => properties[MESSAGE_PROPERTY_NAME].value;
+  Stream get messageChanged => properties[MESSAGE_PROPERTY_NAME].valueChanged;
+  
   void fillValidation({
     @required String id,
     @required ElementValue<FormElement> parent,
@@ -15,21 +17,12 @@ class Validation extends FormElement {
     @required ElementValue<String> message,
   }) {
     fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    this.isValid = registerElementValue("isValid", isValid);
-    this.message = registerElementValue("message", message);
+    registerElementValue(IS_VALID_PROPERTY_NAME, isValid);
+    registerElementValue(MESSAGE_PROPERTY_NAME, message);
   }
 
   @override
-  ExpressionProviderElement clone(
-      ExpressionProvider<ExpressionProviderElement> parent) {
-    var result = Validation();
-    result.fillValidation(
-      id: this.id,
-      parent: parent,
-      isVisible: this.isVisible.clone(),
-      isValid: this.isValid.clone(),
-      message: this.message.clone(),
-    );
-    return result;
+  FormElement getInstance() {
+    return Validation();
   }
 }

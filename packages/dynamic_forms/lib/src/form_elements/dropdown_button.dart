@@ -1,12 +1,14 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/form_elements/dropdown_option.dart';
 import 'package:dynamic_forms/src/form_elements/form_element.dart';
-import 'package:expression_language/expression_language.dart';
 import 'package:meta/meta.dart';
+import 'property_names.dart';
 
 class DropdownButton extends FormElement {
-  ElementValue<List<DropdownOption>> options;
-  ElementValue<String> value;
+  List<DropdownOption> get options => properties[OPTIONS_PROPERTY_NAME].value;
+  Stream get optionsChanged => properties[OPTIONS_PROPERTY_NAME].valueChanged;
+  String get value => properties[VALUE_PROPERTY_NAME].value;
+  Stream get valueChanged => properties[VALUE_PROPERTY_NAME].valueChanged;
 
   void fillDropdownButton({
     @required String id,
@@ -16,21 +18,12 @@ class DropdownButton extends FormElement {
     @required ElementValue<String> value,
   }) {
     fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    this.options = registerElementValue("options", options);
-    this.value = registerElementValue("value", value);
+    registerElementValue(OPTIONS_PROPERTY_NAME, options);
+    registerElementValue(VALUE_PROPERTY_NAME, value);
   }
 
   @override
-  ExpressionProviderElement clone(
-      ExpressionProvider<ExpressionProviderElement> parent) {
-    var result = DropdownButton();
-    result.fillDropdownButton(
-      id: this.id,
-      parent: parent,
-      isVisible: this.isVisible.clone(),
-      options: cloneChildren(this.options, result),
-      value: this.value.clone(),
-    );
-    return result;
+  FormElement getInstance() {
+    return DropdownButton();
   }
 }
