@@ -4,8 +4,8 @@ import 'package:dynamic_forms/src/form_elements/form_element.dart';
 import 'package:meta/meta.dart';
 
 class DropdownButton extends FormElement {
-final OPTIONS_PROPERTY_NAME = "options";
-final String VALUE_PROPERTY_NAME = "value";
+  static const OPTIONS_PROPERTY_NAME = "options";
+  static const String VALUE_PROPERTY_NAME = "value";
 
   List<DropdownOption> get options => properties[OPTIONS_PROPERTY_NAME].value;
   Stream get optionsChanged => properties[OPTIONS_PROPERTY_NAME].valueChanged;

@@ -4,10 +4,10 @@ import 'package:dynamic_forms/src/form_elements/validation.dart';
 import 'package:meta/meta.dart';
 
 class Text extends FormElement {
-  final String VALUE_PROPERTY_NAME = "value";
-  final String LABEL_PROPERTY_NAME = "label";
-  final TEXT_INPUT_TYPE_PROPERTY_NAME = "textInputType";
-  final VALIDATIONS_PROPERTY_NAME = "validations";
+  static const String VALUE_PROPERTY_NAME = "value";
+  static const String LABEL_PROPERTY_NAME = "label";
+  static const TEXT_INPUT_TYPE_PROPERTY_NAME = "textInputType";
+  static const VALIDATIONS_PROPERTY_NAME = "validations";
 
   String get label => properties[LABEL_PROPERTY_NAME].value;
   Stream get labelChanged => properties[LABEL_PROPERTY_NAME].valueChanged;

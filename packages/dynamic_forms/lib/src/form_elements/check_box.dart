@@ -3,8 +3,8 @@ import 'package:dynamic_forms/src/form_elements/form_element.dart';
 import 'package:meta/meta.dart';
 
 class CheckBox extends FormElement {
-  final String VALUE_PROPERTY_NAME = "value";
-  final String LABEL_PROPERTY_NAME = "label";
+  static const String VALUE_PROPERTY_NAME = "value";
+  static const String LABEL_PROPERTY_NAME = "label";
 
   bool get value => properties[VALUE_PROPERTY_NAME].value;
   Stream get valueChanged => properties[VALUE_PROPERTY_NAME].valueChanged;

@@ -4,8 +4,8 @@ import 'package:dynamic_forms/src/form_elements/radio_button.dart';
 import 'package:meta/meta.dart';
 
 class RadioButtonGroup extends FormElement {
-  final String VALUE_PROPERTY_NAME = "value";
-  final String RADIO_BUTTONS_PROPERTY_NAME = "radioButtons";
+  static const String VALUE_PROPERTY_NAME = "value";
+  static const String RADIO_BUTTONS_PROPERTY_NAME = "radioButtons";
 
   String get value => properties[VALUE_PROPERTY_NAME].value;
   Stream get valueChanged => properties[VALUE_PROPERTY_NAME].valueChanged;

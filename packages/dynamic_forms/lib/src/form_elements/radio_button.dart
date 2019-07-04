@@ -3,8 +3,8 @@ import 'package:dynamic_forms/src/form_elements/form_element.dart';
 import 'package:meta/meta.dart';
 
 class RadioButton extends FormElement {
-  final String VALUE_PROPERTY_NAME = "value";
-  final String LABEL_PROPERTY_NAME = "label";
+  static const String VALUE_PROPERTY_NAME = "value";
+  static const String LABEL_PROPERTY_NAME = "label";
 
   String get label => properties[LABEL_PROPERTY_NAME].value;
   Stream get labelChanged => properties[LABEL_PROPERTY_NAME].valueChanged;
