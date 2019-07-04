@@ -20,4 +20,8 @@ class PrimitiveImmutableElementValue<T> extends ElementValue<T> {
   ElementValue<T> clone() {
     return PrimitiveImmutableElementValue(_value);
   }
+
+  PrimitiveImmutableElementValue<T> cloneWithValue(T value){
+    return PrimitiveImmutableElementValue(value);
+  }
 }

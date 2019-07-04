@@ -47,18 +47,18 @@ abstract class FormElement implements ExpressionProviderElement {
       ExpressionProvider<ExpressionProviderElement> parent) {
     var result = getInstance();
     result.id = id;
+    result.registerElementValue(PARENT_PROPERTY_NAME, parent as ElementValue);
     result._fillFromDictionary(this, result, parent);
+
     return result;
   }
 
-  void _fillFromDictionary(
-      FormElement formElement,
-      ExpressionProviderElement instance,
+  void _fillFromDictionary(FormElement oldFormElement, FormElement instance,
       ExpressionProvider<ExpressionProviderElement> parent) {
-    var formElementProperties = Map.from(formElement.getProperties())
+    var formElementProperties = Map.from(oldFormElement.getProperties())
       ..removeWhere((k, v) => k == PARENT_PROPERTY_NAME);
-    formElementProperties.forEach(
-        (k, v) => properties[k] = cloneProperty(k, v, parent, instance));
+    formElementProperties.forEach((k, v) =>
+        instance.properties[k] = cloneProperty(k, v, parent, instance));
   }
 
   @protected
@@ -67,7 +67,7 @@ abstract class FormElement implements ExpressionProviderElement {
       ElementValue oldProperty,
       ExpressionProvider<ExpressionProviderElement> parent,
       ExpressionProviderElement instance) {
-    if (oldProperty is List) {
+    if (oldProperty is ElementValue<List<FormElement>>) {
       return cloneChildren(oldProperty, instance);
     }
     if (oldProperty is ElementValue<ExpressionProviderElement>) {
@@ -92,16 +92,16 @@ abstract class FormElement implements ExpressionProviderElement {
 
   Map<String, ElementValue> getProperties() => properties;
 
-  ElementValue<List<T>> cloneChildren<T extends FormElement>(
-      ElementValue<List<T>> children, ExpressionProviderElement parent) {
-    var childrenElements = children.value;
-    var childrenCopy = List<T>.from(
-      childrenElements.map(
-        (c) => c.clone(
-              getParentValue(parent),
-            ),
-      ),
-    );
-    return PrimitiveImmutableElementValue<List<T>>(childrenCopy);
+  ElementValue cloneChildren(
+      ElementValue<List> children, ExpressionProviderElement parent) {
+    var childrenElements = children.value.toList();
+    for (var i = 0; i < childrenElements.length; i++) {
+      childrenElements[i] = childrenElements[i].clone(getParentValue(parent));
+    }
+    if (children is PrimitiveImmutableElementValue){
+      return (children as PrimitiveImmutableElementValue).cloneWithValue(childrenElements);
+    }
+
+    return PrimitiveImmutableElementValue(childrenElements);
   }
 }
