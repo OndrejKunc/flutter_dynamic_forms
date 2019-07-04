@@ -7,11 +7,16 @@ const String SELECTED_VALUE_PROPERTY = "value";
 
 abstract class FormElement implements ExpressionProviderElement {
   static const String DEFAULT_PROPERTY_NAME = "value";
+  static const String PARENT_PROPERTY_NAME = "parent";
+  static const String IS_VISIBLE_PROPERTY_NAME = "isVisible";
 
   String id;
-  ElementValue<FormElement> parent;
-  Map<String, ElementValue> _properties = {};
-  ElementValue<bool> isVisible;
+  ElementValue<FormElement> get parent => properties[PARENT_PROPERTY_NAME];
+  ElementValue<bool> get isVisible => properties[IS_VISIBLE_PROPERTY_NAME];
+  set isVisible(ElementValue<bool> value) =>
+      properties[IS_VISIBLE_PROPERTY_NAME] = value;
+  @protected
+  Map<String, ElementValue> properties = {};
 
   static Uuid uuid = new Uuid();
 
@@ -20,9 +25,11 @@ abstract class FormElement implements ExpressionProviderElement {
       @required ElementValue<FormElement> parent,
       @required ElementValue<bool> isVisible}) {
     this.id = id;
-    this.isVisible = registerElementValue("isVisible", isVisible);
-    this.parent = registerElementValue("parent", parent);
+    registerElementValue(IS_VISIBLE_PROPERTY_NAME, isVisible);
+    registerElementValue(PARENT_PROPERTY_NAME, parent);
   }
+
+  FormElement getInstance();
 
   ElementValue getElementValue([String propertyName]) {
     if (propertyName == null) {
@@ -35,6 +42,35 @@ abstract class FormElement implements ExpressionProviderElement {
     throw Exception("Can't get expressions for $propertyName");
   }
 
+  @override
+  ExpressionProviderElement clone(
+      ExpressionProvider<ExpressionProviderElement> parent) {
+    var result = getInstance();
+    result._fillFromDictionary(this, result, parent);
+    result.fillFormElement(
+        id: this.id, parent: parent, isVisible: this.isVisible);
+    return result;
+  }
+
+  void _fillFromDictionary(
+      FormElement formElement,
+      ExpressionProviderElement instance,
+      ExpressionProvider<ExpressionProviderElement> parent) {
+    var formElementProperties = formElement.getProperties();
+    formElementProperties.forEach(
+        (k, v) => properties[k] = cloneProperty(k, v, parent, instance));
+  }
+
+  @protected
+  ElementValue cloneProperty(
+          String key,
+          ElementValue oldProperty,
+          ExpressionProvider<ExpressionProviderElement> parent,
+          ExpressionProviderElement instance) =>
+      (oldProperty is List)
+          ? cloneChildren(oldProperty, instance)
+          : oldProperty.clone();
+
   ExpressionProvider getExpressionProvider([String propertyName]) =>
       getElementValue(propertyName);
 
@@ -43,11 +79,11 @@ abstract class FormElement implements ExpressionProviderElement {
     if (elementValue == null) {
       return null;
     }
-    _properties[name] = elementValue;
+    properties[name] = elementValue;
     return elementValue;
   }
 
-  Map<String, ElementValue> getProperties() => _properties;
+  Map<String, ElementValue> getProperties() => properties;
 
   ElementValue<List<T>> cloneChildren<T extends FormElement>(
       ElementValue<List<T>> children, ExpressionProviderElement parent) {

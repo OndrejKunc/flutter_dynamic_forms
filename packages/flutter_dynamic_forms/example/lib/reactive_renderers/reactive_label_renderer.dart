@@ -13,8 +13,8 @@ class ReactiveLabelRenderer extends FormElementRenderer<model.Label> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: StreamBuilder<String>(
-            initialData: element.value.value,
-            stream: element.value.valueChanged,
+            initialData: element.value,
+            stream: element.valueChanged,
             builder: (context, snapshot) {
               return Text(snapshot.data);
             }),

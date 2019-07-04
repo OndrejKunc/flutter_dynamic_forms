@@ -11,7 +11,7 @@ class DynamicFormState {
 
   final List<FormItemValue> resultItemValues;
 
-  bool get isEmpty => form.children.value.length == 0;
+  bool get isEmpty => form.children.length == 0;
 
   DynamicFormState(
       {this.form,

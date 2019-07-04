@@ -15,8 +15,8 @@ class ReactiveCheckBoxRenderer extends FormElementRenderer<model.CheckBox> {
       child: Row(
         children: <Widget>[
           StreamBuilder<bool>(
-            initialData: element.value.value,
-            stream: element.value.valueChanged,
+            initialData: element.value,
+            stream: element.valueChanged,
             builder: (context, snapshot) {
               return Checkbox(
                 onChanged: (value) =>
@@ -28,8 +28,8 @@ class ReactiveCheckBoxRenderer extends FormElementRenderer<model.CheckBox> {
           Padding(
             padding: EdgeInsets.only(left: 8),
             child: StreamBuilder<String>(
-              initialData: element.label.value,
-              stream: element.label.valueChanged,
+              initialData: element.label,
+              stream: element.labelChanged,
               builder: (context, snapshot) {
                 return Text(snapshot.data);
               },

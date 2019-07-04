@@ -187,8 +187,7 @@ void main() {
     var formElementExpressions =
         getFormElementValueIterator<ExpressionElementValue>(result);
 
-    var expressionGrammarDefinition =
-        ExpressionGrammarParser(formElementMap);
+    var expressionGrammarDefinition = ExpressionGrammarParser(formElementMap);
     var parser = expressionGrammarDefinition.build();
 
     for (var expressionValue in formElementExpressions) {
@@ -198,7 +197,7 @@ void main() {
     }
 
     var label2 = formElementMap["label2"] as Label;
-    var resultValue = label2.value.value;
+    var resultValue = label2.value;
 
     expect(resultValue, "Welcome John Doe!");
   });
@@ -224,7 +223,7 @@ void main() {
       </form>''';
 
     var result = parserService.parse(xml);
-    
+
     var formElementMap = Map<String, FormElement>.fromIterable(
         getFormElementIterator<FormElement>(result),
         key: (x) => x.id,
@@ -233,8 +232,7 @@ void main() {
     var formElementExpressions =
         getFormElementValueIterator<ExpressionElementValue>(result);
 
-    var expressionGrammarDefinition =
-        ExpressionGrammarParser(formElementMap);
+    var expressionGrammarDefinition = ExpressionGrammarParser(formElementMap);
     var parser = expressionGrammarDefinition.build();
 
     for (var expressionValue in formElementExpressions) {
@@ -256,7 +254,7 @@ void main() {
 
     var label2 = formElementMap["label2"] as Label;
 
-    expect(label2.value.value, "Welcome John Doe!");
+    expect(label2.value, "Welcome John Doe!");
   });
 
   test('form manager test', () {
@@ -306,7 +304,14 @@ class TestFormElement extends FormElement {
       };
 
   @override
-  ExpressionProviderElement clone(ExpressionProvider<ExpressionProviderElement> parent) {
+  ExpressionProviderElement clone(
+      ExpressionProvider<ExpressionProviderElement> parent) {
+    //Nothing to do
+    return null;
+  }
+
+  @override
+  FormElement getInstance() {
     //Nothing to do
     return null;
   }

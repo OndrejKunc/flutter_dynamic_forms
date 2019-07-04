@@ -1,14 +1,25 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/form_elements/form_element.dart';
 import 'package:dynamic_forms/src/form_elements/validation.dart';
-import 'package:expression_language/expression_language.dart';
 import 'package:meta/meta.dart';
 
 class Text extends FormElement {
-  ElementValue<String> value;
-  ElementValue<String> label;
-  ElementValue<String> textInputType;
-  ElementValue<List<Validation>> validations;
+  final String VALUE_PROPERTY_NAME = "value";
+  final String LABEL_PROPERTY_NAME = "label";
+  final TEXT_INPUT_TYPE_PROPERTY_NAME = "textInputType";
+  final VALIDATIONS_PROPERTY_NAME = "validations";
+
+  String get label => properties[LABEL_PROPERTY_NAME].value;
+  Stream get labelChanged => properties[LABEL_PROPERTY_NAME].valueChanged;
+  String get value => properties[VALUE_PROPERTY_NAME].value;
+  Stream get valueChanged => properties[VALUE_PROPERTY_NAME].valueChanged;
+  String get textInputType => properties[TEXT_INPUT_TYPE_PROPERTY_NAME].value;
+  Stream get textInputTypeChanged =>
+      properties[TEXT_INPUT_TYPE_PROPERTY_NAME].valueChanged;
+  List<Validation> get validations =>
+      properties[VALIDATIONS_PROPERTY_NAME].value;
+  Stream get validationsChanged =>
+      properties[VALIDATIONS_PROPERTY_NAME].valueChanged;
 
   void fillText({
     @required String id,
@@ -20,25 +31,14 @@ class Text extends FormElement {
     @required ElementValue<List<Validation>> validations,
   }) {
     fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    this.value = registerElementValue("value", value);
-    this.label = registerElementValue("label", label);
-    this.textInputType = registerElementValue("textInputType", textInputType);
-    this.validations = registerElementValue("validations", validations);
+    registerElementValue(VALUE_PROPERTY_NAME, value);
+    registerElementValue(LABEL_PROPERTY_NAME, label);
+    registerElementValue(TEXT_INPUT_TYPE_PROPERTY_NAME, textInputType);
+    registerElementValue(VALIDATIONS_PROPERTY_NAME, validations);
   }
 
   @override
-  ExpressionProviderElement clone(
-      ExpressionProvider<ExpressionProviderElement> parent) {
-    var result = Text();
-    result.fillText(
-      id: this.id,
-      parent: parent,
-      isVisible: this.isVisible.clone(),
-      value: this.value.clone(),
-      label: this.label.clone(),
-      textInputType: this.textInputType.clone(),
-      validations: cloneChildren<Validation>(this.validations, result),
-    );
-    return result;
+  FormElement getInstance() {
+    return Text();
   }
 }

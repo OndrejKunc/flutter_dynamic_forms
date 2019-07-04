@@ -12,7 +12,7 @@ class LabelRenderer extends FormElementRenderer<model.Label> {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text(element.value.value),
+        child: Text(element.value),
       ),
     );
   }

@@ -15,7 +15,7 @@ class FormManager {
       this.primitiveMutableValues);
 
   bool get isFormValid {
-    return formValidations.values.every((v) => (v.isValid.value));
+    return formValidations.values.every((v) => (v.isValid));
   }
 
   List<FormItemValue> getFormData() {

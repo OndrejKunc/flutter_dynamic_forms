@@ -1,12 +1,18 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/form_elements/form_element.dart';
 import 'package:dynamic_forms/src/form_elements/radio_button.dart';
-import 'package:expression_language/expression_language.dart';
 import 'package:meta/meta.dart';
 
 class RadioButtonGroup extends FormElement {
-  ElementValue<String> value;
-  ElementValue<List<RadioButton>> radioButtons;
+  final String VALUE_PROPERTY_NAME = "value";
+  final String RADIO_BUTTONS_PROPERTY_NAME = "radioButtons";
+
+  String get value => properties[VALUE_PROPERTY_NAME].value;
+  Stream get valueChanged => properties[VALUE_PROPERTY_NAME].valueChanged;
+  List<RadioButton> get radioButtons =>
+      properties[RADIO_BUTTONS_PROPERTY_NAME].value;
+  Stream get radioButtonsChanged =>
+      properties[RADIO_BUTTONS_PROPERTY_NAME].valueChanged;
 
   void fillRadioButtonGroup({
     @required String id,
@@ -16,21 +22,12 @@ class RadioButtonGroup extends FormElement {
     @required ElementValue<String> value,
   }) {
     fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    this.radioButtons = registerElementValue("radioButtons", radioButtons);
-    this.value = registerElementValue("value", value);
+    registerElementValue(RADIO_BUTTONS_PROPERTY_NAME, radioButtons);
+    registerElementValue(VALUE_PROPERTY_NAME, value);
   }
 
   @override
-  ExpressionProviderElement clone(
-      ExpressionProvider<ExpressionProviderElement> parent) {
-    var result = RadioButtonGroup();
-    result.fillRadioButtonGroup(
-      id: this.id,
-      parent: parent,
-      isVisible: this.isVisible.clone(),
-      radioButtons: cloneChildren(this.radioButtons, result),
-      value: this.value.clone(),
-    );
-    return result;
+  FormElement getInstance() {
+    return RadioButtonGroup();
   }
 }

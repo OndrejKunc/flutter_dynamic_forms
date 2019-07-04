@@ -12,8 +12,8 @@ class ReactiveFormRenderer extends FormElementRenderer<model.Form> {
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
     return StreamBuilder<List<ExpressionProviderElement>>(
-      initialData: element.children.value,
-      stream: element.children.valueChanged,
+      initialData: element.children,
+      stream: element.childrenChanged,
       builder: (context, snapshot) {
         return StreamBuilder(
           stream: Observable.merge(

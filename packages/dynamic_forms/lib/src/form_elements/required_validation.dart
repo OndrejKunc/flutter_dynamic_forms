@@ -19,20 +19,6 @@ class RequiredValidation extends Validation {
     );
   }
 
-  @override
-  ExpressionProviderElement clone(
-      ExpressionProvider<ExpressionProviderElement> parent) {
-    var result = RequiredValidation();
-    result.fillValidation(
-      id: this.id,
-      parent: parent,
-      isVisible: this.isVisible.clone(),
-      isValid: getIsValid(parent),
-      message: this.message.clone(),
-    );
-    return result;
-  }
-
   LazyExpressionElementValue<bool> getIsValid(
       ElementValue<ExpressionProviderElement> parent) {
     return LazyExpressionElementValue(
@@ -46,5 +32,21 @@ class RequiredValidation extends Validation {
             ),
           ),
     );
+  }
+
+  @override
+  FormElement getInstance() {
+    return RequiredValidation();
+  }
+
+  @override
+  ElementValue cloneProperty(
+      String key,
+      ElementValue oldProperty,
+      ExpressionProvider<ExpressionProviderElement> parent,
+      ExpressionProviderElement instance) {
+    return (key == IS_VALID_PROPERTY_NAME)
+        ? getIsValid(parent)
+        : super.cloneProperty(key, oldProperty, parent, instance);
   }
 }

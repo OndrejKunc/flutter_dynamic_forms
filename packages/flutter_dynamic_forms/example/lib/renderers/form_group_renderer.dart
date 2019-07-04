@@ -14,12 +14,12 @@ class FormGroupRenderer extends FormElementRenderer<model.FormGroup> {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          element.name.value,
+          element.name,
           style: TextStyle(color: Colors.grey),
         ),
       )
     ];
-    for (var child in element.children.value) {
+    for (var child in element.children) {
       if ((child as model.FormElement).isVisible.value) {
         childrenWidgets.add(renderer(child, context));
       }
