@@ -46,9 +46,8 @@ abstract class FormElement implements ExpressionProviderElement {
   ExpressionProviderElement clone(
       ExpressionProvider<ExpressionProviderElement> parent) {
     var result = getInstance();
+    result.id = id;
     result._fillFromDictionary(this, result, parent);
-    result.fillFormElement(
-        id: this.id, parent: parent, isVisible: this.isVisible);
     return result;
   }
 
@@ -56,20 +55,28 @@ abstract class FormElement implements ExpressionProviderElement {
       FormElement formElement,
       ExpressionProviderElement instance,
       ExpressionProvider<ExpressionProviderElement> parent) {
-    var formElementProperties = formElement.getProperties();
+    var formElementProperties = Map.from(formElement.getProperties())
+      ..removeWhere((k, v) => k == PARENT_PROPERTY_NAME);
     formElementProperties.forEach(
         (k, v) => properties[k] = cloneProperty(k, v, parent, instance));
   }
 
   @protected
   ElementValue cloneProperty(
-          String key,
-          ElementValue oldProperty,
-          ExpressionProvider<ExpressionProviderElement> parent,
-          ExpressionProviderElement instance) =>
-      (oldProperty is List)
-          ? cloneChildren(oldProperty, instance)
-          : oldProperty.clone();
+      String key,
+      ElementValue oldProperty,
+      ExpressionProvider<ExpressionProviderElement> parent,
+      ExpressionProviderElement instance) {
+    if (oldProperty is List) {
+      return cloneChildren(oldProperty, instance);
+    }
+    if (oldProperty is ElementValue<ExpressionProviderElement>) {
+      return PrimitiveImmutableElementValue(
+          oldProperty.value.clone(getParentValue(instance)));
+    } else {
+      return oldProperty.clone();
+    }
+  }
 
   ExpressionProvider getExpressionProvider([String propertyName]) =>
       getElementValue(propertyName);
