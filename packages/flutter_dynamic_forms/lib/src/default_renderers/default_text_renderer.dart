@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
-class TextRenderer extends FormElementRenderer<model.Text> {
+class DefaultTextRenderer extends FormElementRenderer<model.Text> {
   @override
   Widget render(
       model.Text element,
@@ -66,8 +66,7 @@ class _TextWidgetState extends State<TextWidget> {
       padding: const EdgeInsets.all(8.0),
       child: TextField(
         decoration: InputDecoration(
-            labelText: widget.text.label,
-            errorText: validation?.message),
+            labelText: widget.text.label, errorText: validation?.message),
         keyboardType: getTextInputType(widget.text?.textInputType),
         controller: _controller,
       ),

@@ -2,7 +2,8 @@ import 'package:dynamic_forms/dynamic_forms.dart' as model;
 import 'package:flutter/material.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
-class DropdownButtonRenderer extends FormElementRenderer<model.DropdownButton> {
+class DefaultDropdownButtonRenderer
+    extends FormElementRenderer<model.DropdownButton> {
   @override
   Widget render(
       model.DropdownButton element,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
-class CheckBoxRenderer extends FormElementRenderer<model.CheckBox> {
+class DefaultCheckBoxRenderer extends FormElementRenderer<model.CheckBox> {
   @override
   Widget render(
       model.CheckBox element,

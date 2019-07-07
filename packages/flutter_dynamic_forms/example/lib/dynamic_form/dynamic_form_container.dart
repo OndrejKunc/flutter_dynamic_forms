@@ -1,14 +1,6 @@
 import 'package:example/dynamic_form/dynamic_form_bloc.dart';
 import 'package:example/dynamic_form/dynamic_form_event.dart';
 import 'package:example/dynamic_form/dynamic_form_state.dart';
-import 'package:example/renderers/check_box_renderer.dart';
-import 'package:example/renderers/dropdown_button_renderer.dart';
-import 'package:example/renderers/form_group_renderer.dart';
-import 'package:example/renderers/form_renderer.dart';
-import 'package:example/renderers/label_renderer.dart';
-import 'package:example/renderers/radio_button_group_renderer.dart';
-import 'package:example/renderers/radio_button_widget.dart';
-import 'package:example/renderers/text_renderer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
@@ -26,14 +18,14 @@ class _DynamicFormContainerState extends State<DynamicFormContainer> {
     super.initState();
     _formRenderService = FormRenderService(
       renderers: [
-        FormRenderer(),
-        FormGroupRenderer(),
-        CheckBoxRenderer(),
-        LabelRenderer(),
-        TextRenderer(),
-        RadioButtonGroupRenderer(),
-        RadioButtonRenderer(),
-        DropdownButtonRenderer()
+        DefaultFormRenderer(),
+        DefaultFormGroupRenderer(),
+        DefaultCheckBoxRenderer(),
+        DefaultLabelRenderer(),
+        DefaultTextRenderer(),
+        DefaultRadioButtonGroupRenderer(),
+        DefaultRadioButtonRenderer(),
+        DefaultDropdownButtonRenderer()
       ],
       dispatcher: BlocProvider.of<DynamicFormBloc>(context).dispatch,
     );
