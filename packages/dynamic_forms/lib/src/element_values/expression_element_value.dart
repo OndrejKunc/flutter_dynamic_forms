@@ -12,7 +12,7 @@ abstract class ExpressionElementValue<T> extends ElementValue<T> {
     T oldValue = _cachedValue;
     _cachedValue = getExpression().evaluate();
     if (_cachedValue != oldValue) {
-      behaviorSubject?.add(_cachedValue);
+      valueChangedSubject?.add(_cachedValue);
       notifySubscribers();
     }
     return _cachedValue;

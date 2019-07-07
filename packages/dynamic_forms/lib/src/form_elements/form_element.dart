@@ -1,6 +1,7 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:expression_language/expression_language.dart';
 import 'package:meta/meta.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:uuid/uuid.dart';
 
 const String SELECTED_VALUE_PROPERTY = "value";
@@ -30,6 +31,32 @@ abstract class FormElement implements ExpressionProviderElement {
   }
 
   FormElement getInstance();
+
+  Stream<String> get propertyChanged {
+    if (_propertyChanged == null) {
+      _propertyChanged = _getPropertyChanged();
+    }
+    return _propertyChanged;
+  }
+
+  Stream<String> _propertyChanged;
+
+  Stream<String> _getPropertyChanged() {
+    var keyStreams = List<Stream<String>>();
+    properties.forEach((k, v) {
+      if (v is ElementValue<List<FormElement>>) {
+        for (var element in v.value) {
+          keyStreams.add(element.propertyChanged.map((_) => k));
+        }
+      }
+      if (v is ElementValue<FormElement>) {
+        keyStreams.add(v.value.propertyChanged.map((_) => k));
+      } else {
+        keyStreams.add(v.valueChanged.map((_) => k));
+      }
+    });
+    return Observable.merge(keyStreams);
+  }
 
   ElementValue getElementValue([String propertyName]) {
     if (propertyName == null) {
@@ -98,8 +125,9 @@ abstract class FormElement implements ExpressionProviderElement {
     for (var i = 0; i < childrenElements.length; i++) {
       childrenElements[i] = childrenElements[i].clone(getParentValue(parent));
     }
-    if (children is PrimitiveImmutableElementValue){
-      return (children as PrimitiveImmutableElementValue).cloneWithValue(childrenElements);
+    if (children is PrimitiveImmutableElementValue) {
+      return (children as PrimitiveImmutableElementValue)
+          .cloneWithValue(childrenElements);
     }
 
     return PrimitiveImmutableElementValue(childrenElements);
