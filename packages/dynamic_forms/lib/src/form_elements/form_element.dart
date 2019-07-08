@@ -44,16 +44,7 @@ abstract class FormElement implements ExpressionProviderElement {
   Stream<String> _getPropertyChanged() {
     var keyStreams = List<Stream<String>>();
     properties.forEach((k, v) {
-      if (v is ElementValue<List<FormElement>>) {
-        for (var element in v.value) {
-          keyStreams.add(element.propertyChanged.map((_) => k));
-        }
-      }
-      if (v is ElementValue<FormElement>) {
-        keyStreams.add(v.value.propertyChanged.map((_) => k));
-      } else {
-        keyStreams.add(v.valueChanged.map((_) => k));
-      }
+      keyStreams.add(v.valueChanged.map((_) => k));
     });
     return Observable.merge(keyStreams);
   }
