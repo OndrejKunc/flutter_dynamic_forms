@@ -19,17 +19,10 @@ class _TransitionFormContainerState extends State<TransitionFormContainer> {
   void initState() {
     super.initState();
     _formRenderService = FormRenderService(
-      renderers: [
-        DefaultFormRenderer(),
-        DefaultFormGroupRenderer(),
-        DefaultCheckBoxRenderer(),
-        DefaultLabelRenderer(),
-        DefaultTextRenderer(),
-        DefaultRadioButtonGroupRenderer(),
-        DefaultRadioButtonRenderer(),
-        DefaultDropdownButtonRenderer(),
-        TransitionFormElementRenderer(),
-      ],
+      renderers: getDefaultRenderers()
+        ..addAll([
+          TransitionFormElementRenderer(),
+        ]),
       dispatcher: BlocProvider.of<TransitionFormBloc>(context).dispatch,
     );
     BlocProvider.of<TransitionFormBloc>(context).dispatch(LoadFormEvent(1));

@@ -17,16 +17,7 @@ class _DynamicFormContainerState extends State<DynamicFormContainer> {
   void initState() {
     super.initState();
     _formRenderService = FormRenderService(
-      renderers: [
-        DefaultFormRenderer(),
-        DefaultFormGroupRenderer(),
-        DefaultCheckBoxRenderer(),
-        DefaultLabelRenderer(),
-        DefaultTextRenderer(),
-        DefaultRadioButtonGroupRenderer(),
-        DefaultRadioButtonRenderer(),
-        DefaultDropdownButtonRenderer()
-      ],
+      renderers: getDefaultRenderers(),
       dispatcher: BlocProvider.of<DynamicFormBloc>(context).dispatch,
     );
     BlocProvider.of<DynamicFormBloc>(context).dispatch(LoadFormEvent());
