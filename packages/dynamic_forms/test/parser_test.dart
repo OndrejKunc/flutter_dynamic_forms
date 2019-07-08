@@ -202,6 +202,36 @@ void main() {
     expect(resultValue, "Welcome John Doe!");
   });
 
+  
+  test('xml with HTML value', () {
+    var parserService = FormParserService(getDefaultParserList());
+
+    var xml = '''<?xml version="1.0" encoding="UTF-8"?>
+      <form id="form1">
+          <formGroup id="formgroup1">
+              <label
+                  id="label1">
+                  <label.value>
+                    <![CDATA[
+                      <b>Html help action</b>
+                    ]]>
+                  </label.value>
+              </label>
+          </formGroup>
+      </form>''';
+
+    var result = parserService.parse(xml);
+
+    var formElementMap = Map<String, FormElement>.fromIterable(
+        getFormElementIterator<FormElement>(result),
+        key: (x) => x.id,
+        value: (x) => x);
+    var label1 = formElementMap["label1"] as Label;
+    var resultValue = label1.value;
+
+    expect(resultValue, "<b>Html help action</b>");
+  });
+
   test('xml with changing expressions', () {
     var parserService = FormParserService(getDefaultParserList());
 

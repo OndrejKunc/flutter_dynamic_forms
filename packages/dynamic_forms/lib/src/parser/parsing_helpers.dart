@@ -27,7 +27,7 @@ ElementValue<T> getValue<T>(
   if (elementValue != null) {
     var firstChild = elementValue.firstChild;
     if (firstChild != null) {
-      if (firstChild is XmlText) {
+      if (firstChild is XmlText || firstChild is XmlCDATA) {
         return _createPrimitiveElementValue<T>(
             converter(firstChild.text), isImmutable);
       }
