@@ -97,6 +97,6 @@ ElementValue<String> getStringValue(XmlElement element, String name, {bool isImm
 
 String emptyString() => "";
 String convertToString(String x) => x;
-bool convertToBool(String x) => x == "true";
+bool convertToBool(String x) => x?.toLowerCase() == "true";
 bool defaultFalse() => false;
 bool defaultTrue() => true;
