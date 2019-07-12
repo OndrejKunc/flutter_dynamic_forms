@@ -12,4 +12,4 @@ dependencies:
 dev_dependencies:
   test: ^1.6.3
   test_coverage: ^0.2.3 #Bump to higher version when dart sdk 2.3.0 is available with flutter stable
-  gherkin: ^1.0.3
+  gherkin: ^1.0.4
