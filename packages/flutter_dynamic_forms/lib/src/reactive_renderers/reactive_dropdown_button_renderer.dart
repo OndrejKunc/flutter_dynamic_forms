@@ -11,37 +11,28 @@ class ReactiveDropdownButtonRenderer
       BuildContext context,
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
-    return StreamBuilder<String>(
-      initialData: element.value,
-      stream: element.valueChanged,
-      builder: (context, dropDownValue) {
+    List<Stream> streamsToReact = List<Stream>();
+    streamsToReact.addAll(element.options.map((o) => o.isVisible.valueChanged));
+    streamsToReact.add(element.propertyChanged);
+
+    return LazyStreamBuilder(
+      streamFactory: () => Observable.merge(streamsToReact),
+      builder: (context, _) {
         return Center(
-          child: StreamBuilder<List<model.DropdownOption>>(
-            initialData: element.options,
-            stream: element.optionsChanged,
-            builder: (context, options) {
-              return StreamBuilder(
-                stream: Observable.merge(
-                  options.data.map((child) => child.isVisible.valueChanged),
-                ),
-                builder: (context, _) {
-                  return DropdownButton<String>(
-                    value: dropDownValue.data,
-                    onChanged: (String newValue) => dispatcher(ChangeValueEvent(
-                        newValue, element.id, model.SELECTED_VALUE_PROPERTY)),
-                    items: options.data
-                        .where((d) => d.isVisible.value)
-                        .map<DropdownMenuItem<String>>(
-                            (model.DropdownOption option) {
-                      return DropdownMenuItem<String>(
-                        value: option.value,
-                        child: Text(option.label),
-                      );
-                    }).toList(),
-                  );
-                },
-              );
-            },
+          child: DropdownButton<String>(
+            value: element.value,
+            onChanged: (String newValue) => dispatcher(ChangeValueEvent(
+                newValue, element.id, model.SELECTED_VALUE_PROPERTY)),
+            items: element.options
+                .where((d) => d.isVisible.value)
+                .map<DropdownMenuItem<String>>(
+              (model.DropdownOption option) {
+                return DropdownMenuItem<String>(
+                  value: option.value,
+                  child: Text(option.label),
+                );
+              },
+            ).toList(),
           ),
         );
       },

@@ -1,0 +1,37 @@
+import 'package:flutter/widgets.dart';
+
+typedef StreamFactory<T> = Stream<T> Function();
+
+/// [StreamBuilder] which prevents recreating the stream every
+/// time the build method is called.
+class LazyStreamBuilder<T> extends StatefulWidget {
+  final StreamFactory<T> streamFactory;
+  final AsyncWidgetBuilder<T> builder;
+  final T initialData;
+
+  const LazyStreamBuilder(
+      {Key key, this.streamFactory, this.builder, this.initialData})
+      : super(key: key);
+
+  @override
+  _LazyStreamBuilderState<T> createState() => _LazyStreamBuilderState<T>();
+}
+
+class _LazyStreamBuilderState<T> extends State<LazyStreamBuilder<T>> {
+  Stream<T> _stream;
+
+  @override
+  void initState() {
+    super.initState();
+    _stream = widget.streamFactory();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<T>(
+      builder: widget.builder,
+      stream: _stream,
+      initialData: widget.initialData,
+    );
+  }
+}
