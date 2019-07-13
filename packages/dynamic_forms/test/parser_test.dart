@@ -147,6 +147,50 @@ void main() {
     expect(value, "LabelText");
   });
 
+  test('int expression element value', () {
+    var expressionGrammarDefinition = ExpressionGrammarParser({});
+    var parser = expressionGrammarDefinition.build();
+    var testFormElement = TestFormElement();
+    var stringExpression = testFormElement.getProperties()["intExpression"]
+        as StringExpressionElementValue<int>;
+    stringExpression.buildExpression(parser);
+    var value = stringExpression.evaluate();
+    expect(value, 12);
+  });
+
+  test('integer expression element value', () {
+    var expressionGrammarDefinition = ExpressionGrammarParser({});
+    var parser = expressionGrammarDefinition.build();
+    var testFormElement = TestFormElement();
+    var stringExpression = testFormElement.getProperties()["integerExpression"]
+        as StringExpressionElementValue<Integer>;
+    stringExpression.buildExpression(parser);
+    var value = stringExpression.evaluate();
+    expect(value.toInt(), 11);
+  });
+
+  test('double expression element value', () {
+    var expressionGrammarDefinition = ExpressionGrammarParser({});
+    var parser = expressionGrammarDefinition.build();
+    var testFormElement = TestFormElement();
+    var stringExpression = testFormElement.getProperties()["doubleExpression"]
+        as StringExpressionElementValue<double>;
+    stringExpression.buildExpression(parser);
+    var value = stringExpression.evaluate();
+    expect(value, 9.5);
+  });
+
+  test('decimal expression element value', () {
+    var expressionGrammarDefinition = ExpressionGrammarParser({});
+    var parser = expressionGrammarDefinition.build();
+    var testFormElement = TestFormElement();
+    var stringExpression = testFormElement.getProperties()["decimalExpression"]
+        as StringExpressionElementValue<Decimal>;
+    stringExpression.buildExpression(parser);
+    var value = stringExpression.evaluate();
+    expect(value.toDouble(), 8.5);
+  });
+
   test('function test', () {
     var expressionGrammarDefinition =
         ExpressionGrammarParser({"formId1": TestFormElement()});
@@ -202,7 +246,6 @@ void main() {
     expect(resultValue, "Welcome John Doe!");
   });
 
-  
   test('xml with HTML value', () {
     var parserService = FormParserService(getDefaultParserList());
 
@@ -327,11 +370,17 @@ void main() {
 }
 
 class TestFormElement extends FormElement {
+  Map<String, ElementValue> _properties = {
+    "value": PrimitiveMutableElementValue<Integer>(Integer(27)),
+    "label": PrimitiveMutableElementValue<String>("LabelText"),
+    "intExpression": StringExpressionElementValue<int>("5 + 7"),
+    "integerExpression": StringExpressionElementValue<Integer>("5 + 6"),
+    "doubleExpression": StringExpressionElementValue<double>("5.4 + 4.1"),
+    "decimalExpression": StringExpressionElementValue<Decimal>("5.3 + 3.2"),
+  };
+
   @override
-  Map<String, ElementValue> getProperties() => {
-        "value": PrimitiveMutableElementValue<Integer>(Integer(27)),
-        "label": PrimitiveMutableElementValue<String>("LabelText")
-      };
+  Map<String, ElementValue> get properties => _properties;
 
   @override
   ExpressionProviderElement clone(

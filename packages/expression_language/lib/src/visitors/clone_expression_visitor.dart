@@ -35,6 +35,13 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitConversion<TFrom, TTo extends TFrom>(
+      ConversionExpression<TFrom, TTo> expression) {
+    expression.value.accept(this);
+    push(ConversionExpression<TFrom, TTo>(pop()));
+  }
+
+  @override
   void visitDelegate<T>(DelegateExpression<T> expression) {
     var expressionPath = expression.expressionPath;
     var expressionProviderElement =
@@ -340,9 +347,21 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitIntegerToInt(IntegerToIntExpression expression) {
+    expression.value.accept(this);
+    push(IntegerToIntExpression(pop()));
+  }
+
+  @override
   void visitDoubleToDecimal(DoubleToDecimalExpression expression) {
     expression.value.accept(this);
     push(DoubleToDecimalExpression(pop()));
+  }
+
+  @override
+  void visitDecimalToDouble(DecimalToDoubleExpression expression) {
+    expression.value.accept(this);
+    push(DecimalToDoubleExpression(pop()));
   }
 
   @override

@@ -11,6 +11,12 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitConversion<TFrom, TTo extends TFrom>(
+      ConversionExpression<TFrom, TTo> expression) {
+    expression.value.accept(this);
+  }
+
+  @override
   void visitConditionalExpression<T>(ConditionalExpression<T> expression) {
     expression.condition.accept(this);
     expression.trueValue.accept(this);
@@ -212,7 +218,17 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitIntegerToInt(IntegerToIntExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
   void visitDoubleToDecimal(DoubleToDecimalExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
+  void visitDecimalToDouble(DecimalToDoubleExpression expression) {
     expression.value.accept(this);
   }
 

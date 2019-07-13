@@ -6,6 +6,8 @@ abstract class ExpressionVisitor {
   void visitMutable<T>(MutableExpression<T> expression);
   void visitImmutable<T>(ImmutableExpression<T> expression);
   void visitConstant<T>(ConstantExpression<T> expression);
+  void visitConversion<TFrom, TTo extends TFrom>(
+      ConversionExpression<TFrom, TTo> expression);
   void visitPlusNumber(PlusNumberExpression expression);
   void visitMinusNumber(MinusNumberExpression expression);
   void visitNegateNumber(NegateNumberExpression expression);
@@ -42,7 +44,9 @@ abstract class ExpressionVisitor {
   void visitLengthFunction(LengthFunctionExpression expression);
   void visitToStringFunction(ToStringFunctionExpression expression);
   void visitIntToInteger(IntToIntegerExpression expression);
+  void visitIntegerToInt(IntegerToIntExpression expression);
   void visitDoubleToDecimal(DoubleToDecimalExpression expression);
+  void visitDecimalToDouble(DecimalToDoubleExpression expression);
   void visitListCountFunction<T>(ListCountFunctionExpression<T> expression);
   void visitRoundFunctionIntRoundingMode(
       RoundFunctionIntRoundingModeExpression expression);
