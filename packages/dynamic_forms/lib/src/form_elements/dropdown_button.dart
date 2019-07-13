@@ -8,9 +8,11 @@ class DropdownButton extends FormElement {
   static const String VALUE_PROPERTY_NAME = "value";
 
   List<DropdownOption> get options => properties[OPTIONS_PROPERTY_NAME].value;
-  Stream get optionsChanged => properties[OPTIONS_PROPERTY_NAME].valueChanged;
+  Stream<List<DropdownOption>> get optionsChanged =>
+      properties[OPTIONS_PROPERTY_NAME].valueChanged;
   String get value => properties[VALUE_PROPERTY_NAME].value;
-  Stream get valueChanged => properties[VALUE_PROPERTY_NAME].valueChanged;
+  Stream<String> get valueChanged =>
+      properties[VALUE_PROPERTY_NAME].valueChanged;
 
   void fillDropdownButton({
     @required String id,

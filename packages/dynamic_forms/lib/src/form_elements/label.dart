@@ -5,7 +5,8 @@ import 'package:meta/meta.dart';
 class Label extends FormElement {
   static const String VALUE_PROPERTY_NAME = "value";
   String get value => properties[VALUE_PROPERTY_NAME].value;
-  Stream get valueChanged => properties[VALUE_PROPERTY_NAME].valueChanged;
+  Stream<String> get valueChanged =>
+      properties[VALUE_PROPERTY_NAME].valueChanged;
 
   void fillLabel(
       {@required String id,

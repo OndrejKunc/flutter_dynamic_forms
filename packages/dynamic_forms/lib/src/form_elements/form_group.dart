@@ -6,7 +6,7 @@ class FormGroup extends Container {
   static const String NAME_PROPERTY_NAME = "name";
 
   String get name => properties[NAME_PROPERTY_NAME].value;
-  Stream get nameChanged => properties[NAME_PROPERTY_NAME].valueChanged;
+  Stream<String> get nameChanged => properties[NAME_PROPERTY_NAME].valueChanged;
 
   void fillFormGroup(
       {@required String id,
