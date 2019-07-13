@@ -33,15 +33,21 @@ abstract class ExpressionVisitor {
   void visitLessThanDuration(LessThanDurationExpression expression);
   void visitLessThanDateTime(LessThanDateTimeExpression expression);
   void visitLessThanOrEqualNumber(LessThanOrEqualNumberExpression expression);
-  void visitLessThanOrEqualDuration(LessThanOrEqualDurationExpression expression);
-  void visitLessThanOrEqualDateTime(LessThanOrEqualDateTimeExpression expression);
+  void visitLessThanOrEqualDuration(
+      LessThanOrEqualDurationExpression expression);
+  void visitLessThanOrEqualDateTime(
+      LessThanOrEqualDateTimeExpression expression);
   void visitDelegate<T>(DelegateExpression<T> expression);
   void visitConditionalExpression<T>(ConditionalExpression<T> expression);
   void visitLengthFunction(LengthFunctionExpression expression);
   void visitToStringFunction(ToStringFunctionExpression expression);
+  void visitIntToInteger(IntToIntegerExpression expression);
+  void visitDoubleToDecimal(DoubleToDecimalExpression expression);
   void visitListCountFunction<T>(ListCountFunctionExpression<T> expression);
-  void visitRoundFunctionIntRoundingMode(RoundFunctionIntRoundingModeExpression expression);
-  void visitRoundFunctionStringRoundingMode(RoundFunctionStringRoundingModeExpression expression);
+  void visitRoundFunctionIntRoundingMode(
+      RoundFunctionIntRoundingModeExpression expression);
+  void visitRoundFunctionStringRoundingMode(
+      RoundFunctionStringRoundingModeExpression expression);
   void visitRoundFunction(RoundFunctionExpression expression);
   void visitDateTimeFunction(DateTimeFunctionExpression expression);
   void visitDurationFunction(DurationFunctionExpression expression);
@@ -49,7 +55,10 @@ abstract class ExpressionVisitor {
   void visitNowInUtcFunction(NowInUtcFunctionExpression expression);
   void visitDiffDateTimeFunction(DiffDateTimeFunctionExpression expression);
   void visitDurationInDaysFunction(DurationInDaysFunctionExpression expression);
-  void visitDurationInHoursFunction(DurationInHoursFunctionExpression expression);
-  void visitDurationInMinutesFunction(DurationInMinutesFunctionExpression expression);
-  void visitDurationInSecondsFunction(DurationInSecondsFunctionExpression expression);
+  void visitDurationInHoursFunction(
+      DurationInHoursFunctionExpression expression);
+  void visitDurationInMinutesFunction(
+      DurationInMinutesFunctionExpression expression);
+  void visitDurationInSecondsFunction(
+      DurationInSecondsFunctionExpression expression);
 }

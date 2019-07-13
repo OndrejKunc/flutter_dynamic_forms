@@ -14,6 +14,8 @@ export './delegate_expression.dart';
 export './conditional_expression.dart';
 export './function_expressions/length.dart';
 export './function_expressions/to_string.dart';
+export './function_expressions/int_to_integer.dart';
+export './function_expressions/double_to_decimal.dart';
 export './function_expressions/list_count.dart';
 export './function_expressions/round_int_mode.dart';
 export './function_expressions/round_string_mode.dart';

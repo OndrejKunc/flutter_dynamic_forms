@@ -667,6 +667,16 @@ Feature: Expression
     When expression "length(@testElement.label) - 5" is evaluated
     Then int expression result is "4"
 
+  Scenario: resolve int dependency
+    Given form element is provided
+    When expression "@testElement.intValue - 5" is evaluated
+    Then int expression result is "9"
+
+  Scenario: resolve double dependency
+    Given form element is provided
+    When expression "1.5 + @testElement.doubleValue" is evaluated
+    Then decimal expression result is "8"
+
   Scenario: it should compute -3 when given -5 + 2
     When expression " -5 + 2" is evaluated
     Then int expression result is "-3"

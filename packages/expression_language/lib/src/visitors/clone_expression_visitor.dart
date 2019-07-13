@@ -334,6 +334,18 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitIntToInteger(IntToIntegerExpression expression) {
+    expression.value.accept(this);
+    push(IntToIntegerExpression(pop()));
+  }
+
+  @override
+  void visitDoubleToDecimal(DoubleToDecimalExpression expression) {
+    expression.value.accept(this);
+    push(DoubleToDecimalExpression(pop()));
+  }
+
+  @override
   void visitListCountFunction<T>(ListCountFunctionExpression<T> expression) {
     expression.value.accept(this);
     push(ListCountFunctionExpression(pop()));

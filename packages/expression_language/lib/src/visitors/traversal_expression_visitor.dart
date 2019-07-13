@@ -207,6 +207,16 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitIntToInteger(IntToIntegerExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
+  void visitDoubleToDecimal(DoubleToDecimalExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
   void visitListCountFunction<T>(ListCountFunctionExpression<T> expression) {
     expression.value.accept(this);
   }
