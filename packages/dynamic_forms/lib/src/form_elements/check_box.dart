@@ -7,9 +7,10 @@ class CheckBox extends FormElement {
   static const String LABEL_PROPERTY_NAME = "label";
 
   bool get value => properties[VALUE_PROPERTY_NAME].value;
-  Stream get valueChanged => properties[VALUE_PROPERTY_NAME].valueChanged;
+  Stream<bool> get valueChanged => properties[VALUE_PROPERTY_NAME].valueChanged;
   String get label => properties[LABEL_PROPERTY_NAME].value;
-  Stream get labelChanged => properties[LABEL_PROPERTY_NAME].valueChanged;
+  Stream<String> get labelChanged =>
+      properties[LABEL_PROPERTY_NAME].valueChanged;
 
   void fillCheckBox({
     @required String id,

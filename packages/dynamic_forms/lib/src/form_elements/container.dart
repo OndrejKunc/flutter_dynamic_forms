@@ -5,7 +5,8 @@ class Container extends FormElement {
   static const String CHILDREN_PROPERTY_NAME = "children";
 
   List<FormElement> get children => properties[CHILDREN_PROPERTY_NAME].value;
-  Stream get childrenChanged => properties[CHILDREN_PROPERTY_NAME].valueChanged;
+  Stream<List<FormElement>> get childrenChanged =>
+      properties[CHILDREN_PROPERTY_NAME].valueChanged;
 
   void fillContainer(
       {@required String id,

@@ -10,15 +10,17 @@ class Text extends FormElement {
   static const VALIDATIONS_PROPERTY_NAME = "validations";
 
   String get label => properties[LABEL_PROPERTY_NAME].value;
-  Stream get labelChanged => properties[LABEL_PROPERTY_NAME].valueChanged;
+  Stream<String> get labelChanged =>
+      properties[LABEL_PROPERTY_NAME].valueChanged;
   String get value => properties[VALUE_PROPERTY_NAME].value;
-  Stream get valueChanged => properties[VALUE_PROPERTY_NAME].valueChanged;
+  Stream<String> get valueChanged =>
+      properties[VALUE_PROPERTY_NAME].valueChanged;
   String get textInputType => properties[TEXT_INPUT_TYPE_PROPERTY_NAME].value;
-  Stream get textInputTypeChanged =>
+  Stream<String> get textInputTypeChanged =>
       properties[TEXT_INPUT_TYPE_PROPERTY_NAME].valueChanged;
   List<Validation> get validations =>
       properties[VALIDATIONS_PROPERTY_NAME].value;
-  Stream get validationsChanged =>
+  Stream<List<Validation>> get validationsChanged =>
       properties[VALIDATIONS_PROPERTY_NAME].valueChanged;
 
   void fillText({
