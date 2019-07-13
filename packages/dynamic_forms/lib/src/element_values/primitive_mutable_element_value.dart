@@ -1,4 +1,3 @@
-
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:expression_language/expression_language.dart';
 
@@ -18,7 +17,7 @@ class PrimitiveMutableElementValue<T> extends ElementValue<T> {
     _cachedValue = value;
     expression.value = value;
     if (_cachedValue != oldValue) {
-      behaviorSubject?.add(_cachedValue);
+      valueChangedSubject?.add(_cachedValue);
       notifySubscribers();
     }
   }

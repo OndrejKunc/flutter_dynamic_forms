@@ -17,10 +17,11 @@ class RadioButtonGroup extends FormElement {
 
 
   String get value => properties[VALUE_PROPERTY_NAME].value;
-  Stream get valueChanged => properties[VALUE_PROPERTY_NAME].valueChanged;
+  Stream<String> get valueChanged =>
+      properties[VALUE_PROPERTY_NAME].valueChanged;
   List<RadioButton> get radioButtons =>
       properties[RADIO_BUTTONS_PROPERTY_NAME].value;
-  Stream get radioButtonsChanged =>
+  Stream<List<RadioButton>> get radioButtonsChanged =>
       properties[RADIO_BUTTONS_PROPERTY_NAME].valueChanged;
 
   RadioButtonGroupArrangement get arrangement => properties[ARRANGEMENT_PROPERTY_NAME].value;

@@ -87,5 +87,5 @@
             </dropdownButton>
         </formGroup>
     </formGroup>
-    <address id="testaddress" label="Dorucovaci adresa:" />
+    <address id="testaddress" label="Test address:" />
 </form>

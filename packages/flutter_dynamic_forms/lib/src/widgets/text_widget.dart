@@ -1,30 +1,23 @@
-import 'package:dynamic_forms/dynamic_forms.dart' as model;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
-class TextRenderer extends FormElementRenderer<model.Text> {
-  @override
-  Widget render(
-      model.Text element,
-      BuildContext context,
-      FormElementEventDispatcherFunction dispatcher,
-      FormElementRendererFunction renderer) {
-    return TextWidget(
-      text: element,
-      dispatcher: dispatcher,
-    );
-  }
-}
-
 class TextWidget extends StatefulWidget {
-  final model.Text text;
+  final String id;
+  final String text;
+  final String errorText;
+  final String label;
+  final String textInputType;
   final FormElementEventDispatcherFunction dispatcher;
 
   const TextWidget({
     Key key,
+    this.id,
     this.text,
+    this.label,
     this.dispatcher,
+    this.errorText,
+    this.textInputType,
   }) : super(key: key);
 
   @override
@@ -39,8 +32,8 @@ class _TextWidgetState extends State<TextWidget> {
   @override
   void initState() {
     super.initState();
-    _listener = () =>
-        widget.dispatcher(ChangeValueEvent(_controller.text, widget.text.id));
+    _listener =
+        () => widget.dispatcher(ChangeValueEvent(_controller.text, widget.id));
     _controller.addListener(_listener);
   }
 
@@ -55,20 +48,16 @@ class _TextWidgetState extends State<TextWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var validation = widget.text.validations
-        .firstWhere((v) => !v.isValid, orElse: () => null);
-
-    if (_controller.text != widget.text.value) {
-      _controller.text = widget.text.value;
+    if (_controller.text != widget.text) {
+      _controller.text = widget.text;
     }
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
         decoration: InputDecoration(
-            labelText: widget.text.label,
-            errorText: validation?.message),
-        keyboardType: getTextInputType(widget.text?.textInputType),
+            labelText: widget.label, errorText: widget.errorText),
+        keyboardType: getTextInputType(widget.textInputType),
         controller: _controller,
       ),
     );

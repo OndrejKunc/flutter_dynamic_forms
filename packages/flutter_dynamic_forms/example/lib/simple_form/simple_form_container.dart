@@ -1,12 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:example/reactive_renderers/reactive_check_box_renderer.dart';
-import 'package:example/reactive_renderers/reactive_dropdown_button_renderer.dart';
-import 'package:example/reactive_renderers/reactive_form_group_renderer.dart';
-import 'package:example/reactive_renderers/reactive_form_renderer.dart';
-import 'package:example/reactive_renderers/reactive_label_renderer.dart';
-import 'package:example/reactive_renderers/reactive_radio_button_group_renderer.dart';
-import 'package:example/reactive_renderers/reactive_radio_button_widget.dart';
-import 'package:example/reactive_renderers/reactive_text_renderer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
-class RadioButtonRenderer extends FormElementRenderer<model.RadioButton> {
+class DefaultRadioButtonRenderer
+    extends FormElementRenderer<model.RadioButton> {
   @override
   Widget render(
       model.RadioButton element,
