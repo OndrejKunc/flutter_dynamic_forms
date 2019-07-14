@@ -91,12 +91,13 @@ First you need to create object called `FormManager`. You can put it inside the 
 //Get your XML somewhere, for demo purposes we use local assets
 var xml = await rootBundle.loadString("assets/test_form1.xml");
 
+//For default component set use predefined parser list.
 var formManagerBuilder = FormManagerBuilder(FormParserService(getDefaultParserList()));
 
 //Store the _formManager in your state.
 _formManager = formManagerBuilder.build(xml);
 ```
-The `FormManager` has a getter `form` which is the the object represantation of your xml in Dart. `FormManager` can also perform some useful operation on the form, like manipulating the state of the form when something happens in the UI, validating the form or collecting all the data from the form so it can be for example sent back to the server.
+The `FormManager` has a getter `form` which is the the object representation of your xml in Dart. `FormManager` can also perform some useful operation on the form, like manipulating the state of the form when something happens in the UI, validating the form or collecting all the data from the form so it can be for example sent back to the server.
 
 
 Before you can render your form, you also need to initialize `FormRenderService`. This service gets list of renderers, where each renderer controls how each component would be rendered on the screen:
