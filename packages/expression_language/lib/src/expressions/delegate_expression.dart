@@ -12,8 +12,8 @@ class DelegateExpression<T> extends Expression<T> {
   }
 
   ExpressionProvider<T> getExpressionProvider<T>() {
-    return expressionProvider as ExpressionProvider<
-        T>; //Doesn't work without as, probably compiler error
+    //Doesn't work without as, probably compiler error
+    return expressionProvider as ExpressionProvider<T>;
   }
 
   @override

@@ -3,6 +3,7 @@ export 'package:expression_language/src/parser/expression_parser_exceptions.dart
 export './mutable_expression.dart';
 export './immutable_expression.dart';
 export './constant_expression.dart';
+export './conversion_expression.dart';
 export './plus_number.dart';
 export './plus_string.dart';
 export './minus_number.dart';
@@ -14,6 +15,10 @@ export './delegate_expression.dart';
 export './conditional_expression.dart';
 export './function_expressions/length.dart';
 export './function_expressions/to_string.dart';
+export './function_expressions/int_to_integer.dart';
+export './function_expressions/integer_to_int.dart';
+export './function_expressions/double_to_decimal.dart';
+export './function_expressions/decimal_to_double.dart';
 export './function_expressions/list_count.dart';
 export './function_expressions/round_int_mode.dart';
 export './function_expressions/round_string_mode.dart';

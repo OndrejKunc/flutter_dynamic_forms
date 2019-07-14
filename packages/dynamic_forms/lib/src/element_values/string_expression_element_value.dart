@@ -10,7 +10,25 @@ class StringExpressionElementValue<T> extends ExpressionElementValue<T> {
 
   void buildExpression(Parser parser) {
     var result = parser.parse(_expressionString);
-    _expression = result.value as Expression<T>;
+    var resultExpression = result.value as Expression;
+    if (resultExpression.getType() == Integer &&
+        resultExpression is Expression<Number>) {
+      resultExpression =
+          ConversionExpression<Number, Integer>(resultExpression);
+    } else if (resultExpression.getType() == Decimal &&
+        resultExpression is Expression<Number>) {
+      resultExpression =
+          ConversionExpression<Number, Decimal>(resultExpression);
+    }
+
+    if (T == int && resultExpression is Expression<Integer>) {
+      _expression = IntegerToIntExpression(resultExpression) as Expression<T>;
+    } else if (T == double && resultExpression is Expression<Decimal>) {
+      _expression =
+          DecimalToDoubleExpression(resultExpression) as Expression<T>;
+    } else {
+      _expression = resultExpression as Expression<T>;
+    }
   }
 
   @override

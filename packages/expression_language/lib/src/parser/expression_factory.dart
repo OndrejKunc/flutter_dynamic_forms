@@ -4,10 +4,15 @@ import 'package:expression_language/src/number_type/decimal.dart';
 import 'package:expression_language/src/number_type/integer.dart';
 import 'package:expression_language/src/parser/expression_parser_exceptions.dart';
 
-DelegateExpression createDelegateExpression(
+Expression createDelegateExpression(
     List<String> expressionPath, ExpressionProvider elementValue) {
   if (elementValue is ExpressionProvider<Integer>) {
     return DelegateExpression<Integer>(expressionPath, elementValue);
+  }
+  if (elementValue is ExpressionProvider<int>) {
+    return IntToIntegerExpression(
+      DelegateExpression<int>(expressionPath, elementValue),
+    );
   }
   if (elementValue is ExpressionProvider<bool>) {
     return DelegateExpression<bool>(expressionPath, elementValue);
@@ -17,6 +22,11 @@ DelegateExpression createDelegateExpression(
   }
   if (elementValue is ExpressionProvider<Decimal>) {
     return DelegateExpression<Decimal>(expressionPath, elementValue);
+  }
+  if (elementValue is ExpressionProvider<double>) {
+    return DoubleToDecimalExpression(
+      DelegateExpression<double>(expressionPath, elementValue),
+    );
   }
   if (elementValue is ExpressionProvider<ExpressionProviderElement>) {
     return DelegateExpression<ExpressionProviderElement>(
