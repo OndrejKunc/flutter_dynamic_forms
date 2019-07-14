@@ -81,3 +81,66 @@ See [example project](packages/flutter_dynamic_forms/example) which contains wor
   <br />
   <em>Example output</em>
 </div>
+
+## Simple Usage
+
+This library contains set of predefined components like Text input, Label, CheckBox, RadioButtonGroup etc. To make your app work with those components you need to perform the following steps:
+
+First you need to create object called `FormManager`. You can put it inside the `initState` method in your state of your `StatefulWidget`:
+```dart
+//Get your XML somewhere, for demo purposes we use local assets
+var xml = await rootBundle.loadString("assets/test_form1.xml");
+
+var formManagerBuilder = FormManagerBuilder(FormParserService(getDefaultParserList()));
+
+//Store the _formManager in your state.
+_formManager = formManagerBuilder.build(xml);
+```
+The `FormManager` has a getter `form` which is the the object represantation of your xml in Dart. `FormManager` can also perform some useful operation on the form, like manipulating the state of the form when something happens in the UI, validating the form or collecting all the data from the form so it can be for example sent back to the server.
+
+
+Before you can render your form, you also need to initialize `FormRenderService`. This service gets list of renderers, where each renderer controls how each component would be rendered on the screen:
+```dart
+_formRenderService = FormRenderService(
+    renderers: getReactiveRenderers(),
+    dispatcher: _onFormElementEvent,
+);
+```
+In this example we use set of predefined renderers. The word reactive means that each component will listen to the changes in the form model and will update itself. The dispatcher parameter is the callback method which is sent from the renderers when some action is performed (like checkbox checked). We will delegate this action to our `FormManager`:
+
+```dart
+void _onFormElementEvent(FormElementEvent event) {
+    if (event is ChangeValueEvent) {
+        _formManager.changeValue(
+            event.value, event.formElementId, event.propertyName);
+    }
+}
+```
+Since we are using reactive renderes, we don't need to call `setState()` at the end of this method to re-render our form.
+
+To render your form, you need to pass it to your build method so you must inform the widget that your form is ready to use:
+```dart
+setState(() {
+    _form = _formManager.form;
+});
+```
+
+And finally define the build method:
+
+```dart
+@override
+Widget build(BuildContext context) {
+    if (_form == null) {
+        return Center(
+            child: CircularProgressIndicator(),
+        );
+    }
+    return Center(
+        child: SingleChildScrollView(
+            child: _formRenderService.render(_form, context),
+        ),
+    );
+}
+```
+
+And that's it! Now you can see your form in the action.
