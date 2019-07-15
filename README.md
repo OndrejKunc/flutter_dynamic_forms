@@ -21,18 +21,6 @@ See [example project](packages/flutter_dynamic_forms/example) which contains wor
     <text
         id="firstName"
         label="Enter your first name">
-        <text.validations>
-            <validation
-                message="Name is too long">
-                <validation.isValid>
-                    <expression>
-                        <![CDATA[
-                            length(@firstName) < 15
-                        ]]>
-                    </expression>
-                </validation.isValid>
-            </validation>
-        </text.validations>
     </text>
     <text
         id="lastName"
