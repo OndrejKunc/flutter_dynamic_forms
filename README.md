@@ -72,7 +72,7 @@ See [example project](packages/flutter_dynamic_forms/example) which contains wor
 
 ## Simple Usage
 
-This library contains set of predefined components like Text input, Label, CheckBox, RadioButtonGroup etc. To make your app work with those components you need to perform the following steps:
+This library contains set of predefined components like Text Input, Label, CheckBox, RadioButtonGroup etc. To make your app work with those components you need to perform the following steps:
 
 First you need to create object called `FormManager`. You can put it inside the `initState` method in your state of your `StatefulWidget`:
 ```dart
@@ -85,7 +85,7 @@ var formManagerBuilder = FormManagerBuilder(FormParserService(getDefaultParserLi
 //Store the _formManager in your state.
 _formManager = formManagerBuilder.build(xml);
 ```
-The `FormManager` has a getter `form` which is the the object representation of your xml in Dart. `FormManager` can also perform some useful operation on the form, like manipulating the state of the form when something happens in the UI, validating the form or collecting all the data from the form so it can be for example sent back to the server.
+The `FormManager` has a getter `form` which is the object representation of your xml in Dart. `FormManager` can also perform some useful operation on the form, like manipulating the state of the form when something happens in the UI, validating the form or collecting all the data from the form so it can be for example sent back to the server.
 
 
 Before you can render your form, you also need to initialize `FormRenderService`. This service gets list of renderers, where each renderer controls how each component would be rendered on the screen:
@@ -95,7 +95,7 @@ _formRenderService = FormRenderService(
     dispatcher: _onFormElementEvent,
 );
 ```
-In this example we use set of predefined renderers. The word reactive means that each component will listen to the changes in the form model and will update itself. The dispatcher parameter is the callback method which is sent from the renderers when some action is performed (like checkbox checked). We will delegate this action to our `FormManager`:
+In this example we use set of predefined renderers. The word reactive means that each component will listen to the changes in the form model and will update itself. The `dispatcher` parameter is the callback method which is sent from the renderers when some action is performed (like checkbox checked). We will just delegate this action to our `FormManager`:
 
 ```dart
 void _onFormElementEvent(FormElementEvent event) {
@@ -105,9 +105,9 @@ void _onFormElementEvent(FormElementEvent event) {
     }
 }
 ```
-Since we are using reactive renderes, we don't need to call `setState()` at the end of this method to re-render our form.
+Since we are using reactive renderes, we don't need to call `setState()` at the end of this method to re-render the form. The library itself will ensure that only the right properties of the form elements will be updated according to this change.
 
-To render your form, you need to pass it to your build method so you must inform the widget that your form is ready to use:
+After that you must inform the widget that your form is ready to use:
 ```dart
 setState(() {
     _form = _formManager.form;
