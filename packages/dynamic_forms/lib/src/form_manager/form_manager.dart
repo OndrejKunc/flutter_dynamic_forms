@@ -22,8 +22,6 @@ class FormManager {
     List<FormItemValue> result = List<FormItemValue>();
     var formElements = getFormElementIterator<FormElement>(form).toList();
 
-    print("Form result:");
-
     formElements.forEach((fe) {
       var properties = fe.getProperties();
       properties.forEach((name, propVal) {
@@ -31,7 +29,6 @@ class FormManager {
             !(propVal is ElementValue<ExpressionProviderElement>) &&
             !(propVal is ElementValue<List<ExpressionProviderElement>>)) {
           result.add(FormItemValue(fe.id, name, propVal.value.toString()));
-          print("${fe.id} ${name} ${propVal.value.toString()}");
         }
       });
     });
