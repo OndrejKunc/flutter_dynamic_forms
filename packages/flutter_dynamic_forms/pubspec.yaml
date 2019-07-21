@@ -1,8 +1,8 @@
 name: flutter_dynamic_forms
 description: A flutter project for dynamic forms rendering
 version: 0.0.1
-author:
-homepage:
+author: Ondřej Kunc <kunc.ondrej1@gmail.com>
+homepage: https://github.com/OndrejKunc/flutter_dynamic_forms
 
 environment:
   sdk: ">=2.2.0 <3.0.0"
