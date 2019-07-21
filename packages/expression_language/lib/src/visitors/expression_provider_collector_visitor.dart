@@ -1,4 +1,3 @@
-
 import 'package:expression_language/src/visitors/traversal_expression_visitor.dart';
 import '../../expression_language.dart';
 
@@ -10,4 +9,3 @@ class ExpressionProviderCollectorVisitor extends TraversalExpressionsVisitor {
     expressionProviders.add(expression.getExpressionProvider());
   }
 }
-

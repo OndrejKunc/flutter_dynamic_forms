@@ -56,7 +56,7 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
             }
           }
           if (item[0].value == "-") {
-           if ((left is Expression<Number>) && (right is Expression<Number>)) {
+            if ((left is Expression<Number>) && (right is Expression<Number>)) {
               left = MinusNumberExpression(left, right);
               continue;
             }

@@ -8,23 +8,19 @@ class HookExample extends Hook {
 
   /// Run before any scenario in a test run have executed
   @override
-  Future<void> onBeforeRun(TestConfiguration config) async {
-  }
+  Future<void> onBeforeRun(TestConfiguration config) async {}
 
   /// Run after all scenarios in a test run have completed
   @override
-  Future<void> onAfterRun(TestConfiguration config) async {
-  }
+  Future<void> onAfterRun(TestConfiguration config) async {}
 
   /// Run before a scenario and it steps are executed
   @override
   Future<void> onBeforeScenario(
-      TestConfiguration config, String scenario) async {
-  }
+      TestConfiguration config, String scenario) async {}
 
   /// Run after a scenario has executed
   @override
   Future<void> onAfterScenario(
-      TestConfiguration config, String scenario) async {
-  }
+      TestConfiguration config, String scenario) async {}
 }
