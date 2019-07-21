@@ -7,7 +7,7 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
 
   @override
   void visitDelegate<T>(DelegateExpression<T> expression) {
-    expression.getExpressionProvider<T>().getExpression().accept(this);
+    expression.getExpressionProvider().getExpression().accept(this);
   }
 
   @override

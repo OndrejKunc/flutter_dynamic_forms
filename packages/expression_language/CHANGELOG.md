@@ -1,3 +1,7 @@
+# 0.1.2
+
+Fix small health suggestions.
+
 # 0.1.1
 
 Fix formatting issues.

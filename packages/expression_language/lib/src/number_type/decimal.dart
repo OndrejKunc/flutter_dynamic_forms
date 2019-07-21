@@ -244,13 +244,14 @@ class Decimal extends Number {
     var parts = tempNumber.toString().split('.');
     final String decimalPart = (parts.length == 2) ? parts[1] : "";
 
-    if (decimalPart.length > 0 && decimalPart[0] == '5') {
+    if (decimalPart.isNotEmpty && decimalPart[0] == '5') {
       int lastDigit = int.tryParse(integerPart[integerPart.length - 1]);
       return (lastDigit % 2 == 1)
           ? _roundTowardsZero(precision)
           : _roundFromZero(precision);
-    } else
+    } else {
       return _roundNearestFromZero(precision);
+    }
   }
 
   Number _roundNearestFromZero(int precision) {
@@ -264,7 +265,7 @@ class Decimal extends Number {
     var parts = tempNumber.toString().split('.');
     final String decimalPart = (parts.length == 2) ? parts[1] : "";
 
-    return (decimalPart.length > 0 && decimalPart[0] == '5')
+    return (decimalPart.isNotEmpty && decimalPart[0] == '5')
         ? tempNumber.floor() / multiplier
         : _roundNearestFromZero(precision);
   }
@@ -275,7 +276,7 @@ class Decimal extends Number {
     var parts = tempNumber.toString().split('.');
     final String decimalPart = (parts.length == 2) ? parts[1] : "";
 
-    return (decimalPart.length > 0 && decimalPart[0] == '5')
+    return (decimalPart.isNotEmpty && decimalPart[0] == '5')
         ? tempNumber.ceil() / multiplier
         : _roundNearestFromZero(precision);
   }
