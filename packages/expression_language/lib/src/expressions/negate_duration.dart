@@ -1,6 +1,5 @@
 import 'package:expression_language/expression_language.dart';
 
-
 class NegateDurationExpression extends Expression<Duration> {
   final Expression<Duration> value;
 

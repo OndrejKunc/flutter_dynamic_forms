@@ -211,9 +211,10 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
           } else if ((left is Expression<Duration>) &&
               (right is Expression<Duration>)) {
             left = NegateBoolExpression(EqualDurationExpression(left, right));
-          } else
+          } else {
             throw UnknownExpressionTypeException(
                 "Unknown equality expression type");
+          }
         }
         return left;
       });
@@ -265,9 +266,10 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
               (right is Expression<Duration>)) {
             left = LessThanOrEqualDurationExpression(right, left);
           }
-        } else
+        } else {
           throw UnknownExpressionTypeException(
               "Unknown relational expression type");
+        }
         return left;
       });
 
@@ -276,9 +278,10 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
         String elementId = c[1];
         expressionPath.add(elementId);
         var expressionProviderElement = expressionProviderElementMap[elementId];
-        if (expressionProviderElement == null)
+        if (expressionProviderElement == null) {
           throw NullReferenceException(
               "Reference named {$elementId} does not exist.");
+        }
         ExpressionProvider expressionProvider;
         if (c[2].length == 0) {
           expressionProvider =

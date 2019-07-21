@@ -33,10 +33,11 @@ class Decimal extends Number {
   Decimal _convertToDecimal(Number number) {
     Decimal _other;
 
-    if (number is Integer)
+    if (number is Integer) {
       _other = Decimal.fromInt(number.value);
-    else
+    } else {
       _other = number as Decimal;
+    }
 
     return _other;
   }
@@ -48,8 +49,9 @@ class Decimal extends Number {
 
   @override
   bool operator ==(Object other) {
-    if (other is Integer)
+    if (other is Integer) {
       return (identical(this.toInteger().value, other.value) && isInteger);
+    }
     return (other is Decimal) && (_rational == other._rational);
   }
 
@@ -225,13 +227,14 @@ class Decimal extends Number {
     var parts = tempNumber.toString().split('.');
     final String decimalPart = (parts.length == 2) ? parts[1] : "";
 
-    if (decimalPart.length > 0 && decimalPart[0] == '5') {
+    if (decimalPart.isNotEmpty && decimalPart[0] == '5') {
       int lastDigit = int.tryParse(integerPart[integerPart.length - 1]);
       return (lastDigit % 2 == 0)
           ? _roundTowardsZero(precision)
           : _roundFromZero(precision);
-    } else
+    } else {
       return _roundNearestFromZero(precision);
+    }
   }
 
   Number _roundNearestOdd(int precision) {

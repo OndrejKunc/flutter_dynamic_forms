@@ -10,8 +10,9 @@ class IntegerDivisionNumberExpression extends Expression<Integer> {
   Integer evaluate() {
     Number rightValue = right.evaluate();
     Decimal epsilon = Decimal.parse("1e-15");
-    if (rightValue.abs() < epsilon)
+    if (rightValue.abs() < epsilon) {
       throw DivideByZeroException("Division by zero");
+    }
     return left.evaluate() ~/ right.evaluate();
   }
 

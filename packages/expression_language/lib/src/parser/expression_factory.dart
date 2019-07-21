@@ -92,11 +92,12 @@ Expression createFunctionExpression(
         throw InvalidParameterException(
             "Function $functionName expects integer or string as third parameter");
       }
-    } else if (parameters.length == 2)
+    } else if (parameters.length == 2) {
       return RoundFunctionExpression(parameters[0], parameters[1]);
-    else
+    } else {
       throw InvalidParameterCount(
           "Function $functionName expects only 2 or 3 parameters");
+    }
   }
   if (functionName == "dateTime") {
     if (parameters.length != 1) {
@@ -113,14 +114,14 @@ Expression createFunctionExpression(
     return DurationFunctionExpression(parameters[0]);
   }
   if (functionName == "now") {
-    if (parameters.length != 0) {
+    if (parameters.isNotEmpty) {
       throw InvalidParameterCount(
           "Function $functionName does not expect any parameter");
     }
     return NowFunctionExpression();
   }
   if (functionName == "nowInUtc") {
-    if (parameters.length != 0) {
+    if (parameters.isNotEmpty) {
       throw InvalidParameterCount(
           "Function $functionName does not expect any parameter");
     }

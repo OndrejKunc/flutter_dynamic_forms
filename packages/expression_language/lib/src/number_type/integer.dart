@@ -17,8 +17,9 @@ class Integer extends Number {
 
   @override
   bool operator ==(Object other) {
-    if (other is Decimal)
+    if (other is Decimal) {
       return (other.isInteger && identical(other.toInteger().value, value));
+    }
     return other is Integer && value == other.value;
   }
 
