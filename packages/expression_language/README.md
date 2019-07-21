@@ -1,15 +1,15 @@
 # expression_language
 
-Expression language for dynamic forms.
+Dart library for parsing and evaluating expressions.
 
 ## Main goal
 
-Main goal of this Dart library is to be able to parse and evaluate expressions like: 
+Main goal of this library is to be able to parse and evaluate expressions like: 
 ```dart
 4 * 2.5 + 8.5 + 1.5 / 3.0
 ```
 ```dart
-3* (@control1.numberProperty1 + @control1.numberProperty2) < (length(@control2.stringProperty1 + "test string") - 42)
+3* @control1.numberProperty1 < (length(@control2.stringProperty1 + "test string") - 42)
 ```
 ```dart
 (!@control1.boolProperty1 && length(@control2.stringProperty1) == 21) ? "string1" : "string2"
