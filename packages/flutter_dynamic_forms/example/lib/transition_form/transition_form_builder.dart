@@ -36,7 +36,7 @@ class TransitionFormBuilder {
     int addedElements = 0;
     for (int i = 0; i < oldList.length; i++) {
       var oldElement = oldList[i];
-      var formElement = oldElement as FormElement;
+      var formElement = oldElement;
       var itemInResultList = resultListCopy.firstWhere(
           (o) => (o as FormElement).id == formElement.id,
           orElse: () => null);
@@ -49,12 +49,12 @@ class TransitionFormBuilder {
 
       for (int i = 0; i < resultList.length; i++) {
         var resultElement = resultList[i];
-        var formElement = resultElement as FormElement;
+        var formElement = resultElement;
         if (formElement is TransitionFormElement) {
           continue;
         }
         var itemInOldList = oldList.firstWhere(
-            (o) => (o as FormElement).id == formElement.id,
+            (o) => o.id == formElement.id,
             orElse: () => null);
         if (itemInOldList == null) {
           resultList[i] = TransitionFormElement(
