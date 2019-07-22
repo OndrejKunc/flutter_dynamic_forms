@@ -1,5 +1,7 @@
 # expression_language
 
+[![pub package](https://img.shields.io/pub/v/expression_language.svg)](https://pub.dev/packages/expression_language)
+
 Dart library for parsing and evaluating expressions.
 
 ## Main goal
