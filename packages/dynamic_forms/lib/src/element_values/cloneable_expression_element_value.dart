@@ -6,7 +6,8 @@ class CloneableExpressionElementValue<T> extends ExpressionElementValue<T> {
   Expression<T> _oldExpression;
   CloneableExpressionElementValue(this._oldExpression);
 
-  void buildExpression(Map<String, ExpressionProviderElement> expressionProviderElementMap) {
+  void buildExpression(
+      Map<String, ExpressionProviderElement> expressionProviderElementMap) {
     var cloneVisitor = CloneExpressionVisitor(expressionProviderElementMap);
     _oldExpression.accept(cloneVisitor);
     _expression = cloneVisitor.result as Expression<T>;

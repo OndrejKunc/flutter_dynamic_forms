@@ -10,7 +10,7 @@ class ValidationParser extends FormElementParser<Validation> {
   @override
   Validation parse(XmlElement element, FormElement parent,
       FormElementParserFunction parser) {
-        Validation validation = Validation();
+    Validation validation = Validation();
     validation.fillValidation(
       id: getAttribute(element, "id"),
       isVisible: getIsVisible(element),

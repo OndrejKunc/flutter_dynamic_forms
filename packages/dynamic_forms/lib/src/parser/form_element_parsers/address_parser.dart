@@ -19,7 +19,8 @@ class AddressParser extends FormElementParser<FormGroup> {
         isVisible: PrimitiveImmutableElementValue(true),
         parent: getParentValue(formGroup),
         value: getStringValue(element, "street", isImmutable: false),
-        label: getValue(element, "streetLabel", convertToString, () => "Street"),
+        label:
+            getValue(element, "streetLabel", convertToString, () => "Street"),
         textInputType: PrimitiveImmutableElementValue(""),
         validations: PrimitiveImmutableElementValue([])); //TODO add validations
 

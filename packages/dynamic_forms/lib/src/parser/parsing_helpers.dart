@@ -56,16 +56,23 @@ ElementValue<T> _createPrimitiveElementValue<T>(T value, bool isImmutable) {
       : PrimitiveMutableElementValue<T>(value);
 }
 
-ElementValue<List<TFormElement>> getChildren<TFormElement extends FormElement>(XmlElement element,
-        FormElement parent, FormElementParserFunction parser, {bool isImmutable = true}) =>
-    _createPrimitiveElementValue(element.children
-        .where((c) => c is XmlElement && !c.name.qualified.startsWith(element.name.qualified + "."))
-        .map((c) => parser(c, parent))
-        .cast<TFormElement>()
-        .toList(), isImmutable);
+ElementValue<List<TFormElement>> getChildren<TFormElement extends FormElement>(
+        XmlElement element,
+        FormElement parent,
+        FormElementParserFunction parser,
+        {bool isImmutable = true}) =>
+    _createPrimitiveElementValue(
+        element.children
+            .where((c) =>
+                c is XmlElement &&
+                !c.name.qualified.startsWith(element.name.qualified + "."))
+            .map((c) => parser(c, parent))
+            .cast<TFormElement>()
+            .toList(),
+        isImmutable);
 
 ElementValue<FormElement> getParentValue(FormElement parent) {
-  if (parent == null){
+  if (parent == null) {
     return null;
   }
   return PrimitiveImmutableElementValue(parent);
@@ -92,8 +99,10 @@ ElementValue<List<TFormElement>> getChildrenFromElement<TFormElement>(
 ElementValue<bool> getIsVisible(XmlElement element) =>
     getValue(element, "isVisible", convertToBool, defaultTrue);
 
-ElementValue<String> getStringValue(XmlElement element, String name, {bool isImmutable = true}) =>
-    getValue(element, name, convertToString, emptyString, isImmutable: isImmutable);
+ElementValue<String> getStringValue(XmlElement element, String name,
+        {bool isImmutable = true}) =>
+    getValue(element, name, convertToString, emptyString,
+        isImmutable: isImmutable);
 
 String emptyString() => "";
 String convertToString(String x) => x;

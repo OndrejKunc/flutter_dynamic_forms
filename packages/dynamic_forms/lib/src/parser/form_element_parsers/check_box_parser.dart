@@ -15,7 +15,8 @@ class CheckBoxParser extends FormElementParser<CheckBox> {
       id: getAttribute(element, "id"),
       isVisible: getIsVisible(element),
       parent: getParentValue(parent),
-      value: getValue(element, "isValid", convertToBool, defaultFalse, isImmutable: false),
+      value: getValue(element, "isValid", convertToBool, defaultFalse,
+          isImmutable: false),
       label: getStringValue(element, "label"),
     );
     return checkBox;

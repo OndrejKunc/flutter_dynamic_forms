@@ -4,5 +4,6 @@ import 'package:xml/xml.dart';
 
 abstract class FormElementParser<T> {
   String get name;
-  T parse(XmlElement element, FormElement parent, FormElementParserFunction parser);
+  T parse(
+      XmlElement element, FormElement parent, FormElementParserFunction parser);
 }
