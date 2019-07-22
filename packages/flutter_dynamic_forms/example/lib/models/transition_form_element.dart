@@ -17,7 +17,7 @@ class TransitionFormElement extends FormElement {
 
   @override
   FormElement getInstance() {
-    return TransitionFormElement(child,transitionType);
+    return TransitionFormElement(child, transitionType);
   }
 }
 

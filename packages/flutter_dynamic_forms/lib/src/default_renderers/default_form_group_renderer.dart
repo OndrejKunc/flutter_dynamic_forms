@@ -20,7 +20,7 @@ class DefaultFormGroupRenderer extends FormElementRenderer<model.FormGroup> {
       )
     ];
     for (var child in element.children) {
-      if ((child as model.FormElement).isVisible.value) {
+      if (child.isVisible.value) {
         childrenWidgets.add(renderer(child, context));
       }
     }

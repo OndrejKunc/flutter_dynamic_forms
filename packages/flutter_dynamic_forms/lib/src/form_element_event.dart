@@ -1,4 +1,4 @@
-abstract class FormElementEvent { }
+abstract class FormElementEvent {}
 
 class ChangeValueEvent<T> extends FormElementEvent {
   final T value;
