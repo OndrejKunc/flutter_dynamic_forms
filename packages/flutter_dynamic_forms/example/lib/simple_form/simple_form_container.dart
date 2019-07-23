@@ -49,7 +49,10 @@ class _SimpleFormContainerState extends State<SimpleFormContainer> {
   void _onFormElementEvent(FormElementEvent event) {
     if (event is ChangeValueEvent) {
       _formManager.changeValue(
-          event.value, event.formElementId, event.propertyName);
+          value: event.value,
+          elementId: event.elementId,
+          propertyName: event.propertyName,
+          ignoreLastChange: event.ignoreLastChange);
     }
     //No need to call setState, because reactive renderers already listen to the changes.
     //Call setState when using regular renderers, but note that the whole form will be re-rendered.

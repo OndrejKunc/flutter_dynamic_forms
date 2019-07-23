@@ -3,6 +3,7 @@ import 'package:dynamic_forms/src/form_elements/form_elements.dart';
 import 'package:dynamic_forms/src/form_manager/form_item_value.dart';
 import 'package:dynamic_forms/src/iterators/form_element_iterator.dart';
 import 'package:expression_language/expression_language.dart';
+import 'package:meta/meta.dart';
 
 class FormManager {
   FormElement form;
@@ -40,21 +41,26 @@ class FormManager {
     primitiveMutableValues.forEach((pmv) => pmv.resetValue());
   }
 
-  void changeValue<T>(T value, String formElementId, [String propertyName]) {
-    if (!formElementMap.containsKey(formElementId)) {
+  void changeValue<T>({
+    @required T value,
+    @required String elementId,
+    String propertyName,
+    bool ignoreLastChange = false,
+  }) {
+    if (!formElementMap.containsKey(elementId)) {
       print(
-          "Value cannot be changed because element $formElementId is not present");
+          "Value cannot be changed because element $elementId is not present");
       return;
     }
-    var formElement = formElementMap[formElementId];
+    var formElement = formElementMap[elementId];
     var elementValue = formElement.getElementValue(propertyName);
     var mutableValue = elementValue as PrimitiveMutableElementValue<T>;
     if (mutableValue == null) {
       print(
-          "Value cannot be changed because element $formElementId is not mutable");
+          "Value cannot be changed because element $elementId is not mutable");
       return;
     }
-    mutableValue.setValue(value);
+    mutableValue.setValue(value, ignoreLastChange: ignoreLastChange);
 
     return;
   }

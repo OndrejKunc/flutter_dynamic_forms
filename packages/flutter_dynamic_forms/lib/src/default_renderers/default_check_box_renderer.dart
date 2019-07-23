@@ -15,8 +15,8 @@ class DefaultCheckBoxRenderer extends FormElementRenderer<model.CheckBox> {
       child: Row(
         children: <Widget>[
           Checkbox(
-            onChanged: (value) =>
-                dispatcher(ChangeValueEvent(value, element.id)),
+            onChanged: (value) => dispatcher(
+                ChangeValueEvent(value: value, elementId: element.id)),
             value: element.value,
           ),
           Padding(

@@ -60,7 +60,11 @@ class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
 
     if (event is ChangeValueEvent) {
       formManager.changeValue(
-          event.value, event.formElementId, event.propertyName);
+        value: event.value,
+        elementId: event.elementId,
+        propertyName: event.propertyName,
+        ignoreLastChange: event.ignoreLastChange,
+      );
       yield currentState.copyWith(isValid: formManager.isFormValid);
     }
   }

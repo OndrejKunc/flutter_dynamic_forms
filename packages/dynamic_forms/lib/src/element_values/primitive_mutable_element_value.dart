@@ -3,6 +3,8 @@ import 'package:expression_language/expression_language.dart';
 
 class PrimitiveMutableElementValue<T> extends ElementValue<T> {
   MutableExpression<T> expression;
+  bool get ignoreLastChange => _ignoreLastChange;
+  bool _ignoreLastChange = false;
   T _initialValue;
   T _cachedValue;
 
@@ -12,7 +14,8 @@ class PrimitiveMutableElementValue<T> extends ElementValue<T> {
     expression = MutableExpression(_value);
   }
 
-  void setValue(T value) {
+  void setValue(T value, {bool ignoreLastChange = false}) {
+    _ignoreLastChange = ignoreLastChange;
     var oldValue = _cachedValue;
     _cachedValue = value;
     expression.value = value;

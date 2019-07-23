@@ -32,8 +32,9 @@ class _TextWidgetState extends State<TextWidget> {
   @override
   void initState() {
     super.initState();
-    _listener =
-        () => widget.dispatcher(ChangeValueEvent(_controller.text, widget.id));
+    _listener = () => widget.dispatcher(
+          ChangeValueEvent(value: _controller.text, elementId: widget.id),
+        );
     _controller.addListener(_listener);
   }
 
