@@ -107,7 +107,7 @@ In this example we use set of predefined renderers. The word reactive means that
 void _onFormElementEvent(FormElementEvent event) {
     if (event is ChangeValueEvent) {
         _formManager.changeValue(
-            event.value, event.formElementId, event.propertyName);
+            value: event.value, elementId: event.elementId, propertyName: event.propertyName);
     }
 }
 ```
