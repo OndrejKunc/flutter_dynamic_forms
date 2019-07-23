@@ -19,8 +19,12 @@ class ReactiveCheckBoxRenderer extends FormElementRenderer<model.CheckBox> {
             stream: element.valueChanged,
             builder: (context, snapshot) {
               return Checkbox(
-                onChanged: (value) =>
-                    dispatcher(ChangeValueEvent(value, element.id)),
+                onChanged: (value) => dispatcher(
+                      ChangeValueEvent(
+                        value: value,
+                        elementId: element.id,
+                      ),
+                    ),
                 value: snapshot.data,
               );
             },

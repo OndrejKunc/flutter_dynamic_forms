@@ -26,7 +26,9 @@ class ReactiveRadioButtonRenderer
             groupValue: parent.value,
             onChanged: (String value) => dispatcher(
                   ChangeValueEvent(
-                      value, parent.id, model.SELECTED_VALUE_PROPERTY),
+                      value: value,
+                      elementId: parent.id,
+                      propertyName: model.SELECTED_VALUE_PROPERTY),
                 ),
           );
         },
