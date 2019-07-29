@@ -1,0 +1,27 @@
+name: flutter_dynamic_forms_components
+description: Default set of renderers and standard form elements.
+version: 0.0.1
+author: Michal Dvorak <brp242@gmail.com>
+homepage: https://github.com/OndrejKunc/flutter_dynamic_forms
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dynamic_forms:
+    git:
+      url: https://github.com/OndrejKunc/flutter_dynamic_forms.git
+      path: packages/dynamic_forms
+
+  flutter_dynamic_forms:
+    git:
+      url: https://github.com/OndrejKunc/flutter_dynamic_forms.git
+      path: packages/flutter_dynamic_forms
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
