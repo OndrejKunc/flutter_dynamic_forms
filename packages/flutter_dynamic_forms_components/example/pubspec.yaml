@@ -1,7 +1,6 @@
 name: example
 description: A flutter example of dynamic forms project.
-
-version: 1.0.0+1
+version: 0.2.0
 
 environment:
   sdk: ">=2.2.0 <3.0.0"
@@ -10,7 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
-  flutter_dynamic_forms:
+  flutter_dynamic_forms_components:
     path: ../
   flutter_bloc_extensions: ^0.1.2
 
@@ -19,7 +18,6 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-
   uses-material-design: true
 
   assets:

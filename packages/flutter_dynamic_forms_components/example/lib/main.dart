@@ -1,11 +1,12 @@
 import 'package:dynamic_forms/dynamic_forms.dart' as forms;
+import 'package:flutter/material.dart';
+
 import 'package:example/dynamic_form/dynamic_form_bloc.dart';
 import 'package:example/dynamic_form/dynamic_form_screen.dart';
 import 'package:example/simple_form/simple_form_screen.dart';
 import 'package:example/transition_form/transition_form_bloc.dart';
 import 'package:example/transition_form/transition_form_builder.dart';
 import 'package:example/transition_form/transition_form_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc_extensions/flutter_bloc_extensions.dart';
 
 void main() => runApp(MyApp());
@@ -72,17 +73,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => DisposableBlocProvider(
-                                  blocFactory: () {
-                                    return DynamicFormBloc(
-                                      forms.FormManagerBuilder(
-                                        forms.FormParserService(
-                                          forms.getDefaultParserList(),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: DynamicFormScreen(),
-                                ),
+                              blocFactory: () {
+                                return DynamicFormBloc(
+                                  forms.FormManagerBuilder(
+                                    forms.FormParserService(
+                                      forms.getDefaultParserList(),
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: DynamicFormScreen(),
+                            ),
                           ),
                         );
                       },
@@ -102,14 +103,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => DisposableBlocProvider(
-                                  blocFactory: () {
-                                    return TransitionFormBloc(
-                                      formManagerBuilder,
-                                      TransitionFormBuilder(formManagerBuilder),
-                                    );
-                                  },
-                                  child: TransitionFormScreen(),
-                                ),
+                              blocFactory: () {
+                                return TransitionFormBloc(
+                                  formManagerBuilder,
+                                  TransitionFormBuilder(formManagerBuilder),
+                                );
+                              },
+                              child: TransitionFormScreen(),
+                            ),
                           ),
                         );
                       },
