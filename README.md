@@ -10,6 +10,7 @@ A collection of flutter and dart libraries allowing you to dynamicaly define you
 | [expression_language](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/expression_language)                 | [![pub package](https://img.shields.io/pub/v/expression_language.svg)](https://pub.dev/packages/expression_language)                 |
 | [dynamic_forms](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/dynamic_forms) | [![pub package](https://img.shields.io/pub/v/dynamic_forms.svg)](https://pub.dev/packages/dynamic_forms) |
 | [flutter_dynamic_forms](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/flutter_dynamic_forms) | [![pub package](https://img.shields.io/pub/v/flutter_dynamic_forms.svg)](https://pub.dev/packages/flutter_dynamic_forms) |
+| [flutter_dynamic_forms_components](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/flutter_dynamic_forms_components) | [![pub package](https://img.shields.io/pub/v/flutter_dynamic_forms_components.svg)](https://pub.dev/packages/flutter_dynamic_forms_components) |
 
 ## Main goal
 
@@ -78,7 +79,18 @@ See [example project](packages/flutter_dynamic_forms_components/example) which c
 
 ## Simple Usage
 
-This library contains set of predefined components like Text Input, Label, CheckBox, RadioButtonGroup etc. To make your app work with those components you need to perform the following steps:
+### Installation
+
+Add following dependencies to your `pubspec.yaml` file:
+
+```yaml
+flutter_dynamic_forms: ^0.3.0
+flutter_dynamic_forms_components: ^0.1.0
+```
+
+### Displaying the form
+
+The `flutter_dynamic_forms_components` library contains set of predefined components like Text Input, Label, CheckBox, RadioButtonGroup etc. To make your app work with those components you need to perform the following steps:
 
 First you need to create object called `FormManager`. You can put it inside the `initState` method in your state of your `StatefulWidget`:
 ```dart
@@ -139,3 +151,15 @@ Widget build(BuildContext context) {
 ```
 
 And that's it! Now you can see your form in the action.
+
+### Collect data from the form
+
+The idea behind the process of sending data back to the server is that we shouldn't send back the whole form but only values changed by the user.
+
+To collect the data simply call:
+```dart
+List<FormItemValue> data = formManager.getFormData()
+```
+
+It contains list of all the properties which were marked as a mutable in a component parser definition. In default components those are the properties that are expected to be changed by a user. Each item contains id of the source element, property name and property value.
+To submit the form you usually want to serialize this list and send it back to your server.

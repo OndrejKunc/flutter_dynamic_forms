@@ -74,17 +74,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => DisposableBlocProvider(
-                                  blocFactory: () {
-                                    return DynamicFormBloc(
-                                      forms.FormManagerBuilder(
-                                        forms.FormParserService(
-                                          components.getDefaultParserList(),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: DynamicFormScreen(),
-                                ),
+                              blocFactory: () {
+                                return DynamicFormBloc(
+                                  forms.FormManagerBuilder(
+                                    forms.FormParserService(
+                                      components.getDefaultParserList(),
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: DynamicFormScreen(),
+                            ),
                           ),
                         );
                       },
@@ -104,14 +104,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => DisposableBlocProvider(
-                                  blocFactory: () {
-                                    return TransitionFormBloc(
-                                      formManagerBuilder,
-                                      TransitionFormBuilder(formManagerBuilder),
-                                    );
-                                  },
-                                  child: TransitionFormScreen(),
-                                ),
+                              blocFactory: () {
+                                return TransitionFormBloc(
+                                  formManagerBuilder,
+                                  TransitionFormBuilder(formManagerBuilder),
+                                );
+                              },
+                              child: TransitionFormScreen(),
+                            ),
                           ),
                         );
                       },
