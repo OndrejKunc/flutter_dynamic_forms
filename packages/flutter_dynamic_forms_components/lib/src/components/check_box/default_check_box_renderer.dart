@@ -1,12 +1,13 @@
-import 'package:dynamic_forms/dynamic_forms.dart' as model;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
-class DefaultCheckBoxRenderer extends FormElementRenderer<model.CheckBox> {
+import 'check_box.dart';
+
+class DefaultCheckBoxRenderer extends FormElementRenderer<CheckBox> {
   @override
   Widget render(
-      model.CheckBox element,
+      CheckBox element,
       BuildContext context,
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {

@@ -2,11 +2,13 @@ import 'package:dynamic_forms/dynamic_forms.dart' as model;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
+import 'radio_button_group.dart';
+
 class DefaultRadioButtonGroupRenderer
-    extends FormElementRenderer<model.RadioButtonGroup> {
+    extends FormElementRenderer<RadioButtonGroup> {
   @override
   Widget render(
-      model.RadioButtonGroup element,
+      RadioButtonGroup element,
       BuildContext context,
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {

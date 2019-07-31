@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
+import 'form_group.dart' as model;
+
 class DefaultFormGroupRenderer extends FormElementRenderer<model.FormGroup> {
   @override
   Widget render(

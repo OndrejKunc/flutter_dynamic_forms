@@ -1,6 +1,6 @@
 name: flutter_dynamic_forms
 description: A flutter project providing infrastructure to render dynamic forms.
-version: 0.2.0
+version: 0.3.0
 author: Ondřej Kunc <kunc.ondrej1@gmail.com>
 homepage: https://github.com/OndrejKunc/flutter_dynamic_forms
 

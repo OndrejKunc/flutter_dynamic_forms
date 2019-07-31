@@ -1,6 +1,6 @@
 import 'package:dynamic_forms/dynamic_forms.dart' as forms;
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as components;
 import 'package:flutter/material.dart';
-
 import 'package:example/dynamic_form/dynamic_form_bloc.dart';
 import 'package:example/dynamic_form/dynamic_form_screen.dart';
 import 'package:example/simple_form/simple_form_screen.dart';
@@ -77,7 +77,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 return DynamicFormBloc(
                                   forms.FormManagerBuilder(
                                     forms.FormParserService(
-                                      forms.getDefaultParserList(),
+                                      components.getDefaultParserList(),
                                     ),
                                   ),
                                 );
@@ -96,7 +96,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       onPressed: () {
                         var formManagerBuilder = forms.FormManagerBuilder(
                           forms.FormParserService(
-                            forms.getDefaultParserList(),
+                            components.getDefaultParserList(),
                           ),
                         );
                         Navigator.push(

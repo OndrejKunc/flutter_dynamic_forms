@@ -1,4 +1,5 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
+import 'package:dynamic_forms/src/form_elements/form_element.dart';
 import 'package:xml/xml.dart';
 
 typedef FormElementParserFunction = FormElement Function(

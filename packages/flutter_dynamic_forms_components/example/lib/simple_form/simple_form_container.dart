@@ -2,6 +2,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 
 class SimpleFormContainer extends StatefulWidget {
   @override
@@ -17,16 +18,7 @@ class _SimpleFormContainerState extends State<SimpleFormContainer> {
   void initState() {
     super.initState();
     _formRenderService = FormRenderService(
-      renderers: [
-        ReactiveFormRenderer(),
-        ReactiveFormGroupRenderer(),
-        ReactiveCheckBoxRenderer(),
-        ReactiveLabelRenderer(),
-        ReactiveTextRenderer(),
-        ReactiveRadioButtonGroupRenderer(),
-        ReactiveRadioButtonRenderer(),
-        ReactiveDropdownButtonRenderer()
-      ],
+      renderers: getReactiveRenderers(),
       dispatcher: _onFormElementEvent,
     );
 

@@ -4,6 +4,7 @@ import 'package:example/dynamic_form/dynamic_form_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 
 class DynamicFormContainer extends StatefulWidget {
   @override

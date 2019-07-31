@@ -1,17 +1,19 @@
-import 'package:dynamic_forms/dynamic_forms.dart' as model;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 import 'package:rxdart/rxdart.dart';
 
+import 'radio_button_group.dart';
+import '../radio_button/radio_button.dart';
+
 class ReactiveRadioButtonGroupRenderer
-    extends FormElementRenderer<model.RadioButtonGroup> {
+    extends FormElementRenderer<RadioButtonGroup> {
   @override
   Widget render(
-      model.RadioButtonGroup element,
+      RadioButtonGroup element,
       BuildContext context,
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
-    return StreamBuilder<List<model.RadioButton>>(
+    return StreamBuilder<List<RadioButton>>(
       initialData: element.radioButtons,
       stream: element.radioButtonsChanged,
       builder: (context, snapshot) {

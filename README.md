@@ -17,7 +17,7 @@ The idea behind this project is to be able define your forms with all the inputs
 
 This is achieved by defining the form via XML using XAML like syntax. It has its own expression language to describe all the relationships between properties of each element.
 
-See [example project](packages/flutter_dynamic_forms/example) which contains working demo
+See [example project](packages/flutter_dynamic_forms_components/example) which contains working demo
 
 ## Form definition example
 

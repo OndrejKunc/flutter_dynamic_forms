@@ -5,10 +5,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 import 'package:rxdart/rxdart.dart';
 
-class ReactiveFormGroupRenderer extends FormElementRenderer<model.FormGroup> {
+import 'form_group.dart';
+
+class ReactiveFormGroupRenderer extends FormElementRenderer<FormGroup> {
   @override
   Widget render(
-      model.FormGroup element,
+      FormGroup element,
       BuildContext context,
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
@@ -17,31 +19,32 @@ class ReactiveFormGroupRenderer extends FormElementRenderer<model.FormGroup> {
       stream: element.childrenChanged,
       builder: (context, snapshot) {
         return StreamBuilder(
-            stream: Observable.merge(
+          stream: Observable.merge(
+            snapshot.data
+                .whereType<model.FormElement>()
+                .map((child) => child.isVisible.valueChanged),
+          ),
+          builder: (context, _) {
+            List<Widget> childrenWidgets = [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  element.name,
+                  style: TextStyle(color: Colors.grey),
+                ),
+              )
+            ];
+            childrenWidgets.addAll(
               snapshot.data
                   .whereType<model.FormElement>()
-                  .map((child) => child.isVisible.valueChanged),
-            ),
-            builder: (context, _) {
-              List<Widget> childrenWidgets = [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    element.name,
-                    style: TextStyle(color: Colors.grey),
+                  .where((f) => f.isVisible.value)
+                  .map(
+                    (child) => renderer(child, context),
                   ),
-                )
-              ];
-              childrenWidgets.addAll(
-                snapshot.data
-                    .whereType<model.FormElement>()
-                    .where((f) => f.isVisible.value)
-                    .map(
-                      (child) => renderer(child, context),
-                    ),
-              );
-              return Column(children: childrenWidgets);
-            });
+            );
+            return Column(children: childrenWidgets);
+          },
+        );
       },
     );
   }

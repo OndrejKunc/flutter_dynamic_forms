@@ -2,17 +2,19 @@ import 'package:dynamic_forms/dynamic_forms.dart' as model;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
+import '../radio_button_group/radio_button_group.dart';
 import 'package:rxdart/rxdart.dart';
 
-class ReactiveRadioButtonRenderer
-    extends FormElementRenderer<model.RadioButton> {
+import 'radio_button.dart';
+
+class ReactiveRadioButtonRenderer extends FormElementRenderer<RadioButton> {
   @override
   Widget render(
-      model.RadioButton element,
+      RadioButton element,
       BuildContext context,
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
-    var parent = element.parent.value as model.RadioButtonGroup;
+    var parent = element.parent.value as RadioButtonGroup;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: LazyStreamBuilder<String>(
@@ -25,11 +27,11 @@ class ReactiveRadioButtonRenderer
             value: element.value,
             groupValue: parent.value,
             onChanged: (String value) => dispatcher(
-                  ChangeValueEvent(
-                      value: value,
-                      elementId: parent.id,
-                      propertyName: model.SELECTED_VALUE_PROPERTY),
-                ),
+              ChangeValueEvent(
+                  value: value,
+                  elementId: parent.id,
+                  propertyName: model.SELECTED_VALUE_PROPERTY),
+            ),
           );
         },
       ),

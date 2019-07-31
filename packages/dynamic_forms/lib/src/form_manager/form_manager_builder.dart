@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:dynamic_forms/src/form_elements/form_elements.dart';
 import 'package:dynamic_forms/src/form_manager/form_manager.dart';
 import 'package:dynamic_forms/src/iterators/form_element_iterator.dart';
 import 'package:dynamic_forms/src/iterators/form_element_value_iterator.dart';

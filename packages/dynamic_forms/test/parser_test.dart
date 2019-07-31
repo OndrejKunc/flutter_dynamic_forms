@@ -1,9 +1,16 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:dynamic_forms/src/form_manager/form_manager_builder.dart';
 import 'package:dynamic_forms/src/iterators/form_element_iterator.dart';
 import 'package:dynamic_forms/src/iterators/form_element_value_iterator.dart';
 import 'package:expression_language/expression_language.dart';
 import 'package:test/test.dart';
+
+import 'test_components/container/container_parser.dart';
+import 'test_components/label/label.dart';
+import 'test_components/label/label_parser.dart';
+
+List<FormElementParser> _getDefaultParserList() {
+  return [ContainerParser(), LabelParser()];
+}
 
 void main() {
   test('expression with string and double addition', () {
@@ -202,24 +209,22 @@ void main() {
   });
 
   test('xml with expressions', () {
-    var parserService = FormParserService(getDefaultParserList());
+    var parserService = FormParserService(_getDefaultParserList());
 
     var xml = '''<?xml version="1.0" encoding="UTF-8"?>
-      <form id="form1">
-          <formGroup id="formgroup1">
-              <label
-                  id="label1"
-                  value="John Doe" />
-              <label
-                  id="label2">
-                  <label.value>
-                    <expression><![CDATA[
-                            "Welcome " + @label1 + "!"
-                        ]]></expression>
-                  </label.value>
-              </label>
-          </formGroup>
-      </form>''';
+      <container id="form1">
+        <label
+            id="label1"
+            value="John Doe" />
+        <label
+            id="label2">
+            <label.value>
+              <expression><![CDATA[
+                      "Welcome " + @label1 + "!"
+                  ]]></expression>
+            </label.value>
+        </label>
+      </container>''';
 
     var result = parserService.parse(xml);
 
@@ -247,21 +252,19 @@ void main() {
   });
 
   test('xml with HTML value', () {
-    var parserService = FormParserService(getDefaultParserList());
+    var parserService = FormParserService(_getDefaultParserList());
 
     var xml = '''<?xml version="1.0" encoding="UTF-8"?>
-      <form id="form1">
-          <formGroup id="formgroup1">
-              <label
-                  id="label1">
-                  <label.value>
-                    <![CDATA[
-                      <b>Html help action</b>
-                    ]]>
-                  </label.value>
-              </label>
-          </formGroup>
-      </form>''';
+      <container id="form1">
+        <label
+          id="label1">
+          <label.value>
+            <![CDATA[
+              <b>Html help action</b>
+            ]]>
+          </label.value>
+        </label>
+      </container>''';
 
     var result = parserService.parse(xml);
 
@@ -276,24 +279,22 @@ void main() {
   });
 
   test('xml with changing expressions', () {
-    var parserService = FormParserService(getDefaultParserList());
+    var parserService = FormParserService(_getDefaultParserList());
 
     var xml = '''<?xml version="1.0" encoding="UTF-8"?>
-      <form id="form1">
-          <formGroup id="formgroup1">
-              <label
-                  id="label1"
-                  value="John Doe" />
-              <label
-                  id="label2">
-                  <label.value>
-                    <expression><![CDATA[
-                            "Welcome " + @label1 + "!"
-                        ]]></expression>
-                  </label.value>
-              </label>
-          </formGroup>
-      </form>''';
+      <container id="form1">
+        <label
+          id="label1"
+          value="John Doe" />
+        <label
+          id="label2">
+          <label.value>
+            <expression><![CDATA[
+                    "Welcome " + @label1 + "!"
+                ]]></expression>
+          </label.value>
+        </label>
+      </container>''';
 
     var result = parserService.parse(xml);
 
@@ -328,44 +329,6 @@ void main() {
     var label2 = formElementMap["label2"] as Label;
 
     expect(label2.value, "Welcome John Doe!");
-  });
-
-  test('form manager test', () {
-    var xml = '''<?xml version="1.0" encoding="UTF-8"?>
-      <form id="form1">
-          <formGroup id="formgroup1">
-              <text
-                id="text1">
-                <text.validations>
-                  <validation
-                  message="Name is too long">
-                    <validation.isValid>
-                        <expression>
-                            <![CDATA[
-                                length(@label1) < 15
-                            ]]>
-                        </expression>
-                    </validation.isValid>
-                </validation>
-                </text.validations>
-              </text>
-              <label
-                  id="label1"
-                  value="John Doe" />
-              <label
-                  id="label2">
-                  <label.value>
-                    <expression><![CDATA[
-                            "Welcome " + @label1 + "!"
-                        ]]></expression>
-                  </label.value>
-              </label>
-          </formGroup>
-      </form>''';
-
-    var parserService = FormParserService(getDefaultParserList());
-
-    var formManager = FormManagerBuilder(parserService).build(xml);
   });
 }
 
