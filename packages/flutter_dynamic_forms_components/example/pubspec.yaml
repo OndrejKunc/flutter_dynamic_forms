@@ -1,0 +1,27 @@
+name: example
+description: A flutter example of dynamic forms project with default components.
+version: 0.2.0
+
+environment:
+  sdk: ">=2.2.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+  flutter_dynamic_forms_components:
+    path: ../
+  flutter_bloc_extensions: ^0.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/test_form1.xml
+    - assets/transition_form1.xml
+    - assets/transition_form2.xml
+    - assets/transition_form3.xml

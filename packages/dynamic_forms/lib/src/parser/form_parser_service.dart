@@ -1,5 +1,5 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:dynamic_forms/src/form_elements/form_elements.dart';
+import 'package:dynamic_forms/src/form_elements/form_element.dart';
 import 'package:dynamic_forms/src/parser/form_element_parser.dart';
 import 'package:dynamic_forms/src/parser/visitors/remove_blank_elements_visitor.dart';
 import 'package:dynamic_forms/src/parser/visitors/trim_elements_visitor.dart';

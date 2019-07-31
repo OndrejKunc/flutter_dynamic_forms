@@ -1,16 +1,2 @@
 export 'form_parser_service.dart';
 export 'form_element_parser.dart';
-export 'default_parser_list.dart';
-export 'form_element_parsers/address_parser.dart';
-export 'form_element_parsers/check_box_parser.dart';
-export 'form_element_parsers/dropdown_button_parser.dart';
-export 'form_element_parsers/dropdown_option_parser.dart';
-export 'form_element_parsers/form_group_parser.dart';
-export 'form_element_parsers/form_parser.dart';
-export 'form_element_parsers/form_parser.dart';
-export 'form_element_parsers/label_parser.dart';
-export 'form_element_parsers/radio_button_group_parser.dart';
-export 'form_element_parsers/radio_button_parser.dart';
-export 'form_element_parsers/required_validation_parser.dart';
-export 'form_element_parsers/text_parser.dart';
-export 'form_element_parsers/validation_parser.dart';

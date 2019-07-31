@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form id="form1">
+    <formGroup 
+        id="formgroup1"
+        name="From section 1">
+        <text
+            id="firstName"
+            label="Enter your first name" value="John">
+            <text.validations>
+                <validation
+                  message="Name is too long">
+                    <validation.isValid>
+                        <expression>
+                            <![CDATA[
+                                length(@firstName) < 15
+                            ]]>
+                        </expression>
+                    </validation.isValid>
+                </validation>
+                <requiredValidation
+                  message="First name is required"/>
+            </text.validations>
+        </text>
+        <text
+            id="lastName"
+            label="Enter your last name">
+            <text.validations>
+                <requiredValidation
+                  message="Last name is required"/>
+            </text.validations>
+        </text>
+        <label
+            id="fullNameLabel">
+            <label.value>
+                <expression>
+                    <![CDATA[
+                        @firstName + (length(@firstName) > 0 && length(@lastName) > 0 ? " " : "") + @lastName
+                    ]]>
+                </expression>
+            </label.value>
+        </label>
+        <label>
+            <label.value>
+                <expression>
+                    <![CDATA[
+                        "Welcome " + @fullNameLabel + "!"
+                    ]]>
+                </expression>
+            </label.value>
+            <label.isVisible>
+                <expression>
+                    <![CDATA[
+                        !@hideWelcomeCheckBox && length(@fullNameLabel) > 0
+                    ]]>
+                </expression>
+            </label.isVisible>
+        </label>
+        <checkBox
+            id="hideWelcomeCheckBox"
+            value="false"
+            label="Hide welcome message"
+            />
+        <formGroup id="formgroup2" name="Form section 2">
+            <radioButtonGroup id="radioGroup1" value="-1">
+                <radioButton label="Option 1" value="1" />
+                <radioButton label="Option 2" value="2" />
+                <radioButton label="Option 3" value="3" />
+                <radioButton label="Option 4" value="4" />
+            </radioButtonGroup>
+            <radioButtonGroup id="radioGroup2" value="B">
+                <radioButton label="Option A" value="A" />
+                <radioButton label="Option B" value="B" />
+                <radioButton label="Option C" value="C" />
+                <radioButton label="Option D" value="D" />
+            </radioButtonGroup>
+        </formGroup>
+        <formGroup id="formgroup3" name="Form section 3">
+            <dropdownButton id="dropdownButton1" value="CD">
+                <dropdownOption value="AF" label="Afghanistan"/>
+                <dropdownOption value="AR" label="Argentina"/>
+                <dropdownOption value="BY" label="Belarus"/>
+                <dropdownOption value="BR" label="Brazil"/>
+                <dropdownOption value="CD" label="Congo, The democratic republic of"/>
+                <dropdownOption value="FK" label="Falkland Islands"/>
+                <dropdownOption value="GE" label="Georgia"/>
+                <dropdownOption value="GN" label="Guinea" />
+            </dropdownButton>
+        </formGroup>
+    </formGroup>
+    <address id="testaddress" label="Test address:" />
+</form>
