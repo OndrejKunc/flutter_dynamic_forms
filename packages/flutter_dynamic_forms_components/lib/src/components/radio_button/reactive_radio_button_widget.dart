@@ -27,11 +27,11 @@ class ReactiveRadioButtonRenderer extends FormElementRenderer<RadioButton> {
             value: element.value,
             groupValue: parent.value,
             onChanged: (String value) => dispatcher(
-              ChangeValueEvent(
-                  value: value,
-                  elementId: parent.id,
-                  propertyName: model.SELECTED_VALUE_PROPERTY),
-            ),
+                  ChangeValueEvent(
+                      value: value,
+                      elementId: parent.id,
+                      propertyName: model.SELECTED_VALUE_PROPERTY),
+                ),
           );
         },
       ),

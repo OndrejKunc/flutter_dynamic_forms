@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:dynamic_forms/src/form_elements/form_element.dart';
 import 'package:meta/meta.dart';
 
 class Label extends FormElement {

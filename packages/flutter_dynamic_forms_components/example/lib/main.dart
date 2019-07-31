@@ -1,5 +1,6 @@
 import 'package:dynamic_forms/dynamic_forms.dart' as forms;
-import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as components;
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
+    as components;
 import 'package:flutter/material.dart';
 import 'package:example/dynamic_form/dynamic_form_bloc.dart';
 import 'package:example/dynamic_form/dynamic_form_screen.dart';
@@ -73,17 +74,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => DisposableBlocProvider(
-                              blocFactory: () {
-                                return DynamicFormBloc(
-                                  forms.FormManagerBuilder(
-                                    forms.FormParserService(
-                                      components.getDefaultParserList(),
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: DynamicFormScreen(),
-                            ),
+                                  blocFactory: () {
+                                    return DynamicFormBloc(
+                                      forms.FormManagerBuilder(
+                                        forms.FormParserService(
+                                          components.getDefaultParserList(),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: DynamicFormScreen(),
+                                ),
                           ),
                         );
                       },
@@ -103,14 +104,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => DisposableBlocProvider(
-                              blocFactory: () {
-                                return TransitionFormBloc(
-                                  formManagerBuilder,
-                                  TransitionFormBuilder(formManagerBuilder),
-                                );
-                              },
-                              child: TransitionFormScreen(),
-                            ),
+                                  blocFactory: () {
+                                    return TransitionFormBloc(
+                                      formManagerBuilder,
+                                      TransitionFormBuilder(formManagerBuilder),
+                                    );
+                                  },
+                                  child: TransitionFormScreen(),
+                                ),
                           ),
                         );
                       },

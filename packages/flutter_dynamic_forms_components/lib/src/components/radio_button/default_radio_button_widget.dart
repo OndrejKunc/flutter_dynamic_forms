@@ -22,11 +22,11 @@ class DefaultRadioButtonRenderer
           value: element.value,
           groupValue: parent.value,
           onChanged: (String value) => dispatcher(
-            ChangeValueEvent(
-                value: value,
-                elementId: parent.id,
-                propertyName: RadioButtonGroup.VALUE_PROPERTY_NAME),
-          ),
+                ChangeValueEvent(
+                    value: value,
+                    elementId: parent.id,
+                    propertyName: RadioButtonGroup.VALUE_PROPERTY_NAME),
+              ),
         ));
   }
 }
