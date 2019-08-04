@@ -90,7 +90,7 @@ abstract class FormElement implements ExpressionProviderElement {
     }
     if (oldProperty is ElementValue<ExpressionProviderElement>) {
       return PrimitiveImmutableElementValue(
-          oldProperty.value.clone(getParentValue(instance)));
+          oldProperty.value.clone(getPrimitiveImmutableElementValue(instance)));
     } else {
       return oldProperty.clone();
     }
@@ -114,7 +114,8 @@ abstract class FormElement implements ExpressionProviderElement {
       ElementValue<List> children, ExpressionProviderElement parent) {
     var childrenElements = children.value.toList();
     for (var i = 0; i < childrenElements.length; i++) {
-      childrenElements[i] = childrenElements[i].clone(getParentValue(parent));
+      childrenElements[i] =
+          childrenElements[i].clone(getPrimitiveImmutableElementValue(parent));
     }
     if (children is PrimitiveImmutableElementValue) {
       return (children as PrimitiveImmutableElementValue)
@@ -122,5 +123,13 @@ abstract class FormElement implements ExpressionProviderElement {
     }
 
     return PrimitiveImmutableElementValue(childrenElements);
+  }
+
+  ElementValue<FormElement> getPrimitiveImmutableElementValue(
+      FormElement element) {
+    if (element == null) {
+      return null;
+    }
+    return PrimitiveImmutableElementValue(element);
   }
 }

@@ -209,7 +209,7 @@ void main() {
   });
 
   test('xml with expressions', () {
-    var parserService = FormParserService(_getDefaultParserList());
+    var parserService = XmlFormParserService(_getDefaultParserList());
 
     var xml = '''<?xml version="1.0" encoding="UTF-8"?>
       <container id="form1">
@@ -252,7 +252,7 @@ void main() {
   });
 
   test('xml with HTML value', () {
-    var parserService = FormParserService(_getDefaultParserList());
+    var parserService = XmlFormParserService(_getDefaultParserList());
 
     var xml = '''<?xml version="1.0" encoding="UTF-8"?>
       <container id="form1">
@@ -279,7 +279,7 @@ void main() {
   });
 
   test('xml with changing expressions', () {
-    var parserService = FormParserService(_getDefaultParserList());
+    var parserService = XmlFormParserService(_getDefaultParserList());
 
     var xml = '''<?xml version="1.0" encoding="UTF-8"?>
       <container id="form1">
