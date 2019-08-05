@@ -11,6 +11,7 @@ class XmlParserNode extends ParserNode {
     return element.name.qualified;
   }
 
+  @override
   ElementValue<T> getValue<T>(
       String name, T converter(String s), T defaultValue(),
       {bool isImmutable = true}) {

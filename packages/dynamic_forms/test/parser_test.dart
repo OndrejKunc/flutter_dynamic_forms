@@ -251,6 +251,54 @@ void main() {
     expect(resultValue, "Welcome John Doe!");
   });
 
+    test('json with expressions', () {
+    var parserService = JsonFormParserService(_getDefaultParserList());
+
+    var json = '''
+    {
+        "@name": "container",
+        "id": "form1",
+        "children": [
+          {
+            "@name": "label",
+            "id": "label1",
+            "value": "John Doe"
+          },
+          {
+            "@name": "label",
+            "id": "label2",
+            "value": {
+              "expression": "\\"Welcome \\" + @label1 + \\"!\\""
+            }
+          }
+        ]
+    }''';
+
+    var result = parserService.parse(json);
+
+    var formElementMap = Map<String, FormElement>.fromIterable(
+        getFormElementIterator<FormElement>(result),
+        key: (x) => x.id,
+        value: (x) => x);
+
+    var formElementExpressions =
+        getFormElementValueIterator<ExpressionElementValue>(result);
+
+    var expressionGrammarDefinition = ExpressionGrammarParser(formElementMap);
+    var parser = expressionGrammarDefinition.build();
+
+    for (var expressionValue in formElementExpressions) {
+      if (expressionValue is StringExpressionElementValue) {
+        expressionValue.buildExpression(parser);
+      }
+    }
+
+    var label2 = formElementMap["label2"] as Label;
+    var resultValue = label2.value;
+
+    expect(resultValue, "Welcome John Doe!");
+  });
+
   test('xml with HTML value', () {
     var parserService = XmlFormParserService(_getDefaultParserList());
 
