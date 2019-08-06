@@ -1,4 +1,5 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
+import 'package:expression_language/expression_language.dart';
 
 abstract class ParserNode {
   String getName();
@@ -21,6 +22,21 @@ abstract class ParserNode {
   ElementValue<String> getStringValue(String name, {bool isImmutable = true}) =>
       getValue(name, convertToString, emptyString, isImmutable: isImmutable);
 
+  ElementValue<Decimal> getDecimalValue(
+    String name, {
+    bool isImmutable = true,
+  }) =>
+      getValue<Decimal>(
+          name, (s) => Decimal.tryParse(s) ?? defaultDecimal(), defaultDecimal,
+          isImmutable: isImmutable);
+
+  ElementValue<int> getIntValue(
+    String name, {
+    bool isImmutable = true,
+  }) =>
+      getValue<int>(name, (s) => int.tryParse(s) ?? defaultInt(), defaultInt,
+          isImmutable: isImmutable);
+
   ElementValue<T> createPrimitiveElementValue<T>(T value, bool isImmutable) {
     return isImmutable
         ? PrimitiveImmutableElementValue<T>(value)
@@ -39,4 +55,6 @@ abstract class ParserNode {
   bool convertToBool(String x) => x?.toLowerCase() == "true";
   bool defaultFalse() => false;
   bool defaultTrue() => true;
+  int defaultInt() => 0;
+  Decimal defaultDecimal() => Decimal.fromInt(0);
 }

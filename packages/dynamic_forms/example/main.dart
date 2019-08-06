@@ -21,7 +21,7 @@ void main() {
       </container>''';
 
   var formManagerBuilder =
-      FormManagerBuilder(FormParserService([ContainerParser(), LabelParser()]));
+      FormManagerBuilder(XmlFormParserService([ContainerParser(), LabelParser()]));
   FormManager formManager = formManagerBuilder.build(xml);
   var label2 = formManager.formElementMap["label2"] as Label;
   print(label2.value);
