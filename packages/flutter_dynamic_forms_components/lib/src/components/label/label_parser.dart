@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:xml/xml.dart';
 
 import 'label.dart';
 
@@ -8,14 +7,14 @@ class LabelParser extends FormElementParser<Label> {
   String get name => "label";
 
   @override
-  Label parse(XmlElement element, FormElement parent,
+  Label parse(ParserNode parserNode, FormElement parent,
       FormElementParserFunction parser) {
     var label = Label();
     label.fillLabel(
-      id: getAttribute(element, "id"),
-      isVisible: getIsVisible(element),
-      parent: getParentValue(parent),
-      value: getStringValue(element, "value"),
+      id: parserNode.getPlainStringValue("id"),
+      isVisible: parserNode.getIsVisible(),
+      parent: parserNode.getParentValue(parent),
+      value: parserNode.getStringValue("value"),
     );
     return label;
   }

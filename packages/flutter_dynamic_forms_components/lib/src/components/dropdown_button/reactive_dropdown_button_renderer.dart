@@ -13,7 +13,7 @@ class ReactiveDropdownButtonRenderer
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
     List<Stream> streamsToReact = List<Stream>();
-    streamsToReact.addAll(element.options.map((o) => o.isVisible.valueChanged));
+    streamsToReact.addAll(element.options.map((o) => o.isVisibleChanged));
     streamsToReact.add(element.propertyChanged);
 
     return LazyStreamBuilder(
@@ -29,7 +29,7 @@ class ReactiveDropdownButtonRenderer
                       propertyName: model.DropdownButton.VALUE_PROPERTY_NAME),
                 ),
             items: element.options
-                .where((d) => d.isVisible.value)
+                .where((d) => d.isVisible)
                 .map<DropdownMenuItem<String>>(
               (DropdownOption option) {
                 return DropdownMenuItem<String>(

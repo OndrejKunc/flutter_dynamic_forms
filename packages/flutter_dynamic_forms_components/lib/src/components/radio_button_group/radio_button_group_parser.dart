@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:xml/xml.dart';
 
 import 'radio_button_group.dart';
 import '../radio_button/radio_button.dart';
@@ -9,22 +8,21 @@ class RadioButtonGroupParser extends FormElementParser<RadioButtonGroup> {
   String get name => "radioButtonGroup";
 
   @override
-  RadioButtonGroup parse(XmlElement element, FormElement parent,
+  RadioButtonGroup parse(ParserNode parserNode, FormElement parent,
       FormElementParserFunction parser) {
     var radioButtonGroup = RadioButtonGroup();
     radioButtonGroup.fillRadioButtonGroup(
-      id: getAttribute(element, "id"),
-      isVisible: getIsVisible(element),
-      parent: getParentValue(parent),
-      value: getStringValue(element, "value", isImmutable: false),
-      radioButtons: getChildren<RadioButton>(element, radioButtonGroup, parser),
-      arrangemet: getValue<RadioButtonGroupArrangement>(
-          element,
-          "arrangement",
-          (s) => RadioButtonGroupArrangement.values.firstWhere(
-              (e) => e.toString() == "RadioButtonGroupArrangement." + s,
-              orElse: () => RadioButtonGroupArrangement.vertical),
-          () => RadioButtonGroupArrangement.vertical),
+      id: parserNode.getPlainStringValue("id"),
+      isVisible: parserNode.getIsVisible(),
+      parent: parserNode.getParentValue(parent),
+      value: parserNode.getStringValue("value", isImmutable: false),
+      radioButtons: parserNode.getChildren<RadioButton>(
+          parent: radioButtonGroup,
+          parser: parser,
+          childrenPropertyName: "radioButtons",
+          isContentProperty: true),
+      arrangement: parserNode.getValue<String>(
+          "arrangement", ParserNode.convertToString, () => "vertical"),
     );
     return radioButtonGroup;
   }

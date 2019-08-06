@@ -15,7 +15,7 @@ class ValidationParser extends FormElementParser<Validation> {
       parent: parserNode.getParentValue(parent),
       message: parserNode.getStringValue("message"),
       isValid: parserNode.getValue(
-          "isValid", parserNode.convertToBool, parserNode.defaultTrue),
+          "isValid", ParserNode.convertToBool, ParserNode.defaultTrue),
     );
     return validation;
   }

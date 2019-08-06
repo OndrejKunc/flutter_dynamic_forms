@@ -12,10 +12,11 @@ abstract class FormElement implements ExpressionProviderElement {
   static const String IS_VISIBLE_PROPERTY_NAME = "isVisible";
 
   String id;
-  ElementValue<FormElement> get parent => properties[PARENT_PROPERTY_NAME];
-  ElementValue<bool> get isVisible => properties[IS_VISIBLE_PROPERTY_NAME];
-  set isVisible(ElementValue<bool> value) =>
-      properties[IS_VISIBLE_PROPERTY_NAME] = value;
+  FormElement get parent => properties[PARENT_PROPERTY_NAME].value;
+  bool get isVisible => properties[IS_VISIBLE_PROPERTY_NAME].value;
+  Stream<bool> get isVisibleChanged =>
+      properties[IS_VISIBLE_PROPERTY_NAME].valueChanged;
+      
   @protected
   Map<String, ElementValue> properties = {};
 
@@ -125,8 +126,7 @@ abstract class FormElement implements ExpressionProviderElement {
     return ImmutableElementValue(childrenElements);
   }
 
-  ElementValue<FormElement> getImmutableElementValue(
-      FormElement element) {
+  ElementValue<FormElement> getImmutableElementValue(FormElement element) {
     if (element == null) {
       return null;
     }

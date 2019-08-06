@@ -13,7 +13,7 @@ class DefaultRadioButtonRenderer
       BuildContext context,
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
-    var parent = element.parent.value as RadioButtonGroup;
+    var parent = element.parent as RadioButtonGroup;
 
     return Padding(
         padding: const EdgeInsets.all(8.0),

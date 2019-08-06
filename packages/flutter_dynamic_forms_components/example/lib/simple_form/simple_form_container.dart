@@ -27,7 +27,7 @@ class _SimpleFormContainerState extends State<SimpleFormContainer> {
 
   Future _loadForm() async {
     var formManagerBuilder = FormManagerBuilder(
-      FormParserService(getDefaultParserList()),
+      XmlFormParserService(getDefaultParserList()),
     );
 
     var xml =

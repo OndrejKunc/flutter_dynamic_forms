@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:xml/xml.dart';
 
 import 'check_box.dart';
 
@@ -8,16 +7,16 @@ class CheckBoxParser extends FormElementParser<CheckBox> {
   String get name => "checkBox";
 
   @override
-  CheckBox parse(XmlElement element, FormElement parent,
+  CheckBox parse(ParserNode parserNode, FormElement parent,
       FormElementParserFunction parser) {
     var checkBox = CheckBox();
     checkBox.fillCheckBox(
-      id: getAttribute(element, "id"),
-      isVisible: getIsVisible(element),
-      parent: getParentValue(parent),
-      value: getValue(element, "isValid", convertToBool, defaultFalse,
+      id: parserNode.getPlainStringValue("id"),
+      isVisible: parserNode.getIsVisible(),
+      parent: parserNode.getParentValue(parent),
+      value: parserNode.getValue("isValid", ParserNode.convertToBool, ParserNode.defaultFalse,
           isImmutable: false),
-      label: getStringValue(element, "label"),
+      label: parserNode.getStringValue("label"),
     );
     return checkBox;
   }

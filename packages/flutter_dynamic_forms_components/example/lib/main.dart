@@ -77,7 +77,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               blocFactory: () {
                                 return DynamicFormBloc(
                                   forms.FormManagerBuilder(
-                                    forms.FormParserService(
+                                    forms.XmlFormParserService(
                                       components.getDefaultParserList(),
                                     ),
                                   ),
@@ -96,7 +96,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: RaisedButton(
                       onPressed: () {
                         var formManagerBuilder = forms.FormManagerBuilder(
-                          forms.FormParserService(
+                          forms.XmlFormParserService(
                             components.getDefaultParserList(),
                           ),
                         );

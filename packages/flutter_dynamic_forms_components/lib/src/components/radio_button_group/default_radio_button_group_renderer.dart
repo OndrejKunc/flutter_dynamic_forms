@@ -17,7 +17,7 @@ class DefaultRadioButtonGroupRenderer
       )
     ];
     for (var child in element.radioButtons) {
-      if (child.isVisible.value) {
+      if (child.isVisible) {
         childrenWidgets.add(renderer(child, context));
       }
     }

@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:xml/xml.dart';
 
 import '../form_group/form_group.dart';
 import '../text/text.dart';
@@ -9,48 +8,48 @@ class AddressParser extends FormElementParser<FormGroup> {
   String get name => "address";
 
   @override
-  FormGroup parse(XmlElement element, FormElement parent,
+  FormGroup parse(ParserNode parserNode, FormElement parent,
       FormElementParserFunction parser) {
     var formGroup = FormGroup();
-    var addressId = getAttribute(element, "id");
+    var addressId = parserNode.getPlainStringValue("id");
 
     var streetText = Text();
     streetText.fillText(
         id: "$addressId.street",
-        isVisible: PrimitiveImmutableElementValue(true),
-        parent: getParentValue(formGroup),
-        value: getStringValue(element, "street", isImmutable: false),
+        isVisible: ImmutableElementValue(true),
+        parent: parserNode.getParentValue(formGroup),
+        value: parserNode.getStringValue("street", isImmutable: false),
         label:
-            getValue(element, "streetLabel", convertToString, () => "Street"),
-        textInputType: PrimitiveImmutableElementValue(""),
-        validations: PrimitiveImmutableElementValue([])); //TODO add validations
+            parserNode.getValue("streetLabel", ParserNode.convertToString, () => "Street"),
+        textInputType: ImmutableElementValue(""),
+        validations: ImmutableElementValue([])); //TODO add validations
 
     var cityText = Text();
     cityText.fillText(
         id: "$addressId.city",
-        isVisible: PrimitiveImmutableElementValue(true),
-        parent: getParentValue(formGroup),
-        value: getStringValue(element, "city", isImmutable: false),
-        label: getValue(element, "cityLabel", convertToString, () => "City"),
-        textInputType: PrimitiveImmutableElementValue(""),
-        validations: PrimitiveImmutableElementValue([])); //TODO add validations
+        isVisible: ImmutableElementValue(true),
+        parent: parserNode.getParentValue(formGroup),
+        value: parserNode.getStringValue("city", isImmutable: false),
+        label: parserNode.getValue("cityLabel", ParserNode.convertToString, () => "City"),
+        textInputType: ImmutableElementValue(""),
+        validations: ImmutableElementValue([])); //TODO add validations
 
     var zipText = Text();
     zipText.fillText(
         id: "$addressId.zip",
-        isVisible: PrimitiveImmutableElementValue(true),
-        parent: getParentValue(formGroup),
-        value: getStringValue(element, "zip", isImmutable: false),
-        label: getValue(element, "zipLabel", convertToString, () => "Zip"),
-        textInputType: PrimitiveImmutableElementValue(""),
-        validations: PrimitiveImmutableElementValue([])); //TODO add validations
+        isVisible: ImmutableElementValue(true),
+        parent: parserNode.getParentValue(formGroup),
+        value: parserNode.getStringValue("zip", isImmutable: false),
+        label: parserNode.getValue("zipLabel", ParserNode.convertToString, () => "Zip"),
+        textInputType: ImmutableElementValue(""),
+        validations: ImmutableElementValue([])); //TODO add validations
 
     formGroup.fillFormGroup(
       id: addressId,
-      isVisible: getIsVisible(element),
-      parent: getParentValue(parent),
-      name: getStringValue(element, "label"),
-      children: PrimitiveImmutableElementValue([streetText, cityText, zipText]),
+      isVisible: parserNode.getIsVisible(),
+      parent: parserNode.getParentValue(parent),
+      name: parserNode.getStringValue("label"),
+      children: ImmutableElementValue([streetText, cityText, zipText]),
     );
     return formGroup;
   }

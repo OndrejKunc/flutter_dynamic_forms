@@ -1,5 +1,6 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:expression_language/expression_language.dart';
+import 'package:meta/meta.dart';
 
 abstract class ParserNode {
   String getName();
@@ -8,9 +9,9 @@ abstract class ParserNode {
       {bool isImmutable = true});
 
   ElementValue<List<TFormElement>> getChildren<TFormElement>(
-      {FormElement parent,
-      String childrenPropertyName,
-      FormElementParserFunction parser,
+      {@required FormElement parent,
+      @required String childrenPropertyName,
+      @required FormElementParserFunction parser,
       bool isContentProperty = false,
       bool isImmutable = true});
 
@@ -50,11 +51,11 @@ abstract class ParserNode {
     return ImmutableElementValue(parent);
   }
 
-  String emptyString() => "";
-  String convertToString(String x) => x;
-  bool convertToBool(String x) => x?.toLowerCase() == "true";
-  bool defaultFalse() => false;
-  bool defaultTrue() => true;
-  int defaultInt() => 0;
-  Decimal defaultDecimal() => Decimal.fromInt(0);
+  static String emptyString() => "";
+  static String convertToString(String x) => x;
+  static bool convertToBool(String x) => x?.toLowerCase() == "true";
+  static bool defaultFalse() => false;
+  static bool defaultTrue() => true;
+  static int defaultInt() => 0;
+  static Decimal defaultDecimal() => Decimal.fromInt(0);
 }
