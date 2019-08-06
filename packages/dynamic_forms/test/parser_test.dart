@@ -382,8 +382,8 @@ void main() {
 
 class TestFormElement extends FormElement {
   Map<String, ElementValue> _properties = {
-    "value": PrimitiveMutableElementValue<Integer>(Integer(27)),
-    "label": PrimitiveMutableElementValue<String>("LabelText"),
+    "value": MutableElementValue<Integer>(Integer(27)),
+    "label": MutableElementValue<String>("LabelText"),
     "intExpression": StringExpressionElementValue<int>("5 + 7"),
     "integerExpression": StringExpressionElementValue<Integer>("5 + 6"),
     "doubleExpression": StringExpressionElementValue<double>("5.4 + 4.1"),

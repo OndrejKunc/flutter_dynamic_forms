@@ -16,10 +16,10 @@ class JsonParserNode extends ParserNode {
       {bool isImmutable = true}) {
     var elementValue = element[name];
     if (elementValue == null) {
-      return createPrimitiveElementValue<T>(defaultValue(), isImmutable);
+      return createElementValue<T>(defaultValue(), isImmutable);
     }
     if (elementValue is String) {
-      return createPrimitiveElementValue<T>(
+      return createElementValue<T>(
           converter(elementValue), isImmutable);
     }
     if (elementValue is Map<String, dynamic>) {
@@ -28,7 +28,7 @@ class JsonParserNode extends ParserNode {
         return StringExpressionElementValue<T>(expression);
       }
     }
-    return createPrimitiveElementValue<T>(defaultValue(), isImmutable);
+    return createElementValue<T>(defaultValue(), isImmutable);
   }
 
   @override
@@ -51,7 +51,7 @@ class JsonParserNode extends ParserNode {
             .cast<TFormElement>()
             .toList();
     var childrenElementValue =
-        createPrimitiveElementValue(children, isImmutable);
+        createElementValue(children, isImmutable);
     return childrenElementValue;
   }
 }

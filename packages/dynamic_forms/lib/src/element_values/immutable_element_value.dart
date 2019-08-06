@@ -1,11 +1,11 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:expression_language/expression_language.dart';
 
-class PrimitiveImmutableElementValue<T> extends ElementValue<T> {
+class ImmutableElementValue<T> extends ElementValue<T> {
   final T _value;
   final ImmutableExpression<T> _expression;
 
-  PrimitiveImmutableElementValue(this._value)
+  ImmutableElementValue(this._value)
       : _expression = ImmutableExpression(_value);
 
   @override
@@ -18,10 +18,10 @@ class PrimitiveImmutableElementValue<T> extends ElementValue<T> {
 
   @override
   ElementValue<T> clone() {
-    return PrimitiveImmutableElementValue(_value);
+    return ImmutableElementValue(_value);
   }
 
-  PrimitiveImmutableElementValue<T> cloneWithValue(T value) {
-    return PrimitiveImmutableElementValue(value);
+  ImmutableElementValue<T> cloneWithValue(T value) {
+    return ImmutableElementValue(value);
   }
 }

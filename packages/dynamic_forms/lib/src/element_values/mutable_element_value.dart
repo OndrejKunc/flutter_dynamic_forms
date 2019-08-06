@@ -1,14 +1,14 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:expression_language/expression_language.dart';
 
-class PrimitiveMutableElementValue<T> extends ElementValue<T> {
+class MutableElementValue<T> extends ElementValue<T> {
   MutableExpression<T> expression;
   bool get ignoreLastChange => _ignoreLastChange;
   bool _ignoreLastChange = false;
   T _initialValue;
   T _cachedValue;
 
-  PrimitiveMutableElementValue(T _value, [T _initialValue]) {
+  MutableElementValue(T _value, [T _initialValue]) {
     _cachedValue = _value;
     this._initialValue = _initialValue ?? _value;
     expression = MutableExpression(_value);
@@ -39,6 +39,6 @@ class PrimitiveMutableElementValue<T> extends ElementValue<T> {
 
   @override
   ElementValue<T> clone() {
-    return PrimitiveMutableElementValue(this.value, this._initialValue);
+    return MutableElementValue(this.value, this._initialValue);
   }
 }

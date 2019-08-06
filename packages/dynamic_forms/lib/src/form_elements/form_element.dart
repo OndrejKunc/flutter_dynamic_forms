@@ -89,8 +89,8 @@ abstract class FormElement implements ExpressionProviderElement {
       return cloneChildren(oldProperty, instance);
     }
     if (oldProperty is ElementValue<ExpressionProviderElement>) {
-      return PrimitiveImmutableElementValue(
-          oldProperty.value.clone(getPrimitiveImmutableElementValue(instance)));
+      return ImmutableElementValue(
+          oldProperty.value.clone(getImmutableElementValue(instance)));
     } else {
       return oldProperty.clone();
     }
@@ -115,21 +115,21 @@ abstract class FormElement implements ExpressionProviderElement {
     var childrenElements = children.value.toList();
     for (var i = 0; i < childrenElements.length; i++) {
       childrenElements[i] =
-          childrenElements[i].clone(getPrimitiveImmutableElementValue(parent));
+          childrenElements[i].clone(getImmutableElementValue(parent));
     }
-    if (children is PrimitiveImmutableElementValue) {
-      return (children as PrimitiveImmutableElementValue)
+    if (children is ImmutableElementValue) {
+      return (children as ImmutableElementValue)
           .cloneWithValue(childrenElements);
     }
 
-    return PrimitiveImmutableElementValue(childrenElements);
+    return ImmutableElementValue(childrenElements);
   }
 
-  ElementValue<FormElement> getPrimitiveImmutableElementValue(
+  ElementValue<FormElement> getImmutableElementValue(
       FormElement element) {
     if (element == null) {
       return null;
     }
-    return PrimitiveImmutableElementValue(element);
+    return ImmutableElementValue(element);
   }
 }

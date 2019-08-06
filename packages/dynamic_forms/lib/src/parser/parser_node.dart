@@ -37,17 +37,17 @@ abstract class ParserNode {
       getValue<int>(name, (s) => int.tryParse(s) ?? defaultInt(), defaultInt,
           isImmutable: isImmutable);
 
-  ElementValue<T> createPrimitiveElementValue<T>(T value, bool isImmutable) {
+  ElementValue<T> createElementValue<T>(T value, bool isImmutable) {
     return isImmutable
-        ? PrimitiveImmutableElementValue<T>(value)
-        : PrimitiveMutableElementValue<T>(value);
+        ? ImmutableElementValue<T>(value)
+        : MutableElementValue<T>(value);
   }
 
   ElementValue<FormElement> getParentValue(FormElement parent) {
     if (parent == null) {
       return null;
     }
-    return PrimitiveImmutableElementValue(parent);
+    return ImmutableElementValue(parent);
   }
 
   String emptyString() => "";
