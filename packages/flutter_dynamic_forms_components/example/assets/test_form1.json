@@ -1,0 +1,185 @@
+{
+    "@name": "form",
+    "id": "form1",
+    "children": [
+        {
+            "@name": "formGroup",
+            "id": "formGroup1",
+            "name": "Form section 1",
+            "children": [
+                {
+                    "@name": "text",
+                    "id": "firstName",
+                    "label": "Enter your first name",
+                    "value": "John",
+                    "validations": [
+                        {
+                            "@name": "validation",
+                            "message": "Name is too long",
+                            "isValid": {
+                                "expression": "length(@firstName) < 15"
+                            }
+                        },
+                        {
+                            "@name": "requiredValidation",
+                            "message": "First name is required"
+                        }
+                    ]
+                },
+                {
+                    "@name": "text",
+                    "id": "lastName",
+                    "label": "Enter your last name",
+                    "validations": [
+                        {
+                            "@name": "requiredValidation",
+                            "message": "Last name is required"
+                        }
+                    ]
+                },
+                {
+                    "@name": "label",
+                    "id": "fullNameLabel",
+                    "value": {
+                        "expression": "@firstName + (length(@firstName) > 0 && length(@lastName) > 0 ? \" \": \"\") + @lastName"
+                    }
+                },
+                {
+                    "@name": "label",
+                    "value": {
+                        "expression": "\"Welcome \" + @fullNameLabel + \"!\""
+                    },
+                    "isVisible": {
+                        "expression": "!@hideWelcomeCheckBox && length(@fullNameLabel) > 0"
+                    }
+                },
+                {
+                    "@name": "checkBox",
+                    "id": "hideWelcomeCheckBox",
+                    "value": "false",
+                    "label": "Hide welcome message"
+                },
+                {
+                    "@name": "formGroup",
+                    "id": "formgroup2",
+                    "name": "Form section 2",
+                    "children": [
+                        {
+                            "@name": "radioButtonGroup",
+                            "id": "radioGroup1",
+                            "value": "-1",
+                            "radioButtons": [
+                                {
+                                    "@name": "radioButton",
+                                    "label": "Option 1",
+                                    "value": "1"
+                                },
+                                {
+                                    "@name": "radioButton",
+                                    "label": "Option 2",
+                                    "value": "2"
+                                },
+                                {
+                                    "@name": "radioButton",
+                                    "label": "Option 3",
+                                    "value": "3"
+                                },
+                                {
+                                    "@name": "radioButton",
+                                    "label": "Option 4",
+                                    "value": "4"
+                                }
+                            ]
+                        },
+                        {
+                            "@name": "radioButtonGroup",
+                            "id": "radioGroup2",
+                            "value": "B",
+                            "radioButtons": [
+                                {
+                                    "@name": "radioButton",
+                                    "label": "Option A",
+                                    "value": "A"
+                                },
+                                {
+                                    "@name": "radioButton",
+                                    "label": "Option B",
+                                    "value": "B"
+                                },
+                                {
+                                    "@name": "radioButton",
+                                    "label": "Option C",
+                                    "value": "C"
+                                },
+                                {
+                                    "@name": "radioButton",
+                                    "label": "Option D",
+                                    "value": "D"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "@name": "formGroup",
+                    "id": "formgroup3",
+                    "name": "Form section 3",
+                    "children": [
+                        {
+                            "@name": "dropdownButton",
+                            "id": "dropdownButton1",
+                            "value": "CD",
+                            "options": [
+                                {
+                                    "@name": "dropdownOption",
+                                    "label": "Afganistan",
+                                    "value": "AF"
+                                },
+                                {
+                                    "@name": "dropdownOption",
+                                    "label": "Argentina",
+                                    "value": "AR"
+                                },
+                                {
+                                    "@name": "dropdownOption",
+                                    "label": "Belarus",
+                                    "value": "BY"
+                                },
+                                {
+                                    "@name": "dropdownOption",
+                                    "label": "Brazil",
+                                    "value": "BR"
+                                },
+                                {
+                                    "@name": "dropdownOption",
+                                    "label": "Congo, The democratic republic of",
+                                    "value": "CD"
+                                },
+                                {
+                                    "@name": "dropdownOption",
+                                    "label": "Falkland Islands",
+                                    "value": "FK"
+                                },
+                                {
+                                    "@name": "dropdownOption",
+                                    "label": "Georgia",
+                                    "value": "GE"
+                                },
+                                {
+                                    "@name": "dropdownOption",
+                                    "label": "Guinea",
+                                    "value": "GN"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "@name": "address",
+            "id": "testaddress",
+            "label": "Test address:"
+        }
+    ]
+}

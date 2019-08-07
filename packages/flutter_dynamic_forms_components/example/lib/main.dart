@@ -1,4 +1,5 @@
 import 'package:dynamic_forms/dynamic_forms.dart' as forms;
+import 'package:example/form_parser_type.dart';
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
     as components;
 import 'package:flutter/material.dart';
@@ -60,11 +61,29 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SimpleFormScreen(),
+                          builder: (context) => SimpleFormScreen(
+                            formParserType: FormParserType.xml,
+                          ),
                         ),
                       );
                     },
-                    child: Text("Simple Form"),
+                    child: Text("Simple XML Form"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: RaisedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SimpleFormScreen(
+                              formParserType: FormParserType.json,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text("Simple JSON Form"),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16),

@@ -1,4 +1,4 @@
-import 'package:example/renderers/transition_form_element_renderer.dart';
+import 'package:example/components/transition_form_element/transition_form_element_renderer.dart';
 import 'package:example/transition_form/transition_form_bloc.dart';
 import 'package:example/transition_form/transition_form_event.dart';
 import 'package:example/transition_form/transition_form_state.dart';

@@ -1,10 +1,15 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
+import 'package:example/form_parser_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 
 class SimpleFormContainer extends StatefulWidget {
+  final FormParserType formParserType;
+
+  const SimpleFormContainer({Key key, this.formParserType}) : super(key: key);
+
   @override
   _SimpleFormContainerState createState() => _SimpleFormContainerState();
 }
@@ -21,18 +26,39 @@ class _SimpleFormContainerState extends State<SimpleFormContainer> {
       renderers: getReactiveRenderers(),
       dispatcher: _onFormElementEvent,
     );
-
-    _loadForm();
+    switch (widget.formParserType) {
+      case FormParserType.xml:
+        _loadFormFromXml();
+        break;
+      case FormParserType.json:
+        _loadFormFromJson();
+        break;
+    }
   }
 
-  Future _loadForm() async {
-    var formManagerBuilder = FormManagerBuilder(
-      XmlFormParserService(getDefaultParserList()),
+  Future _loadFormFromXml() {
+    return _loadForm(
+      "assets/test_form1.xml",
+      XmlFormParserService(
+        getDefaultParserList(),
+      ),
     );
+  }
 
-    var xml =
-        await rootBundle.loadString("assets/test_form1.xml", cache: false);
-    _formManager = formManagerBuilder.build(xml);
+  Future _loadFormFromJson() {
+    return _loadForm(
+      "assets/test_form1.json",
+      JsonFormParserService(
+        getDefaultParserList(),
+      ),
+    );
+  }
+
+  Future _loadForm(String fileName, FormParserService formParserService) async {
+    var formManagerBuilder = FormManagerBuilder(formParserService);
+
+    var content = await rootBundle.loadString(fileName, cache: false);
+    _formManager = formManagerBuilder.build(content);
     setState(() {
       _form = _formManager.form;
     });
