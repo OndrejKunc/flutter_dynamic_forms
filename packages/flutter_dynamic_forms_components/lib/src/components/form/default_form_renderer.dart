@@ -11,7 +11,7 @@ class DefaultFormRenderer extends FormElementRenderer<model.Form> {
       FormElementRendererFunction renderer) {
     List<Widget> childrenWidgets = [];
     for (var child in element.children) {
-      if (child.isVisible.value) {
+      if (child.isVisible) {
         childrenWidgets.add(renderer(child, context));
       }
     }

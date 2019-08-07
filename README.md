@@ -16,9 +16,9 @@ A collection of flutter and dart libraries allowing you to dynamicaly define you
 
 The idea behind this project is to be able define your forms with all the inputs, validation logic and other rules on the server and consume it in the flutter client without redeploying the app.
 
-This is achieved by defining the form via XML using XAML like syntax. It has its own expression language to describe all the relationships between properties of each element.
+This is achieved by defining the form via XML using XAML like syntax or JSON. It has its own expression language to describe all the relationships between properties of each element.
 
-See [example project](packages/flutter_dynamic_forms_components/example) which contains working demo
+See [example project](packages/flutter_dynamic_forms_components/example) which contains working demo.
 
 ## Form definition example
 
@@ -69,7 +69,7 @@ See [example project](packages/flutter_dynamic_forms_components/example) which c
         label="Hide welcome message"/>
 </form>
 ```
-
+If you prefer JSON to describe your form please check [json example](packages/flutter_dynamic_forms_components/example/assets/test_form1.json).
 
 <div align="center">
   <img src="docs/simple_form.gif" alt="An animated gif showing example output" />
@@ -94,16 +94,18 @@ The `flutter_dynamic_forms_components` library contains set of predefined compon
 
 First you need to create object called `FormManager`. You can put it inside the `initState` method in your state of your `StatefulWidget`:
 ```dart
-//Get your XML somewhere, for demo purposes we use local assets
-var xml = await rootBundle.loadString("assets/test_form1.xml");
+//Get your data somewhere, for demo purposes we use local assets
+var data = await rootBundle.loadString("assets/test_form1.xml");
 
-//For default component set use predefined parser list.
-var formManagerBuilder = FormManagerBuilder(FormParserService(getDefaultParserList()));
+//Use either XmlFormParserService or JsonParserService depending on your form format.
+//For default component set use the predefined parser list.
+var formManagerBuilder = FormManagerBuilder(XmlFormParserService(getDefaultParserList()));
+
 
 //Store the _formManager in your state.
-_formManager = formManagerBuilder.build(xml);
+_formManager = formManagerBuilder.build(data);
 ```
-The `FormManager` has a getter `form` which is the object representation of your xml in Dart. `FormManager` can also perform some useful operation on the form, like manipulating the state of the form when something happens in the UI, validating the form or collecting all the data from the form so it can be for example sent back to the server.
+The `FormManager` has a getter `form` which is the object representation of your xml/json form in Dart. `FormManager` can also perform some useful operation on the form, like manipulating the state of the form when something happens in the UI, validating the form or collecting all the data from the form so it can be for example sent back to the server.
 
 
 Before you can render your form, you also need to initialize `FormRenderService`. This service gets list of renderers, where each renderer controls how each component would be rendered on the screen:

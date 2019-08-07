@@ -19,7 +19,7 @@ class ReactiveRadioButtonGroupRenderer
       builder: (context, snapshot) {
         return StreamBuilder(
           stream: Observable.merge(
-            snapshot.data.map((child) => child.isVisible.valueChanged),
+            snapshot.data.map((child) => child.isVisibleChanged),
           ),
           builder: (context, _) {
             List<Widget> childrenWidgets = [
@@ -28,7 +28,7 @@ class ReactiveRadioButtonGroupRenderer
               )
             ];
             childrenWidgets.addAll(
-              snapshot.data.where((f) => f.isVisible.value).map(
+              snapshot.data.where((f) => f.isVisible).map(
                     (child) => renderer(child, context),
                   ),
             );

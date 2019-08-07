@@ -12,10 +12,11 @@ abstract class FormElement implements ExpressionProviderElement {
   static const String IS_VISIBLE_PROPERTY_NAME = "isVisible";
 
   String id;
-  ElementValue<FormElement> get parent => properties[PARENT_PROPERTY_NAME];
-  ElementValue<bool> get isVisible => properties[IS_VISIBLE_PROPERTY_NAME];
-  set isVisible(ElementValue<bool> value) =>
-      properties[IS_VISIBLE_PROPERTY_NAME] = value;
+  FormElement get parent => properties[PARENT_PROPERTY_NAME].value;
+  bool get isVisible => properties[IS_VISIBLE_PROPERTY_NAME].value;
+  Stream<bool> get isVisibleChanged =>
+      properties[IS_VISIBLE_PROPERTY_NAME].valueChanged;
+      
   @protected
   Map<String, ElementValue> properties = {};
 
@@ -89,8 +90,8 @@ abstract class FormElement implements ExpressionProviderElement {
       return cloneChildren(oldProperty, instance);
     }
     if (oldProperty is ElementValue<ExpressionProviderElement>) {
-      return PrimitiveImmutableElementValue(
-          oldProperty.value.clone(getParentValue(instance)));
+      return ImmutableElementValue(
+          oldProperty.value.clone(getImmutableElementValue(instance)));
     } else {
       return oldProperty.clone();
     }
@@ -114,13 +115,21 @@ abstract class FormElement implements ExpressionProviderElement {
       ElementValue<List> children, ExpressionProviderElement parent) {
     var childrenElements = children.value.toList();
     for (var i = 0; i < childrenElements.length; i++) {
-      childrenElements[i] = childrenElements[i].clone(getParentValue(parent));
+      childrenElements[i] =
+          childrenElements[i].clone(getImmutableElementValue(parent));
     }
-    if (children is PrimitiveImmutableElementValue) {
-      return (children as PrimitiveImmutableElementValue)
+    if (children is ImmutableElementValue) {
+      return (children as ImmutableElementValue)
           .cloneWithValue(childrenElements);
     }
 
-    return PrimitiveImmutableElementValue(childrenElements);
+    return ImmutableElementValue(childrenElements);
+  }
+
+  ElementValue<FormElement> getImmutableElementValue(FormElement element) {
+    if (element == null) {
+      return null;
+    }
+    return ImmutableElementValue(element);
   }
 }

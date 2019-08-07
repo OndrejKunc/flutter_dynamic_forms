@@ -1,7 +1,5 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-import 'package:xml/xml.dart';
-
 import 'dropdown_button.dart';
 import '../dropdown_option/dropdown_option.dart';
 
@@ -10,15 +8,19 @@ class DropdownButtonParser extends FormElementParser<DropdownButton> {
   String get name => "dropdownButton";
 
   @override
-  DropdownButton parse(XmlElement element, FormElement parent,
+  DropdownButton parse(ParserNode parserNode, FormElement parent,
       FormElementParserFunction parser) {
     var dropdownButton = DropdownButton();
     dropdownButton.fillDropdownButton(
-      id: getAttribute(element, "id"),
-      isVisible: getIsVisible(element),
-      parent: getParentValue(parent),
-      value: getStringValue(element, "value", isImmutable: false),
-      options: getChildren<DropdownOption>(element, dropdownButton, parser),
+      id: parserNode.getPlainStringValue("id"),
+      isVisible: parserNode.getIsVisible(),
+      parent: parserNode.getParentValue(parent),
+      value: parserNode.getStringValue("value", isImmutable: false),
+      options: parserNode.getChildren<DropdownOption>(
+          parent: dropdownButton,
+          childrenPropertyName: "options",
+          parser: parser,
+          isContentProperty: true),
     );
     return dropdownButton;
   }

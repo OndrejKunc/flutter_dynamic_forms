@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:xml/xml.dart';
 
 import 'container.dart';
 
@@ -8,14 +7,18 @@ class ContainerParser extends FormElementParser<Container> {
   String get name => "container";
 
   @override
-  Container parse(XmlElement element, FormElement parent,
+  Container parse(ParserNode parserNode, FormElement parent,
       FormElementParserFunction parser) {
     var container = Container();
     container.fillContainer(
-      id: getAttribute(element, "id"),
-      isVisible: getIsVisible(element),
-      parent: getParentValue(parent),
-      children: getChildren<FormElement>(element, container, parser),
+      id: parserNode.getPlainStringValue("id"),
+      isVisible: parserNode.getIsVisible(),
+      parent: parserNode.getParentValue(parent),
+      children: parserNode.getChildren<FormElement>(
+          parent: container,
+          childrenPropertyName: "children",
+          parser: parser,
+          isContentProperty: true),
     );
     return container;
   }

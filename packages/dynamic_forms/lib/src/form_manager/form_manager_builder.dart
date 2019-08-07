@@ -43,12 +43,12 @@ class FormManagerBuilder {
         key: (x) => x.id,
         value: (x) => x);
 
-    var formPrimitiveMutableValues =
-        getFormElementValueIterator<PrimitiveMutableElementValue>(root)
+    var formMutableValues =
+        getFormElementValueIterator<MutableElementValue>(root)
             .toList();
 
     return FormManager(
-        root, formElementMap, formValidations, formPrimitiveMutableValues);
+        root, formElementMap, formValidations, formMutableValues);
   }
 
   void _buildCloneableExpressions(

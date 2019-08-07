@@ -22,7 +22,7 @@ class ReactiveFormGroupRenderer extends FormElementRenderer<FormGroup> {
           stream: Observable.merge(
             snapshot.data
                 .whereType<model.FormElement>()
-                .map((child) => child.isVisible.valueChanged),
+                .map((child) => child.isVisibleChanged),
           ),
           builder: (context, _) {
             List<Widget> childrenWidgets = [
@@ -37,7 +37,7 @@ class ReactiveFormGroupRenderer extends FormElementRenderer<FormGroup> {
             childrenWidgets.addAll(
               snapshot.data
                   .whereType<model.FormElement>()
-                  .where((f) => f.isVisible.value)
+                  .where((f) => f.isVisible)
                   .map(
                     (child) => renderer(child, context),
                   ),

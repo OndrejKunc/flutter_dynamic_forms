@@ -1,6 +1,11 @@
+# 0.4.0
+
+- Added abstraction over XML parser.
+- Added JSON parser.
+
 # 0.3.0
 
-Specific models and parsers were moved to the flutter_dynamic_forms_components package
+Specific models and parsers were moved to the flutter_dynamic_forms_components package.
 
 # 0.2.0
 

@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:xml/xml.dart';
 
 import 'text.dart';
 
@@ -8,18 +7,19 @@ class TextParser extends FormElementParser<Text> {
   String get name => "text";
 
   @override
-  Text parse(XmlElement element, FormElement parent,
+  Text parse(ParserNode parserNode, FormElement parent,
       FormElementParserFunction parser) {
     var text = Text();
     text.fillText(
-        id: getAttribute(element, "id"),
-        isVisible: getIsVisible(element),
-        parent: getParentValue(parent),
-        value: getStringValue(element, "value", isImmutable: false),
-        label: getStringValue(element, "label"),
-        textInputType: getStringValue(element, "textInputType"),
-        validations: getChildrenFromElement<Validation>(
-            element, text, "validations", parser));
+      id: parserNode.getPlainStringValue("id"),
+      isVisible: parserNode.getIsVisible(),
+      parent: parserNode.getParentValue(parent),
+      value: parserNode.getStringValue("value", isImmutable: false),
+      label: parserNode.getStringValue("label"),
+      textInputType: parserNode.getStringValue("textInputType"),
+      validations: parserNode.getChildren<Validation>(
+          parent: text, childrenPropertyName: "validations", parser: parser),
+    );
     return text;
   }
 }

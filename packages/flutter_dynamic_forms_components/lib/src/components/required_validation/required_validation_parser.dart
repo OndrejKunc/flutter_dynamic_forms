@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:xml/xml.dart';
 
 import '../required_validation/required_validation.dart';
 
@@ -8,14 +7,14 @@ class RequiredValidationParser extends FormElementParser<RequiredValidation> {
   String get name => "requiredValidation";
 
   @override
-  RequiredValidation parse(XmlElement element, FormElement parent,
+  RequiredValidation parse(ParserNode parserNode, FormElement parent,
       FormElementParserFunction parser) {
     RequiredValidation validation = RequiredValidation();
     validation.fillRequiredValidation(
-      id: getAttribute(element, "id"),
-      isVisible: getIsVisible(element),
-      parent: getParentValue(parent),
-      message: getStringValue(element, "message"),
+      id: parserNode.getPlainStringValue("id"),
+      isVisible: parserNode.getIsVisible(),
+      parent: parserNode.getParentValue(parent),
+      message: parserNode.getStringValue("message"),
     );
     return validation;
   }

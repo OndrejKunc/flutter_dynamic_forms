@@ -9,10 +9,10 @@ class FormManager {
   Map<String, FormElement> formElementMap;
   Map<String, Validation> formValidations;
 
-  List<PrimitiveMutableElementValue> primitiveMutableValues;
+  List<MutableElementValue> mutableValues;
 
   FormManager(this.form, this.formElementMap, this.formValidations,
-      this.primitiveMutableValues);
+      this.mutableValues);
 
   bool get isFormValid {
     return formValidations.values.every((v) => (v.isValid));
@@ -25,7 +25,7 @@ class FormManager {
     formElements.forEach((fe) {
       var properties = fe.getProperties();
       properties.forEach((name, propVal) {
-        if (propVal is PrimitiveMutableElementValue &&
+        if (propVal is MutableElementValue &&
             !(propVal is ElementValue<ExpressionProviderElement>) &&
             !(propVal is ElementValue<List<ExpressionProviderElement>>)) {
           result.add(FormItemValue(fe.id, name, propVal.value.toString()));
@@ -37,7 +37,7 @@ class FormManager {
   }
 
   void resetForm() {
-    primitiveMutableValues.forEach((pmv) => pmv.resetValue());
+    mutableValues.forEach((pmv) => pmv.resetValue());
   }
 
   void changeValue<T>({
@@ -53,7 +53,7 @@ class FormManager {
     }
     var formElement = formElementMap[elementId];
     var elementValue = formElement.getElementValue(propertyName);
-    var mutableValue = elementValue as PrimitiveMutableElementValue<T>;
+    var mutableValue = elementValue as MutableElementValue<T>;
     if (mutableValue == null) {
       print(
           "Value cannot be changed because element $elementId is not mutable");

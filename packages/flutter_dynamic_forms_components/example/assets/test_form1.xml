@@ -2,7 +2,7 @@
 <form id="form1">
     <formGroup 
         id="formgroup1"
-        name="From section 1">
+        name="Form section 1">
         <text
             id="firstName"
             label="Enter your first name" value="John">

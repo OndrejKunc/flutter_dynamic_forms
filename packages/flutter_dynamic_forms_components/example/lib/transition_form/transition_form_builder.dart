@@ -1,5 +1,5 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:example/models/transition_form_element.dart';
+import 'package:example/components/transition_form_element/transition_form_element.dart';
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 
 class TransitionFormBuilder {

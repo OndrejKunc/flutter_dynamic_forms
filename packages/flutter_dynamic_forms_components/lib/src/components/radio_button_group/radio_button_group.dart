@@ -3,8 +3,6 @@ import 'package:meta/meta.dart';
 
 import '../radio_button/radio_button.dart';
 
-enum RadioButtonGroupArrangement { vertical, horizontal }
-
 class RadioButtonGroup extends FormElement {
   static const String VALUE_PROPERTY_NAME = "value";
   static const String RADIO_BUTTONS_PROPERTY_NAME = "radioButtons";
@@ -18,8 +16,9 @@ class RadioButtonGroup extends FormElement {
   Stream<List<RadioButton>> get radioButtonsChanged =>
       properties[RADIO_BUTTONS_PROPERTY_NAME].valueChanged;
 
-  RadioButtonGroupArrangement get arrangement =>
-      properties[ARRANGEMENT_PROPERTY_NAME].value;
+  String get arrangement => properties[ARRANGEMENT_PROPERTY_NAME].value;
+  Stream<String> get arrangementChanged =>
+      properties[ARRANGEMENT_PROPERTY_NAME].valueChanged;
 
   void fillRadioButtonGroup(
       {@required String id,
@@ -27,11 +26,11 @@ class RadioButtonGroup extends FormElement {
       @required ElementValue<bool> isVisible,
       @required ElementValue<List<RadioButton>> radioButtons,
       @required ElementValue<String> value,
-      @required ElementValue<RadioButtonGroupArrangement> arrangemet}) {
+      @required ElementValue<String> arrangement}) {
     fillFormElement(id: id, parent: parent, isVisible: isVisible);
     registerElementValue(RADIO_BUTTONS_PROPERTY_NAME, radioButtons);
     registerElementValue(VALUE_PROPERTY_NAME, value);
-    registerElementValue(ARRANGEMENT_PROPERTY_NAME, arrangemet);
+    registerElementValue(ARRANGEMENT_PROPERTY_NAME, arrangement);
   }
 
   @override
