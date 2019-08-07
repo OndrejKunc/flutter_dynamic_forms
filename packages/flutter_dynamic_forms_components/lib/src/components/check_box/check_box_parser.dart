@@ -14,7 +14,8 @@ class CheckBoxParser extends FormElementParser<CheckBox> {
       id: parserNode.getPlainStringValue("id"),
       isVisible: parserNode.getIsVisible(),
       parent: parserNode.getParentValue(parent),
-      value: parserNode.getValue("isValid", ParserNode.convertToBool, ParserNode.defaultFalse,
+      value: parserNode.getValue(
+          "isValid", ParserNode.convertToBool, ParserNode.defaultFalse,
           isImmutable: false),
       label: parserNode.getStringValue("label"),
     );

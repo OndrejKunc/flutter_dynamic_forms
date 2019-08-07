@@ -16,7 +16,7 @@ abstract class FormElement implements ExpressionProviderElement {
   bool get isVisible => properties[IS_VISIBLE_PROPERTY_NAME].value;
   Stream<bool> get isVisibleChanged =>
       properties[IS_VISIBLE_PROPERTY_NAME].valueChanged;
-      
+
   @protected
   Map<String, ElementValue> properties = {};
 

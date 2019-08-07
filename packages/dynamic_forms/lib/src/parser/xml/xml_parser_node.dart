@@ -20,8 +20,7 @@ class XmlParserNode extends ParserNode {
       var firstChild = elementValue.firstChild;
       if (firstChild != null) {
         if (firstChild is XmlText || firstChild is XmlCDATA) {
-          return createElementValue<T>(
-              converter(firstChild.text), isImmutable);
+          return createElementValue<T>(converter(firstChild.text), isImmutable);
         }
         if (firstChild is XmlElement) {
           if (firstChild.name.qualified == "expression") {
@@ -36,8 +35,7 @@ class XmlParserNode extends ParserNode {
     }
     var attributeValue = getAttribute(element, name);
     if (attributeValue != null) {
-      return createElementValue<T>(
-          converter(attributeValue), isImmutable);
+      return createElementValue<T>(converter(attributeValue), isImmutable);
     }
     return createElementValue<T>(defaultValue(), isImmutable);
   }
@@ -90,8 +88,7 @@ class XmlParserNode extends ParserNode {
             .map((c) => parser(XmlParserNode(c), parent))
             .cast<TFormElement>()
             .toList();
-    var childrenElementValue =
-        createElementValue(children, isImmutable);
+    var childrenElementValue = createElementValue(children, isImmutable);
     return childrenElementValue;
   }
 }

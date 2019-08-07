@@ -19,8 +19,7 @@ class JsonParserNode extends ParserNode {
       return createElementValue<T>(defaultValue(), isImmutable);
     }
     if (elementValue is String) {
-      return createElementValue<T>(
-          converter(elementValue), isImmutable);
+      return createElementValue<T>(converter(elementValue), isImmutable);
     }
     if (elementValue is Map<String, dynamic>) {
       var expression = elementValue["expression"];
@@ -50,8 +49,7 @@ class JsonParserNode extends ParserNode {
             .map((c) => parser(JsonParserNode(c), parent))
             .cast<TFormElement>()
             .toList();
-    var childrenElementValue =
-        createElementValue(children, isImmutable);
+    var childrenElementValue = createElementValue(children, isImmutable);
     return childrenElementValue;
   }
 }

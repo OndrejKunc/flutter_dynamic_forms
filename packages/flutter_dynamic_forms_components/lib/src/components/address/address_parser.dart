@@ -19,8 +19,8 @@ class AddressParser extends FormElementParser<FormGroup> {
         isVisible: ImmutableElementValue(true),
         parent: parserNode.getParentValue(formGroup),
         value: parserNode.getStringValue("street", isImmutable: false),
-        label:
-            parserNode.getValue("streetLabel", ParserNode.convertToString, () => "Street"),
+        label: parserNode.getValue(
+            "streetLabel", ParserNode.convertToString, () => "Street"),
         textInputType: ImmutableElementValue(""),
         validations: ImmutableElementValue([])); //TODO add validations
 
@@ -30,7 +30,8 @@ class AddressParser extends FormElementParser<FormGroup> {
         isVisible: ImmutableElementValue(true),
         parent: parserNode.getParentValue(formGroup),
         value: parserNode.getStringValue("city", isImmutable: false),
-        label: parserNode.getValue("cityLabel", ParserNode.convertToString, () => "City"),
+        label: parserNode.getValue(
+            "cityLabel", ParserNode.convertToString, () => "City"),
         textInputType: ImmutableElementValue(""),
         validations: ImmutableElementValue([])); //TODO add validations
 
@@ -40,7 +41,8 @@ class AddressParser extends FormElementParser<FormGroup> {
         isVisible: ImmutableElementValue(true),
         parent: parserNode.getParentValue(formGroup),
         value: parserNode.getStringValue("zip", isImmutable: false),
-        label: parserNode.getValue("zipLabel", ParserNode.convertToString, () => "Zip"),
+        label: parserNode.getValue(
+            "zipLabel", ParserNode.convertToString, () => "Zip"),
         textInputType: ImmutableElementValue(""),
         validations: ImmutableElementValue([])); //TODO add validations
 

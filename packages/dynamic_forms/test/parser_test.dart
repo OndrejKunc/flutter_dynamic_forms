@@ -251,7 +251,7 @@ void main() {
     expect(resultValue, "Welcome John Doe!");
   });
 
-    test('json with expressions', () {
+  test('json with expressions', () {
     var parserService = JsonFormParserService(_getDefaultParserList());
 
     var json = '''

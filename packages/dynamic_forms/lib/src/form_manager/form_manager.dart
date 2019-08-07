@@ -11,8 +11,8 @@ class FormManager {
 
   List<MutableElementValue> mutableValues;
 
-  FormManager(this.form, this.formElementMap, this.formValidations,
-      this.mutableValues);
+  FormManager(
+      this.form, this.formElementMap, this.formValidations, this.mutableValues);
 
   bool get isFormValid {
     return formValidations.values.every((v) => (v.isValid));

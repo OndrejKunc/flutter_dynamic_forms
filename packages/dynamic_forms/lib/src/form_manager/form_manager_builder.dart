@@ -44,8 +44,7 @@ class FormManagerBuilder {
         value: (x) => x);
 
     var formMutableValues =
-        getFormElementValueIterator<MutableElementValue>(root)
-            .toList();
+        getFormElementValueIterator<MutableElementValue>(root).toList();
 
     return FormManager(
         root, formElementMap, formValidations, formMutableValues);

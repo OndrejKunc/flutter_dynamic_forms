@@ -11,7 +11,8 @@ class SimpleFormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Simple dynamic form parsed from ${formParserType.toString().split('.').last}'),
+        title: Text(
+            'Simple dynamic form parsed from ${formParserType.toString().split('.').last}'),
       ),
       body: Center(
         child: SingleChildScrollView(
