@@ -39,3 +39,7 @@ class InvalidParameterException extends ExpressionParserException {
 class InvalidParameterCount extends ExpressionParserException {
   InvalidParameterCount(String message) : super(message);
 }
+
+class InvalidRegularExpressionException extends ExpressionParserException {
+  InvalidRegularExpressionException(String message) : super(message);
+}

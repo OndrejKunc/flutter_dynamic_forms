@@ -42,6 +42,16 @@ class ThenIntExpressionResult extends Then1WithWorld<String, ExpressionWorld> {
   RegExp get pattern => RegExp(r"int expression result is {string}");
 }
 
+class ThenStringExpressionResult
+    extends Then1WithWorld<String, ExpressionWorld> {
+  @override
+  Future<void> executeStep(String result) async {
+    expectMatch(world.result, result);
+  }
+
+  RegExp get pattern => RegExp(r"string expression result is {string}");
+}
+
 class ThenDecimalExpressionResult
     extends Then1WithWorld<String, ExpressionWorld> {
   @override

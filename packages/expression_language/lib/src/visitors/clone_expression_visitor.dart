@@ -341,6 +341,16 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitMatchesFunction(MatchesFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.regex.accept(this);
+    var regex = pop();
+    var value = pop();
+    push(MatchesFunctionExpression(value, regex));
+  }
+
+
+  @override
   void visitIntToInteger(IntToIntegerExpression expression) {
     expression.value.accept(this);
     push(IntToIntegerExpression(pop()));

@@ -529,10 +529,6 @@ Feature: Expression
     When expression "7 + (3*2-(2+8)" is evaluated
     Then "InvalidSyntaxException" exception is thrown
 
-  Scenario: it should throw NullReferenceException when given 6 + c
-    When expression "6 + c" is evaluated
-    Then "NullReferenceException" exception is thrown
-
   Scenario: it should treat dot separated floating point numbers as a valid input
     When expression "2.5" is evaluated
     Then decimal expression result is "2.5"
@@ -709,50 +705,26 @@ Feature: Expression
     When expression "5.0005 + 0.0095" is evaluated
     Then decimal expression result is "5.01"
 
-#Scenario: it should calculate long, mixed additive and multiplicative expressions from left to right
-#  When expression "2*3*4/8 -   5/2*4 +  6 + 0/3   " is evaluated
-#  Then int expression result is "-1"
-#actual 1, problem with a divide operation KOYAL-103
+  Scenario: it should match string with dot
+    When expression ""a \."" is evaluated
+    Then string expression result is "a \."
 
-#Scenario: it should return Infinity when attempt to divide by zero occurs
-#  When expression " 2 - 1 + 14/0 + 7" is evaluated
-#  Then int expression result is "be_infinite"
+  Scenario: it should match string with special characters
+    When expression ""a @ \\ \@ . \."" is evaluated
+    Then string expression result is "a @ \\ \@ . \."
 
-#Scenario: it should solve an expression
-#  When expression "(1 + 20 < 3*5) && false || (2 + 3*(4+21))  >= 15" is evaluated
-#  Then bool expression result is true
+  Scenario: it should calculate correct simple regular expression
+    When expression "matches("test@email.com","test@email.com")" is evaluated
+    Then bool expression result is "true"
 
-#Scenario: resolve dependency
-#  Given form element is provided
-#  When expression "@formElement.value + 5" is evaluated
-#  Then int expression result is "32"
+  Scenario: it should calculate wrong simple regular expression
+    When expression "matches("test@email.com","test@email2.com")" is evaluated
+    Then bool expression result is "false"
 
-#Scenario: resolve dependency
-#   Given form element "testElement" is provided with values "label1:'abc';number1:123;bool2:true"
-#   When expression "@testElement.label1 + 5" is evaluated
-#   Then int expression result is "32"
+  Scenario: it should match simple string
+    When expression ""abcdef 123"" is evaluated
+    Then string expression result is "abcdef 123"
 
-#Scenario: it should return float pointing numbers when division result is not an integer
-#    When expression "10/4" is evaluated
-#    Then int expression result is "2.5"
-
-# Scenario: it should calculate long, mixed additive and multiplicative expressions from left to right
-#   When expression "2*3*4/8 -   5/2*4 +  6 + 0/3   " is evaluated
-#   Then int expression result is "-1"
-# actual 1
-
-# Scenario: it should raise an error when input is empty
-#  When expression "" is evaluated
-#  Then int expression result is "ERROR"
-
-# Scenario: it should return float pointing numbers when division result is not an integer
-#  When expression "5/3" is evaluated
-#  Then decimal expression result is "1.66"
-
-#Scenario: it should return float pointing numbers when division result is not an integer
-#  When expression "3 + 8/5 -1 -2*5" is evaluated
-#  Then int expression result is "be_close(-6.4, 0.01)"
-
-#Scenario: it should return Infinity when attempt to divide by zero occurs
-#  When expression "5/0" is evaluated
-#  Then int expression result is "be_infinite"
+  Scenario: it should calculate complex regular expression
+    When expression "matches("test@email.com","^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$")" is evaluated
+    Then bool expression result is "true"

@@ -96,7 +96,7 @@ Expression createFunctionExpression(
       return RoundFunctionExpression(parameters[0], parameters[1]);
     } else {
       throw InvalidParameterCount(
-          "Function $functionName expects only 2 or 3 parameters");
+          "Function $functionName expects 2 or 3 parameters");
     }
   }
   if (functionName == "dateTime") {
@@ -130,7 +130,7 @@ Expression createFunctionExpression(
   if (functionName == "diffDateTime") {
     if (parameters.length != 2) {
       throw InvalidParameterCount(
-          "Function $functionName expects only 2 parameters");
+          "Function $functionName expects exactly 2 parameters");
     }
     return DiffDateTimeFunctionExpression(parameters[0], parameters[1]);
   }
@@ -161,6 +161,13 @@ Expression createFunctionExpression(
           "Function $functionName expects only 1 parameter");
     }
     return DurationInSecondsFunctionExpression(parameters[0]);
+  }
+  if (functionName == "matches") {
+    if (parameters.length != 2) {
+      throw InvalidParameterCount(
+          "Function $functionName expects exactly 2 parameters");
+    }
+    return MatchesFunctionExpression(parameters[0], parameters[1]);
   }
   throw UnknownFunctionException("Unknown function name $functionName");
 }

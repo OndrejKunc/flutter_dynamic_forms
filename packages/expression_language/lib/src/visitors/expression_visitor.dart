@@ -42,6 +42,7 @@ abstract class ExpressionVisitor {
   void visitDelegate<T>(DelegateExpression<T> expression);
   void visitConditionalExpression<T>(ConditionalExpression<T> expression);
   void visitLengthFunction(LengthFunctionExpression expression);
+  void visitMatchesFunction(MatchesFunctionExpression expression);
   void visitToStringFunction(ToStringFunctionExpression expression);
   void visitIntToInteger(IntToIntegerExpression expression);
   void visitIntegerToInt(IntegerToIntExpression expression);

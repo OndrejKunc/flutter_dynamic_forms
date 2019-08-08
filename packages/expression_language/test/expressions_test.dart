@@ -22,6 +22,7 @@ void main() async {
       GivenFormElementIsProvided(),
       WhenExpressionIsEvaluated(),
       ThenIntExpressionResult(),
+      ThenStringExpressionResult(),
       ThenDecimalExpressionResult(),
       ThenBoolExpressionResult(),
       ThenExceptionThrownResult(),

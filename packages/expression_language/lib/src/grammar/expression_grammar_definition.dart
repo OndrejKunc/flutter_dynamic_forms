@@ -20,7 +20,7 @@ class ExpressionGrammarDefinition extends GrammarDefinition {
   Parser integerNumber() => ref(DIGIT) & ref(DIGIT).star();
   Parser singleLineString() =>
       char('"') & ref(stringContent).star() & char('"');
-  Parser stringContent() => pattern('^\\"\n\r') | char('\\') & pattern('\n\r');
+  Parser stringContent() => pattern('^"');
   Parser literal() => ref(
       token,
       ref(decimalNumber) |
@@ -93,7 +93,7 @@ class ExpressionGrammarDefinition extends GrammarDefinition {
   Parser expression() => ref(conditionalExpression);
 
   Parser reference() =>
-      char('@').optional() &
+      char('@') &
       ref(identifier).flatten() &
       (char('.') & ref(identifier).flatten()).star();
 
