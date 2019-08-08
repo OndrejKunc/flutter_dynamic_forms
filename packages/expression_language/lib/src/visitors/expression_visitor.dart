@@ -66,4 +66,7 @@ abstract class ExpressionVisitor {
       DurationInMinutesFunctionExpression expression);
   void visitDurationInSecondsFunction(
       DurationInSecondsFunctionExpression expression);
+  void visitContainsFunction(ContainsFunctionExpression expression);
+  void visitStartsWithFunction(StartsWithFunctionExpression expression);
+  void visitEndsWithFunction(EndsWithFunctionExpression expression);
 }

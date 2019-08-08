@@ -169,5 +169,26 @@ Expression createFunctionExpression(
     }
     return MatchesFunctionExpression(parameters[0], parameters[1]);
   }
+  if (functionName == "contains") {
+    if (parameters.length != 2) {
+      throw InvalidParameterCount(
+          "Function $functionName expects exactly 2 parameters");
+    }
+    return ContainsFunctionExpression(parameters[0], parameters[1]);
+  }
+  if (functionName == "startsWith") {
+    if (parameters.length != 2) {
+      throw InvalidParameterCount(
+          "Function $functionName expects exactly 2 parameters");
+    }
+    return StartsWithFunctionExpression(parameters[0], parameters[1]);
+  }
+  if (functionName == "endsWith") {
+    if (parameters.length != 2) {
+      throw InvalidParameterCount(
+          "Function $functionName expects exactly 2 parameters");
+    }
+    return EndsWithFunctionExpression(parameters[0], parameters[1]);
+  }
   throw UnknownFunctionException("Unknown function name $functionName");
 }

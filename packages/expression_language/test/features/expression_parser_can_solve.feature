@@ -728,3 +728,27 @@ Feature: Expression
   Scenario: it should calculate complex regular expression
     When expression "matches("test@email.com","^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$")" is evaluated
     Then bool expression result is "true"
+
+  Scenario: it should match valid contains
+    When expression "contains("first second third", "second t")" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: it should not match invalid contains
+    When expression "contains("first second third", "fourth")" is evaluated
+    Then bool expression result is "false"
+
+  Scenario: it should match valid startsWith
+    When expression "startsWith("first second third", "first")" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: it should not match invalid startsWith
+    When expression "startsWith("first second third", "second")" is evaluated
+    Then bool expression result is "false"
+
+  Scenario: it should match valid endsWith
+    When expression "endsWith("first second third", "third")" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: it should not match invalid endsWith
+    When expression "endsWith("first second third", "second")" is evaluated
+    Then bool expression result is "false"

@@ -310,4 +310,22 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
       DurationInSecondsFunctionExpression expression) {
     expression.value.accept(this);
   }
+
+  @override
+  void visitContainsFunction(ContainsFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.searchValue.accept(this);
+  }
+
+  @override
+  void visitEndsWithFunction(EndsWithFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.searchValue.accept(this);
+  }
+
+  @override
+  void visitStartsWithFunction(StartsWithFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.searchValue.accept(this);
+  }
 }

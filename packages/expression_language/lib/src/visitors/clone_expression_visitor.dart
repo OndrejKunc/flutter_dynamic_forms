@@ -349,7 +349,6 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     push(MatchesFunctionExpression(value, regex));
   }
 
-
   @override
   void visitIntToInteger(IntToIntegerExpression expression) {
     expression.value.accept(this);
@@ -472,5 +471,32 @@ class CloneExpressionVisitor extends ExpressionVisitor {
       DurationInSecondsFunctionExpression expression) {
     expression.value.accept(this);
     push(DurationInSecondsFunctionExpression(pop()));
+  }
+
+  @override
+  void visitContainsFunction(ContainsFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.searchValue.accept(this);
+    var searchValue = pop();
+    var value = pop();
+    push(ContainsFunctionExpression(value, searchValue));
+  }
+
+  @override
+  void visitEndsWithFunction(EndsWithFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.searchValue.accept(this);
+    var searchValue = pop();
+    var value = pop();
+    push(EndsWithFunctionExpression(value, searchValue));
+  }
+
+  @override
+  void visitStartsWithFunction(StartsWithFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.searchValue.accept(this);
+    var searchValue = pop();
+    var value = pop();
+    push(StartsWithFunctionExpression(value, searchValue));
   }
 }
