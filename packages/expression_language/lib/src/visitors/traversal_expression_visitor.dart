@@ -213,6 +213,12 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitMatchesFunction(MatchesFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.regex.accept(this);
+  }
+
+  @override
   void visitIntToInteger(IntToIntegerExpression expression) {
     expression.value.accept(this);
   }
@@ -303,5 +309,23 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   void visitDurationInSecondsFunction(
       DurationInSecondsFunctionExpression expression) {
     expression.value.accept(this);
+  }
+
+  @override
+  void visitContainsFunction(ContainsFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.searchValue.accept(this);
+  }
+
+  @override
+  void visitEndsWithFunction(EndsWithFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.searchValue.accept(this);
+  }
+
+  @override
+  void visitStartsWithFunction(StartsWithFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.searchValue.accept(this);
   }
 }
