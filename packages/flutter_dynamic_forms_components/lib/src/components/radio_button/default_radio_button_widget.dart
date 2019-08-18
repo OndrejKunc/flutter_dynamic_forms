@@ -25,7 +25,7 @@ class DefaultRadioButtonRenderer
                 ChangeValueEvent(
                     value: value,
                     elementId: parent.id,
-                    propertyName: RadioButtonGroup.VALUE_PROPERTY_NAME),
+                    propertyName: RadioButtonGroup.valuePropertyName),
               ),
         ));
   }

@@ -23,11 +23,11 @@ class ReactiveDropdownButtonRenderer
           child: DropdownButton<String>(
             value: element.value,
             onChanged: (String newValue) => dispatcher(
-                  ChangeValueEvent(
-                      value: newValue,
-                      elementId: element.id,
-                      propertyName: model.DropdownButton.VALUE_PROPERTY_NAME),
-                ),
+              ChangeValueEvent(
+                  value: newValue,
+                  elementId: element.id,
+                  propertyName: model.DropdownButton.valuePropertyName),
+            ),
             items: element.options
                 .where((d) => d.isVisible)
                 .map<DropdownMenuItem<String>>(

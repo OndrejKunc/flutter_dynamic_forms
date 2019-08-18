@@ -3,15 +3,14 @@ import 'package:flutter_dynamic_forms_components/src/components/dropdown_option/
 import 'package:meta/meta.dart';
 
 class DropdownButton extends FormElement {
-  static const OPTIONS_PROPERTY_NAME = "options";
-  static const String VALUE_PROPERTY_NAME = "value";
+  static const String optionsPropertyName = "options";
+  static const String valuePropertyName = "value";
 
-  List<DropdownOption> get options => properties[OPTIONS_PROPERTY_NAME].value;
+  List<DropdownOption> get options => properties[optionsPropertyName].value;
   Stream<List<DropdownOption>> get optionsChanged =>
-      properties[OPTIONS_PROPERTY_NAME].valueChanged;
-  String get value => properties[VALUE_PROPERTY_NAME].value;
-  Stream<String> get valueChanged =>
-      properties[VALUE_PROPERTY_NAME].valueChanged;
+      properties[optionsPropertyName].valueChanged;
+  String get value => properties[valuePropertyName].value;
+  Stream<String> get valueChanged => properties[valuePropertyName].valueChanged;
 
   void fillDropdownButton({
     @required String id,
@@ -21,8 +20,8 @@ class DropdownButton extends FormElement {
     @required ElementValue<String> value,
   }) {
     fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    registerElementValue(OPTIONS_PROPERTY_NAME, options);
-    registerElementValue(VALUE_PROPERTY_NAME, value);
+    registerElementValue(optionsPropertyName, options);
+    registerElementValue(valuePropertyName, value);
   }
 
   @override

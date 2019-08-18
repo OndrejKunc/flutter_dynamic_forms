@@ -4,18 +4,16 @@ import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:uuid/uuid.dart';
 
-const String SELECTED_VALUE_PROPERTY = "value";
-
 abstract class FormElement implements ExpressionProviderElement {
-  static const String DEFAULT_PROPERTY_NAME = "value";
-  static const String PARENT_PROPERTY_NAME = "parent";
-  static const String IS_VISIBLE_PROPERTY_NAME = "isVisible";
+  static const String defaultPropertyName = "value";
+  static const String parentPropertyName = "parent";
+  static const String isVisiblePropertyName = "isVisible";
 
   String id;
-  FormElement get parent => properties[PARENT_PROPERTY_NAME].value;
-  bool get isVisible => properties[IS_VISIBLE_PROPERTY_NAME].value;
+  FormElement get parent => properties[parentPropertyName].value;
+  bool get isVisible => properties[isVisiblePropertyName].value;
   Stream<bool> get isVisibleChanged =>
-      properties[IS_VISIBLE_PROPERTY_NAME].valueChanged;
+      properties[isVisiblePropertyName].valueChanged;
 
   @protected
   Map<String, ElementValue> properties = {};
@@ -27,8 +25,8 @@ abstract class FormElement implements ExpressionProviderElement {
       @required ElementValue<FormElement> parent,
       @required ElementValue<bool> isVisible}) {
     this.id = id;
-    registerElementValue(IS_VISIBLE_PROPERTY_NAME, isVisible);
-    registerElementValue(PARENT_PROPERTY_NAME, parent);
+    registerElementValue(isVisiblePropertyName, isVisible);
+    registerElementValue(parentPropertyName, parent);
   }
 
   FormElement getInstance();
@@ -52,7 +50,7 @@ abstract class FormElement implements ExpressionProviderElement {
 
   ElementValue getElementValue([String propertyName]) {
     if (propertyName == null) {
-      propertyName = DEFAULT_PROPERTY_NAME;
+      propertyName = defaultPropertyName;
     }
     var properties = getProperties();
     if (properties.containsKey(propertyName)) {
@@ -66,7 +64,7 @@ abstract class FormElement implements ExpressionProviderElement {
       ExpressionProvider<ExpressionProviderElement> parent) {
     var result = getInstance();
     result.id = id;
-    result.registerElementValue(PARENT_PROPERTY_NAME, parent as ElementValue);
+    result.registerElementValue(parentPropertyName, parent as ElementValue);
     result._fillFromDictionary(this, result, parent);
 
     return result;
@@ -75,7 +73,7 @@ abstract class FormElement implements ExpressionProviderElement {
   void _fillFromDictionary(FormElement oldFormElement, FormElement instance,
       ExpressionProvider<ExpressionProviderElement> parent) {
     var formElementProperties = Map.from(oldFormElement.getProperties())
-      ..removeWhere((k, v) => k == PARENT_PROPERTY_NAME);
+      ..removeWhere((k, v) => k == parentPropertyName);
     formElementProperties.forEach((k, v) =>
         instance.properties[k] = cloneProperty(k, v, parent, instance));
   }

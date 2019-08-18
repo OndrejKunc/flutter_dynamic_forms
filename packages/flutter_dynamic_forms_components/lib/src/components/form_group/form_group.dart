@@ -3,10 +3,10 @@ import '../container/container.dart';
 import 'package:meta/meta.dart';
 
 class FormGroup extends Container {
-  static const String NAME_PROPERTY_NAME = "name";
+  static const String namePropertyName = "name";
 
-  String get name => properties[NAME_PROPERTY_NAME].value;
-  Stream<String> get nameChanged => properties[NAME_PROPERTY_NAME].valueChanged;
+  String get name => properties[namePropertyName].value;
+  Stream<String> get nameChanged => properties[namePropertyName].valueChanged;
 
   void fillFormGroup(
       {@required String id,
@@ -16,7 +16,7 @@ class FormGroup extends Container {
       @required ElementValue<String> name}) {
     fillContainer(
         id: id, parent: parent, isVisible: isVisible, children: children);
-    registerElementValue(NAME_PROPERTY_NAME, name);
+    registerElementValue(namePropertyName, name);
   }
 
   @override
