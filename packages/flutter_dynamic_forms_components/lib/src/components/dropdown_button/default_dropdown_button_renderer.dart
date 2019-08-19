@@ -16,10 +16,10 @@ class DefaultDropdownButtonRenderer
       child: DropdownButton<String>(
         value: element.value,
         onChanged: (String newValue) => dispatcher(ChangeValueEvent(
-          value: newValue,
-          elementId: element.id,
-          propertyName: model.DropdownButton.valuePropertyName,
-        )),
+              value: newValue,
+              elementId: element.id,
+              propertyName: model.DropdownButton.valuePropertyName,
+            )),
         items: element.options
             .map<DropdownMenuItem<String>>((DropdownOption option) {
           return DropdownMenuItem<String>(

@@ -22,14 +22,14 @@ class RequiredValidation extends Validation {
       ElementValue<ExpressionProviderElement> parent) {
     return LazyExpressionElementValue(
       () => LessThanNumberExpression(
-        ConstantExpression(Integer(0)),
-        LengthFunctionExpression(
-          DelegateExpression(
-            ["parent"],
-            parent.value.getExpressionProvider(),
+            ConstantExpression(Integer(0)),
+            LengthFunctionExpression(
+              DelegateExpression(
+                ["parent"],
+                parent.value.getExpressionProvider(),
+              ),
+            ),
           ),
-        ),
-      ),
     );
   }
 
