@@ -1,3 +1,7 @@
+# 0.3.0
+
+Removed screaming caps convention.
+
 # 0.2.0
 
 Removed dependency on xml from parsers.
