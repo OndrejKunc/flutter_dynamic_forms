@@ -4,21 +4,20 @@ import 'package:meta/meta.dart';
 import '../radio_button/radio_button.dart';
 
 class RadioButtonGroup extends FormElement {
-  static const String VALUE_PROPERTY_NAME = "value";
-  static const String RADIO_BUTTONS_PROPERTY_NAME = "radioButtons";
-  static const String ARRANGEMENT_PROPERTY_NAME = "arrangement";
+  static const String valuePropertyName = "value";
+  static const String radioButtonsPropertyName = "radioButtons";
+  static const String arrangementPropertyName = "arrangement";
 
-  String get value => properties[VALUE_PROPERTY_NAME].value;
-  Stream<String> get valueChanged =>
-      properties[VALUE_PROPERTY_NAME].valueChanged;
+  String get value => properties[valuePropertyName].value;
+  Stream<String> get valueChanged => properties[valuePropertyName].valueChanged;
   List<RadioButton> get radioButtons =>
-      properties[RADIO_BUTTONS_PROPERTY_NAME].value;
+      properties[radioButtonsPropertyName].value;
   Stream<List<RadioButton>> get radioButtonsChanged =>
-      properties[RADIO_BUTTONS_PROPERTY_NAME].valueChanged;
+      properties[radioButtonsPropertyName].valueChanged;
 
-  String get arrangement => properties[ARRANGEMENT_PROPERTY_NAME].value;
+  String get arrangement => properties[arrangementPropertyName].value;
   Stream<String> get arrangementChanged =>
-      properties[ARRANGEMENT_PROPERTY_NAME].valueChanged;
+      properties[arrangementPropertyName].valueChanged;
 
   void fillRadioButtonGroup(
       {@required String id,
@@ -28,9 +27,9 @@ class RadioButtonGroup extends FormElement {
       @required ElementValue<String> value,
       @required ElementValue<String> arrangement}) {
     fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    registerElementValue(RADIO_BUTTONS_PROPERTY_NAME, radioButtons);
-    registerElementValue(VALUE_PROPERTY_NAME, value);
-    registerElementValue(ARRANGEMENT_PROPERTY_NAME, arrangement);
+    registerElementValue(radioButtonsPropertyName, radioButtons);
+    registerElementValue(valuePropertyName, value);
+    registerElementValue(arrangementPropertyName, arrangement);
   }
 
   @override

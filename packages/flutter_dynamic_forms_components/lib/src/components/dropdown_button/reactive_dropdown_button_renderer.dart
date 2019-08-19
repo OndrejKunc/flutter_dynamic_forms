@@ -26,7 +26,7 @@ class ReactiveDropdownButtonRenderer
                   ChangeValueEvent(
                       value: newValue,
                       elementId: element.id,
-                      propertyName: model.DropdownButton.VALUE_PROPERTY_NAME),
+                      propertyName: model.DropdownButton.valuePropertyName),
                 ),
             items: element.options
                 .where((d) => d.isVisible)

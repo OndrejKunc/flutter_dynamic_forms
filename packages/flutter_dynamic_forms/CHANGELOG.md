@@ -1,3 +1,7 @@
+# 0.5.0
+
+Increment dependency on dynamic_forms package.
+
 # 0.4.0
 
 Small API changes.

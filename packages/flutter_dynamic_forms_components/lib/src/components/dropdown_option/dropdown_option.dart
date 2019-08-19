@@ -2,15 +2,13 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:meta/meta.dart';
 
 class DropdownOption extends FormElement {
-  static const String VALUE_PROPERTY_NAME = "value";
-  static const String LABEL_PROPERTY_NAME = "label";
+  static const String valuePropertyName = "value";
+  static const String labelPropertyName = "label";
 
-  String get label => properties[LABEL_PROPERTY_NAME].value;
-  Stream<String> get labelChanged =>
-      properties[LABEL_PROPERTY_NAME].valueChanged;
-  String get value => properties[VALUE_PROPERTY_NAME].value;
-  Stream<String> get valueChanged =>
-      properties[VALUE_PROPERTY_NAME].valueChanged;
+  String get label => properties[labelPropertyName].value;
+  Stream<String> get labelChanged => properties[labelPropertyName].valueChanged;
+  String get value => properties[valuePropertyName].value;
+  Stream<String> get valueChanged => properties[valuePropertyName].valueChanged;
 
   void fillDropdownOption({
     @required String id,
@@ -20,8 +18,8 @@ class DropdownOption extends FormElement {
     @required ElementValue<String> value,
   }) {
     fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    registerElementValue(LABEL_PROPERTY_NAME, label);
-    registerElementValue(VALUE_PROPERTY_NAME, value);
+    registerElementValue(labelPropertyName, label);
+    registerElementValue(valuePropertyName, value);
   }
 
   @override

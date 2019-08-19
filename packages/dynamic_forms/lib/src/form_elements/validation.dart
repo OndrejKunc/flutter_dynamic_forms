@@ -3,15 +3,15 @@ import 'package:dynamic_forms/src/form_elements/form_element.dart';
 import 'package:meta/meta.dart';
 
 class Validation extends FormElement {
-  static const IS_VALID_PROPERTY_NAME = "isValid";
-  static const MESSAGE_PROPERTY_NAME = "message";
+  static const String isValidPropertyName = "isValid";
+  static const String messagePropertyName = "message";
 
-  bool get isValid => properties[IS_VALID_PROPERTY_NAME].value;
+  bool get isValid => properties[isValidPropertyName].value;
   Stream<bool> get isValidChanged =>
-      properties[IS_VALID_PROPERTY_NAME].valueChanged;
-  String get message => properties[MESSAGE_PROPERTY_NAME].value;
+      properties[isValidPropertyName].valueChanged;
+  String get message => properties[messagePropertyName].value;
   Stream<String> get messageChanged =>
-      properties[MESSAGE_PROPERTY_NAME].valueChanged;
+      properties[messagePropertyName].valueChanged;
 
   void fillValidation({
     @required String id,
@@ -21,8 +21,8 @@ class Validation extends FormElement {
     @required ElementValue<String> message,
   }) {
     fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    registerElementValue(IS_VALID_PROPERTY_NAME, isValid);
-    registerElementValue(MESSAGE_PROPERTY_NAME, message);
+    registerElementValue(isValidPropertyName, isValid);
+    registerElementValue(messagePropertyName, message);
   }
 
   @override

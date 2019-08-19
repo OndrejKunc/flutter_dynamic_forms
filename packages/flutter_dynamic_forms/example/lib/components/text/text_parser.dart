@@ -19,7 +19,7 @@ class TextParser extends FormElementParser<Text> {
       textInputType: parserNode.getStringValue("textInputType"),
       validations: parserNode.getChildren<Validation>(
           parent: text,
-          childrenPropertyName: Text.VALIDATIONS_PROPERTY_NAME,
+          childrenPropertyName: Text.validationsPropertyName,
           parser: parser),
     );
     return text;

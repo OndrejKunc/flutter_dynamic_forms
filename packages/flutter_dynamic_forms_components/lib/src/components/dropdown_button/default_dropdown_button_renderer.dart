@@ -18,7 +18,7 @@ class DefaultDropdownButtonRenderer
         onChanged: (String newValue) => dispatcher(ChangeValueEvent(
               value: newValue,
               elementId: element.id,
-              propertyName: model.DropdownButton.VALUE_PROPERTY_NAME,
+              propertyName: model.DropdownButton.valuePropertyName,
             )),
         items: element.options
             .map<DropdownMenuItem<String>>((DropdownOption option) {

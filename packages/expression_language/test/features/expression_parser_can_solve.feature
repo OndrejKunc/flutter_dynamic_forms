@@ -752,3 +752,7 @@ Feature: Expression
   Scenario: it should not match invalid endsWith
     When expression "endsWith("first second third", "second")" is evaluated
     Then bool expression result is "false"
+
+  Scenario: String concatenation
+    When expression ""ab" + "cd"" is evaluated
+    Then string expression result is "abcd"

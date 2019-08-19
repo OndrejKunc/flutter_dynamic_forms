@@ -1,4 +1,3 @@
-import 'package:dynamic_forms/dynamic_forms.dart' as model;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
@@ -30,7 +29,7 @@ class ReactiveRadioButtonRenderer extends FormElementRenderer<RadioButton> {
                   ChangeValueEvent(
                       value: value,
                       elementId: parent.id,
-                      propertyName: model.SELECTED_VALUE_PROPERTY),
+                      propertyName: RadioButton.valuePropertyName),
                 ),
           );
         },

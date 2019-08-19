@@ -2,10 +2,9 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:meta/meta.dart';
 
 class Label extends FormElement {
-  static const String VALUE_PROPERTY_NAME = "value";
-  String get value => properties[VALUE_PROPERTY_NAME].value;
-  Stream<String> get valueChanged =>
-      properties[VALUE_PROPERTY_NAME].valueChanged;
+  static const String valuePropertyName = "value";
+  String get value => properties[valuePropertyName].value;
+  Stream<String> get valueChanged => properties[valuePropertyName].valueChanged;
 
   void fillLabel(
       {@required String id,
@@ -13,7 +12,7 @@ class Label extends FormElement {
       @required ElementValue<bool> isVisible,
       @required ElementValue<String> value}) {
     super.fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    registerElementValue(VALUE_PROPERTY_NAME, value);
+    registerElementValue(valuePropertyName, value);
   }
 
   @override
