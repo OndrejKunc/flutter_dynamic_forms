@@ -84,8 +84,8 @@ If you prefer JSON to describe your form please check [json example](packages/fl
 Add following dependencies to your `pubspec.yaml` file:
 
 ```yaml
-flutter_dynamic_forms: ^0.4.0
-flutter_dynamic_forms_components: ^0.2.0
+flutter_dynamic_forms: ^0.5.0
+flutter_dynamic_forms_components: ^0.3.0
 ```
 
 ### Displaying the form
