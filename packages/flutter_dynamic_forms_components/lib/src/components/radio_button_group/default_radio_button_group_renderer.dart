@@ -16,7 +16,7 @@ class DefaultRadioButtonGroupRenderer
         padding: const EdgeInsets.all(8.0),
       )
     ];
-    for (var child in element.radioButtons) {
+    for (var child in element.choices) {
       if (child.isVisible) {
         childrenWidgets.add(renderer(child, context));
       }

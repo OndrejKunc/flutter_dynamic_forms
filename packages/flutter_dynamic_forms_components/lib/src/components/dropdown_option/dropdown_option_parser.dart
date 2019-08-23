@@ -9,7 +9,7 @@ class DropdownOptionParser extends FormElementParser<DropdownOption> {
   DropdownOption parse(ParserNode parserNode, FormElement parent,
       FormElementParserFunction parser) {
     var dropdownOption = DropdownOption();
-    dropdownOption.fillDropdownOption(
+    dropdownOption.fillSingleSelectChoice(
       id: parserNode.getPlainStringValue("id"),
       isVisible: parserNode.getIsVisible(),
       parent: parserNode.getParentValue(parent),

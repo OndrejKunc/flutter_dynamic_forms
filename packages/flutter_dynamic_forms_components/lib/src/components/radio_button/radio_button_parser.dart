@@ -10,7 +10,7 @@ class RadioButtonParser extends FormElementParser<RadioButton> {
   RadioButton parse(ParserNode parserNode, FormElement parent,
       FormElementParserFunction parser) {
     var radioButton = RadioButton();
-    radioButton.fillRadioButton(
+    radioButton.fillSingleSelectChoice(
       id: parserNode.getPlainStringValue("id"),
       isVisible: parserNode.getIsVisible(),
       parent: parserNode.getParentValue(parent),

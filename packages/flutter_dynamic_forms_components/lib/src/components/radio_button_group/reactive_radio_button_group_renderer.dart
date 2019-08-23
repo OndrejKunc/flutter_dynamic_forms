@@ -14,8 +14,8 @@ class ReactiveRadioButtonGroupRenderer
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
     return StreamBuilder<List<RadioButton>>(
-      initialData: element.radioButtons,
-      stream: element.radioButtonsChanged,
+      initialData: element.choices,
+      stream: element.choicesChanged,
       builder: (context, snapshot) {
         return StreamBuilder(
           stream: Observable.merge(
