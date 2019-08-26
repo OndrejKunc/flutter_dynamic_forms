@@ -1,14 +1,15 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import '../dropdown_option/dropdown_option.dart';
+import 'package:flutter_dynamic_forms_components/src/components/single_select_chip_choice/single_select_chip_choice.dart';
 
-class DropdownOptionParser extends FormElementParser<DropdownOption> {
+class SingleSelectChipChoiceParser
+    extends FormElementParser<SingleSelectChipChoice> {
   @override
-  String get name => "dropdownOption";
+  String get name => "singleSelectChipChoice";
 
   @override
-  DropdownOption parse(ParserNode parserNode, FormElement parent,
+  SingleSelectChipChoice parse(ParserNode parserNode, FormElement parent,
       FormElementParserFunction parser) {
-    var dropdownOption = DropdownOption();
+    var dropdownOption = SingleSelectChipChoice();
     dropdownOption.fillSingleSelectChoice(
       id: parserNode.getPlainStringValue("id"),
       isVisible: parserNode.getIsVisible(),

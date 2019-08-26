@@ -14,28 +14,24 @@ class ReactiveRadioButtonGroupRenderer
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
     return StreamBuilder<List<RadioButton>>(
-      initialData: element.radioButtons,
-      stream: element.radioButtonsChanged,
+      initialData: element.choices,
+      stream: element.choicesChanged,
       builder: (context, snapshot) {
         return StreamBuilder(
           stream: Observable.merge(
             snapshot.data.map((child) => child.isVisibleChanged),
           ),
-          builder: (context, _) {
-            List<Widget> childrenWidgets = [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-              )
-            ];
-            childrenWidgets.addAll(
-              snapshot.data.where((f) => f.isVisible).map(
-                    (child) => renderer(child, context),
+          builder: (context, _) => Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                   ),
-            );
-            return Column(
-              children: childrenWidgets,
-            );
-          },
+                  ...element.choices
+                      .where((c) => c.isVisible)
+                      .map((choice) => renderer(choice, context))
+                      .toList(),
+                ],
+              ),
         );
       },
     );

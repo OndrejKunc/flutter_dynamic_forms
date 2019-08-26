@@ -1,14 +1,14 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
-import 'package:flutter_dynamic_forms_components/src/components/dropdown_option/dropdown_option.dart';
+import 'package:flutter_dynamic_forms_components/src/components/single_select_chip_choice/single_select_chip_choice.dart';
 import 'package:meta/meta.dart';
 
-class DropdownButton extends SingleSelectGroup<DropdownOption> {
-  void fillDropdownButton({
+class SingleSelectChipGroup extends SingleSelectGroup<SingleSelectChipChoice> {
+  void fillSingleSelectChipGroup({
     @required String id,
     @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
-    @required ElementValue<List<DropdownOption>> choices,
+    @required ElementValue<List<SingleSelectChipChoice>> choices,
     @required ElementValue<String> value,
   }) {
     fillSingleSelectGroup(
@@ -22,6 +22,6 @@ class DropdownButton extends SingleSelectGroup<DropdownOption> {
 
   @override
   FormElement getInstance() {
-    return DropdownButton();
+    return SingleSelectChipGroup();
   }
 }

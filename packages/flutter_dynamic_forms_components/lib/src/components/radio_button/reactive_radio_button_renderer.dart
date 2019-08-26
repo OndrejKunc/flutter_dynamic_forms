@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
+import 'package:flutter_dynamic_forms_components/src/components/single_select_group/single_select_group.dart';
 import '../radio_button_group/radio_button_group.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -29,7 +30,7 @@ class ReactiveRadioButtonRenderer extends FormElementRenderer<RadioButton> {
                   ChangeValueEvent(
                       value: value,
                       elementId: parent.id,
-                      propertyName: RadioButton.valuePropertyName),
+                      propertyName: SingleSelectGroup.valuePropertyName),
                 ),
           );
         },
