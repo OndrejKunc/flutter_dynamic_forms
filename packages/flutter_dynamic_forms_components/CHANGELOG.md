@@ -1,3 +1,8 @@
+# 0.4.0
+
+* Added base class for select components.
+* Added single select chip group component. 
+
 # 0.3.0
 
 Removed screaming caps convention.
