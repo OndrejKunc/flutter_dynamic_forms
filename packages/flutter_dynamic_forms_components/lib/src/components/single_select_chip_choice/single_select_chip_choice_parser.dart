@@ -1,7 +1,8 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:flutter_dynamic_forms_components/src/components/single_select_chip_choice/single_select_chip_choice.dart';
 
-class SingleSelectChipChoiceParser extends FormElementParser<SingleSelectChipChoice> {
+class SingleSelectChipChoiceParser
+    extends FormElementParser<SingleSelectChipChoice> {
   @override
   String get name => "singleSelectChipChoice";
 

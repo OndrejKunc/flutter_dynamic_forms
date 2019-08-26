@@ -26,12 +26,12 @@ class ReactiveSingleSelectChipChoiceRenderer
             label: Text(element.label),
             selected: parent.value == element.value,
             onSelected: (_) => dispatcher(
-              ChangeValueEvent(
-                value: element.value,
-                elementId: parent.id,
-                propertyName: SingleSelectGroup.valuePropertyName,
-              ),
-            ),
+                  ChangeValueEvent(
+                    value: element.value,
+                    elementId: parent.id,
+                    propertyName: SingleSelectGroup.valuePropertyName,
+                  ),
+                ),
           );
         },
       ),

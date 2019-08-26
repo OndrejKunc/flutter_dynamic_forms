@@ -2,7 +2,8 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:flutter_dynamic_forms_components/src/components/single_select_chip_choice/single_select_chip_choice.dart';
 import 'single_select_chip_group.dart';
 
-class SingleSelectChipGroupParser extends FormElementParser<SingleSelectChipGroup> {
+class SingleSelectChipGroupParser
+    extends FormElementParser<SingleSelectChipGroup> {
   @override
   String get name => "singleSelectChipGroup";
 

@@ -22,16 +22,16 @@ class ReactiveRadioButtonGroupRenderer
             snapshot.data.map((child) => child.isVisibleChanged),
           ),
           builder: (context, _) => Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                  ),
+                  ...element.choices
+                      .where((c) => c.isVisible)
+                      .map((choice) => renderer(choice, context))
+                      .toList(),
+                ],
               ),
-              ...element.choices
-                  .where((c) => c.isVisible)
-                  .map((choice) => renderer(choice, context))
-                  .toList(),
-            ],
-          ),
         );
       },
     );

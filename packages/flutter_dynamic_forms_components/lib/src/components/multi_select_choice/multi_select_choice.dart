@@ -8,7 +8,8 @@ class MultiSelectChoice extends FormElement {
   String get label => properties[labelPropertyName].value;
   Stream<String> get labelChanged => properties[labelPropertyName].valueChanged;
   String get value => properties[isSelectedPropertyName].value;
-  Stream<String> get valueChanged => properties[isSelectedPropertyName].valueChanged;
+  Stream<String> get valueChanged =>
+      properties[isSelectedPropertyName].valueChanged;
 
   void fillMultiSelectChoice({
     @required String id,

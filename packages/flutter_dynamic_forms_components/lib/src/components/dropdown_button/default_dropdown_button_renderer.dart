@@ -17,10 +17,10 @@ class DefaultDropdownButtonRenderer
       child: DropdownButton<String>(
         value: element.value,
         onChanged: (String newValue) => dispatcher(ChangeValueEvent(
-          value: newValue,
-          elementId: element.id,
-          propertyName: SingleSelectGroup.valuePropertyName,
-        )),
+              value: newValue,
+              elementId: element.id,
+              propertyName: SingleSelectGroup.valuePropertyName,
+            )),
         items: element.choices
             .whereType<DropdownOption>()
             .map<DropdownMenuItem<String>>((DropdownOption option) {
