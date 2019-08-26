@@ -68,7 +68,7 @@
                             "@name": "radioButtonGroup",
                             "id": "radioGroup1",
                             "value": "-1",
-                            "radioButtons": [
+                            "choices": [
                                 {
                                     "@name": "radioButton",
                                     "label": "Option 1",
@@ -95,7 +95,7 @@
                             "@name": "radioButtonGroup",
                             "id": "radioGroup2",
                             "value": "B",
-                            "radioButtons": [
+                            "choices": [
                                 {
                                     "@name": "radioButton",
                                     "label": "Option A",
@@ -129,7 +129,7 @@
                             "@name": "dropdownButton",
                             "id": "dropdownButton1",
                             "value": "CD",
-                            "options": [
+                            "choices": [
                                 {
                                     "@name": "dropdownOption",
                                     "label": "Afganistan",
