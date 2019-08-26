@@ -65,6 +65,43 @@
                     "name": "Form section 2",
                     "children": [
                         {
+                            "@name": "singleSelectChipGroup",
+                            "id": "chipGroup1",
+                            "value": "-1",
+                            "choices": [
+                                {
+                                    "@name": "singleSelectChipChoice",
+                                    "label": "Chip Option 1",
+                                    "value": "1"
+                                },
+                                {
+                                    "@name": "singleSelectChipChoice",
+                                    "label": "Chip Option 2",
+                                    "value": "2"
+                                },
+                                {
+                                    "@name": "singleSelectChipChoice",
+                                    "label": "Chip Option 3",
+                                    "value": "3"
+                                },
+                                {
+                                    "@name": "singleSelectChipChoice",
+                                    "label": "Chip Option 4",
+                                    "value": "4"
+                                },
+                                {
+                                    "@name": "singleSelectChipChoice",
+                                    "label": "Chip Option 5 with a really long name",
+                                    "value": "5"
+                                },
+                                {
+                                    "@name": "singleSelectChipChoice",
+                                    "label": "Chip Option 6",
+                                    "value": "6"
+                                }
+                            ]
+                        },
+                        {
                             "@name": "radioButtonGroup",
                             "id": "radioGroup1",
                             "value": "-1",
@@ -88,33 +125,6 @@
                                     "@name": "radioButton",
                                     "label": "Option 4",
                                     "value": "4"
-                                }
-                            ]
-                        },
-                        {
-                            "@name": "radioButtonGroup",
-                            "id": "radioGroup2",
-                            "value": "B",
-                            "choices": [
-                                {
-                                    "@name": "radioButton",
-                                    "label": "Option A",
-                                    "value": "A"
-                                },
-                                {
-                                    "@name": "radioButton",
-                                    "label": "Option B",
-                                    "value": "B"
-                                },
-                                {
-                                    "@name": "radioButton",
-                                    "label": "Option C",
-                                    "value": "C"
-                                },
-                                {
-                                    "@name": "radioButton",
-                                    "label": "Option D",
-                                    "value": "D"
                                 }
                             ]
                         }

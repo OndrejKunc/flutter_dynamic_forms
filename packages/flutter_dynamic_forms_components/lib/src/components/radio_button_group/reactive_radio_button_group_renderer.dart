@@ -21,21 +21,17 @@ class ReactiveRadioButtonGroupRenderer
           stream: Observable.merge(
             snapshot.data.map((child) => child.isVisibleChanged),
           ),
-          builder: (context, _) {
-            List<Widget> childrenWidgets = [
+          builder: (context, _) => Column(
+            children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-              )
-            ];
-            childrenWidgets.addAll(
-              snapshot.data.where((f) => f.isVisible).map(
-                    (child) => renderer(child, context),
-                  ),
-            );
-            return Column(
-              children: childrenWidgets,
-            );
-          },
+              ),
+              ...element.choices
+                  .where((c) => c.isVisible)
+                  .map((choice) => renderer(choice, context))
+                  .toList(),
+            ],
+          ),
         );
       },
     );

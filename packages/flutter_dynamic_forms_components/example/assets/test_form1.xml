@@ -61,17 +61,19 @@
             label="Hide welcome message"
             />
         <formGroup id="formgroup2" name="Form section 2">
+            <singleSelectChipGroup id="chipGroup1" value="-1">
+                <singleSelectChipChoice label="Chip Option 1" value="1" />
+                <singleSelectChipChoice label="Chip Option 2" value="2" />
+                <singleSelectChipChoice label="Chip Option 3" value="3" />
+                <singleSelectChipChoice label="Chip Option 4" value="4" />
+                <singleSelectChipChoice label="Chip Option 5 with a really long name" value="5" />
+                <singleSelectChipChoice label="Chip Option 6" value="6" />
+            </singleSelectChipGroup>
             <radioButtonGroup id="radioGroup1" value="-1">
                 <radioButton label="Option 1" value="1" />
                 <radioButton label="Option 2" value="2" />
                 <radioButton label="Option 3" value="3" />
                 <radioButton label="Option 4" value="4" />
-            </radioButtonGroup>
-            <radioButtonGroup id="radioGroup2" value="B">
-                <radioButton label="Option A" value="A" />
-                <radioButton label="Option B" value="B" />
-                <radioButton label="Option C" value="C" />
-                <radioButton label="Option D" value="D" />
             </radioButtonGroup>
         </formGroup>
         <formGroup id="formgroup3" name="Form section 3">

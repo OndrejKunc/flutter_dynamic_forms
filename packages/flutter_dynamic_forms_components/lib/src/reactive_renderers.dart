@@ -10,6 +10,8 @@ List<FormElementRenderer> getReactiveRenderers() {
     ReactiveTextRenderer(),
     ReactiveRadioButtonGroupRenderer(),
     ReactiveRadioButtonRenderer(),
-    ReactiveDropdownButtonRenderer()
+    ReactiveDropdownButtonRenderer(),
+    ReactiveSingleSelectChipGroupRenderer(),
+    ReactiveSingleSelectChipChoiceRenderer(),
   ];
 }

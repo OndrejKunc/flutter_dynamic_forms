@@ -17,17 +17,18 @@ class DefaultRadioButtonRenderer
     var parent = element.parent as RadioButtonGroup;
 
     return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: RadioListTile(
-          title: Text(element.label),
-          value: element.value,
-          groupValue: parent.value,
-          onChanged: (String value) => dispatcher(
-                ChangeValueEvent(
-                    value: value,
-                    elementId: parent.id,
-                    propertyName: SingleSelectGroup.valuePropertyName),
-              ),
-        ));
+      padding: const EdgeInsets.all(8.0),
+      child: RadioListTile(
+        title: Text(element.label),
+        value: element.value,
+        groupValue: parent.value,
+        onChanged: (String value) => dispatcher(
+          ChangeValueEvent(
+              value: value,
+              elementId: parent.id,
+              propertyName: SingleSelectGroup.valuePropertyName),
+        ),
+      ),
+    );
   }
 }

@@ -11,19 +11,16 @@ class DefaultRadioButtonGroupRenderer
       BuildContext context,
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
-    List<Widget> childrenWidgets = [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-      )
-    ];
-    for (var child in element.choices) {
-      if (child.isVisible) {
-        childrenWidgets.add(renderer(child, context));
-      }
-    }
-
     return Column(
-      children: childrenWidgets,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+        ),
+        ...element.choices
+            .where((c) => c.isVisible)
+            .map((choice) => renderer(choice, context))
+            .toList(),
+      ],
     );
   }
 }
