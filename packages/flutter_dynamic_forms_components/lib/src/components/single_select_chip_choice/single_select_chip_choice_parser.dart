@@ -9,14 +9,14 @@ class SingleSelectChipChoiceParser
   @override
   SingleSelectChipChoice parse(ParserNode parserNode, FormElement parent,
       FormElementParserFunction parser) {
-    var dropdownOption = SingleSelectChipChoice();
-    dropdownOption.fillSingleSelectChoice(
+    var singleSelectChipChoice = SingleSelectChipChoice();
+    singleSelectChipChoice.fillSingleSelectChoice(
       id: parserNode.getPlainStringValue("id"),
       isVisible: parserNode.getIsVisible(),
       parent: parserNode.getParentValue(parent),
       value: parserNode.getStringValue("value"),
       label: parserNode.getStringValue("label"),
     );
-    return dropdownOption;
+    return singleSelectChipChoice;
   }
 }

@@ -13,5 +13,7 @@ List<FormElementRenderer> getDefaultRenderers() {
     DefaultDropdownButtonRenderer(),
     DefaultSingleSelectChipGroupRenderer(),
     DefaultSingleSelectChipChoiceRenderer(),
+    DefaultMultiSelectChipChoiceRenderer(),
+    DefaultMultiSelectChipGroupRenderer(),
   ];
 }

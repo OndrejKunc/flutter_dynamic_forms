@@ -75,6 +75,14 @@
                 <radioButton label="Option 3" value="3" />
                 <radioButton label="Option 4" value="4" />
             </radioButtonGroup>
+            <multiSelectChipGroup id="chipGroup2">
+                <multiSelectChipChoice id="multiChoice1" label="Multi Chip Option 1" value="1" />
+                <multiSelectChipChoice id="multiChoice2" label="Multi Chip Option 2" value="2" isSelected="true" />
+                <multiSelectChipChoice id="multiChoice3" label="Multi Chip Option 3" value="3" />
+                <multiSelectChipChoice id="multiChoice4" label="Multi Chip Option 4" value="4" />
+                <multiSelectChipChoice id="multiChoice5" label="Multi Chip Option 5 with a really long name" value="5" />
+                <multiSelectChipChoice id="multiChoice6" label="Multi Chip Option 6" value="6" />
+            </multiSelectChipGroup>
         </formGroup>
         <formGroup id="formgroup3" name="Form section 3">
             <dropdownButton id="dropdownButton1" value="CD">

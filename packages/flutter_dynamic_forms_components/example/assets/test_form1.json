@@ -127,6 +127,48 @@
                                     "value": "4"
                                 }
                             ]
+                        },
+                        {
+                            "@name": "multiSelectChipGroup",
+                            "id": "chipGroup2",
+                            "choices": [
+                                {
+                                    "@name": "multiSelectChipChoice",
+                                    "id": "multiChoice1",
+                                    "label": "Multi Chip Option 1",
+                                    "value": "1"
+                                },
+                                {
+                                    "@name": "multiSelectChipChoice",
+                                    "id": "multiChoice2",
+                                    "label": "Multi Chip Option 2",
+                                    "value": "2"
+                                },
+                                {
+                                    "@name": "multiSelectChipChoice",
+                                    "id": "multiChoice3",
+                                    "label": "Multi Chip Option 3",
+                                    "value": "3"
+                                },
+                                {
+                                    "@name": "multiSelectChipChoice",
+                                    "id": "multiChoice4",
+                                    "label": "Multi Chip Option 4",
+                                    "value": "4"
+                                },
+                                {
+                                    "@name": "multiSelectChipChoice",
+                                    "id": "multiChoice5",
+                                    "label": "Multi Chip Option 5 with a really long name",
+                                    "value": "5"
+                                },
+                                {
+                                    "@name": "multiSelectChipChoice",
+                                    "id": "multiChoice6",
+                                    "label": "Multi Chip Option 6",
+                                    "value": "6"
+                                }
+                            ]
                         }
                     ]
                 },

@@ -17,5 +17,7 @@ List<FormElementParser> getDefaultParserList() {
     TextParser(),
     SingleSelectChipGroupParser(),
     SingleSelectChipChoiceParser(),
+    MultiSelectChipChoiceParser(),
+    MultiSelectChipGroupParser(),
   ];
 }
