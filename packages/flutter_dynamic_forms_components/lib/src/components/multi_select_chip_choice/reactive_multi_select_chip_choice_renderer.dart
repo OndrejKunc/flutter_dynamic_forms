@@ -21,12 +21,12 @@ class ReactiveMultiSelectChipChoiceRenderer
             label: Text(element.label),
             selected: element.isSelected,
             onSelected: (selected) => dispatcher(
-              ChangeValueEvent(
-                value: selected,
-                elementId: element.id,
-                propertyName: MultiSelectChoice.isSelectedPropertyName,
-              ),
-            ),
+                  ChangeValueEvent(
+                    value: selected,
+                    elementId: element.id,
+                    propertyName: MultiSelectChoice.isSelectedPropertyName,
+                  ),
+                ),
           );
         },
       ),

@@ -1,3 +1,7 @@
+# 0.4.1
+
+Added multi select chip group component.
+
 # 0.4.0
 
 * Added base class for select components.

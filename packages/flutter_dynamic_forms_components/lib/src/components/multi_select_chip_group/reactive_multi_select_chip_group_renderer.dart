@@ -24,11 +24,11 @@ class ReactiveMultiSelectChipGroupRenderer
             snapshot.data.map((child) => child.isVisibleChanged),
           ),
           builder: (context, _) => Wrap(
-            children: element.choices
-                .where((c) => c.isVisible)
-                .map((choice) => renderer(choice, context))
-                .toList(),
-          ),
+                children: element.choices
+                    .where((c) => c.isVisible)
+                    .map((choice) => renderer(choice, context))
+                    .toList(),
+              ),
         );
       },
     );
