@@ -71,3 +71,13 @@ export 'src/components/single_select_chip_group/single_select_chip_group.dart';
 export 'src/components/single_select_chip_group/single_select_chip_group_parser.dart';
 export 'src/components/single_select_chip_group/default_single_select_chip_group_renderer.dart';
 export 'src/components/single_select_chip_group/reactive_single_select_chip_group_renderer.dart';
+
+export 'src/components/multi_select_chip_choice/multi_select_chip_choice.dart';
+export 'src/components/multi_select_chip_choice/multi_select_chip_choice_parser.dart';
+export 'src/components/multi_select_chip_choice/default_multi_select_chip_choice_renderer.dart';
+export 'src/components/multi_select_chip_choice/reactive_multi_select_chip_choice_renderer.dart';
+
+export 'src/components/multi_select_chip_group/multi_select_chip_group.dart';
+export 'src/components/multi_select_chip_group/multi_select_chip_group_parser.dart';
+export 'src/components/multi_select_chip_group/default_multi_select_chip_group_renderer.dart';
+export 'src/components/multi_select_chip_group/reactive_multi_select_chip_group_renderer.dart';

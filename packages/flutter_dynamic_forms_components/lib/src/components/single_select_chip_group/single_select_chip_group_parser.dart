@@ -10,18 +10,18 @@ class SingleSelectChipGroupParser
   @override
   SingleSelectChipGroup parse(ParserNode parserNode, FormElement parent,
       FormElementParserFunction parser) {
-    var dropdownButton = SingleSelectChipGroup();
-    dropdownButton.fillSingleSelectChipGroup(
+    var singleSelectChipGroup = SingleSelectChipGroup();
+    singleSelectChipGroup.fillSingleSelectChipGroup(
       id: parserNode.getPlainStringValue("id"),
       isVisible: parserNode.getIsVisible(),
       parent: parserNode.getParentValue(parent),
       value: parserNode.getStringValue("value", isImmutable: false),
       choices: parserNode.getChildren<SingleSelectChipChoice>(
-          parent: dropdownButton,
+          parent: singleSelectChipGroup,
           childrenPropertyName: "choices",
           parser: parser,
           isContentProperty: true),
     );
-    return dropdownButton;
+    return singleSelectChipGroup;
   }
 }

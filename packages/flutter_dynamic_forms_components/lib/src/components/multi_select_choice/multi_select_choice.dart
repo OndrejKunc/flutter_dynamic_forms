@@ -7,8 +7,8 @@ class MultiSelectChoice extends FormElement {
 
   String get label => properties[labelPropertyName].value;
   Stream<String> get labelChanged => properties[labelPropertyName].valueChanged;
-  String get value => properties[isSelectedPropertyName].value;
-  Stream<String> get valueChanged =>
+  bool get isSelected => properties[isSelectedPropertyName].value;
+  Stream<bool> get isSelectedChanged =>
       properties[isSelectedPropertyName].valueChanged;
 
   void fillMultiSelectChoice({
@@ -16,11 +16,11 @@ class MultiSelectChoice extends FormElement {
     @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
     @required ElementValue<String> label,
-    @required ElementValue<String> value,
+    @required ElementValue<bool> isSelected,
   }) {
     fillFormElement(id: id, parent: parent, isVisible: isVisible);
     registerElementValue(labelPropertyName, label);
-    registerElementValue(isSelectedPropertyName, value);
+    registerElementValue(isSelectedPropertyName, isSelected);
   }
 
   @override

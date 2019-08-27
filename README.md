@@ -85,7 +85,7 @@ Add following dependencies to your `pubspec.yaml` file:
 
 ```yaml
 flutter_dynamic_forms: ^0.5.0
-flutter_dynamic_forms_components: ^0.4.0
+flutter_dynamic_forms_components: ^0.5.0
 ```
 
 ### Displaying the form
