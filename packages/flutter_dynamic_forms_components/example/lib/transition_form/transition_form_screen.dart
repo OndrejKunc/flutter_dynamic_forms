@@ -5,7 +5,6 @@ import 'package:example/transition_form/transition_form_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart' as flutter;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
 class TransitionFormScreen extends StatelessWidget {
   @override
@@ -35,10 +34,9 @@ class TransitionFormButtonRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var bloc = BlocProvider.of<TransitionFormBloc>(context);
-    return BlocBuilder<FormElementEvent, TransitionFormState>(
-      bloc: bloc,
+    return BlocBuilder<TransitionFormBloc, TransitionFormState>(
       builder: (context, state) {
+        var bloc = BlocProvider.of<TransitionFormBloc>(context);
         return Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,

@@ -1,37 +1,33 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:example/dynamic_form/dynamic_form_bloc.dart';
-import 'package:example/dynamic_form/dynamic_form_container.dart';
-import 'package:example/dynamic_form/dynamic_form_event.dart';
-import 'package:example/dynamic_form/dynamic_form_state.dart';
+import 'package:example/bloc_dynamic_form/dynamic_form_bloc.dart';
+import 'package:example/bloc_dynamic_form/dynamic_form_container.dart';
+import 'package:example/bloc_dynamic_form/dynamic_form_event.dart';
+import 'package:example/bloc_dynamic_form/dynamic_form_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart' as flutter;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
 class DynamicFormScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var bloc = BlocProvider.of<DynamicFormBloc>(context);
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
-          child: BlocListener<FormElementEvent, DynamicFormState>(
-            bloc: bloc,
+          child: BlocListener<DynamicFormBloc, DynamicFormState>(
             listener: (context, state) {
               if (state.resultItemValues != null &&
                   state.resultItemValues.isNotEmpty) {
                 _displayDialog(context, state.resultItemValues);
               }
             },
-            child: BlocBuilder<FormElementEvent, DynamicFormState>(
-              bloc: bloc,
+            child: BlocBuilder<DynamicFormBloc, DynamicFormState>(
               builder: (context, state) {
                 Column result = Column(children: <Widget>[
                   DynamicFormContainer(),
                 ]);
 
                 if (!state.isLoading) {
-                  result.children.add(DynamicFormButtonRow(bloc, state));
+                  result.children.add(DynamicFormButtonRow(state));
                 }
                 return result;
               },
@@ -78,16 +74,15 @@ class DynamicFormScreen extends StatelessWidget {
 
 class DynamicFormButtonRow extends StatelessWidget {
   final DynamicFormState state;
-  final DynamicFormBloc bloc;
 
   const DynamicFormButtonRow(
-    this.bloc,
     this.state, {
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var bloc = BlocProvider.of<DynamicFormBloc>(context);
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,

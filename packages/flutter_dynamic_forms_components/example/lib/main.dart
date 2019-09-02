@@ -1,15 +1,15 @@
 import 'package:dynamic_forms/dynamic_forms.dart' as forms;
 import 'package:example/form_parser_type.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
     as components;
 import 'package:flutter/material.dart';
-import 'package:example/dynamic_form/dynamic_form_bloc.dart';
-import 'package:example/dynamic_form/dynamic_form_screen.dart';
+import 'package:example/bloc_dynamic_form/dynamic_form_bloc.dart';
+import 'package:example/bloc_dynamic_form/dynamic_form_screen.dart';
 import 'package:example/simple_form/simple_form_screen.dart';
 import 'package:example/transition_form/transition_form_bloc.dart';
 import 'package:example/transition_form/transition_form_builder.dart';
 import 'package:example/transition_form/transition_form_screen.dart';
-import 'package:flutter_bloc_extensions/flutter_bloc_extensions.dart';
 
 void main() => runApp(MyApp());
 
@@ -58,8 +58,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => SimpleFormScreen(
-                          formParserType: FormParserType.xml,
-                        ),
+                      formParserType: FormParserType.xml,
+                    ),
                   ),
                 );
               },
@@ -73,8 +73,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => SimpleFormScreen(
-                            formParserType: FormParserType.json,
-                          ),
+                        formParserType: FormParserType.json,
+                      ),
                     ),
                   );
                 },
@@ -88,18 +88,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DisposableBlocProvider(
-                            blocFactory: () {
-                              return DynamicFormBloc(
-                                forms.FormManagerBuilder(
-                                  forms.XmlFormParserService(
-                                    components.getDefaultParserList(),
-                                  ),
-                                ),
-                              );
-                            },
-                            child: DynamicFormScreen(),
-                          ),
+                      builder: (context) => BlocProvider(
+                        builder: (context) {
+                          return DynamicFormBloc(
+                            forms.FormManagerBuilder(
+                              forms.XmlFormParserService(
+                                components.getDefaultParserList(),
+                              ),
+                            ),
+                          );
+                        },
+                        child: DynamicFormScreen(),
+                      ),
                     ),
                   );
                 },
@@ -118,15 +118,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DisposableBlocProvider(
-                            blocFactory: () {
-                              return TransitionFormBloc(
-                                formManagerBuilder,
-                                TransitionFormBuilder(formManagerBuilder),
-                              );
-                            },
-                            child: TransitionFormScreen(),
-                          ),
+                      builder: (context) => BlocProvider(
+                        builder: (context) {
+                          return TransitionFormBloc(
+                            formManagerBuilder,
+                            TransitionFormBuilder(formManagerBuilder),
+                          );
+                        },
+                        child: TransitionFormScreen(),
+                      ),
                     ),
                   );
                 },

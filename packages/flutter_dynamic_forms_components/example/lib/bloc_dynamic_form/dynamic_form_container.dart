@@ -1,6 +1,6 @@
-import 'package:example/dynamic_form/dynamic_form_bloc.dart';
-import 'package:example/dynamic_form/dynamic_form_event.dart';
-import 'package:example/dynamic_form/dynamic_form_state.dart';
+import 'package:example/bloc_dynamic_form/dynamic_form_bloc.dart';
+import 'package:example/bloc_dynamic_form/dynamic_form_event.dart';
+import 'package:example/bloc_dynamic_form/dynamic_form_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
@@ -26,8 +26,7 @@ class _DynamicFormContainerState extends State<DynamicFormContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FormElementEvent, DynamicFormState>(
-      bloc: BlocProvider.of<DynamicFormBloc>(context),
+    return BlocBuilder<DynamicFormBloc, DynamicFormState>(
       builder: (context, state) {
         if (state.form == null) {
           return Padding(

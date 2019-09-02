@@ -31,8 +31,7 @@ class _TransitionFormContainerState extends State<TransitionFormContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FormElementEvent, TransitionFormState>(
-      bloc: BlocProvider.of<TransitionFormBloc>(context),
+    return BlocBuilder<TransitionFormBloc, TransitionFormState>(
       builder: (context, state) {
         if (state.form == null) {
           return Padding(
