@@ -42,33 +42,34 @@ class DynamicFormScreen extends StatelessWidget {
       BuildContext context, List<FormItemValue> resultItemValues) async {
     var bloc = BlocProvider.of<DynamicFormBloc>(context);
     return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: flutter.Text('Form data'),
-            content: flutter.Container(
-              width: double.maxFinite,
-              height: 300.0,
-              child: ListView(
-                padding: EdgeInsets.all(8.0),
-                //map List of our data to the ListView
-                children: resultItemValues
-                    .map((riv) => flutter.Text(
-                        "${riv.name} ${riv.property} ${riv.value}"))
-                    .toList(),
-              ),
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: flutter.Text('Form data'),
+          content: flutter.Container(
+            width: double.maxFinite,
+            height: 300.0,
+            child: ListView(
+              padding: EdgeInsets.all(8.0),
+              //map List of our data to the ListView
+              children: resultItemValues
+                  .map((riv) =>
+                      flutter.Text("${riv.name} ${riv.property} ${riv.value}"))
+                  .toList(),
             ),
-            actions: <Widget>[
-              new FlatButton(
-                child: flutter.Text('Ok'),
-                onPressed: () {
-                  bloc.dispatch(ClearFormDataEvent());
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
-        });
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              child: flutter.Text('Ok'),
+              onPressed: () {
+                bloc.dispatch(ClearFormDataEvent());
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 }
 
