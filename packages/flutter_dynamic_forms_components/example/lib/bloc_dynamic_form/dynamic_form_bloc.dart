@@ -66,7 +66,11 @@ class DynamicFormBloc extends Bloc<FormElementEvent, DynamicFormState> {
         propertyName: event.propertyName,
         ignoreLastChange: event.ignoreLastChange,
       );
-      yield currentState.copyWith(isValid: formManager.isFormValid);
+      var isValid = formManager.isFormValid;
+      //No need to emit new state every time, because reactive renderers already listen to the changes.
+      if (currentState.isValid != isValid) {
+        yield currentState.copyWith(isValid: isValid);
+      }
     }
   }
 }

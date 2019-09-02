@@ -90,7 +90,7 @@
                 <dropdownOption value="AR" label="Argentina"/>
                 <dropdownOption value="BY" label="Belarus"/>
                 <dropdownOption value="BR" label="Brazil"/>
-                <dropdownOption value="CD" label="Congo, The democratic republic of"/>
+                <dropdownOption value="CD" label="The democratic republic of the Congo"/>
                 <dropdownOption value="FK" label="Falkland Islands"/>
                 <dropdownOption value="GE" label="Georgia"/>
                 <dropdownOption value="GN" label="Guinea" />
