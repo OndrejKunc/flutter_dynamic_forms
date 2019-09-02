@@ -58,8 +58,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => SimpleFormScreen(
-                      formParserType: FormParserType.xml,
-                    ),
+                          formParserType: FormParserType.xml,
+                        ),
                   ),
                 );
               },
@@ -73,8 +73,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => SimpleFormScreen(
-                        formParserType: FormParserType.json,
-                      ),
+                            formParserType: FormParserType.json,
+                          ),
                     ),
                   );
                 },
@@ -89,17 +89,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => BlocProvider(
-                        builder: (context) {
-                          return DynamicFormBloc(
-                            forms.FormManagerBuilder(
-                              forms.XmlFormParserService(
-                                components.getDefaultParserList(),
-                              ),
-                            ),
-                          );
-                        },
-                        child: DynamicFormScreen(),
-                      ),
+                            builder: (context) {
+                              return DynamicFormBloc(
+                                forms.FormManagerBuilder(
+                                  forms.XmlFormParserService(
+                                    components.getDefaultParserList(),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: DynamicFormScreen(),
+                          ),
                     ),
                   );
                 },
@@ -119,14 +119,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => BlocProvider(
-                        builder: (context) {
-                          return TransitionFormBloc(
-                            formManagerBuilder,
-                            TransitionFormBuilder(formManagerBuilder),
-                          );
-                        },
-                        child: TransitionFormScreen(),
-                      ),
+                            builder: (context) {
+                              return TransitionFormBloc(
+                                formManagerBuilder,
+                                TransitionFormBuilder(formManagerBuilder),
+                              );
+                            },
+                            child: TransitionFormScreen(),
+                          ),
                     ),
                   );
                 },
