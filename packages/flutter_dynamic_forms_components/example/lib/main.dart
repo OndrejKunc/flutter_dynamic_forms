@@ -14,7 +14,6 @@ import 'package:flutter_bloc_extensions/flutter_bloc_extensions.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -47,101 +46,95 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Positioned.fill(
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SimpleFormScreen(
-                                formParserType: FormParserType.xml,
-                              ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SimpleFormScreen(
+                          formParserType: FormParserType.xml,
                         ),
-                      );
-                    },
-                    child: Text("Simple XML Form"),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: RaisedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SimpleFormScreen(
-                                  formParserType: FormParserType.json,
-                                ),
+                );
+              },
+              child: Text("Simple XML Form"),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SimpleFormScreen(
+                            formParserType: FormParserType.json,
                           ),
-                        );
-                      },
-                      child: Text("Simple JSON Form"),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: RaisedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DisposableBlocProvider(
-                                  blocFactory: () {
-                                    return DynamicFormBloc(
-                                      forms.FormManagerBuilder(
-                                        forms.XmlFormParserService(
-                                          components.getDefaultParserList(),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: DynamicFormScreen(),
-                                ),
-                          ),
-                        );
-                      },
-                      child: Text("Dynamic Form With Bloc"),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: RaisedButton(
-                      onPressed: () {
-                        var formManagerBuilder = forms.FormManagerBuilder(
-                          forms.XmlFormParserService(
-                            components.getDefaultParserList(),
-                          ),
-                        );
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DisposableBlocProvider(
-                                  blocFactory: () {
-                                    return TransitionFormBloc(
-                                      formManagerBuilder,
-                                      TransitionFormBuilder(formManagerBuilder),
-                                    );
-                                  },
-                                  child: TransitionFormScreen(),
-                                ),
-                          ),
-                        );
-                      },
-                      child: Text("Transition Dynamic Form"),
-                    ),
-                  ),
-                ],
+                  );
+                },
+                child: Text("Simple JSON Form"),
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DisposableBlocProvider(
+                            blocFactory: () {
+                              return DynamicFormBloc(
+                                forms.FormManagerBuilder(
+                                  forms.XmlFormParserService(
+                                    components.getDefaultParserList(),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: DynamicFormScreen(),
+                          ),
+                    ),
+                  );
+                },
+                child: Text("Dynamic Form With Bloc"),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: RaisedButton(
+                onPressed: () {
+                  var formManagerBuilder = forms.FormManagerBuilder(
+                    forms.XmlFormParserService(
+                      components.getDefaultParserList(),
+                    ),
+                  );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DisposableBlocProvider(
+                            blocFactory: () {
+                              return TransitionFormBloc(
+                                formManagerBuilder,
+                                TransitionFormBuilder(formManagerBuilder),
+                              );
+                            },
+                            child: TransitionFormScreen(),
+                          ),
+                    ),
+                  );
+                },
+                child: Text("Transition Dynamic Form"),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
