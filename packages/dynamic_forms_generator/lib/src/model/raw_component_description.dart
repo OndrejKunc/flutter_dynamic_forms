@@ -6,11 +6,12 @@ class RawComponentDescription {
   final List<RawPropertyDescription> properties;
   final String contentProperty;
 
-  RawComponentDescription(
-      {@required this.type,
-      this.parentType,
-      this.properties = const [],
-      this.contentProperty});
+  RawComponentDescription({
+    @required this.type,
+    this.parentType,
+    this.properties = const [],
+    this.contentProperty,
+  });
 }
 
 class RawPropertyDescription {
@@ -19,9 +20,10 @@ class RawPropertyDescription {
   final String defaultValue;
   final bool isMutable;
 
-  RawPropertyDescription(
-      {@required this.name,
-      @required this.type,
-      this.defaultValue,
-      this.isMutable});
+  RawPropertyDescription({
+    @required this.name,
+    @required this.type,
+    this.defaultValue,
+    this.isMutable,
+  });
 }

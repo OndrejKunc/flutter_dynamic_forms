@@ -21,12 +21,12 @@ class PropertyDescription {
   final String name;
   final ComponentType type;
   final String defaultValue;
-  final bool isImmutable;
+  final bool isMutable;
 
   PropertyDescription({
     @required this.name,
     @required this.type,
     this.defaultValue,
-    this.isImmutable,
+    this.isMutable = false,
   });
 }
