@@ -17,6 +17,14 @@ abstract class ParserNode {
 
   String getPlainStringValue(String propertyName);
 
+  ElementValue<TFormElement> getStructure<TFormElement>(
+      {@required String name,
+      @required FormElementParserFunction parser,
+      @required String structureName,
+      @required FormElement parent,
+      @required TFormElement defaultValue(),
+      bool isImmutable = true});
+
   ElementValue<bool> getIsVisible() =>
       getValue("isVisible", convertToBool, defaultTrue);
 

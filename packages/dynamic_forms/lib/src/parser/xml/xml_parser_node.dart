@@ -1,5 +1,7 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/element_values/element_value.dart';
+import 'package:dynamic_forms/src/parser/parser_node.dart';
+import 'package:meta/meta.dart';
 import 'package:xml/xml.dart';
 
 class XmlParserNode extends ParserNode {
@@ -90,5 +92,29 @@ class XmlParserNode extends ParserNode {
             .toList();
     var childrenElementValue = createElementValue(children, isImmutable);
     return childrenElementValue;
+  }
+
+  @override
+  ElementValue<TFormElement> getStructure<TFormElement>(
+      {@required String name,
+      @required FormElementParserFunction parser,
+      @required String structureName,
+      @required FormElement parent,
+      @required TFormElement defaultValue(),
+      bool isImmutable = true}) {
+    XmlElement childElement = getPropertyAsElement(element, name);
+    if (childElement == null) {
+      childElement = getElement(element, name);
+    }
+
+    if (childElement != null) {
+      XmlElement structureElement = childElement.children.firstWhere(
+          (c) => c is XmlElement && c.name.qualified == structureName,
+          orElse: () => null);
+      return createElementValue<TFormElement>(
+          parser(XmlParserNode(structureElement), parent) as TFormElement,
+          isImmutable);
+    }
+    return createElementValue(defaultValue(), isImmutable);
   }
 }
