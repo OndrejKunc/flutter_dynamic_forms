@@ -11,7 +11,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_dynamic_forms_components:
     path: ../
-  flutter_bloc_extensions: ^0.1.2
+  flutter_bloc: ^0.21.0
 
 dev_dependencies:
   flutter_test:

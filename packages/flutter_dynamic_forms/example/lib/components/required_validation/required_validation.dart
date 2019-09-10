@@ -44,7 +44,7 @@ class RequiredValidation extends Validation {
       ElementValue oldProperty,
       ExpressionProvider<ExpressionProviderElement> parent,
       ExpressionProviderElement instance) {
-    return (key == Validation.IS_VALID_PROPERTY_NAME)
+    return (key == Validation.isValidPropertyName)
         ? getIsValid(parent)
         : super.cloneProperty(key, oldProperty, parent, instance);
   }

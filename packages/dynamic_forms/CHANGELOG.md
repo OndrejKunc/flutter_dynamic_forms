@@ -1,3 +1,7 @@
+# 0.5.0
+
+Removed screaming caps convention.
+
 # 0.4.0
 
 - Added abstraction over XML parser.

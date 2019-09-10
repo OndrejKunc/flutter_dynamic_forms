@@ -2,11 +2,11 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:meta/meta.dart';
 
 class Container extends FormElement {
-  static const String CHILDREN_PROPERTY_NAME = "children";
+  static const String childrenPropertyName = "children";
 
-  List<FormElement> get children => properties[CHILDREN_PROPERTY_NAME].value;
+  List<FormElement> get children => properties[childrenPropertyName].value;
   Stream<List<FormElement>> get childrenChanged =>
-      properties[CHILDREN_PROPERTY_NAME].valueChanged;
+      properties[childrenPropertyName].valueChanged;
 
   void fillContainer(
       {@required String id,
@@ -14,7 +14,7 @@ class Container extends FormElement {
       @required ElementValue<bool> isVisible,
       @required ElementValue<List<FormElement>> children}) {
     fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    registerElementValue(CHILDREN_PROPERTY_NAME, children);
+    registerElementValue(childrenPropertyName, children);
   }
 
   @override

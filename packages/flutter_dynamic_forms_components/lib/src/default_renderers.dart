@@ -10,6 +10,10 @@ List<FormElementRenderer> getDefaultRenderers() {
     DefaultTextRenderer(),
     DefaultRadioButtonGroupRenderer(),
     DefaultRadioButtonRenderer(),
-    DefaultDropdownButtonRenderer()
+    DefaultDropdownButtonRenderer(),
+    DefaultSingleSelectChipGroupRenderer(),
+    DefaultSingleSelectChipChoiceRenderer(),
+    DefaultMultiSelectChipChoiceRenderer(),
+    DefaultMultiSelectChipGroupRenderer(),
   ];
 }

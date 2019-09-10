@@ -65,10 +65,47 @@
                     "name": "Form section 2",
                     "children": [
                         {
+                            "@name": "singleSelectChipGroup",
+                            "id": "chipGroup1",
+                            "value": "-1",
+                            "choices": [
+                                {
+                                    "@name": "singleSelectChipChoice",
+                                    "label": "Chip Option 1",
+                                    "value": "1"
+                                },
+                                {
+                                    "@name": "singleSelectChipChoice",
+                                    "label": "Chip Option 2",
+                                    "value": "2"
+                                },
+                                {
+                                    "@name": "singleSelectChipChoice",
+                                    "label": "Chip Option 3",
+                                    "value": "3"
+                                },
+                                {
+                                    "@name": "singleSelectChipChoice",
+                                    "label": "Chip Option 4",
+                                    "value": "4"
+                                },
+                                {
+                                    "@name": "singleSelectChipChoice",
+                                    "label": "Chip Option 5 with a really long name",
+                                    "value": "5"
+                                },
+                                {
+                                    "@name": "singleSelectChipChoice",
+                                    "label": "Chip Option 6",
+                                    "value": "6"
+                                }
+                            ]
+                        },
+                        {
                             "@name": "radioButtonGroup",
                             "id": "radioGroup1",
                             "value": "-1",
-                            "radioButtons": [
+                            "choices": [
                                 {
                                     "@name": "radioButton",
                                     "label": "Option 1",
@@ -92,29 +129,44 @@
                             ]
                         },
                         {
-                            "@name": "radioButtonGroup",
-                            "id": "radioGroup2",
-                            "value": "B",
-                            "radioButtons": [
+                            "@name": "multiSelectChipGroup",
+                            "id": "chipGroup2",
+                            "choices": [
                                 {
-                                    "@name": "radioButton",
-                                    "label": "Option A",
-                                    "value": "A"
+                                    "@name": "multiSelectChipChoice",
+                                    "id": "multiChoice1",
+                                    "label": "Multi Chip Option 1",
+                                    "value": "1"
                                 },
                                 {
-                                    "@name": "radioButton",
-                                    "label": "Option B",
-                                    "value": "B"
+                                    "@name": "multiSelectChipChoice",
+                                    "id": "multiChoice2",
+                                    "label": "Multi Chip Option 2",
+                                    "value": "2"
                                 },
                                 {
-                                    "@name": "radioButton",
-                                    "label": "Option C",
-                                    "value": "C"
+                                    "@name": "multiSelectChipChoice",
+                                    "id": "multiChoice3",
+                                    "label": "Multi Chip Option 3",
+                                    "value": "3"
                                 },
                                 {
-                                    "@name": "radioButton",
-                                    "label": "Option D",
-                                    "value": "D"
+                                    "@name": "multiSelectChipChoice",
+                                    "id": "multiChoice4",
+                                    "label": "Multi Chip Option 4",
+                                    "value": "4"
+                                },
+                                {
+                                    "@name": "multiSelectChipChoice",
+                                    "id": "multiChoice5",
+                                    "label": "Multi Chip Option 5 with a really long name",
+                                    "value": "5"
+                                },
+                                {
+                                    "@name": "multiSelectChipChoice",
+                                    "id": "multiChoice6",
+                                    "label": "Multi Chip Option 6",
+                                    "value": "6"
                                 }
                             ]
                         }
@@ -129,7 +181,7 @@
                             "@name": "dropdownButton",
                             "id": "dropdownButton1",
                             "value": "CD",
-                            "options": [
+                            "choices": [
                                 {
                                     "@name": "dropdownOption",
                                     "label": "Afganistan",
@@ -152,7 +204,7 @@
                                 },
                                 {
                                     "@name": "dropdownOption",
-                                    "label": "Congo, The democratic republic of",
+                                    "label": "The democratic republic of the Congo",
                                     "value": "CD"
                                 },
                                 {

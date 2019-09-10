@@ -61,18 +61,28 @@
             label="Hide welcome message"
             />
         <formGroup id="formgroup2" name="Form section 2">
+            <singleSelectChipGroup id="chipGroup1" value="-1">
+                <singleSelectChipChoice label="Chip Option 1" value="1" />
+                <singleSelectChipChoice label="Chip Option 2" value="2" />
+                <singleSelectChipChoice label="Chip Option 3" value="3" />
+                <singleSelectChipChoice label="Chip Option 4" value="4" />
+                <singleSelectChipChoice label="Chip Option 5 with a really long name" value="5" />
+                <singleSelectChipChoice label="Chip Option 6" value="6" />
+            </singleSelectChipGroup>
             <radioButtonGroup id="radioGroup1" value="-1">
                 <radioButton label="Option 1" value="1" />
                 <radioButton label="Option 2" value="2" />
                 <radioButton label="Option 3" value="3" />
                 <radioButton label="Option 4" value="4" />
             </radioButtonGroup>
-            <radioButtonGroup id="radioGroup2" value="B">
-                <radioButton label="Option A" value="A" />
-                <radioButton label="Option B" value="B" />
-                <radioButton label="Option C" value="C" />
-                <radioButton label="Option D" value="D" />
-            </radioButtonGroup>
+            <multiSelectChipGroup id="chipGroup2">
+                <multiSelectChipChoice id="multiChoice1" label="Multi Chip Option 1" value="1" />
+                <multiSelectChipChoice id="multiChoice2" label="Multi Chip Option 2" value="2" isSelected="true" />
+                <multiSelectChipChoice id="multiChoice3" label="Multi Chip Option 3" value="3" />
+                <multiSelectChipChoice id="multiChoice4" label="Multi Chip Option 4" value="4" />
+                <multiSelectChipChoice id="multiChoice5" label="Multi Chip Option 5 with a really long name" value="5" />
+                <multiSelectChipChoice id="multiChoice6" label="Multi Chip Option 6" value="6" />
+            </multiSelectChipGroup>
         </formGroup>
         <formGroup id="formgroup3" name="Form section 3">
             <dropdownButton id="dropdownButton1" value="CD">
@@ -80,7 +90,7 @@
                 <dropdownOption value="AR" label="Argentina"/>
                 <dropdownOption value="BY" label="Belarus"/>
                 <dropdownOption value="BR" label="Brazil"/>
-                <dropdownOption value="CD" label="Congo, The democratic republic of"/>
+                <dropdownOption value="CD" label="The democratic republic of the Congo"/>
                 <dropdownOption value="FK" label="Falkland Islands"/>
                 <dropdownOption value="GE" label="Georgia"/>
                 <dropdownOption value="GN" label="Guinea" />
