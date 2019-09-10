@@ -1,6 +1,6 @@
 import 'package:build/build.dart';
 import 'package:dynamic_forms_generator/src/model_generator.dart';
-import 'package:dynamic_forms_generator/src/parser.dart';
+import 'package:dynamic_forms_generator/src/parser/parser.dart';
 import 'package:dynamic_forms_generator/src/parser_generator.dart';
 
 import 'component_description_builder.dart';
@@ -24,14 +24,18 @@ class DynamicFormsBuilder implements Builder {
     if (rawComponentDescription == null) {
       return;
     }
-    var componentDescription = buildFromRawComponent(rawComponentDescription);
+
+    var componentBuilder = ComponentDescriptionBuilder();
+
+    var componentDescription =
+        componentBuilder.buildFromRawComponent(rawComponentDescription);
     if (componentDescription == null) {
       return;
     }
 
     var modelGenerator = ModelGenerator(componentDescription);
     var modelContent = modelGenerator.generate();
-    if (modelContent == null){
+    if (modelContent == null) {
       return;
     }
     var model = inputId.changeExtension(".g.dart");
@@ -39,7 +43,7 @@ class DynamicFormsBuilder implements Builder {
 
     var parserGenerator = ParserGenerator(componentDescription);
     var parserContent = parserGenerator.generate();
-    if (parserContent == null){
+    if (parserContent == null) {
       return;
     }
     var parser = inputId.changeExtension("_parser.g.dart");
