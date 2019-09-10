@@ -1,0 +1,6 @@
+type: radioButtonGroup
+parentType: singleSelectGroup<radioButton>
+properties:
+  arrangement:
+    type: string
+    isMutable: true

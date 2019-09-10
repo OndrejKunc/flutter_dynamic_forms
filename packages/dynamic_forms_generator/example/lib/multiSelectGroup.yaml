@@ -1,0 +1,5 @@
+type: multiSelectGroup<tMultiSelectChoice extends multiSelectChoice>
+parentType: formElement
+properties:
+  choices:
+    type: tMultiSelectChoice[]

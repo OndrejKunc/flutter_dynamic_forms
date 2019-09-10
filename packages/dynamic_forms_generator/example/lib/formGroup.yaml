@@ -1,0 +1,5 @@
+type: formGroup
+parentType: container
+properties:
+  name:
+    type: string

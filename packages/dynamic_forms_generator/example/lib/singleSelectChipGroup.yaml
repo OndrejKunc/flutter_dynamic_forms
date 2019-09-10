@@ -1,0 +1,2 @@
+type: singleSelectChipGroup
+parentType: singleSelectGroup<singleSelectChipChoice>

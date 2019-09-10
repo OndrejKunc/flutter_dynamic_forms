@@ -1,0 +1,6 @@
+targets:
+  $default:
+    builders:
+      dynamic_forms_generator:dynamicFormsBuilder:
+        options:
+          key2: "overriden2"

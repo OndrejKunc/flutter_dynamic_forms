@@ -6,3 +6,7 @@ builders:
     build_extensions: {".yaml": [".g.dart", "_model.g.dart"]}
     build_to: source
     auto_apply: root_package
+    defaults: 
+      options:
+        key1: "value1"
+        key2: "value2"

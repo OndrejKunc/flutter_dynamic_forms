@@ -1,9 +1,9 @@
 import 'package:dynamic_forms_generator/src/component_description.dart';
 
-class ParserGenerator {
+class ModelGenerator {
   final ComponentDescription componentDescription;
 
-  ParserGenerator(this.componentDescription);
+  ModelGenerator(this.componentDescription);
 
   String generate() {
     return "//TODO";
