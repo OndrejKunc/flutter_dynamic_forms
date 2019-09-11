@@ -13,10 +13,14 @@ class DynamicFormsBuilder implements Builder {
 
   @override
   Future build(BuildStep buildStep) async {
+    var buildConfiguration = BuildConfiguration.fromConfig(config);
+
     var inputId = buildStep.inputId;
     var content = await buildStep.readAsString(inputId);
     if (inputId.path.contains("pubspec.yaml") ||
-        inputId.path.contains("build.yaml")) {
+        inputId.path.contains("build.yaml") ||
+        buildConfiguration.componentsToIgnore
+            .any((c) => inputId.path.contains(c))) {
       return;
     }
 
@@ -32,8 +36,6 @@ class DynamicFormsBuilder implements Builder {
     if (componentDescription == null) {
       return;
     }
-
-    var buildConfiguration = BuildConfiguration.fromConfig(config);
 
     var modelGenerator = ModelGenerator(
         componentDescription: componentDescription,

@@ -2,7 +2,7 @@ import 'package:dynamic_forms_generator/src/model/component_type.dart';
 import 'package:meta/meta.dart';
 
 class ComponentDescription {
-  final ComponentType type;
+  final DefinitionType type;
   final ComponentType parentType;
   final List<PropertyDescription> properties;
   final PropertyDescription conentProperty;

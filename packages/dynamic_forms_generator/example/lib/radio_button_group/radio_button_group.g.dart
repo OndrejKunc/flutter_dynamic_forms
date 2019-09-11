@@ -1,5 +1,10 @@
 import '../components.dart';
-class RadioButtonGroup {
-    
-}
+import 'package:dynamic_forms/dynamic_forms.dart';
 
+class RadioButtonGroup extends SingleSelectGroup<RadioButton> {
+
+  @override
+  FormElement getInstance() {
+    return RadioButtonGroup();
+  }
+}

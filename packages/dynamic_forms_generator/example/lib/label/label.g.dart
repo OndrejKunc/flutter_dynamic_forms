@@ -1,5 +1,10 @@
 import '../components.dart';
-class Label {
-    
-}
+import 'package:dynamic_forms/dynamic_forms.dart';
 
+class Label extends FormElement {
+
+  @override
+  FormElement getInstance() {
+    return Label();
+  }
+}

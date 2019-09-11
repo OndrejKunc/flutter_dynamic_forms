@@ -10,3 +10,7 @@ builders:
       options:
         default_imports:
           - "../components.dart"
+          - "package:dynamic_forms/dynamic_forms.dart"
+        components_to_ignore:
+          - "form_element.yaml"
+          - "validation.yaml"

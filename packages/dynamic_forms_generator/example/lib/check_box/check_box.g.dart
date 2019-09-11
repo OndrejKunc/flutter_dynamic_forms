@@ -1,5 +1,10 @@
 import '../components.dart';
-class CheckBox {
-    
-}
+import 'package:dynamic_forms/dynamic_forms.dart';
 
+class CheckBox extends FormElement {
+
+  @override
+  FormElement getInstance() {
+    return CheckBox();
+  }
+}

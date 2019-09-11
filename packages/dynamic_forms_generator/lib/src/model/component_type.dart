@@ -47,7 +47,7 @@ class GenericParameterType extends ComponentType {
   }
 }
 
-class GenericDefinitionType extends ComponentType {
+class GenericDefinitionType extends DefinitionType {
   final List<GenericParameterType> genericParameters;
 
   GenericDefinitionType(String typeName, this.genericParameters)
@@ -63,4 +63,8 @@ class GenericDefinitionType extends ComponentType {
 
 class DefinitionType extends ComponentType {
   DefinitionType(String typeName) : super(typeName);
+
+  String toConstructorString() {
+    return "${capitalize(typeName)}()";
+  }
 }
