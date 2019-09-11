@@ -17,7 +17,7 @@ abstract class ParserNode {
 
   String getPlainStringValue(String propertyName);
 
-  ElementValue<TFormElement> getStructure<TFormElement>(
+  ElementValue<TFormElement> getChild<TFormElement>(
       {@required String name,
       @required FormElementParserFunction parser,
       @required String structureName,
