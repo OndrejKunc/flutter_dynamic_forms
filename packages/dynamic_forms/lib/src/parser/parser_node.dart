@@ -20,7 +20,7 @@ abstract class ParserNode {
   ElementValue<TFormElement> getChild<TFormElement>(
       {@required String name,
       @required FormElementParserFunction parser,
-      @required String childName,
+      @required String childPropertyName,
       @required FormElement parent,
       @required TFormElement defaultValue(),
       bool isImmutable = true});

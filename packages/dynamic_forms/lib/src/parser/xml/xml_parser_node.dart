@@ -98,7 +98,7 @@ class XmlParserNode extends ParserNode {
   ElementValue<TFormElement> getChild<TFormElement>(
       {@required String name,
       @required FormElementParserFunction parser,
-      @required String childName,
+      @required String childPropertyName,
       @required FormElement parent,
       @required TFormElement defaultValue(),
       bool isImmutable = true}) {
@@ -109,7 +109,7 @@ class XmlParserNode extends ParserNode {
 
     if (childElement != null) {
       XmlElement structureElement = childElement.children.firstWhere(
-          (c) => c is XmlElement && c.name.qualified == childName,
+          (c) => c is XmlElement && c.name.qualified == childPropertyName,
           orElse: () => null);
       return createElementValue<TFormElement>(
           parser(XmlParserNode(structureElement), parent) as TFormElement,
