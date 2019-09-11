@@ -59,7 +59,7 @@ class JsonParserNode extends ParserNode {
   ElementValue<TFormElement> getChild<TFormElement>(
       {@required String name,
       @required FormElementParserFunction parser,
-      @required String structureName,
+      @required String childName,
       @required FormElement parent,
       @required TFormElement defaultValue(),
       bool isImmutable = true}) {
@@ -67,7 +67,7 @@ class JsonParserNode extends ParserNode {
 
     if (childElement != null) {
       return createElementValue<TFormElement>(
-          parser(JsonParserNode(childElement[structureName]), parent)
+          parser(JsonParserNode(childElement[childName]), parent)
               as TFormElement,
           isImmutable);
     }
