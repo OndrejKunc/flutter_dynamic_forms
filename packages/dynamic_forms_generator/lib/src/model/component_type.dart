@@ -3,7 +3,7 @@ class ComponentType {
   ComponentType(this.typeName);
 
   String toTypeString() {
-    return typeName;
+    return capitalize(typeName);
   }
 
   String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
@@ -40,9 +40,9 @@ class GenericParameterType extends ComponentType {
 
   @override
   String toTypeString() {
-    if (extendsType == null){
+    if (extendsType == null) {
       return typeName;
-    } 
+    }
     return "${capitalize(typeName)} extends ${extendsType.toTypeString()}";
   }
 }
@@ -50,7 +50,8 @@ class GenericParameterType extends ComponentType {
 class GenericDefinitionType extends ComponentType {
   final List<GenericParameterType> genericParameters;
 
-  GenericDefinitionType(String typeName, [this.genericParameters = const []]) : super(typeName);
+  GenericDefinitionType(String typeName, this.genericParameters)
+      : super(typeName);
 
   @override
   String toTypeString() {
@@ -58,4 +59,8 @@ class GenericDefinitionType extends ComponentType {
         genericParameters.map((t) => t.toTypeString()).join(",");
     return "${capitalize(typeName)}<${joinedTypeParameters}>";
   }
+}
+
+class DefinitionType extends ComponentType {
+  DefinitionType(String typeName) : super(typeName);
 }

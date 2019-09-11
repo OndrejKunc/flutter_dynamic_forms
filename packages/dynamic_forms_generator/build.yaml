@@ -8,5 +8,5 @@ builders:
     auto_apply: root_package
     defaults: 
       options:
-        key1: "value1"
-        key2: "value2"
+        default_imports:
+          - "../components.dart"

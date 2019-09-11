@@ -25,7 +25,7 @@ class ComponentTypeGrammarParser extends ComponentTypeGrammarDefinition {
         (c) {
           ComponentType type;
           if (c[1] == null) {
-            type = GenericDefinitionType(c[0]);
+            type = DefinitionType(c[0]);
           } else {
             type = GenericDefinitionType(c[0], c[1][1]);
           }

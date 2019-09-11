@@ -12,6 +12,7 @@ void main() {
 
   test("simple type", () {
     var result = parser.parse("type1").value as ComponentType;
+    expect(result, isA<DefinitionType>());
     expect(result.typeName, "type1");
   });
 

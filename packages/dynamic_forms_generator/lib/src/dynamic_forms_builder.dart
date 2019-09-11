@@ -1,4 +1,5 @@
 import 'package:build/build.dart';
+import 'package:dynamic_forms_generator/src/build_configuration.dart';
 import 'package:dynamic_forms_generator/src/model_generator.dart';
 import 'package:dynamic_forms_generator/src/parser/parser.dart';
 import 'package:dynamic_forms_generator/src/parser_generator.dart';
@@ -12,7 +13,6 @@ class DynamicFormsBuilder implements Builder {
 
   @override
   Future build(BuildStep buildStep) async {
-    print("This is the config: $config");
     var inputId = buildStep.inputId;
     var content = await buildStep.readAsString(inputId);
     if (inputId.path.contains("pubspec.yaml") ||
@@ -33,7 +33,11 @@ class DynamicFormsBuilder implements Builder {
       return;
     }
 
-    var modelGenerator = ModelGenerator(componentDescription);
+    var buildConfiguration = BuildConfiguration.fromConfig(config);
+
+    var modelGenerator = ModelGenerator(
+        componentDescription: componentDescription,
+        buildConfiguration: buildConfiguration);
     var modelContent = modelGenerator.generate();
     if (modelContent == null) {
       return;
@@ -41,7 +45,9 @@ class DynamicFormsBuilder implements Builder {
     var model = inputId.changeExtension(".g.dart");
     await buildStep.writeAsString(model, modelContent);
 
-    var parserGenerator = ParserGenerator(componentDescription);
+    var parserGenerator = ParserGenerator(
+        componentDescription: componentDescription,
+        buildConfiguration: buildConfiguration);
     var parserContent = parserGenerator.generate();
     if (parserContent == null) {
       return;
