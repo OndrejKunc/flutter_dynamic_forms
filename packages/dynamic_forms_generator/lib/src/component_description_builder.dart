@@ -6,23 +6,21 @@ import 'package:dynamic_forms_generator/src/parser/component_type_grammar_parser
 class ComponentDescriptionBuilder {
   ComponentDescription buildFromRawComponent(
       RawComponentDescription rawComponent) {
-    var parser = ComponentTypeGrammarParser().build();
-    ComponentType type = parser.parse(rawComponent.type).value;
+    var typeDefinitionParser =
+        ComponentTypeGrammarParser(parseTypeDefinition: true).build();
+    ComponentType type = typeDefinitionParser.parse(rawComponent.type).value;
 
-    List<String> genericParameters;
-    if (type is GenericType) {
-      genericParameters = type.genericParameters.map((g) => g.typeName);
-    }
+    var typeParser = ComponentTypeGrammarParser().build();
 
     ComponentType parentType;
     if (rawComponent.parentType != null) {
-      parentType = parser.parse(rawComponent.parentType).value;
+      parentType = typeParser.parse(rawComponent.parentType).value;
     }
 
     List<PropertyDescription> properties = [];
     if (rawComponent.properties != null) {
       for (var rawProperty in rawComponent.properties) {
-        var propertyType = parser.parse(rawProperty.type).value;
+        var propertyType = typeParser.parse(rawProperty.type).value;
         var isMutable = rawProperty.isMutable;
         properties.add(
           PropertyDescription(

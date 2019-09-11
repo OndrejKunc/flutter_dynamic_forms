@@ -5,6 +5,8 @@ class ComponentType {
   String toTypeString() {
     return typeName;
   }
+
+  String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 }
 
 class GenericType extends ComponentType {
@@ -16,7 +18,7 @@ class GenericType extends ComponentType {
   String toTypeString() {
     var joinedTypeParameters =
         genericParameters.map((t) => t.toTypeString()).join(",");
-    return "$typeName<${joinedTypeParameters}>";
+    return "${capitalize(typeName)}<${joinedTypeParameters}>";
   }
 }
 
@@ -27,6 +29,33 @@ class ArrayType extends ComponentType {
 
   @override
   String toTypeString() {
-    return "$typeName[]";
+    return "${capitalize(typeName)}[]";
+  }
+}
+
+class GenericParameterType extends ComponentType {
+  final ComponentType extendsType;
+
+  GenericParameterType(String typeName, [this.extendsType]) : super(typeName);
+
+  @override
+  String toTypeString() {
+    if (extendsType == null){
+      return typeName;
+    } 
+    return "${capitalize(typeName)} extends ${extendsType.toTypeString()}";
+  }
+}
+
+class GenericDefinitionType extends ComponentType {
+  final List<GenericParameterType> genericParameters;
+
+  GenericDefinitionType(String typeName, [this.genericParameters = const []]) : super(typeName);
+
+  @override
+  String toTypeString() {
+    var joinedTypeParameters =
+        genericParameters.map((t) => t.toTypeString()).join(",");
+    return "${capitalize(typeName)}<${joinedTypeParameters}>";
   }
 }
