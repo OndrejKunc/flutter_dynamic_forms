@@ -1,3 +1,4 @@
+export 'package:dynamic_forms/dynamic_forms.dart';
 export 'container/container.g.dart';
 export 'dropdown_button/dropdown_button.g.dart';
 export 'dropdown_option/dropdown_option.g.dart';

@@ -1,3 +1,5 @@
+Set<String> lowerCaseTypes = {"int", "bool", "double"};
+
 class ComponentType {
   final String typeName;
   ComponentType(this.typeName);
@@ -6,7 +8,12 @@ class ComponentType {
     return capitalize(typeName);
   }
 
-  String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
+  String capitalize(String s) {
+    if (lowerCaseTypes.contains(s)) {
+      return s;
+    }
+    return s[0].toUpperCase() + s.substring(1);
+  }
 }
 
 class GenericType extends ComponentType {
@@ -29,7 +36,7 @@ class ArrayType extends ComponentType {
 
   @override
   String toTypeString() {
-    return "${capitalize(typeName)}[]";
+    return "List<${capitalize(typeName)}>";
   }
 }
 

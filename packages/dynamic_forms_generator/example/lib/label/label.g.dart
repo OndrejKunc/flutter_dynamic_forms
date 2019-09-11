@@ -1,7 +1,12 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
 import '../components.dart';
-import 'package:dynamic_forms/dynamic_forms.dart';
 
 class Label extends FormElement {
+  static const String valuePropertyName = "value";
+
+  String get value => properties[valuePropertyName].value;
+  Stream<String> get valueChanged => properties[valuePropertyName].valueChanged;
 
   @override
   FormElement getInstance() {
