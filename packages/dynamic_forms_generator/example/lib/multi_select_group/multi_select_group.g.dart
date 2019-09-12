@@ -9,12 +9,18 @@ class MultiSelectGroup<TMultiSelectChoice extends MultiSelectChoice> extends For
   List<TMultiSelectChoice> get choices => properties[choicesPropertyName].value;
   Stream<List<TMultiSelectChoice>> get choicesChanged => properties[choicesPropertyName].valueChanged;
 
-  void fillCheckBox({
+  void fillMultiSelectGroup({
     @required String id,
     @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
     @required ElementValue<List<TMultiSelectChoice>> choices,
   }) {
+    fillFormElement(
+      id: id,
+      parent: parent,
+      isVisible: isVisible,
+    );
+    registerElementValue(choicesPropertyName, choices);
   }
 
   @override

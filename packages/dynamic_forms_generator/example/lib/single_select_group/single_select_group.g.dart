@@ -13,13 +13,20 @@ class SingleSelectGroup<TSingleSelectChoice extends SingleSelectChoice> extends 
   String get value => properties[valuePropertyName].value;
   Stream<String> get valueChanged => properties[valuePropertyName].valueChanged;
 
-  void fillCheckBox({
+  void fillSingleSelectGroup({
     @required String id,
     @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
     @required ElementValue<List<TSingleSelectChoice>> choices,
     @required ElementValue<String> value,
   }) {
+    fillFormElement(
+      id: id,
+      parent: parent,
+      isVisible: isVisible,
+    );
+    registerElementValue(choicesPropertyName, choices);
+    registerElementValue(valuePropertyName, value);
   }
 
   @override

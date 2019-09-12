@@ -9,12 +9,18 @@ class Label extends FormElement {
   String get value => properties[valuePropertyName].value;
   Stream<String> get valueChanged => properties[valuePropertyName].valueChanged;
 
-  void fillCheckBox({
+  void fillLabel({
     @required String id,
     @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
     @required ElementValue<String> value,
   }) {
+    fillFormElement(
+      id: id,
+      parent: parent,
+      isVisible: isVisible,
+    );
+    registerElementValue(valuePropertyName, value);
   }
 
   @override

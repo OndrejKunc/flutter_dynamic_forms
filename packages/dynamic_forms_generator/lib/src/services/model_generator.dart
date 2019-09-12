@@ -47,7 +47,8 @@ class ModelGenerator {
       buffer.writeln();
     }
 
-    buffer.writeln("  void fillCheckBox({");
+    buffer.writeln(
+        "  void fill${componentDescription.type.capitalizedTypeName}({");
 
     for (var property in allProperties) {
       var typeName = property.name == "id"
@@ -57,6 +58,21 @@ class ModelGenerator {
     }
 
     buffer.writeln("  }) {");
+
+    buffer.writeln(
+        "    fill${componentDescription.parentType.capitalizedTypeName}(");
+
+    for (var property in allProperties.where(
+        (p) => !componentDescription.properties.any((c) => c.name == p.name))) {
+      buffer.writeln("      ${property.name}: ${property.name},");
+    }
+
+    buffer.writeln("    );");
+
+    for (var property in componentDescription.properties) {
+      buffer.writeln(
+          "    registerElementValue(${property.name}PropertyName, ${property.name});");
+    }
 
     buffer.writeln("  }");
     buffer.writeln();

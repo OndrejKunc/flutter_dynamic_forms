@@ -21,7 +21,7 @@ class Text extends FormElement {
   String get value => properties[valuePropertyName].value;
   Stream<String> get valueChanged => properties[valuePropertyName].valueChanged;
 
-  void fillCheckBox({
+  void fillText({
     @required String id,
     @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
@@ -30,6 +30,15 @@ class Text extends FormElement {
     @required ElementValue<List<Validation>> validations,
     @required ElementValue<String> value,
   }) {
+    fillFormElement(
+      id: id,
+      parent: parent,
+      isVisible: isVisible,
+    );
+    registerElementValue(labelPropertyName, label);
+    registerElementValue(textInputTypePropertyName, textInputType);
+    registerElementValue(validationsPropertyName, validations);
+    registerElementValue(valuePropertyName, value);
   }
 
   @override

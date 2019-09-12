@@ -9,7 +9,7 @@ class RadioButtonGroup extends SingleSelectGroup<RadioButton> {
   String get arrangement => properties[arrangementPropertyName].value;
   Stream<String> get arrangementChanged => properties[arrangementPropertyName].valueChanged;
 
-  void fillCheckBox({
+  void fillRadioButtonGroup({
     @required String id,
     @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
@@ -17,6 +17,14 @@ class RadioButtonGroup extends SingleSelectGroup<RadioButton> {
     @required ElementValue<String> value,
     @required ElementValue<String> arrangement,
   }) {
+    fillSingleSelectGroup(
+      id: id,
+      parent: parent,
+      isVisible: isVisible,
+      choices: choices,
+      value: value,
+    );
+    registerElementValue(arrangementPropertyName, arrangement);
   }
 
   @override

@@ -20,6 +20,13 @@ class CheckBox extends FormElement {
     @required ElementValue<String> label,
     @required ElementValue<bool> value,
   }) {
+    fillFormElement(
+      id: id,
+      parent: parent,
+      isVisible: isVisible,
+    );
+    registerElementValue(labelPropertyName, label);
+    registerElementValue(valuePropertyName, value);
   }
 
   @override

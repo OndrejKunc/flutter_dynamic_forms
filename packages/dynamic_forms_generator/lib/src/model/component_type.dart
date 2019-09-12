@@ -6,6 +6,8 @@ class ComponentType {
   final String typeName;
   ComponentType(this.typeName);
 
+  String get capitalizedTypeName => capitalize(typeName);
+
   String toTypeString() {
     return capitalize(typeName);
   }

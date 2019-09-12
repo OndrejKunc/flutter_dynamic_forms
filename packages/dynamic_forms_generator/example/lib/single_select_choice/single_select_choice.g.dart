@@ -13,13 +13,20 @@ class SingleSelectChoice extends FormElement {
   String get value => properties[valuePropertyName].value;
   Stream<String> get valueChanged => properties[valuePropertyName].valueChanged;
 
-  void fillCheckBox({
+  void fillSingleSelectChoice({
     @required String id,
     @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
     @required ElementValue<String> label,
     @required ElementValue<String> value,
   }) {
+    fillFormElement(
+      id: id,
+      parent: parent,
+      isVisible: isVisible,
+    );
+    registerElementValue(labelPropertyName, label);
+    registerElementValue(valuePropertyName, value);
   }
 
   @override

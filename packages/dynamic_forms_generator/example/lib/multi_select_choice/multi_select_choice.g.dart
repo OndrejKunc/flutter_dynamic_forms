@@ -13,13 +13,20 @@ class MultiSelectChoice extends FormElement {
   String get label => properties[labelPropertyName].value;
   Stream<String> get labelChanged => properties[labelPropertyName].valueChanged;
 
-  void fillCheckBox({
+  void fillMultiSelectChoice({
     @required String id,
     @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
     @required ElementValue<bool> isSelected,
     @required ElementValue<String> label,
   }) {
+    fillFormElement(
+      id: id,
+      parent: parent,
+      isVisible: isVisible,
+    );
+    registerElementValue(isSelectedPropertyName, isSelected);
+    registerElementValue(labelPropertyName, label);
   }
 
   @override

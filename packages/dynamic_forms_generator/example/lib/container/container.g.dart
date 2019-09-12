@@ -9,12 +9,18 @@ class Container extends FormElement {
   List<FormElement> get children => properties[childrenPropertyName].value;
   Stream<List<FormElement>> get childrenChanged => properties[childrenPropertyName].valueChanged;
 
-  void fillCheckBox({
+  void fillContainer({
     @required String id,
     @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
     @required ElementValue<List<FormElement>> children,
   }) {
+    fillFormElement(
+      id: id,
+      parent: parent,
+      isVisible: isVisible,
+    );
+    registerElementValue(childrenPropertyName, children);
   }
 
   @override
