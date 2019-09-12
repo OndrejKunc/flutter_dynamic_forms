@@ -1,9 +1,10 @@
 import 'package:build/build.dart';
 import 'package:dynamic_forms_generator/src/build_configuration.dart';
 import 'package:dynamic_forms_generator/src/model/component_description.dart';
-import 'package:dynamic_forms_generator/src/model_generator.dart';
 import 'package:dynamic_forms_generator/src/parser/parser.dart';
-import 'package:dynamic_forms_generator/src/parser_generator.dart';
+import 'package:dynamic_forms_generator/src/services/inheritance_service.dart';
+import 'package:dynamic_forms_generator/src/services/model_generator.dart';
+import 'package:dynamic_forms_generator/src/services/parser_generator.dart';
 import 'package:glob/glob.dart';
 
 import 'component_description_builder.dart';
@@ -42,15 +43,20 @@ class DynamicFormsBuilder implements Builder {
       return;
     }
 
-    List<PropertyDescription> allProperties = componentDescription.properties.toList();
+    List<ComponentDescription> inheritanceList = [componentDescription];
     if (componentDescription.parentType != null) {
-      allProperties = await _getParentProperties(
-          componentDescription.parentType.typeName, buildStep, allProperties);
+      inheritanceList = await _getInheritanceList(
+          componentDescription.parentType.typeName, buildStep, inheritanceList);
     }
+
+    var inheritanceService = InheritanceService(inheritanceList);
+    inheritanceService.resolveGenericTypes();
+    var allProperties = inheritanceService.getAllProperties();
 
     var modelGenerator = ModelGenerator(
         componentDescription: componentDescription,
-        buildConfiguration: buildConfiguration);
+        buildConfiguration: buildConfiguration,
+        allProperties: allProperties);
     var modelContent = modelGenerator.generate();
     if (modelContent == null) {
       return;
@@ -74,12 +80,12 @@ class DynamicFormsBuilder implements Builder {
     '.yaml': ['.g.dart', '_parser.g.dart']
   };
 
-  Future<List<PropertyDescription>> _getParentProperties(String typeName,
-      BuildStep buildStep, List<PropertyDescription> properties) async {
+  Future<List<ComponentDescription>> _getInheritanceList(String typeName,
+      BuildStep buildStep, List<ComponentDescription> list) async {
     var fileName = _getFileNameFromTypeName(typeName);
     var assets = await buildStep.findAssets(Glob("lib/**$fileName")).toList();
     if (assets == null || assets.isEmpty) {
-      return properties;
+      return list;
     }
     var asset = assets.first;
     var content = await buildStep.readAsString(asset);
@@ -87,22 +93,22 @@ class DynamicFormsBuilder implements Builder {
     var rawComponentDescription =
         componentYamlParser.parse(content, asset.path);
     if (rawComponentDescription == null) {
-      return properties;
+      return list;
     }
 
     var componentDescription = componentDescriptionBuilder
         .buildFromRawComponent(rawComponentDescription);
     if (componentDescription == null) {
-      return properties;
+      return list;
     }
 
-    properties.addAll(componentDescription.properties);
+    list.insert(0, componentDescription);
 
     if (componentDescription.parentType == null) {
-      return properties;
+      return list;
     }
-    return _getParentProperties(
-        componentDescription.parentType.typeName, buildStep, properties);
+    return _getInheritanceList(
+        componentDescription.parentType.typeName, buildStep, list);
   }
 
   String _getFileNameFromTypeName(String typeName) {

@@ -2,11 +2,11 @@ import 'package:dynamic_forms_generator/src/model/component_type.dart';
 import 'package:meta/meta.dart';
 
 class ComponentDescription {
-  final DefinitionType type;
-  final ComponentType parentType;
-  final List<PropertyDescription> properties;
-  final PropertyDescription conentProperty;
-  final List<String> namespaces;
+  DefinitionType type;
+  ComponentType parentType;
+  List<PropertyDescription> properties;
+  PropertyDescription conentProperty;
+  List<String> namespaces;
 
   ComponentDescription({
     @required this.type,
@@ -18,10 +18,10 @@ class ComponentDescription {
 }
 
 class PropertyDescription {
-  final String name;
-  final ComponentType type;
-  final String defaultValue;
-  final bool isMutable;
+  String name;
+  ComponentType type;
+  String defaultValue;
+  bool isMutable;
 
   PropertyDescription({
     @required this.name,

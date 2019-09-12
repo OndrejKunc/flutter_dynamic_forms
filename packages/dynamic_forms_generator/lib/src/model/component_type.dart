@@ -1,3 +1,5 @@
+import 'package:dynamic_forms_generator/src/visitor/comopnent_type_visitor.dart';
+
 Set<String> lowerCaseTypes = {"int", "bool", "double"};
 
 class ComponentType {
@@ -14,6 +16,10 @@ class ComponentType {
     }
     return s[0].toUpperCase() + s.substring(1);
   }
+
+  void accept(ComponentTypeVisitor visitor) {
+    visitor.visitComponentType(this);
+  }
 }
 
 class GenericType extends ComponentType {
@@ -27,6 +33,11 @@ class GenericType extends ComponentType {
         genericParameters.map((t) => t.toTypeString()).join(",");
     return "${capitalize(typeName)}<${joinedTypeParameters}>";
   }
+
+  @override
+  void accept(ComponentTypeVisitor visitor) {
+    visitor.visitGenericType(this);
+  }
 }
 
 class ArrayType extends ComponentType {
@@ -37,6 +48,11 @@ class ArrayType extends ComponentType {
   @override
   String toTypeString() {
     return "List<${capitalize(typeName)}>";
+  }
+
+  @override
+  void accept(ComponentTypeVisitor visitor) {
+    visitor.visitArrayType(this);
   }
 }
 
@@ -52,6 +68,24 @@ class GenericParameterType extends ComponentType {
     }
     return "${capitalize(typeName)} extends ${extendsType.toTypeString()}";
   }
+
+  @override
+  void accept(ComponentTypeVisitor visitor) {
+    visitor.visitGenericParameterType(this);
+  }
+}
+
+class DefinitionType extends ComponentType {
+  DefinitionType(String typeName) : super(typeName);
+
+  String toConstructorString() {
+    return "${capitalize(typeName)}()";
+  }
+
+  @override
+  void accept(ComponentTypeVisitor visitor) {
+    visitor.visitDefinitionType(this);
+  }
 }
 
 class GenericDefinitionType extends DefinitionType {
@@ -66,12 +100,9 @@ class GenericDefinitionType extends DefinitionType {
         genericParameters.map((t) => t.toTypeString()).join(",");
     return "${capitalize(typeName)}<${joinedTypeParameters}>";
   }
-}
 
-class DefinitionType extends ComponentType {
-  DefinitionType(String typeName) : super(typeName);
-
-  String toConstructorString() {
-    return "${capitalize(typeName)}()";
+  @override
+  void accept(ComponentTypeVisitor visitor) {
+    visitor.visitGenericDefinitionType(this);
   }
 }

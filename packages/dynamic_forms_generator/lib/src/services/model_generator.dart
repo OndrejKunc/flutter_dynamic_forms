@@ -5,10 +5,12 @@ import 'package:meta/meta.dart';
 class ModelGenerator {
   final ComponentDescription componentDescription;
   final BuildConfiguration buildConfiguration;
+  final List<PropertyDescription> allProperties;
 
   ModelGenerator({
     @required this.componentDescription,
     @required this.buildConfiguration,
+    @required this.allProperties,
   });
 
   String generate() {
@@ -44,6 +46,20 @@ class ModelGenerator {
           "  Stream<${property.type.toTypeString()}> get ${property.name}Changed => properties[${property.name}PropertyName].valueChanged;");
       buffer.writeln();
     }
+
+    buffer.writeln("  void fillCheckBox({");
+
+    for (var property in allProperties) {
+      var typeName = property.name == "id"
+          ? "String"
+          : "ElementValue<${property.type.toTypeString()}>";
+      buffer.writeln("    @required $typeName ${property.name},");
+    }
+
+    buffer.writeln("  }) {");
+
+    buffer.writeln("  }");
+    buffer.writeln();
 
     buffer.writeln('''
   @override
