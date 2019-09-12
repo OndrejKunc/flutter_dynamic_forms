@@ -1,6 +1,7 @@
 import 'package:build/build.dart';
 import 'package:dynamic_forms_generator/src/build_configuration.dart';
 import 'package:dynamic_forms_generator/src/model/component_description.dart';
+import 'package:dynamic_forms_generator/src/model/component_type.dart';
 import 'package:dynamic_forms_generator/src/parser/parser.dart';
 import 'package:dynamic_forms_generator/src/services/inheritance_service.dart';
 import 'package:dynamic_forms_generator/src/services/model_generator.dart';
@@ -63,6 +64,11 @@ class DynamicFormsBuilder implements Builder {
     }
     var model = inputId.changeExtension(".g.dart");
     await buildStep.writeAsString(model, modelContent);
+
+    if (componentDescription.type is GenericDefinitionType){
+      //We don't support parsers for generic types
+      return;
+    }
 
     var parserGenerator = ParserGenerator(
         componentDescription: componentDescription,

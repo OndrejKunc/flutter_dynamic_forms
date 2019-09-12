@@ -19,7 +19,10 @@ class ModelGenerator {
     buffer.writeln("// GENERATED CODE - DO NOT MODIFY BY HAND");
     buffer.writeln();
 
-    for (var import in buildConfiguration.defaultImports) {
+    for (var import in [
+      ...buildConfiguration.defaultImports,
+      ...buildConfiguration.modelImports
+    ]) {
       buffer.writeln("import '$import';");
     }
 

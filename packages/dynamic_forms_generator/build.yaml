@@ -10,6 +10,7 @@ builders:
       options:
         default_imports:
           - "../components.dart"
+        model_imports:
           - "package:meta/meta.dart"
         components_to_ignore:
           - "form_element.yaml"

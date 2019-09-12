@@ -5,7 +5,7 @@ author: Ondřej Kunc <kunc.ondrej1@gmail.com>
 homepage: https://github.com/OndrejKunc/flutter_dynamic_forms
 
 environment:
-  sdk: ">=2.2.0 <3.0.0"
+  sdk: ">=2.3.0 <3.0.0"
 
 dependencies:
   build: ^1.0.0
