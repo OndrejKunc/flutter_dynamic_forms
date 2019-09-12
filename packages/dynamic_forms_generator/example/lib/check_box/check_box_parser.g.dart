@@ -11,6 +11,19 @@ class CheckBoxParser extends FormElementParser<CheckBox> {
       FormElementParserFunction parser) {
     var checkBox = CheckBox();
     checkBox.fillCheckBox(
+      id: parserNode.getPlainStringValue("id"),
+      parent: parserNode.getParentValue(parent),
+      isVisible: parserNode.getIsVisible(),
+      label: parserNode.getStringValue(
+        "label",
+        isImmutable: true,
+      ),
+      value: parserNode.getValue(
+        "value",
+        ParserNode.convertToBool,
+        ParserNode.defaultFalse,
+        isImmutable: true,
+      ),
     );
     return checkBox;
   }
