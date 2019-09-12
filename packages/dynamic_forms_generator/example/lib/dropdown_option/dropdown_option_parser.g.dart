@@ -11,6 +11,17 @@ class DropdownOptionParser extends FormElementParser<DropdownOption> {
       FormElementParserFunction parser) {
     var dropdownOption = DropdownOption();
     dropdownOption.fillDropdownOption(
+      id: parserNode.getPlainStringValue("id"),
+      parent: parserNode.getParentValue(parent),
+      isVisible: parserNode.getIsVisible(),
+      label: parserNode.getStringValue(
+        "label",
+        isImmutable: true,
+      ),
+      value: parserNode.getStringValue(
+        "value",
+        isImmutable: true,
+      ),
     );
     return dropdownOption;
   }

@@ -11,6 +11,22 @@ class RadioButtonGroupParser extends FormElementParser<RadioButtonGroup> {
       FormElementParserFunction parser) {
     var radioButtonGroup = RadioButtonGroup();
     radioButtonGroup.fillRadioButtonGroup(
+      id: parserNode.getPlainStringValue("id"),
+      parent: parserNode.getParentValue(parent),
+      isVisible: parserNode.getIsVisible(),
+      choices: parserNode.getChildren<RadioButton>(
+        parent: radioButtonGroup,
+        parser: parser,
+        childrenPropertyName: "choices",
+        isContentProperty: false),
+      value: parserNode.getStringValue(
+        "value",
+        isImmutable: true,
+      ),
+      arrangement: parserNode.getStringValue(
+        "arrangement",
+        isImmutable: true,
+      ),
     );
     return radioButtonGroup;
   }

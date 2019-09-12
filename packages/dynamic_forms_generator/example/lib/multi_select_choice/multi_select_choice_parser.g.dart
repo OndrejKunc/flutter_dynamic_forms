@@ -11,6 +11,19 @@ class MultiSelectChoiceParser extends FormElementParser<MultiSelectChoice> {
       FormElementParserFunction parser) {
     var multiSelectChoice = MultiSelectChoice();
     multiSelectChoice.fillMultiSelectChoice(
+      id: parserNode.getPlainStringValue("id"),
+      parent: parserNode.getParentValue(parent),
+      isVisible: parserNode.getIsVisible(),
+      isSelected: parserNode.getValue(
+        "isSelected",
+        ParserNode.convertToBool,
+        ParserNode.defaultFalse,
+        isImmutable: true,
+      ),
+      label: parserNode.getStringValue(
+        "label",
+        isImmutable: true,
+      ),
     );
     return multiSelectChoice;
   }

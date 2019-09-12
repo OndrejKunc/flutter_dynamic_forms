@@ -11,6 +11,18 @@ class FormGroupParser extends FormElementParser<FormGroup> {
       FormElementParserFunction parser) {
     var formGroup = FormGroup();
     formGroup.fillFormGroup(
+      id: parserNode.getPlainStringValue("id"),
+      parent: parserNode.getParentValue(parent),
+      isVisible: parserNode.getIsVisible(),
+      children: parserNode.getChildren<FormElement>(
+        parent: formGroup,
+        parser: parser,
+        childrenPropertyName: "children",
+        isContentProperty: false),
+      name: parserNode.getStringValue(
+        "name",
+        isImmutable: true,
+      ),
     );
     return formGroup;
   }

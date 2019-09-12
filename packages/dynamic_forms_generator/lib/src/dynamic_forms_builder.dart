@@ -72,7 +72,8 @@ class DynamicFormsBuilder implements Builder {
 
     var parserGenerator = ParserGenerator(
         componentDescription: componentDescription,
-        buildConfiguration: buildConfiguration);
+        buildConfiguration: buildConfiguration,
+        allProperties: allProperties);
     var parserContent = parserGenerator.generate();
     if (parserContent == null) {
       return;

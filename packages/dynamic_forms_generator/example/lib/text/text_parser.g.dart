@@ -11,6 +11,26 @@ class TextParser extends FormElementParser<Text> {
       FormElementParserFunction parser) {
     var text = Text();
     text.fillText(
+      id: parserNode.getPlainStringValue("id"),
+      parent: parserNode.getParentValue(parent),
+      isVisible: parserNode.getIsVisible(),
+      label: parserNode.getStringValue(
+        "label",
+        isImmutable: true,
+      ),
+      textInputType: parserNode.getStringValue(
+        "textInputType",
+        isImmutable: true,
+      ),
+      validations: parserNode.getChildren<Validation>(
+        parent: text,
+        parser: parser,
+        childrenPropertyName: "validations",
+        isContentProperty: false),
+      value: parserNode.getStringValue(
+        "value",
+        isImmutable: true,
+      ),
     );
     return text;
   }

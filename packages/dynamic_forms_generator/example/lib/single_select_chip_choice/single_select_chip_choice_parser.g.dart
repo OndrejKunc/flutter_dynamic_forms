@@ -11,6 +11,17 @@ class SingleSelectChipChoiceParser extends FormElementParser<SingleSelectChipCho
       FormElementParserFunction parser) {
     var singleSelectChipChoice = SingleSelectChipChoice();
     singleSelectChipChoice.fillSingleSelectChipChoice(
+      id: parserNode.getPlainStringValue("id"),
+      parent: parserNode.getParentValue(parent),
+      isVisible: parserNode.getIsVisible(),
+      label: parserNode.getStringValue(
+        "label",
+        isImmutable: true,
+      ),
+      value: parserNode.getStringValue(
+        "value",
+        isImmutable: true,
+      ),
     );
     return singleSelectChipChoice;
   }

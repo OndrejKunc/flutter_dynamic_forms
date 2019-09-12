@@ -3,7 +3,7 @@ builders:
   dynamicFormsBuilder:
     import: "package:dynamic_forms_generator/dynamic_forms_generator.dart"
     builder_factories: ["dynamicFormsBuilder"]
-    build_extensions: {".yaml": [".g.dart", "_model.g.dart"]}
+    build_extensions: {".yaml": [".g.dart", "_parser.g.dart"]}
     build_to: source
     auto_apply: root_package
     defaults: 

@@ -11,6 +11,19 @@ class MultiSelectChipChoiceParser extends FormElementParser<MultiSelectChipChoic
       FormElementParserFunction parser) {
     var multiSelectChipChoice = MultiSelectChipChoice();
     multiSelectChipChoice.fillMultiSelectChipChoice(
+      id: parserNode.getPlainStringValue("id"),
+      parent: parserNode.getParentValue(parent),
+      isVisible: parserNode.getIsVisible(),
+      isSelected: parserNode.getValue(
+        "isSelected",
+        ParserNode.convertToBool,
+        ParserNode.defaultFalse,
+        isImmutable: true,
+      ),
+      label: parserNode.getStringValue(
+        "label",
+        isImmutable: true,
+      ),
     );
     return multiSelectChipChoice;
   }

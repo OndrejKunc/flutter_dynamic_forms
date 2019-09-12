@@ -11,6 +11,18 @@ class SingleSelectChipGroupParser extends FormElementParser<SingleSelectChipGrou
       FormElementParserFunction parser) {
     var singleSelectChipGroup = SingleSelectChipGroup();
     singleSelectChipGroup.fillSingleSelectChipGroup(
+      id: parserNode.getPlainStringValue("id"),
+      parent: parserNode.getParentValue(parent),
+      isVisible: parserNode.getIsVisible(),
+      choices: parserNode.getChildren<SingleSelectChipChoice>(
+        parent: singleSelectChipGroup,
+        parser: parser,
+        childrenPropertyName: "choices",
+        isContentProperty: false),
+      value: parserNode.getStringValue(
+        "value",
+        isImmutable: true,
+      ),
     );
     return singleSelectChipGroup;
   }

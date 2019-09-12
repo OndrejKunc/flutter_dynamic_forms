@@ -11,6 +11,13 @@ class LabelParser extends FormElementParser<Label> {
       FormElementParserFunction parser) {
     var label = Label();
     label.fillLabel(
+      id: parserNode.getPlainStringValue("id"),
+      parent: parserNode.getParentValue(parent),
+      isVisible: parserNode.getIsVisible(),
+      value: parserNode.getStringValue(
+        "value",
+        isImmutable: true,
+      ),
     );
     return label;
   }
