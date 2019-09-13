@@ -51,8 +51,8 @@ class ParserGenerator {
     ${componentDescription.type.typeName}.fill${componentDescription.type.capitalizedTypeName}(''');
 
     for (var property in allProperties) {
-      var parseMethod = _getParseMethod(
-          property, contentProperty?.name == property?.name);
+      var parseMethod =
+          _getParseMethod(property, contentProperty?.name == property?.name);
       buffer.writeln("      ${property.name}: ${parseMethod},");
     }
 

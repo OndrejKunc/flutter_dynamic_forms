@@ -28,7 +28,7 @@ class InheritanceService {
 
   PropertyDescription getContentProperty() {
     for (var i = inheritanceList.length - 1; i >= 0; i--) {
-      if (inheritanceList[i].conentProperty != null){
+      if (inheritanceList[i].conentProperty != null) {
         return inheritanceList[i].conentProperty;
       }
     }

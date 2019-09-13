@@ -6,8 +6,8 @@ class ComponentTypeGrammarDefinition extends GrammarDefinition {
   ComponentTypeGrammarDefinition({this.parseTypeDefinition = false});
 
   start() {
-    if (parseTypeDefinition){
-      return ref(typeDefinitionExpression).end();  
+    if (parseTypeDefinition) {
+      return ref(typeDefinitionExpression).end();
     }
     return ref(typeExpression).end();
   }
@@ -18,8 +18,7 @@ class ComponentTypeGrammarDefinition extends GrammarDefinition {
       ref(arraySymbol).optional();
 
   Parser typeDefinitionExpression() =>
-      ref(identifier).flatten() &
-      ref(genericDefinitionParameters).optional();
+      ref(identifier).flatten() & ref(genericDefinitionParameters).optional();
 
   Parser genericParameters() =>
       ref(token, "<") & ref(listOfTypes) & ref(token, ">");
@@ -27,17 +26,20 @@ class ComponentTypeGrammarDefinition extends GrammarDefinition {
   Parser arraySymbol() => ref(token, "[]");
 
   Parser genericDefinitionParameters() =>
-      ref(token, "<") & ref(listOfGenericDefinitionParameterTypes) & ref(token, ">");
+      ref(token, "<") &
+      ref(listOfGenericDefinitionParameterTypes) &
+      ref(token, ">");
 
   Parser listOfTypes() =>
       (ref(typeExpression) & ref(token, ',')).star() & ref(typeExpression);
 
   Parser listOfGenericDefinitionParameterTypes() =>
-      (ref(genericParameterTypeExpression) & ref(token, ',')).star() & ref(genericParameterTypeExpression);
+      (ref(genericParameterTypeExpression) & ref(token, ',')).star() &
+      ref(genericParameterTypeExpression);
 
   Parser genericParameterTypeExpression() =>
-      ref(identifier).flatten() & (ref(token, "extends") & ref(typeExpression)).optional();
-
+      ref(identifier).flatten() &
+      (ref(token, "extends") & ref(typeExpression)).optional();
 
   Parser anyLetter() => letter();
   Parser anyDigit() => digit();

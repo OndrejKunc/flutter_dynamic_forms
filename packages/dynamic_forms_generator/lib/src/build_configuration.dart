@@ -20,7 +20,7 @@ class BuildConfiguration {
     }
     List<String> modelImports = [];
     if (config.containsKey("model_imports")) {
-      modelImports = _getConfigList(config, "model_imports"); 
+      modelImports = _getConfigList(config, "model_imports");
     }
     List<String> parserImports = [];
     if (config.containsKey("parser_imports")) {
@@ -40,10 +40,10 @@ class BuildConfiguration {
 
   static List<String> _getConfigList(Map<String, dynamic> config, String key) {
     dynamic resultList = config[key];
-    if (resultList is YamlList){
+    if (resultList is YamlList) {
       List<dynamic> list = resultList.toList();
       return List<String>.from(list);
-    }    
+    }
     return List<String>.from((resultList) as List<dynamic>);
   }
 }
