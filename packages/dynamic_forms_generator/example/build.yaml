@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      dynamic_forms_generator:dynamicFormsBuilder:
+        options:
+          default_imports:
+            - "../components.dart"

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
-import 'package:flutter_dynamic_forms_components/src/components/multi_select_chip_choice/multi_select_chip_choice.dart';
-import 'package:flutter_dynamic_forms_components/src/components/multi_select_choice/multi_select_choice.dart';
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as model;
 
 class ReactiveMultiSelectChipChoiceRenderer
-    extends FormElementRenderer<MultiSelectChipChoice> {
+    extends FormElementRenderer<model.MultiSelectChipChoice> {
   @override
   Widget render(
-      MultiSelectChipChoice element,
+      model.MultiSelectChipChoice element,
       BuildContext context,
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
@@ -24,7 +23,7 @@ class ReactiveMultiSelectChipChoiceRenderer
                   ChangeValueEvent(
                     value: selected,
                     elementId: element.id,
-                    propertyName: MultiSelectChoice.isSelectedPropertyName,
+                    propertyName: model.MultiSelectChoice.isSelectedPropertyName,
                   ),
                 ),
           );

@@ -1,19 +1,18 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
+    as model;
 
-import '../form_group/form_group.dart';
-import '../text/text.dart';
-
-class AddressParser extends FormElementParser<FormGroup> {
+class AddressParser extends FormElementParser<model.FormGroup> {
   @override
   String get name => "address";
 
   @override
-  FormGroup parse(ParserNode parserNode, FormElement parent,
+  model.FormGroup parse(ParserNode parserNode, FormElement parent,
       FormElementParserFunction parser) {
-    var formGroup = FormGroup();
+    var formGroup = model.FormGroup();
     var addressId = parserNode.getPlainStringValue("id");
 
-    var streetText = Text();
+    var streetText = model.Text();
     streetText.fillText(
         id: "$addressId.street",
         isVisible: ImmutableElementValue(true),
@@ -24,7 +23,7 @@ class AddressParser extends FormElementParser<FormGroup> {
         textInputType: ImmutableElementValue(""),
         validations: ImmutableElementValue([])); //TODO add validations
 
-    var cityText = Text();
+    var cityText = model.Text();
     cityText.fillText(
         id: "$addressId.city",
         isVisible: ImmutableElementValue(true),
@@ -35,7 +34,7 @@ class AddressParser extends FormElementParser<FormGroup> {
         textInputType: ImmutableElementValue(""),
         validations: ImmutableElementValue([])); //TODO add validations
 
-    var zipText = Text();
+    var zipText = model.Text();
     zipText.fillText(
         id: "$addressId.zip",
         isVisible: ImmutableElementValue(true),

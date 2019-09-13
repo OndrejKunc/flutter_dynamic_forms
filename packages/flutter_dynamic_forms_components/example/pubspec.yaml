@@ -3,7 +3,7 @@ description: A flutter example of dynamic forms project with default components.
 version: 0.2.0
 
 environment:
-  sdk: ">=2.2.0 <3.0.0"
+  sdk: ">=2.3.0 <3.0.0"
 
 dependencies:
   flutter:

@@ -1,0 +1,8 @@
+type: validation
+parentType: formElement
+properties:
+  isValid:
+    type: bool
+    default: true
+  message:
+    type: string

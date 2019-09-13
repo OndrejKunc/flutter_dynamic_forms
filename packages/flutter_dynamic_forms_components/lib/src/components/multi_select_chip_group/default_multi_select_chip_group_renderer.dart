@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
-import 'package:flutter_dynamic_forms_components/src/components/multi_select_chip_group/multi_select_chip_group.dart';
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as model;
 
 class DefaultMultiSelectChipGroupRenderer
-    extends FormElementRenderer<MultiSelectChipGroup> {
+    extends FormElementRenderer<model.MultiSelectChipGroup> {
   @override
   Widget render(
-      MultiSelectChipGroup element,
+      model.MultiSelectChipGroup element,
       BuildContext context,
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {

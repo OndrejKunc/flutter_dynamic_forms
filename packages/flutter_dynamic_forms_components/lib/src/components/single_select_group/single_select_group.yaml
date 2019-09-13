@@ -1,0 +1,9 @@
+type: singleSelectGroup<tSingleSelectChoice extends singleSelectChoice>
+parentType: formElement
+properties:
+  value:
+    type: string
+    isMutable: true
+  choices:
+    type: tSingleSelectChoice[]
+contentProperty: choices

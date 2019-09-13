@@ -1,0 +1,17 @@
+# Read about `build.yaml` at https://pub.dev/packages/build_config
+builders:
+  dynamicFormsBuilder:
+    import: "package:dynamic_forms_generator/dynamic_forms_generator.dart"
+    builder_factories: ["dynamicFormsBuilder"]
+    build_extensions: {".yaml": [".g.dart", "_parser.g.dart"]}
+    build_to: source
+    auto_apply: root_package
+    defaults: 
+      options:
+        default_imports:
+          - "../components.dart"
+        model_imports:
+          - "package:meta/meta.dart"
+        components_to_ignore:
+          - "form_element.yaml"
+          - "validation.yaml"

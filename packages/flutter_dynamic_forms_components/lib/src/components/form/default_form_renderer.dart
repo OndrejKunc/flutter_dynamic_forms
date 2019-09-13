@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
-import 'form.dart' as model;
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as model;
 
 class DefaultFormRenderer extends FormElementRenderer<model.Form> {
   @override

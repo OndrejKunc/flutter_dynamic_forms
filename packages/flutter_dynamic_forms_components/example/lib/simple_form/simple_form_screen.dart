@@ -1,10 +1,9 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:example/form_parser_type.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
-import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
-    as components;
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as components;
 
 class SimpleFormScreen extends StatefulWidget {
   final FormParserType formParserType;

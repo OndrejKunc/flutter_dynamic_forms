@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
-import 'package:flutter_dynamic_forms_components/src/components/single_select_group/single_select_group.dart';
-
-import 'radio_button.dart' as model;
-import '../radio_button_group/radio_button_group.dart';
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as model;
 
 class DefaultRadioButtonRenderer
     extends FormElementRenderer<model.RadioButton> {
@@ -14,7 +11,7 @@ class DefaultRadioButtonRenderer
       BuildContext context,
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
-    var parent = element.parent as RadioButtonGroup;
+    var parent = element.parent as model.RadioButtonGroup;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -26,7 +23,7 @@ class DefaultRadioButtonRenderer
               ChangeValueEvent(
                   value: value,
                   elementId: parent.id,
-                  propertyName: SingleSelectGroup.valuePropertyName),
+                  propertyName: model.SingleSelectGroup.valuePropertyName),
             ),
       ),
     );

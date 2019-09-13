@@ -1,0 +1,12 @@
+type: text
+parentType: formElement
+properties:
+  value:
+    type: string
+    isMutable: true
+  label:
+    type: string
+  textInputType:
+    type: string
+  validations:
+    type: validation[]

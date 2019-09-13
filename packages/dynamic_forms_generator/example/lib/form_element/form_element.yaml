@@ -1,0 +1,7 @@
+type: formElement
+properties:
+  id:
+    type: string
+  isVisible:
+    type: bool
+    default: true  

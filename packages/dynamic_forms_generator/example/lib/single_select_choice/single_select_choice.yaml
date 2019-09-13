@@ -1,0 +1,7 @@
+type: singleSelectChoice
+parentType: formElement
+properties:
+  label:
+    type: string
+  value:
+    type: string

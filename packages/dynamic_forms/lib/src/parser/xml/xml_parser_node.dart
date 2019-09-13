@@ -98,22 +98,30 @@ class XmlParserNode extends ParserNode {
   ElementValue<TFormElement> getChild<TFormElement>(
       {@required String name,
       @required FormElementParserFunction parser,
-      @required String childPropertyName,
+      @required String childName,
       @required FormElement parent,
       @required TFormElement defaultValue(),
+      bool isContentProperty = false,
       bool isImmutable = true}) {
-    XmlElement childElement = getPropertyAsElement(element, name);
-    if (childElement == null) {
-      childElement = getElement(element, name);
+    XmlElement propertyElement;
+    if (isContentProperty) {
+      propertyElement = element;
+    } else {
+      propertyElement = getPropertyAsElement(element, name);
+      if (propertyElement == null) {
+        propertyElement = getElement(element, name);
+      }
     }
 
-    if (childElement != null) {
-      XmlElement structureElement = childElement.children.firstWhere(
-          (c) => c is XmlElement && c.name.qualified == childPropertyName,
+    if (propertyElement != null) {
+      XmlElement childElement = propertyElement.children.firstWhere(
+          (c) => c is XmlElement && c.name.qualified == childName,
           orElse: () => null);
-      return createElementValue<TFormElement>(
-          parser(XmlParserNode(structureElement), parent) as TFormElement,
-          isImmutable);
+      if (childElement != null) {
+        return createElementValue<TFormElement>(
+            parser(XmlParserNode(childElement), parent) as TFormElement,
+            isImmutable);
+      }
     }
     return createElementValue(defaultValue(), isImmutable);
   }

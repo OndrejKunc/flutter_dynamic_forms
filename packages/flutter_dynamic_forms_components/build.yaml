@@ -1,0 +1,8 @@
+targets:
+  $default:
+    builders:
+      dynamic_forms_generator:dynamicFormsBuilder:
+        options:
+          default_imports:
+            - "package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart"
+            - "package:dynamic_forms/dynamic_forms.dart"
