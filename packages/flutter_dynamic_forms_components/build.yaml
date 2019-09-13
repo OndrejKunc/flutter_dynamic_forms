@@ -4,4 +4,4 @@ targets:
       dynamic_forms_generator:dynamicFormsBuilder:
         options:
           default_imports:
-            - "../components.dart"
+            - "package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart"

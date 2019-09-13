@@ -1,0 +1,9 @@
+type: checkBox
+parentType: formElement
+properties:
+  label:
+    type: string
+  value:
+    type: bool
+    default: false
+    isMutable: true

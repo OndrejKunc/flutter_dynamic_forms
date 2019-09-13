@@ -1,0 +1,2 @@
+type: dropdownButton
+parentType: singleSelectGroup<dropdownOption>
