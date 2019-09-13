@@ -1,3 +1,7 @@
+# 0.6.0
+
+Added possibility to parse single child component.
+
 # 0.5.0
 
 Removed screaming caps convention.

@@ -1,3 +1,8 @@
+# 0.6.0
+
+* Added component generator.
+* Added missing parsers. 
+
 # 0.5.0
 
 Added multi select chip group component.
