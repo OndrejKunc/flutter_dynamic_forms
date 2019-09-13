@@ -4,4 +4,4 @@ properties:
   label:
     type: string
   value:
-    type: string
+    type: string    

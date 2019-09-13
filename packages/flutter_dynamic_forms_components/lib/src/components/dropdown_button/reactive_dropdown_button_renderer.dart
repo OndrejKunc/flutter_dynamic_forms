@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
-import 'package:flutter_dynamic_forms_components/src/components/single_select_group/single_select_group.dart';
 import 'package:rxdart/rxdart.dart';
-import 'dropdown_button.dart' as model;
-import '../dropdown_option/dropdown_option.dart';
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as model;
 
 class ReactiveDropdownButtonRenderer
     extends FormElementRenderer<model.DropdownButton> {
@@ -27,13 +25,13 @@ class ReactiveDropdownButtonRenderer
                   ChangeValueEvent(
                       value: newValue,
                       elementId: element.id,
-                      propertyName: SingleSelectGroup.valuePropertyName),
+                      propertyName: model.SingleSelectGroup.valuePropertyName),
                 ),
             items: element.choices
                 .where((d) => d.isVisible)
-                .whereType<DropdownOption>()
+                .whereType<model.DropdownOption>()
                 .map<DropdownMenuItem<String>>(
-              (DropdownOption option) {
+              (model.DropdownOption option) {
                 return DropdownMenuItem<String>(
                   value: option.value,
                   child: Text(option.label),

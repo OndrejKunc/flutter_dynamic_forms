@@ -26,6 +26,15 @@ class InheritanceService {
     return result;
   }
 
+  PropertyDescription getContentProperty() {
+    for (var i = inheritanceList.length - 1; i >= 0; i--) {
+      if (inheritanceList[i].conentProperty != null){
+        return inheritanceList[i].conentProperty;
+      }
+    }
+    return null;
+  }
+
   void resolveGenericTypes() {
     ComponentDescription lastComponent;
     List<ComponentDescription> parentComponents = [];

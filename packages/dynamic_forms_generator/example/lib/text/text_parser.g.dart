@@ -29,7 +29,7 @@ class TextParser extends FormElementParser<Text> {
         isContentProperty: false),
       value: parserNode.getStringValue(
         "value",
-        isImmutable: true,
+        isImmutable: false,
       ),
     );
     return text;

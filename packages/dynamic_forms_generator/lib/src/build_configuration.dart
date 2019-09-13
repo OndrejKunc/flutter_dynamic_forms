@@ -1,3 +1,5 @@
+import 'package:yaml/yaml.dart';
+
 class BuildConfiguration {
   final List<String> defaultImports;
   final List<String> modelImports;
@@ -14,19 +16,19 @@ class BuildConfiguration {
   factory BuildConfiguration.fromConfig(Map<String, dynamic> config) {
     List<String> defaultImports = [];
     if (config.containsKey("default_imports")) {
-      defaultImports = config["default_imports"];
+      defaultImports = _getConfigList(config, "default_imports");
     }
     List<String> modelImports = [];
     if (config.containsKey("model_imports")) {
-      modelImports = config["model_imports"];
+      modelImports = _getConfigList(config, "model_imports"); 
     }
     List<String> parserImports = [];
     if (config.containsKey("parser_imports")) {
-      parserImports = config["parser_imports"];
+      parserImports = _getConfigList(config, "parser_imports");
     }
     List<String> componentsToIgnore = [];
     if (config.containsKey("components_to_ignore")) {
-      componentsToIgnore = config["components_to_ignore"];
+      componentsToIgnore = _getConfigList(config, "components_to_ignore");
     }
     return BuildConfiguration(
       defaultImports: defaultImports,
@@ -34,5 +36,14 @@ class BuildConfiguration {
       parserImports: parserImports,
       componentsToIgnore: componentsToIgnore,
     );
+  }
+
+  static List<String> _getConfigList(Map<String, dynamic> config, String key) {
+    dynamic resultList = config[key];
+    if (resultList is YamlList){
+      List<dynamic> list = resultList.toList();
+      return List<String>.from(list);
+    }    
+    return List<String>.from((resultList) as List<dynamic>);
   }
 }

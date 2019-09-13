@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as model;
 
-import 'text.dart' as model;
 import 'text_widget.dart';
 
 class DefaultTextRenderer extends FormElementRenderer<model.Text> {

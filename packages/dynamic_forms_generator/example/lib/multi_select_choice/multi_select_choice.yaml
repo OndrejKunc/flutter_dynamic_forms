@@ -1,9 +1,0 @@
-type: multiSelectChoice
-parentType: formElement
-properties:
-  label:
-    type: string
-  isSelected:
-    type: bool
-    default: false
-    isMutable: true

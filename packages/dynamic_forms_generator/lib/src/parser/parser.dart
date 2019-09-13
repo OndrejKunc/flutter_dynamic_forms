@@ -24,7 +24,7 @@ class ComponentYamlParser {
               type: propertyAttributtes["type"],
               defaultValue: propertyAttributtes["default"].toString(),
               isMutable:
-                  propertyAttributtes["isMutable"] == "true" ? true : false,
+                  propertyAttributtes["isMutable"] == "true" || propertyAttributtes["isMutable"] == true,
             ),
           );
         }

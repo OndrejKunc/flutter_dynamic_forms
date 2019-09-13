@@ -46,7 +46,7 @@ class CheckBoxParser extends FormElementParser<CheckBox> {
         "value",
         ParserNode.convertToBool,
         ParserNode.defaultFalse,
-        isImmutable: true,
+        isImmutable: false,
       ),
     );
     return checkBox;

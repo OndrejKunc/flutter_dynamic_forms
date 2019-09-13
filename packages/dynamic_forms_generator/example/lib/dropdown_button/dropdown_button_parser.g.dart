@@ -21,7 +21,7 @@ class DropdownButtonParser extends FormElementParser<DropdownButton> {
         isContentProperty: false),
       value: parserNode.getStringValue(
         "value",
-        isImmutable: true,
+        isImmutable: false,
       ),
     );
     return dropdownButton;

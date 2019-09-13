@@ -1,5 +1,0 @@
-type: label
-parentType: formElement
-properties:
-  value:
-    type: string

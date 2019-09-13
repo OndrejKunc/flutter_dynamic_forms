@@ -1,16 +1,15 @@
-import 'package:dynamic_forms/dynamic_forms.dart' as model;
 import 'package:expression_language/expression_language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as model;
+import 'package:dynamic_forms/dynamic_forms.dart';
 
-import 'form_group.dart';
-
-class ReactiveFormGroupRenderer extends FormElementRenderer<FormGroup> {
+class ReactiveFormGroupRenderer extends FormElementRenderer<model.FormGroup> {
   @override
   Widget render(
-      FormGroup element,
+      model.FormGroup element,
       BuildContext context,
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
@@ -21,7 +20,7 @@ class ReactiveFormGroupRenderer extends FormElementRenderer<FormGroup> {
         return StreamBuilder(
           stream: Observable.merge(
             snapshot.data
-                .whereType<model.FormElement>()
+                .whereType<FormElement>()
                 .map((child) => child.isVisibleChanged),
           ),
           builder: (context, _) {
@@ -36,7 +35,7 @@ class ReactiveFormGroupRenderer extends FormElementRenderer<FormGroup> {
             ];
             childrenWidgets.addAll(
               snapshot.data
-                  .whereType<model.FormElement>()
+                  .whereType<FormElement>()
                   .where((f) => f.isVisible)
                   .map(
                     (child) => renderer(child, context),

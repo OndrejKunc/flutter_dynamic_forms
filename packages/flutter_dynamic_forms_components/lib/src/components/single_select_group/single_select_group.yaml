@@ -6,3 +6,4 @@ properties:
     isMutable: true
   choices:
     type: tSingleSelectChoice[]
+contentProperty: choices

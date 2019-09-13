@@ -21,11 +21,11 @@ class RadioButtonGroupParser extends FormElementParser<RadioButtonGroup> {
         isContentProperty: false),
       value: parserNode.getStringValue(
         "value",
-        isImmutable: true,
+        isImmutable: false,
       ),
       arrangement: parserNode.getStringValue(
         "arrangement",
-        isImmutable: true,
+        isImmutable: false,
       ),
     );
     return radioButtonGroup;

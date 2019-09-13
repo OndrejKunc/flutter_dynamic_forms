@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
-import 'package:flutter_dynamic_forms_components/src/components/single_select_chip_choice/single_select_chip_choice.dart';
-import 'package:flutter_dynamic_forms_components/src/components/single_select_chip_group/single_select_chip_group.dart';
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ReactiveSingleSelectChipGroupRenderer
