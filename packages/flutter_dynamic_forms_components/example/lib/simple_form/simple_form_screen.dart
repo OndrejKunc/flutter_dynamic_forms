@@ -3,7 +3,7 @@ import 'package:example/form_parser_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
-import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as components;
 
 class SimpleFormScreen extends StatefulWidget {
   final FormParserType formParserType;
@@ -27,11 +27,11 @@ class _SimpleFormScreenState extends State<SimpleFormScreen> {
 
   Future _buildForm() async {
     _formRenderService = FormRenderService(
-      renderers: getReactiveRenderers(),
+      renderers: components.getReactiveRenderers(),
       dispatcher: _onFormElementEvent,
     );
 
-    var parsers = getDefaultParserList();
+    var parsers = components.getDefaultParserList();
     String fileName;
     FormParserService parserService;
 
