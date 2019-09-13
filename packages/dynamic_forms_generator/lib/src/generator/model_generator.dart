@@ -26,7 +26,7 @@ class ModelGenerator {
       buffer.writeln("import '$import';");
     }
 
-    if (buildConfiguration.defaultImports.length > 0) {
+    if (buildConfiguration.defaultImports.isNotEmpty) {
       buffer.writeln();
     }
 
@@ -38,7 +38,7 @@ class ModelGenerator {
           "  static const String ${property.name}PropertyName = \"${property.name}\";");
     }
 
-    if (componentDescription.properties.length > 0) {
+    if (componentDescription.properties.isNotEmpty) {
       buffer.writeln();
     }
 

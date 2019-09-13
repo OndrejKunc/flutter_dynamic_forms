@@ -29,7 +29,7 @@ class ParserGenerator {
       buffer.writeln("import '$import';");
     }
 
-    if (buildConfiguration.defaultImports.length > 0) {
+    if (buildConfiguration.defaultImports.isNotEmpty) {
       buffer.writeln();
     }
 

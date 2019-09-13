@@ -11,7 +11,7 @@ class InheritanceService {
     List<PropertyDescription> result = [];
     for (var component in inheritanceList) {
       if (component.type.typeName == "formElement" &&
-          component.properties.length > 0) {
+          component.properties.isNotEmpty) {
         component.properties.insert(
           1,
           PropertyDescription(
