@@ -7,3 +7,15 @@ properties:
     type: bool
     default: false
     isMutable: true
+  myDate:
+    type: dateTime
+    default: "1969-07-20 20:18:04Z"
+  myDouble:
+    type: double
+    default: 27.0
+  myDecimal:
+    type: decimal
+    default: 42
+  myInt:
+    type: int
+    default: 51

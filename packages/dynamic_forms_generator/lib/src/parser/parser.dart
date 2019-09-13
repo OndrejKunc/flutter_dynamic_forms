@@ -22,7 +22,7 @@ class ComponentYamlParser {
             RawPropertyDescription(
               name: propertyEntry.key,
               type: propertyAttributtes["type"],
-              defaultValue: propertyAttributtes["defaultValue"],
+              defaultValue: propertyAttributtes["default"].toString(),
               isMutable:
                   propertyAttributtes["isMutable"] == "true" ? true : false,
             ),
@@ -39,8 +39,8 @@ class ComponentYamlParser {
       );
 
       return result;
-    } catch (e) {
-      print("Error parsing ${inputPath} into the component description: $e");
+    } catch (e, stackTrace) {
+      print("Error parsing ${inputPath} into the component description: $e $stackTrace");
       return null;
     }
   }

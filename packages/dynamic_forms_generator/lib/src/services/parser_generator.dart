@@ -106,7 +106,7 @@ class ParserGenerator {
       return '''parserNode.getValue<Decimal>(
         "${property.name}",
         (s) => Decimal.parse(s),
-        () => Decimal.fromInt($defaultValue),
+        () => Decimal.fromDouble($defaultValue),
         isImmutable: ${!property.isMutable},
       )''';
     }
@@ -122,6 +122,37 @@ class ParserGenerator {
         isImmutable: ${!property.isMutable},
       )''';
     }
-    return "parse_error";
+    if (property.type.typeName == "double") {
+      var defaultValue =
+          property.defaultValue == null || property.defaultValue == ""
+              ? "0"
+              : property.defaultValue;
+      return '''parserNode.getValue<double>(
+        "${property.name}",
+        (s) => double.parse(s),
+        () => $defaultValue,
+        isImmutable: ${!property.isMutable},
+      )''';
+    }
+    if (property.type.typeName == "dateTime") {
+      var defaultValue =
+          property.defaultValue == null || property.defaultValue == ""
+              ? "null"
+              : "DateTime.parse(\"${property.defaultValue}\")";
+      return '''parserNode.getValue<DateTime>(
+        "${property.name}",
+        (s) => DateTime.parse(s),
+        () => $defaultValue,
+        isImmutable: ${!property.isMutable},
+      )''';
+    }
+    return '''parserNode.getChild<${property.type.toTypeString()}>(
+        parent: ${componentDescription.type.typeName},
+        parser: parser,
+        name: "${property.name}",
+        childName: "${property.type.typeName}",
+        isContentProperty: $isContentProperty,
+        defaultValue: () => ${property.type.capitalizedTypeName}(),
+        isImmutable: ${!property.isMutable})''';
   }
 }
