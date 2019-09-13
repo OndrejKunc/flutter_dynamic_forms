@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
-import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as model;
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
+    as model;
 
 class DefaultDropdownButtonRenderer
     extends FormElementRenderer<model.DropdownButton> {
@@ -14,10 +15,10 @@ class DefaultDropdownButtonRenderer
       child: DropdownButton<String>(
         value: element.value,
         onChanged: (String newValue) => dispatcher(ChangeValueEvent(
-              value: newValue,
-              elementId: element.id,
-              propertyName: model.SingleSelectGroup.valuePropertyName,
-            )),
+          value: newValue,
+          elementId: element.id,
+          propertyName: model.SingleSelectGroup.valuePropertyName,
+        )),
         items: element.choices
             .whereType<model.DropdownOption>()
             .map<DropdownMenuItem<String>>((model.DropdownOption option) {

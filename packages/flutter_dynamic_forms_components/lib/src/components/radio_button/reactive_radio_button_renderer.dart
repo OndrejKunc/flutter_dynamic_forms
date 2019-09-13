@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as model;
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
+    as model;
 
-class ReactiveRadioButtonRenderer extends FormElementRenderer<model.RadioButton> {
+class ReactiveRadioButtonRenderer
+    extends FormElementRenderer<model.RadioButton> {
   @override
   Widget render(
       model.RadioButton element,
@@ -24,11 +26,11 @@ class ReactiveRadioButtonRenderer extends FormElementRenderer<model.RadioButton>
             value: element.value,
             groupValue: parent.value,
             onChanged: (String value) => dispatcher(
-                  ChangeValueEvent(
-                      value: value,
-                      elementId: parent.id,
-                      propertyName: model.SingleSelectGroup.valuePropertyName),
-                ),
+              ChangeValueEvent(
+                  value: value,
+                  elementId: parent.id,
+                  propertyName: model.SingleSelectGroup.valuePropertyName),
+            ),
           );
         },
       ),

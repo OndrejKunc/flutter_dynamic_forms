@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
-import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as model;
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
+    as model;
 
 class DefaultRadioButtonRenderer
     extends FormElementRenderer<model.RadioButton> {
@@ -20,11 +21,11 @@ class DefaultRadioButtonRenderer
         value: element.value,
         groupValue: parent.value,
         onChanged: (String value) => dispatcher(
-              ChangeValueEvent(
-                  value: value,
-                  elementId: parent.id,
-                  propertyName: model.SingleSelectGroup.valuePropertyName),
-            ),
+          ChangeValueEvent(
+              value: value,
+              elementId: parent.id,
+              propertyName: model.SingleSelectGroup.valuePropertyName),
+        ),
       ),
     );
   }

@@ -1,5 +1,7 @@
 # dynamic_forms_generator
 
+[![pub package](https://img.shields.io/pub/v/dynamic_forms_generator.svg)](https://pub.dev/packages/dynamic_forms_generator)
+
 Dart library for generating model and parser part of the [flutter_dynamic_forms](https://github.com/OndrejKunc/flutter_dynamic_forms).
 
 ## Main goal

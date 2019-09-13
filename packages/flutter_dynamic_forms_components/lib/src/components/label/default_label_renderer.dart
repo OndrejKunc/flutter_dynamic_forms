@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
-import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as model;
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
+    as model;
 
 class DefaultLabelRenderer extends FormElementRenderer<model.Label> {
   @override

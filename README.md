@@ -9,6 +9,7 @@ A collection of flutter and dart libraries allowing you to dynamically define yo
 | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | [expression_language](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/expression_language)                 | [![pub package](https://img.shields.io/pub/v/expression_language.svg)](https://pub.dev/packages/expression_language)                 |
 | [dynamic_forms](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/dynamic_forms) | [![pub package](https://img.shields.io/pub/v/dynamic_forms.svg)](https://pub.dev/packages/dynamic_forms) |
+| [dynamic_forms_generator](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/dynamic_forms_generator) | [![pub package](https://img.shields.io/pub/v/dynamic_forms_generator.svg)](https://pub.dev/packages/dynamic_forms_generator) |
 | [flutter_dynamic_forms](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/flutter_dynamic_forms) | [![pub package](https://img.shields.io/pub/v/flutter_dynamic_forms.svg)](https://pub.dev/packages/flutter_dynamic_forms) |
 | [flutter_dynamic_forms_components](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/flutter_dynamic_forms_components) | [![pub package](https://img.shields.io/pub/v/flutter_dynamic_forms_components.svg)](https://pub.dev/packages/flutter_dynamic_forms_components) |
 
@@ -146,8 +147,8 @@ If you prefer JSON to describe your form please check this [json example](packag
 Add following dependencies to your `pubspec.yaml` file:
 
 ```yaml
-flutter_dynamic_forms: ^0.5.0
-flutter_dynamic_forms_components: ^0.5.0
+flutter_dynamic_forms: <latest version>
+flutter_dynamic_forms_components: <latest version>
 ```
 
 ### Displaying the form

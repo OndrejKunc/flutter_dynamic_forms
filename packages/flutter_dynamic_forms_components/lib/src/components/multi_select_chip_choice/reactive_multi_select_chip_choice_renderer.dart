@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
-import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart' as model;
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
+    as model;
 
 class ReactiveMultiSelectChipChoiceRenderer
     extends FormElementRenderer<model.MultiSelectChipChoice> {
@@ -20,12 +21,12 @@ class ReactiveMultiSelectChipChoiceRenderer
             label: Text(element.label),
             selected: element.isSelected,
             onSelected: (selected) => dispatcher(
-                  ChangeValueEvent(
-                    value: selected,
-                    elementId: element.id,
-                    propertyName: model.MultiSelectChoice.isSelectedPropertyName,
-                  ),
-                ),
+              ChangeValueEvent(
+                value: selected,
+                elementId: element.id,
+                propertyName: model.MultiSelectChoice.isSelectedPropertyName,
+              ),
+            ),
           );
         },
       ),
