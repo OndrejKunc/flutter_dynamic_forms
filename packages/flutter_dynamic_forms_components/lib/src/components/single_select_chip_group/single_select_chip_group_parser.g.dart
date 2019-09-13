@@ -16,10 +16,10 @@ class SingleSelectChipGroupParser extends FormElementParser<SingleSelectChipGrou
       parent: parserNode.getParentValue(parent),
       isVisible: parserNode.getIsVisible(),
       choices: parserNode.getChildren<SingleSelectChipChoice>(
-        parent: singleSelectChipGroup,
-        parser: parser,
-        childrenPropertyName: "choices",
-        isContentProperty: true),
+          parent: singleSelectChipGroup,
+          parser: parser,
+          childrenPropertyName: "choices",
+          isContentProperty: true),
       value: parserNode.getStringValue(
         "value",
         isImmutable: false,

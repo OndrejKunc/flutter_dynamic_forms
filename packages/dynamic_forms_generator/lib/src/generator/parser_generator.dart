@@ -95,10 +95,10 @@ class ParserGenerator {
     if (property.type is ArrayType) {
       var arrayType = property.type as ArrayType;
       return '''parserNode.getChildren<${arrayType.innerType.toTypeString()}>(
-        parent: ${componentDescription.type.typeName},
-        parser: parser,
-        childrenPropertyName: "${property.name}",
-        isContentProperty: $isContentProperty)''';
+          parent: ${componentDescription.type.typeName},
+          parser: parser,
+          childrenPropertyName: "${property.name}",
+          isContentProperty: $isContentProperty)''';
     }
     if (property.type.typeName == "decimal") {
       var defaultValue =
@@ -149,12 +149,12 @@ class ParserGenerator {
       )''';
     }
     return '''parserNode.getChild<${property.type.toTypeString()}>(
-        parent: ${componentDescription.type.typeName},
-        parser: parser,
-        name: "${property.name}",
-        childName: "${property.type.typeName}",
-        isContentProperty: $isContentProperty,
-        defaultValue: () => ${property.type.capitalizedTypeName}(),
-        isImmutable: ${!property.isMutable})''';
+          parent: ${componentDescription.type.typeName},
+          parser: parser,
+          name: "${property.name}",
+          childName: "${property.type.typeName}",
+          isContentProperty: $isContentProperty,
+          defaultValue: () => ${property.type.capitalizedTypeName}(),
+          isImmutable: ${!property.isMutable})''';
   }
 }

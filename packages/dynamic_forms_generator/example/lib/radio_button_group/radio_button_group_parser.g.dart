@@ -15,10 +15,10 @@ class RadioButtonGroupParser extends FormElementParser<RadioButtonGroup> {
       parent: parserNode.getParentValue(parent),
       isVisible: parserNode.getIsVisible(),
       choices: parserNode.getChildren<RadioButton>(
-        parent: radioButtonGroup,
-        parser: parser,
-        childrenPropertyName: "choices",
-        isContentProperty: false),
+          parent: radioButtonGroup,
+          parser: parser,
+          childrenPropertyName: "choices",
+          isContentProperty: false),
       value: parserNode.getStringValue(
         "value",
         isImmutable: false,

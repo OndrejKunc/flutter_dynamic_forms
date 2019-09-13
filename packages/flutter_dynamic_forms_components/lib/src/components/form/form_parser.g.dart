@@ -16,10 +16,10 @@ class FormParser extends FormElementParser<Form> {
       parent: parserNode.getParentValue(parent),
       isVisible: parserNode.getIsVisible(),
       children: parserNode.getChildren<FormElement>(
-        parent: form,
-        parser: parser,
-        childrenPropertyName: "children",
-        isContentProperty: true),
+          parent: form,
+          parser: parser,
+          childrenPropertyName: "children",
+          isContentProperty: true),
       name: parserNode.getStringValue(
         "name",
         isImmutable: true,

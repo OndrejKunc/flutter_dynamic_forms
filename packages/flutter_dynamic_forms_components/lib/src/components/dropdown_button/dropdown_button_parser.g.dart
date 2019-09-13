@@ -16,10 +16,10 @@ class DropdownButtonParser extends FormElementParser<DropdownButton> {
       parent: parserNode.getParentValue(parent),
       isVisible: parserNode.getIsVisible(),
       choices: parserNode.getChildren<DropdownOption>(
-        parent: dropdownButton,
-        parser: parser,
-        childrenPropertyName: "choices",
-        isContentProperty: true),
+          parent: dropdownButton,
+          parser: parser,
+          childrenPropertyName: "choices",
+          isContentProperty: true),
       value: parserNode.getStringValue(
         "value",
         isImmutable: false,

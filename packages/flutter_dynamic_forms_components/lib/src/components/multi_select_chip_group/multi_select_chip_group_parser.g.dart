@@ -16,10 +16,10 @@ class MultiSelectChipGroupParser extends FormElementParser<MultiSelectChipGroup>
       parent: parserNode.getParentValue(parent),
       isVisible: parserNode.getIsVisible(),
       choices: parserNode.getChildren<MultiSelectChipChoice>(
-        parent: multiSelectChipGroup,
-        parser: parser,
-        childrenPropertyName: "choices",
-        isContentProperty: true),
+          parent: multiSelectChipGroup,
+          parser: parser,
+          childrenPropertyName: "choices",
+          isContentProperty: true),
     );
     return multiSelectChipGroup;
   }

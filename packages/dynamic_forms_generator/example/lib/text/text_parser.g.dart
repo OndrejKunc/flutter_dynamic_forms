@@ -23,10 +23,10 @@ class TextParser extends FormElementParser<Text> {
         isImmutable: true,
       ),
       validations: parserNode.getChildren<Validation>(
-        parent: text,
-        parser: parser,
-        childrenPropertyName: "validations",
-        isContentProperty: false),
+          parent: text,
+          parser: parser,
+          childrenPropertyName: "validations",
+          isContentProperty: false),
       value: parserNode.getStringValue(
         "value",
         isImmutable: false,

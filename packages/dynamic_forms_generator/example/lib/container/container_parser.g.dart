@@ -15,10 +15,10 @@ class ContainerParser extends FormElementParser<Container> {
       parent: parserNode.getParentValue(parent),
       isVisible: parserNode.getIsVisible(),
       children: parserNode.getChildren<FormElement>(
-        parent: container,
-        parser: parser,
-        childrenPropertyName: "children",
-        isContentProperty: true),
+          parent: container,
+          parser: parser,
+          childrenPropertyName: "children",
+          isContentProperty: true),
     );
     return container;
   }

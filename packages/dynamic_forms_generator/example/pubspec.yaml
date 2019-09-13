@@ -6,7 +6,8 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
-  dynamic_forms: ^0.5.0
+  dynamic_forms:
+    path: ../../dynamic_forms
 
 dev_dependencies:
   build_runner: ^1.0.0
