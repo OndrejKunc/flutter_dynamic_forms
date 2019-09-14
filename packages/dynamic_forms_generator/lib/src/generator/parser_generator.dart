@@ -87,10 +87,19 @@ class ParserGenerator {
       )''';
     }
     if (property.type.typeName == "string") {
-      return '''parserNode.getStringValue(
+      if (property.defaultValue == null || property.defaultValue == ""){
+        return '''parserNode.getStringValue(
         "${property.name}",
         isImmutable: ${!property.isMutable},
       )''';
+      }
+      return '''parserNode.getValue<String>(
+        "${property.name}",
+        (s) => s,
+        () => "${property.defaultValue}",
+        isImmutable: ${!property.isMutable},
+      )''';
+
     }
     if (property.type is ArrayType) {
       var arrayType = property.type as ArrayType;

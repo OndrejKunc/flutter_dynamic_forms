@@ -9,6 +9,7 @@ class CheckBox extends FormElement {
   static const String myDecimalPropertyName = "myDecimal";
   static const String myDoublePropertyName = "myDouble";
   static const String myIntPropertyName = "myInt";
+  static const String textColorPropertyName = "textColor";
   static const String valuePropertyName = "value";
 
   String get label => properties[labelPropertyName].value;
@@ -26,6 +27,9 @@ class CheckBox extends FormElement {
   int get myInt => properties[myIntPropertyName].value;
   Stream<int> get myIntChanged => properties[myIntPropertyName].valueChanged;
 
+  String get textColor => properties[textColorPropertyName].value;
+  Stream<String> get textColorChanged => properties[textColorPropertyName].valueChanged;
+
   bool get value => properties[valuePropertyName].value;
   Stream<bool> get valueChanged => properties[valuePropertyName].valueChanged;
 
@@ -38,6 +42,7 @@ class CheckBox extends FormElement {
     @required ElementValue<Decimal> myDecimal,
     @required ElementValue<double> myDouble,
     @required ElementValue<int> myInt,
+    @required ElementValue<String> textColor,
     @required ElementValue<bool> value,
   }) {
     fillFormElement(
@@ -50,6 +55,7 @@ class CheckBox extends FormElement {
     registerElementValue(myDecimalPropertyName, myDecimal);
     registerElementValue(myDoublePropertyName, myDouble);
     registerElementValue(myIntPropertyName, myInt);
+    registerElementValue(textColorPropertyName, textColor);
     registerElementValue(valuePropertyName, value);
   }
 

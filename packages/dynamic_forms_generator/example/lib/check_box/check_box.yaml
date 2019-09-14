@@ -19,3 +19,6 @@ properties:
   myInt:
     type: int
     default: 51
+  textColor:
+    type: string
+    default: b74903
