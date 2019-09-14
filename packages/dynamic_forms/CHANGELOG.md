@@ -1,3 +1,7 @@
+# 0.6.1
+
+Published FormElement propertyChanged Stream so it can have multiple subscribers.
+
 # 0.6.0
 
 Added possibility to parse single child component.

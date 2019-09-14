@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:expression_language/expression_language.dart';
 import 'package:meta/meta.dart';
@@ -45,7 +47,10 @@ abstract class FormElement implements ExpressionProviderElement {
     properties.forEach((k, v) {
       keyStreams.add(v.valueChanged.map((_) => k));
     });
-    return Observable.merge(keyStreams);
+    var mergedStream = Observable.merge(keyStreams);
+    var connectableObservable = mergedStream.publishReplay(maxSize: 1);
+    connectableObservable.connect();
+    return connectableObservable;
   }
 
   ElementValue getElementValue([String propertyName]) {
