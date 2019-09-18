@@ -47,19 +47,21 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     var expressionProviderElement =
         _expressionProviderElementMap[expressionPath[0]];
     ExpressionProvider expressionProvider;
-    if (expressionPath.length == 1) {
-      expressionProvider = expressionProviderElement.getExpressionProvider();
-      push(DelegateExpression<T>(expressionPath, expressionProvider));
-      return;
-    }
+
+    bool isLastItemElement = true;
     for (var i = 1; i < expressionPath.length; i++) {
+      isLastItemElement = false;
       var propertyName = expressionPath[i];
       expressionProvider =
           expressionProviderElement.getExpressionProvider(propertyName);
       if (expressionProvider is ExpressionProvider<ExpressionProviderElement>) {
         expressionProviderElement =
             expressionProvider.getExpression().evaluate();
+        isLastItemElement = true;
       }
+    }
+    if (isLastItemElement) {
+      expressionProvider = expressionProviderElement.getExpressionProvider();
     }
     push(DelegateExpression<T>(expressionPath, expressionProvider));
   }

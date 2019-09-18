@@ -25,7 +25,7 @@ class RequiredValidation extends Validation {
         ConstantExpression(Integer(0)),
         LengthFunctionExpression(
           DelegateExpression(
-            ["parent"],
+            [(parent.value as FormElement).id],
             parent.value.getExpressionProvider(),
           ),
         ),
@@ -44,8 +44,6 @@ class RequiredValidation extends Validation {
       ElementValue oldProperty,
       ExpressionProvider<ExpressionProviderElement> parent,
       ExpressionProviderElement instance) {
-    return (key == Validation.isValidPropertyName)
-        ? getIsValid(parent)
-        : super.cloneProperty(key, oldProperty, parent, instance);
+    return super.cloneProperty(key, oldProperty, parent, instance);
   }
 }
