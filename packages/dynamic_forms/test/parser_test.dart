@@ -8,7 +8,7 @@ import 'test_components/container/container_parser.dart';
 import 'test_components/label/label.dart';
 import 'test_components/label/label_parser.dart';
 
-List<FormElementParser> _getDefaultParserList() {
+List<ElementParser> _getDefaultParserList() {
   return [ContainerParser(), LabelParser()];
 }
 

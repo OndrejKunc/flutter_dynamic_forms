@@ -2,13 +2,13 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 
 import 'container.dart';
 
-class ContainerParser extends FormElementParser<Container> {
+class ContainerParser extends ElementParser<Container> {
   @override
   String get name => "container";
 
   @override
-  Container parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+  Container parse(
+      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
     var container = Container();
     container.fillContainer(
       id: parserNode.getPlainStringValue("id"),

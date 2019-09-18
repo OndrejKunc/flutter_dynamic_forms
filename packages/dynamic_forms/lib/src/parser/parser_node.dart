@@ -8,21 +8,21 @@ abstract class ParserNode {
       String name, T converter(String s), T defaultValue(),
       {bool isImmutable = true});
 
-  ElementValue<List<TFormElement>> getChildren<TFormElement>(
+  ElementValue<List<TElement>> getChildren<TElement>(
       {@required FormElement parent,
       @required String childrenPropertyName,
-      @required FormElementParserFunction parser,
+      @required ElementParserFunction parser,
       bool isContentProperty = false,
       bool isImmutable = true});
 
   String getPlainStringValue(String propertyName);
 
-  ElementValue<TFormElement> getChild<TFormElement>(
+  ElementValue<TElement> getChild<TElement>(
       {@required String name,
-      @required FormElementParserFunction parser,
+      @required ElementParserFunction parser,
       @required String childName,
       @required FormElement parent,
-      @required TFormElement defaultValue(),
+      @required TElement defaultValue(),
       bool isContentProperty = false,
       bool isImmutable = true});
 

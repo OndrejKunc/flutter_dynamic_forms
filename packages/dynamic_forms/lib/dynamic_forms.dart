@@ -1,8 +1,9 @@
 library dynamic_forms;
 
 export './src/element_values/element_values.dart';
-export './src/form_elements/form_element.dart';
-export './src/form_elements/validation.dart';
+export './src/elements/form_element.dart';
+export './src/elements/validation.dart';
+export './src/elements/element.dart';
 export './src/form_manager/form_manager.dart';
 export './src/form_manager/form_item_value.dart';
 export './src/form_manager/form_manager_builder.dart';

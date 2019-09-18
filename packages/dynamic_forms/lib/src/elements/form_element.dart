@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:uuid/uuid.dart';
 
-abstract class FormElement implements ExpressionProviderElement {
+abstract class FormElement implements Element {
   static const String defaultPropertyName = "value";
   static const String parentPropertyName = "parent";
   static const String isVisiblePropertyName = "isVisible";
