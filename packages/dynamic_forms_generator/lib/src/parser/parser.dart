@@ -22,7 +22,7 @@ class ComponentYamlParser {
             RawPropertyDescription(
               name: propertyEntry.key,
               type: propertyAttributtes["type"],
-              defaultValue: propertyAttributtes["default"].toString(),
+              defaultValue: propertyAttributtes["default"]?.toString(),
               isMutable: propertyAttributtes["isMutable"] == "true" ||
                   propertyAttributtes["isMutable"] == true,
             ),

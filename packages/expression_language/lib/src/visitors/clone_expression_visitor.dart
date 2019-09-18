@@ -47,19 +47,21 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     var expressionProviderElement =
         _expressionProviderElementMap[expressionPath[0]];
     ExpressionProvider expressionProvider;
-    if (expressionPath.length == 1) {
-      expressionProvider = expressionProviderElement.getExpressionProvider();
-      push(DelegateExpression<T>(expressionPath, expressionProvider));
-      return;
-    }
+
+    bool isLastItemElement = true;
     for (var i = 1; i < expressionPath.length; i++) {
+      isLastItemElement = false;
       var propertyName = expressionPath[i];
       expressionProvider =
           expressionProviderElement.getExpressionProvider(propertyName);
       if (expressionProvider is ExpressionProvider<ExpressionProviderElement>) {
         expressionProviderElement =
             expressionProvider.getExpression().evaluate();
+        isLastItemElement = true;
       }
+    }
+    if (isLastItemElement) {
+      expressionProvider = expressionProviderElement.getExpressionProvider();
     }
     push(DelegateExpression<T>(expressionPath, expressionProvider));
   }
@@ -498,5 +500,18 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     var searchValue = pop();
     var value = pop();
     push(StartsWithFunctionExpression(value, searchValue));
+  }
+
+  @override
+  void visitCustomFunction<T>(CustomFunctionExpression<T> expression) {
+    for (var parameter in expression.parameters) {
+      parameter.accept(this);
+    }
+
+    var resultList = List<Expression>();
+    for (var i = 0; i < expression.parameters.length; i++) {
+      resultList.insert(0, pop());
+    }
+    push(CustomFunctionExpression<T>(resultList, expression.function));
   }
 }

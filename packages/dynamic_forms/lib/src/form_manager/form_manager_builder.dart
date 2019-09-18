@@ -11,8 +11,8 @@ class FormManagerBuilder {
 
   FormManagerBuilder(this.formParserService);
 
-  FormManager build(String xml) {
-    var root = formParserService.parse(xml);
+  FormManager build(String content) {
+    var root = formParserService.parse(content);
 
     var formElementMap = Map<String, FormElement>.fromIterable(
         getFormElementIterator<FormElement>(root),
