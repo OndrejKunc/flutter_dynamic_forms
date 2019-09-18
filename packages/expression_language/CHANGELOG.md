@@ -1,6 +1,7 @@
 # 0.1.4
 
-Added custom function expression.
+* Added custom function expression.
+* Increase minimum dart SDK to 2.4.0
 
 # 0.1.3
 
