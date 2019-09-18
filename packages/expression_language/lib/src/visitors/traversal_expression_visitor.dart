@@ -330,7 +330,7 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitCustomFunction(CustomFunctionExpression expression) {
+  void visitCustomFunction<T>(CustomFunctionExpression<T> expression) {
     for (var parameter in expression.parameters) {
       parameter.accept(this);
     }

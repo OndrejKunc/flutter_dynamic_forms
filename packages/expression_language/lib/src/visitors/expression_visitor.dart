@@ -48,7 +48,7 @@ abstract class ExpressionVisitor {
   void visitIntegerToInt(IntegerToIntExpression expression);
   void visitDoubleToDecimal(DoubleToDecimalExpression expression);
   void visitDecimalToDouble(DecimalToDoubleExpression expression);
-  void visitCustomFunction(CustomFunctionExpression expression);
+  void visitCustomFunction<T>(CustomFunctionExpression<T> expression);
   void visitListCountFunction<T>(ListCountFunctionExpression<T> expression);
   void visitRoundFunctionIntRoundingMode(
       RoundFunctionIntRoundingModeExpression expression);

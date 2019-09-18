@@ -503,7 +503,7 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
-  void visitCustomFunction(CustomFunctionExpression expression) {
+  void visitCustomFunction<T>(CustomFunctionExpression<T> expression) {
     for (var parameter in expression.parameters) {
       parameter.accept(this);
     }
@@ -512,6 +512,6 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     for (var i = 0; i < expression.parameters.length; i++) {
       resultList.insert(0, pop());
     }
-    push(CustomFunctionExpression(resultList, expression.function));
+    push(CustomFunctionExpression<T>(resultList, expression.function));
   }
 }
