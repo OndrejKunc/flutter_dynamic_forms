@@ -328,4 +328,11 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
     expression.value.accept(this);
     expression.searchValue.accept(this);
   }
+
+  @override
+  void visitCustomFunction(CustomFunctionExpression expression) {
+    for (var parameter in expression.parameters) {
+      parameter.accept(this);
+    }
+  }
 }

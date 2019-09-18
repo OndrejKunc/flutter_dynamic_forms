@@ -1,3 +1,7 @@
+# 0.1.4
+
+Added custom function expression.
+
 # 0.1.3
 
 Added matches, contains, startsWith and endsWith functions.

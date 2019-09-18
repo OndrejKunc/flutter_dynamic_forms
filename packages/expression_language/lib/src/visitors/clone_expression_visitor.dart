@@ -501,4 +501,17 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     var value = pop();
     push(StartsWithFunctionExpression(value, searchValue));
   }
+
+  @override
+  void visitCustomFunction(CustomFunctionExpression expression) {
+    for (var parameter in expression.parameters) {
+      parameter.accept(this);
+    }
+
+    var resultList = List<Expression>();
+    for (var i = 0; i < expression.parameters.length; i++) {
+      resultList.insert(0, pop());
+    }
+    push(CustomFunctionExpression(resultList, expression.function));
+  }
 }
