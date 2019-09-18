@@ -19,12 +19,12 @@ before_script:
 script:
   - cd packages/expression_language
   - pub get
-  - dart test/expressions_test.dart
+  - pub run test
   - pub run test_coverage
   - cp coverage/lcov.info ../../expression_language.lcov
   - cd ../dynamic_forms
   - pub get
-  - dart test/parser_test.dart
+  - pub run test
   - pub run test_coverage
   - cp coverage/lcov.info ../../dynamic_forms.lcov
 after_success:
