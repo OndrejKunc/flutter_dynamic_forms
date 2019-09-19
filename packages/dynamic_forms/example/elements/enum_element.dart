@@ -6,8 +6,7 @@ enum Example { firstOption, secondOption }
 
 class EnumElementExample extends EnumElement {
   final Example example;
-  static const String FIRST_OPTION = "firstOption";
-  static const String SECOND_OPTION = "secondOption";
+
   EnumElementExample(this.example);
 
   @override
