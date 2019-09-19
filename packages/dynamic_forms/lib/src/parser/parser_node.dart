@@ -17,6 +17,33 @@ abstract class ParserNode {
 
   String getPlainStringValue(String propertyName);
 
+  ElementValue<TEnumElement> getEnum<TEnum, TEnumElement>(
+      String name,
+      List<TEnum> enumerationValues,
+      TEnumElement Function(TEnum _) enumElementConstructor) {
+    var inputValueSplits = getStringValue(name).value.split('.');
+    var realEnumSplits = enumerationValues.first.toString().split('.');
+
+    var nameOfEnum = realEnumSplits.first;
+    var nameOfInputEnum = inputValueSplits.first;
+
+    if (nameOfEnum != nameOfInputEnum) {
+      throw "Enumeration $nameOfInputEnum does not exist";
+    }
+
+    var constantName = inputValueSplits.last;
+    var returnValue = enumerationValues.firstWhere(
+        (v) => nameOfEnum + '.' + constantName == v.toString(),
+        orElse: () => null);
+
+    if (returnValue == null) {
+      throw "Enumeration $nameOfEnum does not have constant named $constantName";
+    } else {
+      return ImmutableElementValue<TEnumElement>(
+          enumElementConstructor(returnValue));
+    }
+  }
+
   ElementValue<TElement> getChild<TElement>(
       {@required String name,
       @required ElementParserFunction parser,

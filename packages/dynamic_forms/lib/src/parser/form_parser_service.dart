@@ -4,7 +4,7 @@ import 'package:dynamic_forms/src/elements/form_element.dart';
 import 'package:dynamic_forms/src/parser/form_element_parser.dart';
 
 typedef ElementParserFunction = Element Function(
-    ParserNode dataNode, Element parent);
+    ParserNode dataNode, FormElement parent);
 
 abstract class FormParserService {
   final List<ElementParser> _parsers;
