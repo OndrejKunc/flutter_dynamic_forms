@@ -3,13 +3,13 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class CheckBoxParser extends FormElementParser<CheckBox> {
+class CheckBoxParser extends ElementParser<CheckBox> {
   @override
   String get name => "checkBox";
 
   @override
-  CheckBox parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+  CheckBox parse(
+      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
     var checkBox = CheckBox();
     checkBox.fillCheckBox(
       id: parserNode.getPlainStringValue("id"),

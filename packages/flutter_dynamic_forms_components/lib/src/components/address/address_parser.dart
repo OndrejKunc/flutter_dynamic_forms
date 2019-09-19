@@ -2,13 +2,13 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
     as model;
 
-class AddressParser extends FormElementParser<model.FormGroup> {
+class AddressParser extends ElementParser<model.FormGroup> {
   @override
   String get name => "address";
 
   @override
-  model.FormGroup parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+  model.FormGroup parse(
+      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
     var formGroup = model.FormGroup();
     var addressId = parserNode.getPlainStringValue("id");
 

@@ -3,13 +3,13 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class FormGroupParser extends FormElementParser<FormGroup> {
+class FormGroupParser extends ElementParser<FormGroup> {
   @override
   String get name => "formGroup";
 
   @override
-  FormGroup parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+  FormGroup parse(
+      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
     var formGroup = FormGroup();
     formGroup.fillFormGroup(
       id: parserNode.getPlainStringValue("id"),
