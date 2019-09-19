@@ -34,7 +34,7 @@ class ParserGenerator {
     }
 
     buffer.writeln(
-        "class ${componentDescription.type.capitalizedTypeName}Parser extends FormElementParser<${componentDescription.type.toTypeString()}> {");
+        "class ${componentDescription.type.capitalizedTypeName}Parser extends ElementParser<${componentDescription.type.toTypeString()}> {");
 
     buffer.writeln("  @override");
     buffer.writeln(
@@ -44,7 +44,7 @@ class ParserGenerator {
 
   @override
   ${componentDescription.type.toTypeString()} parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {''');
+      ElementParserFunction parser) {''');
 
     buffer.writeln('''
     var ${componentDescription.type.typeName} = ${componentDescription.type.capitalizedTypeName}();

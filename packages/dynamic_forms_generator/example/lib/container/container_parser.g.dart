@@ -2,13 +2,13 @@
 
 import '../components.dart';
 
-class ContainerParser extends FormElementParser<Container> {
+class ContainerParser extends ElementParser<Container> {
   @override
   String get name => "container";
 
   @override
   Container parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+      ElementParserFunction parser) {
     var container = Container();
     container.fillContainer(
       id: parserNode.getPlainStringValue("id"),
