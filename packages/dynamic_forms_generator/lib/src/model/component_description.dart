@@ -5,14 +5,14 @@ class ComponentDescription {
   DefinitionType type;
   ComponentType parentType;
   List<PropertyDescription> properties;
-  PropertyDescription conentProperty;
+  PropertyDescription contentProperty;
   List<String> namespaces;
 
   ComponentDescription({
     @required this.type,
     this.parentType,
     this.properties,
-    this.conentProperty,
+    this.contentProperty,
     this.namespaces,
   });
 }
