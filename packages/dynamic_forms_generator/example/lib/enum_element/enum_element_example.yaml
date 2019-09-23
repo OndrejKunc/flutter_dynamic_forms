@@ -1,0 +1,7 @@
+type: exampleEnumElement
+parentType: enumElement
+properties:
+  firstOption:
+    type: enum
+  secondOption:
+    type: enum

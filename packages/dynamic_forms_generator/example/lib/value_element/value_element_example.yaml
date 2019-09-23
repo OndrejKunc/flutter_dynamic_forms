@@ -1,0 +1,7 @@
+type: exampleValueElement
+parentType: valueElement
+properties:
+  firstProperty:
+    type: string
+  secondProperty:
+    type: int
