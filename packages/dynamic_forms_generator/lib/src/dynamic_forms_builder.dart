@@ -94,7 +94,7 @@ class DynamicFormsBuilder implements Builder {
   Future<List<ComponentDescription>> _getInheritanceList(String typeName,
       BuildStep buildStep, List<ComponentDescription> list) async {
     var fileName = _getFileNameFromTypeName(typeName);
-    var assets = await buildStep.findAssets(Glob("lib/**$fileName")).toList();
+    var assets = await buildStep.findAssets(Glob("lib/**/$fileName")).toList();
     if (assets == null || assets.isEmpty) {
       return list;
     }
