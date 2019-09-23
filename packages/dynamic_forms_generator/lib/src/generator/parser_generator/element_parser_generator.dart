@@ -1,71 +1,47 @@
-import 'package:dynamic_forms_generator/src/build_configuration.dart';
+import 'package:dynamic_forms_generator/src/generator/parser_generator/form_element_parser_generator.dart';
+import 'package:dynamic_forms_generator/src/generator/parser_generator/value_element_parser_generator.dart';
 import 'package:dynamic_forms_generator/src/model/component_description.dart';
 import 'package:dynamic_forms_generator/src/model/component_type.dart';
-import 'package:meta/meta.dart';
 
-class ParserGenerator {
-  final ComponentDescription componentDescription;
-  final BuildConfiguration buildConfiguration;
-  final List<PropertyDescription> allProperties;
-  final PropertyDescription contentProperty;
+abstract class ElementParserGenerator {
+  ComponentDescription componentDescription;
+  List<PropertyDescription> allProperties;
+  PropertyDescription contentProperty;
 
-  ParserGenerator({
-    @required this.componentDescription,
-    @required this.buildConfiguration,
-    @required this.allProperties,
-    @required this.contentProperty,
-  });
+  static const String _valueElementName = "valueElement";
 
-  String generate() {
-    StringBuffer buffer = StringBuffer();
+  String generate();
 
-    buffer.writeln("// GENERATED CODE - DO NOT MODIFY BY HAND");
-    buffer.writeln();
-
-    for (var import in [
-      ...buildConfiguration.defaultImports,
-      ...buildConfiguration.parserImports
-    ]) {
-      buffer.writeln("import '$import';");
+  static ElementParserGenerator getGenerator(
+      {String typeName,
+      ComponentDescription componentDescription,
+      List<PropertyDescription> allProperties,
+      PropertyDescription contentProperty}) {
+    ElementParserGenerator returnElement;
+    if (typeName != null) {
+      switch (typeName) {
+        case _valueElementName:
+          {
+            returnElement = ValueElementParserGenerator();
+            break;
+          }
+        default:
+          {
+            returnElement = FormElementParserGenerator();
+            break;
+          }
+      }
+      returnElement
+        ..allProperties = allProperties
+        ..componentDescription = componentDescription
+        ..contentProperty = contentProperty;
+      return returnElement;
+    } else {
+      throw "Typename can't be null";
     }
-
-    if (buildConfiguration.defaultImports.isNotEmpty) {
-      buffer.writeln();
-    }
-
-    buffer.writeln(
-        "class ${componentDescription.type.capitalizedTypeName}Parser extends ElementParser<${componentDescription.type.toTypeString()}> {");
-
-    buffer.writeln("  @override");
-    buffer.writeln(
-        "  String get name => \"${componentDescription.type.typeName}\";");
-
-    buffer.writeln('''
-
-  @override
-  ${componentDescription.type.toTypeString()} parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {''');
-
-    buffer.writeln('''
-    var ${componentDescription.type.typeName} = ${componentDescription.type.capitalizedTypeName}();
-    ${componentDescription.type.typeName}.fill${componentDescription.type.capitalizedTypeName}(''');
-
-    for (var property in allProperties) {
-      var parseMethod =
-          _getParseMethod(property, contentProperty?.name == property?.name);
-      buffer.writeln("      ${property.name}: ${parseMethod},");
-    }
-
-    buffer.writeln("    );");
-    buffer.writeln("    return ${componentDescription.type.typeName};");
-
-    buffer.writeln("  }");
-
-    buffer.writeln("}");
-    return buffer.toString();
   }
 
-  String _getParseMethod(PropertyDescription property, bool isContentProperty) {
+  String getParseMethod(PropertyDescription property, bool isContentProperty) {
     if (property.name == "id") {
       return "parserNode.getPlainStringValue(\"id\")";
     }
@@ -148,13 +124,25 @@ class ParserGenerator {
         isImmutable: ${!property.isMutable},
       )''';
     }
-    return '''parserNode.getChild<${property.type.toTypeString()}>(
+    if ((property.type.typeName.endsWith("valueElement")) ||
+        ((property.type.typeName.endsWith("ValueElement")))) {
+      return '''parserNode.getChild<${property.type.toTypeString()}>(
           parent: ${componentDescription.type.typeName},
           parser: parser,
           name: "${property.name}",
           childName: "${property.type.typeName}",
           isContentProperty: $isContentProperty,
-          defaultValue: () => ${property.type.capitalizedTypeName}(),
+          defaultValue: () => ${property.type.capitalizedTypeName}.defaultValue(),
           isImmutable: ${!property.isMutable})''';
+    }
+    if ((property.type.typeName.endsWith("enumElement")) ||
+        ((property.type.typeName.endsWith("EnumElement")))) {
+      return '''parserNode.getEnum<${property.type.toTypeString()}Enum,${property.type.toTypeString()}>(
+          name: "${property.name}",
+          enumerationValues: ${property.type.toTypeString()}Enum.values,
+          enumElementConstructor: (x) => ${property.type.toTypeString()}(enumeration: x))
+          ''';
+    }
+    throw "Unknown property type : ${componentDescription.type.typeName}";
   }
 }

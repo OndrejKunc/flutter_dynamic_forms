@@ -1,38 +1,9 @@
-import 'package:dynamic_forms_generator/src/build_configuration.dart';
-import 'package:dynamic_forms_generator/src/model/component_description.dart';
-import 'package:meta/meta.dart';
+import 'package:dynamic_forms_generator/src/generator/model_generator/element_model_generator.dart';
 
-class ModelGenerator {
-  final ComponentDescription componentDescription;
-  final BuildConfiguration buildConfiguration;
-  final List<PropertyDescription> allProperties;
-
-  ModelGenerator({
-    @required this.componentDescription,
-    @required this.buildConfiguration,
-    @required this.allProperties,
-  });
-
-  String generate() {
+class FormElementModelGenerator extends ElementModelGenerator {
+  @override
+  String generateBody() {
     StringBuffer buffer = StringBuffer();
-
-    buffer.writeln("// GENERATED CODE - DO NOT MODIFY BY HAND");
-    buffer.writeln();
-
-    for (var import in [
-      ...buildConfiguration.defaultImports,
-      ...buildConfiguration.modelImports
-    ]) {
-      buffer.writeln("import '$import';");
-    }
-
-    if (buildConfiguration.defaultImports.isNotEmpty) {
-      buffer.writeln();
-    }
-
-    buffer.writeln(
-        "class ${componentDescription.type.toTypeString()} extends ${componentDescription.parentType.toTypeString()} {");
-
     for (var property in componentDescription.properties) {
       buffer.writeln(
           "  static const String ${property.name}PropertyName = \"${property.name}\";");
@@ -86,7 +57,9 @@ class ModelGenerator {
     return ${componentDescription.type.toConstructorString()};
   }''');
 
-    buffer.writeln("}");
     return buffer.toString();
   }
+
+  @override
+  String generatePrelude() => "";
 }
