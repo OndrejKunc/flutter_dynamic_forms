@@ -3,6 +3,7 @@ library dynamic_forms;
 export './src/element_values/element_values.dart';
 export './src/elements/form_element.dart';
 export './src/elements/enum_element.dart';
+export './src/elements/value_element.dart';
 export './src/elements/validation.dart';
 export './src/elements/element.dart';
 export './src/form_manager/form_manager.dart';

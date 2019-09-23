@@ -18,9 +18,9 @@ abstract class ParserNode {
   String getPlainStringValue(String propertyName);
 
   ElementValue<TEnumElement> getEnum<TEnum, TEnumElement>(
-      String name,
-      List<TEnum> enumerationValues,
-      TEnumElement Function(TEnum _) enumElementConstructor) {
+      {@required String name,
+      @required List<TEnum> enumerationValues,
+      @required TEnumElement Function(TEnum _) enumElementConstructor}) {
     var inputValueSplits = getStringValue(name).value.split('.');
     var realEnumSplits = enumerationValues.first.toString().split('.');
 
