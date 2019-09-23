@@ -63,7 +63,7 @@ abstract class ElementParserGenerator {
       )''';
     }
     if (property.type.typeName == "string") {
-      if (property.defaultValue == null || property.defaultValue == ""){
+      if (property.defaultValue == null || property.defaultValue == "") {
         return '''parserNode.getStringValue(
         "${property.name}",
         isImmutable: ${!property.isMutable},
@@ -75,7 +75,6 @@ abstract class ElementParserGenerator {
         () => "${property.defaultValue}",
         isImmutable: ${!property.isMutable},
       )''';
-
     }
     if (property.type is ArrayType) {
       var arrayType = property.type as ArrayType;
@@ -141,7 +140,7 @@ abstract class ElementParserGenerator {
           name: "${property.name}",
           childName: "${property.type.typeName}",
           isContentProperty: $isContentProperty,
-          defaultValue: () => ${property.type.capitalizedTypeName}.defaultValue(),
+          defaultValue: () => ${property.type.capitalizedTypeName}(),
           isImmutable: ${!property.isMutable})''';
     }
     if ((property.type.typeName.endsWith("enumElement")) ||

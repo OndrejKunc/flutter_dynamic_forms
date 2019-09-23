@@ -23,7 +23,7 @@ abstract class ElementModelGenerator {
         }
       case "string":
         {
-          return "";
+          return "\"\"";
         }
       case "decimal":
         {

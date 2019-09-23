@@ -21,27 +21,21 @@ class ValueElementModelGenerator extends ElementModelGenerator {
       buffer.writeln();
     }
 
-    buffer.write("  ${componentDescription.type.toTypeString()}({");
+    buffer.writeln("  ${componentDescription.type.toTypeString()}({");
     for (var property in componentDescription.properties) {
-      buffer.write("@required this.${property.name},");
+      buffer.writeln(
+          "    this.${property.name} = ${getDefaultValue(property.type.typeName)},");
     }
-    buffer.writeln("});");
-    buffer.write(
-        "  static defaultValue() => ${componentDescription.type.toTypeString()}(");
-    for (var property in componentDescription.properties) {
-      buffer.write(
-          "${property.name}: ${getDefaultValue(property.type.toTypeString())},");
-    }
-    buffer.writeln(');');
+    buffer.writeln("  });");
     buffer.writeln('''
   @override
   ExpressionProviderElement clone(
           ExpressionProvider<ExpressionProviderElement> parent) =>''');
-    buffer.write("  ${componentDescription.type.toTypeString()}(");
+    buffer.writeln("  ${componentDescription.type.toTypeString()}(");
     for (var property in componentDescription.properties) {
-      buffer.write("${property.name}: ${property.name},");
+      buffer.writeln("    ${property.name}: ${property.name},");
     }
-    buffer.writeln(");");
+    buffer.writeln("  );");
     buffer.writeln('''
   @override
   ExpressionProvider getExpressionProvider([String propertyName]) {

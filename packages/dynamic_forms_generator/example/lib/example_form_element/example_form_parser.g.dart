@@ -25,7 +25,7 @@ class ExampleFormElementParser extends ElementParser<ExampleFormElement> {
           name: "valueProperty",
           childName: "exampleValueElement",
           isContentProperty: false,
-          defaultValue: () => ExampleValueElement.defaultValue(),
+          defaultValue: () => ExampleValueElement(),
           isImmutable: true),
     );
     return exampleFormElement;

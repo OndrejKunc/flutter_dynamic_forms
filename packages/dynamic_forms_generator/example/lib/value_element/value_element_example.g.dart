@@ -10,12 +10,17 @@ class ExampleValueElement extends ValueElement {
   final String firstProperty;
   final int secondProperty;
 
-  ExampleValueElement({@required this.firstProperty,@required this.secondProperty,});
-  static defaultValue() => ExampleValueElement(firstProperty: null,secondProperty: 0,);
+  ExampleValueElement({
+    this.firstProperty = "",
+    this.secondProperty = 0,
+  });
   @override
   ExpressionProviderElement clone(
           ExpressionProvider<ExpressionProviderElement> parent) =>
-  ExampleValueElement(firstProperty: firstProperty,secondProperty: secondProperty,);
+  ExampleValueElement(
+    firstProperty: firstProperty,
+    secondProperty: secondProperty,
+  );
   @override
   ExpressionProvider getExpressionProvider([String propertyName]) {
     switch (propertyName) {
