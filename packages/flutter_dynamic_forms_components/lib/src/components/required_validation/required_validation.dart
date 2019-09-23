@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:expression_language/expression_language.dart';
 import 'package:meta/meta.dart';
 
 class RequiredValidation extends Validation {
@@ -7,6 +6,7 @@ class RequiredValidation extends Validation {
     @required String id,
     @required ElementValue<FormElement> parent,
     @required ElementValue<bool> isVisible,
+    @required ElementValue<bool> isValid,
     @required ElementValue<String> message,
   }) {
     fillValidation(
@@ -14,38 +14,12 @@ class RequiredValidation extends Validation {
       parent: parent,
       isVisible: isVisible,
       message: message,
-      isValid: getIsValid(parent),
-    );
-  }
-
-  LazyExpressionElementValue<bool> getIsValid(
-      ElementValue<ExpressionProviderElement> parent) {
-    return LazyExpressionElementValue(
-      () => LessThanNumberExpression(
-        ConstantExpression(Integer(0)),
-        LengthFunctionExpression(
-          DelegateExpression(
-            ["parent"],
-            parent.value.getExpressionProvider(),
-          ),
-        ),
-      ),
+      isValid: isValid,
     );
   }
 
   @override
   FormElement getInstance() {
     return RequiredValidation();
-  }
-
-  @override
-  ElementValue cloneProperty(
-      String key,
-      ElementValue oldProperty,
-      ExpressionProvider<ExpressionProviderElement> parent,
-      ExpressionProviderElement instance) {
-    return (key == Validation.isValidPropertyName)
-        ? getIsValid(parent)
-        : super.cloneProperty(key, oldProperty, parent, instance);
   }
 }

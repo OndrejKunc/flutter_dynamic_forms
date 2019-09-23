@@ -42,6 +42,12 @@ class CheckBoxParser extends ElementParser<CheckBox> {
         () => 51,
         isImmutable: true,
       ),
+      textColor: parserNode.getValue<String>(
+        "textColor",
+        (s) => s,
+        () => "b74903",
+        isImmutable: true,
+      ),
       value: parserNode.getValue(
         "value",
         ParserNode.convertToBool,
