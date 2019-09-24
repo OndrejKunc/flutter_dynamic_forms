@@ -1,7 +1,6 @@
 import 'package:dynamic_forms_generator/src/generator/model_generator/enum_element_model_generator.dart';
 import 'package:dynamic_forms_generator/src/generator/model_generator/form_element_model_generator.dart';
 import 'package:dynamic_forms_generator/src/model/component_description.dart';
-import 'package:expression_language/expression_language.dart';
 
 import 'value_element_model_generator.dart';
 
@@ -15,31 +14,23 @@ abstract class ElementModelGenerator {
   String generatePrelude();
   String generateBody();
 
-  dynamic getDefaultValue(String type) {
+  String getDefaultValue(String type) {
     switch (type) {
       case "bool":
         {
-          return false;
+          return "false";
         }
       case "string":
         {
           return "\"\"";
         }
-      case "decimal":
-        {
-          return Decimal.fromInt(0);
-        }
       case "int":
         {
-          return 0;
+          return "0";
         }
       case "double":
         {
-          return 0.0;
-        }
-      case "dateTime":
-        {
-          return DateTime.now();
+          return "0";
         }
       default:
         {

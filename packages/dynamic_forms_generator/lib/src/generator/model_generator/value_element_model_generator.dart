@@ -23,8 +23,12 @@ class ValueElementModelGenerator extends ElementModelGenerator {
 
     buffer.writeln("  ${componentDescription.type.toTypeString()}({");
     for (var property in componentDescription.properties) {
-      buffer.writeln(
-          "    this.${property.name} = ${getDefaultValue(property.type.typeName)},");
+      var defaultValue = getDefaultValue(property.type.typeName);
+      if (defaultValue != null) {
+        buffer.writeln("    this.${property.name} = ${defaultValue},");
+      } else {
+        buffer.writeln("    this.${property.name},");
+      }
     }
     buffer.writeln("  });");
     buffer.writeln('''
