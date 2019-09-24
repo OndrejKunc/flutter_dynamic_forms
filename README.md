@@ -5,12 +5,12 @@
 
 A collection of flutter and dart libraries allowing you to dynamically define your complex forms outside the app and consume it at runtime.
 
-| Package                                                                            | Pub                                                                                                             |
-| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| [expression_language](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/expression_language)                 | [![pub package](https://img.shields.io/pub/v/expression_language.svg)](https://pub.dev/packages/expression_language)                 |
-| [dynamic_forms](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/dynamic_forms) | [![pub package](https://img.shields.io/pub/v/dynamic_forms.svg)](https://pub.dev/packages/dynamic_forms) |
-| [dynamic_forms_generator](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/dynamic_forms_generator) | [![pub package](https://img.shields.io/pub/v/dynamic_forms_generator.svg)](https://pub.dev/packages/dynamic_forms_generator) |
-| [flutter_dynamic_forms](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/flutter_dynamic_forms) | [![pub package](https://img.shields.io/pub/v/flutter_dynamic_forms.svg)](https://pub.dev/packages/flutter_dynamic_forms) |
+| Package                                                                                                                                       | Pub                                                                                                                                            |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| [expression_language](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/expression_language)                           | [![pub package](https://img.shields.io/pub/v/expression_language.svg)](https://pub.dev/packages/expression_language)                           |
+| [dynamic_forms](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/dynamic_forms)                                       | [![pub package](https://img.shields.io/pub/v/dynamic_forms.svg)](https://pub.dev/packages/dynamic_forms)                                       |
+| [dynamic_forms_generator](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/dynamic_forms_generator)                   | [![pub package](https://img.shields.io/pub/v/dynamic_forms_generator.svg)](https://pub.dev/packages/dynamic_forms_generator)                   |
+| [flutter_dynamic_forms](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/flutter_dynamic_forms)                       | [![pub package](https://img.shields.io/pub/v/flutter_dynamic_forms.svg)](https://pub.dev/packages/flutter_dynamic_forms)                       |
 | [flutter_dynamic_forms_components](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/flutter_dynamic_forms_components) | [![pub package](https://img.shields.io/pub/v/flutter_dynamic_forms_components.svg)](https://pub.dev/packages/flutter_dynamic_forms_components) |
 
 ## Main goal
@@ -235,19 +235,19 @@ This library allows you to define your custom tree of the components.
 To implement a custom component you need to provide 3 classes: `Parser`, `Model` and `Renderer`. Parsers and Models then need to be registered when you are building the form as you can see in the code above. Let's show it on the `CheckBox` example:
 
 ### Parser
-This class controls how the component would be deserialized into a corresponding model class. It works on both XML and JSON. `ParserNode` parameter contains a collection of methods which let you parse values from the current XML/JSON node. Use the `FormElementParserFunction parser` parameter of the parse method to recursively parse children nodes.
+This class controls how the component would be deserialized into a corresponding model class. It works on both XML and JSON. `ParserNode` parameter contains a collection of methods which let you parse values from the current XML/JSON node. Use the `ElementParserFunction parser` parameter of the parse method to recursively parse children nodes.
 
 ```dart
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'check_box.dart';
 
-class CheckBoxParser extends FormElementParser<CheckBox> {
+class CheckBoxParser extends ElementParser<CheckBox> {
   @override
   String get name => "checkBox";
 
   @override
   CheckBox parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+      ElementParserFunction parser) {
     var checkBox = CheckBox();
     checkBox.fillCheckBox(
       id: parserNode.getPlainStringValue("id"),
