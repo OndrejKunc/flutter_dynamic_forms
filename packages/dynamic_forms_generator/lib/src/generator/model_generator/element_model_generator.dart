@@ -24,10 +24,6 @@ abstract class ElementModelGenerator {
         {
           return "\"\"";
         }
-      case "decimal":
-        {
-          return "Decimal.fromInt(0)";
-        }
       case "int":
         {
           return "0";
@@ -42,7 +38,7 @@ abstract class ElementModelGenerator {
         }
       default:
         {
-          return "null";
+          return null;
         }
     }
   }
