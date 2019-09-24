@@ -13,7 +13,9 @@ dependencies:
   yaml: ^2.1.16
   petitparser: ^2.1.1
   dynamic_forms:
-    path: ../dynamic_forms
+    git:
+      url: https://github.com/OndrejKunc/flutter_dynamic_forms.git
+      path: packages/dynamic_forms
 
 dev_dependencies:
   test: ^1.6.3
