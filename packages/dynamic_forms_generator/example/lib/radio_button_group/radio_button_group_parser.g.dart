@@ -2,13 +2,13 @@
 
 import '../components.dart';
 
-class RadioButtonGroupParser extends FormElementParser<RadioButtonGroup> {
+class RadioButtonGroupParser extends ElementParser<RadioButtonGroup> {
   @override
   String get name => "radioButtonGroup";
 
   @override
   RadioButtonGroup parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+      ElementParserFunction parser) {
     var radioButtonGroup = RadioButtonGroup();
     radioButtonGroup.fillRadioButtonGroup(
       id: parserNode.getPlainStringValue("id"),

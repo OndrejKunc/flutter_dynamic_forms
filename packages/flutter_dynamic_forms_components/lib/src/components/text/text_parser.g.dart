@@ -3,13 +3,13 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class TextParser extends FormElementParser<Text> {
+class TextParser extends ElementParser<Text> {
   @override
   String get name => "text";
 
   @override
-  Text parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+  Text parse(
+      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
     var text = Text();
     text.fillText(
       id: parserNode.getPlainStringValue("id"),

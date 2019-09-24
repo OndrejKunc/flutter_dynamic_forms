@@ -3,13 +3,13 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class DropdownButtonParser extends FormElementParser<DropdownButton> {
+class DropdownButtonParser extends ElementParser<DropdownButton> {
   @override
   String get name => "dropdownButton";
 
   @override
-  DropdownButton parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+  DropdownButton parse(
+      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
     var dropdownButton = DropdownButton();
     dropdownButton.fillDropdownButton(
       id: parserNode.getPlainStringValue("id"),

@@ -1,0 +1,7 @@
+type: exampleFormElement
+parentType: formElement
+properties:
+  enumProperty:
+    type: exampleEnumElement
+  valueProperty:
+    type: exampleValueElement

@@ -2,13 +2,13 @@
 
 import '../components.dart';
 
-class SingleSelectChoiceParser extends FormElementParser<SingleSelectChoice> {
+class SingleSelectChoiceParser extends ElementParser<SingleSelectChoice> {
   @override
   String get name => "singleSelectChoice";
 
   @override
   SingleSelectChoice parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+      ElementParserFunction parser) {
     var singleSelectChoice = SingleSelectChoice();
     singleSelectChoice.fillSingleSelectChoice(
       id: parserNode.getPlainStringValue("id"),

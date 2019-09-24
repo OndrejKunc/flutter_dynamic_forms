@@ -8,21 +8,48 @@ abstract class ParserNode {
       String name, T converter(String s), T defaultValue(),
       {bool isImmutable = true});
 
-  ElementValue<List<TFormElement>> getChildren<TFormElement>(
+  ElementValue<List<TElement>> getChildren<TElement>(
       {@required FormElement parent,
       @required String childrenPropertyName,
-      @required FormElementParserFunction parser,
+      @required ElementParserFunction parser,
       bool isContentProperty = false,
       bool isImmutable = true});
 
   String getPlainStringValue(String propertyName);
 
-  ElementValue<TFormElement> getChild<TFormElement>(
+  ElementValue<TEnumElement> getEnum<TEnum, TEnumElement>(
       {@required String name,
-      @required FormElementParserFunction parser,
+      @required List<TEnum> enumerationValues,
+      @required TEnumElement Function(TEnum _) enumElementConstructor}) {
+    var inputValueSplits = getStringValue(name).value.split('.');
+    var realEnumSplits = enumerationValues.first.toString().split('.');
+
+    var nameOfEnum = realEnumSplits.first;
+    var nameOfInputEnum = inputValueSplits.first;
+
+    if (nameOfEnum != nameOfInputEnum) {
+      throw "Enumeration $nameOfInputEnum does not exist";
+    }
+
+    var constantName = inputValueSplits.last;
+    var returnValue = enumerationValues.firstWhere(
+        (v) => nameOfEnum + '.' + constantName == v.toString(),
+        orElse: () => null);
+
+    if (returnValue == null) {
+      throw "Enumeration $nameOfEnum does not have constant named $constantName";
+    } else {
+      return ImmutableElementValue<TEnumElement>(
+          enumElementConstructor(returnValue));
+    }
+  }
+
+  ElementValue<TElement> getChild<TElement>(
+      {@required String name,
+      @required ElementParserFunction parser,
       @required String childName,
       @required FormElement parent,
-      @required TFormElement defaultValue(),
+      @required TElement defaultValue(),
       bool isContentProperty = false,
       bool isImmutable = true});
 

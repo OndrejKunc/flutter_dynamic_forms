@@ -2,13 +2,13 @@
 
 import '../components.dart';
 
-class DropdownButtonParser extends FormElementParser<DropdownButton> {
+class DropdownButtonParser extends ElementParser<DropdownButton> {
   @override
   String get name => "dropdownButton";
 
   @override
   DropdownButton parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+      ElementParserFunction parser) {
     var dropdownButton = DropdownButton();
     dropdownButton.fillDropdownButton(
       id: parserNode.getPlainStringValue("id"),

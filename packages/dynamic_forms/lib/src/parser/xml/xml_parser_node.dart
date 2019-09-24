@@ -67,7 +67,7 @@ class XmlParserNode extends ParserNode {
   ElementValue<List<TFormElement>> getChildren<TFormElement>(
       {FormElement parent,
       String childrenPropertyName,
-      FormElementParserFunction parser,
+      ElementParserFunction parser,
       bool isContentProperty = false,
       bool isImmutable = true}) {
     if (isContentProperty) {
@@ -97,7 +97,7 @@ class XmlParserNode extends ParserNode {
   @override
   ElementValue<TFormElement> getChild<TFormElement>(
       {@required String name,
-      @required FormElementParserFunction parser,
+      @required ElementParserFunction parser,
       @required String childName,
       @required FormElement parent,
       @required TFormElement defaultValue(),

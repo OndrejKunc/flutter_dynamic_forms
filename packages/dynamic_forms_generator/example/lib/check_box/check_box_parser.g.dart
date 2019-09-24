@@ -2,13 +2,13 @@
 
 import '../components.dart';
 
-class CheckBoxParser extends FormElementParser<CheckBox> {
+class CheckBoxParser extends ElementParser<CheckBox> {
   @override
   String get name => "checkBox";
 
   @override
   CheckBox parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+      ElementParserFunction parser) {
     var checkBox = CheckBox();
     checkBox.fillCheckBox(
       id: parserNode.getPlainStringValue("id"),

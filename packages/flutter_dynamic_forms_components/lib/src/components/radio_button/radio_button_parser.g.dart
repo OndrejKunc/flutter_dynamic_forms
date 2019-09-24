@@ -3,13 +3,13 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class RadioButtonParser extends FormElementParser<RadioButton> {
+class RadioButtonParser extends ElementParser<RadioButton> {
   @override
   String get name => "radioButton";
 
   @override
-  RadioButton parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+  RadioButton parse(
+      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
     var radioButton = RadioButton();
     radioButton.fillRadioButton(
       id: parserNode.getPlainStringValue("id"),

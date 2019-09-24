@@ -5,7 +5,7 @@ import 'package:dynamic_forms/src/parser/visitors/trim_elements_visitor.dart';
 import 'package:xml/xml.dart' as xml;
 
 class XmlFormParserService extends FormParserService {
-  XmlFormParserService(List<FormElementParser> parsers) : super(parsers);
+  XmlFormParserService(List<ElementParser> parsers) : super(parsers);
 
   @override
   ParserNode getRoot(String formString) {

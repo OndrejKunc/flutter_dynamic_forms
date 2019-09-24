@@ -1,11 +1,11 @@
 import 'package:build/build.dart';
 import 'package:dynamic_forms_generator/src/build_configuration.dart';
+import 'package:dynamic_forms_generator/src/generator/model_generator/model_generator.dart';
+import 'package:dynamic_forms_generator/src/generator/parser_generator/parser_generator.dart';
 import 'package:dynamic_forms_generator/src/model/component_description.dart';
 import 'package:dynamic_forms_generator/src/model/component_type.dart';
 import 'package:dynamic_forms_generator/src/parser/parser.dart';
 import 'package:dynamic_forms_generator/src/services/inheritance_service.dart';
-import 'package:dynamic_forms_generator/src/generator/model_generator.dart';
-import 'package:dynamic_forms_generator/src/generator/parser_generator.dart';
 import 'package:glob/glob.dart';
 
 import 'component_description_builder.dart';
@@ -78,6 +78,7 @@ class DynamicFormsBuilder implements Builder {
       allProperties: allProperties,
       contentProperty: contentProperty,
     );
+
     var parserContent = parserGenerator.generate();
     if (parserContent == null) {
       return;

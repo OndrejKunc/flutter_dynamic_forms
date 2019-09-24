@@ -3,13 +3,13 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class LabelParser extends FormElementParser<Label> {
+class LabelParser extends ElementParser<Label> {
   @override
   String get name => "label";
 
   @override
-  Label parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+  Label parse(
+      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
     var label = Label();
     label.fillLabel(
       id: parserNode.getPlainStringValue("id"),

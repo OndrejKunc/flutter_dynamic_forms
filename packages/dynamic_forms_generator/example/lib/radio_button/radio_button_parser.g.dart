@@ -2,13 +2,13 @@
 
 import '../components.dart';
 
-class RadioButtonParser extends FormElementParser<RadioButton> {
+class RadioButtonParser extends ElementParser<RadioButton> {
   @override
   String get name => "radioButton";
 
   @override
   RadioButton parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+      ElementParserFunction parser) {
     var radioButton = RadioButton();
     radioButton.fillRadioButton(
       id: parserNode.getPlainStringValue("id"),

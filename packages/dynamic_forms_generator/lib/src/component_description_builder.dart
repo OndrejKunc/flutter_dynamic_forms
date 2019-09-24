@@ -43,7 +43,7 @@ class ComponentDescriptionBuilder {
       type: type,
       parentType: parentType,
       properties: properties,
-      conentProperty: contentProperty,
+      contentProperty: contentProperty,
     );
   }
 }

@@ -2,13 +2,13 @@
 
 import '../components.dart';
 
-class TextParser extends FormElementParser<Text> {
+class TextParser extends ElementParser<Text> {
   @override
   String get name => "text";
 
   @override
   Text parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+      ElementParserFunction parser) {
     var text = Text();
     text.fillText(
       id: parserNode.getPlainStringValue("id"),

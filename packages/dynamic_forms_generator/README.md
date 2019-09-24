@@ -57,7 +57,7 @@ Each component should contain all the necessary info to be able to represent it 
 Example component definitions:
 
 ```yaml
-name: checkBox
+type: checkBox
 parentType: formElement
 properties:
   label:
@@ -69,7 +69,7 @@ properties:
 ```
 
 ```yaml
-name: container
+type: container
 parentType: formElement
 properties:
   children:
@@ -78,7 +78,7 @@ contentProperty: children
 ```
 
 ```yaml
-name: singleSelectGroup<tSingleSelectChoice extends singleSelectChoice>
+type: singleSelectGroup<tSingleSelectChoice extends singleSelectChoice>
 parentType: formElement
 properties:
   value:
@@ -89,7 +89,7 @@ properties:
 ```
 
 ```yaml
-name: dropdownButton
+type: dropdownButton
 parentType: singleSelectGroup<dropdownOption>
 ```
 
@@ -117,6 +117,9 @@ There are multiple types that can be set to the `type` in the property descripti
 * `bool`
 * `string`
 * `dateTime` - string as standardized format of date-time (ISO 8601)
+* typename that ends with `valueElement` or `ValueElement` (e.g. `moneyValueElement`) - used for structures
+* typename that ends with `enumElement` or `EnumElement` (e.g. `exampleEnumElement`) - used for enumerators
+* `enum` - used only in `enumElement` components
 * `customformElement` - name of the other component
 * `customformElement[]` - array of the other components
 

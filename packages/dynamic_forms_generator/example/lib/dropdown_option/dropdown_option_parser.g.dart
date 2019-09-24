@@ -2,13 +2,13 @@
 
 import '../components.dart';
 
-class DropdownOptionParser extends FormElementParser<DropdownOption> {
+class DropdownOptionParser extends ElementParser<DropdownOption> {
   @override
   String get name => "dropdownOption";
 
   @override
   DropdownOption parse(ParserNode parserNode, FormElement parent,
-      FormElementParserFunction parser) {
+      ElementParserFunction parser) {
     var dropdownOption = DropdownOption();
     dropdownOption.fillDropdownOption(
       id: parserNode.getPlainStringValue("id"),
