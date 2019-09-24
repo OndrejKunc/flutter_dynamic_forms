@@ -12,10 +12,10 @@ dependencies:
   build_config: '>=0.2.6 <0.5.0'
   yaml: ^2.1.16
   petitparser: ^2.1.1
-  dynamic_forms:
+  expression_language:
     git:
       url: https://github.com/OndrejKunc/flutter_dynamic_forms.git
-      path: packages/dynamic_forms
+      path: packages/expression_language
 
 dev_dependencies:
   test: ^1.6.3
