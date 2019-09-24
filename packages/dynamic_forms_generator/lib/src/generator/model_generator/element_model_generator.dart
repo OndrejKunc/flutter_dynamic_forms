@@ -32,10 +32,6 @@ abstract class ElementModelGenerator {
         {
           return "0";
         }
-      case "dateTime":
-        {
-          return DateTime.now().toString();
-        }
       default:
         {
           return null;
