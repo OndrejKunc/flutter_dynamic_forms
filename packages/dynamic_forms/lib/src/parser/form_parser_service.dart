@@ -1,7 +1,6 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/elements/element.dart';
 import 'package:dynamic_forms/src/elements/form_element.dart';
-import 'package:dynamic_forms/src/parser/form_element_parser.dart';
 
 typedef ElementParserFunction = Element Function(
     ParserNode dataNode, FormElement parent);
