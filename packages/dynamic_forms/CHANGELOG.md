@@ -1,3 +1,7 @@
+# 0.7.0
+
+Changed model hierarchy and parser naming. 
+
 # 0.6.1
 
 Published FormElement propertyChanged Stream so it can have multiple subscribers.

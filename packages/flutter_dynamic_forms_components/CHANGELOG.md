@@ -1,3 +1,7 @@
+# 0.7.0
+
+Updated dependency for flutter dynamic forms and generator.
+
 # 0.6.0
 
 * Added component generator.

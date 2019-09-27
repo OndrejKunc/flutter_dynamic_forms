@@ -8,8 +8,8 @@ class CheckBoxParser extends ElementParser<CheckBox> {
   String get name => "checkBox";
 
   @override
-  CheckBox parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
+  CheckBox parse(ParserNode parserNode, FormElement parent,
+      ElementParserFunction parser) {
     var checkBox = CheckBox();
     checkBox.fillCheckBox(
       id: parserNode.getPlainStringValue("id"),

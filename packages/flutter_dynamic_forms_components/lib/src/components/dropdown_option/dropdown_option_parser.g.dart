@@ -8,8 +8,8 @@ class DropdownOptionParser extends ElementParser<DropdownOption> {
   String get name => "dropdownOption";
 
   @override
-  DropdownOption parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
+  DropdownOption parse(ParserNode parserNode, FormElement parent,
+      ElementParserFunction parser) {
     var dropdownOption = DropdownOption();
     dropdownOption.fillDropdownOption(
       id: parserNode.getPlainStringValue("id"),

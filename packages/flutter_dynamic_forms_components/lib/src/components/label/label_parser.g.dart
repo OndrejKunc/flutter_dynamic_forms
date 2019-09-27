@@ -8,8 +8,8 @@ class LabelParser extends ElementParser<Label> {
   String get name => "label";
 
   @override
-  Label parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
+  Label parse(ParserNode parserNode, FormElement parent,
+      ElementParserFunction parser) {
     var label = Label();
     label.fillLabel(
       id: parserNode.getPlainStringValue("id"),

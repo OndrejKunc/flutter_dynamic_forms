@@ -8,8 +8,8 @@ class TextParser extends ElementParser<Text> {
   String get name => "text";
 
   @override
-  Text parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
+  Text parse(ParserNode parserNode, FormElement parent,
+      ElementParserFunction parser) {
     var text = Text();
     text.fillText(
       id: parserNode.getPlainStringValue("id"),

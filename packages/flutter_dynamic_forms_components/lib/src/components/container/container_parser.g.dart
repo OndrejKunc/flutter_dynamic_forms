@@ -8,8 +8,8 @@ class ContainerParser extends ElementParser<Container> {
   String get name => "container";
 
   @override
-  Container parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
+  Container parse(ParserNode parserNode, FormElement parent,
+      ElementParserFunction parser) {
     var container = Container();
     container.fillContainer(
       id: parserNode.getPlainStringValue("id"),

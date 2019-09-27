@@ -1,3 +1,7 @@
+# 0.7.0
+
+Increment dependency on dynamic_forms package with new model names.
+
 # 0.6.0
 
 Increment dependency on dynamic_forms package.

@@ -8,8 +8,8 @@ class MultiSelectChoiceParser extends ElementParser<MultiSelectChoice> {
   String get name => "multiSelectChoice";
 
   @override
-  MultiSelectChoice parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
+  MultiSelectChoice parse(ParserNode parserNode, FormElement parent,
+      ElementParserFunction parser) {
     var multiSelectChoice = MultiSelectChoice();
     multiSelectChoice.fillMultiSelectChoice(
       id: parserNode.getPlainStringValue("id"),

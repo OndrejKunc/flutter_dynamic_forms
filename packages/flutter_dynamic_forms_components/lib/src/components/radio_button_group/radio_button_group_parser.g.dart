@@ -8,8 +8,8 @@ class RadioButtonGroupParser extends ElementParser<RadioButtonGroup> {
   String get name => "radioButtonGroup";
 
   @override
-  RadioButtonGroup parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
+  RadioButtonGroup parse(ParserNode parserNode, FormElement parent,
+      ElementParserFunction parser) {
     var radioButtonGroup = RadioButtonGroup();
     radioButtonGroup.fillRadioButtonGroup(
       id: parserNode.getPlainStringValue("id"),

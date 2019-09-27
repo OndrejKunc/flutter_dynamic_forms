@@ -5,8 +5,8 @@ class ValidationParser extends ElementParser<Validation> {
   String get name => "validation";
 
   @override
-  Validation parse(ParserNode parserNode, Element parent,
-      ElementParserFunction parser) {
+  Validation parse(
+      ParserNode parserNode, Element parent, ElementParserFunction parser) {
     Validation validation = Validation();
     validation.fillValidation(
       id: parserNode.getPlainStringValue("id"),

@@ -1,3 +1,7 @@
+# 0.2.0
+
+Added support for value types and enums.
+
 # 0.1.3
 
 Fixed issue with files having the same suffix.

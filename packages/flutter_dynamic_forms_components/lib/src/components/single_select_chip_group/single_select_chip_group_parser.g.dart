@@ -8,8 +8,8 @@ class SingleSelectChipGroupParser extends ElementParser<SingleSelectChipGroup> {
   String get name => "singleSelectChipGroup";
 
   @override
-  SingleSelectChipGroup parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
+  SingleSelectChipGroup parse(ParserNode parserNode, FormElement parent,
+      ElementParserFunction parser) {
     var singleSelectChipGroup = SingleSelectChipGroup();
     singleSelectChipGroup.fillSingleSelectChipGroup(
       id: parserNode.getPlainStringValue("id"),

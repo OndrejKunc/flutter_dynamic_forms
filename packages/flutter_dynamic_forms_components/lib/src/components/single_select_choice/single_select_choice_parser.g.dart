@@ -8,8 +8,8 @@ class SingleSelectChoiceParser extends ElementParser<SingleSelectChoice> {
   String get name => "singleSelectChoice";
 
   @override
-  SingleSelectChoice parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
+  SingleSelectChoice parse(ParserNode parserNode, FormElement parent,
+      ElementParserFunction parser) {
     var singleSelectChoice = SingleSelectChoice();
     singleSelectChoice.fillSingleSelectChoice(
       id: parserNode.getPlainStringValue("id"),

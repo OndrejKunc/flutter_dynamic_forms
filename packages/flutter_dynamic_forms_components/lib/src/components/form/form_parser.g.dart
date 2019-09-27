@@ -8,8 +8,8 @@ class FormParser extends ElementParser<Form> {
   String get name => "form";
 
   @override
-  Form parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
+  Form parse(ParserNode parserNode, FormElement parent,
+      ElementParserFunction parser) {
     var form = Form();
     form.fillForm(
       id: parserNode.getPlainStringValue("id"),

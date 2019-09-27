@@ -8,8 +8,8 @@ class MultiSelectChipGroupParser extends ElementParser<MultiSelectChipGroup> {
   String get name => "multiSelectChipGroup";
 
   @override
-  MultiSelectChipGroup parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
+  MultiSelectChipGroup parse(ParserNode parserNode, FormElement parent,
+      ElementParserFunction parser) {
     var multiSelectChipGroup = MultiSelectChipGroup();
     multiSelectChipGroup.fillMultiSelectChipGroup(
       id: parserNode.getPlainStringValue("id"),

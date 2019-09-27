@@ -8,8 +8,8 @@ class FormGroupParser extends ElementParser<FormGroup> {
   String get name => "formGroup";
 
   @override
-  FormGroup parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
+  FormGroup parse(ParserNode parserNode, FormElement parent,
+      ElementParserFunction parser) {
     var formGroup = FormGroup();
     formGroup.fillFormGroup(
       id: parserNode.getPlainStringValue("id"),
