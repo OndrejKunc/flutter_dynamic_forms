@@ -15,5 +15,6 @@ List<FormElementRenderer> getDefaultRenderers() {
     DefaultSingleSelectChipChoiceRenderer(),
     DefaultMultiSelectChipChoiceRenderer(),
     DefaultMultiSelectChipGroupRenderer(),
+    DefaultDateRenderer(),
   ];
 }

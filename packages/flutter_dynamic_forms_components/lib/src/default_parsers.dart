@@ -19,5 +19,6 @@ List<ElementParser> getDefaultParserList() {
     SingleSelectChipChoiceParser(),
     MultiSelectChipChoiceParser(),
     MultiSelectChipGroupParser(),
+    DateParser(),
   ];
 }

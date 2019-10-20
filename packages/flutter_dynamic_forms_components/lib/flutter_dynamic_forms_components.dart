@@ -82,3 +82,8 @@ export 'src/components/multi_select_chip_group/multi_select_chip_group.g.dart';
 export 'src/components/multi_select_chip_group/multi_select_chip_group_parser.g.dart';
 export 'src/components/multi_select_chip_group/default_multi_select_chip_group_renderer.dart';
 export 'src/components/multi_select_chip_group/reactive_multi_select_chip_group_renderer.dart';
+
+export 'src/components/date/date.g.dart';
+export 'src/components/date/date_parser.g.dart';
+export 'src/components/date/reactive_date_renderer.dart';
+export 'src/components/date/default_date_renderer.dart';
