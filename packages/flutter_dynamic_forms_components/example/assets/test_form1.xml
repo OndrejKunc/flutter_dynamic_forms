@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form id="form1">
-    <formGroup 
-        id="formgroup1"
-        name="Form section 1">
-        <text
-            id="firstName"
-            label="Enter your first name" value="John">
+    <formGroup id="formgroup1" name="Form section 1">
+        <text id="firstName" label="Enter your first name" value="John">
             <text.validations>
-                <validation
-                  message="Name is too long">
+                <validation message="Name is too long">
                     <validation.isValid>
                         <expression>
                             <![CDATA[
@@ -17,20 +12,15 @@
                         </expression>
                     </validation.isValid>
                 </validation>
-                <requiredValidation
-                  message="First name is required"/>
+                <requiredValidation message="First name is required"/>
             </text.validations>
         </text>
-        <text
-            id="lastName"
-            label="Enter your last name">
+        <text id="lastName" label="Enter your last name">
             <text.validations>
-                <requiredValidation
-                  message="Last name is required"/>
+                <requiredValidation message="Last name is required"/>
             </text.validations>
         </text>
-        <label
-            id="fullNameLabel">
+        <label id="fullNameLabel">
             <label.value>
                 <expression>
                     <![CDATA[
@@ -55,11 +45,7 @@
                 </expression>
             </label.isVisible>
         </label>
-        <checkBox
-            id="hideWelcomeCheckBox"
-            value="false"
-            label="Hide welcome message"
-            />
+        <checkBox id="hideWelcomeCheckBox" value="false" label="Hide welcome message" />
         <formGroup id="formgroup2" name="Form section 2">
             <singleSelectChipGroup id="chipGroup1" value="-1">
                 <singleSelectChipChoice label="Chip Option 1" value="1" />
@@ -96,6 +82,9 @@
                 <dropdownOption value="GN" label="Guinea" />
             </dropdownButton>
         </formGroup>
+    </formGroup>
+    <formGroup id="formgroup4" name="Form section 4">
+        <date id="formDate1" label="Form Date" initialDate="2019-10-20" firstDate="2010-02-27" lastDate="2030-02-27" format="yyyy-MM-dd"/>
     </formGroup>
     <address id="testaddress" label="Test address:" />
 </form>

@@ -1,6 +1,6 @@
 name: flutter_dynamic_forms_components
 description: Flutter package containing default set of dynamic form components.
-version: 0.7.0
+version: 0.7.1
 author: Ondřej Kunc <kunc.ondrej1@gmail.com>
 homepage: https://github.com/OndrejKunc/flutter_dynamic_forms
 
@@ -15,6 +15,7 @@ dependencies:
       url: https://github.com/OndrejKunc/flutter_dynamic_forms.git
       path: packages/flutter_dynamic_forms
   
+  intl: ^0.16.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
