@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 import 'package:intl/intl.dart';
 
-import 'date.g.dart' as model;
+import 'date.dart' as model;
 
 class ReactiveDateRenderer extends FormElementRenderer<model.Date> {
   @override
@@ -15,10 +15,9 @@ class ReactiveDateRenderer extends FormElementRenderer<model.Date> {
     return StreamBuilder(
       stream: element.dateValueChanged,
       builder: (BuildContext context, _) {
-        final format = new DateFormat(element.format);
-        final time = element.dateValue.length != 0
-            ? DateTime.parse(element.dateValue)
-            : DateTime.now();
+        final format = DateFormat(element.format);
+        final time =
+            element.dateValue != null ? element.dateValue : element.initialDate;
 
         return Center(
           child: Padding(
@@ -33,20 +32,20 @@ class ReactiveDateRenderer extends FormElementRenderer<model.Date> {
                 final DateTime picked = await showDatePicker(
                   context: context,
                   firstDate: element.firstDate != null
-                      ? DateTime(element.firstDate)
-                      : DateTime(1900),
+                      ? element.firstDate
+                      : DateTime(1979 - 01 - 01),
                   lastDate: element.lastDate != null
-                      ? DateTime(element.lastDate)
-                      : DateTime(2100),
-                  initialDate: DateTime.now(),
+                      ? element.lastDate
+                      : DateTime(2050 - 01 - 01),
+                  initialDate: element.initialDate,
                 );
 
                 if (picked != null) {
                   dispatcher(
                     ChangeValueEvent(
-                      value: picked.toString(),
+                      value: picked,
                       elementId: element.id,
-                      propertyName: model.Date.dateValuePropertyName,
+                      // propertyName: model.Date.valuePropertyName,
                     ),
                   );
                 }

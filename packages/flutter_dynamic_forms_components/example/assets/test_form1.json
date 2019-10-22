@@ -229,6 +229,21 @@
             ]
         },
         {
+            "@name": "formGroup",
+            "id": "formgroup4",
+            "name": "Form section 4",
+            "children": [
+                {
+                    "@name": "date",
+                    "id": "Form Date",
+                    "firsDate": "2010-02-27",
+                    "lastDate": "2030-02-27",
+                    "format": "yyyy-MM-dd",
+                    "initialDate": "2019-10-20"
+                }
+            ]
+        },
+        {
             "@name": "address",
             "id": "testaddress",
             "label": "Test address:"
