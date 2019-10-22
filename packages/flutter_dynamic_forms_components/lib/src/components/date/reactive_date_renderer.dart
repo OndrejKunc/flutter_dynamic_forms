@@ -33,10 +33,10 @@ class ReactiveDateRenderer extends FormElementRenderer<model.Date> {
                   context: context,
                   firstDate: element.firstDate != null
                       ? element.firstDate
-                      : DateTime(1979 - 01 - 01),
+                      : DateTime(1979, 01, 01),
                   lastDate: element.lastDate != null
                       ? element.lastDate
-                      : DateTime(2050 - 01 - 01),
+                      : DateTime(2050, 01, 01),
                   initialDate: element.initialDate,
                 );
 
