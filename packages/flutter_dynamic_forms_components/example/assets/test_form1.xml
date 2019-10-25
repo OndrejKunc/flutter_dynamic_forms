@@ -85,7 +85,7 @@
     </formGroup>
     <formGroup id="formgroup4" name="Form section 4">
         <date id="formDate1" label="Form Date" initialDate="2019-10-20" firstDate="2010-02-27" lastDate="2030-02-27" format="yyyy-MM-dd"/>
-        <dateRange id="formRangeDate1" label="Form Range Date" initialDate="2019-10-20" firstDate="2010-02-27" lastDate="2030-02-27" format="yyyy-MM-dd"/>
+        <dateRange id="formRangeDate1" label="Form Range Date" initialDate="2019-10-20" minDate="2010-02-27" maxDate="2030-02-27" firstValue="2019-10-20" secondValue="2019-10-25" format="yyyy-MM-dd"/>
     </formGroup>
     <address id="testaddress" label="Test address:" />
 </form>

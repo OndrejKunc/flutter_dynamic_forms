@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-
 import 'date_range.dart';
 
 class DateRangeParser extends ElementParser<DateRange> {
@@ -18,13 +17,13 @@ class DateRangeParser extends ElementParser<DateRange> {
       firstValue: parserNode.getValue(
         "firstValue",
         (date) => DateTime.parse(date),
-        () => DateTime(2050, 01, 01),
+        () => null,
         isImmutable: false,
       ),
       secondValue: parserNode.getValue(
         "secondValue",
         (date) => DateTime.parse(date),
-        () => DateTime(2050, 01, 01),
+        () => null,
         isImmutable: false,
       ),
       initialDate: parserNode.getValue(

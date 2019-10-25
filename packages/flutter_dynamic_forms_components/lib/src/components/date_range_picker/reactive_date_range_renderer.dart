@@ -17,16 +17,22 @@ class ReactiveDateRangeRenderer extends FormElementRenderer<model.DateRange> {
       stream: element.propertyChanged,
       builder: (BuildContext context, _) {
         final format = DateFormat(element.format);
-        final time = element.firstValue != null
-            ? element.firstValue
-            : element.initialDate;
+
+        String _getHintText() {
+          if (element.firstValue != null && element.secondValue != null) {
+            var first = format.format(element.firstValue);
+            var second = format.format(element.secondValue);
+            return "$first - $second";
+          }
+          return "Select Date";
+        }
 
         return Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               decoration: InputDecoration(
-                hintText: format.format(time),
+                hintText: _getHintText(),
               ),
               onTap: () async {
                 FocusScope.of(context).requestFocus(FocusNode());
@@ -37,6 +43,8 @@ class ReactiveDateRangeRenderer extends FormElementRenderer<model.DateRange> {
                     barrierDismissible: true,
                     minimumDate: element.minDate,
                     maximumDate: element.maxDate,
+                    initialStartDate: element.firstValue,
+                    initialEndDate: element.secondValue,
                     onApplyClick: (DateTime startDate, DateTime endDate) {
                       if (startDate != null && endDate != null) {
                         dispatcher(
