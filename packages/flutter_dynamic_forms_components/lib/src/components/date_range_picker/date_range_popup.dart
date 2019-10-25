@@ -36,7 +36,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
   @override
   void initState() {
     animationController =
-        AnimationController(duration: Duration(milliseconds: 400), vsync: this);
+        AnimationController(duration: Duration(milliseconds: 200), vsync: this);
     if (widget.initialStartDate != null) {
       startDate = widget.initialStartDate;
     }
@@ -86,7 +86,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                         ],
                       ),
                       child: InkWell(
-                        borderRadius: BorderRadius.all(Radius.circular(24.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(6.0)),
                         onTap: () {},
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -105,10 +105,10 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                         "From",
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w100,
-                                            fontSize: 16,
-                                            color:
-                                                Colors.grey.withOpacity(0.8)),
+                                          fontWeight: FontWeight.w100,
+                                          fontSize: 16,
+                                          color: Colors.grey.withOpacity(0.8),
+                                        ),
                                       ),
                                       SizedBox(
                                         height: 4,
@@ -185,8 +185,6 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                 height: 48,
                                 decoration: BoxDecoration(
                                   color: Theme.of(context).primaryColor,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(24.0)),
                                   boxShadow: <BoxShadow>[
                                     BoxShadow(
                                       color: Colors.grey.withOpacity(0.6),
@@ -198,8 +196,6 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                 child: Material(
                                   color: Colors.transparent,
                                   child: InkWell(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(24.0)),
                                     highlightColor: Colors.transparent,
                                     onTap: () {
                                       try {

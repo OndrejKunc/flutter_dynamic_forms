@@ -14,11 +14,12 @@ class ReactiveDateRangeRenderer extends FormElementRenderer<model.DateRange> {
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
     return StreamBuilder(
-      stream: element.dateValueChanged,
+      stream: element.propertyChanged,
       builder: (BuildContext context, _) {
         final format = DateFormat(element.format);
-        final time =
-            element.dateValue != null ? element.dateValue : element.initialDate;
+        final time = element.firstValue != null
+            ? element.firstValue
+            : element.initialDate;
 
         return Center(
           child: Padding(
@@ -34,12 +35,27 @@ class ReactiveDateRangeRenderer extends FormElementRenderer<model.DateRange> {
                   context: context,
                   builder: (BuildContext context) => CalendarPopupView(
                     barrierDismissible: true,
-                    minimumDate: DateTime.now(),
-                    //  maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 10),
-                    initialEndDate: element.lastDate,
-                    initialStartDate: element.firstDate,
-                    onApplyClick: (DateTime startDate, DateTime endData) {
-                      print(startDate);
+                    minimumDate: element.minDate,
+                    maximumDate: element.maxDate,
+                    onApplyClick: (DateTime startDate, DateTime endDate) {
+                      if (startDate != null && endDate != null) {
+                        dispatcher(
+                          ChangeValueEvent(
+                            value: startDate,
+                            elementId: element.id,
+                            propertyName:
+                                model.DateRange.firstValuePropertyName,
+                          ),
+                        );
+                        dispatcher(
+                          ChangeValueEvent(
+                            value: endDate,
+                            elementId: element.id,
+                            propertyName:
+                                model.DateRange.secondValuePropertyName,
+                          ),
+                        );
+                      }
                     },
                     onCancelClick: () {},
                   ),

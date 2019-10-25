@@ -172,9 +172,10 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
             child: Text(
               DateFormat("EEE").format(dateList[i]),
               style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Theme.of(context).primaryColor),
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey,
+              ),
             ),
           ),
         ),
@@ -214,7 +215,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                                           getIsInRange(date)
                                       ? Theme.of(context)
                                           .primaryColor
-                                          .withOpacity(0.4)
+                                          .withOpacity(0.1)
                                       : Colors.transparent
                                   : Colors.transparent,
                               borderRadius: BorderRadius.only(

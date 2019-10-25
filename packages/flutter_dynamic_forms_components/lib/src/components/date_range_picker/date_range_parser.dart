@@ -14,24 +14,33 @@ class DateRangeParser extends ElementParser<DateRange> {
       id: parserNode.getPlainStringValue("id"),
       isVisible: parserNode.getIsVisible(),
       parent: parserNode.getParentValue(parent),
-      value: parserNode.getValue(
-          "value", (date) => DateTime.parse(date), () => null,
-          isImmutable: false),
       format: parserNode.getStringValue("format", isImmutable: true),
+      firstValue: parserNode.getValue(
+        "firstValue",
+        (date) => DateTime.parse(date),
+        () => DateTime(2050, 01, 01),
+        isImmutable: false,
+      ),
+      secondValue: parserNode.getValue(
+        "secondValue",
+        (date) => DateTime.parse(date),
+        () => DateTime(2050, 01, 01),
+        isImmutable: false,
+      ),
       initialDate: parserNode.getValue(
         "initialDate",
         (date) => DateTime.parse(date),
         () => DateTime.now(),
         isImmutable: true,
       ),
-      firstDate: parserNode.getValue(
-        "firstDate",
+      minDate: parserNode.getValue(
+        "minDate",
         (date) => DateTime.parse(date),
         () => DateTime(1969, 01, 01),
         isImmutable: true,
       ),
-      lastDate: parserNode.getValue(
-        "lastDate",
+      maxDate: parserNode.getValue(
+        "maxDate",
         (date) => DateTime.parse(date),
         () => DateTime(2050, 01, 01),
         isImmutable: true,
