@@ -1,15 +1,15 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-import 'date.dart';
+import 'date_range.dart';
 
-class DateParser extends ElementParser<Date> {
+class DateRangeParser extends ElementParser<DateRange> {
   @override
-  String get name => "date";
+  String get name => "dateRange";
 
   @override
-  Date parse(
+  DateRange parse(
       ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
-    var date = Date();
+    var date = DateRange();
     date.fillDate(
       id: parserNode.getPlainStringValue("id"),
       isVisible: parserNode.getIsVisible(),
