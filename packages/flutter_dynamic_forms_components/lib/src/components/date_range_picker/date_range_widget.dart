@@ -46,7 +46,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
 
   void setListOfDate(DateTime monthDate) {
     dateList.clear();
-    var newDate = DateTime(monthDate.year, monthDate.month, 0);
+    var newDate = DateTime.utc(monthDate.year, monthDate.month, 0);
     int privusMothDay = 0;
     if (newDate.weekday < 7) {
       privusMothDay = newDate.weekday;
