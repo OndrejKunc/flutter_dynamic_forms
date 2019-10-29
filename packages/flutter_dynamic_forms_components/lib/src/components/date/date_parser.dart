@@ -27,13 +27,11 @@ class DateParser extends ElementParser<Date> {
       firstDate: parserNode.getValue(
         "firstDate",
         (date) => DateTime.parse(date),
-        () => DateTime(1969, 01, 01),
         isImmutable: true,
       ),
       lastDate: parserNode.getValue(
         "lastDate",
         (date) => DateTime.parse(date),
-        () => DateTime(2050, 01, 01),
         isImmutable: true,
       ),
       label: parserNode.getStringValue("label"),

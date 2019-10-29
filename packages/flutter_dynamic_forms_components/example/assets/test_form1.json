@@ -240,14 +240,6 @@
                     "lastDate": "2030-02-27",
                     "format": "yyyy-MM-dd",
                     "initialDate": "2019-10-20"
-                },
-                {
-                    "@name": "dateRange",
-                    "id": "Form Date Range",
-                    "minDate": "2010-02-27",
-                    "maxDate": "2030-02-27",
-                    "format": "yyyy-MM-dd",
-                    "initialDate": "2019-10-20"
                 }
             ]
         },

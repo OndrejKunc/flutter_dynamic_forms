@@ -1,3 +1,7 @@
+# 0.7.1
+
+Added date component.
+
 # 0.7.0
 
 Updated dependency for flutter dynamic forms and generator.
