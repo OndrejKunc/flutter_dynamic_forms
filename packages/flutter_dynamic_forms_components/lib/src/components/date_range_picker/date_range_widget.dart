@@ -413,6 +413,10 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   }
 
   void onDateClick(DateTime date) {
+    if (startDate != null && endDate != null) {
+      startDate = null;
+      endDate = null;
+    }
     if (startDate == null) {
       startDate = date;
     } else if (startDate != date && endDate == null) {
