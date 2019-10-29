@@ -1,39 +1,47 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
+import 'date_range.dart';
 
-import 'date.dart';
-
-class DateParser extends ElementParser<Date> {
+class DateRangeParser extends ElementParser<DateRange> {
   @override
-  String get name => "date";
+  String get name => "dateRange";
 
   @override
-  Date parse(
+  DateRange parse(
       ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
-    var date = Date();
+    var date = DateRange();
     date.fillDate(
       id: parserNode.getPlainStringValue("id"),
       isVisible: parserNode.getIsVisible(),
       parent: parserNode.getParentValue(parent),
-      value: parserNode.getValue(
-          "value", (date) => DateTime.parse(date), () => null,
-          isImmutable: false),
       format: parserNode.getStringValue("format", isImmutable: true),
+      firstValue: parserNode.getValue(
+        "firstValue",
+        (date) => DateTime.parse(date),
+        () => null,
+        isImmutable: false,
+      ),
+      secondValue: parserNode.getValue(
+        "secondValue",
+        (date) => DateTime.parse(date),
+        () => null,
+        isImmutable: false,
+      ),
       initialDate: parserNode.getValue(
         "initialDate",
         (date) => DateTime.parse(date),
         () => DateTime.now(),
         isImmutable: true,
       ),
-      firstDate: parserNode.getValue(
-        "firstDate",
+      minDate: parserNode.getValue(
+        "minDate",
         (date) => DateTime.parse(date),
-        () => null,
+        () => DateTime(1969, 01, 01),
         isImmutable: true,
       ),
-      lastDate: parserNode.getValue(
-        "lastDate",
+      maxDate: parserNode.getValue(
+        "maxDate",
         (date) => DateTime.parse(date),
-        () => null,
+        () => DateTime(2050, 01, 01),
         isImmutable: true,
       ),
       label: parserNode.getStringValue("label"),

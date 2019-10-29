@@ -20,5 +20,6 @@ List<ElementParser> getDefaultParserList() {
     MultiSelectChipChoiceParser(),
     MultiSelectChipGroupParser(),
     DateParser(),
+    DateRangeParser(),
   ];
 }

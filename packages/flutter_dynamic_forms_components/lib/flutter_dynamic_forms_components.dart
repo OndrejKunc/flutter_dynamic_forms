@@ -87,3 +87,7 @@ export 'src/components/date/date.dart';
 export 'src/components/date/date_parser.dart';
 export 'src/components/date/reactive_date_renderer.dart';
 export 'src/components/date/default_date_renderer.dart';
+
+export 'src/components/date_range_picker/date_range.dart';
+export 'src/components/date_range_picker/date_range_parser.dart'; 
+export 'src/components/date_range_picker/reactive_date_range_renderer.dart';
