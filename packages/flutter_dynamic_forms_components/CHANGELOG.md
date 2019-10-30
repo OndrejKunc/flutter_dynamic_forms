@@ -1,3 +1,7 @@
+# 0.7.2
+
+Added date range component.
+
 # 0.7.1
 
 Added date component.
