@@ -1,3 +1,7 @@
+# 0.7.1
+
+Fix stream subscription in LazyStreamBuilder.
+
 # 0.7.0
 
 Increment dependency on dynamic_forms package with new model names.

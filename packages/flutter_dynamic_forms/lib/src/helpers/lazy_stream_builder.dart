@@ -27,6 +27,14 @@ class _LazyStreamBuilderState<T> extends State<LazyStreamBuilder<T>> {
   }
 
   @override
+  void didUpdateWidget(LazyStreamBuilder<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.streamFactory != widget.streamFactory) {
+      _stream = widget.streamFactory();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<T>(
       builder: widget.builder,

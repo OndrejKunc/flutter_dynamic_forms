@@ -84,6 +84,9 @@
         </formGroup>
     </formGroup>
     <formGroup id="formgroup4" name="Form section 4">
+        <slider id="slider1" label="Form Slider" value="15.0" minValue="0.0" maxValue="100.0"/>
+    </formGroup>
+    <formGroup id="formgroup5" name="Form section 5">
         <date id="formDate1" label="Form Date" initialDate="2019-10-20" firstDate="2010-02-27" lastDate="2030-02-27" format="yyyy-MM-dd"/>
         <dateRange id="formDateRange1" label="Form Date Range" initialDate="2019-10-20" minDate="2010-02-27" maxDate="2030-02-27" format="yyyy-MM-dd"/>
     </formGroup>
