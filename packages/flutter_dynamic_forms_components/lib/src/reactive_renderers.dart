@@ -17,6 +17,7 @@ List<FormElementRenderer> getReactiveRenderers() {
     ReactiveMultiSelectChipGroupRenderer(),
     ReactiveDateRenderer(),
     ReactiveDateRangeRenderer(),
+    ReactiveSliderRenderer(),
 
   ];
 }
