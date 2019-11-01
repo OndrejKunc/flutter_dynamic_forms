@@ -18,8 +18,14 @@ class SliderParser extends ElementParser<Slider> {
       value: parserNode.getDoubleValue("value", isImmutable: false),
       minValue: parserNode.getDoubleValue("minValue", isImmutable: true),
       maxValue: parserNode.getDoubleValue("maxValue", isImmutable: true),
+      division: parserNode.getIntValue("division", isImmutable: false),
       activeColor: parserNode.getValue(
         "activeColor",
+        ParserNode.convertToColor,
+        () => null,
+      ),
+      inActiveColor: parserNode.getValue(
+        "inActiveColor",
         ParserNode.convertToColor,
         () => null,
       ),

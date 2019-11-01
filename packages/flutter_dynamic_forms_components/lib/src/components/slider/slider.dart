@@ -6,6 +6,8 @@ class Slider extends FormElement {
   static const String validationsPropertyName = "validations";
   static const String valuePropertyName = "value";
   static const String activeColorPropertyName = "activeColor";
+  static const String inActiveColorPropertyName = "inActiveColor";
+  static const String divisionPropertyName = "division";
   static const String minValuePropertyName = "minValue";
   static const String maxValuePropertyName = "maxValue";
 
@@ -16,6 +18,8 @@ class Slider extends FormElement {
   Stream<double> get valueChanged => properties[valuePropertyName].valueChanged;
 
   int get activeColor => properties[activeColorPropertyName].value;
+  int get inActiveColor => properties[inActiveColorPropertyName].value;
+  int get division => properties[divisionPropertyName].value;
   double get minValue => properties[minValuePropertyName].value;
   double get maxValue => properties[maxValuePropertyName].value;
 
@@ -26,6 +30,8 @@ class Slider extends FormElement {
     @required ElementValue<String> label,
     @required ElementValue<double> value,
     @required ElementValue<int> activeColor,
+    @required ElementValue<int> inActiveColor,
+    @required ElementValue<int> division,
     @required ElementValue<double> minValue,
     @required ElementValue<double> maxValue,
   }) {
@@ -38,6 +44,8 @@ class Slider extends FormElement {
     registerElementValue(valuePropertyName, value);
 
     registerElementValue(activeColorPropertyName, activeColor);
+    registerElementValue(inActiveColorPropertyName, inActiveColor);
+    registerElementValue(divisionPropertyName, division);
     registerElementValue(minValuePropertyName, minValue);
     registerElementValue(maxValuePropertyName, maxValue);
   }

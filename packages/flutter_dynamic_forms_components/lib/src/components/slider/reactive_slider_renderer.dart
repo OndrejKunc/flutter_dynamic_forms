@@ -13,7 +13,7 @@ class ReactiveSliderRenderer extends FormElementRenderer<model.Slider> {
     return StreamBuilder(
       stream: element.valueChanged,
       builder: (BuildContext context, _) {
-        print(element.activeColor);
+        print(element.division);
         return Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -22,6 +22,9 @@ class ReactiveSliderRenderer extends FormElementRenderer<model.Slider> {
               min: element.minValue,
               max: element.maxValue,
               activeColor: Color(element.activeColor),
+              inactiveColor: Color(element.inActiveColor),
+              label: element.division != 0 ? "${element.value}" : null,
+              divisions: element.division != 0 ? element.division : null,
               onChanged: (double value) {
                 dispatcher(
                   ChangeValueEvent(
