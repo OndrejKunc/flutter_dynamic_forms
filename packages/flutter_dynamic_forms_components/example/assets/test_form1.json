@@ -234,6 +234,20 @@
             "name": "Form section 4",
             "children": [
                 {
+                    "@name": "slider",
+                    "id": "Form Slider",
+                    "value": "15.0",
+                    "minValue": "0.0",
+                    "maxValue": "100.0"
+                }
+            ]
+        },
+        {
+            "@name": "formGroup",
+            "id": "formgroup5",
+            "name": "Form section 5",
+            "children": [
+                {
                     "@name": "date",
                     "id": "Form Date",
                     "firsDate": "2010-02-27",
