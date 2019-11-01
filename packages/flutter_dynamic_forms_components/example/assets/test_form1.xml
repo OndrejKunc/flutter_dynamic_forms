@@ -84,7 +84,7 @@
         </formGroup>
     </formGroup>
     <formGroup id="formgroup4" name="Form section 4">
-        <slider id="slider1" label="Form Slider" value="15.0" minValue="0.0" maxValue="100.0" activeColor="0xFFeb3434" inActiveColor="0xFFd3d3d3" />
+        <slider id="slider1" label="Form Slider" value="15.0" minValue="0.0" maxValue="100.0" activeColor="0xFFeb3434" inactiveColor="0xFFd3d3d3" />
     </formGroup>
     <formGroup id="formgroup5" name="Form section 5">
         <date id="formDate1" label="Form Date" initialDate="2019-10-20" firstDate="2010-02-27" lastDate="2030-02-27" format="yyyy-MM-dd"/>

@@ -22,7 +22,7 @@ class ReactiveSliderRenderer extends FormElementRenderer<model.Slider> {
               min: element.minValue,
               max: element.maxValue,
               activeColor: Color(element.activeColor),
-              inactiveColor: Color(element.inActiveColor),
+              inactiveColor: Color(element.inactiveColor),
               label: element.division != 0 ? "${element.value}" : null,
               divisions: element.division != 0 ? element.division : null,
               onChanged: (double value) {
