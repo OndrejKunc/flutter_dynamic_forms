@@ -1,0 +1,26 @@
+type: slider
+parentType: formElement
+properties:
+  value:
+    type: double
+    isMutable: false
+  label:
+    type: string
+  minValue: 
+    type: double
+    isMutable: true
+  maxValue: 
+    type: double
+    isMutable: true
+  division: 
+    type: int
+    isMutable: true
+  activeColor:
+    type: int
+    default: 0xFF0000FF
+    isMutable: true
+  inactiveColor: 
+    type: int    
+    default: 0xFFBEBEBE
+    isMutable: true
+          

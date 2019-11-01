@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
-import 'slider.dart' as model;
+import 'slider.g.dart' as model;
 
 class ReactiveSliderRenderer extends FormElementRenderer<model.Slider> {
   @override
@@ -13,7 +13,7 @@ class ReactiveSliderRenderer extends FormElementRenderer<model.Slider> {
     return StreamBuilder(
       stream: element.valueChanged,
       builder: (BuildContext context, _) {
-        print(element.division);
+        print(element.value);
         return Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
