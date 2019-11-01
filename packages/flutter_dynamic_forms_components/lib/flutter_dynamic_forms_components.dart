@@ -92,7 +92,3 @@ export 'src/components/date_range_picker/date_range.dart';
 export 'src/components/date_range_picker/date_range_parser.dart'; 
 export 'src/components/date_range_picker/reactive_date_range_renderer.dart';
 
-
-export 'src/components/slider/slider.dart';
-export 'src/components/slider/slider_parser.dart'; 
-export 'src/components/slider/reactive_slider_renderer.dart';

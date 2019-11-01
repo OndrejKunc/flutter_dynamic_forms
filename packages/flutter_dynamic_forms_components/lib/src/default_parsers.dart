@@ -21,6 +21,5 @@ List<ElementParser> getDefaultParserList() {
     MultiSelectChipGroupParser(),
     DateParser(),
     DateRangeParser(),
-    SliderParser(),
   ];
 }
