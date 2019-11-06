@@ -8,8 +8,8 @@ class SliderParser extends ElementParser<Slider> {
   String get name => "slider";
 
   @override
-  Slider parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
+  Slider parse(ParserNode parserNode, FormElement parent,
+      ElementParserFunction parser) {
     var slider = Slider();
     slider.fillSlider(
       id: parserNode.getPlainStringValue("id"),

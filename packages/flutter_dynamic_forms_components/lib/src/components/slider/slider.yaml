@@ -3,24 +3,24 @@ parentType: formElement
 properties:
   value:
     type: double
-    isMutable: false
+    isMutable: true
   label:
     type: string
   minValue: 
     type: double
-    isMutable: true
+    isMutable: false
   maxValue: 
     type: double
-    isMutable: true
+    isMutable: false
   division: 
     type: int
-    isMutable: true
+    isMutable: false
   activeColor:
     type: int
     default: 0xFF0000FF
-    isMutable: true
+    isMutable: false
   inactiveColor: 
     type: int    
     default: 0xFFBEBEBE
-    isMutable: true
+    isMutable: false
           
