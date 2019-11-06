@@ -130,6 +130,6 @@ class DynamicFormsBuilder implements Builder {
       parts = parts.sublist(1);
     }
 
-    return parts.join("_") + ".yaml";
+    return parts.map((p) => p.toLowerCase()).join("_") + ".yaml";
   }
 }

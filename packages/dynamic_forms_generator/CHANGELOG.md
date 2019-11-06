@@ -1,3 +1,7 @@
+# 0.2.1
+
+Fixed filename issue when running on Mac.
+
 # 0.2.0
 
 Added support for value types and enums.
