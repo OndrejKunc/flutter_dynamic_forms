@@ -14,27 +14,22 @@ class Slider extends FormElement {
   static const String valuePropertyName = "value";
 
   int get activeColor => properties[activeColorPropertyName].value;
-  Stream<int> get activeColorChanged =>
-      properties[activeColorPropertyName].valueChanged;
+  Stream<int> get activeColorChanged => properties[activeColorPropertyName].valueChanged;
 
   int get division => properties[divisionPropertyName].value;
-  Stream<int> get divisionChanged =>
-      properties[divisionPropertyName].valueChanged;
+  Stream<int> get divisionChanged => properties[divisionPropertyName].valueChanged;
 
   int get inactiveColor => properties[inactiveColorPropertyName].value;
-  Stream<int> get inactiveColorChanged =>
-      properties[inactiveColorPropertyName].valueChanged;
+  Stream<int> get inactiveColorChanged => properties[inactiveColorPropertyName].valueChanged;
 
   String get label => properties[labelPropertyName].value;
   Stream<String> get labelChanged => properties[labelPropertyName].valueChanged;
 
   double get maxValue => properties[maxValuePropertyName].value;
-  Stream<double> get maxValueChanged =>
-      properties[maxValuePropertyName].valueChanged;
+  Stream<double> get maxValueChanged => properties[maxValuePropertyName].valueChanged;
 
   double get minValue => properties[minValuePropertyName].value;
-  Stream<double> get minValueChanged =>
-      properties[minValuePropertyName].valueChanged;
+  Stream<double> get minValueChanged => properties[minValuePropertyName].valueChanged;
 
   double get value => properties[valuePropertyName].value;
   Stream<double> get valueChanged => properties[valuePropertyName].valueChanged;

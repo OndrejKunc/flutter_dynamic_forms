@@ -11,9 +11,8 @@ class ReactiveSliderRenderer extends FormElementRenderer<model.Slider> {
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
     return StreamBuilder(
-      stream: element.valueChanged,
+      stream: element.propertyChanged,
       builder: (BuildContext context, _) {
-        print(element.value);
         return Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -27,9 +26,10 @@ class ReactiveSliderRenderer extends FormElementRenderer<model.Slider> {
               divisions: element.division != 0 ? element.division : null,
               onChanged: (double value) {
                 dispatcher(
-                  ChangeValueEvent(
+                  ChangeValueEvent<double>(
                     value: value,
                     elementId: element.id,
+                    propertyName: model.Slider.valuePropertyName,
                   ),
                 );
               },
