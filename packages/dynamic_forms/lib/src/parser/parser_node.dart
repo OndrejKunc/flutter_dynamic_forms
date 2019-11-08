@@ -67,6 +67,14 @@ abstract class ParserNode {
           name, (s) => Decimal.tryParse(s) ?? defaultDecimal(), defaultDecimal,
           isImmutable: isImmutable);
 
+  ElementValue<double> getDoubleValue(
+    String name, {
+    bool isImmutable = true,
+  }) =>
+      getValue<double>(
+          name, (s) => double.parse(s) ?? defaultDouble(), defaultDouble,
+          isImmutable: isImmutable);
+
   ElementValue<int> getIntValue(
     String name, {
     bool isImmutable = true,
@@ -90,8 +98,10 @@ abstract class ParserNode {
   static String emptyString() => "";
   static String convertToString(String x) => x;
   static bool convertToBool(String x) => x?.toLowerCase() == "true";
+  static int convertToColor(String x) => int.parse(x);
   static bool defaultFalse() => false;
   static bool defaultTrue() => true;
   static int defaultInt() => 0;
   static Decimal defaultDecimal() => Decimal.fromInt(0);
+  static double defaultDouble() => 2.0;
 }
