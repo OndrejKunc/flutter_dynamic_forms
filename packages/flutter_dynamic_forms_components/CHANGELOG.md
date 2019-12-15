@@ -1,3 +1,7 @@
+# 0.7.3
+
+Added slider component.
+
 # 0.7.2
 
 Added date range component.
