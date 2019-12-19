@@ -1,6 +1,6 @@
 name: dynamic_forms_generator
 description: Library for generating model and parser part of the dynamic forms.
-version: 0.2.1
+version: 0.3.0
 author: Ondřej Kunc <kunc.ondrej1@gmail.com>
 homepage: https://github.com/OndrejKunc/flutter_dynamic_forms
 

@@ -1,3 +1,7 @@
+# 0.8.0
+
+Increment dependency on dynamic_forms package.
+
 # 0.7.1
 
 Fix stream subscription in LazyStreamBuilder.

@@ -1,3 +1,7 @@
+# 0.8.0
+
+Fixed inconsistency in parsers.
+
 # 0.7.0
 
 Changed model hierarchy and parser naming. 

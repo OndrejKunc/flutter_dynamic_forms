@@ -1,3 +1,7 @@
+# 0.3.0
+
+Changed generated output to be compatible with dynamic_forms 0.8.0.
+
 # 0.2.1
 
 Fixed filename issue when running on Mac.
