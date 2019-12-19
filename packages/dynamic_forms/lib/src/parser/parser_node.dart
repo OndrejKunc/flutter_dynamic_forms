@@ -8,19 +8,21 @@ abstract class ParserNode {
       String name, T converter(String s), T defaultValue(),
       {bool isImmutable = true});
 
-  ElementValue<List<TElement>> getChildren<TElement>(
-      {@required FormElement parent,
-      @required String childrenPropertyName,
-      @required ElementParserFunction parser,
-      bool isContentProperty = false,
-      bool isImmutable = true});
+  ElementValue<List<TElement>> getChildren<TElement>({
+    @required FormElement parent,
+    @required String childrenPropertyName,
+    @required ElementParserFunction parser,
+    bool isContentProperty = false,
+    bool isImmutable = true,
+  });
 
   String getPlainStringValue(String propertyName);
 
-  ElementValue<TEnumElement> getEnum<TEnum, TEnumElement>(
-      {@required String name,
-      @required List<TEnum> enumerationValues,
-      @required TEnumElement Function(TEnum _) enumElementConstructor}) {
+  ElementValue<TEnumElement> getEnum<TEnum, TEnumElement>({
+    @required String name,
+    @required List<TEnum> enumerationValues,
+    @required TEnumElement Function(TEnum _) enumElementConstructor,
+  }) {
     var inputValueSplits = getStringValue(name).value.split('.');
     var realEnumSplits = enumerationValues.first.toString().split('.');
 
@@ -45,9 +47,8 @@ abstract class ParserNode {
   }
 
   ElementValue<TElement> getChild<TElement>(
-      {@required String name,
+      {@required String propertyName,
       @required ElementParserFunction parser,
-      @required String childName,
       @required FormElement parent,
       @required TElement defaultValue(),
       bool isContentProperty = false,

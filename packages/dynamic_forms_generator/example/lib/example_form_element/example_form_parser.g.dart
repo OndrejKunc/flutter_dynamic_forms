@@ -22,7 +22,7 @@ class ExampleFormElementParser extends ElementParser<ExampleFormElement> {
       valueProperty: parserNode.getChild<ExampleValueElement>(
           parent: exampleFormElement,
           parser: parser,
-          name: "valueProperty",
+          propertyName: "valueProperty",
           childName: "exampleValueElement",
           isContentProperty: false,
           defaultValue: () => ExampleValueElement(),

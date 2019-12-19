@@ -56,20 +56,19 @@ class JsonParserNode extends ParserNode {
   }
 
   @override
-  ElementValue<TFormElement> getChild<TFormElement>(
-      {@required String name,
-      @required ElementParserFunction parser,
-      @required String childName,
-      @required FormElement parent,
-      @required TFormElement defaultValue(),
-      bool isContentProperty = false,
-      bool isImmutable = true}) {
-    var childElement = element[name];
+  ElementValue<TFormElement> getChild<TFormElement>({
+    @required String propertyName,
+    @required ElementParserFunction parser,
+    @required FormElement parent,
+    @required TFormElement defaultValue(),
+    bool isContentProperty = false,
+    bool isImmutable = true,
+  }) {
+    var childElement = element[propertyName] as Map<String, dynamic>;
 
     if (childElement != null) {
       return createElementValue<TFormElement>(
-          parser(JsonParserNode(childElement[childName]), parent)
-              as TFormElement,
+          parser(JsonParserNode(childElement), parent) as TFormElement,
           isImmutable);
     }
     return createElementValue<TFormElement>(defaultValue(), isImmutable);
