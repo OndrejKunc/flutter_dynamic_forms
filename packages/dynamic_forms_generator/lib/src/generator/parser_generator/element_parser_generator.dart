@@ -137,8 +137,7 @@ abstract class ElementParserGenerator {
       return '''parserNode.getChild<${property.type.toTypeString()}>(
           parent: ${componentDescription.type.typeName},
           parser: parser,
-          name: "${property.name}",
-          childName: "${property.type.typeName}",
+          propertyName: "${property.name}",
           isContentProperty: $isContentProperty,
           defaultValue: () => ${property.type.capitalizedTypeName}(),
           isImmutable: ${!property.isMutable})''';
