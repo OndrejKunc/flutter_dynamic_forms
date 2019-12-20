@@ -61,6 +61,68 @@ void main() {
     expect(resultValue, "Welcome John Doe!");
   });
 
+  test('xml with content property as explicit property', () {
+    var parserService = XmlFormParserService(_getDefaultParserList());
+
+    var xml = '''<?xml version="1.0" encoding="UTF-8"?>
+      <container id="form1">
+        <container.children>
+          <label
+            id="label1"
+            value="John Doe" />
+          <label
+            id="label2"
+            value="Hello World" />
+        </container.children>
+      </container>''';
+
+    var result = parserService.parse(xml);
+
+    var formElementMap = Map<String, FormElement>.fromIterable(
+        getFormElementIterator<FormElement>(result),
+        key: (x) => x.id,
+        value: (x) => x);
+
+    var label2 = formElementMap["label2"] as Label;
+    var resultValue = label2.value;
+
+    expect(resultValue, "Hello World");
+  });
+
+  test('xml with non content property as explicit property', () {
+    var parserService = XmlFormParserService(_getDefaultParserList());
+
+    var xml = '''<?xml version="1.0" encoding="UTF-8"?>
+      <container id="form1">
+        <container.children2>
+          <label
+            id="label1"
+            value="test1" />
+          <label
+            id="label2"
+            value="test2" />
+        </container.children2>
+        <label
+          id="label3"
+          value="John Doe" />
+        <label
+          id="label4"
+          value="Hello World" />
+      </container>''';
+
+    var result = parserService.parse(xml);
+
+    var formElementMap = Map<String, FormElement>.fromIterable(
+        getFormElementIterator<FormElement>(result),
+        key: (x) => x.id,
+        value: (x) => x);
+
+    var label2 = formElementMap["label2"] as Label;
+    var resultValue = label2.value;
+
+    expect(resultValue, "test2");
+  });
+
   test('xml with single child element', () {
     var parserService = XmlFormParserService(_getDefaultParserList());
 
@@ -84,7 +146,7 @@ void main() {
     expect(resultValue, "John Doe");
   });
 
-    test('xml with single child element in property', () {
+  test('xml with single child element in property', () {
     var parserService = XmlFormParserService(_getDefaultParserList());
 
     var xml = '''<?xml version="1.0" encoding="UTF-8"?>
