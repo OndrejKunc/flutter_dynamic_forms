@@ -1,3 +1,7 @@
+# 0.8.0
+
+Updated dependency for flutter dynamic forms and generator.
+
 # 0.7.3
 
 Added slider component.

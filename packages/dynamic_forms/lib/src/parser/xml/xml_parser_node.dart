@@ -70,53 +70,51 @@ class XmlParserNode extends ParserNode {
       ElementParserFunction parser,
       bool isContentProperty = false,
       bool isImmutable = true}) {
-    if (isContentProperty) {
-      return createElementValue(
-          element.children
-              .where((c) =>
-                  c is XmlElement &&
-                  !c.name.qualified.startsWith(element.name.qualified + "."))
-              .map((c) => parser(XmlParserNode(c), parent))
-              .cast<TFormElement>()
-              .toList(),
-          isImmutable);
-    }
     var childrenXmlElement =
         getPropertyAsElement(element, childrenPropertyName);
-    var children = childrenXmlElement == null
-        ? List<TFormElement>()
-        : childrenXmlElement.children
-            .where((c) => c is XmlElement)
-            .map((c) => parser(XmlParserNode(c), parent))
-            .cast<TFormElement>()
-            .toList();
-    var childrenElementValue = createElementValue(children, isImmutable);
-    return childrenElementValue;
-  }
+    if (childrenXmlElement != null) {
+      var children = childrenXmlElement.children
+          .where((c) => c is XmlElement)
+          .map((c) => parser(XmlParserNode(c), parent))
+          .cast<TFormElement>()
+          .toList();
+      var childrenElementValue = createElementValue(children, isImmutable);
+      return childrenElementValue;
+    }
 
-  @override
-  ElementValue<TFormElement> getChild<TFormElement>(
-      {@required String name,
-      @required ElementParserFunction parser,
-      @required String childName,
-      @required FormElement parent,
-      @required TFormElement defaultValue(),
-      bool isContentProperty = false,
-      bool isImmutable = true}) {
-    XmlElement propertyElement;
-    if (isContentProperty) {
-      propertyElement = element;
-    } else {
-      propertyElement = getPropertyAsElement(element, name);
-      if (propertyElement == null) {
-        propertyElement = getElement(element, name);
+    if (childrenXmlElement == null && isContentProperty) {
+      var children = element.children
+          .where((c) =>
+              c is XmlElement &&
+              !c.name.qualified.startsWith(element.name.qualified + "."))
+          .map((c) => parser(XmlParserNode(c), parent))
+          .cast<TFormElement>()
+          .toList();
+      if (children != null) {
+        return createElementValue(children, isImmutable);
       }
     }
 
+    return createElementValue(List<TFormElement>(), isImmutable);
+  }
+
+  @override
+  ElementValue<TFormElement> getChild<TFormElement>({
+    @required String propertyName,
+    @required ElementParserFunction parser,
+    @required FormElement parent,
+    @required TFormElement defaultValue(),
+    bool isContentProperty = false,
+    bool isImmutable = true,
+  }) {
+    XmlElement propertyElement = getPropertyAsElement(element, propertyName);
+    if (propertyElement == null && isContentProperty) {
+      propertyElement = element;
+    }
+
     if (propertyElement != null) {
-      XmlElement childElement = propertyElement.children.firstWhere(
-          (c) => c is XmlElement && c.name.qualified == childName,
-          orElse: () => null);
+      XmlElement childElement = propertyElement.children
+          .firstWhere((c) => c is XmlElement, orElse: () => null);
       if (childElement != null) {
         return createElementValue<TFormElement>(
             parser(XmlParserNode(childElement), parent) as TFormElement,
