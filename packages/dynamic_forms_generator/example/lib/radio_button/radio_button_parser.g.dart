@@ -10,19 +10,18 @@ class RadioButtonParser extends ElementParser<RadioButton> {
   RadioButton parse(ParserNode parserNode, FormElement parent,
       ElementParserFunction parser) {
     var radioButton = RadioButton();
-    radioButton.fillRadioButton(
-      id: parserNode.getPlainStringValue("id"),
-      parent: parserNode.getParentValue(parent),
-      isVisible: parserNode.getIsVisible(),
-      label: parserNode.getStringValue(
+    radioButton
+      ..id = parserNode.getPlainStringValue("id")
+      ..parentProperty = parserNode.getParentValue(parent)
+      ..isVisibleProperty = parserNode.getIsVisible()
+      ..labelProperty = parserNode.getStringValue(
         "label",
         isImmutable: true,
-      ),
-      value: parserNode.getStringValue(
+      )
+      ..valueProperty = parserNode.getStringValue(
         "value",
         isImmutable: true,
-      ),
-    );
+      );
     return radioButton;
   }
 }

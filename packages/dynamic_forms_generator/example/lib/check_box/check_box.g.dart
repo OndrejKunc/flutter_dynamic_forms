@@ -12,52 +12,54 @@ class CheckBox extends FormElement {
   static const String textColorPropertyName = "textColor";
   static const String valuePropertyName = "value";
 
-  String get label => properties[labelPropertyName].value;
-  Stream<String> get labelChanged => properties[labelPropertyName].valueChanged;
+  Property<String> get labelProperty => properties[labelPropertyName];
+  set labelProperty(Property<String> value) =>
+      registerProperty(labelPropertyName, value);
+  String get label =>
+      labelProperty.value;
+  Stream<String> get labelChanged => labelProperty.valueChanged;
 
-  DateTime get myDate => properties[myDatePropertyName].value;
-  Stream<DateTime> get myDateChanged => properties[myDatePropertyName].valueChanged;
+  Property<DateTime> get myDateProperty => properties[myDatePropertyName];
+  set myDateProperty(Property<DateTime> value) =>
+      registerProperty(myDatePropertyName, value);
+  DateTime get myDate =>
+      myDateProperty.value;
+  Stream<DateTime> get myDateChanged => myDateProperty.valueChanged;
 
-  Decimal get myDecimal => properties[myDecimalPropertyName].value;
-  Stream<Decimal> get myDecimalChanged => properties[myDecimalPropertyName].valueChanged;
+  Property<Decimal> get myDecimalProperty => properties[myDecimalPropertyName];
+  set myDecimalProperty(Property<Decimal> value) =>
+      registerProperty(myDecimalPropertyName, value);
+  Decimal get myDecimal =>
+      myDecimalProperty.value;
+  Stream<Decimal> get myDecimalChanged => myDecimalProperty.valueChanged;
 
-  double get myDouble => properties[myDoublePropertyName].value;
-  Stream<double> get myDoubleChanged => properties[myDoublePropertyName].valueChanged;
+  Property<double> get myDoubleProperty => properties[myDoublePropertyName];
+  set myDoubleProperty(Property<double> value) =>
+      registerProperty(myDoublePropertyName, value);
+  double get myDouble =>
+      myDoubleProperty.value;
+  Stream<double> get myDoubleChanged => myDoubleProperty.valueChanged;
 
-  int get myInt => properties[myIntPropertyName].value;
-  Stream<int> get myIntChanged => properties[myIntPropertyName].valueChanged;
+  Property<int> get myIntProperty => properties[myIntPropertyName];
+  set myIntProperty(Property<int> value) =>
+      registerProperty(myIntPropertyName, value);
+  int get myInt =>
+      myIntProperty.value;
+  Stream<int> get myIntChanged => myIntProperty.valueChanged;
 
-  String get textColor => properties[textColorPropertyName].value;
-  Stream<String> get textColorChanged => properties[textColorPropertyName].valueChanged;
+  Property<String> get textColorProperty => properties[textColorPropertyName];
+  set textColorProperty(Property<String> value) =>
+      registerProperty(textColorPropertyName, value);
+  String get textColor =>
+      textColorProperty.value;
+  Stream<String> get textColorChanged => textColorProperty.valueChanged;
 
-  bool get value => properties[valuePropertyName].value;
-  Stream<bool> get valueChanged => properties[valuePropertyName].valueChanged;
-
-  void fillCheckBox({
-    @required String id,
-    @required ElementValue<FormElement> parent,
-    @required ElementValue<bool> isVisible,
-    @required ElementValue<String> label,
-    @required ElementValue<DateTime> myDate,
-    @required ElementValue<Decimal> myDecimal,
-    @required ElementValue<double> myDouble,
-    @required ElementValue<int> myInt,
-    @required ElementValue<String> textColor,
-    @required ElementValue<bool> value,
-  }) {
-    fillFormElement(
-      id: id,
-      parent: parent,
-      isVisible: isVisible,
-    );
-    registerElementValue(labelPropertyName, label);
-    registerElementValue(myDatePropertyName, myDate);
-    registerElementValue(myDecimalPropertyName, myDecimal);
-    registerElementValue(myDoublePropertyName, myDouble);
-    registerElementValue(myIntPropertyName, myInt);
-    registerElementValue(textColorPropertyName, textColor);
-    registerElementValue(valuePropertyName, value);
-  }
+  Property<bool> get valueProperty => properties[valuePropertyName];
+  set valueProperty(Property<bool> value) =>
+      registerProperty(valuePropertyName, value);
+  bool get value =>
+      valueProperty.value;
+  Stream<bool> get valueChanged => valueProperty.valueChanged;
 
   @override
   FormElement getInstance() {

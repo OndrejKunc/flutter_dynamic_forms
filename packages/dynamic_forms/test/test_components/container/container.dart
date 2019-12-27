@@ -5,25 +5,21 @@ class Container extends FormElement {
   static const String childrenPropertyName = "children";
   static const String children2PropertyName = "children2";
 
-  List<FormElement> get children => properties[childrenPropertyName].value;
+  Property<List<FormElement>> get childrenProperty =>
+      properties[childrenPropertyName];
+  set childrenProperty(Property<List<FormElement>> value) =>
+      registerProperty(childrenPropertyName, value);
+  List<FormElement> get children => childrenProperty.value;
   Stream<List<FormElement>> get childrenChanged =>
-      properties[childrenPropertyName].valueChanged;
+      childrenProperty.valueChanged;
 
-  List<FormElement> get children2 => properties[children2PropertyName].value;
+  Property<List<FormElement>> get children2Property =>
+      properties[children2PropertyName];
+  set children2Property(Property<List<FormElement>> value) =>
+      registerProperty(children2PropertyName, value);
+  List<FormElement> get children2 => children2Property.value;
   Stream<List<FormElement>> get children2Changed =>
-      properties[children2PropertyName].valueChanged;
-
-  void fillContainer({
-    @required String id,
-    @required ElementValue<FormElement> parent,
-    @required ElementValue<bool> isVisible,
-    @required ElementValue<List<FormElement>> children,
-    @required ElementValue<List<FormElement>> children2,
-  }) {
-    fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    registerElementValue(childrenPropertyName, children);
-    registerElementValue(children2PropertyName, children2);
-  }
+      children2Property.valueChanged;
 
   @override
   FormElement getInstance() {

@@ -1,4 +1,4 @@
-import 'package:dynamic_forms/src/element_values/element_values.dart';
+import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/elements/enum_element.dart';
 import 'package:expression_language/src/expressions/expression_provider.dart';
 
@@ -16,5 +16,5 @@ class EnumElementExample extends EnumElement {
 
   @override
   ExpressionProvider getExpressionProvider([String propertyName]) =>
-      ImmutableElementValue(example);
+      ImmutableProperty(example);
 }

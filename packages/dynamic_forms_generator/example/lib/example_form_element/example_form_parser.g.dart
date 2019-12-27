@@ -10,23 +10,22 @@ class ExampleFormElementParser extends ElementParser<ExampleFormElement> {
   ExampleFormElement parse(ParserNode parserNode, FormElement parent,
       ElementParserFunction parser) {
     var exampleFormElement = ExampleFormElement();
-    exampleFormElement.fillExampleFormElement(
-      id: parserNode.getPlainStringValue("id"),
-      parent: parserNode.getParentValue(parent),
-      isVisible: parserNode.getIsVisible(),
-      enumProperty: parserNode.getEnum<ExampleEnumElementEnum,ExampleEnumElement>(
-          name: "enumProperty",
+    exampleFormElement
+      ..id = parserNode.getPlainStringValue("id")
+      ..parentProperty = parserNode.getParentValue(parent)
+      ..isVisibleProperty = parserNode.getIsVisible()
+      ..enumExampleProperty = parserNode.getEnum<ExampleEnumElementEnum,ExampleEnumElement>(
+          name: "enumExample",
           enumerationValues: ExampleEnumElementEnum.values,
           enumElementConstructor: (x) => ExampleEnumElement(enumeration: x))
-          ,
-      valueProperty: parserNode.getChild<ExampleValueElement>(
+          
+      ..valueExampleProperty = parserNode.getChild<ExampleValueElement>(
           parent: exampleFormElement,
           parser: parser,
-          propertyName: "valueProperty",
+          propertyName: "valueExample",
           isContentProperty: false,
           defaultValue: () => ExampleValueElement(),
-          isImmutable: true),
-    );
+          isImmutable: true);
     return exampleFormElement;
   }
 }

@@ -1,14 +1,14 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:expression_language/expression_language.dart';
 
-class MutableElementValue<T> extends ElementValue<T> {
+class MutableProperty<T> extends Property<T> {
   MutableExpression<T> expression;
   bool get ignoreLastChange => _ignoreLastChange;
   bool _ignoreLastChange = false;
   T _initialValue;
   T _cachedValue;
 
-  MutableElementValue(T _value, [T _initialValue]) {
+  MutableProperty(T _value, [T _initialValue]) {
     _cachedValue = _value;
     this._initialValue = _initialValue ?? _value;
     expression = MutableExpression(_value);
@@ -38,7 +38,7 @@ class MutableElementValue<T> extends ElementValue<T> {
   }
 
   @override
-  ElementValue<T> clone() {
-    return MutableElementValue(this.value, this._initialValue);
+  Property<T> clone() {
+    return MutableProperty(this.value, this._initialValue);
   }
 }

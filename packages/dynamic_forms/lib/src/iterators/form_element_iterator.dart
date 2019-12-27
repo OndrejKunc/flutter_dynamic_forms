@@ -15,14 +15,14 @@ Iterable<TFormElement> getFormElementIterator<TFormElement extends FormElement>(
     var formElements = formElement
         .getProperties()
         .values
-        .whereType<ElementValue<FormElement>>()
+        .whereType<Property<FormElement>>()
         .map((v) => v.value)
         .toList();
 
     var formListElements = formElement
         .getProperties()
         .values
-        .whereType<ElementValue<List<FormElement>>>()
+        .whereType<Property<List<FormElement>>>()
         .map((v) => v.value)
         .expand((x) => x);
     formElements.addAll(formListElements);

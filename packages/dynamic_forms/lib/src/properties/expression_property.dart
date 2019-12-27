@@ -1,7 +1,7 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:meta/meta.dart';
 
-abstract class ExpressionElementValue<T> extends ElementValue<T> {
+abstract class ExpressionProperty<T> extends Property<T> {
   @protected
   T _cachedValue;
 
@@ -19,7 +19,7 @@ abstract class ExpressionElementValue<T> extends ElementValue<T> {
   }
 
   @override
-  ElementValue<T> clone() {
-    return CloneableExpressionElementValue<T>(getExpression());
+  Property<T> clone() {
+    return CloneableExpressionProperty<T>(getExpression());
   }
 }

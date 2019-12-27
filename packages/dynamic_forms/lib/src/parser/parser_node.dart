@@ -4,11 +4,10 @@ import 'package:meta/meta.dart';
 
 abstract class ParserNode {
   String getName();
-  ElementValue<T> getValue<T>(
-      String name, T converter(String s), T defaultValue(),
+  Property<T> getValue<T>(String name, T converter(String s), T defaultValue(),
       {bool isImmutable = true});
 
-  ElementValue<List<TElement>> getChildren<TElement>({
+  Property<List<TElement>> getChildren<TElement>({
     @required FormElement parent,
     @required String childrenPropertyName,
     @required ElementParserFunction parser,
@@ -18,7 +17,7 @@ abstract class ParserNode {
 
   String getPlainStringValue(String propertyName);
 
-  ElementValue<TEnumElement> getEnum<TEnum, TEnumElement>({
+  Property<TEnumElement> getEnum<TEnum, TEnumElement>({
     @required String name,
     @required List<TEnum> enumerationValues,
     @required TEnumElement Function(TEnum _) enumElementConstructor,
@@ -41,12 +40,12 @@ abstract class ParserNode {
     if (returnValue == null) {
       throw "Enumeration $nameOfEnum does not have constant named $constantName";
     } else {
-      return ImmutableElementValue<TEnumElement>(
+      return ImmutableProperty<TEnumElement>(
           enumElementConstructor(returnValue));
     }
   }
 
-  ElementValue<TElement> getChild<TElement>(
+  Property<TElement> getChild<TElement>(
       {@required String propertyName,
       @required ElementParserFunction parser,
       @required FormElement parent,
@@ -54,13 +53,13 @@ abstract class ParserNode {
       bool isContentProperty = false,
       bool isImmutable = true});
 
-  ElementValue<bool> getIsVisible() =>
+  Property<bool> getIsVisible() =>
       getValue("isVisible", convertToBool, defaultTrue);
 
-  ElementValue<String> getStringValue(String name, {bool isImmutable = true}) =>
+  Property<String> getStringValue(String name, {bool isImmutable = true}) =>
       getValue(name, convertToString, emptyString, isImmutable: isImmutable);
 
-  ElementValue<Decimal> getDecimalValue(
+  Property<Decimal> getDecimalValue(
     String name, {
     bool isImmutable = true,
   }) =>
@@ -68,7 +67,7 @@ abstract class ParserNode {
           name, (s) => Decimal.tryParse(s) ?? defaultDecimal(), defaultDecimal,
           isImmutable: isImmutable);
 
-  ElementValue<double> getDoubleValue(
+  Property<double> getDoubleValue(
     String name, {
     bool isImmutable = true,
   }) =>
@@ -76,24 +75,24 @@ abstract class ParserNode {
           name, (s) => double.parse(s) ?? defaultDouble(), defaultDouble,
           isImmutable: isImmutable);
 
-  ElementValue<int> getIntValue(
+  Property<int> getIntValue(
     String name, {
     bool isImmutable = true,
   }) =>
       getValue<int>(name, (s) => int.tryParse(s) ?? defaultInt(), defaultInt,
           isImmutable: isImmutable);
 
-  ElementValue<T> createElementValue<T>(T value, bool isImmutable) {
+  Property<T> createProperty<T>(T value, bool isImmutable) {
     return isImmutable
-        ? ImmutableElementValue<T>(value)
-        : MutableElementValue<T>(value);
+        ? ImmutableProperty<T>(value)
+        : MutableProperty<T>(value);
   }
 
-  ElementValue<FormElement> getParentValue(FormElement parent) {
+  Property<FormElement> getParentValue(FormElement parent) {
     if (parent == null) {
       return null;
     }
-    return ImmutableElementValue(parent);
+    return ImmutableProperty(parent);
   }
 
   static String emptyString() => "";

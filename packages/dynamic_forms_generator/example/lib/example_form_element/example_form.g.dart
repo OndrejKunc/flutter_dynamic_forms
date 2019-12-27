@@ -4,30 +4,22 @@ import '../components.dart';
 import 'package:meta/meta.dart';
 
 class ExampleFormElement extends FormElement {
-  static const String enumPropertyPropertyName = "enumProperty";
-  static const String valuePropertyPropertyName = "valueProperty";
+  static const String enumExamplePropertyName = "enumExample";
+  static const String valueExamplePropertyName = "valueExample";
 
-  ExampleEnumElement get enumProperty => properties[enumPropertyPropertyName].value;
-  Stream<ExampleEnumElement> get enumPropertyChanged => properties[enumPropertyPropertyName].valueChanged;
+  Property<ExampleEnumElement> get enumExampleProperty => properties[enumExamplePropertyName];
+  set enumExampleProperty(Property<ExampleEnumElement> value) =>
+      registerProperty(enumExamplePropertyName, value);
+  ExampleEnumElement get enumExample =>
+      enumExampleProperty.value;
+  Stream<ExampleEnumElement> get enumExampleChanged => enumExampleProperty.valueChanged;
 
-  ExampleValueElement get valueProperty => properties[valuePropertyPropertyName].value;
-  Stream<ExampleValueElement> get valuePropertyChanged => properties[valuePropertyPropertyName].valueChanged;
-
-  void fillExampleFormElement({
-    @required String id,
-    @required ElementValue<FormElement> parent,
-    @required ElementValue<bool> isVisible,
-    @required ElementValue<ExampleEnumElement> enumProperty,
-    @required ElementValue<ExampleValueElement> valueProperty,
-  }) {
-    fillFormElement(
-      id: id,
-      parent: parent,
-      isVisible: isVisible,
-    );
-    registerElementValue(enumPropertyPropertyName, enumProperty);
-    registerElementValue(valuePropertyPropertyName, valueProperty);
-  }
+  Property<ExampleValueElement> get valueExampleProperty => properties[valueExamplePropertyName];
+  set valueExampleProperty(Property<ExampleValueElement> value) =>
+      registerProperty(valueExamplePropertyName, value);
+  ExampleValueElement get valueExample =>
+      valueExampleProperty.value;
+  Stream<ExampleValueElement> get valueExampleChanged => valueExampleProperty.valueChanged;
 
   @override
   FormElement getInstance() {

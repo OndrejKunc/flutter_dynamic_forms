@@ -26,11 +26,11 @@ class ExampleValueElement extends ValueElement {
     switch (propertyName) {
       case firstPropertyPropertyName:
         {
-          return ImmutableElementValue(firstProperty);
+          return ImmutableProperty(firstProperty);
         }
       case secondPropertyPropertyName:
         {
-          return ImmutableElementValue(secondProperty);
+          return ImmutableProperty(secondProperty);
         }
     default:
       return null;

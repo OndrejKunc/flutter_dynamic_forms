@@ -9,7 +9,7 @@ class FormManager {
   Map<String, FormElement> formElementMap;
   Map<String, Validation> formValidations;
 
-  List<MutableElementValue> mutableValues;
+  List<MutableProperty> mutableValues;
 
   FormManager(
       this.form, this.formElementMap, this.formValidations, this.mutableValues);
@@ -25,9 +25,9 @@ class FormManager {
     formElements.forEach((fe) {
       var properties = fe.getProperties();
       properties.forEach((name, propVal) {
-        if (propVal is MutableElementValue &&
-            !(propVal is ElementValue<ExpressionProviderElement>) &&
-            !(propVal is ElementValue<List<ExpressionProviderElement>>)) {
+        if (propVal is MutableProperty &&
+            !(propVal is Property<ExpressionProviderElement>) &&
+            !(propVal is Property<List<ExpressionProviderElement>>)) {
           result.add(FormItemValue(fe.id, name, propVal.value.toString()));
         }
       });
@@ -52,8 +52,8 @@ class FormManager {
       return;
     }
     var formElement = formElementMap[elementId];
-    var elementValue = formElement.getElementValue(propertyName);
-    var mutableValue = elementValue as MutableElementValue<T>;
+    var elementValue = formElement.getProperty(propertyName);
+    var mutableValue = elementValue as MutableProperty<T>;
     if (mutableValue == null) {
       print(
           "Value cannot be changed because element $elementId is not mutable");

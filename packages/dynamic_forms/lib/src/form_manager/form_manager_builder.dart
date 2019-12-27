@@ -1,7 +1,7 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/form_manager/form_manager.dart';
 import 'package:dynamic_forms/src/iterators/form_element_iterator.dart';
-import 'package:dynamic_forms/src/iterators/form_element_value_iterator.dart';
+import 'package:dynamic_forms/src/iterators/form_property_iterator.dart';
 import 'package:dynamic_forms/src/parser/form_parser_service.dart';
 import 'package:expression_language/expression_language.dart';
 import 'package:petitparser/petitparser.dart';
@@ -44,7 +44,7 @@ class FormManagerBuilder {
         value: (x) => x);
 
     var formMutableValues =
-        getFormElementValueIterator<MutableElementValue>(root).toList();
+        getFormPropertyIterator<MutableProperty>(root).toList();
 
     return FormManager(
         root, formElementMap, formValidations, formMutableValues);
@@ -53,7 +53,7 @@ class FormManagerBuilder {
   void _buildCloneableExpressions(
       FormElement form, Map<String, FormElement> expressionProviderElementMap) {
     var formElementExpressions =
-        getFormElementValueIterator<CloneableExpressionElementValue>(form);
+        getFormPropertyIterator<CloneableExpressionProperty>(form);
 
     for (var expressionValue in formElementExpressions) {
       expressionValue.buildExpression(expressionProviderElementMap);
@@ -62,7 +62,7 @@ class FormManagerBuilder {
 
   void _buildStringExpressions(FormElement root, Parser parser) {
     var formElementExpressions =
-        getFormElementValueIterator<StringExpressionElementValue>(root);
+        getFormPropertyIterator<StringExpressionProperty>(root);
 
     for (var expressionValue in formElementExpressions) {
       expressionValue.buildExpression(parser);
@@ -70,14 +70,14 @@ class FormManagerBuilder {
   }
 
   void _buildElementsSubscriptionDependencies(FormElement root) {
-    var formElementValues = getFormElementValueIterator<ElementValue>(root);
+    var formProperties = getFormPropertyIterator<Property>(root);
 
-    for (var elementValue in formElementValues) {
+    for (var property in formProperties) {
       var elementsValuesCollectorVisitor = ExpressionProviderCollectorVisitor();
-      elementValue.getExpression().accept(elementsValuesCollectorVisitor);
-      for (var sourceElementValue
+      property.getExpression().accept(elementsValuesCollectorVisitor);
+      for (var sourceProperty
           in elementsValuesCollectorVisitor.expressionProviders) {
-        (sourceElementValue as ElementValue).addSubscriber(elementValue);
+        (sourceProperty as Property).addSubscriber(property);
       }
     }
   }

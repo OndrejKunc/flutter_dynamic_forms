@@ -8,14 +8,14 @@ class ValidationParser extends ElementParser<Validation> {
   Validation parse(
       ParserNode parserNode, Element parent, ElementParserFunction parser) {
     Validation validation = Validation();
-    validation.fillValidation(
-      id: parserNode.getPlainStringValue("id"),
-      isVisible: parserNode.getIsVisible(),
-      parent: parserNode.getParentValue(parent),
-      message: parserNode.getStringValue("message"),
-      isValid: parserNode.getValue(
-          "isValid", ParserNode.convertToBool, ParserNode.defaultTrue),
-    );
+    validation
+      ..id = parserNode.getPlainStringValue("id")
+      ..isVisibleProperty = parserNode.getIsVisible()
+      ..parentProperty = parserNode.getParentValue(parent)
+      ..messageProperty = parserNode.getStringValue("message")
+      ..isValidProperty = parserNode.getValue(
+          "isValid", ParserNode.convertToBool, ParserNode.defaultTrue);
+
     return validation;
   }
 }

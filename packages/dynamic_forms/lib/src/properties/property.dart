@@ -3,7 +3,7 @@ import 'package:expression_language/expression_language.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
-abstract class ElementValue<T> implements ExpressionProvider<T> {
+abstract class Property<T> implements ExpressionProvider<T> {
   T get value;
 
   Expression<T> getExpression();
@@ -15,17 +15,17 @@ abstract class ElementValue<T> implements ExpressionProvider<T> {
   @protected
   BehaviorSubject<T> valueChangedSubject;
 
-  void addSubscriber(ExpressionElementValue expressionElementValue) {
-    subscribers.add(expressionElementValue);
+  void addSubscriber(ExpressionProperty expressionProperty) {
+    subscribers.add(expressionProperty);
   }
 
   @protected
-  final Set<ExpressionElementValue> subscribers = {};
+  final Set<ExpressionProperty> subscribers = {};
 
   @protected
   void notifySubscribers() {
     subscribers.forEach((s) => s.evaluate());
   }
 
-  ElementValue<T> clone();
+  Property<T> clone();
 }

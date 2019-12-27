@@ -10,16 +10,15 @@ class ContainerParser extends ElementParser<Container> {
   Container parse(ParserNode parserNode, FormElement parent,
       ElementParserFunction parser) {
     var container = Container();
-    container.fillContainer(
-      id: parserNode.getPlainStringValue("id"),
-      parent: parserNode.getParentValue(parent),
-      isVisible: parserNode.getIsVisible(),
-      children: parserNode.getChildren<FormElement>(
+    container
+      ..id = parserNode.getPlainStringValue("id")
+      ..parentProperty = parserNode.getParentValue(parent)
+      ..isVisibleProperty = parserNode.getIsVisible()
+      ..childrenProperty = parserNode.getChildren<FormElement>(
           parent: container,
           parser: parser,
           childrenPropertyName: "children",
-          isContentProperty: true),
-    );
+          isContentProperty: true);
     return container;
   }
 }

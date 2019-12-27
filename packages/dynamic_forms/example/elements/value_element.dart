@@ -1,4 +1,4 @@
-import 'package:dynamic_forms/src/element_values/element_values.dart';
+import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/elements/value_element.dart';
 import 'package:expression_language/src/expressions/expression_provider.dart';
 
@@ -20,11 +20,11 @@ class ExampleValueElement extends ValueElement {
     switch (propertyName) {
       case firstPropertyName:
         {
-          return ImmutableElementValue(firstProperty);
+          return ImmutableProperty(firstProperty);
         }
       case secondPropertyName:
         {
-          return ImmutableElementValue(secondProperty);
+          return ImmutableProperty(secondProperty);
         }
       default:
         return null;

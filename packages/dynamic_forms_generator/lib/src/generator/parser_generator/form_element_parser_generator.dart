@@ -16,15 +16,18 @@ class FormElementParserGenerator extends ElementParserGenerator {
 
     buffer.writeln('''
     var ${componentDescription.type.typeName} = ${componentDescription.type.capitalizedTypeName}();
-    ${componentDescription.type.typeName}.fill${componentDescription.type.capitalizedTypeName}(''');
+    ${componentDescription.type.typeName}''');
 
-    for (var property in allProperties) {
+    for (var i = 0; i < allProperties.length; i++) {
+      var property = allProperties[i];
+      var propertySetter =
+          property.name == "id" ? "id" : "${property.name}Property";
       var parseMethod =
           getParseMethod(property, contentProperty?.name == property?.name);
-      buffer.writeln("      ${property.name}: ${parseMethod},");
+      var endOfLine = i == allProperties.length - 1 ? ";" : "";
+      buffer.writeln("      ..$propertySetter = ${parseMethod}$endOfLine");
     }
 
-    buffer.writeln("    );");
     buffer.writeln("    return ${componentDescription.type.typeName};");
 
     buffer.writeln("  }");

@@ -48,7 +48,7 @@ class ValueElementModelGenerator extends ElementModelGenerator {
       buffer.writeln('''
       case ${property.name}PropertyName:
         {
-          return ImmutableElementValue(${property.name});
+          return ImmutableProperty(${property.name});
         }''');
     }
     buffer.writeln('''

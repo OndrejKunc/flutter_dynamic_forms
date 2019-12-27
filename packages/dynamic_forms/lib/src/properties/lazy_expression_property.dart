@@ -1,10 +1,10 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:expression_language/expression_language.dart';
 
-class LazyExpressionElementValue<T> extends ExpressionElementValue<T> {
+class LazyExpressionProperty<T> extends ExpressionProperty<T> {
   Expression<T> _expression;
   LazyExpression<T> _lazyExpression;
-  LazyExpressionElementValue(this._lazyExpression);
+  LazyExpressionProperty(this._lazyExpression);
 
   @override
   Expression<T> getExpression() {

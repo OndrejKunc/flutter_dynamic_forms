@@ -10,12 +10,11 @@ class LabelParser extends ElementParser<Label> {
   Label parse(
       ParserNode parserNode, Element parent, ElementParserFunction parser) {
     var label = Label();
-    label.fillLabel(
-      id: parserNode.getPlainStringValue("id"),
-      isVisible: parserNode.getIsVisible(),
-      parent: parserNode.getParentValue(parent),
-      value: parserNode.getStringValue("value"),
-    );
+    label
+      ..id = parserNode.getPlainStringValue("id")
+      ..isVisibleProperty = parserNode.getIsVisible()
+      ..parentProperty = parserNode.getParentValue(parent)
+      ..valueProperty = parserNode.getStringValue("value");
     return label;
   }
 }
