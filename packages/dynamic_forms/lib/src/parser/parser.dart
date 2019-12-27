@@ -5,3 +5,5 @@ export 'xml/xml_parser_node.dart';
 export 'xml/xml_parser_service.dart';
 export 'json/json_parser_node.dart';
 export 'json/json_parser_service.dart';
+export 'form_element_parsers/form_element_parser.dart';
+export 'form_element_parsers/validation_parser.dart';

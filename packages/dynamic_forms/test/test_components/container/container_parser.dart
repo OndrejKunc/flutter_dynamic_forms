@@ -2,18 +2,18 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 
 import 'container.dart';
 
-class ContainerParser extends ElementParser<Container> {
+class ContainerParser extends FormElementParser<Container> {
   @override
   String get name => "container";
 
   @override
-  Container parse(
-      ParserNode parserNode, Element parent, ElementParserFunction parser) {
-    var container = Container();
+  FormElement getInstance() => Container();
+
+  @override
+  void fillProperties(
+      Container container, ParserNode parserNode, Element parent, parser) {
+    super.fillProperties(container, parserNode, parent, parser);
     container
-      ..id = parserNode.getPlainStringValue("id")
-      ..isVisibleProperty = parserNode.getIsVisible()
-      ..parentProperty = parserNode.getParentValue(parent)
       ..childrenProperty = parserNode.getChildren<FormElement>(
           parent: container,
           childrenPropertyName: "children",
@@ -24,6 +24,5 @@ class ContainerParser extends ElementParser<Container> {
           childrenPropertyName: "children2",
           parser: parser,
           isContentProperty: true);
-    return container;
   }
 }
