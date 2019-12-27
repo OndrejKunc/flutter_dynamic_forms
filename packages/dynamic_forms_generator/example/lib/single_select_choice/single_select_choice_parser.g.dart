@@ -2,18 +2,21 @@
 
 import '../components.dart';
 
-class SingleSelectChoiceParser extends ElementParser<SingleSelectChoice> {
+class SingleSelectChoiceParser<TSingleSelectChoice extends SingleSelectChoice> extends FormElementParser<TSingleSelectChoice> {
   @override
   String get name => "singleSelectChoice";
 
   @override
-  SingleSelectChoice parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var singleSelectChoice = SingleSelectChoice();
+  FormElement getInstance() => SingleSelectChoice();
+
+  @override
+  void fillProperties(
+    TSingleSelectChoice singleSelectChoice, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser) {
+    super.fillProperties(singleSelectChoice, parserNode, parent, parser);
     singleSelectChoice
-      ..id = parserNode.getPlainStringValue("id")
-      ..parentProperty = parserNode.getParentValue(parent)
-      ..isVisibleProperty = parserNode.getIsVisible()
       ..labelProperty = parserNode.getStringValue(
         "label",
         isImmutable: true,
@@ -22,6 +25,5 @@ class SingleSelectChoiceParser extends ElementParser<SingleSelectChoice> {
         "value",
         isImmutable: true,
       );
-    return singleSelectChoice;
   }
 }

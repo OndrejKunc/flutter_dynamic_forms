@@ -2,23 +2,25 @@
 
 import '../components.dart';
 
-class ContainerParser extends ElementParser<Container> {
+class ContainerParser<TContainer extends Container> extends FormElementParser<TContainer> {
   @override
   String get name => "container";
 
   @override
-  Container parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var container = Container();
+  FormElement getInstance() => Container();
+
+  @override
+  void fillProperties(
+    TContainer container, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser) {
+    super.fillProperties(container, parserNode, parent, parser);
     container
-      ..id = parserNode.getPlainStringValue("id")
-      ..parentProperty = parserNode.getParentValue(parent)
-      ..isVisibleProperty = parserNode.getIsVisible()
       ..childrenProperty = parserNode.getChildren<FormElement>(
           parent: container,
           parser: parser,
           childrenPropertyName: "children",
           isContentProperty: true);
-    return container;
   }
 }

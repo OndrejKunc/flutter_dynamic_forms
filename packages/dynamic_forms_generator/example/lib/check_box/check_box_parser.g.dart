@@ -2,18 +2,21 @@
 
 import '../components.dart';
 
-class CheckBoxParser extends ElementParser<CheckBox> {
+class CheckBoxParser<TCheckBox extends CheckBox> extends FormElementParser<TCheckBox> {
   @override
   String get name => "checkBox";
 
   @override
-  CheckBox parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var checkBox = CheckBox();
+  FormElement getInstance() => CheckBox();
+
+  @override
+  void fillProperties(
+    TCheckBox checkBox, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser) {
+    super.fillProperties(checkBox, parserNode, parent, parser);
     checkBox
-      ..id = parserNode.getPlainStringValue("id")
-      ..parentProperty = parserNode.getParentValue(parent)
-      ..isVisibleProperty = parserNode.getIsVisible()
       ..labelProperty = parserNode.getStringValue(
         "label",
         isImmutable: true,
@@ -54,6 +57,5 @@ class CheckBoxParser extends ElementParser<CheckBox> {
         ParserNode.defaultFalse,
         isImmutable: false,
       );
-    return checkBox;
   }
 }

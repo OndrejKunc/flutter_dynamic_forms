@@ -4,34 +4,46 @@ class FormElementParserGenerator extends ElementParserGenerator {
   @override
   String generate() {
     StringBuffer buffer = StringBuffer();
+    buffer.writeln(
+        "class ${componentDescription.type.capitalizedTypeName}Parser<T${componentDescription.type.capitalizedTypeName} extends ${componentDescription.type.capitalizedTypeName}> extends ${componentDescription.parentType.capitalizedTypeName}Parser<T${componentDescription.type.capitalizedTypeName}> {");
     buffer.writeln("  @override");
     buffer.writeln(
         "  String get name => \"${componentDescription.type.typeName}\";");
+    buffer.writeln();
+
+    buffer.writeln("  @override");
+    buffer.writeln(
+        "  FormElement getInstance() => ${componentDescription.type.capitalizedTypeName}();");
 
     buffer.writeln('''
 
   @override
-  ${componentDescription.type.toTypeString()} parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {''');
+  void fillProperties(
+    T${componentDescription.type.capitalizedTypeName} ${componentDescription.type.typeName}, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser) {''');
 
     buffer.writeln('''
-    var ${componentDescription.type.typeName} = ${componentDescription.type.capitalizedTypeName}();
-    ${componentDescription.type.typeName}''');
+    super.fillProperties(${componentDescription.type.typeName}, parserNode, parent, parser);''');
 
-    for (var i = 0; i < allProperties.length; i++) {
-      var property = allProperties[i];
+    for (var i = 0; i < componentDescription.properties.length; i++) {
+      if (i == 0) {
+        buffer.writeln("    ${componentDescription.type.typeName}");
+      }
+      var property = componentDescription.properties[i];
       var propertySetter =
           property.name == "id" ? "id" : "${property.name}Property";
       var parseMethod =
           getParseMethod(property, contentProperty?.name == property?.name);
-      var endOfLine = i == allProperties.length - 1 ? ";" : "";
+      var endOfLine =
+          i == componentDescription.properties.length - 1 ? ";" : "";
       buffer.writeln("      ..$propertySetter = ${parseMethod}$endOfLine");
     }
 
-    buffer.writeln("    return ${componentDescription.type.typeName};");
-
     buffer.writeln("  }");
 
+    buffer.writeln("}");
     return buffer.toString();
   }
 }

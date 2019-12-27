@@ -47,12 +47,8 @@ class ParserGenerator {
       buffer.writeln();
     }
 
-    buffer.writeln(
-        "class ${componentDescription.type.capitalizedTypeName}Parser extends ElementParser<${componentDescription.type.toTypeString()}> {");
-
     buffer.write(generator.generate());
 
-    buffer.writeln("}");
     return buffer.toString();
   }
 }

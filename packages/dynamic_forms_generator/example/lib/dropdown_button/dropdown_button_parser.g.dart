@@ -1,28 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+import 'package:example/single_select_group/single_select_group_parser.g.dart';
+
 import '../components.dart';
 
-class DropdownButtonParser extends ElementParser<DropdownButton> {
+class DropdownButtonParser<TDropdownButton extends DropdownButton>
+    extends SingleSelectGroupParser<TDropdownButton, DropdownOption> {
   @override
   String get name => "dropdownButton";
 
   @override
-  DropdownButton parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var dropdownButton = DropdownButton();
-    dropdownButton
-      ..id = parserNode.getPlainStringValue("id")
-      ..parentProperty = parserNode.getParentValue(parent)
-      ..isVisibleProperty = parserNode.getIsVisible()
-      ..choicesProperty = parserNode.getChildren<DropdownOption>(
-          parent: dropdownButton,
-          parser: parser,
-          childrenPropertyName: "choices",
-          isContentProperty: false)
-      ..valueProperty = parserNode.getStringValue(
-        "value",
-        isImmutable: false,
-      );
-    return dropdownButton;
+  FormElement getInstance() => DropdownButton();
+
+  @override
+  void fillProperties(TDropdownButton dropdownButton, ParserNode parserNode,
+      Element parent, ElementParserFunction parser) {
+    super.fillProperties(dropdownButton, parserNode, parent, parser);
   }
 }

@@ -10,9 +10,9 @@ class ValidationParser<TValidation extends Validation>
 
   @override
   void fillProperties(
-      TValidation formElement, ParserNode parserNode, Element parent, parser) {
-    super.fillProperties(formElement, parserNode, parent, parser);
-    formElement
+      TValidation validation, ParserNode parserNode, Element parent, parser) {
+    super.fillProperties(validation, parserNode, parent, parser);
+    validation
       ..messageProperty = parserNode.getStringValue("message")
       ..isValidProperty = parserNode.getValue(
           "isValid", ParserNode.convertToBool, ParserNode.defaultTrue);

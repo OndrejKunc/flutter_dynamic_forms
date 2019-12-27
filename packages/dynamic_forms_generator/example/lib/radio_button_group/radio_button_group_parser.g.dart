@@ -2,31 +2,24 @@
 
 import '../components.dart';
 
-class RadioButtonGroupParser extends ElementParser<RadioButtonGroup> {
+class RadioButtonGroupParser<TRadioButtonGroup extends RadioButtonGroup> extends SingleSelectGroupParser<TRadioButtonGroup> {
   @override
   String get name => "radioButtonGroup";
 
   @override
-  RadioButtonGroup parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var radioButtonGroup = RadioButtonGroup();
+  FormElement getInstance() => RadioButtonGroup();
+
+  @override
+  void fillProperties(
+    TRadioButtonGroup radioButtonGroup, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser) {
+    super.fillProperties(radioButtonGroup, parserNode, parent, parser);
     radioButtonGroup
-      ..id = parserNode.getPlainStringValue("id")
-      ..parentProperty = parserNode.getParentValue(parent)
-      ..isVisibleProperty = parserNode.getIsVisible()
-      ..choicesProperty = parserNode.getChildren<RadioButton>(
-          parent: radioButtonGroup,
-          parser: parser,
-          childrenPropertyName: "choices",
-          isContentProperty: false)
-      ..valueProperty = parserNode.getStringValue(
-        "value",
-        isImmutable: false,
-      )
       ..arrangementProperty = parserNode.getStringValue(
         "arrangement",
         isImmutable: false,
       );
-    return radioButtonGroup;
   }
 }
