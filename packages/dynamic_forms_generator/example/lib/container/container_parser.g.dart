@@ -2,7 +2,8 @@
 
 import '../components.dart';
 
-class ContainerParser<TContainer extends Container> extends FormElementParser<TContainer> {
+class ContainerParser<TContainer extends Container>
+    extends FormElementParser<TContainer> {
   @override
   String get name => "container";
 
@@ -10,11 +11,8 @@ class ContainerParser<TContainer extends Container> extends FormElementParser<TC
   FormElement getInstance() => Container();
 
   @override
-  void fillProperties(
-    TContainer container, 
-    ParserNode parserNode, 
-    Element parent,
-    ElementParserFunction parser) {
+  void fillProperties(TContainer container, ParserNode parserNode,
+      Element parent, ElementParserFunction parser) {
     super.fillProperties(container, parserNode, parent, parser);
     container
       ..childrenProperty = parserNode.getChildren<FormElement>(

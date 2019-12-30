@@ -2,7 +2,8 @@
 
 import '../components.dart';
 
-class SingleSelectChoiceParser<TSingleSelectChoice extends SingleSelectChoice> extends FormElementParser<TSingleSelectChoice> {
+class SingleSelectChoiceParser<TSingleSelectChoice extends SingleSelectChoice>
+    extends FormElementParser<TSingleSelectChoice> {
   @override
   String get name => "singleSelectChoice";
 

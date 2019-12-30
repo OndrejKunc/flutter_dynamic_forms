@@ -2,7 +2,8 @@
 
 import '../components.dart';
 
-class TextParser<TText extends Text> extends FormElementParser<TText> {
+class TextParser<TText extends Text>
+    extends FormElementParser<TText> {
   @override
   String get name => "text";
 

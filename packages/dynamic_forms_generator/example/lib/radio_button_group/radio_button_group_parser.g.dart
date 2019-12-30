@@ -2,7 +2,8 @@
 
 import '../components.dart';
 
-class RadioButtonGroupParser<TRadioButtonGroup extends RadioButtonGroup> extends SingleSelectGroupParser<TRadioButtonGroup> {
+class RadioButtonGroupParser<TRadioButtonGroup extends RadioButtonGroup>
+    extends SingleSelectGroupParser<TRadioButtonGroup, RadioButton> {
   @override
   String get name => "radioButtonGroup";
 

@@ -2,7 +2,8 @@
 
 import '../components.dart';
 
-class CheckBoxParser<TCheckBox extends CheckBox> extends FormElementParser<TCheckBox> {
+class CheckBoxParser<TCheckBox extends CheckBox>
+    extends FormElementParser<TCheckBox> {
   @override
   String get name => "checkBox";
 

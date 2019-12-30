@@ -65,11 +65,6 @@ class DynamicFormsBuilder implements Builder {
     var model = inputId.changeExtension(".g.dart");
     await buildStep.writeAsString(model, modelContent);
 
-    if (componentDescription.type is GenericDefinitionType) {
-      //We don't support parsers for generic types
-      return;
-    }
-
     var contentProperty = inheritanceService.getContentProperty();
 
     var parserGenerator = ParserGenerator(

@@ -2,7 +2,8 @@
 
 import '../components.dart';
 
-class ExampleFormElementParser<TExampleFormElement extends ExampleFormElement> extends FormElementParser<TExampleFormElement> {
+class ExampleFormElementParser<TExampleFormElement extends ExampleFormElement>
+    extends FormElementParser<TExampleFormElement> {
   @override
   String get name => "exampleFormElement";
 

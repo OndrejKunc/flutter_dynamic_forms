@@ -2,7 +2,8 @@
 
 import '../components.dart';
 
-class DropdownOptionParser<TDropdownOption extends DropdownOption> extends SingleSelectChoiceParser<TDropdownOption> {
+class DropdownOptionParser<TDropdownOption extends DropdownOption>
+    extends SingleSelectChoiceParser<TDropdownOption> {
   @override
   String get name => "dropdownOption";
 
