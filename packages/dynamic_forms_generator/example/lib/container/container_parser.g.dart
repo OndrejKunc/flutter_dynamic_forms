@@ -11,8 +11,12 @@ class ContainerParser<TContainer extends Container>
   FormElement getInstance() => Container();
 
   @override
-  void fillProperties(TContainer container, ParserNode parserNode,
-      Element parent, ElementParserFunction parser) {
+  void fillProperties(
+    TContainer container,
+    ParserNode parserNode,
+    Element parent,
+    ElementParserFunction parser,
+  ) {
     super.fillProperties(container, parserNode, parent, parser);
     container
       ..childrenProperty = parserNode.getChildren<FormElement>(

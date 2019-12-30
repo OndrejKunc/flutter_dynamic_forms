@@ -15,7 +15,8 @@ class ExampleFormElementParser<TExampleFormElement extends ExampleFormElement>
     TExampleFormElement exampleFormElement, 
     ParserNode parserNode, 
     Element parent,
-    ElementParserFunction parser) {
+    ElementParserFunction parser,
+  ) {
     super.fillProperties(exampleFormElement, parserNode, parent, parser);
     exampleFormElement
       ..enumExampleProperty = parserNode.getEnum<ExampleEnumElementEnum,ExampleEnumElement>(

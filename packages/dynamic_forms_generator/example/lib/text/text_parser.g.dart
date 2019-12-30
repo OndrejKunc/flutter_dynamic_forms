@@ -15,7 +15,8 @@ class TextParser<TText extends Text>
     TText text, 
     ParserNode parserNode, 
     Element parent,
-    ElementParserFunction parser) {
+    ElementParserFunction parser,
+  ) {
     super.fillProperties(text, parserNode, parent, parser);
     text
       ..labelProperty = parserNode.getStringValue(

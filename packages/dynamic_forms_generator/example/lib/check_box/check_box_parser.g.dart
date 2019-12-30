@@ -12,10 +12,11 @@ class CheckBoxParser<TCheckBox extends CheckBox>
 
   @override
   void fillProperties(
-    TCheckBox checkBox, 
-    ParserNode parserNode, 
+    TCheckBox checkBox,
+    ParserNode parserNode,
     Element parent,
-    ElementParserFunction parser) {
+    ElementParserFunction parser,
+  ) {
     super.fillProperties(checkBox, parserNode, parent, parser);
     checkBox
       ..labelProperty = parserNode.getStringValue(

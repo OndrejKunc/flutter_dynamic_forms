@@ -61,7 +61,8 @@ class FormElementParserGenerator extends ElementParserGenerator {
     T${componentDescription.type.capitalizedTypeName} ${componentDescription.type.typeName}, 
     ParserNode parserNode, 
     Element parent,
-    ElementParserFunction parser) {''');
+    ElementParserFunction parser,
+  ) {''');
 
     buffer.writeln('''
     super.fillProperties(${componentDescription.type.typeName}, parserNode, parent, parser);''');

@@ -15,7 +15,8 @@ class SingleSelectChoiceParser<TSingleSelectChoice extends SingleSelectChoice>
     TSingleSelectChoice singleSelectChoice, 
     ParserNode parserNode, 
     Element parent,
-    ElementParserFunction parser) {
+    ElementParserFunction parser,
+  ) {
     super.fillProperties(singleSelectChoice, parserNode, parent, parser);
     singleSelectChoice
       ..labelProperty = parserNode.getStringValue(

@@ -6,7 +6,6 @@ import 'value_element_model_generator.dart';
 
 abstract class ElementModelGenerator {
   ComponentDescription componentDescription;
-  List<PropertyDescription> allProperties;
 
   static const String _enumElementName = "enumElement";
   static const String _valueElementName = "valueElement";
@@ -42,7 +41,6 @@ abstract class ElementModelGenerator {
   static ElementModelGenerator getGenerator({
     String typeName,
     ComponentDescription componentDescription,
-    List<PropertyDescription> allProperties,
   }) {
     ElementModelGenerator returnElement;
     if (typeName != null) {
@@ -63,9 +61,7 @@ abstract class ElementModelGenerator {
             break;
           }
       }
-      returnElement
-        ..allProperties = allProperties
-        ..componentDescription = componentDescription;
+      returnElement.componentDescription = componentDescription;
 
       return returnElement;
     } else {
