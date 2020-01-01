@@ -264,11 +264,6 @@
                     "initialDate": "2019-10-20"
                 }
             ]
-        },
-        {
-            "@name": "address",
-            "id": "testaddress",
-            "label": "Test address:"
         }
     ]
 }

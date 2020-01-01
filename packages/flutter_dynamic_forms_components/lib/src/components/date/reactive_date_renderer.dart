@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 import 'package:intl/intl.dart';
 
-import 'date.dart' as model;
+import 'date.g.dart' as model;
 
 class ReactiveDateRenderer extends FormElementRenderer<model.Date> {
   @override
@@ -13,11 +13,11 @@ class ReactiveDateRenderer extends FormElementRenderer<model.Date> {
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
     return StreamBuilder(
-      stream: element.dateValueChanged,
+      stream: element.valueChanged,
       builder: (BuildContext context, _) {
         final format = DateFormat(element.format);
         final time =
-            element.dateValue != null ? element.dateValue : element.initialDate;
+            element.value != null ? element.value : element.initialDate;
 
         return Center(
           child: Padding(

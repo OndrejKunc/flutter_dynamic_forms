@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 import 'package:intl/intl.dart';
 
-import 'date_range.dart' as model;
+import 'date_range.g.dart' as model;
 import 'date_range_popup.dart';
 
 class ReactiveDateRangeRenderer extends FormElementRenderer<model.DateRange> {

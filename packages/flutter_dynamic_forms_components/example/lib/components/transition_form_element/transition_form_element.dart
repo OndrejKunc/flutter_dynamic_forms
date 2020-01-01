@@ -6,8 +6,8 @@ class TransitionFormElement extends FormElement {
   final FormElementTransitionType transitionType;
 
   TransitionFormElement(this.child, this.transitionType) {
-    registerElementValue(
-        FormElement.isVisiblePropertyName, ImmutableElementValue<bool>(true));
+    registerProperty(
+        FormElement.isVisiblePropertyName, ImmutableProperty<bool>(true));
   }
 
   @override

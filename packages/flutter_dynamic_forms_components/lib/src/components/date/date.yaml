@@ -1,0 +1,16 @@
+type: date
+parentType: formElement
+properties:
+  value:
+    type: dateTime
+    isMutable: true
+  label:
+    type: string
+  format:
+    type: string
+  initialDate:
+    type: dateTime
+  firstDate:
+    type: dateTime
+  lastDate:
+    type: dateTime

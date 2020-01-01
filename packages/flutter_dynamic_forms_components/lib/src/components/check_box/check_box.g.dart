@@ -8,27 +8,19 @@ class CheckBox extends FormElement {
   static const String labelPropertyName = "label";
   static const String valuePropertyName = "value";
 
-  String get label => properties[labelPropertyName].value;
-  Stream<String> get labelChanged => properties[labelPropertyName].valueChanged;
+  Property<String> get labelProperty => properties[labelPropertyName];
+  set labelProperty(Property<String> value) =>
+      registerProperty(labelPropertyName, value);
+  String get label =>
+      labelProperty.value;
+  Stream<String> get labelChanged => labelProperty.valueChanged;
 
-  bool get value => properties[valuePropertyName].value;
-  Stream<bool> get valueChanged => properties[valuePropertyName].valueChanged;
-
-  void fillCheckBox({
-    @required String id,
-    @required ElementValue<FormElement> parent,
-    @required ElementValue<bool> isVisible,
-    @required ElementValue<String> label,
-    @required ElementValue<bool> value,
-  }) {
-    fillFormElement(
-      id: id,
-      parent: parent,
-      isVisible: isVisible,
-    );
-    registerElementValue(labelPropertyName, label);
-    registerElementValue(valuePropertyName, value);
-  }
+  Property<bool> get valueProperty => properties[valuePropertyName];
+  set valueProperty(Property<bool> value) =>
+      registerProperty(valuePropertyName, value);
+  bool get value =>
+      valueProperty.value;
+  Stream<bool> get valueChanged => valueProperty.valueChanged;
 
   @override
   FormElement getInstance() {

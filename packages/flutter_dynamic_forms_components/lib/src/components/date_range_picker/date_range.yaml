@@ -1,0 +1,21 @@
+type: dateRange
+parentType: formElement
+properties:
+  firstValue:
+    type: dateTime
+    isMutable: true
+  secondValue:
+    type: dateTime
+    isMutable: true
+  label:
+    type: string
+  format:
+    type: string
+  initialDate:
+    type: dateTime
+  minDate:
+    type: dateTime
+    default: "19690101"
+  maxDate:
+    type: dateTime
+    default: "20500101"

@@ -3,28 +3,21 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class FormParser extends ElementParser<Form> {
+class FormParser<TForm extends Form>
+    extends FormGroupParser<TForm> {
   @override
   String get name => "form";
 
   @override
-  Form parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var form = Form();
-    form.fillForm(
-      id: parserNode.getPlainStringValue("id"),
-      parent: parserNode.getParentValue(parent),
-      isVisible: parserNode.getIsVisible(),
-      children: parserNode.getChildren<FormElement>(
-          parent: form,
-          parser: parser,
-          childrenPropertyName: "children",
-          isContentProperty: true),
-      name: parserNode.getStringValue(
-        "name",
-        isImmutable: true,
-      ),
-    );
-    return form;
+  FormElement getInstance() => Form();
+
+  @override
+  void fillProperties(
+    TForm form, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser,
+  ) {
+    super.fillProperties(form, parserNode, parent, parser);
   }
 }

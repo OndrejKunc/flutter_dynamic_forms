@@ -8,27 +8,19 @@ class SingleSelectGroup<TSingleSelectChoice extends SingleSelectChoice> extends 
   static const String choicesPropertyName = "choices";
   static const String valuePropertyName = "value";
 
-  List<TSingleSelectChoice> get choices => properties[choicesPropertyName].value;
-  Stream<List<TSingleSelectChoice>> get choicesChanged => properties[choicesPropertyName].valueChanged;
+  Property<List<TSingleSelectChoice>> get choicesProperty => properties[choicesPropertyName];
+  set choicesProperty(Property<List<TSingleSelectChoice>> value) =>
+      registerProperty(choicesPropertyName, value);
+  List<TSingleSelectChoice> get choices =>
+      choicesProperty.value;
+  Stream<List<TSingleSelectChoice>> get choicesChanged => choicesProperty.valueChanged;
 
-  String get value => properties[valuePropertyName].value;
-  Stream<String> get valueChanged => properties[valuePropertyName].valueChanged;
-
-  void fillSingleSelectGroup({
-    @required String id,
-    @required ElementValue<FormElement> parent,
-    @required ElementValue<bool> isVisible,
-    @required ElementValue<List<TSingleSelectChoice>> choices,
-    @required ElementValue<String> value,
-  }) {
-    fillFormElement(
-      id: id,
-      parent: parent,
-      isVisible: isVisible,
-    );
-    registerElementValue(choicesPropertyName, choices);
-    registerElementValue(valuePropertyName, value);
-  }
+  Property<String> get valueProperty => properties[valuePropertyName];
+  set valueProperty(Property<String> value) =>
+      registerProperty(valuePropertyName, value);
+  String get value =>
+      valueProperty.value;
+  Stream<String> get valueChanged => valueProperty.valueChanged;
 
   @override
   FormElement getInstance() {

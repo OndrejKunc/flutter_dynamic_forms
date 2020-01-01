@@ -5,22 +5,6 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:meta/meta.dart';
 
 class SingleSelectChipChoice extends SingleSelectChoice {
-  void fillSingleSelectChipChoice({
-    @required String id,
-    @required ElementValue<FormElement> parent,
-    @required ElementValue<bool> isVisible,
-    @required ElementValue<String> label,
-    @required ElementValue<String> value,
-  }) {
-    fillSingleSelectChoice(
-      id: id,
-      parent: parent,
-      isVisible: isVisible,
-      label: label,
-      value: value,
-    );
-  }
-
   @override
   FormElement getInstance() {
     return SingleSelectChipChoice();

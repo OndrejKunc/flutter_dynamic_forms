@@ -7,22 +7,12 @@ import 'package:meta/meta.dart';
 class MultiSelectGroup<TMultiSelectChoice extends MultiSelectChoice> extends FormElement {
   static const String choicesPropertyName = "choices";
 
-  List<TMultiSelectChoice> get choices => properties[choicesPropertyName].value;
-  Stream<List<TMultiSelectChoice>> get choicesChanged => properties[choicesPropertyName].valueChanged;
-
-  void fillMultiSelectGroup({
-    @required String id,
-    @required ElementValue<FormElement> parent,
-    @required ElementValue<bool> isVisible,
-    @required ElementValue<List<TMultiSelectChoice>> choices,
-  }) {
-    fillFormElement(
-      id: id,
-      parent: parent,
-      isVisible: isVisible,
-    );
-    registerElementValue(choicesPropertyName, choices);
-  }
+  Property<List<TMultiSelectChoice>> get choicesProperty => properties[choicesPropertyName];
+  set choicesProperty(Property<List<TMultiSelectChoice>> value) =>
+      registerProperty(choicesPropertyName, value);
+  List<TMultiSelectChoice> get choices =>
+      choicesProperty.value;
+  Stream<List<TMultiSelectChoice>> get choicesChanged => choicesProperty.valueChanged;
 
   @override
   FormElement getInstance() {

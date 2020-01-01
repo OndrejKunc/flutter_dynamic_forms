@@ -3,7 +3,6 @@ import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_component
 
 List<ElementParser> getDefaultParserList() {
   return [
-    AddressParser(),
     CheckBoxParser(),
     DropdownButtonParser(),
     DropdownOptionParser(),

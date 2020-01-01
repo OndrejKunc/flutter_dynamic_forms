@@ -3,28 +3,26 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class FormGroupParser extends ElementParser<FormGroup> {
+class FormGroupParser<TFormGroup extends FormGroup>
+    extends ContainerParser<TFormGroup> {
   @override
   String get name => "formGroup";
 
   @override
-  FormGroup parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var formGroup = FormGroup();
-    formGroup.fillFormGroup(
-      id: parserNode.getPlainStringValue("id"),
-      parent: parserNode.getParentValue(parent),
-      isVisible: parserNode.getIsVisible(),
-      children: parserNode.getChildren<FormElement>(
-          parent: formGroup,
-          parser: parser,
-          childrenPropertyName: "children",
-          isContentProperty: true),
-      name: parserNode.getStringValue(
+  FormElement getInstance() => FormGroup();
+
+  @override
+  void fillProperties(
+    TFormGroup formGroup, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser,
+  ) {
+    super.fillProperties(formGroup, parserNode, parent, parser);
+    formGroup
+      ..nameProperty = parserNode.getStringValue(
         "name",
         isImmutable: true,
-      ),
-    );
-    return formGroup;
+      );
   }
 }

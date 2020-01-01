@@ -13,52 +13,54 @@ class Slider extends FormElement {
   static const String minValuePropertyName = "minValue";
   static const String valuePropertyName = "value";
 
-  int get activeColor => properties[activeColorPropertyName].value;
-  Stream<int> get activeColorChanged => properties[activeColorPropertyName].valueChanged;
+  Property<int> get activeColorProperty => properties[activeColorPropertyName];
+  set activeColorProperty(Property<int> value) =>
+      registerProperty(activeColorPropertyName, value);
+  int get activeColor =>
+      activeColorProperty.value;
+  Stream<int> get activeColorChanged => activeColorProperty.valueChanged;
 
-  int get division => properties[divisionPropertyName].value;
-  Stream<int> get divisionChanged => properties[divisionPropertyName].valueChanged;
+  Property<int> get divisionProperty => properties[divisionPropertyName];
+  set divisionProperty(Property<int> value) =>
+      registerProperty(divisionPropertyName, value);
+  int get division =>
+      divisionProperty.value;
+  Stream<int> get divisionChanged => divisionProperty.valueChanged;
 
-  int get inactiveColor => properties[inactiveColorPropertyName].value;
-  Stream<int> get inactiveColorChanged => properties[inactiveColorPropertyName].valueChanged;
+  Property<int> get inactiveColorProperty => properties[inactiveColorPropertyName];
+  set inactiveColorProperty(Property<int> value) =>
+      registerProperty(inactiveColorPropertyName, value);
+  int get inactiveColor =>
+      inactiveColorProperty.value;
+  Stream<int> get inactiveColorChanged => inactiveColorProperty.valueChanged;
 
-  String get label => properties[labelPropertyName].value;
-  Stream<String> get labelChanged => properties[labelPropertyName].valueChanged;
+  Property<String> get labelProperty => properties[labelPropertyName];
+  set labelProperty(Property<String> value) =>
+      registerProperty(labelPropertyName, value);
+  String get label =>
+      labelProperty.value;
+  Stream<String> get labelChanged => labelProperty.valueChanged;
 
-  double get maxValue => properties[maxValuePropertyName].value;
-  Stream<double> get maxValueChanged => properties[maxValuePropertyName].valueChanged;
+  Property<double> get maxValueProperty => properties[maxValuePropertyName];
+  set maxValueProperty(Property<double> value) =>
+      registerProperty(maxValuePropertyName, value);
+  double get maxValue =>
+      maxValueProperty.value;
+  Stream<double> get maxValueChanged => maxValueProperty.valueChanged;
 
-  double get minValue => properties[minValuePropertyName].value;
-  Stream<double> get minValueChanged => properties[minValuePropertyName].valueChanged;
+  Property<double> get minValueProperty => properties[minValuePropertyName];
+  set minValueProperty(Property<double> value) =>
+      registerProperty(minValuePropertyName, value);
+  double get minValue =>
+      minValueProperty.value;
+  Stream<double> get minValueChanged => minValueProperty.valueChanged;
 
-  double get value => properties[valuePropertyName].value;
-  Stream<double> get valueChanged => properties[valuePropertyName].valueChanged;
-
-  void fillSlider({
-    @required String id,
-    @required ElementValue<FormElement> parent,
-    @required ElementValue<bool> isVisible,
-    @required ElementValue<int> activeColor,
-    @required ElementValue<int> division,
-    @required ElementValue<int> inactiveColor,
-    @required ElementValue<String> label,
-    @required ElementValue<double> maxValue,
-    @required ElementValue<double> minValue,
-    @required ElementValue<double> value,
-  }) {
-    fillFormElement(
-      id: id,
-      parent: parent,
-      isVisible: isVisible,
-    );
-    registerElementValue(activeColorPropertyName, activeColor);
-    registerElementValue(divisionPropertyName, division);
-    registerElementValue(inactiveColorPropertyName, inactiveColor);
-    registerElementValue(labelPropertyName, label);
-    registerElementValue(maxValuePropertyName, maxValue);
-    registerElementValue(minValuePropertyName, minValue);
-    registerElementValue(valuePropertyName, value);
-  }
+  Property<double> get valueProperty => properties[valuePropertyName];
+  set valueProperty(Property<double> value) =>
+      registerProperty(valuePropertyName, value);
+  double get value =>
+      valueProperty.value;
+  Stream<double> get valueChanged => valueProperty.valueChanged;
 
   @override
   FormElement getInstance() {
