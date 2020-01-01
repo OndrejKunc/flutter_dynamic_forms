@@ -2,26 +2,38 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 
 import 'text.dart';
 
-class TextParser extends ElementParser<Text> {
+class TextParser<TText extends Text> extends FormElementParser<TText> {
   @override
   String get name => "text";
 
   @override
-  Text parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
-    var text = Text();
-    text.fillText(
-      id: parserNode.getPlainStringValue("id"),
-      isVisible: parserNode.getIsVisible(),
-      parent: parserNode.getParentValue(parent),
-      value: parserNode.getStringValue("value", isImmutable: false),
-      label: parserNode.getStringValue("label"),
-      textInputType: parserNode.getStringValue("textInputType"),
-      validations: parserNode.getChildren<Validation>(
+  FormElement getInstance() => Text();
+
+  @override
+  void fillProperties(
+    TText text,
+    ParserNode parserNode,
+    Element parent,
+    ElementParserFunction parser,
+  ) {
+    super.fillProperties(text, parserNode, parent, parser);
+    text
+      ..labelProperty = parserNode.getStringValue(
+        "label",
+        isImmutable: true,
+      )
+      ..textInputTypeProperty = parserNode.getStringValue(
+        "textInputType",
+        isImmutable: true,
+      )
+      ..validationsProperty = parserNode.getChildren<Validation>(
           parent: text,
-          childrenPropertyName: Text.validationsPropertyName,
-          parser: parser),
-    );
-    return text;
+          parser: parser,
+          childrenPropertyName: "validations",
+          isContentProperty: false)
+      ..valueProperty = parserNode.getStringValue(
+        "value",
+        isImmutable: false,
+      );
   }
 }

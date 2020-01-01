@@ -52,8 +52,8 @@ class FormManager {
       return;
     }
     var formElement = formElementMap[elementId];
-    var elementValue = formElement.getProperty(propertyName);
-    var mutableValue = elementValue as MutableProperty<T>;
+    var property = formElement.getProperty(propertyName);
+    var mutableValue = property as MutableProperty<T>;
     if (mutableValue == null) {
       print(
           "Value cannot be changed because element $elementId is not mutable");

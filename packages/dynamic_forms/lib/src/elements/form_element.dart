@@ -98,12 +98,12 @@ abstract class FormElement implements Element {
   ExpressionProvider getExpressionProvider([String propertyName]) =>
       getProperty(propertyName);
 
-  Property<T> registerProperty<T>(String name, Property<T> elementValue) {
-    if (elementValue == null) {
+  Property<T> registerProperty<T>(String name, Property<T> property) {
+    if (property == null) {
       return null;
     }
-    properties[name] = elementValue;
-    return elementValue;
+    properties[name] = property;
+    return property;
   }
 
   Map<String, Property> getProperties() => properties;

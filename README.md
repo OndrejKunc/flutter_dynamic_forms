@@ -155,9 +155,9 @@ flutter_dynamic_forms_components: <latest version>
 
 The `flutter_dynamic_forms_components` library contains set of predefined components like `Text`, `Label`, `CheckBox`, `RadioButtonGroup` etc. To make your app work with those components you need to perform the following steps:
 
-First you need to create object called `FormManager`. You can put it inside the `initState` method in your state of your `StatefulWidget`:
+First, you need to create an object called `FormManager`. You can put it inside the `initState` method in your state of your `StatefulWidget`:
 ```dart
-//Get your data somewhere, for demo purposes we use local assets
+//Get your data somewhere, for demo purposes, we use local assets
 var data = await rootBundle.loadString("assets/test_form.xml");
 
 //Use either XmlFormParserService or JsonParserService depending on your form format.
@@ -170,14 +170,14 @@ _formManager = formManagerBuilder.build(data);
 The `FormManager` has a getter `form` which is the object representation of your xml/json form in Dart. `FormManager` can also perform some useful operation on the form, like manipulating the state of the form when something happens in the UI, validating the form or collecting all the data from the form so it can be sent back to the server.
 
 
-Before you can render your form, you also need to initialize `FormRenderService`. This service gets list of renderers, where each renderer controls how each component would be rendered on the screen:
+Before you can render your form, you also need to initialize `FormRenderService`. This service gets a list of renderers, where each renderer controls how each component would be rendered on the screen:
 ```dart
 _formRenderService = FormRenderService(
     renderers: getReactiveRenderers(),
     dispatcher: _onFormElementEvent,
 );
 ```
-In this example we use set of predefined renderers. The word reactive means that each component will listen to the changes in the form model property and will update itself. The `dispatcher` parameter is the callback method which is sent from the renderers when some action is performed (like checkbox checked). We will just delegate this action to our `FormManager`:
+In this example, we use a set of predefined renderers. The word reactive means that each component will listen to the changes in the form model property and will update itself. The `dispatcher` parameter is the callback method which is sent from the renderers when some action is performed (like checkbox checked). We will just delegate this action to our `FormManager`:
 
 ```dart
 void _onFormElementEvent(FormElementEvent event) {
@@ -196,7 +196,7 @@ setState(() {
 });
 ```
 
-And finally define the build method:
+And finally, define the build method:
 
 ```dart
 @override
@@ -225,7 +225,7 @@ To collect the data simply call:
 List<FormItemValue> data = formManager.getFormData()
 ```
 
-It contains list of all the properties which were marked as a mutable in a component parser definition. In default components those are the properties that are expected to be changed by a user. Each item contains id of the source element, property name and property value.
+It contains a list of all the properties which were marked as a mutable in a component parser definition. In default components those are the properties that are expected to be changed by a user. Each item contains id of the source element, property name, and property value.
 To submit the form you usually want to serialize this list and send it back to your server.
 
 ## Writing a custom component
@@ -235,62 +235,66 @@ This library allows you to define your custom tree of the components.
 To implement a custom component you need to provide 3 classes: `Parser`, `Model` and `Renderer`. Parsers and Models then need to be registered when you are building the form as you can see in the code above. Let's show it on the `CheckBox` example:
 
 ### Parser
-This class controls how the component would be deserialized into a corresponding model class. It works on both XML and JSON. `ParserNode` parameter contains a collection of methods which let you parse values from the current XML/JSON node. Use the `ElementParserFunction parser` parameter of the parse method to recursively parse children nodes.
+This class controls how the component would be deserialized into a corresponding model class. It works on both XML and JSON. `ParserNode` parameter contains a collection of methods that let you parse values from the current XML/JSON node. Use the `ElementParserFunction parser` parameter of the parse method to recursively parse children nodes.
 
 ```dart
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'check_box.dart';
 
-class CheckBoxParser extends ElementParser<CheckBox> {
+class CheckBoxParser extends FormElementParser<CheckBox> {
   @override
   String get name => "checkBox";
 
   @override
-  CheckBox parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var checkBox = CheckBox();
-    checkBox.fillCheckBox(
-      id: parserNode.getPlainStringValue("id"),
-      isVisible: parserNode.getIsVisible(),
-      parent: parserNode.getParentValue(parent),
-      value: parserNode.getValue(
-          "isValid", ParserNode.convertToBool, ParserNode.defaultFalse,
-          isImmutable: false),
-      label: parserNode.getStringValue("label"),
-    );
-    return checkBox;
+  FormElement getInstance() => CheckBox();
+
+  @override
+  void fillProperties(
+    CheckBox checkBox,
+    ParserNode parserNode,
+    Element parent,
+    ElementParserFunction parser,
+  ) {
+    super.fillProperties(checkBox, parserNode, parent, parser);
+    checkBox
+      ..labelProperty = parserNode.getStringValue(
+        "label",
+        isImmutable: true,
+      )
+      ..valueProperty = parserNode.getValue(
+        "value",
+        ParserNode.convertToBool,
+        ParserNode.defaultFalse,
+        isImmutable: false,
+      );
   }
 }
 ```
 
 ### Model
-Model is the main component definition without any Flutter dependency. Component can extend other component inheriting all the properties. It can also contain components as its children.
-Every property can contain either simple value or expression which is evaluated to the value. To be able to cover both of those cases all the properties must be defined using `ElementValue<T>` syntax. Properties are stored in a single map called `properties` so you can easily traverse the whole component tree. It is a good idea to create getters around this map so you can easily access property values.
+Model is the main component definition without any Flutter dependency. A component can extend other component inheriting all the properties. It can also contain components as its children.
+Every property can contain either simple value or expression which is evaluated to the value. To be able to cover both of those cases all the properties must be defined using `Property<T>` syntax. Properties are stored in a single map called `properties` so you can easily traverse the whole component tree. It is a good idea to create getters and setters around this map so you can easily access and set property values.
 
 ```dart
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:meta/meta.dart';
 
 class CheckBox extends FormElement {
-  static const String valuePropertyName = "value";
   static const String labelPropertyName = "label";
+  static const String valuePropertyName = "value";
 
-  bool get value => properties[valuePropertyName].value;
-  Stream<bool> get valueChanged => properties[valuePropertyName].valueChanged;
-  String get label => properties[labelPropertyName].value;
-  Stream<String> get labelChanged => properties[labelPropertyName].valueChanged;
+  Property<String> get labelProperty => properties[labelPropertyName];
+  set labelProperty(Property<String> value) =>
+      registerProperty(labelPropertyName, value);
+  String get label =>
+      labelProperty.value;
+  Stream<String> get labelChanged => labelProperty.valueChanged;
 
-  void fillCheckBox({
-    @required String id,
-    @required ElementValue<FormElement> parent,
-    @required ElementValue<bool> isVisible,
-    @required ElementValue<bool> value,
-    @required ElementValue<String> label,
-  }) {
-    fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    registerElementValue(valuePropertyName, value);
-    registerElementValue(labelPropertyName, label);
-  }
+  Property<bool> get valueProperty => properties[valuePropertyName];
+  set valueProperty(Property<bool> value) =>
+      registerProperty(valuePropertyName, value);
+  bool get value =>
+      valueProperty.value;
+  Stream<bool> get valueChanged => valueProperty.valueChanged;
 
   @override
   FormElement getInstance() {
@@ -300,7 +304,7 @@ class CheckBox extends FormElement {
 ```
 
 ### Renderer
-This class simply takes the model and returns a Flutter widget. You can also subscribe to the changes on the properties so your widget will be properly updated when something happens on the model. For this purpose use the Stream defined on each property or use the component property `propertyChanged` which returns Stream and emits value whenever any property changes. To redefine UI of the default components inside `flutter_dynamic_forms_components` simply define your own renderers for the existing models. You can even have multiple renderers and show a different UI on a different screen. Use the `FormElementRendererFunction renderer` parameter of the render method to recursively render children.
+This class simply takes the model and returns a Flutter widget. You can also subscribe to the changes in the properties so your widget will be properly updated when something happens on the model. For this purpose use the Stream defined on each property or use the component property `propertyChanged` which returns Stream and emits value whenever any property changes. To redefine UI of the default components inside `flutter_dynamic_forms_components` simply define your renderers for the existing models. You can even have multiple renderers and show a different UI on a different screen. Use the `FormElementRendererFunction renderer` parameter of the render method to recursively render children.
 
 ```dart
 import 'package:flutter/material.dart';
@@ -351,3 +355,7 @@ class CheckBoxRenderer extends FormElementRenderer<CheckBox> {
   }
 }
 ```
+
+### Generator
+
+There is a lot of boilerplate when implementing `Parser` and `Model` classes. Because most of the apps will probably need to create a lot of custom components, there is also a [generator package](https://github.com/OndrejKunc/flutter_dynamic_forms/tree/master/packages/dynamic_forms_generator) which lets you define components and their properties using simple YAML syntax. 

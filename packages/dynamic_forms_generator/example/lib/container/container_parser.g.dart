@@ -12,8 +12,8 @@ class ContainerParser<TContainer extends Container>
 
   @override
   void fillProperties(
-    TContainer container,
-    ParserNode parserNode,
+    TContainer container, 
+    ParserNode parserNode, 
     Element parent,
     ElementParserFunction parser,
   ) {

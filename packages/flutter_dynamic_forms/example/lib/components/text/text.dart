@@ -1,38 +1,37 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:meta/meta.dart';
 
 class Text extends FormElement {
-  static const String valuePropertyName = "value";
   static const String labelPropertyName = "label";
-  static const textInputTypePropertyName = "textInputType";
-  static const validationsPropertyName = "validations";
+  static const String textInputTypePropertyName = "textInputType";
+  static const String validationsPropertyName = "validations";
+  static const String valuePropertyName = "value";
 
-  String get label => properties[labelPropertyName].value;
-  Stream<String> get labelChanged => properties[labelPropertyName].valueChanged;
-  String get value => properties[valuePropertyName].value;
-  Stream<String> get valueChanged => properties[valuePropertyName].valueChanged;
-  String get textInputType => properties[textInputTypePropertyName].value;
-  Stream<String> get textInputTypeChanged =>
-      properties[textInputTypePropertyName].valueChanged;
-  List<Validation> get validations => properties[validationsPropertyName].value;
+  Property<String> get labelProperty => properties[labelPropertyName];
+  set labelProperty(Property<String> value) =>
+      registerProperty(labelPropertyName, value);
+  String get label => labelProperty.value;
+  Stream<String> get labelChanged => labelProperty.valueChanged;
+
+  Property<String> get textInputTypeProperty =>
+      properties[textInputTypePropertyName];
+  set textInputTypeProperty(Property<String> value) =>
+      registerProperty(textInputTypePropertyName, value);
+  String get textInputType => textInputTypeProperty.value;
+  Stream<String> get textInputTypeChanged => textInputTypeProperty.valueChanged;
+
+  Property<List<Validation>> get validationsProperty =>
+      properties[validationsPropertyName];
+  set validationsProperty(Property<List<Validation>> value) =>
+      registerProperty(validationsPropertyName, value);
+  List<Validation> get validations => validationsProperty.value;
   Stream<List<Validation>> get validationsChanged =>
-      properties[validationsPropertyName].valueChanged;
+      validationsProperty.valueChanged;
 
-  void fillText({
-    @required String id,
-    @required ElementValue<FormElement> parent,
-    @required ElementValue<bool> isVisible,
-    @required ElementValue<String> value,
-    @required ElementValue<String> label,
-    @required ElementValue<String> textInputType,
-    @required ElementValue<List<Validation>> validations,
-  }) {
-    fillFormElement(id: id, parent: parent, isVisible: isVisible);
-    registerElementValue(valuePropertyName, value);
-    registerElementValue(labelPropertyName, label);
-    registerElementValue(textInputTypePropertyName, textInputType);
-    registerElementValue(validationsPropertyName, validations);
-  }
+  Property<String> get valueProperty => properties[valuePropertyName];
+  set valueProperty(Property<String> value) =>
+      registerProperty(valuePropertyName, value);
+  String get value => valueProperty.value;
+  Stream<String> get valueChanged => valueProperty.valueChanged;
 
   @override
   FormElement getInstance() {

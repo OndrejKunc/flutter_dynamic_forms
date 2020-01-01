@@ -3,23 +3,23 @@ import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_component
 
 List<ElementParser> getDefaultParserList() {
   return [
-    CheckBoxParser(),
-    DropdownButtonParser(),
-    DropdownOptionParser(),
-    FormParser(),
-    FormGroupParser(),
-    LabelParser(),
-    RadioButtonGroupParser(),
-    RadioButtonParser(),
-    ValidationParser(),
+    CheckBoxParser<CheckBox>(),
+    DropdownButtonParser<DropdownButton>(),
+    DropdownOptionParser<DropdownOption>(),
+    FormParser<Form>(),
+    FormGroupParser<FormGroup>(),
+    LabelParser<Label>(),
+    RadioButtonGroupParser<RadioButtonGroup>(),
+    RadioButtonParser<RadioButton>(),
+    ValidationParser<Validation>(),
     RequiredValidationParser(),
-    TextParser(),
-    SingleSelectChipGroupParser(),
-    SingleSelectChipChoiceParser(),
-    MultiSelectChipChoiceParser(),
-    MultiSelectChipGroupParser(),
-    DateParser(),
-    DateRangeParser(),
-    SliderParser()
+    TextParser<Text>(),
+    SingleSelectChipGroupParser<SingleSelectChipGroup>(),
+    SingleSelectChipChoiceParser<SingleSelectChipChoice>(),
+    MultiSelectChipChoiceParser<MultiSelectChipChoice>(),
+    MultiSelectChipGroupParser<MultiSelectChipGroup>(),
+    DateParser<Date>(),
+    DateRangeParser<DateRange>(),
+    SliderParser<Slider>()
   ];
 }

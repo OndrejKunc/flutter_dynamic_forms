@@ -12,8 +12,8 @@ class CheckBoxParser<TCheckBox extends CheckBox>
 
   @override
   void fillProperties(
-    TCheckBox checkBox,
-    ParserNode parserNode,
+    TCheckBox checkBox, 
+    ParserNode parserNode, 
     Element parent,
     ElementParserFunction parser,
   ) {

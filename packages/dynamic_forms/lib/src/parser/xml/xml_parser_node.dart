@@ -15,9 +15,9 @@ class XmlParserNode extends ParserNode {
   @override
   Property<T> getValue<T>(String name, T converter(String s), T defaultValue(),
       {bool isImmutable = true}) {
-    var elementValue = getPropertyAsElement(element, name);
-    if (elementValue != null) {
-      var firstChild = elementValue.firstChild;
+    var property = getPropertyAsElement(element, name);
+    if (property != null) {
+      var firstChild = property.firstChild;
       if (firstChild != null) {
         if (firstChild is XmlText || firstChild is XmlCDATA) {
           return createProperty<T>(converter(firstChild.text), isImmutable);

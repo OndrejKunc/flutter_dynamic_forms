@@ -236,12 +236,12 @@ void main() {
 
     var formProperties = getFormPropertyIterator<Property>(result);
 
-    for (var elementValue in formProperties) {
+    for (var property in formProperties) {
       var elementsValuesCollectorVisitor = ExpressionProviderCollectorVisitor();
-      elementValue.getExpression().accept(elementsValuesCollectorVisitor);
+      property.getExpression().accept(elementsValuesCollectorVisitor);
       for (var sourceProperty
           in elementsValuesCollectorVisitor.expressionProviders) {
-        (sourceProperty as Property).addSubscriber(elementValue);
+        (sourceProperty as Property).addSubscriber(property);
       }
     }
 

@@ -14,15 +14,15 @@ class JsonParserNode extends ParserNode {
   @override
   Property<T> getValue<T>(String name, T converter(String s), T defaultValue(),
       {bool isImmutable = true}) {
-    var elementValue = element[name];
-    if (elementValue == null) {
+    var property = element[name];
+    if (property == null) {
       return createProperty<T>(defaultValue(), isImmutable);
     }
-    if (elementValue is String) {
-      return createProperty<T>(converter(elementValue), isImmutable);
+    if (property is String) {
+      return createProperty<T>(converter(property), isImmutable);
     }
-    if (elementValue is Map<String, dynamic>) {
-      var expression = elementValue["expression"];
+    if (property is Map<String, dynamic>) {
+      var expression = property["expression"];
       if (expression != null) {
         return StringExpressionProperty<T>(expression);
       }

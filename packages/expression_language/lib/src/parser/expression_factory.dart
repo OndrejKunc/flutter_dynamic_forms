@@ -5,36 +5,36 @@ import 'package:expression_language/src/number_type/integer.dart';
 import 'package:expression_language/src/parser/expression_parser_exceptions.dart';
 
 Expression createDelegateExpression(
-    List<String> expressionPath, ExpressionProvider elementValue) {
-  if (elementValue is ExpressionProvider<Integer>) {
-    return DelegateExpression<Integer>(expressionPath, elementValue);
+    List<String> expressionPath, ExpressionProvider property) {
+  if (property is ExpressionProvider<Integer>) {
+    return DelegateExpression<Integer>(expressionPath, property);
   }
-  if (elementValue is ExpressionProvider<int>) {
+  if (property is ExpressionProvider<int>) {
     return IntToIntegerExpression(
-      DelegateExpression<int>(expressionPath, elementValue),
+      DelegateExpression<int>(expressionPath, property),
     );
   }
-  if (elementValue is ExpressionProvider<bool>) {
-    return DelegateExpression<bool>(expressionPath, elementValue);
+  if (property is ExpressionProvider<bool>) {
+    return DelegateExpression<bool>(expressionPath, property);
   }
-  if (elementValue is ExpressionProvider<String>) {
-    return DelegateExpression<String>(expressionPath, elementValue);
+  if (property is ExpressionProvider<String>) {
+    return DelegateExpression<String>(expressionPath, property);
   }
-  if (elementValue is ExpressionProvider<Decimal>) {
-    return DelegateExpression<Decimal>(expressionPath, elementValue);
+  if (property is ExpressionProvider<Decimal>) {
+    return DelegateExpression<Decimal>(expressionPath, property);
   }
-  if (elementValue is ExpressionProvider<double>) {
+  if (property is ExpressionProvider<double>) {
     return DoubleToDecimalExpression(
-      DelegateExpression<double>(expressionPath, elementValue),
+      DelegateExpression<double>(expressionPath, property),
     );
   }
-  if (elementValue is ExpressionProvider<ExpressionProviderElement>) {
+  if (property is ExpressionProvider<ExpressionProviderElement>) {
     return DelegateExpression<ExpressionProviderElement>(
-        expressionPath, elementValue);
+        expressionPath, property);
   }
-  if (elementValue is ExpressionProvider<List<ExpressionProviderElement>>) {
+  if (property is ExpressionProvider<List<ExpressionProviderElement>>) {
     return DelegateExpression<List<ExpressionProviderElement>>(
-        expressionPath, elementValue);
+        expressionPath, property);
   }
   throw UnknownExpressionFactoryException("Unknown expression factory");
 }

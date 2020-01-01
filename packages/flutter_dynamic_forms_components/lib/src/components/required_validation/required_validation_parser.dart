@@ -21,6 +21,13 @@ class RequiredValidationParser extends ValidationParser<RequiredValidation> {
   @override
   FormElement getInstance() => RequiredValidation();
 
+  /// Gets the "value" property of the parent element and creates
+  /// ExpressionProperty which is true when the value property is
+  /// greater than zero.
+  ///
+  /// It has to be declared as LazyExpressionProperty because parent
+  /// properties are not initialized at this point so
+  /// parent.getExpressionProvider would return null.
   LazyExpressionProperty<bool> getIsValid(FormElement parent) {
     return LazyExpressionProperty(
       () => CustomFunctionExpression<bool>(
