@@ -1,3 +1,9 @@
+# 0.9.0
+
+- Renamed `ElementValue<T>` to `Property<T>`.
+- `FormElement` and `Validation` now use property setters instead of `fill` method.
+- Added base `FormElementParser` so parsers can be easily inherited from each other.
+
 # 0.8.0
 
 Fixed inconsistency in parsers.
