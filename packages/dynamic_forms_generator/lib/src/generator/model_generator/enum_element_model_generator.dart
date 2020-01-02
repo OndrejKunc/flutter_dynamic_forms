@@ -18,7 +18,7 @@ class EnumElementModelGenerator extends ElementModelGenerator {
   @override
   ExpressionProvider getExpressionProvider(
           [String propertyName]) =>
-      ImmutableElementValue(enumeration);''');
+      ImmutableProperty(enumeration);''');
     return buffer.toString();
   }
 

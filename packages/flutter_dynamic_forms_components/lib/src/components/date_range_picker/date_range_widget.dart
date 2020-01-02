@@ -57,9 +57,6 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
     for (var i = 0; i < (42 - privusMothDay); i++) {
       dateList.add(newDate.add(Duration(days: i + 1)));
     }
-    // if (dateList[dateList.length - 7].month != monthDate.month) {
-    //   dateList.removeRange(dateList.length - 7, dateList.length);
-    // }
   }
 
   @override

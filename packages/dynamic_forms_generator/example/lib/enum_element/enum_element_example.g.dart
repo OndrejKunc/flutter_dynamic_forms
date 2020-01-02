@@ -16,5 +16,5 @@ class ExampleEnumElement extends EnumElement {
   @override
   ExpressionProvider getExpressionProvider(
           [String propertyName]) =>
-      ImmutableElementValue(enumeration);
+      ImmutableProperty(enumeration);
 }

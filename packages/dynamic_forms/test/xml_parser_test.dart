@@ -1,6 +1,5 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/iterators/form_element_iterator.dart';
-import 'package:dynamic_forms/src/iterators/form_element_value_iterator.dart';
 import 'package:expression_language/expression_language.dart';
 import 'package:test/test.dart';
 
@@ -44,13 +43,13 @@ void main() {
         value: (x) => x);
 
     var formElementExpressions =
-        getFormElementValueIterator<ExpressionElementValue>(result);
+        getFormPropertyIterator<ExpressionProperty>(result);
 
     var expressionGrammarDefinition = ExpressionGrammarParser(formElementMap);
     var parser = expressionGrammarDefinition.build();
 
     for (var expressionValue in formElementExpressions) {
-      if (expressionValue is StringExpressionElementValue) {
+      if (expressionValue is StringExpressionProperty) {
         expressionValue.buildExpression(parser);
       }
     }
@@ -224,25 +223,25 @@ void main() {
         value: (x) => x);
 
     var formElementExpressions =
-        getFormElementValueIterator<ExpressionElementValue>(result);
+        getFormPropertyIterator<ExpressionProperty>(result);
 
     var expressionGrammarDefinition = ExpressionGrammarParser(formElementMap);
     var parser = expressionGrammarDefinition.build();
 
     for (var expressionValue in formElementExpressions) {
-      if (expressionValue is StringExpressionElementValue) {
+      if (expressionValue is StringExpressionProperty) {
         expressionValue.buildExpression(parser);
       }
     }
 
-    var formElementValues = getFormElementValueIterator<ElementValue>(result);
+    var formProperties = getFormPropertyIterator<Property>(result);
 
-    for (var elementValue in formElementValues) {
+    for (var property in formProperties) {
       var elementsValuesCollectorVisitor = ExpressionProviderCollectorVisitor();
-      elementValue.getExpression().accept(elementsValuesCollectorVisitor);
-      for (var sourceElementValue
+      property.getExpression().accept(elementsValuesCollectorVisitor);
+      for (var sourceProperty
           in elementsValuesCollectorVisitor.expressionProviders) {
-        (sourceElementValue as ElementValue).addSubscriber(elementValue);
+        (sourceProperty as Property).addSubscriber(property);
       }
     }
 

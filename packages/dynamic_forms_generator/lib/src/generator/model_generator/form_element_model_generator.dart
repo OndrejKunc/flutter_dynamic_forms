@@ -14,42 +14,24 @@ class FormElementModelGenerator extends ElementModelGenerator {
     }
 
     for (var property in componentDescription.properties) {
+      var propertyTypeName = "Property<${property.type.toTypeString()}>";
+
       buffer.writeln(
-          "  ${property.type.toTypeString()} get ${property.name} => properties[${property.name}PropertyName].value;");
+          "  $propertyTypeName get ${property.name}Property => properties[${property.name}PropertyName];");
+
       buffer.writeln(
-          "  Stream<${property.type.toTypeString()}> get ${property.name}Changed => properties[${property.name}PropertyName].valueChanged;");
+          "  set ${property.name}Property($propertyTypeName value) =>");
+      buffer.writeln(
+          "      registerProperty(${property.name}PropertyName, value);");
+
+      buffer
+          .writeln("  ${property.type.toTypeString()} get ${property.name} =>");
+      buffer.writeln("      ${property.name}Property.value;");
+
+      buffer.writeln(
+          "  Stream<${property.type.toTypeString()}> get ${property.name}Changed => ${property.name}Property.valueChanged;");
       buffer.writeln();
     }
-
-    buffer.writeln(
-        "  void fill${componentDescription.type.capitalizedTypeName}({");
-
-    for (var property in allProperties) {
-      var typeName = property.name == "id"
-          ? "String"
-          : "ElementValue<${property.type.toTypeString()}>";
-      buffer.writeln("    @required $typeName ${property.name},");
-    }
-
-    buffer.writeln("  }) {");
-
-    buffer.writeln(
-        "    fill${componentDescription.parentType.capitalizedTypeName}(");
-
-    for (var property in allProperties.where(
-        (p) => !componentDescription.properties.any((c) => c.name == p.name))) {
-      buffer.writeln("      ${property.name}: ${property.name},");
-    }
-
-    buffer.writeln("    );");
-
-    for (var property in componentDescription.properties) {
-      buffer.writeln(
-          "    registerElementValue(${property.name}PropertyName, ${property.name});");
-    }
-
-    buffer.writeln("  }");
-    buffer.writeln();
 
     buffer.writeln('''
   @override

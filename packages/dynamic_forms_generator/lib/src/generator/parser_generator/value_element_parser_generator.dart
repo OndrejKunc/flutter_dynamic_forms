@@ -4,6 +4,8 @@ class ValueElementParserGenerator extends ElementParserGenerator {
   @override
   String generate() {
     StringBuffer buffer = StringBuffer();
+    buffer.writeln(
+        "class ${componentDescription.type.capitalizedTypeName}Parser extends ElementParser<${componentDescription.type.capitalizedTypeName}> {");
     buffer.writeln("  @override");
     buffer.writeln(
         "  String get name => \"${componentDescription.type.typeName}\";");
@@ -13,12 +15,13 @@ class ValueElementParserGenerator extends ElementParserGenerator {
   ${componentDescription.type.toTypeString()} parse(ParserNode parserNode, FormElement parent,
       ElementParserFunction parser) =>''');
     buffer.writeln("      ${componentDescription.type.toTypeString()}( ");
-    for (var property in allProperties) {
+    for (var property in componentDescription.properties) {
       var parseMethod =
           getParseMethod(property, contentProperty?.name == property?.name);
       buffer.writeln("      ${property.name}: ${parseMethod}.value,");
     }
     buffer.writeln("    );");
+    buffer.writeln("}");
     return buffer.toString();
   }
 }

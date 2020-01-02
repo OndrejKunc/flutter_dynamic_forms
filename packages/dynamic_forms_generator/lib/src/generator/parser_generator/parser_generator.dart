@@ -6,13 +6,11 @@ import 'package:meta/meta.dart';
 class ParserGenerator {
   final ComponentDescription componentDescription;
   final BuildConfiguration buildConfiguration;
-  final List<PropertyDescription> allProperties;
   final PropertyDescription contentProperty;
 
   ParserGenerator({
     @required this.componentDescription,
     @required this.buildConfiguration,
-    @required this.allProperties,
     @required this.contentProperty,
   });
 
@@ -30,7 +28,6 @@ class ParserGenerator {
       typeName: componentDescription.parentType.typeName,
       contentProperty: contentProperty,
       componentDescription: componentDescription,
-      allProperties: allProperties,
     );
 
     buffer.writeln("// GENERATED CODE - DO NOT MODIFY BY HAND");
@@ -47,12 +44,8 @@ class ParserGenerator {
       buffer.writeln();
     }
 
-    buffer.writeln(
-        "class ${componentDescription.type.capitalizedTypeName}Parser extends ElementParser<${componentDescription.type.toTypeString()}> {");
-
     buffer.write(generator.generate());
 
-    buffer.writeln("}");
     return buffer.toString();
   }
 }

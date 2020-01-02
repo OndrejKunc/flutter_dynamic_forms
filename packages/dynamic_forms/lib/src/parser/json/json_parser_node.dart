@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:dynamic_forms/src/element_values/element_value.dart';
 import 'package:dynamic_forms/src/parser/parser_node.dart';
 import 'package:meta/meta.dart';
 
@@ -13,23 +12,22 @@ class JsonParserNode extends ParserNode {
   }
 
   @override
-  ElementValue<T> getValue<T>(
-      String name, T converter(String s), T defaultValue(),
+  Property<T> getValue<T>(String name, T converter(String s), T defaultValue(),
       {bool isImmutable = true}) {
-    var elementValue = element[name];
-    if (elementValue == null) {
-      return createElementValue<T>(defaultValue(), isImmutable);
+    var property = element[name];
+    if (property == null) {
+      return createProperty<T>(defaultValue(), isImmutable);
     }
-    if (elementValue is String) {
-      return createElementValue<T>(converter(elementValue), isImmutable);
+    if (property is String) {
+      return createProperty<T>(converter(property), isImmutable);
     }
-    if (elementValue is Map<String, dynamic>) {
-      var expression = elementValue["expression"];
+    if (property is Map<String, dynamic>) {
+      var expression = property["expression"];
       if (expression != null) {
-        return StringExpressionElementValue<T>(expression);
+        return StringExpressionProperty<T>(expression);
       }
     }
-    return createElementValue<T>(defaultValue(), isImmutable);
+    return createProperty<T>(defaultValue(), isImmutable);
   }
 
   @override
@@ -38,7 +36,7 @@ class JsonParserNode extends ParserNode {
   }
 
   @override
-  ElementValue<List<TFormElement>> getChildren<TFormElement>(
+  Property<List<TFormElement>> getChildren<TFormElement>(
       {FormElement parent,
       String childrenPropertyName,
       ElementParserFunction parser,
@@ -51,12 +49,12 @@ class JsonParserNode extends ParserNode {
             .map((c) => parser(JsonParserNode(c), parent))
             .cast<TFormElement>()
             .toList();
-    var childrenElementValue = createElementValue(children, isImmutable);
-    return childrenElementValue;
+    var childrenProperty = createProperty(children, isImmutable);
+    return childrenProperty;
   }
 
   @override
-  ElementValue<TFormElement> getChild<TFormElement>({
+  Property<TFormElement> getChild<TFormElement>({
     @required String propertyName,
     @required ElementParserFunction parser,
     @required FormElement parent,
@@ -67,10 +65,10 @@ class JsonParserNode extends ParserNode {
     var childElement = element[propertyName] as Map<String, dynamic>;
 
     if (childElement != null) {
-      return createElementValue<TFormElement>(
+      return createProperty<TFormElement>(
           parser(JsonParserNode(childElement), parent) as TFormElement,
           isImmutable);
     }
-    return createElementValue<TFormElement>(defaultValue(), isImmutable);
+    return createProperty<TFormElement>(defaultValue(), isImmutable);
   }
 }

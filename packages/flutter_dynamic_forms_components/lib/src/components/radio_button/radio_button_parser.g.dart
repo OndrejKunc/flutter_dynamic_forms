@@ -3,27 +3,21 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class RadioButtonParser extends ElementParser<RadioButton> {
+class RadioButtonParser<TRadioButton extends RadioButton>
+    extends SingleSelectChoiceParser<TRadioButton> {
   @override
   String get name => "radioButton";
 
   @override
-  RadioButton parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var radioButton = RadioButton();
-    radioButton.fillRadioButton(
-      id: parserNode.getPlainStringValue("id"),
-      parent: parserNode.getParentValue(parent),
-      isVisible: parserNode.getIsVisible(),
-      label: parserNode.getStringValue(
-        "label",
-        isImmutable: true,
-      ),
-      value: parserNode.getStringValue(
-        "value",
-        isImmutable: true,
-      ),
-    );
-    return radioButton;
+  FormElement getInstance() => RadioButton();
+
+  @override
+  void fillProperties(
+    TRadioButton radioButton, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser,
+  ) {
+    super.fillProperties(radioButton, parserNode, parent, parser);
   }
 }

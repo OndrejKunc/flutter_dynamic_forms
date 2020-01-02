@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:dynamic_forms/src/element_values/element_value.dart';
 import 'package:dynamic_forms/src/parser/parser_node.dart';
 import 'package:meta/meta.dart';
 import 'package:xml/xml.dart';
@@ -14,22 +13,21 @@ class XmlParserNode extends ParserNode {
   }
 
   @override
-  ElementValue<T> getValue<T>(
-      String name, T converter(String s), T defaultValue(),
+  Property<T> getValue<T>(String name, T converter(String s), T defaultValue(),
       {bool isImmutable = true}) {
-    var elementValue = getPropertyAsElement(element, name);
-    if (elementValue != null) {
-      var firstChild = elementValue.firstChild;
+    var property = getPropertyAsElement(element, name);
+    if (property != null) {
+      var firstChild = property.firstChild;
       if (firstChild != null) {
         if (firstChild is XmlText || firstChild is XmlCDATA) {
-          return createElementValue<T>(converter(firstChild.text), isImmutable);
+          return createProperty<T>(converter(firstChild.text), isImmutable);
         }
         if (firstChild is XmlElement) {
           if (firstChild.name.qualified == "expression") {
             var expressionChild = firstChild.firstChild;
             if (expressionChild.nodeType == XmlNodeType.CDATA ||
                 expressionChild.nodeType == XmlNodeType.TEXT) {
-              return StringExpressionElementValue<T>(expressionChild.text);
+              return StringExpressionProperty<T>(expressionChild.text);
             }
           }
         }
@@ -37,9 +35,9 @@ class XmlParserNode extends ParserNode {
     }
     var attributeValue = getAttribute(element, name);
     if (attributeValue != null) {
-      return createElementValue<T>(converter(attributeValue), isImmutable);
+      return createProperty<T>(converter(attributeValue), isImmutable);
     }
-    return createElementValue<T>(defaultValue(), isImmutable);
+    return createProperty<T>(defaultValue(), isImmutable);
   }
 
   @override
@@ -64,7 +62,7 @@ class XmlParserNode extends ParserNode {
   }
 
   @override
-  ElementValue<List<TFormElement>> getChildren<TFormElement>(
+  Property<List<TFormElement>> getChildren<TFormElement>(
       {FormElement parent,
       String childrenPropertyName,
       ElementParserFunction parser,
@@ -78,8 +76,8 @@ class XmlParserNode extends ParserNode {
           .map((c) => parser(XmlParserNode(c), parent))
           .cast<TFormElement>()
           .toList();
-      var childrenElementValue = createElementValue(children, isImmutable);
-      return childrenElementValue;
+      var childrenProperty = createProperty(children, isImmutable);
+      return childrenProperty;
     }
 
     if (childrenXmlElement == null && isContentProperty) {
@@ -91,15 +89,15 @@ class XmlParserNode extends ParserNode {
           .cast<TFormElement>()
           .toList();
       if (children != null) {
-        return createElementValue(children, isImmutable);
+        return createProperty(children, isImmutable);
       }
     }
 
-    return createElementValue(List<TFormElement>(), isImmutable);
+    return createProperty(List<TFormElement>(), isImmutable);
   }
 
   @override
-  ElementValue<TFormElement> getChild<TFormElement>({
+  Property<TFormElement> getChild<TFormElement>({
     @required String propertyName,
     @required ElementParserFunction parser,
     @required FormElement parent,
@@ -116,11 +114,11 @@ class XmlParserNode extends ParserNode {
       XmlElement childElement = propertyElement.children
           .firstWhere((c) => c is XmlElement, orElse: () => null);
       if (childElement != null) {
-        return createElementValue<TFormElement>(
+        return createProperty<TFormElement>(
             parser(XmlParserNode(childElement), parent) as TFormElement,
             isImmutable);
       }
     }
-    return createElementValue(defaultValue(), isImmutable);
+    return createProperty(defaultValue(), isImmutable);
   }
 }

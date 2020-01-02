@@ -1,21 +1,20 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class ValidationParser extends ElementParser<Validation> {
+class ValidationParser<TValidation extends Validation>
+    extends FormElementParser<TValidation> {
   @override
   String get name => "validation";
 
   @override
-  Validation parse(
-      ParserNode parserNode, Element parent, ElementParserFunction parser) {
-    Validation validation = Validation();
-    validation.fillValidation(
-      id: parserNode.getPlainStringValue("id"),
-      isVisible: parserNode.getIsVisible(),
-      parent: parserNode.getParentValue(parent),
-      message: parserNode.getStringValue("message"),
-      isValid: parserNode.getValue(
-          "isValid", ParserNode.convertToBool, ParserNode.defaultTrue),
-    );
-    return validation;
+  FormElement getInstance() => Validation();
+
+  @override
+  void fillProperties(
+      TValidation validation, ParserNode parserNode, Element parent, parser) {
+    super.fillProperties(validation, parserNode, parent, parser);
+    validation
+      ..messageProperty = parserNode.getStringValue("message")
+      ..isValidProperty = parserNode.getValue(
+          "isValid", ParserNode.convertToBool, ParserNode.defaultTrue);
   }
 }

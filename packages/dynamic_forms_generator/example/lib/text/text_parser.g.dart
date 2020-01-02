@@ -2,36 +2,39 @@
 
 import '../components.dart';
 
-class TextParser extends ElementParser<Text> {
+class TextParser<TText extends Text>
+    extends FormElementParser<TText> {
   @override
   String get name => "text";
 
   @override
-  Text parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var text = Text();
-    text.fillText(
-      id: parserNode.getPlainStringValue("id"),
-      parent: parserNode.getParentValue(parent),
-      isVisible: parserNode.getIsVisible(),
-      label: parserNode.getStringValue(
+  FormElement getInstance() => Text();
+
+  @override
+  void fillProperties(
+    TText text, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser,
+  ) {
+    super.fillProperties(text, parserNode, parent, parser);
+    text
+      ..labelProperty = parserNode.getStringValue(
         "label",
         isImmutable: true,
-      ),
-      textInputType: parserNode.getStringValue(
+      )
+      ..textInputTypeProperty = parserNode.getStringValue(
         "textInputType",
         isImmutable: true,
-      ),
-      validations: parserNode.getChildren<Validation>(
+      )
+      ..validationsProperty = parserNode.getChildren<Validation>(
           parent: text,
           parser: parser,
           childrenPropertyName: "validations",
-          isContentProperty: false),
-      value: parserNode.getStringValue(
+          isContentProperty: false)
+      ..valueProperty = parserNode.getStringValue(
         "value",
         isImmutable: false,
-      ),
-    );
-    return text;
+      );
   }
 }

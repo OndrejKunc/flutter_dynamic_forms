@@ -8,27 +8,19 @@ class MultiSelectChoice extends FormElement {
   static const String isSelectedPropertyName = "isSelected";
   static const String labelPropertyName = "label";
 
-  bool get isSelected => properties[isSelectedPropertyName].value;
-  Stream<bool> get isSelectedChanged => properties[isSelectedPropertyName].valueChanged;
+  Property<bool> get isSelectedProperty => properties[isSelectedPropertyName];
+  set isSelectedProperty(Property<bool> value) =>
+      registerProperty(isSelectedPropertyName, value);
+  bool get isSelected =>
+      isSelectedProperty.value;
+  Stream<bool> get isSelectedChanged => isSelectedProperty.valueChanged;
 
-  String get label => properties[labelPropertyName].value;
-  Stream<String> get labelChanged => properties[labelPropertyName].valueChanged;
-
-  void fillMultiSelectChoice({
-    @required String id,
-    @required ElementValue<FormElement> parent,
-    @required ElementValue<bool> isVisible,
-    @required ElementValue<bool> isSelected,
-    @required ElementValue<String> label,
-  }) {
-    fillFormElement(
-      id: id,
-      parent: parent,
-      isVisible: isVisible,
-    );
-    registerElementValue(isSelectedPropertyName, isSelected);
-    registerElementValue(labelPropertyName, label);
-  }
+  Property<String> get labelProperty => properties[labelPropertyName];
+  set labelProperty(Property<String> value) =>
+      registerProperty(labelPropertyName, value);
+  String get label =>
+      labelProperty.value;
+  Stream<String> get labelChanged => labelProperty.valueChanged;
 
   @override
   FormElement getInstance() {

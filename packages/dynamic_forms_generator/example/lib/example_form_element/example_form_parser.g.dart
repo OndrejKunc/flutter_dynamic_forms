@@ -2,31 +2,34 @@
 
 import '../components.dart';
 
-class ExampleFormElementParser extends ElementParser<ExampleFormElement> {
+class ExampleFormElementParser<TExampleFormElement extends ExampleFormElement>
+    extends FormElementParser<TExampleFormElement> {
   @override
   String get name => "exampleFormElement";
 
   @override
-  ExampleFormElement parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var exampleFormElement = ExampleFormElement();
-    exampleFormElement.fillExampleFormElement(
-      id: parserNode.getPlainStringValue("id"),
-      parent: parserNode.getParentValue(parent),
-      isVisible: parserNode.getIsVisible(),
-      enumProperty: parserNode.getEnum<ExampleEnumElementEnum,ExampleEnumElement>(
-          name: "enumProperty",
+  FormElement getInstance() => ExampleFormElement();
+
+  @override
+  void fillProperties(
+    TExampleFormElement exampleFormElement, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser,
+  ) {
+    super.fillProperties(exampleFormElement, parserNode, parent, parser);
+    exampleFormElement
+      ..enumExampleProperty = parserNode.getEnum<ExampleEnumElementEnum,ExampleEnumElement>(
+          name: "enumExample",
           enumerationValues: ExampleEnumElementEnum.values,
           enumElementConstructor: (x) => ExampleEnumElement(enumeration: x))
-          ,
-      valueProperty: parserNode.getChild<ExampleValueElement>(
+          
+      ..valueExampleProperty = parserNode.getChild<ExampleValueElement>(
           parent: exampleFormElement,
           parser: parser,
-          propertyName: "valueProperty",
+          propertyName: "valueExample",
           isContentProperty: false,
           defaultValue: () => ExampleValueElement(),
-          isImmutable: true),
-    );
-    return exampleFormElement;
+          isImmutable: true);
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 import 'package:intl/intl.dart';
 
-import 'date.dart' as model;
+import 'date.g.dart' as model;
 
 class DefaultDateRenderer extends FormElementRenderer<model.Date> {
   @override
@@ -13,7 +13,7 @@ class DefaultDateRenderer extends FormElementRenderer<model.Date> {
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
     final format = new DateFormat(element.format);
-    final time = element.dateValue != null ? element.dateValue : DateTime.now();
+    final time = element.value != null ? element.value : DateTime.now();
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(8.0),

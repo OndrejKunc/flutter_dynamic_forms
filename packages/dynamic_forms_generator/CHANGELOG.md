@@ -1,3 +1,9 @@
+# 0.4.0
+
+- Changed generated output to be compatible with dynamic_forms 0.9.0.
+- Removed scanning of related YAML files.
+- Generator no longer needs all YAML files to generate components. You just need to make sure correct generic parser exists for the parent type of a specific component.
+
 # 0.3.0
 
 Changed generated output to be compatible with dynamic_forms 0.8.0.

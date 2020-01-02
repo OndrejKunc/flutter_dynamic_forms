@@ -10,9 +10,7 @@ There is a lots of boilerplate code needed to write a single component for the f
 
 ## Usage
 
-To use this generator you need to have all the Yaml files for the related components in your project.
-
-After that add this package as a dev dependency together with `build_runner`:
+Add this package as a dev dependency together with `build_runner`:
 
 ```yaml
 dev_dependencies:
@@ -39,6 +37,8 @@ targets:
 `components_to_ignore` will not generate anything for the listed components. Specifically `form_element.yaml` and `validation.yaml` are the default option so you don't need to explicitly list them. Reason why you don't want to generate anything for those classes is that they already have their models and parsers in the `dynamic_forms` library but other components can extend them and generator needs to have all the Yaml definitions in the project so it can correctly analyse their structure.
 
 Other options are `model_imports` and `parser_imports` which generates imports at the beginning of the model or parser file.
+
+For each component you would need corresponding `component_name.yaml` file in the format below.
 
 Now you simply run
 ```

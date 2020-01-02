@@ -10,37 +10,33 @@ class Text extends FormElement {
   static const String validationsPropertyName = "validations";
   static const String valuePropertyName = "value";
 
-  String get label => properties[labelPropertyName].value;
-  Stream<String> get labelChanged => properties[labelPropertyName].valueChanged;
+  Property<String> get labelProperty => properties[labelPropertyName];
+  set labelProperty(Property<String> value) =>
+      registerProperty(labelPropertyName, value);
+  String get label =>
+      labelProperty.value;
+  Stream<String> get labelChanged => labelProperty.valueChanged;
 
-  String get textInputType => properties[textInputTypePropertyName].value;
-  Stream<String> get textInputTypeChanged => properties[textInputTypePropertyName].valueChanged;
+  Property<String> get textInputTypeProperty => properties[textInputTypePropertyName];
+  set textInputTypeProperty(Property<String> value) =>
+      registerProperty(textInputTypePropertyName, value);
+  String get textInputType =>
+      textInputTypeProperty.value;
+  Stream<String> get textInputTypeChanged => textInputTypeProperty.valueChanged;
 
-  List<Validation> get validations => properties[validationsPropertyName].value;
-  Stream<List<Validation>> get validationsChanged => properties[validationsPropertyName].valueChanged;
+  Property<List<Validation>> get validationsProperty => properties[validationsPropertyName];
+  set validationsProperty(Property<List<Validation>> value) =>
+      registerProperty(validationsPropertyName, value);
+  List<Validation> get validations =>
+      validationsProperty.value;
+  Stream<List<Validation>> get validationsChanged => validationsProperty.valueChanged;
 
-  String get value => properties[valuePropertyName].value;
-  Stream<String> get valueChanged => properties[valuePropertyName].valueChanged;
-
-  void fillText({
-    @required String id,
-    @required ElementValue<FormElement> parent,
-    @required ElementValue<bool> isVisible,
-    @required ElementValue<String> label,
-    @required ElementValue<String> textInputType,
-    @required ElementValue<List<Validation>> validations,
-    @required ElementValue<String> value,
-  }) {
-    fillFormElement(
-      id: id,
-      parent: parent,
-      isVisible: isVisible,
-    );
-    registerElementValue(labelPropertyName, label);
-    registerElementValue(textInputTypePropertyName, textInputType);
-    registerElementValue(validationsPropertyName, validations);
-    registerElementValue(valuePropertyName, value);
-  }
+  Property<String> get valueProperty => properties[valuePropertyName];
+  set valueProperty(Property<String> value) =>
+      registerProperty(valuePropertyName, value);
+  String get value =>
+      valueProperty.value;
+  Stream<String> get valueChanged => valueProperty.valueChanged;
 
   @override
   FormElement getInstance() {

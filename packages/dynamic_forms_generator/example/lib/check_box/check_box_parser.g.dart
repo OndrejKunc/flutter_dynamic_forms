@@ -2,59 +2,62 @@
 
 import '../components.dart';
 
-class CheckBoxParser extends ElementParser<CheckBox> {
+class CheckBoxParser<TCheckBox extends CheckBox>
+    extends FormElementParser<TCheckBox> {
   @override
   String get name => "checkBox";
 
   @override
-  CheckBox parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var checkBox = CheckBox();
-    checkBox.fillCheckBox(
-      id: parserNode.getPlainStringValue("id"),
-      parent: parserNode.getParentValue(parent),
-      isVisible: parserNode.getIsVisible(),
-      label: parserNode.getStringValue(
+  FormElement getInstance() => CheckBox();
+
+  @override
+  void fillProperties(
+    TCheckBox checkBox, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser,
+  ) {
+    super.fillProperties(checkBox, parserNode, parent, parser);
+    checkBox
+      ..labelProperty = parserNode.getStringValue(
         "label",
         isImmutable: true,
-      ),
-      myDate: parserNode.getValue<DateTime>(
+      )
+      ..myDateProperty = parserNode.getValue<DateTime>(
         "myDate",
         (s) => DateTime.parse(s),
         () => DateTime.parse("1969-07-20 20:18:04Z"),
         isImmutable: true,
-      ),
-      myDecimal: parserNode.getValue<Decimal>(
+      )
+      ..myDecimalProperty = parserNode.getValue<Decimal>(
         "myDecimal",
         (s) => Decimal.parse(s),
         () => Decimal.fromDouble(42),
         isImmutable: true,
-      ),
-      myDouble: parserNode.getValue<double>(
+      )
+      ..myDoubleProperty = parserNode.getValue<double>(
         "myDouble",
         (s) => double.parse(s),
         () => 27.0,
         isImmutable: true,
-      ),
-      myInt: parserNode.getValue<int>(
+      )
+      ..myIntProperty = parserNode.getValue<int>(
         "myInt",
         (s) => int.parse(s),
         () => 51,
         isImmutable: true,
-      ),
-      textColor: parserNode.getValue<String>(
+      )
+      ..textColorProperty = parserNode.getValue<String>(
         "textColor",
         (s) => s,
         () => "b74903",
         isImmutable: true,
-      ),
-      value: parserNode.getValue(
+      )
+      ..valueProperty = parserNode.getValue(
         "value",
         ParserNode.convertToBool,
         ParserNode.defaultFalse,
         isImmutable: false,
-      ),
-    );
-    return checkBox;
+      );
   }
 }

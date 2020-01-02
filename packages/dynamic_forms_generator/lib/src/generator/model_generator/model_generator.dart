@@ -7,18 +7,15 @@ import 'package:meta/meta.dart';
 class ModelGenerator {
   final ComponentDescription componentDescription;
   final BuildConfiguration buildConfiguration;
-  final List<PropertyDescription> allProperties;
 
   ModelGenerator({
     @required this.componentDescription,
     @required this.buildConfiguration,
-    @required this.allProperties,
   });
 
   String generate() {
     StringBuffer buffer = StringBuffer();
     ElementModelGenerator generator = ElementModelGenerator.getGenerator(
-        allProperties: allProperties,
         componentDescription: componentDescription,
         typeName: componentDescription.parentType.typeName);
 

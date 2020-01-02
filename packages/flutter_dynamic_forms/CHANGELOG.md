@@ -1,3 +1,7 @@
+# 0.9.0
+
+Increment dependency on dynamic_forms package.
+
 # 0.8.0
 
 Increment dependency on dynamic_forms package.

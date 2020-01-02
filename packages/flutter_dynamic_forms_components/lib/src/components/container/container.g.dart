@@ -7,22 +7,12 @@ import 'package:meta/meta.dart';
 class Container extends FormElement {
   static const String childrenPropertyName = "children";
 
-  List<FormElement> get children => properties[childrenPropertyName].value;
-  Stream<List<FormElement>> get childrenChanged => properties[childrenPropertyName].valueChanged;
-
-  void fillContainer({
-    @required String id,
-    @required ElementValue<FormElement> parent,
-    @required ElementValue<bool> isVisible,
-    @required ElementValue<List<FormElement>> children,
-  }) {
-    fillFormElement(
-      id: id,
-      parent: parent,
-      isVisible: isVisible,
-    );
-    registerElementValue(childrenPropertyName, children);
-  }
+  Property<List<FormElement>> get childrenProperty => properties[childrenPropertyName];
+  set childrenProperty(Property<List<FormElement>> value) =>
+      registerProperty(childrenPropertyName, value);
+  List<FormElement> get children =>
+      childrenProperty.value;
+  Stream<List<FormElement>> get childrenChanged => childrenProperty.valueChanged;
 
   @override
   FormElement getInstance() {

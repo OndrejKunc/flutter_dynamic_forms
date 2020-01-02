@@ -1,6 +1,5 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/iterators/form_element_iterator.dart';
-import 'package:dynamic_forms/src/iterators/form_element_value_iterator.dart';
 import 'package:expression_language/expression_language.dart';
 import 'package:test/test.dart';
 
@@ -49,13 +48,13 @@ void main() {
         value: (x) => x);
 
     var formElementExpressions =
-        getFormElementValueIterator<ExpressionElementValue>(result);
+        getFormPropertyIterator<ExpressionProperty>(result);
 
     var expressionGrammarDefinition = ExpressionGrammarParser(formElementMap);
     var parser = expressionGrammarDefinition.build();
 
     for (var expressionValue in formElementExpressions) {
-      if (expressionValue is StringExpressionElementValue) {
+      if (expressionValue is StringExpressionProperty) {
         expressionValue.buildExpression(parser);
       }
     }

@@ -3,23 +3,26 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class LabelParser extends ElementParser<Label> {
+class LabelParser<TLabel extends Label>
+    extends FormElementParser<TLabel> {
   @override
   String get name => "label";
 
   @override
-  Label parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var label = Label();
-    label.fillLabel(
-      id: parserNode.getPlainStringValue("id"),
-      parent: parserNode.getParentValue(parent),
-      isVisible: parserNode.getIsVisible(),
-      value: parserNode.getStringValue(
+  FormElement getInstance() => Label();
+
+  @override
+  void fillProperties(
+    TLabel label, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser,
+  ) {
+    super.fillProperties(label, parserNode, parent, parser);
+    label
+      ..valueProperty = parserNode.getStringValue(
         "value",
         isImmutable: true,
-      ),
-    );
-    return label;
+      );
   }
 }

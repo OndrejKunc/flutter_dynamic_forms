@@ -7,27 +7,19 @@ class SingleSelectChoice extends FormElement {
   static const String labelPropertyName = "label";
   static const String valuePropertyName = "value";
 
-  String get label => properties[labelPropertyName].value;
-  Stream<String> get labelChanged => properties[labelPropertyName].valueChanged;
+  Property<String> get labelProperty => properties[labelPropertyName];
+  set labelProperty(Property<String> value) =>
+      registerProperty(labelPropertyName, value);
+  String get label =>
+      labelProperty.value;
+  Stream<String> get labelChanged => labelProperty.valueChanged;
 
-  String get value => properties[valuePropertyName].value;
-  Stream<String> get valueChanged => properties[valuePropertyName].valueChanged;
-
-  void fillSingleSelectChoice({
-    @required String id,
-    @required ElementValue<FormElement> parent,
-    @required ElementValue<bool> isVisible,
-    @required ElementValue<String> label,
-    @required ElementValue<String> value,
-  }) {
-    fillFormElement(
-      id: id,
-      parent: parent,
-      isVisible: isVisible,
-    );
-    registerElementValue(labelPropertyName, label);
-    registerElementValue(valuePropertyName, value);
-  }
+  Property<String> get valueProperty => properties[valuePropertyName];
+  set valueProperty(Property<String> value) =>
+      registerProperty(valuePropertyName, value);
+  String get value =>
+      valueProperty.value;
+  Stream<String> get valueChanged => valueProperty.valueChanged;
 
   @override
   FormElement getInstance() {

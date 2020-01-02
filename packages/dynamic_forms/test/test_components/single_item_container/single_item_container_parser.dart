@@ -10,17 +10,16 @@ class SingleItemContainerParser extends ElementParser<SingleItemContainer> {
   SingleItemContainer parse(
       ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
     var container = SingleItemContainer();
-    container.fillSingleItemContainer(
-      id: parserNode.getPlainStringValue("id"),
-      isVisible: parserNode.getIsVisible(),
-      parent: parserNode.getParentValue(parent),
-      child: parserNode.getChild<FormElement>(
+    container
+      ..id = parserNode.getPlainStringValue("id")
+      ..isVisibleProperty = parserNode.getIsVisible()
+      ..parentProperty = parserNode.getParentValue(parent)
+      ..childProperty = parserNode.getChild<FormElement>(
           propertyName: "child",
           parent: container,
           parser: parser,
           isContentProperty: true,
-          defaultValue: () => null),
-    );
+          defaultValue: () => null);
     return container;
   }
 }

@@ -5,7 +5,6 @@ import 'package:dynamic_forms_generator/src/model/component_type.dart';
 
 abstract class ElementParserGenerator {
   ComponentDescription componentDescription;
-  List<PropertyDescription> allProperties;
   PropertyDescription contentProperty;
 
   static const String _valueElementName = "valueElement";
@@ -15,7 +14,6 @@ abstract class ElementParserGenerator {
   static ElementParserGenerator getGenerator(
       {String typeName,
       ComponentDescription componentDescription,
-      List<PropertyDescription> allProperties,
       PropertyDescription contentProperty}) {
     ElementParserGenerator returnElement;
     if (typeName != null) {
@@ -32,7 +30,6 @@ abstract class ElementParserGenerator {
           }
       }
       returnElement
-        ..allProperties = allProperties
         ..componentDescription = componentDescription
         ..contentProperty = contentProperty;
       return returnElement;

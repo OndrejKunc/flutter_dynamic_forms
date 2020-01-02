@@ -3,29 +3,32 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class MultiSelectChoiceParser extends ElementParser<MultiSelectChoice> {
+class MultiSelectChoiceParser<TMultiSelectChoice extends MultiSelectChoice>
+    extends FormElementParser<TMultiSelectChoice> {
   @override
   String get name => "multiSelectChoice";
 
   @override
-  MultiSelectChoice parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var multiSelectChoice = MultiSelectChoice();
-    multiSelectChoice.fillMultiSelectChoice(
-      id: parserNode.getPlainStringValue("id"),
-      parent: parserNode.getParentValue(parent),
-      isVisible: parserNode.getIsVisible(),
-      isSelected: parserNode.getValue(
+  FormElement getInstance() => MultiSelectChoice();
+
+  @override
+  void fillProperties(
+    TMultiSelectChoice multiSelectChoice, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser,
+  ) {
+    super.fillProperties(multiSelectChoice, parserNode, parent, parser);
+    multiSelectChoice
+      ..isSelectedProperty = parserNode.getValue(
         "isSelected",
         ParserNode.convertToBool,
         ParserNode.defaultFalse,
         isImmutable: false,
-      ),
-      label: parserNode.getStringValue(
+      )
+      ..labelProperty = parserNode.getStringValue(
         "label",
         isImmutable: true,
-      ),
-    );
-    return multiSelectChoice;
+      );
   }
 }

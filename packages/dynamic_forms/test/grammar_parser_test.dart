@@ -149,7 +149,7 @@ void main() {
     var parser = expressionGrammarDefinition.build();
     var testFormElement = TestFormElement();
     var stringExpression = testFormElement.getProperties()["intExpression"]
-        as StringExpressionElementValue<int>;
+        as StringExpressionProperty<int>;
     stringExpression.buildExpression(parser);
     var value = stringExpression.evaluate();
     expect(value, 12);
@@ -160,7 +160,7 @@ void main() {
     var parser = expressionGrammarDefinition.build();
     var testFormElement = TestFormElement();
     var stringExpression = testFormElement.getProperties()["integerExpression"]
-        as StringExpressionElementValue<Integer>;
+        as StringExpressionProperty<Integer>;
     stringExpression.buildExpression(parser);
     var value = stringExpression.evaluate();
     expect(value.toInt(), 11);
@@ -171,7 +171,7 @@ void main() {
     var parser = expressionGrammarDefinition.build();
     var testFormElement = TestFormElement();
     var stringExpression = testFormElement.getProperties()["doubleExpression"]
-        as StringExpressionElementValue<double>;
+        as StringExpressionProperty<double>;
     stringExpression.buildExpression(parser);
     var value = stringExpression.evaluate();
     expect(value, 9.5);
@@ -182,7 +182,7 @@ void main() {
     var parser = expressionGrammarDefinition.build();
     var testFormElement = TestFormElement();
     var stringExpression = testFormElement.getProperties()["decimalExpression"]
-        as StringExpressionElementValue<Decimal>;
+        as StringExpressionProperty<Decimal>;
     stringExpression.buildExpression(parser);
     var value = stringExpression.evaluate();
     expect(value.toDouble(), 8.5);
@@ -200,17 +200,17 @@ void main() {
 }
 
 class TestFormElement extends FormElement {
-  Map<String, ElementValue> _properties = {
-    "value": MutableElementValue<Integer>(Integer(27)),
-    "label": MutableElementValue<String>("LabelText"),
-    "intExpression": StringExpressionElementValue<int>("5 + 7"),
-    "integerExpression": StringExpressionElementValue<Integer>("5 + 6"),
-    "doubleExpression": StringExpressionElementValue<double>("5.4 + 4.1"),
-    "decimalExpression": StringExpressionElementValue<Decimal>("5.3 + 3.2"),
+  Map<String, Property> _properties = {
+    "value": MutableProperty<Integer>(Integer(27)),
+    "label": MutableProperty<String>("LabelText"),
+    "intExpression": StringExpressionProperty<int>("5 + 7"),
+    "integerExpression": StringExpressionProperty<Integer>("5 + 6"),
+    "doubleExpression": StringExpressionProperty<double>("5.4 + 4.1"),
+    "decimalExpression": StringExpressionProperty<Decimal>("5.3 + 3.2"),
   };
 
   @override
-  Map<String, ElementValue> get properties => _properties;
+  Map<String, Property> get properties => _properties;
 
   @override
   ExpressionProviderElement clone(

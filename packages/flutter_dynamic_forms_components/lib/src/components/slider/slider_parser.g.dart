@@ -3,59 +3,62 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class SliderParser extends ElementParser<Slider> {
+class SliderParser<TSlider extends Slider>
+    extends FormElementParser<TSlider> {
   @override
   String get name => "slider";
 
   @override
-  Slider parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var slider = Slider();
-    slider.fillSlider(
-      id: parserNode.getPlainStringValue("id"),
-      parent: parserNode.getParentValue(parent),
-      isVisible: parserNode.getIsVisible(),
-      activeColor: parserNode.getValue<int>(
+  FormElement getInstance() => Slider();
+
+  @override
+  void fillProperties(
+    TSlider slider, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser,
+  ) {
+    super.fillProperties(slider, parserNode, parent, parser);
+    slider
+      ..activeColorProperty = parserNode.getValue<int>(
         "activeColor",
         (s) => int.parse(s),
         () => 4278190335,
         isImmutable: true,
-      ),
-      division: parserNode.getValue<int>(
+      )
+      ..divisionProperty = parserNode.getValue<int>(
         "division",
         (s) => int.parse(s),
         () => 0,
         isImmutable: true,
-      ),
-      inactiveColor: parserNode.getValue<int>(
+      )
+      ..inactiveColorProperty = parserNode.getValue<int>(
         "inactiveColor",
         (s) => int.parse(s),
         () => 4290690750,
         isImmutable: true,
-      ),
-      label: parserNode.getStringValue(
+      )
+      ..labelProperty = parserNode.getStringValue(
         "label",
         isImmutable: true,
-      ),
-      maxValue: parserNode.getValue<double>(
+      )
+      ..maxValueProperty = parserNode.getValue<double>(
         "maxValue",
         (s) => double.parse(s),
         () => 0,
         isImmutable: true,
-      ),
-      minValue: parserNode.getValue<double>(
+      )
+      ..minValueProperty = parserNode.getValue<double>(
         "minValue",
         (s) => double.parse(s),
         () => 0,
         isImmutable: true,
-      ),
-      value: parserNode.getValue<double>(
+      )
+      ..valueProperty = parserNode.getValue<double>(
         "value",
         (s) => double.parse(s),
         () => 0,
         isImmutable: false,
-      ),
-    );
-    return slider;
+      );
   }
 }

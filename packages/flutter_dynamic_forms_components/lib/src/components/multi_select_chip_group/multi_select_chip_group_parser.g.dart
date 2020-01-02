@@ -3,24 +3,21 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class MultiSelectChipGroupParser extends ElementParser<MultiSelectChipGroup> {
+class MultiSelectChipGroupParser<TMultiSelectChipGroup extends MultiSelectChipGroup>
+    extends MultiSelectGroupParser<TMultiSelectChipGroup, MultiSelectChipChoice> {
   @override
   String get name => "multiSelectChipGroup";
 
   @override
-  MultiSelectChipGroup parse(ParserNode parserNode, FormElement parent,
-      ElementParserFunction parser) {
-    var multiSelectChipGroup = MultiSelectChipGroup();
-    multiSelectChipGroup.fillMultiSelectChipGroup(
-      id: parserNode.getPlainStringValue("id"),
-      parent: parserNode.getParentValue(parent),
-      isVisible: parserNode.getIsVisible(),
-      choices: parserNode.getChildren<MultiSelectChipChoice>(
-          parent: multiSelectChipGroup,
-          parser: parser,
-          childrenPropertyName: "choices",
-          isContentProperty: true),
-    );
-    return multiSelectChipGroup;
+  FormElement getInstance() => MultiSelectChipGroup();
+
+  @override
+  void fillProperties(
+    TMultiSelectChipGroup multiSelectChipGroup, 
+    ParserNode parserNode, 
+    Element parent,
+    ElementParserFunction parser,
+  ) {
+    super.fillProperties(multiSelectChipGroup, parserNode, parent, parser);
   }
 }
