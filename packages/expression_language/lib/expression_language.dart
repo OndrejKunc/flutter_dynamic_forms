@@ -12,3 +12,4 @@ export './src/expressions/expressions.dart';
 export './src/number_type/decimal.dart';
 export './src/number_type/integer.dart';
 export './src/number_type/number.dart';
+export './src/services/expression_parser.dart';
