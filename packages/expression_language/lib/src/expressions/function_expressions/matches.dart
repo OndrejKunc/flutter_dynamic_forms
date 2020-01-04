@@ -28,7 +28,7 @@ class MatchesFunctionExpression extends Expression<bool> {
       return false;
     } catch (e) {
       throw InvalidRegularExpressionException(
-          "Regular expression $regexSource is invalid");
+          'Regular expression $regexSource is invalid');
     }
   }
 }

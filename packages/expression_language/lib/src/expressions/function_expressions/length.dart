@@ -7,7 +7,7 @@ class LengthFunctionExpression extends Expression<Integer> {
 
   @override
   Integer evaluate() {
-    return new Integer(value.evaluate().length);
+    return Integer(value.evaluate().length);
   }
 
   @override

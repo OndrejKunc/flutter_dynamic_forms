@@ -32,17 +32,20 @@ abstract class Number implements Comparable<Number> {
   /// If both operands are integers, they are equal if they have the same value.
   ///
   /// Returns false if `other` is not a [num].
+  @override
   bool operator ==(Object other);
 
   ///
   ///Returns a hash code for a numerical value.
   ///
+  @override
   int get hashCode;
 
   /// Compares this to `other`.
   ///
   /// Returns a negative number if `this` is less than `other`, zero if they are
   /// equal, and a positive number if `this` is greater than `other`.
+  @override
   int compareTo(Number other);
 
   /// Addition operator.
@@ -229,6 +232,7 @@ abstract class Number implements Comparable<Number> {
   /// Returns the shortest string that correctly represent the input number.
   ///
   /// An [Integer] is converted to a decimal representation with no decimal point.
+  @override
   String toString();
 
   /// Parses a string containing a number literal into a number.
@@ -238,12 +242,12 @@ abstract class Number implements Comparable<Number> {
   /// [Decimal.parse]).
   /// If that fails too, it throws FormatException.
   static Number parse(String input) {
-    String source = input.trim();
+    var source = input.trim();
 
-    Integer intResult = new Integer(int.tryParse(source));
+    var intResult = Integer(int.tryParse(source));
     if (intResult.value != null) return intResult;
 
-    Decimal decimalResult = Decimal.parse(
+    var decimalResult = Decimal.parse(
         source); //this throws FormatException, if input is not decimal number
     return decimalResult;
   }

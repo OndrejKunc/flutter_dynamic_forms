@@ -16,26 +16,25 @@ class DurationFunctionExpression extends Expression<Duration> {
   }
 
   Duration convertIso8601DurationToDuration(String input) {
-    List<int> values = List(4);
-    RegExp validator =
-        RegExp(r"^P(([0-9]+D)?T?([0-9]+H)?([0-9]+M)?([0-9]+S)?)$");
+    var values = List(4);
+    var validator = RegExp(r'^P(([0-9]+D)?T?([0-9]+H)?([0-9]+M)?([0-9]+S)?)$');
     if (!validator.hasMatch(input)) {
-      throw InvalidParameterException("Invalid format of duration string");
+      throw InvalidParameterException('Invalid format of duration string');
     }
-    List<RegExp> regularExpressions = [
-      RegExp(r"[0-9]+D"),
-      RegExp(r"[0-9]+H"),
-      RegExp(r"[0-9]+M"),
-      RegExp(r"[0-9]+S")
+    var regularExpressions = [
+      RegExp(r'[0-9]+D'),
+      RegExp(r'[0-9]+H'),
+      RegExp(r'[0-9]+M'),
+      RegExp(r'[0-9]+S')
     ];
-    List<String> matchedStrings = [
+    var matchedStrings = [
       regularExpressions[0].stringMatch(input),
       regularExpressions[1].stringMatch(input),
       regularExpressions[2].stringMatch(input),
       regularExpressions[3].stringMatch(input)
     ];
 
-    for (int i = 0; i < matchedStrings.length; i++) {
+    for (var i = 0; i < matchedStrings.length; i++) {
       if ((matchedStrings[i] != null) && (matchedStrings.isNotEmpty)) {
         values[i] = int.parse(
             matchedStrings[i].substring(0, matchedStrings[i].length - 1));

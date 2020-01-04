@@ -8,10 +8,10 @@ class ModuloExpression extends Expression<Number> {
 
   @override
   Number evaluate() {
-    Number rightValue = right.evaluate();
-    Decimal epsilon = Decimal.parse("1e-15");
+    var rightValue = right.evaluate();
+    var epsilon = Decimal.parse('1e-15');
     if (rightValue.abs() < epsilon) {
-      throw DivideByZeroException("Modulo by zero");
+      throw DivideByZeroException('Modulo by zero');
     }
     return left.evaluate() % right.evaluate();
   }

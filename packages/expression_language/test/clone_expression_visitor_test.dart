@@ -1,19 +1,19 @@
 import 'package:expression_language/expression_language.dart';
 import 'package:test/test.dart';
 
-main() {
-  test("delegate expression with single property", () {
+void main() {
+  test('delegate expression with single property', () {
     var testElement = TestElement(
       {
-        "value": ConstantExpressionProvider<int>(14),
+        'value': ConstantExpressionProvider<int>(14),
       },
     );
     var visitor = CloneExpressionVisitor(
-      {"element1": testElement},
+      {'element1': testElement},
     );
 
     var delegateExpression = DelegateExpression(
-        ["element1"], testElement.getExpressionProvider("value"));
+        ['element1'], testElement.getExpressionProvider('value'));
     delegateExpression.accept(visitor);
     var resultExpression = visitor.result;
     expect(resultExpression, isA<DelegateExpression>());
@@ -21,26 +21,26 @@ main() {
     expect(resultExpression.evaluate(), 14);
   });
 
-  test("delegate expression with parent property and explicit value", () {
+  test('delegate expression with parent property and explicit value', () {
     var testElement2 = TestElement(
       {
-        "value": ConstantExpressionProvider<int>(14),
+        'value': ConstantExpressionProvider<int>(14),
       },
     );
     var testElement1 = TestElement(
       {
-        "parent": ConstantExpressionProvider<TestElement>(testElement2),
+        'parent': ConstantExpressionProvider<TestElement>(testElement2),
       },
     );
     var visitor = CloneExpressionVisitor(
       {
-        "element1": testElement1,
-        "element2": testElement2,
+        'element1': testElement1,
+        'element2': testElement2,
       },
     );
 
-    var delegateExpression = DelegateExpression(["element1", "parent", "value"],
-        testElement2.getExpressionProvider("value"));
+    var delegateExpression = DelegateExpression(['element1', 'parent', 'value'],
+        testElement2.getExpressionProvider('value'));
     delegateExpression.accept(visitor);
     var resultExpression = visitor.result;
     expect(resultExpression, isA<DelegateExpression>());
@@ -48,26 +48,26 @@ main() {
     expect(resultExpression.evaluate(), 14);
   });
 
-  test("delegate expression with parent property and default value", () {
+  test('delegate expression with parent property and default value', () {
     var testElement2 = TestElement(
       {
-        "value": ConstantExpressionProvider<int>(14),
+        'value': ConstantExpressionProvider<int>(14),
       },
     );
     var testElement1 = TestElement(
       {
-        "parent": ConstantExpressionProvider<TestElement>(testElement2),
+        'parent': ConstantExpressionProvider<TestElement>(testElement2),
       },
     );
     var visitor = CloneExpressionVisitor(
       {
-        "element1": testElement1,
-        "element2": testElement2,
+        'element1': testElement1,
+        'element2': testElement2,
       },
     );
 
     var delegateExpression = DelegateExpression(
-        ["element1", "parent"], testElement2.getExpressionProvider("value"));
+        ['element1', 'parent'], testElement2.getExpressionProvider('value'));
     delegateExpression.accept(visitor);
     var resultExpression = visitor.result;
     expect(resultExpression, isA<DelegateExpression>());
@@ -83,8 +83,8 @@ class TestElement extends ExpressionProviderElement {
 
   @override
   ExpressionProvider getExpressionProvider([String propertyName]) {
-    if (propertyName == null || propertyName == "") {
-      propertyName = "value";
+    if (propertyName == null || propertyName == '') {
+      propertyName = 'value';
     }
     return properties[propertyName];
   }

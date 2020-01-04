@@ -5,7 +5,7 @@ import 'supporting_files/steps/when_then_expression_num.dart';
 
 void main() async {
   final config = TestConfiguration()
-    ..features = [Glob(r"test/features/**.feature")]
+    ..features = [Glob(r'test/features/**.feature')]
     ..exitAfterTestRun = false
     ..reporters = [
       StdoutReporter(MessageLevel.error),

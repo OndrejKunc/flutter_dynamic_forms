@@ -9,7 +9,7 @@ class DivisionDurationExpression extends Expression<Duration> {
   @override
   Duration evaluate() {
     if (right.evaluate().value == 0) {
-      throw DivideByZeroException("Division by zero");
+      throw DivideByZeroException('Division by zero');
     }
     return left.evaluate() ~/ right.evaluate().value;
   }

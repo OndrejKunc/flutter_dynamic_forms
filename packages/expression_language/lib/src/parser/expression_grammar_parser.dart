@@ -13,17 +13,19 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
 
   ExpressionGrammarParser(this.expressionProviderElementMap);
 
+  @override
   Parser failureState() => super.failureState().map((c) {
         var lastSeenSymbol = (c is List && c.length >= 2) ? c[1] : c;
         throw InvalidSyntaxException(
-            "Invalid syntax, last seen symbol: {$lastSeenSymbol} ");
+            'Invalid syntax, last seen symbol: {$lastSeenSymbol} ');
       });
 
+  @override
   Parser additiveExpression() => super.additiveExpression().map((c) {
         Expression left = c[0];
         for (var item in c[1]) {
           Expression right = item[1];
-          if (item[0].value == "+") {
+          if (item[0].value == '+') {
             if (left is Expression<Number> && right is Expression<Number>) {
               left = PlusNumberExpression(left, right);
               continue;
@@ -55,7 +57,7 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
               continue;
             }
           }
-          if (item[0].value == "-") {
+          if (item[0].value == '-') {
             if ((left is Expression<Number>) && (right is Expression<Number>)) {
               left = MinusNumberExpression(left, right);
               continue;
@@ -72,11 +74,12 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
             }
           }
           throw UnknownExpressionTypeException(
-              "Unknown additive expression type");
+              'Unknown additive expression type');
         }
         return left;
       });
 
+  @override
   Parser multiplicativeExpression() =>
       super.multiplicativeExpression().map((c) {
         Expression left = c[0];
@@ -88,7 +91,7 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
             left = IntegerDivisionNumberExpression(left, right);
             continue;
           }
-          if (item[0].value == "*") {
+          if (item[0].value == '*') {
             if (left is Expression<Number> && right is Expression<Number>) {
               left = MultiplyNumberExpression(left, right);
               continue;
@@ -98,7 +101,7 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
               continue;
             }
           }
-          if (item[0].value == "/") {
+          if (item[0].value == '/') {
             if (left is Expression<Number> && right is Expression<Number>) {
               left = DivisionNumberExpression(left, right);
               continue;
@@ -110,29 +113,31 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
 
             continue;
           }
-          if (item[0].value == "%") {
+          if (item[0].value == '%') {
             left = ModuloExpression(left, right);
             continue;
           }
           throw UnknownExpressionTypeException(
-              "Unknown multiplicative expression type");
+              'Unknown multiplicative expression type');
         }
         return left;
       });
 
+  @override
   Parser expressionInParentheses() =>
       super.expressionInParentheses().map((c) => c[1]);
 
+  @override
   Parser unaryExpression() => super.unaryExpression().map((c) {
         if (c is List && c.length == 2) {
-          if (c[0].value == "-") {
+          if (c[0].value == '-') {
             if (c[1] is Expression<Number>) {
               return NegateNumberExpression(c[1]);
             }
             if (c[1] is Expression<Duration>) {
               return NegateDurationExpression(c[1]);
             }
-          } else if (c[0].value == "!") {
+          } else if (c[0].value == '!') {
             if (c[1] is Expression<bool>) {
               return NegateBoolExpression(c[1]);
             }
@@ -141,6 +146,7 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
         return c;
       });
 
+  @override
   Parser conditionalExpression() => super.conditionalExpression().map((c) {
         if (c[1] == null) {
           return c[0];
@@ -148,31 +154,35 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
         return createConditionalExpression(c[0], c[1][1], c[1][3]);
       });
 
+  @override
   Parser logicalOrExpression() => super.logicalOrExpression().map((c) {
         Expression expression = c[0];
         for (var item in c[1]) {
-          if (item[0].value == "||") {
+          if (item[0].value == '||') {
             expression = LogicalOrExpression(expression, item[1]);
             continue;
           }
           throw UnknownExpressionTypeException(
-              "Unknown logical-or expression type");
-        }
-        return expression;
-      });
-  Parser logicalAndExpression() => super.logicalAndExpression().map((c) {
-        Expression expression = c[0];
-        for (var item in c[1]) {
-          if (item[0].value == "&&") {
-            expression = LogicalAndExpression(expression, item[1]);
-            continue;
-          }
-          throw UnknownExpressionTypeException(
-              "Unknown logical-and expression type");
+              'Unknown logical-or expression type');
         }
         return expression;
       });
 
+  @override
+  Parser logicalAndExpression() => super.logicalAndExpression().map((c) {
+        Expression expression = c[0];
+        for (var item in c[1]) {
+          if (item[0].value == '&&') {
+            expression = LogicalAndExpression(expression, item[1]);
+            continue;
+          }
+          throw UnknownExpressionTypeException(
+              'Unknown logical-and expression type');
+        }
+        return expression;
+      });
+
+  @override
   Parser equalityExpression() => super.equalityExpression().map((c) {
         Expression left = c[0];
         if (c[1] == null) {
@@ -180,7 +190,7 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
         }
         var item = c[1];
         var right = item[1];
-        if (item[0].value == "==") {
+        if (item[0].value == '==') {
           if ((left is Expression<Number>) && (right is Expression<Number>)) {
             left = EqualNumberExpression(left, right);
           } else if ((left is Expression<bool>) &&
@@ -196,7 +206,7 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
               (right is Expression<Duration>)) {
             left = EqualDurationExpression(left, right);
           }
-        } else if (item[0].value == "!=") {
+        } else if (item[0].value == '!=') {
           if ((left is Expression<Number>) && (right is Expression<Number>)) {
             left = NegateBoolExpression(EqualNumberExpression(left, right));
           } else if ((left is Expression<bool>) &&
@@ -213,12 +223,13 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
             left = NegateBoolExpression(EqualDurationExpression(left, right));
           } else {
             throw UnknownExpressionTypeException(
-                "Unknown equality expression type");
+                'Unknown equality expression type');
           }
         }
         return left;
       });
 
+  @override
   Parser relationalExpression() => super.relationalExpression().map((c) {
         Expression left = c[0];
         if (c[1] == null) {
@@ -226,7 +237,7 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
         }
         var item = c[1];
         var right = item[1];
-        if (item[0].value == "<") {
+        if (item[0].value == '<') {
           if ((left is Expression<Number>) && (right is Expression<Number>)) {
             left = LessThanNumberExpression(left, right);
           } else if ((left is Expression<DateTime>) &&
@@ -236,7 +247,7 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
               (right is Expression<Duration>)) {
             left = LessThanDurationExpression(left, right);
           }
-        } else if (item[0].value == "<=") {
+        } else if (item[0].value == '<=') {
           if ((left is Expression<Number>) && (right is Expression<Number>)) {
             left = LessThanOrEqualNumberExpression(left, right);
           } else if ((left is Expression<DateTime>) &&
@@ -246,7 +257,7 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
               (right is Expression<Duration>)) {
             left = LessThanOrEqualDurationExpression(left, right);
           }
-        } else if (item[0].value == ">") {
+        } else if (item[0].value == '>') {
           if ((left is Expression<Number>) && (right is Expression<Number>)) {
             left = LessThanNumberExpression(right, left);
           } else if ((left is Expression<DateTime>) &&
@@ -256,7 +267,7 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
               (right is Expression<Duration>)) {
             left = LessThanDurationExpression(right, left);
           }
-        } else if (item[0].value == ">=") {
+        } else if (item[0].value == '>=') {
           if ((left is Expression<Number>) && (right is Expression<Number>)) {
             left = LessThanOrEqualNumberExpression(right, left);
           } else if ((left is Expression<DateTime>) &&
@@ -268,19 +279,20 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
           }
         } else {
           throw UnknownExpressionTypeException(
-              "Unknown relational expression type");
+              'Unknown relational expression type');
         }
         return left;
       });
 
+  @override
   Parser reference() => super.reference().map((c) {
-        var expressionPath = List<String>();
+        var expressionPath = <String>[];
         String elementId = c[1];
         expressionPath.add(elementId);
         var expressionProviderElement = expressionProviderElementMap[elementId];
         if (expressionProviderElement == null) {
           throw NullReferenceException(
-              "Reference named {$elementId} does not exist.");
+              'Reference named {$elementId} does not exist.');
         }
         ExpressionProvider expressionProvider;
         if (c[2].length == 0) {
@@ -302,23 +314,27 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
         return createDelegateExpression(expressionPath, expressionProvider);
       });
 
+  @override
   Parser integerNumber() => super
       .integerNumber()
       .flatten()
       .map((c) => ConstantExpression<Integer>(Integer.parse(c)));
 
+  @override
   Parser decimalNumber() => super
       .decimalNumber()
       .flatten()
       .map((c) => ConstantExpression<Decimal>(Decimal.parse(c)));
 
+  @override
   Parser singleLineString() => super
       .singleLineString()
       .flatten()
       .map((c) => ConstantExpression<String>(c.substring(1, c.length - 1)));
 
+  @override
   Parser functionParameters() => super.functionParameters().map((c) {
-        var result = List<Expression>();
+        var result = <Expression>[];
         for (var i = 0; i < c[0].length; i++) {
           result.add(c[0][i][0]);
         }
@@ -326,15 +342,19 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
         return result;
       });
 
+  @override
   Parser literal() => super.literal().map((c) => c.value);
 
+  @override
   Parser function() => super
       .function()
-      .map((c) => createFunctionExpression(c[0], c[2] ?? List<Expression>()));
+      .map((c) => createFunctionExpression(c[0], c[2] ?? <Expression>[]));
 
+  @override
   Parser TRUE() =>
-      super.TRUE().map((c) => ConstantExpression<bool>(c.value == "true"));
+      super.TRUE().map((c) => ConstantExpression<bool>(c.value == 'true'));
 
+  @override
   Parser FALSE() =>
-      super.FALSE().map((c) => ConstantExpression<bool>(c.value != "false"));
+      super.FALSE().map((c) => ConstantExpression<bool>(c.value != 'false'));
 }
