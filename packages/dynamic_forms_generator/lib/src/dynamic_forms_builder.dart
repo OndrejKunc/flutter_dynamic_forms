@@ -23,6 +23,7 @@ class DynamicFormsBuilder implements Builder {
     var content = await buildStep.readAsString(inputId);
     if (inputId.path.contains('pubspec.yaml') ||
         inputId.path.contains('build.yaml') ||
+        inputId.path.contains('analysis_options.yaml') ||
         buildConfiguration.componentsToIgnore
             .any((c) => inputId.path.contains(c))) {
       return;

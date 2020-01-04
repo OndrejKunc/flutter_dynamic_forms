@@ -53,7 +53,7 @@ class _SimpleFormScreenState extends State<SimpleFormScreen> {
 
     //Use JsonFormParserService for the JSON format
     var formManagerBuilder = FormManagerBuilder(XmlFormParserService(parsers));
-    var content = await rootBundle.loadString("assets/test_form1.xml"); //Load your form
+    var content = await rootBundle.loadString('assets/test_form1.xml'); //Load your form
     _formManager = formManagerBuilder.build(content);
     setState(() {
       _form = _formManager.form;
@@ -158,7 +158,7 @@ The `flutter_dynamic_forms_components` library contains set of predefined compon
 First, you need to create an object called `FormManager`. You can put it inside the `initState` method in your state of your `StatefulWidget`:
 ```dart
 //Get your data somewhere, for demo purposes, we use local assets
-var data = await rootBundle.loadString("assets/test_form.xml");
+var data = await rootBundle.loadString('assets/test_form.xml');
 
 //Use either XmlFormParserService or JsonParserService depending on your form format.
 //For default component set use the predefined parser list.
@@ -243,7 +243,7 @@ import 'check_box.dart';
 
 class CheckBoxParser extends FormElementParser<CheckBox> {
   @override
-  String get name => "checkBox";
+  String get name => 'checkBox';
 
   @override
   FormElement getInstance() => CheckBox();
@@ -258,11 +258,11 @@ class CheckBoxParser extends FormElementParser<CheckBox> {
     super.fillProperties(checkBox, parserNode, parent, parser);
     checkBox
       ..labelProperty = parserNode.getStringValue(
-        "label",
+        'label',
         isImmutable: true,
       )
       ..valueProperty = parserNode.getValue(
-        "value",
+        'value',
         ParserNode.convertToBool,
         ParserNode.defaultFalse,
         isImmutable: false,
@@ -279,8 +279,8 @@ Every property can contain either simple value or expression which is evaluated 
 import 'package:dynamic_forms/dynamic_forms.dart';
 
 class CheckBox extends FormElement {
-  static const String labelPropertyName = "label";
-  static const String valuePropertyName = "value";
+  static const String labelPropertyName = 'label';
+  static const String valuePropertyName = 'value';
 
   Property<String> get labelProperty => properties[labelPropertyName];
   set labelProperty(Property<String> value) =>
