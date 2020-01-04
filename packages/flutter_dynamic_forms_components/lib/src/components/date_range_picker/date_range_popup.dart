@@ -199,12 +199,11 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                     highlightColor: Colors.transparent,
                                     onTap: () {
                                       try {
-                                        // animationController.reverse().then((f) {
-
-                                        // });
                                         widget.onApplyClick(startDate, endDate);
                                         Navigator.pop(context);
-                                      } catch (e) {}
+                                      } catch (e) {
+                                        print(e);
+                                      }
                                     },
                                     child: Center(
                                       child: Text(

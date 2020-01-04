@@ -47,7 +47,7 @@ class _SimpleFormScreenState extends State<SimpleFormScreen> {
     );
 
     var xml =
-        await rootBundle.loadString("assets/test_form1.xml", cache: false);
+        await rootBundle.loadString('assets/test_form1.xml', cache: false);
     _formManager = formManagerBuilder.build(xml);
     setState(() {
       _form = _formManager.form;

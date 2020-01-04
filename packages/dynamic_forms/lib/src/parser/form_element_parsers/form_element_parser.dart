@@ -15,7 +15,7 @@ abstract class FormElementParser<TFormElement extends FormElement>
   void fillProperties(TFormElement formElement, ParserNode parserNode,
       Element parent, ElementParserFunction parser) {
     formElement
-      ..id = parserNode.getPlainStringValue("id")
+      ..id = parserNode.getPlainStringValue('id')
       ..isVisibleProperty = parserNode.getIsVisible()
       ..parentProperty = parserNode.getParentValue(parent);
   }

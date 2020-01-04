@@ -42,10 +42,9 @@ void main() {
 
     var result = parserService.parse(json);
 
-    var formElementMap = Map<String, FormElement>.fromIterable(
-        getFormElementIterator<FormElement>(result),
-        key: (x) => x.id,
-        value: (x) => x);
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+    };
 
     var formElementExpressions =
         getFormPropertyIterator<ExpressionProperty>(result);
@@ -58,10 +57,10 @@ void main() {
       }
     }
 
-    var label2 = formElementMap["label2"] as Label;
+    var label2 = formElementMap['label2'] as Label;
     var resultValue = label2.value;
 
-    expect(resultValue, "Welcome John Doe!");
+    expect(resultValue, 'Welcome John Doe!');
   });
 
   test('json with single child element', () {
@@ -81,14 +80,13 @@ void main() {
 
     var result = parserService.parse(json);
 
-    var formElementMap = Map<String, FormElement>.fromIterable(
-        getFormElementIterator<FormElement>(result),
-        key: (x) => x.id,
-        value: (x) => x);
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+    };
 
-    var label2 = formElementMap["label1"] as Label;
+    var label2 = formElementMap['label1'] as Label;
     var resultValue = label2.value;
 
-    expect(resultValue, "John Doe");
+    expect(resultValue, 'John Doe');
   });
 }

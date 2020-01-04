@@ -9,7 +9,7 @@ class TransitionFormState {
   final int selectedForm;
   final bool isValid;
 
-  bool get isEmpty => form.children.length == 0;
+  bool get isEmpty => form.children.isEmpty;
 
   TransitionFormState(
       {this.form,

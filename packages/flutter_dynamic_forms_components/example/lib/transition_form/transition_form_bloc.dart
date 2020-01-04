@@ -23,7 +23,7 @@ class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
   Stream<TransitionFormState> mapEventToState(FormElementEvent event) async* {
     if (event is LoadFormEvent) {
       var xml = await rootBundle.loadString(
-          "assets/transition_form${event.formNumber}.xml",
+          'assets/transition_form${event.formNumber}.xml',
           cache: false);
       var oldForm = formManager?.form;
       formManager = formManagerBuilder.build(xml);

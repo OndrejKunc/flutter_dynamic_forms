@@ -48,7 +48,7 @@ class CloneExpressionVisitor extends ExpressionVisitor {
         _expressionProviderElementMap[expressionPath[0]];
     ExpressionProvider expressionProvider;
 
-    bool isLastItemElement = true;
+    var isLastItemElement = true;
     for (var i = 1; i < expressionPath.length; i++) {
       isLastItemElement = false;
       var propertyName = expressionPath[i];
@@ -508,7 +508,7 @@ class CloneExpressionVisitor extends ExpressionVisitor {
       parameter.accept(this);
     }
 
-    var resultList = List<Expression>();
+    var resultList = <Expression>[];
     for (var i = 0; i < expression.parameters.length; i++) {
       resultList.insert(0, pop());
     }

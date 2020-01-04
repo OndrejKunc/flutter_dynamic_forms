@@ -4,7 +4,7 @@ import 'container.dart';
 
 class ContainerParser extends FormElementParser<Container> {
   @override
-  String get name => "container";
+  String get name => 'container';
 
   @override
   FormElement getInstance() => Container();
@@ -16,7 +16,7 @@ class ContainerParser extends FormElementParser<Container> {
     container
       ..childrenProperty = parserNode.getChildren<FormElement>(
           parent: container,
-          childrenPropertyName: "children",
+          childrenPropertyName: 'children',
           parser: parser,
           isContentProperty: true);
   }

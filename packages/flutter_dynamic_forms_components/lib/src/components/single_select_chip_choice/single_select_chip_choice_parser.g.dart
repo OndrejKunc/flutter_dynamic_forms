@@ -6,7 +6,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 class SingleSelectChipChoiceParser<TSingleSelectChipChoice extends SingleSelectChipChoice>
     extends SingleSelectChoiceParser<TSingleSelectChipChoice> {
   @override
-  String get name => "singleSelectChipChoice";
+  String get name => 'singleSelectChipChoice';
 
   @override
   FormElement getInstance() => SingleSelectChipChoice();

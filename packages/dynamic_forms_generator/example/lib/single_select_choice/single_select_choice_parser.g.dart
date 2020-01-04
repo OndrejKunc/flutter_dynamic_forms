@@ -5,7 +5,7 @@ import '../components.dart';
 class SingleSelectChoiceParser<TSingleSelectChoice extends SingleSelectChoice>
     extends FormElementParser<TSingleSelectChoice> {
   @override
-  String get name => "singleSelectChoice";
+  String get name => 'singleSelectChoice';
 
   @override
   FormElement getInstance() => SingleSelectChoice();
@@ -20,11 +20,11 @@ class SingleSelectChoiceParser<TSingleSelectChoice extends SingleSelectChoice>
     super.fillProperties(singleSelectChoice, parserNode, parent, parser);
     singleSelectChoice
       ..labelProperty = parserNode.getStringValue(
-        "label",
+        'label',
         isImmutable: true,
       )
       ..valueProperty = parserNode.getStringValue(
-        "value",
+        'value',
         isImmutable: true,
       );
   }

@@ -2,10 +2,9 @@
 
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:meta/meta.dart';
 
 class MultiSelectGroup<TMultiSelectChoice extends MultiSelectChoice> extends FormElement {
-  static const String choicesPropertyName = "choices";
+  static const String choicesPropertyName = 'choices';
 
   Property<List<TMultiSelectChoice>> get choicesProperty => properties[choicesPropertyName];
   set choicesProperty(Property<List<TMultiSelectChoice>> value) =>

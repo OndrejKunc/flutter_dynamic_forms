@@ -9,11 +9,11 @@ import 'package:petitparser/petitparser.dart';
 class GivenFormElementIsProvided extends GivenWithWorld<ExpressionWorld> {
   @override
   Future<void> executeStep() async {
-    world.buildGrammarParser({"testElement": TestElement()});
+    world.buildGrammarParser({'testElement': TestElement()});
   }
 
   @override
-  RegExp get pattern => RegExp(r"form element is provided");
+  RegExp get pattern => RegExp(r'form element is provided');
 }
 
 class WhenExpressionIsEvaluated
@@ -30,7 +30,8 @@ class WhenExpressionIsEvaluated
     }
   }
 
-  RegExp get pattern => RegExp(r"expression {string} is evaluated");
+  @override
+  RegExp get pattern => RegExp(r'expression {string} is evaluated');
 }
 
 class ThenIntExpressionResult extends Then1WithWorld<String, ExpressionWorld> {
@@ -39,7 +40,8 @@ class ThenIntExpressionResult extends Then1WithWorld<String, ExpressionWorld> {
     expectMatch(world.result, Integer.parse(result));
   }
 
-  RegExp get pattern => RegExp(r"int expression result is {string}");
+  @override
+  RegExp get pattern => RegExp(r'int expression result is {string}');
 }
 
 class ThenStringExpressionResult
@@ -49,7 +51,8 @@ class ThenStringExpressionResult
     expectMatch(world.result, result);
   }
 
-  RegExp get pattern => RegExp(r"string expression result is {string}");
+  @override
+  RegExp get pattern => RegExp(r'string expression result is {string}');
 }
 
 class ThenDecimalExpressionResult
@@ -59,7 +62,8 @@ class ThenDecimalExpressionResult
     expectMatch(world.result, Decimal.parse(result));
   }
 
-  RegExp get pattern => RegExp(r"decimal expression result is {string}");
+  @override
+  RegExp get pattern => RegExp(r'decimal expression result is {string}');
 }
 
 class ThenDateTimeExpressionResult
@@ -69,16 +73,18 @@ class ThenDateTimeExpressionResult
     expectMatch(world.result, DateTime.parse(result));
   }
 
-  RegExp get pattern => RegExp(r"DateTime expression result is {string}");
+  @override
+  RegExp get pattern => RegExp(r'DateTime expression result is {string}');
 }
 
 class ThenBoolExpressionResult extends Then1WithWorld<String, ExpressionWorld> {
   @override
   Future<void> executeStep(String result) async {
-    expectMatch(world.result, result == "true");
+    expectMatch(world.result, result == 'true');
   }
 
-  RegExp get pattern => RegExp(r"bool expression result is {string}");
+  @override
+  RegExp get pattern => RegExp(r'bool expression result is {string}');
 }
 
 class ThenExceptionThrownResult
@@ -88,7 +94,8 @@ class ThenExceptionThrownResult
     expectMatch(world.result.runtimeType.toString(), result);
   }
 
-  RegExp get pattern => RegExp(r"{string} exception is thrown");
+  @override
+  RegExp get pattern => RegExp(r'{string} exception is thrown');
 }
 
 class ExpressionWorld extends World {
@@ -110,16 +117,16 @@ class ExpressionWorld extends World {
 
 class TestElement extends ExpressionProviderElement {
   Map<String, ExpressionProvider> properties = {
-    "value": ConstantExpressionProvider<Integer>(Integer(27)),
-    "label": ConstantExpressionProvider<String>("LabelText"),
-    "intValue": ConstantExpressionProvider<int>(14),
-    "doubleValue": ConstantExpressionProvider<double>(6.5),
+    'value': ConstantExpressionProvider<Integer>(Integer(27)),
+    'label': ConstantExpressionProvider<String>('LabelText'),
+    'intValue': ConstantExpressionProvider<int>(14),
+    'doubleValue': ConstantExpressionProvider<double>(6.5),
   };
 
   @override
   ExpressionProvider getExpressionProvider([String propertyName]) {
-    if (propertyName == null || propertyName == "") {
-      propertyName = "value";
+    if (propertyName == null || propertyName == '') {
+      propertyName = 'value';
     }
     return properties[propertyName];
   }

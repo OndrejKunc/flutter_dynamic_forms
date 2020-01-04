@@ -15,12 +15,12 @@ class RoundFunctionStringRoundingModeExpression extends Expression<Number> {
 
   @override
   Number evaluate() {
-    String roundingModeString = roundingMode.evaluate();
-    String nameOfEnum = RoundingMode.nearestEven.toString().split('.').first;
-    RoundingMode mode = RoundingMode.values.firstWhere(
+    var roundingModeString = roundingMode.evaluate();
+    var nameOfEnum = RoundingMode.nearestEven.toString().split('.').first;
+    var mode = RoundingMode.values.firstWhere(
         (e) => e.toString() == nameOfEnum + '.' + roundingModeString,
         orElse: () => throw InvalidParameterException(
-            "Rounding mode $roundingModeString does not exist"));
+            'Rounding mode $roundingModeString does not exist'));
     return value
         .evaluate()
         .roundWithPrecision(precision.evaluate().value, mode);

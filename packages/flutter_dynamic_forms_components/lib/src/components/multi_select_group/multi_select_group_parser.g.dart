@@ -20,7 +20,7 @@ abstract class MultiSelectGroupParser<
       ..choicesProperty = parserNode.getChildren<TMultiSelectChoice>(
           parent: multiSelectGroup,
           parser: parser,
-          childrenPropertyName: "choices",
+          childrenPropertyName: 'choices',
           isContentProperty: true);
   }
 }

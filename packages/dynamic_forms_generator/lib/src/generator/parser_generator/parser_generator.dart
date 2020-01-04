@@ -14,7 +14,7 @@ class ParserGenerator {
     @required this.contentProperty,
   });
 
-  List forbiddenTypes = ["enumElement"];
+  List forbiddenTypes = ['enumElement'];
 
   bool _generateParser() =>
       !forbiddenTypes.contains(componentDescription.parentType.typeName);
@@ -23,14 +23,14 @@ class ParserGenerator {
     if (!_generateParser()) {
       return null;
     }
-    StringBuffer buffer = StringBuffer();
-    ElementParserGenerator generator = ElementParserGenerator.getGenerator(
+    var buffer = StringBuffer();
+    var generator = ElementParserGenerator.getGenerator(
       typeName: componentDescription.parentType.typeName,
       contentProperty: contentProperty,
       componentDescription: componentDescription,
     );
 
-    buffer.writeln("// GENERATED CODE - DO NOT MODIFY BY HAND");
+    buffer.writeln('// GENERATED CODE - DO NOT MODIFY BY HAND');
     buffer.writeln();
 
     for (var import in [

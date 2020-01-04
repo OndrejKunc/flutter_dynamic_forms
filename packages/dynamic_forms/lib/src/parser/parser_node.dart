@@ -4,8 +4,12 @@ import 'package:meta/meta.dart';
 
 abstract class ParserNode {
   String getName();
-  Property<T> getValue<T>(String name, T converter(String s), T defaultValue(),
-      {bool isImmutable = true});
+  Property<T> getValue<T>(
+    String name,
+    T Function(String s) converter,
+    T Function() defaultValue, {
+    bool isImmutable = true,
+  });
 
   Property<List<TElement>> getChildren<TElement>({
     @required FormElement parent,
@@ -29,7 +33,7 @@ abstract class ParserNode {
     var nameOfInputEnum = inputValueSplits.first;
 
     if (nameOfEnum != nameOfInputEnum) {
-      throw "Enumeration $nameOfInputEnum does not exist";
+      throw 'Enumeration $nameOfInputEnum does not exist';
     }
 
     var constantName = inputValueSplits.last;
@@ -38,7 +42,7 @@ abstract class ParserNode {
         orElse: () => null);
 
     if (returnValue == null) {
-      throw "Enumeration $nameOfEnum does not have constant named $constantName";
+      throw 'Enumeration $nameOfEnum does not have constant named $constantName';
     } else {
       return ImmutableProperty<TEnumElement>(
           enumElementConstructor(returnValue));
@@ -49,12 +53,12 @@ abstract class ParserNode {
       {@required String propertyName,
       @required ElementParserFunction parser,
       @required FormElement parent,
-      @required TElement defaultValue(),
+      @required TElement Function() defaultValue,
       bool isContentProperty = false,
       bool isImmutable = true});
 
   Property<bool> getIsVisible() =>
-      getValue("isVisible", convertToBool, defaultTrue);
+      getValue('isVisible', convertToBool, defaultTrue);
 
   Property<String> getStringValue(String name, {bool isImmutable = true}) =>
       getValue(name, convertToString, emptyString, isImmutable: isImmutable);
@@ -95,9 +99,9 @@ abstract class ParserNode {
     return ImmutableProperty(parent);
   }
 
-  static String emptyString() => "";
+  static String emptyString() => '';
   static String convertToString(String x) => x;
-  static bool convertToBool(String x) => x?.toLowerCase() == "true";
+  static bool convertToBool(String x) => x?.toLowerCase() == 'true';
   static int convertToColor(String x) => int.parse(x);
   static bool defaultFalse() => false;
   static bool defaultTrue() => true;

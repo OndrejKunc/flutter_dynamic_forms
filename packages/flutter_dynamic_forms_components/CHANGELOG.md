@@ -1,3 +1,7 @@
+# 0.10.1
+
+Fixed analyzer issues.
+
 # 0.10.0
 
 * Updated dependency for flutter dynamic forms.

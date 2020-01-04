@@ -1,3 +1,7 @@
+# 0.2.1
+
+Fixed analyzer issues.
+
 # 0.2.0
 
 * Added `ExpressionParser` class to abstract underlying parser library.

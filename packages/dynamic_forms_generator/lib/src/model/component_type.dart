@@ -1,6 +1,6 @@
 import 'package:dynamic_forms_generator/src/visitor/comopnent_type_visitor.dart';
 
-Set<String> lowerCaseTypes = {"int", "bool", "double"};
+Set<String> lowerCaseTypes = {'int', 'bool', 'double'};
 
 class ComponentType {
   final String typeName;
@@ -32,8 +32,8 @@ class GenericType extends ComponentType {
   @override
   String toTypeString() {
     var joinedTypeParameters =
-        genericParameters.map((t) => t.toTypeString()).join(",");
-    return "${capitalize(typeName)}<${joinedTypeParameters}>";
+        genericParameters.map((t) => t.toTypeString()).join(',');
+    return '${capitalize(typeName)}<${joinedTypeParameters}>';
   }
 
   @override
@@ -49,7 +49,7 @@ class ArrayType extends ComponentType {
 
   @override
   String toTypeString() {
-    return "List<${capitalize(typeName)}>";
+    return 'List<${capitalize(typeName)}>';
   }
 
   @override
@@ -68,7 +68,7 @@ class GenericParameterType extends ComponentType {
     if (extendsType == null) {
       return typeName;
     }
-    return "${capitalize(typeName)} extends ${extendsType.toTypeString()}";
+    return '${capitalize(typeName)} extends ${extendsType.toTypeString()}';
   }
 
   @override
@@ -81,7 +81,7 @@ class DefinitionType extends ComponentType {
   DefinitionType(String typeName) : super(typeName);
 
   String toConstructorString() {
-    return "${capitalize(typeName)}()";
+    return '${capitalize(typeName)}()';
   }
 
   @override
@@ -99,8 +99,8 @@ class GenericDefinitionType extends DefinitionType {
   @override
   String toTypeString() {
     var joinedTypeParameters =
-        genericParameters.map((t) => t.toTypeString()).join(",");
-    return "${capitalize(typeName)}<${joinedTypeParameters}>";
+        genericParameters.map((t) => t.toTypeString()).join(',');
+    return '${capitalize(typeName)}<${joinedTypeParameters}>';
   }
 
   @override

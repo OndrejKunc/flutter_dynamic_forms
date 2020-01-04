@@ -3,7 +3,7 @@ import 'package:expression_language/expression_language.dart';
 
 class CloneableExpressionProperty<T> extends ExpressionProperty<T> {
   Expression<T> _expression;
-  Expression<T> _oldExpression;
+  final Expression<T> _oldExpression;
   CloneableExpressionProperty(this._oldExpression);
 
   void buildExpression(

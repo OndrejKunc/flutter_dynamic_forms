@@ -10,76 +10,76 @@ void main() {
     parser = ComponentTypeGrammarParser(parseTypeDefinition: true).build();
   });
 
-  test("simple type", () {
-    var result = parser.parse("type1").value as ComponentType;
+  test('simple type', () {
+    var result = parser.parse('type1').value as ComponentType;
     expect(result, isA<DefinitionType>());
-    expect(result.typeName, "type1");
+    expect(result.typeName, 'type1');
   });
 
-  test("single generic type", () {
-    var result = parser.parse("type1<type2>").value as ComponentType;
-    expect(result.typeName, "type1");
+  test('single generic type', () {
+    var result = parser.parse('type1<type2>').value as ComponentType;
+    expect(result.typeName, 'type1');
     expect(result, isA<GenericDefinitionType>());
     expect((result as GenericDefinitionType).genericParameters[0].typeName,
-        "type2");
+        'type2');
     expect((result as GenericDefinitionType).genericParameters[0],
         isA<GenericParameterType>());
   });
 
-  test("multiple generic types", () {
-    var result = parser.parse("type1<type2, type3>").value as ComponentType;
-    expect(result.typeName, "type1");
+  test('multiple generic types', () {
+    var result = parser.parse('type1<type2, type3>').value as ComponentType;
+    expect(result.typeName, 'type1');
     expect(result, isA<GenericDefinitionType>());
     expect((result as GenericDefinitionType).genericParameters[0].typeName,
-        "type2");
+        'type2');
     expect((result as GenericDefinitionType).genericParameters[1].typeName,
-        "type3");
+        'type3');
   });
 
-  test("single extends generic type", () {
+  test('single extends generic type', () {
     var result =
-        parser.parse("type1<type2 extends type3>").value as ComponentType;
-    expect(result.typeName, "type1");
+        parser.parse('type1<type2 extends type3>').value as ComponentType;
+    expect(result.typeName, 'type1');
     expect(result, isA<GenericDefinitionType>());
     expect(((result as GenericDefinitionType).genericParameters[0]).typeName,
-        "type2");
+        'type2');
     expect(
         ((result as GenericDefinitionType).genericParameters[0])
             .extendsType
             .typeName,
-        "type3");
+        'type3');
   });
 
-  test("multiple extends generic type", () {
+  test('multiple extends generic type', () {
     var result = parser
-        .parse("type1<type2 extends type3, type4 extends type5>")
+        .parse('type1<type2 extends type3, type4 extends type5>')
         .value as ComponentType;
-    expect(result.typeName, "type1");
+    expect(result.typeName, 'type1');
     expect(result, isA<GenericDefinitionType>());
     expect(
         (result as GenericDefinitionType)
             .genericParameters[0]
             .extendsType
             .typeName,
-        "type3");
+        'type3');
     expect(
         (result as GenericDefinitionType)
             .genericParameters[1]
             .extendsType
             .typeName,
-        "type5");
+        'type5');
   });
 
-  test("nested type in extends", () {
-    var result = parser.parse("type1<type2 extends type3<type4[]>>").value
+  test('nested type in extends', () {
+    var result = parser.parse('type1<type2 extends type3<type4[]>>').value
         as ComponentType;
-    expect(result.typeName, "type1");
+    expect(result.typeName, 'type1');
     expect(result, isA<GenericDefinitionType>());
     expect(
         (((result as GenericDefinitionType).genericParameters[0].extendsType
                     as GenericType)
                 .genericParameters[0] as ArrayType)
             .typeName,
-        "type4");
+        'type4');
   });
 }

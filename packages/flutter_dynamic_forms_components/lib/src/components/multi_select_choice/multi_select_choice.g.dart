@@ -2,11 +2,10 @@
 
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:meta/meta.dart';
 
 class MultiSelectChoice extends FormElement {
-  static const String isSelectedPropertyName = "isSelected";
-  static const String labelPropertyName = "label";
+  static const String isSelectedPropertyName = 'isSelected';
+  static const String labelPropertyName = 'label';
 
   Property<bool> get isSelectedProperty => properties[isSelectedPropertyName];
   set isSelectedProperty(Property<bool> value) =>

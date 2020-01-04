@@ -1,11 +1,10 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 import '../components.dart';
-import 'package:meta/meta.dart';
 
 class SingleSelectGroup<TSingleSelectChoice extends SingleSelectChoice> extends FormElement {
-  static const String choicesPropertyName = "choices";
-  static const String valuePropertyName = "value";
+  static const String choicesPropertyName = 'choices';
+  static const String valuePropertyName = 'value';
 
   Property<List<TSingleSelectChoice>> get choicesProperty => properties[choicesPropertyName];
   set choicesProperty(Property<List<TSingleSelectChoice>> value) =>

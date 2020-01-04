@@ -10,7 +10,7 @@ class Integer extends Number {
     this.value = value;
   }
 
-  factory Integer.parse(String value) => new Integer(int.parse(value));
+  factory Integer.parse(String value) => Integer(int.parse(value));
 
   @override
   int get hashCode => Decimal.fromInt(value).hashCode;
@@ -32,30 +32,30 @@ class Integer extends Number {
   @override
   Number operator %(Number other) => (other is Decimal)
       ? Decimal.fromInt(value) % other
-      : new Integer(value % (other as Integer).value);
+      : Integer(value % (other as Integer).value);
 
   @override
   Number operator *(Number other) => (other is Decimal)
       ? Decimal.fromInt(value) * other
-      : new Integer(value * (other as Integer).value);
+      : Integer(value * (other as Integer).value);
 
   @override
   Number operator +(Number other) => (other is Decimal)
       ? Decimal.fromInt(value) + other
-      : new Integer(value + (other as Integer).value);
+      : Integer(value + (other as Integer).value);
 
   @override
-  Number operator -() => new Integer(-value);
+  Number operator -() => Integer(-value);
 
   @override
   Integer operator ~/(Number other) => (other is Decimal)
       ? Decimal.fromInt(value) ~/ other
-      : new Integer(value ~/ (other as Integer).value);
+      : Integer(value ~/ (other as Integer).value);
 
   @override
   Number operator -(Number other) => (other is Decimal)
       ? Decimal.fromInt(value) - other
-      : new Integer(value - (other as Integer).value);
+      : Integer(value - (other as Integer).value);
 
   @override
   Decimal operator /(Number other) => Decimal.fromInt(value) / other;
@@ -73,13 +73,13 @@ class Integer extends Number {
   bool operator >=(Number other) => Decimal.fromInt(value) >= other;
 
   @override
-  Number abs() => new Integer(value.abs());
+  Number abs() => Integer(value.abs());
 
   @override
-  Integer ceil() => new Integer(value.ceil());
+  Integer ceil() => Integer(value.ceil());
 
   @override
-  Integer floor() => new Integer(value.floor());
+  Integer floor() => Integer(value.floor());
 
   @override
   bool get isInfinite => value.isInfinite;
@@ -93,16 +93,16 @@ class Integer extends Number {
   @override
   Number remainder(Number other) => (other is Decimal)
       ? Decimal.fromInt(value).remainder(other)
-      : new Integer(value.remainder((other as Integer).value));
+      : Integer(value.remainder((other as Integer).value));
 
   @override
-  Integer round() => new Integer(value.round());
+  Integer round() => Integer(value.round());
 
   @override
-  Integer get sign => new Integer(value.sign);
+  Integer get sign => Integer(value.sign);
 
   @override
-  Integer toInteger() => new Integer(value);
+  Integer toInteger() => Integer(value);
 
   @override
   int toInt() => value;
@@ -120,7 +120,7 @@ class Integer extends Number {
       Decimal.fromInt(value).toStringAsPrecision(precision);
 
   @override
-  Integer truncate() => new Integer(value.truncate());
+  Integer truncate() => Integer(value.truncate());
 
   @override
   Number roundWithPrecision(int precision,
@@ -129,7 +129,7 @@ class Integer extends Number {
       return Integer(value);
     } else {
       final int multiplier = pow(10, -precision);
-      final int adder = 5 * (multiplier ~/ 10) * ((value < 0) ? -1 : 1);
+      final adder = 5 * (multiplier ~/ 10) * ((value < 0) ? -1 : 1);
       return Integer(((value + adder) ~/ multiplier) * multiplier);
     }
   }

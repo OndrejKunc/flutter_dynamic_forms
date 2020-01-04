@@ -6,9 +6,9 @@ import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 abstract class FormElement implements Element {
-  static const String defaultPropertyName = "value";
-  static const String parentPropertyName = "parent";
-  static const String isVisiblePropertyName = "isVisible";
+  static const String defaultPropertyName = 'value';
+  static const String parentPropertyName = 'parent';
+  static const String isVisiblePropertyName = 'isVisible';
 
   String id;
 
@@ -29,16 +29,14 @@ abstract class FormElement implements Element {
   FormElement getInstance();
 
   Stream<String> get propertyChanged {
-    if (_propertyChanged == null) {
-      _propertyChanged = _getPropertyChanged();
-    }
+    _propertyChanged ??= _getPropertyChanged();
     return _propertyChanged;
   }
 
   Stream<String> _propertyChanged;
 
   Stream<String> _getPropertyChanged() {
-    var keyStreams = List<Stream<String>>();
+    var keyStreams = <Stream<String>>[];
     properties.forEach((k, v) {
       keyStreams.add(v.valueChanged.map((_) => k));
     });
@@ -49,9 +47,7 @@ abstract class FormElement implements Element {
   }
 
   Property getProperty([String propertyName]) {
-    if (propertyName == null) {
-      propertyName = defaultPropertyName;
-    }
+    propertyName ??= defaultPropertyName;
     var properties = getProperties();
     if (properties.containsKey(propertyName)) {
       return properties[propertyName];
@@ -95,6 +91,7 @@ abstract class FormElement implements Element {
     }
   }
 
+  @override
   ExpressionProvider getExpressionProvider([String propertyName]) =>
       getProperty(propertyName);
 

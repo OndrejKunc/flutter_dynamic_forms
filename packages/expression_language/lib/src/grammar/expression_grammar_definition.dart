@@ -1,7 +1,8 @@
 import 'package:petitparser/petitparser.dart';
 
 class ExpressionGrammarDefinition extends GrammarDefinition {
-  start() => (ref(expression).end()).or(ref(failureState));
+  @override
+  Parser start() => (ref(expression).end()).or(ref(failureState));
 
   Parser FALSE() => ref(token, 'false');
   Parser TRUE() => ref(token, 'true');

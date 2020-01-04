@@ -2,10 +2,9 @@
 
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:meta/meta.dart';
 
 class Container extends FormElement {
-  static const String childrenPropertyName = "children";
+  static const String childrenPropertyName = 'children';
 
   Property<List<FormElement>> get childrenProperty => properties[childrenPropertyName];
   set childrenProperty(Property<List<FormElement>> value) =>

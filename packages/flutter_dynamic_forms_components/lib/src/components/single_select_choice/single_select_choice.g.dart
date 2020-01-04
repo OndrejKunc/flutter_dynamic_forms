@@ -2,11 +2,10 @@
 
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:meta/meta.dart';
 
 class SingleSelectChoice extends FormElement {
-  static const String labelPropertyName = "label";
-  static const String valuePropertyName = "value";
+  static const String labelPropertyName = 'label';
+  static const String valuePropertyName = 'value';
 
   Property<String> get labelProperty => properties[labelPropertyName];
   set labelProperty(Property<String> value) =>

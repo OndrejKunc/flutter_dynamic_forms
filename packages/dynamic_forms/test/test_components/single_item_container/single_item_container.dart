@@ -1,7 +1,7 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 
 class SingleItemContainer extends FormElement {
-  static const String childPropertyName = "child";
+  static const String childPropertyName = 'child';
 
   Property<FormElement> get childProperty => properties[childPropertyName];
   set childProperty(Property<FormElement> value) =>

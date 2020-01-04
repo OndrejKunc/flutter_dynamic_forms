@@ -6,7 +6,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 class MultiSelectChipGroupParser<TMultiSelectChipGroup extends MultiSelectChipGroup>
     extends MultiSelectGroupParser<TMultiSelectChipGroup, MultiSelectChipChoice> {
   @override
-  String get name => "multiSelectChipGroup";
+  String get name => 'multiSelectChipGroup';
 
   @override
   FormElement getInstance() => MultiSelectChipGroup();

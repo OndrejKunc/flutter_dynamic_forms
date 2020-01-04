@@ -6,7 +6,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 class DropdownButtonParser<TDropdownButton extends DropdownButton>
     extends SingleSelectGroupParser<TDropdownButton, DropdownOption> {
   @override
-  String get name => "dropdownButton";
+  String get name => 'dropdownButton';
 
   @override
   FormElement getInstance() => DropdownButton();

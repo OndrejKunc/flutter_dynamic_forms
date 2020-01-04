@@ -17,7 +17,7 @@ class ComponentDescriptionBuilder {
       parentType = typeParser.parse(rawComponent.parentType).value;
     }
 
-    List<PropertyDescription> properties = [];
+    var properties = <PropertyDescription>[];
     if (rawComponent.properties != null) {
       for (var rawProperty in rawComponent.properties) {
         var propertyType = typeParser.parse(rawProperty.type).value;

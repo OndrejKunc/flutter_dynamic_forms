@@ -1,3 +1,7 @@
+# 0.10.1
+
+Fixed analyzer issues.
+
 # 0.10.0
 
 * Increased minimum dart SDK to 2.6.0.

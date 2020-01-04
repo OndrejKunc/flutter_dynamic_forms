@@ -39,7 +39,7 @@ class RequiredValidationParser extends ValidationParser<RequiredValidation> {
         ],
         (parameters) {
           var text = parameters[0] as String;
-          return text.length > 0;
+          return text.isNotEmpty;
         },
       ),
     );

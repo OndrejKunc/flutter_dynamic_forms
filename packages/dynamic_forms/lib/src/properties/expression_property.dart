@@ -6,10 +6,10 @@ abstract class ExpressionProperty<T> extends Property<T> {
   T _cachedValue;
 
   @override
-  T get value => _cachedValue == null ? evaluate() : _cachedValue;
+  T get value => _cachedValue ?? evaluate();
 
   T evaluate() {
-    T oldValue = _cachedValue;
+    var oldValue = _cachedValue;
     _cachedValue = getExpression().evaluate();
     if (_cachedValue != oldValue) {
       valueChangedSubject?.add(_cachedValue);

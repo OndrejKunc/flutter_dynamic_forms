@@ -1,7 +1,7 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 
 class Label extends FormElement {
-  static const String valuePropertyName = "value";
+  static const String valuePropertyName = 'value';
 
   Property<String> get valueProperty => properties[valuePropertyName];
   set valueProperty(Property<String> value) =>

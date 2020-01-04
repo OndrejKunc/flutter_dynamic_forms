@@ -6,7 +6,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 class MultiSelectChoiceParser<TMultiSelectChoice extends MultiSelectChoice>
     extends FormElementParser<TMultiSelectChoice> {
   @override
-  String get name => "multiSelectChoice";
+  String get name => 'multiSelectChoice';
 
   @override
   FormElement getInstance() => MultiSelectChoice();
@@ -21,13 +21,13 @@ class MultiSelectChoiceParser<TMultiSelectChoice extends MultiSelectChoice>
     super.fillProperties(multiSelectChoice, parserNode, parent, parser);
     multiSelectChoice
       ..isSelectedProperty = parserNode.getValue(
-        "isSelected",
+        'isSelected',
         ParserNode.convertToBool,
         ParserNode.defaultFalse,
         isImmutable: false,
       )
       ..labelProperty = parserNode.getStringValue(
-        "label",
+        'label',
         isImmutable: true,
       );
   }

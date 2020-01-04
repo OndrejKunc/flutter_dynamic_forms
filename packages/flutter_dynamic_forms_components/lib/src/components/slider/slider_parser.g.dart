@@ -6,7 +6,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 class SliderParser<TSlider extends Slider>
     extends FormElementParser<TSlider> {
   @override
-  String get name => "slider";
+  String get name => 'slider';
 
   @override
   FormElement getInstance() => Slider();
@@ -21,41 +21,41 @@ class SliderParser<TSlider extends Slider>
     super.fillProperties(slider, parserNode, parent, parser);
     slider
       ..activeColorProperty = parserNode.getValue<int>(
-        "activeColor",
+        'activeColor',
         (s) => int.parse(s),
         () => 4278190335,
         isImmutable: true,
       )
       ..divisionProperty = parserNode.getValue<int>(
-        "division",
+        'division',
         (s) => int.parse(s),
         () => 0,
         isImmutable: true,
       )
       ..inactiveColorProperty = parserNode.getValue<int>(
-        "inactiveColor",
+        'inactiveColor',
         (s) => int.parse(s),
         () => 4290690750,
         isImmutable: true,
       )
       ..labelProperty = parserNode.getStringValue(
-        "label",
+        'label',
         isImmutable: true,
       )
       ..maxValueProperty = parserNode.getValue<double>(
-        "maxValue",
+        'maxValue',
         (s) => double.parse(s),
         () => 0,
         isImmutable: true,
       )
       ..minValueProperty = parserNode.getValue<double>(
-        "minValue",
+        'minValue',
         (s) => double.parse(s),
         () => 0,
         isImmutable: true,
       )
       ..valueProperty = parserNode.getValue<double>(
-        "value",
+        'value',
         (s) => double.parse(s),
         () => 0,
         isImmutable: false,

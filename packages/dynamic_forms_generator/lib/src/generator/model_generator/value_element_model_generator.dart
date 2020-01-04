@@ -3,10 +3,10 @@ import 'package:dynamic_forms_generator/src/generator/model_generator/element_mo
 class ValueElementModelGenerator extends ElementModelGenerator {
   @override
   String generateBody() {
-    StringBuffer buffer = StringBuffer();
+    var buffer = StringBuffer();
     for (var property in componentDescription.properties) {
       buffer.writeln(
-          "  static const String ${property.name}PropertyName = \"${property.name}\";");
+          '  static const String ${property.name}PropertyName = \'${property.name}\';');
     }
     if (componentDescription.properties.isNotEmpty) {
       buffer.writeln();
@@ -14,32 +14,32 @@ class ValueElementModelGenerator extends ElementModelGenerator {
 
     for (var property in componentDescription.properties) {
       buffer
-          .writeln("  final ${property.type.toTypeString()} ${property.name};");
+          .writeln('  final ${property.type.toTypeString()} ${property.name};');
     }
 
     if (componentDescription.properties.isNotEmpty) {
       buffer.writeln();
     }
 
-    buffer.writeln("  ${componentDescription.type.toTypeString()}({");
+    buffer.writeln('  ${componentDescription.type.toTypeString()}({');
     for (var property in componentDescription.properties) {
       var defaultValue = getDefaultValue(property.type.typeName);
       if (defaultValue != null) {
-        buffer.writeln("    this.${property.name} = ${defaultValue},");
+        buffer.writeln('    this.${property.name} = ${defaultValue},');
       } else {
-        buffer.writeln("    this.${property.name},");
+        buffer.writeln('    this.${property.name},');
       }
     }
-    buffer.writeln("  });");
+    buffer.writeln('  });');
     buffer.writeln('''
   @override
   ExpressionProviderElement clone(
           ExpressionProvider<ExpressionProviderElement> parent) =>''');
-    buffer.writeln("  ${componentDescription.type.toTypeString()}(");
+    buffer.writeln('  ${componentDescription.type.toTypeString()}(');
     for (var property in componentDescription.properties) {
-      buffer.writeln("    ${property.name}: ${property.name},");
+      buffer.writeln('    ${property.name}: ${property.name},');
     }
-    buffer.writeln("  );");
+    buffer.writeln('  );');
     buffer.writeln('''
   @override
   ExpressionProvider getExpressionProvider([String propertyName]) {
@@ -61,5 +61,5 @@ class ValueElementModelGenerator extends ElementModelGenerator {
   }
 
   @override
-  String generatePrelude() => "";
+  String generatePrelude() => '';
 }

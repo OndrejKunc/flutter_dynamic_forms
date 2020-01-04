@@ -10,61 +10,61 @@ void main() {
     parser = ComponentTypeGrammarParser().build();
   });
 
-  test("simple type", () {
-    var result = parser.parse("type1").value as ComponentType;
-    expect(result.typeName, "type1");
+  test('simple type', () {
+    var result = parser.parse('type1').value as ComponentType;
+    expect(result.typeName, 'type1');
   });
 
-  test("array type", () {
-    var result = parser.parse("type[]").value as ComponentType;
-    expect(result.typeName, "type");
+  test('array type', () {
+    var result = parser.parse('type[]').value as ComponentType;
+    expect(result.typeName, 'type');
     expect(result, isA<ArrayType>());
-    expect((result as ArrayType).innerType.typeName, "type");
+    expect((result as ArrayType).innerType.typeName, 'type');
   });
 
-  test("single generic type", () {
-    var result = parser.parse("type1<type2>").value as ComponentType;
-    expect(result.typeName, "type1");
+  test('single generic type', () {
+    var result = parser.parse('type1<type2>').value as ComponentType;
+    expect(result.typeName, 'type1');
     expect(result, isA<GenericType>());
-    expect((result as GenericType).genericParameters[0].typeName, "type2");
+    expect((result as GenericType).genericParameters[0].typeName, 'type2');
   });
 
-  test("multiple generic types", () {
-    var result = parser.parse("type1<type2, type3>").value as ComponentType;
-    expect(result.typeName, "type1");
+  test('multiple generic types', () {
+    var result = parser.parse('type1<type2, type3>').value as ComponentType;
+    expect(result.typeName, 'type1');
     expect(result, isA<GenericType>());
-    expect((result as GenericType).genericParameters[0].typeName, "type2");
-    expect((result as GenericType).genericParameters[1].typeName, "type3");
+    expect((result as GenericType).genericParameters[0].typeName, 'type2');
+    expect((result as GenericType).genericParameters[1].typeName, 'type3');
   });
 
-  test("nested generic types", () {
+  test('nested generic types', () {
     var result =
-        parser.parse("type1<type2<type4>, type3>").value as ComponentType;
-    expect(result.typeName, "type1");
+        parser.parse('type1<type2<type4>, type3>').value as ComponentType;
+    expect(result.typeName, 'type1');
     expect(result, isA<GenericType>());
     expect(
         ((result as GenericType).genericParameters[0] as GenericType)
             .genericParameters[0]
             .typeName,
-        "type4");
+        'type4');
   });
 
-  test("nested generic array", () {
-    var result = parser.parse("type1<type2[], type3>").value as ComponentType;
-    expect(result.typeName, "type1");
+  test('nested generic array', () {
+    var result = parser.parse('type1<type2[], type3>').value as ComponentType;
+    expect(result.typeName, 'type1');
     expect(result, isA<GenericType>());
     expect(((result as GenericType).genericParameters[0] as ArrayType).typeName,
-        "type2");
+        'type2');
   });
 
-  test("generic array", () {
-    var result = parser.parse("type1<type2[], type3>[]").value as ComponentType;
-    expect(result.typeName, "type1");
+  test('generic array', () {
+    var result = parser.parse('type1<type2[], type3>[]').value as ComponentType;
+    expect(result.typeName, 'type1');
     expect(result, isA<ArrayType>());
     expect(
         (((result as ArrayType).innerType as GenericType).genericParameters[0]
                 as ArrayType)
             .typeName,
-        "type2");
+        'type2');
   });
 }

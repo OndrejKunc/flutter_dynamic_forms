@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 import '../components.dart';
-import 'package:meta/meta.dart';
 
 class Text extends FormElement {
-  static const String labelPropertyName = "label";
-  static const String textInputTypePropertyName = "textInputType";
-  static const String validationsPropertyName = "validations";
-  static const String valuePropertyName = "value";
+  static const String labelPropertyName = 'label';
+  static const String textInputTypePropertyName = 'textInputType';
+  static const String validationsPropertyName = 'validations';
+  static const String valuePropertyName = 'value';
 
   Property<String> get labelProperty => properties[labelPropertyName];
   set labelProperty(Property<String> value) =>

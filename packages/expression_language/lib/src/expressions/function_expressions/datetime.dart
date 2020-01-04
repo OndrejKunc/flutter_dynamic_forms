@@ -12,9 +12,9 @@ class DateTimeFunctionExpression extends Expression<DateTime> {
 
   @override
   DateTime evaluate() {
-    DateTime returnValue = DateTime.tryParse(value.evaluate());
+    var returnValue = DateTime.tryParse(value.evaluate());
     if (returnValue == null) {
-      throw InvalidParameterException("Invalid format of date-time string");
+      throw InvalidParameterException('Invalid format of date-time string');
     }
     return returnValue;
   }

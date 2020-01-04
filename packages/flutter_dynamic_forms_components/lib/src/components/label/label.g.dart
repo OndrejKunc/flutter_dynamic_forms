@@ -2,10 +2,9 @@
 
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:meta/meta.dart';
 
 class Label extends FormElement {
-  static const String valuePropertyName = "value";
+  static const String valuePropertyName = 'value';
 
   Property<String> get valueProperty => properties[valuePropertyName];
   set valueProperty(Property<String> value) =>

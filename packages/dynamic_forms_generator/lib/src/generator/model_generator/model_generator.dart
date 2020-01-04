@@ -14,18 +14,17 @@ class ModelGenerator {
   });
 
   String generate() {
-    StringBuffer buffer = StringBuffer();
-    ElementModelGenerator generator = ElementModelGenerator.getGenerator(
-        componentDescription: componentDescription,
-        typeName: componentDescription.parentType.typeName);
+    var buffer = StringBuffer();
+    var generator = ElementModelGenerator.getGenerator(
+      componentDescription: componentDescription,
+      typeName: componentDescription.parentType.typeName,
+      buildConfiguration: buildConfiguration,
+    );
 
-    buffer.writeln("// GENERATED CODE - DO NOT MODIFY BY HAND");
+    buffer.writeln('// GENERATED CODE - DO NOT MODIFY BY HAND');
     buffer.writeln();
 
-    for (var import in [
-      ...buildConfiguration.defaultImports,
-      ...buildConfiguration.modelImports
-    ]) {
+    for (var import in generator.imports) {
       buffer.writeln("import '$import';");
     }
 
@@ -35,9 +34,9 @@ class ModelGenerator {
 
     buffer.write(generator.generatePrelude());
     buffer.writeln(
-        "class ${componentDescription.type.toTypeString()} extends ${componentDescription.parentType.toTypeString()} {");
+        'class ${componentDescription.type.toTypeString()} extends ${componentDescription.parentType.toTypeString()} {');
     buffer.write(generator.generateBody());
-    buffer.writeln("}");
+    buffer.writeln('}');
     return buffer.toString();
   }
 }

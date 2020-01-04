@@ -6,7 +6,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 class DateParser<TDate extends Date>
     extends FormElementParser<TDate> {
   @override
-  String get name => "date";
+  String get name => 'date';
 
   @override
   FormElement getInstance() => Date();
@@ -21,33 +21,33 @@ class DateParser<TDate extends Date>
     super.fillProperties(date, parserNode, parent, parser);
     date
       ..firstDateProperty = parserNode.getValue<DateTime>(
-        "firstDate",
+        'firstDate',
         (s) => DateTime.parse(s),
         () => null,
         isImmutable: true,
       )
       ..formatProperty = parserNode.getStringValue(
-        "format",
+        'format',
         isImmutable: true,
       )
       ..initialDateProperty = parserNode.getValue<DateTime>(
-        "initialDate",
+        'initialDate',
         (s) => DateTime.parse(s),
         () => null,
         isImmutable: true,
       )
       ..labelProperty = parserNode.getStringValue(
-        "label",
+        'label',
         isImmutable: true,
       )
       ..lastDateProperty = parserNode.getValue<DateTime>(
-        "lastDate",
+        'lastDate',
         (s) => DateTime.parse(s),
         () => null,
         isImmutable: true,
       )
       ..valueProperty = parserNode.getValue<DateTime>(
-        "value",
+        'value',
         (s) => DateTime.parse(s),
         () => null,
         isImmutable: false,

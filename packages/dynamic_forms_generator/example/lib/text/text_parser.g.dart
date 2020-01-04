@@ -5,7 +5,7 @@ import '../components.dart';
 class TextParser<TText extends Text>
     extends FormElementParser<TText> {
   @override
-  String get name => "text";
+  String get name => 'text';
 
   @override
   FormElement getInstance() => Text();
@@ -20,20 +20,20 @@ class TextParser<TText extends Text>
     super.fillProperties(text, parserNode, parent, parser);
     text
       ..labelProperty = parserNode.getStringValue(
-        "label",
+        'label',
         isImmutable: true,
       )
       ..textInputTypeProperty = parserNode.getStringValue(
-        "textInputType",
+        'textInputType',
         isImmutable: true,
       )
       ..validationsProperty = parserNode.getChildren<Validation>(
           parent: text,
           parser: parser,
-          childrenPropertyName: "validations",
+          childrenPropertyName: 'validations',
           isContentProperty: false)
       ..valueProperty = parserNode.getStringValue(
-        "value",
+        'value',
         isImmutable: false,
       );
   }

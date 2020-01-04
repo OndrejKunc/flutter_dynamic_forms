@@ -20,10 +20,10 @@ abstract class SingleSelectGroupParser<
       ..choicesProperty = parserNode.getChildren<TSingleSelectChoice>(
           parent: singleSelectGroup,
           parser: parser,
-          childrenPropertyName: "choices",
+          childrenPropertyName: 'choices',
           isContentProperty: true)
       ..valueProperty = parserNode.getStringValue(
-        "value",
+        'value',
         isImmutable: false,
       );
   }
