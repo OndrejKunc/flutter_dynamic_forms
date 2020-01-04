@@ -89,7 +89,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => BlocProvider(
-                        builder: (context) {
+                        create: (context) {
                           return DynamicFormBloc(
                             forms.FormManagerBuilder(
                               forms.XmlFormParserService(
@@ -119,7 +119,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => BlocProvider(
-                        builder: (context) {
+                        create: (context) {
                           return TransitionFormBloc(
                             formManagerBuilder,
                             TransitionFormBuilder(formManagerBuilder),

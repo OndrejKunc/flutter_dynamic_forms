@@ -1,9 +1,14 @@
+# 0.10.0
+
+* Updated dependency for flutter dynamic forms.
+* Increased minimum dart SDK to 2.6.0.
+
 # 0.9.0
 
-- Updated dependency for flutter dynamic forms and generator.
-- Components are now using new format for the Model and Parser classes.
-- Removed address component.
-- Date and DateRange components are now generated from YAML files.
+* Updated dependency for flutter dynamic forms and generator.
+* Components are now using new format for the Model and Parser classes.
+* Removed address component.
+* Date and DateRange components are now generated from YAML files.
 
 # 0.8.0
 

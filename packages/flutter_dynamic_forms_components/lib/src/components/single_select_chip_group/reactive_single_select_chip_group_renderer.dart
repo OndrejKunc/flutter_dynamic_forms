@@ -19,7 +19,7 @@ class ReactiveSingleSelectChipGroupRenderer
       stream: element.choicesChanged,
       builder: (context, snapshot) {
         return StreamBuilder(
-          stream: Observable.merge(
+          stream: MergeStream(
             snapshot.data.map((child) => child.isVisibleChanged),
           ),
           builder: (context, _) => Wrap(

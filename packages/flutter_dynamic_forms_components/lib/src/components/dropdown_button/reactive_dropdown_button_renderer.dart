@@ -17,7 +17,7 @@ class ReactiveDropdownButtonRenderer
     streamsToReact.add(element.propertyChanged);
 
     return LazyStreamBuilder(
-      streamFactory: () => Observable.merge(streamsToReact),
+      streamFactory: () => MergeStream(streamsToReact),
       builder: (context, _) {
         return Center(
           child: DropdownButton<String>(

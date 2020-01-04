@@ -42,7 +42,7 @@ abstract class FormElement implements Element {
     properties.forEach((k, v) {
       keyStreams.add(v.valueChanged.map((_) => k));
     });
-    var mergedStream = Observable.merge(keyStreams);
+    var mergedStream = MergeStream(keyStreams);
     var connectableObservable = mergedStream.publishReplay(maxSize: 1);
     connectableObservable.connect();
     return connectableObservable;

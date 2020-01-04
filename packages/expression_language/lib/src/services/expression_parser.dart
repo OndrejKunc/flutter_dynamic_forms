@@ -1,5 +1,5 @@
 import 'package:expression_language/expression_language.dart';
-import 'package:petitparser/core.dart';
+import 'package:petitparser/petitparser.dart';
 
 class ExpressionParser {
   final Parser parser;

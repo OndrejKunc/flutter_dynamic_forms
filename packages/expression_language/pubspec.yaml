@@ -4,10 +4,10 @@ version: 0.2.0
 homepage: https://github.com/OndrejKunc/flutter_dynamic_forms
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
-  petitparser: ^3.0.0
+  petitparser: ^2.4.0
   rational: ^0.3.7
 
 dev_dependencies:

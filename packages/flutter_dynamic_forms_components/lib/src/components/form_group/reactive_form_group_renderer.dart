@@ -19,7 +19,7 @@ class ReactiveFormGroupRenderer extends FormElementRenderer<model.FormGroup> {
       stream: element.childrenChanged,
       builder: (context, snapshot) {
         return StreamBuilder(
-          stream: Observable.merge(
+          stream: MergeStream(
             snapshot.data
                 .whereType<FormElement>()
                 .map((child) => child.isVisibleChanged),

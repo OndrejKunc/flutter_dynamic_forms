@@ -18,14 +18,14 @@ class DynamicFormBloc extends Bloc<FormElementEvent, DynamicFormState> {
   @override
   Stream<DynamicFormState> mapEventToState(FormElementEvent event) async* {
     if (event is LoadFormEvent) {
-      yield currentState.copyWith(isLoading: true);
+      yield state.copyWith(isLoading: true);
 
       await Future.delayed(Duration(seconds: 1));
       var xml =
           await rootBundle.loadString("assets/test_form1.xml", cache: false);
       formManager = formManagerBuilder.build(xml);
 
-      yield currentState.copyWith(
+      yield state.copyWith(
           isLoading: false,
           isValid: formManager.isFormValid,
           form: formManager.form);
@@ -34,7 +34,7 @@ class DynamicFormBloc extends Bloc<FormElementEvent, DynamicFormState> {
 
     if (event is ClearFormEvent) {
       formManager.resetForm();
-      yield currentState.copyWith(
+      yield state.copyWith(
           isLoading: false,
           isValid: formManager.isFormValid,
           form: formManager.form);
@@ -42,7 +42,7 @@ class DynamicFormBloc extends Bloc<FormElementEvent, DynamicFormState> {
     }
 
     if (event is RequestFormDataEvent) {
-      yield currentState.copyWith(
+      yield state.copyWith(
           isLoading: false,
           isValid: formManager.isFormValid,
           form: formManager.form,
@@ -51,7 +51,7 @@ class DynamicFormBloc extends Bloc<FormElementEvent, DynamicFormState> {
     }
 
     if (event is ClearFormDataEvent) {
-      yield currentState.copyWith(
+      yield state.copyWith(
           isLoading: false,
           isValid: formManager.isFormValid,
           form: formManager.form,
@@ -68,8 +68,8 @@ class DynamicFormBloc extends Bloc<FormElementEvent, DynamicFormState> {
       );
       var isValid = formManager.isFormValid;
       //No need to emit new state every time, because reactive renderers already listen to the changes.
-      if (currentState.isValid != isValid) {
-        yield currentState.copyWith(isValid: isValid);
+      if (state.isValid != isValid) {
+        yield state.copyWith(isValid: isValid);
       }
     }
   }
