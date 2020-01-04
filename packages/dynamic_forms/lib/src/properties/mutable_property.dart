@@ -39,6 +39,6 @@ class MutableProperty<T> extends Property<T> {
 
   @override
   Property<T> clone() {
-    return MutableProperty(this.value, this._initialValue);
+    return MutableProperty(value, _initialValue);
   }
 }

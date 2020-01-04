@@ -1,8 +1,8 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 
 class Validation extends FormElement {
-  static const String isValidPropertyName = "isValid";
-  static const String messagePropertyName = "message";
+  static const String isValidPropertyName = 'isValid';
+  static const String messagePropertyName = 'message';
 
   Property<bool> get isValidProperty => properties[isValidPropertyName];
   set isValidProperty(Property<bool> value) =>

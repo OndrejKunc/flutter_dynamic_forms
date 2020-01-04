@@ -2,16 +2,15 @@
 
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:meta/meta.dart';
 
 class DateRange extends FormElement {
-  static const String firstValuePropertyName = "firstValue";
-  static const String formatPropertyName = "format";
-  static const String initialDatePropertyName = "initialDate";
-  static const String labelPropertyName = "label";
-  static const String maxDatePropertyName = "maxDate";
-  static const String minDatePropertyName = "minDate";
-  static const String secondValuePropertyName = "secondValue";
+  static const String firstValuePropertyName = 'firstValue';
+  static const String formatPropertyName = 'format';
+  static const String initialDatePropertyName = 'initialDate';
+  static const String labelPropertyName = 'label';
+  static const String maxDatePropertyName = 'maxDate';
+  static const String minDatePropertyName = 'minDate';
+  static const String secondValuePropertyName = 'secondValue';
 
   Property<DateTime> get firstValueProperty => properties[firstValuePropertyName];
   set firstValueProperty(Property<DateTime> value) =>

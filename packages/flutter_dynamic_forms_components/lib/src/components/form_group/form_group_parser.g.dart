@@ -6,7 +6,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 class FormGroupParser<TFormGroup extends FormGroup>
     extends ContainerParser<TFormGroup> {
   @override
-  String get name => "formGroup";
+  String get name => 'formGroup';
 
   @override
   FormElement getInstance() => FormGroup();
@@ -21,7 +21,7 @@ class FormGroupParser<TFormGroup extends FormGroup>
     super.fillProperties(formGroup, parserNode, parent, parser);
     formGroup
       ..nameProperty = parserNode.getStringValue(
-        "name",
+        'name',
         isImmutable: true,
       );
   }

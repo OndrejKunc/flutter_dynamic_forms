@@ -5,10 +5,6 @@ Iterable<TProperty> getFormPropertyIterator<TProperty extends Property>(
     FormElement rootFormElement) sync* {
   for (var formElement
       in getFormElementIterator<FormElement>(rootFormElement)) {
-    yield* formElement
-        .getProperties()
-        .values
-        .where((v) => v is TProperty)
-        .map(((v) => v as TProperty));
+    yield* formElement.getProperties().values.whereType<TProperty>();
   }
 }

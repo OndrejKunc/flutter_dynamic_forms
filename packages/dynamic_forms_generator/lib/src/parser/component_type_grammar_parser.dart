@@ -6,6 +6,7 @@ class ComponentTypeGrammarParser extends ComponentTypeGrammarDefinition {
   ComponentTypeGrammarParser({bool parseTypeDefinition = false})
       : super(parseTypeDefinition: parseTypeDefinition);
 
+  @override
   Parser typeExpression() => super.typeExpression().map(
         (c) {
           ComponentType type;
@@ -21,6 +22,7 @@ class ComponentTypeGrammarParser extends ComponentTypeGrammarDefinition {
         },
       );
 
+  @override
   Parser typeDefinitionExpression() => super.typeDefinitionExpression().map(
         (c) {
           ComponentType type;
@@ -33,9 +35,10 @@ class ComponentTypeGrammarParser extends ComponentTypeGrammarDefinition {
         },
       );
 
+  @override
   Parser listOfTypes() => super.listOfTypes().map(
         (c) {
-          var result = List<ComponentType>();
+          var result = <ComponentType>[];
           for (var i = 0; i < c[0].length; i++) {
             result.add(c[0][i][0]);
           }
@@ -44,10 +47,11 @@ class ComponentTypeGrammarParser extends ComponentTypeGrammarDefinition {
         },
       );
 
+  @override
   Parser listOfGenericDefinitionParameterTypes() =>
       super.listOfGenericDefinitionParameterTypes().map(
         (c) {
-          var result = List<GenericParameterType>();
+          var result = <GenericParameterType>[];
           for (var i = 0; i < c[0].length; i++) {
             result.add(c[0][i][0]);
           }
@@ -56,6 +60,7 @@ class ComponentTypeGrammarParser extends ComponentTypeGrammarDefinition {
         },
       );
 
+  @override
   Parser genericParameterTypeExpression() =>
       super.genericParameterTypeExpression().map(
         (c) {

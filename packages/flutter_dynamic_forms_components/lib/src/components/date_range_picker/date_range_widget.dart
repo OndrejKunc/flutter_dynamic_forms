@@ -76,7 +76,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                     width: 38,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(24.0)),
-                      border: new Border.all(
+                      border: Border.all(
                         color: Theme.of(context).dividerColor,
                       ),
                     ),
@@ -117,7 +117,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                     width: 38,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(24.0)),
-                      border: new Border.all(
+                      border: Border.all(
                         color: Theme.of(context).dividerColor,
                       ),
                     ),
@@ -443,7 +443,9 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
     setState(() {
       try {
         widget.startEndDateChange(startDate, endDate);
-      } catch (e) {}
+      } catch (e) {
+        print(e);
+      }
     });
   }
 }

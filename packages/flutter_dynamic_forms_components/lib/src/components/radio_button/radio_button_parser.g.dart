@@ -6,7 +6,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 class RadioButtonParser<TRadioButton extends RadioButton>
     extends SingleSelectChoiceParser<TRadioButton> {
   @override
-  String get name => "radioButton";
+  String get name => 'radioButton';
 
   @override
   FormElement getInstance() => RadioButton();

@@ -6,11 +6,11 @@ import 'package:rxdart/rxdart.dart';
 abstract class Property<T> implements ExpressionProvider<T> {
   T get value;
 
+  @override
   Expression<T> getExpression();
 
-  Stream<T> get valueChanged => valueChangedSubject == null
-      ? valueChangedSubject = BehaviorSubject<T>.seeded(value)
-      : valueChangedSubject;
+  Stream<T> get valueChanged =>
+      valueChangedSubject ??= BehaviorSubject<T>.seeded(value);
 
   @protected
   BehaviorSubject<T> valueChangedSubject;

@@ -13,7 +13,8 @@ class XmlParserNode extends ParserNode {
   }
 
   @override
-  Property<T> getValue<T>(String name, T converter(String s), T defaultValue(),
+  Property<T> getValue<T>(
+      String name, T Function(String s) converter, T Function() defaultValue,
       {bool isImmutable = true}) {
     var property = getPropertyAsElement(element, name);
     if (property != null) {
@@ -23,7 +24,7 @@ class XmlParserNode extends ParserNode {
           return createProperty<T>(converter(firstChild.text), isImmutable);
         }
         if (firstChild is XmlElement) {
-          if (firstChild.name.qualified == "expression") {
+          if (firstChild.name.qualified == 'expression') {
             var expressionChild = firstChild.firstChild;
             if (expressionChild.nodeType == XmlNodeType.CDATA ||
                 expressionChild.nodeType == XmlNodeType.TEXT) {
@@ -58,7 +59,7 @@ class XmlParserNode extends ParserNode {
   }
 
   XmlElement getPropertyAsElement(XmlElement xmlElement, String name) {
-    return getElement(xmlElement, xmlElement.name.qualified + "." + name);
+    return getElement(xmlElement, xmlElement.name.qualified + '.' + name);
   }
 
   @override
@@ -72,7 +73,7 @@ class XmlParserNode extends ParserNode {
         getPropertyAsElement(element, childrenPropertyName);
     if (childrenXmlElement != null) {
       var children = childrenXmlElement.children
-          .where((c) => c is XmlElement)
+          .whereType<XmlElement>()
           .map((c) => parser(XmlParserNode(c), parent))
           .cast<TFormElement>()
           .toList();
@@ -84,7 +85,7 @@ class XmlParserNode extends ParserNode {
       var children = element.children
           .where((c) =>
               c is XmlElement &&
-              !c.name.qualified.startsWith(element.name.qualified + "."))
+              !c.name.qualified.startsWith(element.name.qualified + '.'))
           .map((c) => parser(XmlParserNode(c), parent))
           .cast<TFormElement>()
           .toList();
@@ -93,7 +94,7 @@ class XmlParserNode extends ParserNode {
       }
     }
 
-    return createProperty(List<TFormElement>(), isImmutable);
+    return createProperty(<TFormElement>[], isImmutable);
   }
 
   @override
@@ -101,11 +102,11 @@ class XmlParserNode extends ParserNode {
     @required String propertyName,
     @required ElementParserFunction parser,
     @required FormElement parent,
-    @required TFormElement defaultValue(),
+    @required TFormElement Function() defaultValue,
     bool isContentProperty = false,
     bool isImmutable = true,
   }) {
-    XmlElement propertyElement = getPropertyAsElement(element, propertyName);
+    var propertyElement = getPropertyAsElement(element, propertyName);
     if (propertyElement == null && isContentProperty) {
       propertyElement = element;
     }

@@ -63,7 +63,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 );
               },
-              child: Text("Simple XML Form"),
+              child: Text('Simple XML Form'),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 16),
@@ -78,7 +78,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   );
                 },
-                child: Text("Simple JSON Form"),
+                child: Text('Simple JSON Form'),
               ),
             ),
             Padding(
@@ -103,7 +103,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   );
                 },
-                child: Text("Dynamic Form With Bloc"),
+                child: Text('Dynamic Form With Bloc'),
               ),
             ),
             Padding(
@@ -130,7 +130,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   );
                 },
-                child: Text("Transition Dynamic Form"),
+                child: Text('Transition Dynamic Form'),
               ),
             ),
           ],

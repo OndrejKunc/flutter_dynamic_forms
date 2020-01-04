@@ -59,7 +59,7 @@ class DynamicFormScreen extends StatelessWidget {
             ),
           ),
           actions: <Widget>[
-            new FlatButton(
+            FlatButton(
               child: flutter.Text('Ok'),
               onPressed: () {
                 bloc.add(ClearFormDataEvent());

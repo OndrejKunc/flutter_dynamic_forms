@@ -3,25 +3,25 @@ import 'package:dynamic_forms_generator/src/generator/parser_generator/element_p
 class ValueElementParserGenerator extends ElementParserGenerator {
   @override
   String generate() {
-    StringBuffer buffer = StringBuffer();
+    var buffer = StringBuffer();
     buffer.writeln(
-        "class ${componentDescription.type.capitalizedTypeName}Parser extends ElementParser<${componentDescription.type.capitalizedTypeName}> {");
-    buffer.writeln("  @override");
+        'class ${componentDescription.type.capitalizedTypeName}Parser extends ElementParser<${componentDescription.type.capitalizedTypeName}> {');
+    buffer.writeln('  @override');
     buffer.writeln(
-        "  String get name => \"${componentDescription.type.typeName}\";");
+        '  String get name => \'${componentDescription.type.typeName}\';');
     buffer.writeln('''
 
   @override
   ${componentDescription.type.toTypeString()} parse(ParserNode parserNode, FormElement parent,
       ElementParserFunction parser) =>''');
-    buffer.writeln("      ${componentDescription.type.toTypeString()}( ");
+    buffer.writeln('      ${componentDescription.type.toTypeString()}( ');
     for (var property in componentDescription.properties) {
       var parseMethod =
           getParseMethod(property, contentProperty?.name == property?.name);
-      buffer.writeln("      ${property.name}: ${parseMethod}.value,");
+      buffer.writeln('      ${property.name}: ${parseMethod}.value,');
     }
-    buffer.writeln("    );");
-    buffer.writeln("}");
+    buffer.writeln('    );');
+    buffer.writeln('}');
     return buffer.toString();
   }
 }

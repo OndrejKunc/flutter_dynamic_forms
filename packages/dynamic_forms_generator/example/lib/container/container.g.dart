@@ -1,10 +1,9 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 import '../components.dart';
-import 'package:meta/meta.dart';
 
 class Container extends FormElement {
-  static const String childrenPropertyName = "children";
+  static const String childrenPropertyName = 'children';
 
   Property<List<FormElement>> get childrenProperty => properties[childrenPropertyName];
   set childrenProperty(Property<List<FormElement>> value) =>

@@ -4,18 +4,18 @@ import '../components.dart';
 
 class ExampleValueElementParser extends ElementParser<ExampleValueElement> {
   @override
-  String get name => "exampleValueElement";
+  String get name => 'exampleValueElement';
 
   @override
   ExampleValueElement parse(ParserNode parserNode, FormElement parent,
       ElementParserFunction parser) =>
       ExampleValueElement( 
       firstProperty: parserNode.getStringValue(
-        "firstProperty",
+        'firstProperty',
         isImmutable: true,
       ).value,
       secondProperty: parserNode.getValue<int>(
-        "secondProperty",
+        'secondProperty',
         (s) => int.parse(s),
         () => 0,
         isImmutable: true,

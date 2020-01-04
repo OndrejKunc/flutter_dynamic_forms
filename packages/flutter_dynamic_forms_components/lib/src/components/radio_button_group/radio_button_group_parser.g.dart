@@ -6,7 +6,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 class RadioButtonGroupParser<TRadioButtonGroup extends RadioButtonGroup>
     extends SingleSelectGroupParser<TRadioButtonGroup, RadioButton> {
   @override
-  String get name => "radioButtonGroup";
+  String get name => 'radioButtonGroup';
 
   @override
   FormElement getInstance() => RadioButtonGroup();
@@ -21,7 +21,7 @@ class RadioButtonGroupParser<TRadioButtonGroup extends RadioButtonGroup>
     super.fillProperties(radioButtonGroup, parserNode, parent, parser);
     radioButtonGroup
       ..arrangementProperty = parserNode.getStringValue(
-        "arrangement",
+        'arrangement',
         isImmutable: false,
       );
   }

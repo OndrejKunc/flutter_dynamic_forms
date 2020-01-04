@@ -4,7 +4,7 @@ import 'label.dart';
 
 class LabelParser<TLabel extends Label> extends FormElementParser<TLabel> {
   @override
-  String get name => "label";
+  String get name => 'label';
 
   @override
   FormElement getInstance() => Label();
@@ -19,7 +19,7 @@ class LabelParser<TLabel extends Label> extends FormElementParser<TLabel> {
     super.fillProperties(label, parserNode, parent, parser);
     label
       ..valueProperty = parserNode.getStringValue(
-        "value",
+        'value',
         isImmutable: true,
       );
   }

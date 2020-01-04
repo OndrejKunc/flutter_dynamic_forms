@@ -3,8 +3,8 @@ import 'package:dynamic_forms/src/elements/value_element.dart';
 import 'package:expression_language/src/expressions/expression_provider.dart';
 
 class ExampleValueElement extends ValueElement {
-  static const String firstPropertyName = "firstProperty";
-  static const String secondPropertyName = "secondProperty";
+  static const String firstPropertyName = 'firstProperty';
+  static const String secondPropertyName = 'secondProperty';
   final String firstProperty;
   final int secondProperty;
 

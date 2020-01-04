@@ -2,16 +2,15 @@
 
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:meta/meta.dart';
 
 class Slider extends FormElement {
-  static const String activeColorPropertyName = "activeColor";
-  static const String divisionPropertyName = "division";
-  static const String inactiveColorPropertyName = "inactiveColor";
-  static const String labelPropertyName = "label";
-  static const String maxValuePropertyName = "maxValue";
-  static const String minValuePropertyName = "minValue";
-  static const String valuePropertyName = "value";
+  static const String activeColorPropertyName = 'activeColor';
+  static const String divisionPropertyName = 'division';
+  static const String inactiveColorPropertyName = 'inactiveColor';
+  static const String labelPropertyName = 'label';
+  static const String maxValuePropertyName = 'maxValue';
+  static const String minValuePropertyName = 'minValue';
+  static const String valuePropertyName = 'value';
 
   Property<int> get activeColorProperty => properties[activeColorPropertyName];
   set activeColorProperty(Property<int> value) =>

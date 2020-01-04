@@ -2,10 +2,9 @@
 
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:meta/meta.dart';
 
 class FormGroup extends Container {
-  static const String namePropertyName = "name";
+  static const String namePropertyName = 'name';
 
   Property<String> get nameProperty => properties[namePropertyName];
   set nameProperty(Property<String> value) =>

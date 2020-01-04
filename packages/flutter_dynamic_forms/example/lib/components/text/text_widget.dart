@@ -68,28 +68,28 @@ class _TextWidgetState extends State<TextWidget> {
     TextInputType result;
 
     switch (textInputType) {
-      case "datetime":
+      case 'datetime':
         result = TextInputType.datetime;
         break;
-      case "emailAddress":
+      case 'emailAddress':
         result = TextInputType.emailAddress;
         break;
-      case "multiline":
+      case 'multiline':
         result = TextInputType.multiline;
         break;
-      case "number":
+      case 'number':
         result = TextInputType.number;
         break;
-      case "money":
+      case 'money':
         result = TextInputType.numberWithOptions(signed: false, decimal: true);
         break;
-      case "phone":
+      case 'phone':
         result = TextInputType.phone;
         break;
-      case "text":
+      case 'text':
         result = TextInputType.text;
         break;
-      case "url":
+      case 'url':
         result = TextInputType.url;
         break;
       default:

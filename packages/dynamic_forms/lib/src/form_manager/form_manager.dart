@@ -19,7 +19,7 @@ class FormManager {
   }
 
   List<FormItemValue> getFormData() {
-    List<FormItemValue> result = List<FormItemValue>();
+    var result = <FormItemValue>[];
     var formElements = getFormElementIterator<FormElement>(form).toList();
 
     formElements.forEach((fe) {
@@ -48,7 +48,7 @@ class FormManager {
   }) {
     if (!formElementMap.containsKey(elementId)) {
       print(
-          "Value cannot be changed because element $elementId is not present");
+          'Value cannot be changed because element $elementId is not present');
       return;
     }
     var formElement = formElementMap[elementId];
@@ -56,7 +56,7 @@ class FormManager {
     var mutableValue = property as MutableProperty<T>;
     if (mutableValue == null) {
       print(
-          "Value cannot be changed because element $elementId is not mutable");
+          'Value cannot be changed because element $elementId is not mutable');
       return;
     }
     mutableValue.setValue(value, ignoreLastChange: ignoreLastChange);

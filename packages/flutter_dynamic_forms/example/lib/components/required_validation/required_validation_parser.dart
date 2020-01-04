@@ -5,16 +5,16 @@ import '../required_validation/required_validation.dart';
 
 class RequiredValidationParser extends ValidationParser<RequiredValidation> {
   @override
-  String get name => "requiredValidation";
+  String get name => 'requiredValidation';
 
   @override
   void fillProperties(RequiredValidation validation, ParserNode parserNode,
       Element parent, parser) {
     validation
-      ..id = parserNode.getPlainStringValue("id")
+      ..id = parserNode.getPlainStringValue('id')
       ..isVisibleProperty = parserNode.getIsVisible()
       ..parentProperty = parserNode.getParentValue(parent)
-      ..messageProperty = parserNode.getStringValue("message")
+      ..messageProperty = parserNode.getStringValue('message')
       ..isValidProperty = getIsValid(parent);
   }
 
@@ -39,7 +39,7 @@ class RequiredValidationParser extends ValidationParser<RequiredValidation> {
         ],
         (parameters) {
           var text = parameters[0] as String;
-          return text.length > 0;
+          return text.isNotEmpty;
         },
       ),
     );

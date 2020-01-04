@@ -47,7 +47,7 @@ class TransitionFormButtonRow extends StatelessWidget {
               ),
               child: Row(
                 children: <Widget>[
-                  flutter.Text("Form 1"),
+                  flutter.Text('Form 1'),
                   SizedBox(width: 10),
                   Icon(
                     Icons.list,
@@ -67,7 +67,7 @@ class TransitionFormButtonRow extends StatelessWidget {
               ),
               child: Row(
                 children: <Widget>[
-                  flutter.Text("Form 2"),
+                  flutter.Text('Form 2'),
                   SizedBox(width: 10),
                   Icon(
                     Icons.list,
@@ -86,7 +86,7 @@ class TransitionFormButtonRow extends StatelessWidget {
                 ),
                 child: Row(
                   children: <Widget>[
-                    flutter.Text("Form 3"),
+                    flutter.Text('Form 3'),
                     SizedBox(width: 10),
                     Icon(
                       Icons.list,

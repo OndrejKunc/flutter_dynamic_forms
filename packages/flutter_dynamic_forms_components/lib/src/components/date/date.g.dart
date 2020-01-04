@@ -2,15 +2,14 @@
 
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:meta/meta.dart';
 
 class Date extends FormElement {
-  static const String firstDatePropertyName = "firstDate";
-  static const String formatPropertyName = "format";
-  static const String initialDatePropertyName = "initialDate";
-  static const String labelPropertyName = "label";
-  static const String lastDatePropertyName = "lastDate";
-  static const String valuePropertyName = "value";
+  static const String firstDatePropertyName = 'firstDate';
+  static const String formatPropertyName = 'format';
+  static const String initialDatePropertyName = 'initialDate';
+  static const String labelPropertyName = 'label';
+  static const String lastDatePropertyName = 'lastDate';
+  static const String valuePropertyName = 'value';
 
   Property<DateTime> get firstDateProperty => properties[firstDatePropertyName];
   set firstDateProperty(Property<DateTime> value) =>

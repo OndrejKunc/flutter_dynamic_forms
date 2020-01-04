@@ -6,7 +6,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 class CheckBoxParser<TCheckBox extends CheckBox>
     extends FormElementParser<TCheckBox> {
   @override
-  String get name => "checkBox";
+  String get name => 'checkBox';
 
   @override
   FormElement getInstance() => CheckBox();
@@ -21,11 +21,11 @@ class CheckBoxParser<TCheckBox extends CheckBox>
     super.fillProperties(checkBox, parserNode, parent, parser);
     checkBox
       ..labelProperty = parserNode.getStringValue(
-        "label",
+        'label',
         isImmutable: true,
       )
       ..valueProperty = parserNode.getValue(
-        "value",
+        'value',
         ParserNode.convertToBool,
         ParserNode.defaultFalse,
         isImmutable: false,

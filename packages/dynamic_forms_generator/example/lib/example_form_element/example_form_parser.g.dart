@@ -5,7 +5,7 @@ import '../components.dart';
 class ExampleFormElementParser<TExampleFormElement extends ExampleFormElement>
     extends FormElementParser<TExampleFormElement> {
   @override
-  String get name => "exampleFormElement";
+  String get name => 'exampleFormElement';
 
   @override
   FormElement getInstance() => ExampleFormElement();
@@ -20,14 +20,14 @@ class ExampleFormElementParser<TExampleFormElement extends ExampleFormElement>
     super.fillProperties(exampleFormElement, parserNode, parent, parser);
     exampleFormElement
       ..enumExampleProperty = parserNode.getEnum<ExampleEnumElementEnum,ExampleEnumElement>(
-          name: "enumExample",
+          name: 'enumExample',
           enumerationValues: ExampleEnumElementEnum.values,
           enumElementConstructor: (x) => ExampleEnumElement(enumeration: x))
           
       ..valueExampleProperty = parserNode.getChild<ExampleValueElement>(
           parent: exampleFormElement,
           parser: parser,
-          propertyName: "valueExample",
+          propertyName: 'valueExample',
           isContentProperty: false,
           defaultValue: () => ExampleValueElement(),
           isImmutable: true);

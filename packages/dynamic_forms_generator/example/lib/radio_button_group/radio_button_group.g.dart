@@ -1,10 +1,9 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 import '../components.dart';
-import 'package:meta/meta.dart';
 
 class RadioButtonGroup extends SingleSelectGroup<RadioButton> {
-  static const String arrangementPropertyName = "arrangement";
+  static const String arrangementPropertyName = 'arrangement';
 
   Property<String> get arrangementProperty => properties[arrangementPropertyName];
   set arrangementProperty(Property<String> value) =>

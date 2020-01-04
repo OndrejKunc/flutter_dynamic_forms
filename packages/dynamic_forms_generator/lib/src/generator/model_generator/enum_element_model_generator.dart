@@ -3,11 +3,11 @@ import 'package:dynamic_forms_generator/src/generator/model_generator/element_mo
 class EnumElementModelGenerator extends ElementModelGenerator {
   @override
   String generateBody() {
-    StringBuffer buffer = StringBuffer();
+    var buffer = StringBuffer();
     buffer.writeln(
-        "  final ${componentDescription.type.toTypeString()}Enum enumeration;");
+        '  final ${componentDescription.type.toTypeString()}Enum enumeration;');
     buffer.writeln(
-        "  ${componentDescription.type.toTypeString()}({@required this.enumeration});");
+        '  ${componentDescription.type.toTypeString()}({@required this.enumeration});');
     buffer.writeln('''
   @override
   ExpressionProviderElement clone(
@@ -24,12 +24,12 @@ class EnumElementModelGenerator extends ElementModelGenerator {
 
   @override
   String generatePrelude() {
-    StringBuffer buffer = StringBuffer();
-    buffer.write("enum ${componentDescription.type.toTypeString()}Enum {");
+    var buffer = StringBuffer();
+    buffer.write('enum ${componentDescription.type.toTypeString()}Enum {');
     for (var property in componentDescription.properties) {
-      buffer.write(" ${property.name},");
+      buffer.write(' ${property.name},');
     }
-    buffer.writeln("}");
+    buffer.writeln('}');
     buffer.writeln();
     return buffer.toString();
   }

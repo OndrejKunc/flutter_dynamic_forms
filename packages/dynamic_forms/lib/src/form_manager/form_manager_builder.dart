@@ -13,10 +13,9 @@ class FormManagerBuilder {
   FormManager build(String content) {
     var root = formParserService.parse(content);
 
-    var formElementMap = Map<String, FormElement>.fromIterable(
-        getFormElementIterator<FormElement>(root),
-        key: (x) => x.id,
-        value: (x) => x);
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(root)) x.id: x
+    };
     var parser = ExpressionParser(formElementMap);
     _buildStringExpressions(root, parser);
     return _build(root, formElementMap);
@@ -24,10 +23,9 @@ class FormManagerBuilder {
 
   FormManager buildFromForm(FormElement root) {
     var clonedForm = root.clone(null);
-    var formElementMap = Map<String, FormElement>.fromIterable(
-        getFormElementIterator<FormElement>(clonedForm),
-        key: (x) => x.id,
-        value: (x) => x);
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(clonedForm)) x.id: x
+    };
     _buildCloneableExpressions(clonedForm, formElementMap);
     return _build(clonedForm, formElementMap);
   }
@@ -36,10 +34,9 @@ class FormManagerBuilder {
       FormElement root, Map<String, FormElement> formElementMap) {
     _buildElementsSubscriptionDependencies(root);
 
-    var formValidations = Map<String, Validation>.fromIterable(
-        getFormElementIterator<Validation>(root),
-        key: (x) => x.id,
-        value: (x) => x);
+    var formValidations = {
+      for (var x in getFormElementIterator<Validation>(root)) x.id: x
+    };
 
     var formMutableValues =
         getFormPropertyIterator<MutableProperty>(root).toList();

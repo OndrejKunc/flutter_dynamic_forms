@@ -21,8 +21,8 @@ class DynamicFormsBuilder implements Builder {
 
     var inputId = buildStep.inputId;
     var content = await buildStep.readAsString(inputId);
-    if (inputId.path.contains("pubspec.yaml") ||
-        inputId.path.contains("build.yaml") ||
+    if (inputId.path.contains('pubspec.yaml') ||
+        inputId.path.contains('build.yaml') ||
         buildConfiguration.componentsToIgnore
             .any((c) => inputId.path.contains(c))) {
       return;
@@ -47,7 +47,7 @@ class DynamicFormsBuilder implements Builder {
     if (modelContent == null) {
       return;
     }
-    var model = inputId.changeExtension(".g.dart");
+    var model = inputId.changeExtension('.g.dart');
     await buildStep.writeAsString(model, modelContent);
 
     var contentProperty = componentDescription.contentProperty;
@@ -62,7 +62,7 @@ class DynamicFormsBuilder implements Builder {
     if (parserContent == null) {
       return;
     }
-    var parser = inputId.changeExtension("_parser.g.dart");
+    var parser = inputId.changeExtension('_parser.g.dart');
     await buildStep.writeAsString(parser, parserContent);
   }
 

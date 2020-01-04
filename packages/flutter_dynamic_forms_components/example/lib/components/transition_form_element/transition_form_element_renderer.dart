@@ -26,7 +26,7 @@ class TransitionFormElementRenderer
         );
         break;
       default:
-        throw Exception("Unknown transition type");
+        throw Exception('Unknown transition type');
     }
   }
 }

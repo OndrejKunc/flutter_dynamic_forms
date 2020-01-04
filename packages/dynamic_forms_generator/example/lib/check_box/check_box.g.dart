@@ -1,16 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 import '../components.dart';
-import 'package:meta/meta.dart';
 
 class CheckBox extends FormElement {
-  static const String labelPropertyName = "label";
-  static const String myDatePropertyName = "myDate";
-  static const String myDecimalPropertyName = "myDecimal";
-  static const String myDoublePropertyName = "myDouble";
-  static const String myIntPropertyName = "myInt";
-  static const String textColorPropertyName = "textColor";
-  static const String valuePropertyName = "value";
+  static const String labelPropertyName = 'label';
+  static const String myDatePropertyName = 'myDate';
+  static const String myDecimalPropertyName = 'myDecimal';
+  static const String myDoublePropertyName = 'myDouble';
+  static const String myIntPropertyName = 'myInt';
+  static const String textColorPropertyName = 'textColor';
+  static const String valuePropertyName = 'value';
 
   Property<String> get labelProperty => properties[labelPropertyName];
   set labelProperty(Property<String> value) =>

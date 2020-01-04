@@ -38,11 +38,11 @@ class _SimpleFormScreenState extends State<SimpleFormScreen> {
 
     switch (widget.formParserType) {
       case FormParserType.xml:
-        fileName = "assets/test_form1.xml";
+        fileName = 'assets/test_form1.xml';
         parserService = XmlFormParserService(parsers);
         break;
       case FormParserType.json:
-        fileName = "assets/test_form1.json";
+        fileName = 'assets/test_form1.json';
         parserService = JsonFormParserService(parsers);
         break;
     }

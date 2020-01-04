@@ -1,11 +1,10 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 import '../components.dart';
-import 'package:meta/meta.dart';
 
 class ExampleFormElement extends FormElement {
-  static const String enumExamplePropertyName = "enumExample";
-  static const String valueExamplePropertyName = "valueExample";
+  static const String enumExamplePropertyName = 'enumExample';
+  static const String valueExamplePropertyName = 'valueExample';
 
   Property<ExampleEnumElement> get enumExampleProperty => properties[enumExamplePropertyName];
   set enumExampleProperty(Property<ExampleEnumElement> value) =>

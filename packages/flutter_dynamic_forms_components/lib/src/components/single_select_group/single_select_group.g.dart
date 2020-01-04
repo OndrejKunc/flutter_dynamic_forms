@@ -2,11 +2,10 @@
 
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:meta/meta.dart';
 
 class SingleSelectGroup<TSingleSelectChoice extends SingleSelectChoice> extends FormElement {
-  static const String choicesPropertyName = "choices";
-  static const String valuePropertyName = "value";
+  static const String choicesPropertyName = 'choices';
+  static const String valuePropertyName = 'value';
 
   Property<List<TSingleSelectChoice>> get choicesProperty => properties[choicesPropertyName];
   set choicesProperty(Property<List<TSingleSelectChoice>> value) =>

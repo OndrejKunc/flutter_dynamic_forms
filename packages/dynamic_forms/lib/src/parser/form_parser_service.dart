@@ -10,8 +10,7 @@ abstract class FormParserService {
   Map<String, ElementParser> _parsersMap;
 
   FormParserService(this._parsers) {
-    _parsersMap =
-        Map.fromIterable(_parsers, key: (p) => p.name, value: (p) => p);
+    _parsersMap = {for (var p in _parsers) p.name: p};
   }
 
   Element parse(String formString) {
@@ -25,7 +24,7 @@ abstract class FormParserService {
     var elementName = element.getName();
     var parser = _parsersMap[elementName];
     if (parser == null) {
-      throw Exception("No parser for element name $elementName found");
+      throw Exception('No parser for element name $elementName found');
     }
     return parser.parse(element, parent, parseElement);
   }

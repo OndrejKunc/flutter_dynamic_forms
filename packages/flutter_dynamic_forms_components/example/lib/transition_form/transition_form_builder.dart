@@ -67,7 +67,7 @@ class TransitionFormBuilder {
   Map<String, FormGroup> getAllFormGroups(FormElement formElement) {
     var result = Map<String, FormGroup>();
     for (var formGroup in getFormElementIterator<FormGroup>(formElement)) {
-      if (formGroup.id == null || formGroup.id == "") {
+      if (formGroup.id == null || formGroup.id == '') {
         continue;
       }
       result[formGroup.id] = formGroup;

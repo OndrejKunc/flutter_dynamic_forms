@@ -37,10 +37,9 @@ void main() {
 
     var result = parserService.parse(xml);
 
-    var formElementMap = Map<String, FormElement>.fromIterable(
-        getFormElementIterator<FormElement>(result),
-        key: (x) => x.id,
-        value: (x) => x);
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+    };
 
     var formElementExpressions =
         getFormPropertyIterator<ExpressionProperty>(result);
@@ -53,10 +52,10 @@ void main() {
       }
     }
 
-    var label2 = formElementMap["label2"] as Label;
+    var label2 = formElementMap['label2'] as Label;
     var resultValue = label2.value;
 
-    expect(resultValue, "Welcome John Doe!");
+    expect(resultValue, 'Welcome John Doe!');
   });
 
   test('xml with content property as explicit property', () {
@@ -76,15 +75,14 @@ void main() {
 
     var result = parserService.parse(xml);
 
-    var formElementMap = Map<String, FormElement>.fromIterable(
-        getFormElementIterator<FormElement>(result),
-        key: (x) => x.id,
-        value: (x) => x);
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+    };
 
-    var label2 = formElementMap["label2"] as Label;
+    var label2 = formElementMap['label2'] as Label;
     var resultValue = label2.value;
 
-    expect(resultValue, "Hello World");
+    expect(resultValue, 'Hello World');
   });
 
   test('xml with non content property as explicit property', () {
@@ -110,15 +108,14 @@ void main() {
 
     var result = parserService.parse(xml);
 
-    var formElementMap = Map<String, FormElement>.fromIterable(
-        getFormElementIterator<FormElement>(result),
-        key: (x) => x.id,
-        value: (x) => x);
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+    };
 
-    var label2 = formElementMap["label2"] as Label;
+    var label2 = formElementMap['label2'] as Label;
     var resultValue = label2.value;
 
-    expect(resultValue, "test2");
+    expect(resultValue, 'test2');
   });
 
   test('xml with single child element', () {
@@ -133,15 +130,14 @@ void main() {
 
     var result = parserService.parse(xml);
 
-    var formElementMap = Map<String, FormElement>.fromIterable(
-        getFormElementIterator<FormElement>(result),
-        key: (x) => x.id,
-        value: (x) => x);
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+    };
 
-    var label1 = formElementMap["label1"] as Label;
+    var label1 = formElementMap['label1'] as Label;
     var resultValue = label1.value;
 
-    expect(resultValue, "John Doe");
+    expect(resultValue, 'John Doe');
   });
 
   test('xml with single child element in property', () {
@@ -158,15 +154,14 @@ void main() {
 
     var result = parserService.parse(xml);
 
-    var formElementMap = Map<String, FormElement>.fromIterable(
-        getFormElementIterator<FormElement>(result),
-        key: (x) => x.id,
-        value: (x) => x);
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+    };
 
-    var label1 = formElementMap["label1"] as Label;
+    var label1 = formElementMap['label1'] as Label;
     var resultValue = label1.value;
 
-    expect(resultValue, "John Doe");
+    expect(resultValue, 'John Doe');
   });
 
   test('xml with HTML value', () {
@@ -186,14 +181,13 @@ void main() {
 
     var result = parserService.parse(xml);
 
-    var formElementMap = Map<String, FormElement>.fromIterable(
-        getFormElementIterator<FormElement>(result),
-        key: (x) => x.id,
-        value: (x) => x);
-    var label1 = formElementMap["label1"] as Label;
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+    };
+    var label1 = formElementMap['label1'] as Label;
     var resultValue = label1.value;
 
-    expect(resultValue, "<b>Html help action</b>");
+    expect(resultValue, '<b>Html help action</b>');
   });
 
   test('xml with changing expressions', () {
@@ -216,10 +210,9 @@ void main() {
 
     var result = parserService.parse(xml);
 
-    var formElementMap = Map<String, FormElement>.fromIterable(
-        getFormElementIterator<FormElement>(result),
-        key: (x) => x.id,
-        value: (x) => x);
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+    };
 
     var formElementExpressions =
         getFormPropertyIterator<ExpressionProperty>(result);
@@ -243,8 +236,8 @@ void main() {
       }
     }
 
-    var label2 = formElementMap["label2"] as Label;
+    var label2 = formElementMap['label2'] as Label;
 
-    expect(label2.value, "Welcome John Doe!");
+    expect(label2.value, 'Welcome John Doe!');
   });
 }

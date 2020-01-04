@@ -45,7 +45,7 @@ class ReplaceGenericTypeVisitor extends ComponentTypeVisitor {
     for (var parameter in type.genericParameters) {
       parameter.accept(this);
     }
-    var resultParameters = List<GenericParameterType>();
+    var resultParameters = <GenericParameterType>[];
     for (var i = 0; i < type.genericParameters.length; i++) {
       resultParameters.insert(0, pop());
     }
@@ -67,7 +67,7 @@ class ReplaceGenericTypeVisitor extends ComponentTypeVisitor {
     for (var parameter in type.genericParameters) {
       parameter.accept(this);
     }
-    var resultParameters = List<ComponentType>();
+    var resultParameters = <ComponentType>[];
     for (var i = 0; i < type.genericParameters.length; i++) {
       resultParameters.insert(0, pop());
     }

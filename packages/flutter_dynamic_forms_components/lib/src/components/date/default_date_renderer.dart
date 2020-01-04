@@ -12,7 +12,7 @@ class DefaultDateRenderer extends FormElementRenderer<model.Date> {
       BuildContext context,
       FormElementEventDispatcherFunction dispatcher,
       FormElementRendererFunction renderer) {
-    final format = new DateFormat(element.format);
+    final format = DateFormat(element.format);
     final time = element.value != null ? element.value : DateTime.now();
     return Center(
       child: Padding(

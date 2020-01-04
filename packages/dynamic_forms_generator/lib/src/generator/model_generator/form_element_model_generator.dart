@@ -3,10 +3,10 @@ import 'package:dynamic_forms_generator/src/generator/model_generator/element_mo
 class FormElementModelGenerator extends ElementModelGenerator {
   @override
   String generateBody() {
-    StringBuffer buffer = StringBuffer();
+    var buffer = StringBuffer();
     for (var property in componentDescription.properties) {
       buffer.writeln(
-          "  static const String ${property.name}PropertyName = \"${property.name}\";");
+          '  static const String ${property.name}PropertyName = \'${property.name}\';');
     }
 
     if (componentDescription.properties.isNotEmpty) {
@@ -14,22 +14,22 @@ class FormElementModelGenerator extends ElementModelGenerator {
     }
 
     for (var property in componentDescription.properties) {
-      var propertyTypeName = "Property<${property.type.toTypeString()}>";
+      var propertyTypeName = 'Property<${property.type.toTypeString()}>';
 
       buffer.writeln(
-          "  $propertyTypeName get ${property.name}Property => properties[${property.name}PropertyName];");
+          '  $propertyTypeName get ${property.name}Property => properties[${property.name}PropertyName];');
 
       buffer.writeln(
-          "  set ${property.name}Property($propertyTypeName value) =>");
+          '  set ${property.name}Property($propertyTypeName value) =>');
       buffer.writeln(
-          "      registerProperty(${property.name}PropertyName, value);");
+          '      registerProperty(${property.name}PropertyName, value);');
 
       buffer
-          .writeln("  ${property.type.toTypeString()} get ${property.name} =>");
-      buffer.writeln("      ${property.name}Property.value;");
+          .writeln('  ${property.type.toTypeString()} get ${property.name} =>');
+      buffer.writeln('      ${property.name}Property.value;');
 
       buffer.writeln(
-          "  Stream<${property.type.toTypeString()}> get ${property.name}Changed => ${property.name}Property.valueChanged;");
+          '  Stream<${property.type.toTypeString()}> get ${property.name}Changed => ${property.name}Property.valueChanged;');
       buffer.writeln();
     }
 
@@ -43,5 +43,5 @@ class FormElementModelGenerator extends ElementModelGenerator {
   }
 
   @override
-  String generatePrelude() => "";
+  String generatePrelude() => '';
 }

@@ -8,11 +8,12 @@ class JsonParserNode extends ParserNode {
 
   @override
   String getName() {
-    return element["@name"];
+    return element['@name'];
   }
 
   @override
-  Property<T> getValue<T>(String name, T converter(String s), T defaultValue(),
+  Property<T> getValue<T>(
+      String name, T Function(String s) converter, T Function() defaultValue,
       {bool isImmutable = true}) {
     var property = element[name];
     if (property == null) {
@@ -22,7 +23,7 @@ class JsonParserNode extends ParserNode {
       return createProperty<T>(converter(property), isImmutable);
     }
     if (property is Map<String, dynamic>) {
-      var expression = property["expression"];
+      var expression = property['expression'];
       if (expression != null) {
         return StringExpressionProperty<T>(expression);
       }
@@ -32,7 +33,7 @@ class JsonParserNode extends ParserNode {
 
   @override
   String getPlainStringValue(String propertyName) {
-    return element[propertyName] ?? null;
+    return element[propertyName];
   }
 
   @override
@@ -44,7 +45,7 @@ class JsonParserNode extends ParserNode {
       bool isImmutable = true}) {
     var childrenList = element[childrenPropertyName] as List;
     var children = childrenList == null
-        ? List<TFormElement>()
+        ? <TFormElement>[]
         : childrenList
             .map((c) => parser(JsonParserNode(c), parent))
             .cast<TFormElement>()
@@ -58,7 +59,7 @@ class JsonParserNode extends ParserNode {
     @required String propertyName,
     @required ElementParserFunction parser,
     @required FormElement parent,
-    @required TFormElement defaultValue(),
+    @required TFormElement Function() defaultValue,
     bool isContentProperty = false,
     bool isImmutable = true,
   }) {

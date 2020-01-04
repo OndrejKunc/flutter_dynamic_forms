@@ -36,7 +36,7 @@ targets:
 
 `components_to_ignore` will not generate anything for the listed components. Specifically `form_element.yaml` and `validation.yaml` are the default option so you don't need to explicitly list them. Reason why you don't want to generate anything for those classes is that they already have their models and parsers in the `dynamic_forms` library but other components can extend them and generator needs to have all the Yaml definitions in the project so it can correctly analyse their structure.
 
-Other options are `model_imports` and `parser_imports` which generates imports at the beginning of the model or parser file.
+Other options are `model_imports` and `parser_imports` which generates imports at the beginning of the model or parser file. To distinct between different types of models there are also `form_element_model_imports`, `value_element_model_imports` and `enum_element_model_imports`.
 
 For each component you would need corresponding `component_name.yaml` file in the format below.
 

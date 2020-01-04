@@ -6,7 +6,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 class FormParser<TForm extends Form>
     extends FormGroupParser<TForm> {
   @override
-  String get name => "form";
+  String get name => 'form';
 
   @override
   FormElement getInstance() => Form();

@@ -22,7 +22,7 @@ class DynamicFormBloc extends Bloc<FormElementEvent, DynamicFormState> {
 
       await Future.delayed(Duration(seconds: 1));
       var xml =
-          await rootBundle.loadString("assets/test_form1.xml", cache: false);
+          await rootBundle.loadString('assets/test_form1.xml', cache: false);
       formManager = formManagerBuilder.build(xml);
 
       yield state.copyWith(

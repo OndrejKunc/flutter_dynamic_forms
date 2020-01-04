@@ -24,7 +24,7 @@ class ReactiveDateRangeRenderer extends FormElementRenderer<model.DateRange> {
             var second = format.format(element.secondValue);
             return "$first - $second";
           }
-          return "Select Date";
+          return 'Select Date';
         }
 
         return Center(
