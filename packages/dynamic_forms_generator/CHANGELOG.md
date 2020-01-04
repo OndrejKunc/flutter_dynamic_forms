@@ -1,3 +1,7 @@
+# 0.5.0
+
+Increased minimum dart SDK to 2.6.0.
+
 # 0.4.0
 
 - Changed generated output to be compatible with dynamic_forms 0.9.0.

@@ -56,7 +56,8 @@ class TransitionFormButtonRow extends StatelessWidget {
                 ],
               ),
               onPressed: () {
-                bloc.dispatch(LoadFormEvent(1));
+                BlocProvider.of<TransitionFormBloc>(context)
+                    .add(LoadFormEvent(1));
               },
             ),
             SizedBox(width: 10),
@@ -75,7 +76,7 @@ class TransitionFormButtonRow extends StatelessWidget {
                 ],
               ),
               onPressed: () {
-                bloc.dispatch(LoadFormEvent(2));
+                bloc.add(LoadFormEvent(2));
               },
             ),
             SizedBox(width: 10),
@@ -94,7 +95,7 @@ class TransitionFormButtonRow extends StatelessWidget {
                   ],
                 ),
                 onPressed: () {
-                  bloc.dispatch(LoadFormEvent(3));
+                  bloc.add(LoadFormEvent(3));
                 })
           ],
         );

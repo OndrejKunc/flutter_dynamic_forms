@@ -19,7 +19,7 @@ class ReactiveSingleSelectChipChoiceRenderer
       child: LazyStreamBuilder<String>(
         initialData: parent.value,
         streamFactory: () =>
-            Observable.merge([parent.valueChanged, element.propertyChanged]),
+            MergeStream([parent.valueChanged, element.propertyChanged]),
         builder: (context, _) {
           return ChoiceChip(
             label: Text(element.label),

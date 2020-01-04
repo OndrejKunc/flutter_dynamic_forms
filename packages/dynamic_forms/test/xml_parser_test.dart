@@ -45,8 +45,7 @@ void main() {
     var formElementExpressions =
         getFormPropertyIterator<ExpressionProperty>(result);
 
-    var expressionGrammarDefinition = ExpressionGrammarParser(formElementMap);
-    var parser = expressionGrammarDefinition.build();
+    var parser = ExpressionParser(formElementMap);
 
     for (var expressionValue in formElementExpressions) {
       if (expressionValue is StringExpressionProperty) {
@@ -225,8 +224,7 @@ void main() {
     var formElementExpressions =
         getFormPropertyIterator<ExpressionProperty>(result);
 
-    var expressionGrammarDefinition = ExpressionGrammarParser(formElementMap);
-    var parser = expressionGrammarDefinition.build();
+    var parser = ExpressionParser(formElementMap);
 
     for (var expressionValue in formElementExpressions) {
       if (expressionValue is StringExpressionProperty) {

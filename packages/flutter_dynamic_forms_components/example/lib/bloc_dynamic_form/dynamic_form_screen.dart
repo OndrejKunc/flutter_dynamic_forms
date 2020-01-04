@@ -62,7 +62,7 @@ class DynamicFormScreen extends StatelessWidget {
             new FlatButton(
               child: flutter.Text('Ok'),
               onPressed: () {
-                bloc.dispatch(ClearFormDataEvent());
+                bloc.add(ClearFormDataEvent());
                 Navigator.of(context).pop();
               },
             )
@@ -110,7 +110,7 @@ class DynamicFormButtonRow extends StatelessWidget {
             ],
           ),
           onPressed: () {
-            bloc.dispatch(ClearFormEvent());
+            bloc.add(ClearFormEvent());
           },
         ),
         SizedBox(width: 10),
@@ -127,7 +127,7 @@ class DynamicFormButtonRow extends StatelessWidget {
           ),
           onPressed: state.isValid
               ? () {
-                  bloc.dispatch(RequestFormDataEvent());
+                  bloc.add(RequestFormDataEvent());
                 }
               : null,
         )

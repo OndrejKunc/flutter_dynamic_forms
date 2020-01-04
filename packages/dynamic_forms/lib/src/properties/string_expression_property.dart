@@ -1,6 +1,5 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:expression_language/expression_language.dart';
-import 'package:petitparser/petitparser.dart';
 
 class StringExpressionProperty<T> extends ExpressionProperty<T> {
   Expression<T> _expression;
@@ -8,9 +7,8 @@ class StringExpressionProperty<T> extends ExpressionProperty<T> {
 
   StringExpressionProperty(this._expressionString);
 
-  void buildExpression(Parser parser) {
-    var result = parser.parse(_expressionString);
-    var resultExpression = result.value as Expression;
+  void buildExpression(ExpressionParser parser) {
+    var resultExpression = parser.parse(_expressionString);
     if (resultExpression.getType() == Integer &&
         resultExpression is Expression<Number>) {
       resultExpression =

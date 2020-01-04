@@ -27,20 +27,20 @@ class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
           cache: false);
       var oldForm = formManager?.form;
       formManager = formManagerBuilder.build(xml);
-      var state = currentState;
+      var currentState = state;
       if (oldForm != null) {
         var transitionForm =
             transitionFormBuilder.buildTranstionForm(oldForm, formManager.form);
-        state = currentState.copyWith(
+        currentState = state.copyWith(
             isInTransition: true,
             isValid: true,
             form: transitionForm,
             selectedForm: event.formNumber);
-        yield state;
+        yield currentState;
         await Future.delayed(transitionDuration);
       }
 
-      yield state.copyWith(
+      yield currentState.copyWith(
           isInTransition: false,
           isValid: formManager.isFormValid,
           form: formManager.form,
@@ -50,7 +50,7 @@ class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
 
     if (event is ClearFormEvent) {
       formManager.resetForm();
-      yield currentState.copyWith(
+      yield state.copyWith(
         isInTransition: false,
         isValid: formManager.isFormValid,
         form: formManager.form,
@@ -65,7 +65,7 @@ class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
         propertyName: event.propertyName,
         ignoreLastChange: event.ignoreLastChange,
       );
-      yield currentState.copyWith(isValid: formManager.isFormValid);
+      yield state.copyWith(isValid: formManager.isFormValid);
     }
   }
 }

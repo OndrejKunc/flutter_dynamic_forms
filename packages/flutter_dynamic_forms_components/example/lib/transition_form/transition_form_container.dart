@@ -24,9 +24,9 @@ class _TransitionFormContainerState extends State<TransitionFormContainer> {
         ..addAll([
           TransitionFormElementRenderer(),
         ]),
-      dispatcher: BlocProvider.of<TransitionFormBloc>(context).dispatch,
+      dispatcher: BlocProvider.of<TransitionFormBloc>(context).add,
     );
-    BlocProvider.of<TransitionFormBloc>(context).dispatch(LoadFormEvent(1));
+    BlocProvider.of<TransitionFormBloc>(context).add(LoadFormEvent(1));
   }
 
   @override

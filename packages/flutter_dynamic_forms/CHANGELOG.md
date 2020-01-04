@@ -1,26 +1,31 @@
+# 0.10.0
+
+* Incremented dependency on dynamic_forms package.
+* Increased minimum dart SDK to 2.6.0.
+
 # 0.9.0
 
-Increment dependency on dynamic_forms package.
+Incremented dependency on dynamic_forms package.
 
 # 0.8.0
 
-Increment dependency on dynamic_forms package.
+Incremented dependency on dynamic_forms package.
 
 # 0.7.1
 
-Fix stream subscription in LazyStreamBuilder.
+Fixed stream subscription in LazyStreamBuilder.
 
 # 0.7.0
 
-Increment dependency on dynamic_forms package with new model names.
+Incremented dependency on dynamic_forms package with new model names.
 
 # 0.6.0
 
-Increment dependency on dynamic_forms package.
+Incremented dependency on dynamic_forms package.
 
 # 0.5.0
 
-Increment dependency on dynamic_forms package.
+Incremented dependency on dynamic_forms package.
 
 # 0.4.0
 

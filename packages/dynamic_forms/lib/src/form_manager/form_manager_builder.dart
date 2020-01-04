@@ -4,7 +4,6 @@ import 'package:dynamic_forms/src/iterators/form_element_iterator.dart';
 import 'package:dynamic_forms/src/iterators/form_property_iterator.dart';
 import 'package:dynamic_forms/src/parser/form_parser_service.dart';
 import 'package:expression_language/expression_language.dart';
-import 'package:petitparser/petitparser.dart';
 
 class FormManagerBuilder {
   final FormParserService formParserService;
@@ -18,8 +17,7 @@ class FormManagerBuilder {
         getFormElementIterator<FormElement>(root),
         key: (x) => x.id,
         value: (x) => x);
-    var expressionGrammarDefinition = ExpressionGrammarParser(formElementMap);
-    var parser = expressionGrammarDefinition.build();
+    var parser = ExpressionParser(formElementMap);
     _buildStringExpressions(root, parser);
     return _build(root, formElementMap);
   }
@@ -60,7 +58,7 @@ class FormManagerBuilder {
     }
   }
 
-  void _buildStringExpressions(FormElement root, Parser parser) {
+  void _buildStringExpressions(FormElement root, ExpressionParser parser) {
     var formElementExpressions =
         getFormPropertyIterator<StringExpressionProperty>(root);
 
