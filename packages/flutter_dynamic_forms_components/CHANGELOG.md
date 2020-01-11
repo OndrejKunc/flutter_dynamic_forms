@@ -1,3 +1,7 @@
+# 0.10.2
+
+Made text widget obsolete. Added textField widget instead.
+
 # 0.10.1
 
 Fixed analyzer issues.
