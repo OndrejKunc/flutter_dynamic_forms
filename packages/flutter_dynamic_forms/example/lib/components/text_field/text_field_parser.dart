@@ -1,17 +1,18 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-import 'text.dart';
+import 'text_field.dart';
 
-class TextParser<TText extends Text> extends FormElementParser<TText> {
+class TextFieldParser<TTextField extends TextField>
+    extends FormElementParser<TTextField> {
   @override
-  String get name => 'text';
+  String get name => 'textField';
 
   @override
-  FormElement getInstance() => Text();
+  FormElement getInstance() => TextField();
 
   @override
   void fillProperties(
-    TText text,
+    TTextField text,
     ParserNode parserNode,
     Element parent,
     ElementParserFunction parser,

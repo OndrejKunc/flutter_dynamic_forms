@@ -1,4 +1,4 @@
-type: text
+type: textField
 parentType: formElement
 properties:
   value:

@@ -88,18 +88,18 @@ class _SimpleFormScreenState extends State<SimpleFormScreen> {
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <form id="form1">
-    <text
+    <textField
         id="firstName"
         label="Enter your first name">
-    </text>
-    <text
+    </textField>
+    <textField
         id="lastName"
         label="Enter your last name">
-        <text.validations>
+        <textField.validations>
             <requiredValidation
                 message="Last name is required"/>
-        </text.validations>
-    </text>
+        </textField.validations>
+    </textField>
     <label
         id="fullNameLabel">
         <label.value>
@@ -308,7 +308,6 @@ This class simply takes the model and returns a Flutter widget. You can also sub
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
 import 'check_box.dart';

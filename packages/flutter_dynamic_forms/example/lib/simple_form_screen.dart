@@ -4,8 +4,8 @@ import 'package:example/components/container/container_renderer.dart';
 import 'package:example/components/label/label_parser.dart';
 import 'package:example/components/label/label_renderer.dart';
 import 'package:example/components/required_validation/required_validation_parser.dart';
-import 'package:example/components/text/text_parser.dart';
-import 'package:example/components/text/text_renderer.dart';
+import 'package:example/components/text_field/text_field_parser.dart';
+import 'package:example/components/text_field/text_field_renderer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
@@ -27,7 +27,7 @@ class _SimpleFormScreenState extends State<SimpleFormScreen> {
       renderers: [
         ContainerRenderer(),
         LabelRenderer(),
-        TextRenderer(),
+        TextFieldRenderer(),
       ],
       dispatcher: _onFormElementEvent,
     );
@@ -40,7 +40,7 @@ class _SimpleFormScreenState extends State<SimpleFormScreen> {
       XmlFormParserService([
         ContainerParser(),
         LabelParser(),
-        TextParser(),
+        TextFieldParser(),
         ValidationParser(),
         RequiredValidationParser(),
       ]),

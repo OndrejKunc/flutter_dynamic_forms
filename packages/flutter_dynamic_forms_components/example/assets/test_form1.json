@@ -8,7 +8,7 @@
             "name": "Form section 1",
             "children": [
                 {
-                    "@name": "text",
+                    "@name": "textField",
                     "id": "firstName",
                     "label": "Enter your first name",
                     "value": "John",
@@ -27,7 +27,7 @@
                     ]
                 },
                 {
-                    "@name": "text",
+                    "@name": "textField",
                     "id": "lastName",
                     "label": "Enter your last name",
                     "validations": [

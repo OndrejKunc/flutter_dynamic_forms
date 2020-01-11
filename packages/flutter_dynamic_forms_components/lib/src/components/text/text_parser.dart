@@ -3,8 +3,9 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class TextParser<TText extends Text>
-    extends FormElementParser<TText> {
+@Deprecated('Use TextFieldParser instead. '
+    'This component was deprecated after 0.10.1')
+class TextParser<TText extends Text> extends FormElementParser<TText> {
   @override
   String get name => 'text';
 
@@ -13,8 +14,8 @@ class TextParser<TText extends Text>
 
   @override
   void fillProperties(
-    TText text, 
-    ParserNode parserNode, 
+    TText text,
+    ParserNode parserNode,
     Element parent,
     ElementParserFunction parser,
   ) {
