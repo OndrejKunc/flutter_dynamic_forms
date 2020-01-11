@@ -37,7 +37,7 @@ abstract class ParserNode {
     return getProperty(
       name,
       convertToBool,
-      defaultTrue,
+      defaultValue,
       isImmutable: isImmutable,
     );
   }
@@ -63,20 +63,25 @@ abstract class ParserNode {
     TEnum Function() defaultValue,
     bool isImmutable = true,
   }) {
-    return getProperty<TEnum>(name, (s) {
-      var lowerCaseInput = s.toLowerCase();
-      return enumValues.firstWhere(
-        (e) {
-          var enumString = e.toString().toLowerCase();
-          if (enumString == lowerCaseInput) {
-            return true;
-          }
-          var lastPart = enumString.split('.').last;
-          return lastPart == lowerCaseInput;
-        },
-        orElse: defaultValue ?? () => null,
-      );
-    }, defaultValue ?? () => null, isImmutable: isImmutable);
+    return getProperty<TEnum>(
+      name,
+      (s) {
+        var lowerCaseInput = s.toLowerCase();
+        return enumValues.firstWhere(
+          (e) {
+            var enumString = e.toString().toLowerCase();
+            if (enumString == lowerCaseInput) {
+              return true;
+            }
+            var lastPart = enumString.split('.').last;
+            return lastPart == lowerCaseInput;
+          },
+          orElse: defaultValue ?? () => null,
+        );
+      },
+      defaultValue ?? () => null,
+      isImmutable: isImmutable,
+    );
   }
 
   Property<double> getDoubleProperty(
