@@ -20,14 +20,14 @@ class MultiSelectChoiceParser<TMultiSelectChoice extends MultiSelectChoice>
   ) {
     super.fillProperties(multiSelectChoice, parserNode, parent, parser);
     multiSelectChoice
-      ..isSelectedProperty = parserNode.getValue(
-        'isSelected',
-        ParserNode.convertToBool,
-        ParserNode.defaultFalse,
+      ..isSelectedProperty = parserNode.getBoolProperty(
+        'isSelected',        
+        defaultValue: ParserNode.defaultFalse,
         isImmutable: false,
       )
-      ..labelProperty = parserNode.getStringValue(
+      ..labelProperty = parserNode.getStringProperty(
         'label',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       );
   }

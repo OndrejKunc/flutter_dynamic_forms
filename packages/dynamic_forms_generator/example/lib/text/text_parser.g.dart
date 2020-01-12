@@ -19,21 +19,24 @@ class TextParser<TText extends Text>
   ) {
     super.fillProperties(text, parserNode, parent, parser);
     text
-      ..labelProperty = parserNode.getStringValue(
+      ..labelProperty = parserNode.getStringProperty(
         'label',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       )
-      ..textInputTypeProperty = parserNode.getStringValue(
+      ..textInputTypeProperty = parserNode.getStringProperty(
         'textInputType',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       )
-      ..validationsProperty = parserNode.getChildren<Validation>(
+      ..validationsProperty = parserNode.getChildrenProperty<Validation>(
           parent: text,
           parser: parser,
           childrenPropertyName: 'validations',
           isContentProperty: false)
-      ..valueProperty = parserNode.getStringValue(
+      ..valueProperty = parserNode.getStringProperty(
         'value',
+        defaultValue: ParserNode.defaultString,
         isImmutable: false,
       );
   }

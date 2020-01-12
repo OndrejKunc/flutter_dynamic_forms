@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
+import 'package:flutter_dynamic_forms_components/src/components/text_field/text_field_input_type.g.dart';
 
 class TextFieldWidget extends StatefulWidget {
   final String id;
   final String text;
   final String errorText;
   final String label;
-  final String textInputType;
+  final TextFieldInputType textInputType;
   final FormElementEventDispatcherFunction dispatcher;
 
   const TextFieldWidget({
@@ -64,32 +64,32 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     );
   }
 
-  TextInputType getTextInputType(String textInputType) {
+  TextInputType getTextInputType(TextFieldInputType textInputType) {
     TextInputType result;
 
     switch (textInputType) {
-      case "datetime":
+      case TextFieldInputType.datetime:
         result = TextInputType.datetime;
         break;
-      case "emailAddress":
+      case TextFieldInputType.emailAddress:
         result = TextInputType.emailAddress;
         break;
-      case "multiline":
+      case TextFieldInputType.multiline:
         result = TextInputType.multiline;
         break;
-      case "number":
+      case TextFieldInputType.number:
         result = TextInputType.number;
         break;
-      case "money":
+      case TextFieldInputType.money:
         result = TextInputType.numberWithOptions(signed: false, decimal: true);
         break;
-      case "phone":
+      case TextFieldInputType.phone:
         result = TextInputType.phone;
         break;
-      case "text":
+      case TextFieldInputType.text:
         result = TextInputType.text;
         break;
-      case "url":
+      case TextFieldInputType.url:
         result = TextInputType.url;
         break;
       default:

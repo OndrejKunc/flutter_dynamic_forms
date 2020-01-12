@@ -1,6 +1,7 @@
-# 0.10.2
+# 0.11.0
 
-Made text widget obsolete. Added textField widget instead.
+* Made the text widget obsolete. Added textField widget instead.
+* Using new parser methods from dynamic_forms 0.11.0.
 
 # 0.10.1
 

@@ -20,8 +20,9 @@ class LabelParser<TLabel extends Label>
   ) {
     super.fillProperties(label, parserNode, parent, parser);
     label
-      ..valueProperty = parserNode.getStringValue(
+      ..valueProperty = parserNode.getStringProperty(
         'value',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       );
   }

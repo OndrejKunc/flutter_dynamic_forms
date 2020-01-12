@@ -21,7 +21,7 @@ class DefaultTextFieldRenderer extends FormElementRenderer<model.TextField> {
       id: element.id,
       errorText: errorText,
       label: element.label,
-      textInputType: element.textInputType,
+      textInputType: element.inputType,
       dispatcher: dispatcher,
     );
   }

@@ -20,14 +20,14 @@ class CheckBoxParser<TCheckBox extends CheckBox>
   ) {
     super.fillProperties(checkBox, parserNode, parent, parser);
     checkBox
-      ..labelProperty = parserNode.getStringValue(
+      ..labelProperty = parserNode.getStringProperty(
         'label',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       )
-      ..valueProperty = parserNode.getValue(
-        'value',
-        ParserNode.convertToBool,
-        ParserNode.defaultFalse,
+      ..valueProperty = parserNode.getBoolProperty(
+        'value',        
+        defaultValue: ParserNode.defaultFalse,
         isImmutable: false,
       );
   }

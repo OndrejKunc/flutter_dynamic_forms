@@ -1,0 +1,11 @@
+type: textFieldInputType
+parentType: enum
+values:
+  - text
+  - datetime
+  - emailAddress
+  - multiline
+  - number
+  - money
+  - phone
+  - url

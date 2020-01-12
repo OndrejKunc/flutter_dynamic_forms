@@ -1,3 +1,7 @@
+# 0.11.0
+
+Incremented dependency on dynamic_forms package.
+
 # 0.10.1
 
 Fixed analyzer issues.

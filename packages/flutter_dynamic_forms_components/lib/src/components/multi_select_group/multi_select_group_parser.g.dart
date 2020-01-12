@@ -17,7 +17,7 @@ abstract class MultiSelectGroupParser<
   ) {
     super.fillProperties(multiSelectGroup, parserNode, parent, parser);
     multiSelectGroup
-      ..choicesProperty = parserNode.getChildren<TMultiSelectChoice>(
+      ..choicesProperty = parserNode.getChildrenProperty<TMultiSelectChoice>(
           parent: multiSelectGroup,
           parser: parser,
           childrenPropertyName: 'choices',

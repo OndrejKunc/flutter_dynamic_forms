@@ -1,6 +1,6 @@
 import 'package:build/build.dart';
 import 'package:dynamic_forms_generator/src/build_configuration.dart';
-import 'package:dynamic_forms_generator/src/generator/model_generator/model_generator.dart';
+import 'package:dynamic_forms_generator/src/generator/model_generator/model_generator_factory.dart';
 import 'package:dynamic_forms_generator/src/generator/parser_generator/parser_generator.dart';
 import 'package:dynamic_forms_generator/src/parser/parser.dart';
 
@@ -41,15 +41,22 @@ class DynamicFormsBuilder implements Builder {
       return;
     }
 
-    var modelGenerator = ModelGenerator(
-        componentDescription: componentDescription,
-        buildConfiguration: buildConfiguration);
-    var modelContent = modelGenerator.generate();
+    var modelGenerator = getGenerator(
+      componentDescription: componentDescription,
+      typeName: componentDescription.parentType.typeName,
+      buildConfiguration: buildConfiguration,
+    );
+
+    var modelContent = modelGenerator.generateBody();
     if (modelContent == null) {
       return;
     }
     var model = inputId.changeExtension('.g.dart');
     await buildStep.writeAsString(model, modelContent);
+
+    if (componentDescription.parentType.typeName == 'enum') {
+      return;
+    }
 
     var contentProperty = componentDescription.contentProperty;
 

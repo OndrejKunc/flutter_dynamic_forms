@@ -12,7 +12,7 @@ class JsonParserNode extends ParserNode {
   }
 
   @override
-  Property<T> getValue<T>(
+  Property<T> getProperty<T>(
       String name, T Function(String s) converter, T Function() defaultValue,
       {bool isImmutable = true}) {
     var property = element[name];
@@ -32,12 +32,12 @@ class JsonParserNode extends ParserNode {
   }
 
   @override
-  String getPlainStringValue(String propertyName) {
+  String getPlainString(String propertyName) {
     return element[propertyName];
   }
 
   @override
-  Property<List<TFormElement>> getChildren<TFormElement>(
+  Property<List<TFormElement>> getChildrenProperty<TFormElement>(
       {FormElement parent,
       String childrenPropertyName,
       ElementParserFunction parser,
@@ -55,7 +55,7 @@ class JsonParserNode extends ParserNode {
   }
 
   @override
-  Property<TFormElement> getChild<TFormElement>({
+  Property<TFormElement> getChildProperty<TFormElement>({
     @required String propertyName,
     @required ElementParserFunction parser,
     @required FormElement parent,

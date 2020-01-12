@@ -4,6 +4,21 @@ class FormElementModelGenerator extends ElementModelGenerator {
   @override
   String generateBody() {
     var buffer = StringBuffer();
+
+    buffer.writeln('// GENERATED CODE - DO NOT MODIFY BY HAND');
+    buffer.writeln();
+
+    for (var import in imports) {
+      buffer.writeln("import '$import';");
+    }
+
+    if (imports.isNotEmpty) {
+      buffer.writeln();
+    }
+
+    buffer.writeln(
+        'class ${componentDescription.type.toTypeString()} extends ${componentDescription.parentType.toTypeString()} {');
+
     for (var property in componentDescription.properties) {
       buffer.writeln(
           '  static const String ${property.name}PropertyName = \'${property.name}\';');
@@ -39,9 +54,7 @@ class FormElementModelGenerator extends ElementModelGenerator {
     return ${componentDescription.type.toConstructorString()};
   }''');
 
+    buffer.writeln('}');
     return buffer.toString();
   }
-
-  @override
-  String generatePrelude() => '';
 }

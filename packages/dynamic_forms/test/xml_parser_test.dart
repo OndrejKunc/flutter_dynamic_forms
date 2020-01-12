@@ -140,6 +140,68 @@ void main() {
     expect(resultValue, 'John Doe');
   });
 
+  test('xml with enum without dot', () {
+    var parserService = XmlFormParserService(_getDefaultParserList());
+
+    var xml = '''<?xml version="1.0" encoding="UTF-8"?>
+      <label
+          id="label1"
+          value="John Doe"
+          fontSize="large" />''';
+
+    var result = parserService.parse(xml);
+
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+    };
+
+    var label1 = formElementMap['label1'] as Label;
+    var resultValue = label1.fontSize;
+
+    expect(resultValue, FontSize.large);
+  });
+
+  test('xml with default value enum', () {
+    var parserService = XmlFormParserService(_getDefaultParserList());
+
+    var xml = '''<?xml version="1.0" encoding="UTF-8"?>
+      <label
+          id="label1"
+          value="John Doe" />''';
+
+    var result = parserService.parse(xml);
+
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+    };
+
+    var label1 = formElementMap['label1'] as Label;
+    var resultValue = label1.fontSize;
+
+    expect(resultValue, FontSize.medium);
+  });
+
+  test('xml with enum with dot', () {
+    var parserService = XmlFormParserService(_getDefaultParserList());
+
+    var xml = '''<?xml version="1.0" encoding="UTF-8"?>
+      <label
+          id="label1"
+          value="John Doe"
+          fontSize="FontSize.small" />''';
+
+    var result = parserService.parse(xml);
+
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+    };
+
+    var label1 = formElementMap['label1'] as Label;
+    var resultValue = label1.fontSize;
+
+    expect(resultValue, FontSize.small);
+  });
+
   test('xml with single child element in property', () {
     var parserService = XmlFormParserService(_getDefaultParserList());
 

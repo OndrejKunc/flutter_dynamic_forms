@@ -19,12 +19,13 @@ class ExampleFormElementParser<TExampleFormElement extends ExampleFormElement>
   ) {
     super.fillProperties(exampleFormElement, parserNode, parent, parser);
     exampleFormElement
-      ..enumExampleProperty = parserNode.getEnum<ExampleEnumElementEnum,ExampleEnumElement>(
-          name: 'enumExample',
-          enumerationValues: ExampleEnumElementEnum.values,
-          enumElementConstructor: (x) => ExampleEnumElement(enumeration: x))
-          
-      ..valueExampleProperty = parserNode.getChild<ExampleValueElement>(
+      ..enumExampleProperty = parserNode.getEnumProperty(
+        'enumExample',
+        ExampleEnum.values,
+        defaultValue: () => ExampleEnum.firstOption,
+        isImmutable: true,
+      )
+      ..valueExampleProperty = parserNode.getChildProperty<ExampleValueElement>(
           parent: exampleFormElement,
           parser: parser,
           propertyName: 'valueExample',

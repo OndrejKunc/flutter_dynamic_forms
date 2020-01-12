@@ -20,7 +20,7 @@ class ContainerParser<TContainer extends Container>
   ) {
     super.fillProperties(container, parserNode, parent, parser);
     container
-      ..childrenProperty = parserNode.getChildren<FormElement>(
+      ..childrenProperty = parserNode.getChildrenProperty<FormElement>(
           parent: container,
           parser: parser,
           childrenPropertyName: 'children',

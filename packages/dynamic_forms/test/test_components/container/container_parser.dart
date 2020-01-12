@@ -14,12 +14,12 @@ class ContainerParser extends FormElementParser<Container> {
       Container container, ParserNode parserNode, Element parent, parser) {
     super.fillProperties(container, parserNode, parent, parser);
     container
-      ..childrenProperty = parserNode.getChildren<FormElement>(
+      ..childrenProperty = parserNode.getChildrenProperty<FormElement>(
           parent: container,
           childrenPropertyName: 'children',
           parser: parser,
           isContentProperty: true)
-      ..children2Property = parserNode.getChildren<FormElement>(
+      ..children2Property = parserNode.getChildrenProperty<FormElement>(
           parent: container,
           childrenPropertyName: 'children2',
           parser: parser,

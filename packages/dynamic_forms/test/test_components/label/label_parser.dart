@@ -13,6 +13,12 @@ class LabelParser extends FormElementParser<Label> {
   void fillProperties(
       Label label, ParserNode parserNode, Element parent, parser) {
     super.fillProperties(label, parserNode, parent, parser);
-    label..valueProperty = parserNode.getStringValue('value');
+    label
+      ..valueProperty = parserNode.getStringProperty('value')
+      ..fontSizeProperty = parserNode.getEnumProperty<FontSize>(
+        'fontSize',
+        FontSize.values,
+        defaultValue: () => FontSize.medium,
+      );
   }
 }

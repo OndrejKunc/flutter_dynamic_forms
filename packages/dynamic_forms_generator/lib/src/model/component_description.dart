@@ -7,6 +7,7 @@ class ComponentDescription {
   List<PropertyDescription> properties;
   PropertyDescription contentProperty;
   List<String> namespaces;
+  List<String> values;
 
   ComponentDescription({
     @required this.type,
@@ -14,6 +15,7 @@ class ComponentDescription {
     this.properties,
     this.contentProperty,
     this.namespaces,
+    this.values,
   });
 }
 
@@ -22,11 +24,13 @@ class PropertyDescription {
   ComponentType type;
   String defaultValue;
   bool isMutable;
+  bool isEnum;
 
   PropertyDescription({
     @required this.name,
     @required this.type,
     this.defaultValue,
     this.isMutable = false,
+    this.isEnum,
   });
 }

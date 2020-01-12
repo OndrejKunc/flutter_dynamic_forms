@@ -257,14 +257,9 @@ class CheckBoxParser extends FormElementParser<CheckBox> {
   ) {
     super.fillProperties(checkBox, parserNode, parent, parser);
     checkBox
-      ..labelProperty = parserNode.getStringValue(
-        'label',
-        isImmutable: true,
-      )
-      ..valueProperty = parserNode.getValue(
-        'value',
-        ParserNode.convertToBool,
-        ParserNode.defaultFalse,
+      ..labelProperty = parserNode.getStringProperty('label')
+      ..valueProperty = parserNode.getBoolProperty(
+        'value',        
         isImmutable: false,
       );
   }

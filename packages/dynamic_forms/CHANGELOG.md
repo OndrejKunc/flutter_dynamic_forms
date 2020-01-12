@@ -1,3 +1,9 @@
+# 0.11.0
+
+* Changed `ParserNode` method suffixes from `Value` to `Property`.
+* Added missing parser methods to `ParserNode`. 
+* `GetEnum` in `ParserNode` no longer wraps enum in custom element.
+
 # 0.10.1
 
 Fixed analyzer issues.

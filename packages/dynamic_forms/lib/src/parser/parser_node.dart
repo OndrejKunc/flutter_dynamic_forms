@@ -4,14 +4,14 @@ import 'package:meta/meta.dart';
 
 abstract class ParserNode {
   String getName();
-  Property<T> getValue<T>(
+  Property<T> getProperty<T>(
     String name,
     T Function(String s) converter,
     T Function() defaultValue, {
     bool isImmutable = true,
   });
 
-  Property<List<TElement>> getChildren<TElement>({
+  Property<List<TElement>> getChildrenProperty<TElement>({
     @required FormElement parent,
     @required String childrenPropertyName,
     @required ElementParserFunction parser,
@@ -19,37 +19,9 @@ abstract class ParserNode {
     bool isImmutable = true,
   });
 
-  String getPlainStringValue(String propertyName);
+  String getPlainString(String propertyName);
 
-  Property<TEnumElement> getEnum<TEnum, TEnumElement>({
-    @required String name,
-    @required List<TEnum> enumerationValues,
-    @required TEnumElement Function(TEnum _) enumElementConstructor,
-  }) {
-    var inputValueSplits = getStringValue(name).value.split('.');
-    var realEnumSplits = enumerationValues.first.toString().split('.');
-
-    var nameOfEnum = realEnumSplits.first;
-    var nameOfInputEnum = inputValueSplits.first;
-
-    if (nameOfEnum != nameOfInputEnum) {
-      throw 'Enumeration $nameOfInputEnum does not exist';
-    }
-
-    var constantName = inputValueSplits.last;
-    var returnValue = enumerationValues.firstWhere(
-        (v) => nameOfEnum + '.' + constantName == v.toString(),
-        orElse: () => null);
-
-    if (returnValue == null) {
-      throw 'Enumeration $nameOfEnum does not have constant named $constantName';
-    } else {
-      return ImmutableProperty<TEnumElement>(
-          enumElementConstructor(returnValue));
-    }
-  }
-
-  Property<TElement> getChild<TElement>(
+  Property<TElement> getChildProperty<TElement>(
       {@required String propertyName,
       @required ElementParserFunction parser,
       @required FormElement parent,
@@ -57,34 +29,110 @@ abstract class ParserNode {
       bool isContentProperty = false,
       bool isImmutable = true});
 
-  Property<bool> getIsVisible() =>
-      getValue('isVisible', convertToBool, defaultTrue);
-
-  Property<String> getStringValue(String name, {bool isImmutable = true}) =>
-      getValue(name, convertToString, emptyString, isImmutable: isImmutable);
-
-  Property<Decimal> getDecimalValue(
+  Property<bool> getBoolProperty(
     String name, {
+    bool Function() defaultValue = defaultFalse,
     bool isImmutable = true,
-  }) =>
-      getValue<Decimal>(
-          name, (s) => Decimal.tryParse(s) ?? defaultDecimal(), defaultDecimal,
-          isImmutable: isImmutable);
+  }) {
+    return getProperty(
+      name,
+      convertToBool,
+      defaultValue,
+      isImmutable: isImmutable,
+    );
+  }
 
-  Property<double> getDoubleValue(
+  Property<String> getStringProperty(
     String name, {
+    String Function() defaultValue = defaultString,
     bool isImmutable = true,
-  }) =>
-      getValue<double>(
-          name, (s) => double.parse(s) ?? defaultDouble(), defaultDouble,
-          isImmutable: isImmutable);
+  }) {
+    return getProperty(
+      name,
+      convertToString,
+      defaultValue,
+      isImmutable: isImmutable,
+    );
+  }
 
-  Property<int> getIntValue(
+  Property<Decimal> getDecimalProperty(
     String name, {
+    Decimal Function() defaultValue = defaultDecimal,
     bool isImmutable = true,
-  }) =>
-      getValue<int>(name, (s) => int.tryParse(s) ?? defaultInt(), defaultInt,
-          isImmutable: isImmutable);
+  }) {
+    return getProperty<Decimal>(
+      name,
+      (s) => Decimal.tryParse(s) ?? defaultValue(),
+      defaultValue,
+      isImmutable: isImmutable,
+    );
+  }
+
+  Property<TEnum> getEnumProperty<TEnum>(
+    String name,
+    List<TEnum> enumValues, {
+    TEnum Function() defaultValue,
+    bool isImmutable = true,
+  }) {
+    return getProperty<TEnum>(
+      name,
+      (s) {
+        var lowerCaseInput = s.toLowerCase();
+        return enumValues.firstWhere(
+          (e) {
+            var enumString = e.toString().toLowerCase();
+            if (enumString == lowerCaseInput) {
+              return true;
+            }
+            var lastPart = enumString.split('.').last;
+            return lastPart == lowerCaseInput;
+          },
+          orElse: defaultValue ?? () => null,
+        );
+      },
+      defaultValue ?? () => null,
+      isImmutable: isImmutable,
+    );
+  }
+
+  Property<double> getDoubleProperty(
+    String name, {
+    double Function() defaultValue = defaultDouble,
+    bool isImmutable = true,
+  }) {
+    return getProperty<double>(
+      name,
+      (s) => double.tryParse(s) ?? defaultValue(),
+      defaultValue,
+      isImmutable: isImmutable,
+    );
+  }
+
+  Property<int> getIntProperty(
+    String name, {
+    int Function() defaultValue = defaultInt,
+    bool isImmutable = true,
+  }) {
+    return getProperty<int>(
+      name,
+      (s) => int.tryParse(s) ?? defaultValue(),
+      defaultValue,
+      isImmutable: isImmutable,
+    );
+  }
+
+  Property<DateTime> getDateTimeProperty(
+    String name, {
+    DateTime Function() defaultValue = defaultDateTime,
+    bool isImmutable = true,
+  }) {
+    return getProperty<DateTime>(
+      name,
+      (s) => DateTime.tryParse(s) ?? defaultValue(),
+      defaultValue,
+      isImmutable: isImmutable,
+    );
+  }
 
   Property<T> createProperty<T>(T value, bool isImmutable) {
     return isImmutable
@@ -92,14 +140,17 @@ abstract class ParserNode {
         : MutableProperty<T>(value);
   }
 
-  Property<FormElement> getParentValue(FormElement parent) {
+  Property<FormElement> getParentProperty(FormElement parent) {
     if (parent == null) {
       return null;
     }
     return ImmutableProperty(parent);
   }
 
-  static String emptyString() => '';
+  Property<bool> getIsVisibleProperty() =>
+      getProperty('isVisible', convertToBool, defaultTrue);
+
+  static String defaultString() => '';
   static String convertToString(String x) => x;
   static bool convertToBool(String x) => x?.toLowerCase() == 'true';
   static int convertToColor(String x) => int.parse(x);
@@ -107,5 +158,6 @@ abstract class ParserNode {
   static bool defaultTrue() => true;
   static int defaultInt() => 0;
   static Decimal defaultDecimal() => Decimal.fromInt(0);
-  static double defaultDouble() => 2.0;
+  static double defaultDouble() => 0.0;
+  static DateTime defaultDateTime() => null;
 }

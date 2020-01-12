@@ -20,21 +20,25 @@ class TextFieldParser<TTextField extends TextField>
   ) {
     super.fillProperties(textField, parserNode, parent, parser);
     textField
-      ..labelProperty = parserNode.getStringValue(
+      ..inputTypeProperty = parserNode.getEnumProperty(
+        'inputType',
+        TextFieldInputType.values,
+        defaultValue: () => TextFieldInputType.text,
+        isImmutable: true,
+      )
+      ..labelProperty = parserNode.getStringProperty(
         'label',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       )
-      ..textInputTypeProperty = parserNode.getStringValue(
-        'textInputType',
-        isImmutable: true,
-      )
-      ..validationsProperty = parserNode.getChildren<Validation>(
+      ..validationsProperty = parserNode.getChildrenProperty<Validation>(
           parent: textField,
           parser: parser,
           childrenPropertyName: 'validations',
           isContentProperty: false)
-      ..valueProperty = parserNode.getStringValue(
+      ..valueProperty = parserNode.getStringProperty(
         'value',
+        defaultValue: ParserNode.defaultString,
         isImmutable: false,
       );
   }

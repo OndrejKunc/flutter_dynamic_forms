@@ -40,10 +40,10 @@ abstract class ElementParserGenerator {
 
   String getParseMethod(PropertyDescription property, bool isContentProperty) {
     if (property.name == 'id') {
-      return 'parserNode.getPlainStringValue(\'id\')';
+      return 'parserNode.getPlainString(\'id\')';
     }
     if (property.name == 'parent') {
-      return 'parserNode.getParentValue(parent)';
+      return 'parserNode.getParent(parent)';
     }
     if (property.name == 'isVisible') {
       return 'parserNode.getIsVisible()';
@@ -52,30 +52,27 @@ abstract class ElementParserGenerator {
       var defaultValue = property.defaultValue == 'true'
           ? 'ParserNode.defaultTrue'
           : 'ParserNode.defaultFalse';
-      return '''parserNode.getValue(
-        '${property.name}',
-        ParserNode.convertToBool,
-        $defaultValue,
+      return '''parserNode.getBoolProperty(
+        '${property.name}',        
+        defaultValue: $defaultValue,
         isImmutable: ${!property.isMutable},
       )''';
     }
     if (property.type.typeName == 'string') {
-      if (property.defaultValue == null || property.defaultValue == '') {
-        return '''parserNode.getStringValue(
+      var defaultValue =
+          (property.defaultValue == '' || property.defaultValue == null)
+              ? 'ParserNode.defaultString'
+              : '() => \'${property.defaultValue}\'';
+
+      return '''parserNode.getStringProperty(
         '${property.name}',
-        isImmutable: ${!property.isMutable},
-      )''';
-      }
-      return '''parserNode.getValue<String>(
-        '${property.name}',
-        (s) => s,
-        () => '${property.defaultValue}',
+        defaultValue: $defaultValue,
         isImmutable: ${!property.isMutable},
       )''';
     }
     if (property.type is ArrayType) {
       var arrayType = property.type as ArrayType;
-      return '''parserNode.getChildren<${arrayType.innerType.toTypeString()}>(
+      return '''parserNode.getChildrenProperty<${arrayType.innerType.toTypeString()}>(
           parent: ${componentDescription.type.typeName},
           parser: parser,
           childrenPropertyName: '${property.name}',
@@ -86,10 +83,9 @@ abstract class ElementParserGenerator {
           property.defaultValue == null || property.defaultValue == ''
               ? '0'
               : property.defaultValue;
-      return '''parserNode.getValue<Decimal>(
+      return '''parserNode.getDecimalProperty(
         '${property.name}',
-        (s) => Decimal.parse(s),
-        () => Decimal.fromDouble($defaultValue),
+        defaultValue: () => Decimal.fromDouble($defaultValue),
         isImmutable: ${!property.isMutable},
       )''';
     }
@@ -98,10 +94,9 @@ abstract class ElementParserGenerator {
           property.defaultValue == null || property.defaultValue == ''
               ? '0'
               : property.defaultValue;
-      return '''parserNode.getValue<int>(
-        '${property.name}',
-        (s) => int.parse(s),
-        () => $defaultValue,
+      return '''parserNode.getIntProperty(
+        '${property.name}',      
+        defaultValue: () => $defaultValue,
         isImmutable: ${!property.isMutable},
       )''';
     }
@@ -110,10 +105,9 @@ abstract class ElementParserGenerator {
           property.defaultValue == null || property.defaultValue == ''
               ? '0'
               : property.defaultValue;
-      return '''parserNode.getValue<double>(
+      return '''parserNode.getDoubleProperty(
         '${property.name}',
-        (s) => double.parse(s),
-        () => $defaultValue,
+        defaultValue: () => $defaultValue,
         isImmutable: ${!property.isMutable},
       )''';
     }
@@ -122,16 +116,35 @@ abstract class ElementParserGenerator {
           property.defaultValue == null || property.defaultValue == ''
               ? 'null'
               : 'DateTime.parse(\'${property.defaultValue}\')';
-      return '''parserNode.getValue<DateTime>(
+      return '''parserNode.getDateTimeProperty(
         '${property.name}',
-        (s) => DateTime.parse(s),
-        () => $defaultValue,
+        defaultValue: () => $defaultValue,
+        isImmutable: ${!property.isMutable},
+      )''';
+    }
+    if (property.isEnum) {
+      var defaultValue;
+      if (property.defaultValue == null || property.defaultValue == '') {
+        defaultValue = 'null';
+      } else {
+        if (property.defaultValue.contains('.')) {
+          var lastPart = property.defaultValue.split('.').last;
+          defaultValue = '${property.type.toTypeString()}.$lastPart';
+        } else {
+          defaultValue =
+              '${property.type.toTypeString()}.${property.defaultValue}';
+        }
+      }
+      return '''parserNode.getEnumProperty(
+        '${property.name}',
+        ${property.type.toTypeString()}.values,
+        defaultValue: () => $defaultValue,
         isImmutable: ${!property.isMutable},
       )''';
     }
     if ((property.type.typeName.endsWith('valueElement')) ||
         ((property.type.typeName.endsWith('ValueElement')))) {
-      return '''parserNode.getChild<${property.type.toTypeString()}>(
+      return '''parserNode.getChildProperty<${property.type.toTypeString()}>(
           parent: ${componentDescription.type.typeName},
           parser: parser,
           propertyName: '${property.name}',
@@ -139,14 +152,14 @@ abstract class ElementParserGenerator {
           defaultValue: () => ${property.type.capitalizedTypeName}(),
           isImmutable: ${!property.isMutable})''';
     }
-    if ((property.type.typeName.endsWith('enumElement')) ||
-        ((property.type.typeName.endsWith('EnumElement')))) {
-      return '''parserNode.getEnum<${property.type.toTypeString()}Enum,${property.type.toTypeString()}>(
-          name: '${property.name}',
-          enumerationValues: ${property.type.toTypeString()}Enum.values,
-          enumElementConstructor: (x) => ${property.type.toTypeString()}(enumeration: x))
-          ''';
-    }
-    throw 'Unknown property type : ${componentDescription.type.typeName}';
+
+    return '''parserNode.getChildProperty<${property.type.toTypeString()}>(
+        propertyName: '${property.name}',
+        parent: ${componentDescription.type.typeName},
+        parser: parser,
+        defaultValue: () => null,
+        isContentProperty: $isContentProperty,
+        isImmutable: ${!property.isMutable},
+      )''';
   }
 }

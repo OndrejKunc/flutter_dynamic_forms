@@ -2,6 +2,8 @@ type: exampleFormElement
 parentType: formElement
 properties:
   enumExample:
-    type: exampleEnumElement
+    type: exampleEnum
+    isEnum: true
+    default: firstOption
   valueExample:
     type: exampleValueElement

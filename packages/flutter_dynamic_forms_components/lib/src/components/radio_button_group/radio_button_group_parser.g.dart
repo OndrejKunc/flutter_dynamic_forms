@@ -20,8 +20,9 @@ class RadioButtonGroupParser<TRadioButtonGroup extends RadioButtonGroup>
   ) {
     super.fillProperties(radioButtonGroup, parserNode, parent, parser);
     radioButtonGroup
-      ..arrangementProperty = parserNode.getStringValue(
+      ..arrangementProperty = parserNode.getStringProperty(
         'arrangement',
+        defaultValue: ParserNode.defaultString,
         isImmutable: false,
       );
   }

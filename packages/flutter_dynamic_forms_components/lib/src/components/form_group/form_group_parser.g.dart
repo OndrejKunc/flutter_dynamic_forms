@@ -20,8 +20,9 @@ class FormGroupParser<TFormGroup extends FormGroup>
   ) {
     super.fillProperties(formGroup, parserNode, parent, parser);
     formGroup
-      ..nameProperty = parserNode.getStringValue(
+      ..nameProperty = parserNode.getStringProperty(
         'name',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       );
   }

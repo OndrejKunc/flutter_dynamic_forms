@@ -25,8 +25,18 @@ class ComponentYamlParser {
               defaultValue: propertyAttributtes['default']?.toString(),
               isMutable: propertyAttributtes['isMutable'] == 'true' ||
                   propertyAttributtes['isMutable'] == true,
+              isEnum: propertyAttributtes['isEnum'] == 'true' ||
+                  propertyAttributtes['isEnum'] == true,
             ),
           );
+        }
+      }
+
+      YamlList yamlList = parsedMap['values'];
+      var values = <String>[];
+      if (yamlList != null) {
+        for (var value in yamlList) {
+          values.add(value);
         }
       }
 
@@ -36,6 +46,7 @@ class ComponentYamlParser {
         parentType: parsedMap['parentType'],
         contentProperty: parsedMap['contentProperty'],
         properties: properties,
+        values: values,
       );
 
       return result;
