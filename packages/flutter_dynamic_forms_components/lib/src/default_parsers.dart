@@ -14,6 +14,7 @@ List<ElementParser> getDefaultParserList() {
     ValidationParser<Validation>(),
     RequiredValidationParser(),
     TextParser<Text>(),
+    TextFieldParser<TextField>(),
     SingleSelectChipGroupParser<SingleSelectChipGroup>(),
     SingleSelectChipChoiceParser<SingleSelectChipChoice>(),
     MultiSelectChipChoiceParser<MultiSelectChipChoice>(),

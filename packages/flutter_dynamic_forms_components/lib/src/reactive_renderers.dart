@@ -8,6 +8,7 @@ List<FormElementRenderer> getReactiveRenderers() {
     ReactiveCheckBoxRenderer(),
     ReactiveLabelRenderer(),
     ReactiveTextRenderer(),
+    ReactiveTextFieldRenderer(),
     ReactiveRadioButtonGroupRenderer(),
     ReactiveRadioButtonRenderer(),
     ReactiveDropdownButtonRenderer(),
@@ -18,6 +19,5 @@ List<FormElementRenderer> getReactiveRenderers() {
     ReactiveDateRenderer(),
     ReactiveDateRangeRenderer(),
     ReactiveSliderRenderer(),
-
   ];
 }

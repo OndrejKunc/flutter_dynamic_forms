@@ -48,10 +48,15 @@ export 'src/components/radio_button_group/reactive_radio_button_group_renderer.d
 export 'src/components/required_validation/required_validation.dart';
 export 'src/components/required_validation/required_validation_parser.dart';
 
-export 'src/components/text/text.g.dart';
-export 'src/components/text/text_parser.g.dart';
+export 'src/components/text/text.dart';
+export 'src/components/text/text_parser.dart';
 export 'src/components/text/default_text_renderer.dart';
 export 'src/components/text/reactive_text_renderer.dart';
+
+export 'src/components/text_field/text_field.g.dart';
+export 'src/components/text_field/text_field_parser.g.dart';
+export 'src/components/text_field/default_text_field_renderer.dart';
+export 'src/components/text_field/reactive_text_field_renderer.dart';
 
 export 'src/components/single_select_choice/single_select_choice.g.dart';
 export 'src/components/single_select_choice/single_select_choice_parser.g.dart';

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <container id="form1">
-    <text
+    <textField
         id="firstName"
         label="Enter your first name" value="John">
-        <text.validations>
+        <textField.validations>
             <validation
                 message="Name is too long">
                 <validation.isValid>
@@ -16,16 +16,16 @@
             </validation>
             <requiredValidation
                 message="First name is required"/>
-        </text.validations>
-    </text>
-    <text
+        </textField.validations>
+    </textField>
+    <textField
         id="lastName"
         label="Enter your last name">
-        <text.validations>
+        <textField.validations>
             <requiredValidation
                 message="Last name is required"/>
-        </text.validations>
-    </text>
+        </textField.validations>
+    </textField>
     <label
         id="fullNameLabel">
         <label.value>

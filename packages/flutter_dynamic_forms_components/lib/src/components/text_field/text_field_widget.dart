@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
-@Deprecated('Use TextFieldWidget instead. '
-    'This component was deprecated after 0.10.1')
-class TextWidget extends StatefulWidget {
+class TextFieldWidget extends StatefulWidget {
   final String id;
   final String text;
   final String errorText;
@@ -12,7 +10,7 @@ class TextWidget extends StatefulWidget {
   final String textInputType;
   final FormElementEventDispatcherFunction dispatcher;
 
-  const TextWidget({
+  const TextFieldWidget({
     Key key,
     this.id,
     this.text,
@@ -23,10 +21,10 @@ class TextWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TextWidgetState createState() => _TextWidgetState();
+  _TextFieldWidgetState createState() => _TextFieldWidgetState();
 }
 
-class _TextWidgetState extends State<TextWidget> {
+class _TextFieldWidgetState extends State<TextFieldWidget> {
   TextEditingController _controller = TextEditingController();
 
   VoidCallback _listener;
