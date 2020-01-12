@@ -57,6 +57,7 @@ export 'src/components/text_field/text_field.g.dart';
 export 'src/components/text_field/text_field_parser.g.dart';
 export 'src/components/text_field/default_text_field_renderer.dart';
 export 'src/components/text_field/reactive_text_field_renderer.dart';
+export 'src/components/text_field/text_field_input_type.g.dart';
 
 export 'src/components/single_select_choice/single_select_choice.g.dart';
 export 'src/components/single_select_choice/single_select_choice_parser.g.dart';

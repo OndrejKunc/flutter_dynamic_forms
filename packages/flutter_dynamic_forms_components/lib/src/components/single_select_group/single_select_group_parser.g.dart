@@ -17,13 +17,14 @@ abstract class SingleSelectGroupParser<
   ) {
     super.fillProperties(singleSelectGroup, parserNode, parent, parser);
     singleSelectGroup
-      ..choicesProperty = parserNode.getChildren<TSingleSelectChoice>(
+      ..choicesProperty = parserNode.getChildrenProperty<TSingleSelectChoice>(
           parent: singleSelectGroup,
           parser: parser,
           childrenPropertyName: 'choices',
           isContentProperty: true)
-      ..valueProperty = parserNode.getStringValue(
+      ..valueProperty = parserNode.getStringProperty(
         'value',
+        defaultValue: ParserNode.defaultString,
         isImmutable: false,
       );
   }

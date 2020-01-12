@@ -20,44 +20,39 @@ class SliderParser<TSlider extends Slider>
   ) {
     super.fillProperties(slider, parserNode, parent, parser);
     slider
-      ..activeColorProperty = parserNode.getValue<int>(
-        'activeColor',
-        (s) => int.parse(s),
-        () => 4278190335,
+      ..activeColorProperty = parserNode.getIntProperty(
+        'activeColor',      
+        defaultValue: () => 4278190335,
         isImmutable: true,
       )
-      ..divisionProperty = parserNode.getValue<int>(
-        'division',
-        (s) => int.parse(s),
-        () => 0,
+      ..divisionProperty = parserNode.getIntProperty(
+        'division',      
+        defaultValue: () => 0,
         isImmutable: true,
       )
-      ..inactiveColorProperty = parserNode.getValue<int>(
-        'inactiveColor',
-        (s) => int.parse(s),
-        () => 4290690750,
+      ..inactiveColorProperty = parserNode.getIntProperty(
+        'inactiveColor',      
+        defaultValue: () => 4290690750,
         isImmutable: true,
       )
-      ..labelProperty = parserNode.getStringValue(
+      ..labelProperty = parserNode.getStringProperty(
         'label',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       )
-      ..maxValueProperty = parserNode.getValue<double>(
+      ..maxValueProperty = parserNode.getDoubleProperty(
         'maxValue',
-        (s) => double.parse(s),
-        () => 0,
+        defaultValue: () => 0,
         isImmutable: true,
       )
-      ..minValueProperty = parserNode.getValue<double>(
+      ..minValueProperty = parserNode.getDoubleProperty(
         'minValue',
-        (s) => double.parse(s),
-        () => 0,
+        defaultValue: () => 0,
         isImmutable: true,
       )
-      ..valueProperty = parserNode.getValue<double>(
+      ..valueProperty = parserNode.getDoubleProperty(
         'value',
-        (s) => double.parse(s),
-        () => 0,
+        defaultValue: () => 0,
         isImmutable: false,
       );
   }

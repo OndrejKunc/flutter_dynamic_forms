@@ -6,7 +6,9 @@ properties:
     isMutable: true
   label:
     type: string
-  textInputType:
-    type: string
+  inputType:
+    type: textFieldInputType
+    isEnum: true
+    default: text
   validations:
     type: validation[]

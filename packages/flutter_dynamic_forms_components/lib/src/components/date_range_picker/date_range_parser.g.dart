@@ -20,42 +20,39 @@ class DateRangeParser<TDateRange extends DateRange>
   ) {
     super.fillProperties(dateRange, parserNode, parent, parser);
     dateRange
-      ..firstValueProperty = parserNode.getValue<DateTime>(
+      ..firstValueProperty = parserNode.getDateTimeProperty(
         'firstValue',
-        (s) => DateTime.parse(s),
-        () => null,
+        defaultValue: () => null,
         isImmutable: false,
       )
-      ..formatProperty = parserNode.getStringValue(
+      ..formatProperty = parserNode.getStringProperty(
         'format',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       )
-      ..initialDateProperty = parserNode.getValue<DateTime>(
+      ..initialDateProperty = parserNode.getDateTimeProperty(
         'initialDate',
-        (s) => DateTime.parse(s),
-        () => null,
+        defaultValue: () => null,
         isImmutable: true,
       )
-      ..labelProperty = parserNode.getStringValue(
+      ..labelProperty = parserNode.getStringProperty(
         'label',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       )
-      ..maxDateProperty = parserNode.getValue<DateTime>(
+      ..maxDateProperty = parserNode.getDateTimeProperty(
         'maxDate',
-        (s) => DateTime.parse(s),
-        () => DateTime.parse('20500101'),
+        defaultValue: () => DateTime.parse('20500101'),
         isImmutable: true,
       )
-      ..minDateProperty = parserNode.getValue<DateTime>(
+      ..minDateProperty = parserNode.getDateTimeProperty(
         'minDate',
-        (s) => DateTime.parse(s),
-        () => DateTime.parse('19690101'),
+        defaultValue: () => DateTime.parse('19690101'),
         isImmutable: true,
       )
-      ..secondValueProperty = parserNode.getValue<DateTime>(
+      ..secondValueProperty = parserNode.getDateTimeProperty(
         'secondValue',
-        (s) => DateTime.parse(s),
-        () => null,
+        defaultValue: () => null,
         isImmutable: false,
       );
   }

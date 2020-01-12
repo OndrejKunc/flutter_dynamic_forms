@@ -20,36 +20,34 @@ class DateParser<TDate extends Date>
   ) {
     super.fillProperties(date, parserNode, parent, parser);
     date
-      ..firstDateProperty = parserNode.getValue<DateTime>(
+      ..firstDateProperty = parserNode.getDateTimeProperty(
         'firstDate',
-        (s) => DateTime.parse(s),
-        () => null,
+        defaultValue: () => null,
         isImmutable: true,
       )
-      ..formatProperty = parserNode.getStringValue(
+      ..formatProperty = parserNode.getStringProperty(
         'format',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       )
-      ..initialDateProperty = parserNode.getValue<DateTime>(
+      ..initialDateProperty = parserNode.getDateTimeProperty(
         'initialDate',
-        (s) => DateTime.parse(s),
-        () => null,
+        defaultValue: () => null,
         isImmutable: true,
       )
-      ..labelProperty = parserNode.getStringValue(
+      ..labelProperty = parserNode.getStringProperty(
         'label',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       )
-      ..lastDateProperty = parserNode.getValue<DateTime>(
+      ..lastDateProperty = parserNode.getDateTimeProperty(
         'lastDate',
-        (s) => DateTime.parse(s),
-        () => null,
+        defaultValue: () => null,
         isImmutable: true,
       )
-      ..valueProperty = parserNode.getValue<DateTime>(
+      ..valueProperty = parserNode.getDateTimeProperty(
         'value',
-        (s) => DateTime.parse(s),
-        () => null,
+        defaultValue: () => null,
         isImmutable: false,
       );
   }
