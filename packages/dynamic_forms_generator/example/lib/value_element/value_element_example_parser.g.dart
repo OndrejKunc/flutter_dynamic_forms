@@ -10,14 +10,14 @@ class ExampleValueElementParser extends ElementParser<ExampleValueElement> {
   ExampleValueElement parse(ParserNode parserNode, FormElement parent,
       ElementParserFunction parser) =>
       ExampleValueElement( 
-      firstProperty: parserNode.getStringValue(
+      firstProperty: parserNode.getStringProperty(
         'firstProperty',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       ).value,
-      secondProperty: parserNode.getValue<int>(
-        'secondProperty',
-        (s) => int.parse(s),
-        () => 0,
+      secondProperty: parserNode.getIntProperty(
+        'secondProperty',      
+        defaultValue: () => 0,
         isImmutable: true,
       ).value,
     );

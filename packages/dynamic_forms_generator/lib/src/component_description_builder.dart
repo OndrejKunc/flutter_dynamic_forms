@@ -28,6 +28,7 @@ class ComponentDescriptionBuilder {
             type: propertyType,
             defaultValue: rawProperty.defaultValue,
             isMutable: isMutable,
+            isEnum: rawProperty.isEnum,
           ),
         );
       }
@@ -44,6 +45,7 @@ class ComponentDescriptionBuilder {
       parentType: parentType,
       properties: properties,
       contentProperty: contentProperty,
+      values: rawComponent.values,
     );
   }
 }

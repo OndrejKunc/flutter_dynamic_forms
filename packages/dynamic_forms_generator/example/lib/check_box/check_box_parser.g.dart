@@ -19,44 +19,39 @@ class CheckBoxParser<TCheckBox extends CheckBox>
   ) {
     super.fillProperties(checkBox, parserNode, parent, parser);
     checkBox
-      ..labelProperty = parserNode.getStringValue(
+      ..labelProperty = parserNode.getStringProperty(
         'label',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       )
-      ..myDateProperty = parserNode.getValue<DateTime>(
+      ..myDateProperty = parserNode.getDateTimeProperty(
         'myDate',
-        (s) => DateTime.parse(s),
-        () => DateTime.parse('1969-07-20 20:18:04Z'),
+        defaultValue: () => DateTime.parse('1969-07-20 20:18:04Z'),
         isImmutable: true,
       )
-      ..myDecimalProperty = parserNode.getValue<Decimal>(
+      ..myDecimalProperty = parserNode.getDecimalProperty(
         'myDecimal',
-        (s) => Decimal.parse(s),
-        () => Decimal.fromDouble(42),
+        defaultValue: () => Decimal.fromDouble(42),
         isImmutable: true,
       )
-      ..myDoubleProperty = parserNode.getValue<double>(
+      ..myDoubleProperty = parserNode.getDoubleProperty(
         'myDouble',
-        (s) => double.parse(s),
-        () => 27.0,
+        defaultValue: () => 27.0,
         isImmutable: true,
       )
-      ..myIntProperty = parserNode.getValue<int>(
-        'myInt',
-        (s) => int.parse(s),
-        () => 51,
+      ..myIntProperty = parserNode.getIntProperty(
+        'myInt',      
+        defaultValue: () => 51,
         isImmutable: true,
       )
-      ..textColorProperty = parserNode.getValue<String>(
+      ..textColorProperty = parserNode.getStringProperty(
         'textColor',
-        (s) => s,
-        () => 'b74903',
+        defaultValue: () => 'b74903',
         isImmutable: true,
       )
-      ..valueProperty = parserNode.getValue(
-        'value',
-        ParserNode.convertToBool,
-        ParserNode.defaultFalse,
+      ..valueProperty = parserNode.getBoolProperty(
+        'value',        
+        defaultValue: ParserNode.defaultFalse,
         isImmutable: false,
       );
   }

@@ -42,17 +42,28 @@ abstract class ParserNode {
     );
   }
 
-  Property<String> getStringProperty(String name, {bool isImmutable = true}) =>
-      getProperty(name, convertToString, emptyString, isImmutable: isImmutable);
+  Property<String> getStringProperty(
+    String name, {
+    String Function() defaultValue = defaultString,
+    bool isImmutable = true,
+  }) {
+    return getProperty(
+      name,
+      convertToString,
+      defaultValue,
+      isImmutable: isImmutable,
+    );
+  }
 
   Property<Decimal> getDecimalProperty(
     String name, {
+    Decimal Function() defaultValue = defaultDecimal,
     bool isImmutable = true,
   }) {
     return getProperty<Decimal>(
       name,
-      (s) => Decimal.tryParse(s) ?? defaultDecimal(),
-      defaultDecimal,
+      (s) => Decimal.tryParse(s) ?? defaultValue(),
+      defaultValue,
       isImmutable: isImmutable,
     );
   }
@@ -86,20 +97,41 @@ abstract class ParserNode {
 
   Property<double> getDoubleProperty(
     String name, {
+    double Function() defaultValue = defaultDouble,
     bool isImmutable = true,
   }) {
     return getProperty<double>(
-        name, (s) => double.parse(s) ?? defaultDouble(), defaultDouble,
-        isImmutable: isImmutable);
+      name,
+      (s) => double.tryParse(s) ?? defaultValue(),
+      defaultValue,
+      isImmutable: isImmutable,
+    );
   }
 
   Property<int> getIntProperty(
     String name, {
+    int Function() defaultValue = defaultInt,
     bool isImmutable = true,
   }) {
     return getProperty<int>(
-        name, (s) => int.tryParse(s) ?? defaultInt(), defaultInt,
-        isImmutable: isImmutable);
+      name,
+      (s) => int.tryParse(s) ?? defaultValue(),
+      defaultValue,
+      isImmutable: isImmutable,
+    );
+  }
+
+  Property<DateTime> getDateTimeProperty(
+    String name, {
+    DateTime Function() defaultValue = defaultDateTime,
+    bool isImmutable = true,
+  }) {
+    return getProperty<DateTime>(
+      name,
+      (s) => DateTime.tryParse(s) ?? defaultValue(),
+      defaultValue,
+      isImmutable: isImmutable,
+    );
   }
 
   Property<T> createProperty<T>(T value, bool isImmutable) {
@@ -118,7 +150,7 @@ abstract class ParserNode {
   Property<bool> getIsVisibleProperty() =>
       getProperty('isVisible', convertToBool, defaultTrue);
 
-  static String emptyString() => '';
+  static String defaultString() => '';
   static String convertToString(String x) => x;
   static bool convertToBool(String x) => x?.toLowerCase() == 'true';
   static int convertToColor(String x) => int.parse(x);
@@ -126,5 +158,6 @@ abstract class ParserNode {
   static bool defaultTrue() => true;
   static int defaultInt() => 0;
   static Decimal defaultDecimal() => Decimal.fromInt(0);
-  static double defaultDouble() => 2.0;
+  static double defaultDouble() => 0.0;
+  static DateTime defaultDateTime() => null;
 }

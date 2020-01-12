@@ -19,12 +19,14 @@ class SingleSelectChoiceParser<TSingleSelectChoice extends SingleSelectChoice>
   ) {
     super.fillProperties(singleSelectChoice, parserNode, parent, parser);
     singleSelectChoice
-      ..labelProperty = parserNode.getStringValue(
+      ..labelProperty = parserNode.getStringProperty(
         'label',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       )
-      ..valueProperty = parserNode.getStringValue(
+      ..valueProperty = parserNode.getStringProperty(
         'value',
+        defaultValue: ParserNode.defaultString,
         isImmutable: true,
       );
   }

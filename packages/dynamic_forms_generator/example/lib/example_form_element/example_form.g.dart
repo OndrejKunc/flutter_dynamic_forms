@@ -6,12 +6,12 @@ class ExampleFormElement extends FormElement {
   static const String enumExamplePropertyName = 'enumExample';
   static const String valueExamplePropertyName = 'valueExample';
 
-  Property<ExampleEnumElement> get enumExampleProperty => properties[enumExamplePropertyName];
-  set enumExampleProperty(Property<ExampleEnumElement> value) =>
+  Property<ExampleEnum> get enumExampleProperty => properties[enumExamplePropertyName];
+  set enumExampleProperty(Property<ExampleEnum> value) =>
       registerProperty(enumExamplePropertyName, value);
-  ExampleEnumElement get enumExample =>
+  ExampleEnum get enumExample =>
       enumExampleProperty.value;
-  Stream<ExampleEnumElement> get enumExampleChanged => enumExampleProperty.valueChanged;
+  Stream<ExampleEnum> get enumExampleChanged => enumExampleProperty.valueChanged;
 
   Property<ExampleValueElement> get valueExampleProperty => properties[valueExamplePropertyName];
   set valueExampleProperty(Property<ExampleValueElement> value) =>

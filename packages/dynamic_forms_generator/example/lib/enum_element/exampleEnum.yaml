@@ -1,0 +1,5 @@
+type: exampleEnum
+parentType: enum
+values:
+  - firstOption
+  - secondOption

@@ -15,11 +15,12 @@ class SingleItemContainerParser extends ElementParser<SingleItemContainer> {
       ..isVisibleProperty = parserNode.getIsVisibleProperty()
       ..parentProperty = parserNode.getParentProperty(parent)
       ..childProperty = parserNode.getChildProperty<FormElement>(
-          propertyName: 'child',
-          parent: container,
-          parser: parser,
-          isContentProperty: true,
-          defaultValue: () => null);
+        propertyName: 'child',
+        parent: container,
+        parser: parser,
+        isContentProperty: true,
+        defaultValue: () => null,
+      );
     return container;
   }
 }
