@@ -12,6 +12,6 @@ export 'single_select_choice/single_select_choice.g.dart';
 export 'single_select_choice/single_select_choice_parser.g.dart';
 export 'text/text.g.dart';
 export 'value_element/value_element_example.g.dart';
-export 'enum_element/exampleEnum.g.dart';
+export 'example_enum/example_enum.g.dart';
 export 'example_form_element/example_form.g.dart';
 export 'padding/padding.g.dart';
