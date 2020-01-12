@@ -1,3 +1,9 @@
+# 0.6.0
+
+* Added generator for yaml files with enum.
+* Changed generated output to be compatible with dynamic_forms 0.11.0.
+* Fixed single child parser method output.
+
 # 0.5.1
 
 * Replaced all double quotes for single quotes in generated output.
