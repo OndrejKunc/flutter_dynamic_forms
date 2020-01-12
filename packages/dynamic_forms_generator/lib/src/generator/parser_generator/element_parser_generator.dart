@@ -153,7 +153,7 @@ abstract class ElementParserGenerator {
           isImmutable: ${!property.isMutable})''';
     }
 
-    return '''parserNode.getChildProperty<${property.type.toTypeString()}}>(
+    return '''parserNode.getChildProperty<${property.type.toTypeString()}>(
         propertyName: '${property.name}',
         parent: ${componentDescription.type.typeName},
         parser: parser,

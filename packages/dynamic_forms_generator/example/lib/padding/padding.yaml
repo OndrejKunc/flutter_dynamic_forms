@@ -1,0 +1,5 @@
+type: padding
+parentType: formElement
+properties:
+  child:
+    type: formElement
