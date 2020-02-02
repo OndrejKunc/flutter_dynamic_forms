@@ -95,6 +95,15 @@
             <formGroup id="formGroupToCopy" name="User info">
                 <textField id="copyFirstName" label="Enter your first name" />
                 <textField id="copyLastName" label="Enter your last name" />
+                <label id="fullNameCopyLabel">
+                    <label.value>
+                        <expression>
+                            <![CDATA[
+                                @firstName + (length(@firstName) > 0 && length(@lastName) > 0 ? " " : "") + @lastName
+                            ]]>
+                        </expression>
+                    </label.value>
+                </label>
             </formGroup>
         </copyContainer>
     </formGroup>

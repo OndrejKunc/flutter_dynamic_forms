@@ -1,4 +1,6 @@
+import 'package:expression_language/expression_language.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
+import 'package:example/bloc_dynamic_form/dynamic_form_event.dart';
 import 'package:example/components/copy_container/copy_container_parser.dart';
 import 'package:example/components/copy_container/copy_container_renderer.dart';
 import 'package:example/form_parser_type.dart';
@@ -67,6 +69,54 @@ class _SimpleFormScreenState extends State<SimpleFormScreen> {
           elementId: event.elementId,
           propertyName: event.propertyName,
           ignoreLastChange: event.ignoreLastChange);
+    }
+    if (event is CopyFirstChildEvent) {
+      var children = event.copyContainer.children;
+      if (children.isEmpty) {
+        return;
+      }
+
+      // Create copy of the first children
+      var clonedRoot = children[0].clone(null);
+
+      var clonedElements =
+          getFormElementIterator<FormElement>(clonedRoot).toList();
+
+      // Change id of each element in the new tree
+      for (var i = 0; i < clonedElements.length; i++) {
+        var clonedElement = clonedElements[i];
+        if (clonedElement.id == null) {
+          continue;
+        }
+        clonedElement.id = "${clonedElement.id}_$i";
+        _formManager.formElementMap[clonedElement.id] = clonedElement;
+      }
+
+      // Build expressions in the cloned subtree
+      var clonedExpressions =
+          getFormPropertyIterator<CloneableExpressionProperty>(clonedRoot);
+      for (var expressionValue in clonedExpressions) {
+        expressionValue.buildExpression(_formManager.formElementMap);
+      }
+
+      // Add subscriptions to existing expressions
+      for (var expressionValue in clonedExpressions) {
+        var elementsValuesCollectorVisitor =
+            ExpressionProviderCollectorVisitor();
+        expressionValue.getExpression().accept(elementsValuesCollectorVisitor);
+        for (var sourceProperty
+            in elementsValuesCollectorVisitor.expressionProviders) {
+          (sourceProperty as Property).addSubscriber(expressionValue);
+        }
+      }
+
+      (clonedRoot as FormElement).parentProperty = children[0].parentProperty;
+
+      // Add back to the children list
+      children.add(clonedRoot);
+
+      // Notify view about the change
+      event.copyContainer.changedSubject.add(children.length);
     }
     //No need to call setState, because reactive renderers already listen to the changes.
     //Call setState when using regular renderers, but note that the whole form will be re-rendered.
