@@ -1,4 +1,6 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
+import 'package:example/components/copy_container/copy_container_parser.dart';
+import 'package:example/components/copy_container/copy_container_renderer.dart';
 import 'package:example/form_parser_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,11 +30,14 @@ class _SimpleFormScreenState extends State<SimpleFormScreen> {
 
   Future _buildForm() async {
     _formRenderService = FormRenderService(
-      renderers: components.getReactiveRenderers(),
+      renderers: [
+        ...components.getReactiveRenderers(),
+        CopyContainerRenderer()
+      ],
       dispatcher: _onFormElementEvent,
     );
 
-    var parsers = components.getDefaultParserList();
+    var parsers = [...components.getDefaultParserList(), CopyContainerParser()];
     String fileName;
     FormParserService parserService;
 

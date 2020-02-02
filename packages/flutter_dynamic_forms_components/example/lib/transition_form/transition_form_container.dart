@@ -1,3 +1,4 @@
+import 'package:example/components/copy_container/copy_container_renderer.dart';
 import 'package:example/components/transition_form_element/transition_form_element_renderer.dart';
 import 'package:example/transition_form/transition_form_bloc.dart';
 import 'package:example/transition_form/transition_form_event.dart';
@@ -23,6 +24,7 @@ class _TransitionFormContainerState extends State<TransitionFormContainer> {
       renderers: getDefaultRenderers()
         ..addAll([
           TransitionFormElementRenderer(),
+          CopyContainerRenderer(),
         ]),
       dispatcher: BlocProvider.of<TransitionFormBloc>(context).add,
     );

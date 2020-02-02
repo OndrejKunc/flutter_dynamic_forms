@@ -90,4 +90,12 @@
         <date id="formDate1" label="Form Date" initialDate="2019-10-20" firstDate="2010-02-27" lastDate="2030-02-27" format="yyyy-MM-dd"/>
         <dateRange id="formDateRange1" label="Form Date Range" initialDate="2019-10-20" minDate="2010-02-27" maxDate="2030-02-27" format="yyyy-MM-dd"/>
     </formGroup>
+    <formGroup id="formGroup6" name="Copy container">
+        <copyContainer>
+            <formGroup id="formGroupToCopy" name="User info">
+                <textField id="copyFirstName" label="Enter your first name" />
+                <textField id="copyLastName" label="Enter your last name" />
+            </formGroup>
+        </copyContainer>
+    </formGroup>
 </form>  

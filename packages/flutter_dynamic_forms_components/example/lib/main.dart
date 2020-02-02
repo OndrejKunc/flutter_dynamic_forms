@@ -1,4 +1,5 @@
 import 'package:dynamic_forms/dynamic_forms.dart' as forms;
+import 'package:example/components/copy_container/copy_container_parser.dart';
 import 'package:example/form_parser_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
@@ -93,7 +94,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           return DynamicFormBloc(
                             forms.FormManagerBuilder(
                               forms.XmlFormParserService(
-                                components.getDefaultParserList(),
+                                [
+                                  ...components.getDefaultParserList(),
+                                  CopyContainerParser()
+                                ],
                               ),
                             ),
                           );

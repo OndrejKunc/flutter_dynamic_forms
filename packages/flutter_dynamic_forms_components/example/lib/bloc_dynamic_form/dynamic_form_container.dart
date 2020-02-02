@@ -1,6 +1,7 @@
 import 'package:example/bloc_dynamic_form/dynamic_form_bloc.dart';
 import 'package:example/bloc_dynamic_form/dynamic_form_event.dart';
 import 'package:example/bloc_dynamic_form/dynamic_form_state.dart';
+import 'package:example/components/copy_container/copy_container_renderer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
@@ -18,7 +19,10 @@ class _DynamicFormContainerState extends State<DynamicFormContainer> {
   void initState() {
     super.initState();
     _formRenderService = FormRenderService(
-      renderers: getReactiveRenderers(),
+      renderers: [
+        ...getReactiveRenderers(),
+        CopyContainerRenderer(),
+      ],
       dispatcher: BlocProvider.of<DynamicFormBloc>(context).add,
     );
     BlocProvider.of<DynamicFormBloc>(context).add(LoadFormEvent());

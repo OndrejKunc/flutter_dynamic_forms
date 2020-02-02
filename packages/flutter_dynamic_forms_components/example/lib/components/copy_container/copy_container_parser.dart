@@ -15,17 +15,11 @@ class CopyContainerParser<TCopyContainer extends CopyContainer>
 
   @override
   void fillProperties(
-    TCopyContainer formGroup,
+    TCopyContainer copyContainer,
     ParserNode parserNode,
     Element parent,
     ElementParserFunction parser,
   ) {
-    super.fillProperties(formGroup, parserNode, parent, parser);
-    formGroup
-      ..itemCountProperty = parserNode.getIntProperty(
-        'itemCount',
-        defaultValue: ParserNode.defaultInt,
-        isImmutable: false,
-      );
+    super.fillProperties(copyContainer, parserNode, parent, parser);
   }
 }
