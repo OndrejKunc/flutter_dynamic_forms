@@ -7,10 +7,12 @@ class BuildConfiguration {
   final List<String> enumElementImports;
   final List<String> valueElementModelImports;
   final List<String> parserImports;
+  final List<String> comments;
   final List<String> componentsToIgnore;
 
   BuildConfiguration({
     this.defaultImports = const [],
+    this.comments = const [],
     this.modelImports = const [],
     this.formElementModelImports = const [],
     this.enumElementImports = const [],
@@ -51,6 +53,10 @@ class BuildConfiguration {
     if (config.containsKey('components_to_ignore')) {
       componentsToIgnore = _getConfigList(config, 'components_to_ignore');
     }
+    var comments = <String>[];
+    if (config.containsKey('comments')) {
+      comments = _getConfigList(config, 'comments');
+    }
     return BuildConfiguration(
       defaultImports: defaultImports,
       modelImports: modelImports,
@@ -59,6 +65,7 @@ class BuildConfiguration {
       valueElementModelImports: valueElementModelImports,
       parserImports: parserImports,
       componentsToIgnore: componentsToIgnore,
+      comments: comments,
     );
   }
 

@@ -7,6 +7,10 @@ class EnumModelGenerator extends ElementModelGenerator {
     buffer.writeln('// GENERATED CODE - DO NOT MODIFY BY HAND');
     buffer.writeln();
 
+    for (var comment in comments) {
+      buffer.writeln('//$comment');
+    }
+
     buffer.writeln('enum ${componentDescription.type.toTypeString()} {');
 
     for (var enumValue in componentDescription.values) {

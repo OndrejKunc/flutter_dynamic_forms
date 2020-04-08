@@ -33,6 +33,10 @@ class ParserGenerator {
     buffer.writeln('// GENERATED CODE - DO NOT MODIFY BY HAND');
     buffer.writeln();
 
+    for (var comment in buildConfiguration.comments) {
+      buffer.writeln('//$comment');
+    }
+
     for (var import in [
       ...buildConfiguration.defaultImports,
       ...buildConfiguration.parserImports
