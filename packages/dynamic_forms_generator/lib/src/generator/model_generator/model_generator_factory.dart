@@ -41,6 +41,7 @@ ElementModelGenerator getGenerator({
           break;
         }
     }
+    returnElement.comments = buildConfiguration.comments;
     returnElement.componentDescription = componentDescription;
 
     return returnElement;

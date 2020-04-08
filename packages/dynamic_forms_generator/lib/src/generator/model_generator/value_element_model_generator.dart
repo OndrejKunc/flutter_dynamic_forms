@@ -8,6 +8,10 @@ class ValueElementModelGenerator extends ElementModelGenerator {
     buffer.writeln('// GENERATED CODE - DO NOT MODIFY BY HAND');
     buffer.writeln();
 
+    for (var comment in comments) {
+      buffer.writeln('//$comment');
+    }
+
     for (var import in imports) {
       buffer.writeln("import '$import';");
     }

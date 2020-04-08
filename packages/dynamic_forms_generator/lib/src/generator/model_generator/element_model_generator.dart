@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 abstract class ElementModelGenerator {
   ComponentDescription componentDescription;
   List<String> imports;
+  List<String> comments;
 
   String generateBody();
 
