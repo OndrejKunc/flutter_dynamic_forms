@@ -1,3 +1,7 @@
+# 0.6.1
+
+* Added comments option to build.yaml.
+
 # 0.6.0
 
 * Added generator for yaml files with enum.
