@@ -18,7 +18,7 @@ class LabelParser<TLabel extends Label> extends FormElementParser<TLabel> {
   ) {
     super.fillProperties(label, parserNode, parent, parser);
     label
-      ..valueProperty = parserNode.getStringValue(
+      ..valueProperty = parserNode.getStringProperty(
         'value',
         isImmutable: true,
       );
