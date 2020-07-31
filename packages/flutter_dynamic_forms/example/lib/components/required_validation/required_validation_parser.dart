@@ -11,10 +11,10 @@ class RequiredValidationParser extends ValidationParser<RequiredValidation> {
   void fillProperties(RequiredValidation validation, ParserNode parserNode,
       Element parent, parser) {
     validation
-      ..id = parserNode.getPlainString('id')
-      ..isVisibleProperty = parserNode.getIsVisibleProperty()
-      ..parentProperty = parserNode.getParentProperty(parent)
-      ..messageProperty = parserNode.getStringProperty('message')
+      ..id = parserNode.getPlainStringValue('id')
+      ..isVisibleProperty = parserNode.getIsVisible()
+      ..parentProperty = parserNode.getParentValue(parent)
+      ..messageProperty = parserNode.getStringValue('message')
       ..isValidProperty = getIsValid(parent);
   }
 
