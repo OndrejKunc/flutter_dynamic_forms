@@ -4,7 +4,7 @@ os:
 sudo: required
 dist: trusty
 dart:
-- 2.6.0
+  - 2.8.4
 addons:
   chrome: stable
   apt:
@@ -28,7 +28,7 @@ script:
   - pub run test_coverage
   - cp coverage/lcov.info ../../dynamic_forms.lcov
 after_success:
-  - bash <(curl -s https://codecov.io/bash)  
+  - bash <(curl -s https://codecov.io/bash)
 cache:
   directories:
     - $HOME/.pub-cache
