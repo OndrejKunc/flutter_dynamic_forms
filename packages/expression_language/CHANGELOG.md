@@ -1,3 +1,8 @@
+# 0.3.0
+
+* Increased petitparser dependency to ^3.0.0
+* Increased minimum dart SDK to 2.8.4.
+
 # 0.2.1
 
 Fixed analyzer issues.

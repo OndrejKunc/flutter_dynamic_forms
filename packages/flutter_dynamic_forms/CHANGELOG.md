@@ -1,3 +1,8 @@
+# 0.12.0
+
+* Increased minimum dart SDK to 2.8.4.
+* Increased dynamic_forms dependency to ^0.12.0.
+
 # 0.11.0
 
 Incremented dependency on dynamic_forms package.

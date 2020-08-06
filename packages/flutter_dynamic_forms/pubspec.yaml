@@ -1,10 +1,10 @@
 name: flutter_dynamic_forms
 description: A flutter project providing infrastructure to render dynamic forms.
-version: 0.11.0
+version: 0.12.0
 homepage: https://github.com/OndrejKunc/flutter_dynamic_forms
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: ">=2.8.4 <3.0.0"
 
 dependencies:
   flutter:
@@ -13,8 +13,8 @@ dependencies:
 
   dynamic_forms:
     git:
-        url: https://github.com/OndrejKunc/flutter_dynamic_forms.git
-        path: packages/dynamic_forms
+      url: https://github.com/OndrejKunc/flutter_dynamic_forms.git
+      path: packages/dynamic_forms
 
 dev_dependencies:
   flutter_test:

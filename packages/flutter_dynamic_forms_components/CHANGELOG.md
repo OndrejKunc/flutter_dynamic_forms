@@ -1,3 +1,7 @@
+# 0.12.0
+
+* Updated dependency for flutter dynamic forms and generator.
+
 # 0.11.0
 
 * Made the text widget obsolete. Added textField widget instead.

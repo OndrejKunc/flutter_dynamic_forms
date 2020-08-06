@@ -1,3 +1,8 @@
+# 0.12.0
+
+* Increased minimum dart SDK to 2.8.4.
+* Increased expression_language dependency to ^0.3.0.
+
 # 0.11.0
 
 * Changed `ParserNode` method suffixes from `Value` to `Property`.
