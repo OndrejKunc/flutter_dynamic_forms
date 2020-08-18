@@ -2,7 +2,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
-class FormRenderer extends StatefulWidget {
+class FormRenderer<T extends FormManager> extends StatefulWidget {
   final List<FormElementRenderer> renderers;
   final FormElementEventDispatcherFunction dispatcher;
   final FormManager formManager;
@@ -15,10 +15,10 @@ class FormRenderer extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _FormRendererState createState() => _FormRendererState();
+  _FormRendererState<T> createState() => _FormRendererState<T>();
 }
 
-class _FormRendererState extends State<FormRenderer> {
+class _FormRendererState<T extends FormManager> extends State<FormRenderer> {
   FormRenderService _formRenderService;
   FormManager _formManager;
 
@@ -26,7 +26,7 @@ class _FormRendererState extends State<FormRenderer> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (widget.formManager == null) {
-      _formManager = FormProvider.of(context)?.formManager;
+      _formManager = FormProvider.of<T>(context);
       if (_formManager == null) {
         throw Exception('''
 Error: No `FormManager` provided to the `FormRenderer` widget. 

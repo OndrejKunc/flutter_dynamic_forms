@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
     as components;
@@ -37,10 +38,11 @@ class _SimpleFormJsonState extends State<SimpleFormJson> {
         child: SingleChildScrollView(
           child: isLoading
               ? CircularProgressIndicator()
-              : JsonFormProvider(
-                  jsonString: fileContent,
+              : ParsedFormProvider(
+                  create: (_) => JsonFormManager(),
+                  content: fileContent,
                   parsers: components.getDefaultParserList(),
-                  child: FormRenderer(
+                  child: FormRenderer<JsonFormManager>(
                     renderers: components.getReactiveRenderers(),
                   ),
                 ),

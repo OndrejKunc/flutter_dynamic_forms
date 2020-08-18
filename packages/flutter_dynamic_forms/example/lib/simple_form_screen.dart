@@ -41,8 +41,9 @@ class _SimpleFormScreenState extends State<SimpleFormScreen> {
       body: Center(
         child: isLoading
             ? CircularProgressIndicator()
-            : XmlFormProvider(
-                xmlString: xml,
+            : ParsedFormProvider(
+                create: (_) => XmlFormManager(),
+                content: xml,
                 parsers: [
                   ContainerParser(),
                   LabelParser(),
@@ -50,7 +51,7 @@ class _SimpleFormScreenState extends State<SimpleFormScreen> {
                   ValidationParser(),
                   RequiredValidationParser(),
                 ],
-                child: FormRenderer(
+                child: FormRenderer<XmlFormManager>(
                   renderers: [
                     ContainerRenderer(),
                     LabelRenderer(),

@@ -10,7 +10,7 @@ class DynamicFormState {
 
   final bool isValid;
 
-  final List<FormItemValue> resultItemValues;
+  final List<FormPropertyValue> resultProperties;
 
   bool get isEmpty => form.children.isEmpty;
 
@@ -18,17 +18,17 @@ class DynamicFormState {
       {this.form,
       this.isLoading = false,
       this.isValid = false,
-      this.resultItemValues});
+      this.resultProperties});
 
   DynamicFormState copyWith(
       {Form form,
       bool isLoading,
       bool isValid,
-      List<FormItemValue> resultItemValues}) {
+      List<FormPropertyValue> resultProperties}) {
     return DynamicFormState(
         form: form ?? this.form,
         isLoading: isLoading ?? this.isLoading,
         isValid: isValid ?? this.isValid,
-        resultItemValues: resultItemValues ?? this.resultItemValues);
+        resultProperties: resultProperties ?? this.resultProperties);
   }
 }

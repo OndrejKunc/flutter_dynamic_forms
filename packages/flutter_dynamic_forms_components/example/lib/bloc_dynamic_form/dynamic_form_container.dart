@@ -1,3 +1,4 @@
+import 'package:example/bloc_dynamic_form/custom_form_manager.dart';
 import 'package:example/bloc_dynamic_form/dynamic_form_bloc.dart';
 import 'package:example/bloc_dynamic_form/dynamic_form_event.dart';
 import 'package:example/bloc_dynamic_form/dynamic_form_state.dart';
@@ -12,15 +13,9 @@ class DynamicFormContainer extends StatefulWidget {
 }
 
 class _DynamicFormContainerState extends State<DynamicFormContainer> {
-  FormRenderService _formRenderService;
-
   @override
   void initState() {
     super.initState();
-    _formRenderService = FormRenderService(
-      renderers: getReactiveRenderers(),
-      dispatcher: BlocProvider.of<DynamicFormBloc>(context).add,
-    );
     BlocProvider.of<DynamicFormBloc>(context).add(LoadFormEvent());
   }
 
@@ -36,8 +31,10 @@ class _DynamicFormContainerState extends State<DynamicFormContainer> {
         }
         return Center(
           child: SingleChildScrollView(
-            child: _formRenderService.render(state.form, context),
-          ),
+              child: FormRenderer<CustomFormManager>(
+            renderers: getReactiveRenderers(),
+            dispatcher: BlocProvider.of<DynamicFormBloc>(context).add,
+          )),
         );
       },
     );

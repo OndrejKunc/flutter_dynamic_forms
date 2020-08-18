@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
     as components;
@@ -37,10 +38,11 @@ class _SimpleFormXmlState extends State<SimpleFormXml> {
         child: SingleChildScrollView(
           child: isLoading
               ? CircularProgressIndicator()
-              : XmlFormProvider(
-                  xmlString: fileContent,
+              : ParsedFormProvider(
+                  create: (_) => XmlFormManager(),
+                  content: fileContent,
                   parsers: components.getDefaultParserList(),
-                  child: FormRenderer(
+                  child: FormRenderer<XmlFormManager>(
                     renderers: components.getReactiveRenderers(),
                   ),
                 ),
