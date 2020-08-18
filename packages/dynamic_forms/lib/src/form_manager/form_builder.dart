@@ -1,16 +1,16 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:dynamic_forms/src/form_manager/form_manager.dart';
+import 'package:dynamic_forms/src/form_manager/form_data.dart';
 import 'package:dynamic_forms/src/iterators/form_element_iterator.dart';
 import 'package:dynamic_forms/src/iterators/form_property_iterator.dart';
 import 'package:dynamic_forms/src/parser/form_parser_service.dart';
 import 'package:expression_language/expression_language.dart';
 
-class FormManagerBuilder {
+class FormBuilder {
   final FormParserService formParserService;
 
-  FormManagerBuilder(this.formParserService);
+  FormBuilder(this.formParserService);
 
-  FormManager build(String content) {
+  FormData build(String content) {
     var root = formParserService.parse(content);
 
     var formElementMap = {
@@ -21,7 +21,7 @@ class FormManagerBuilder {
     return _build(root, formElementMap);
   }
 
-  FormManager buildFromForm(FormElement root) {
+  FormData buildFromForm(FormElement root) {
     var clonedForm = root.clone(null);
     var formElementMap = {
       for (var x in getFormElementIterator<FormElement>(clonedForm)) x.id: x
@@ -30,8 +30,7 @@ class FormManagerBuilder {
     return _build(clonedForm, formElementMap);
   }
 
-  FormManager _build(
-      FormElement root, Map<String, FormElement> formElementMap) {
+  FormData _build(FormElement root, Map<String, FormElement> formElementMap) {
     _buildElementsSubscriptionDependencies(root);
 
     var formValidations = {
@@ -41,8 +40,11 @@ class FormManagerBuilder {
     var formMutableValues =
         getFormPropertyIterator<MutableProperty>(root).toList();
 
-    return FormManager(
-        root, formElementMap, formValidations, formMutableValues);
+    return FormData(
+        form: root,
+        formElementMap: formElementMap,
+        validations: formValidations,
+        mutableValues: formMutableValues);
   }
 
   void _buildCloneableExpressions(
