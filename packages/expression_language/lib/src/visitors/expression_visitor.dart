@@ -45,6 +45,7 @@ abstract class ExpressionVisitor {
   void visitMatchesFunction(MatchesFunctionExpression expression);
   void visitToStringFunction(ToStringFunctionExpression expression);
   void visitIsNullFunction(IsNullFunctionExpression expression);
+  void visitIsNullOrEmptyFunction(IsNullOrEmptyFunctionExpression expression);
   void visitIntToInteger(IntToIntegerExpression expression);
   void visitIntegerToInt(IntegerToIntExpression expression);
   void visitDoubleToDecimal(DoubleToDecimalExpression expression);

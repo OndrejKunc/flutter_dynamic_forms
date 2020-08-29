@@ -120,6 +120,7 @@ class TestElement extends ExpressionProviderElement {
     'value': ConstantExpressionProvider<Integer>(Integer(27)),
     'label': ConstantExpressionProvider<String>('LabelText'),
     'nullLabel': ConstantExpressionProvider<String>(null),
+    'emptyLabel': ConstantExpressionProvider<String>(''),
     'intValue': ConstantExpressionProvider<int>(14),
     'doubleValue': ConstantExpressionProvider<double>(6.5),
   };

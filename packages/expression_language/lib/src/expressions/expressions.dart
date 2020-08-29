@@ -16,6 +16,7 @@ export './conditional_expression.dart';
 export './function_expressions/length.dart';
 export './function_expressions/to_string.dart';
 export './function_expressions/is_null.dart';
+export './function_expressions/is_null_or_empty.dart';
 export './function_expressions/int_to_integer.dart';
 export './function_expressions/integer_to_int.dart';
 export './function_expressions/double_to_decimal.dart';

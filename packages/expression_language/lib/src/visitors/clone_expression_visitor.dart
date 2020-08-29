@@ -349,6 +349,12 @@ class CloneExpressionVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitIsNullOrEmptyFunction(IsNullOrEmptyFunctionExpression expression) {
+    expression.value.accept(this);
+    push(IsNullOrEmptyFunctionExpression(pop()));
+  }
+
+  @override
   void visitMatchesFunction(MatchesFunctionExpression expression) {
     expression.value.accept(this);
     expression.regex.accept(this);
