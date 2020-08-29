@@ -541,6 +541,21 @@ Feature: Expression
     When expression "length(@testElement.label) - 5" is evaluated
     Then int expression result is "4"
 
+  Scenario: resolve dependency with null
+    Given form element is provided
+    When expression "isNull(@testElement.nullLabel)" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: resolve dependency with isNullOrEmpty null check
+    Given form element is provided
+    When expression "isNullOrEmpty(@testElement.nullLabel)" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: resolve dependency with isNullOrEmpty empty check
+    Given form element is provided
+    When expression "isNullOrEmpty(@testElement.emptyLabel)" is evaluated
+    Then bool expression result is "true"
+
   Scenario: resolve int dependency
     Given form element is provided
     When expression "@testElement.intValue - 5" is evaluated

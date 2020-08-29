@@ -3,12 +3,12 @@ import 'package:example/components/transition_form_element/transition_form_eleme
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 
 class TransitionFormBuilder {
-  final FormManagerBuilder formManagerBuilder;
+  final FormBuilder formBuilder;
 
-  TransitionFormBuilder(this.formManagerBuilder);
+  TransitionFormBuilder(this.formBuilder);
 
   Form buildTranstionForm(Form oldForm, Form newForm) {
-    var resultFormManager = formManagerBuilder.buildFromForm(newForm);
+    var resultFormManager = formBuilder.buildFromForm(newForm);
     var resultForm = resultFormManager.form;
     addTransitionElements(oldForm, resultForm);
     return resultForm;

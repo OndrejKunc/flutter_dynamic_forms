@@ -1,3 +1,7 @@
+# 0.3.1
+
+Added isNull and isNullOrEmpty functions.
+
 # 0.3.0
 
 * Increased petitparser dependency to ^3.0.0

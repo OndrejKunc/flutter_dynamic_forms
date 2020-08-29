@@ -119,6 +119,8 @@ class TestElement extends ExpressionProviderElement {
   Map<String, ExpressionProvider> properties = {
     'value': ConstantExpressionProvider<Integer>(Integer(27)),
     'label': ConstantExpressionProvider<String>('LabelText'),
+    'nullLabel': ConstantExpressionProvider<String>(null),
+    'emptyLabel': ConstantExpressionProvider<String>(''),
     'intValue': ConstantExpressionProvider<int>(14),
     'doubleValue': ConstantExpressionProvider<double>(6.5),
   };

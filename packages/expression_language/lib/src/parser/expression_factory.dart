@@ -73,6 +73,20 @@ Expression createFunctionExpression(
     }
     return ToStringFunctionExpression(parameters[0]);
   }
+  if (functionName == 'isNull') {
+    if (parameters.length != 1) {
+      throw InvalidParameterCount(
+          'Function $functionName expects only 1 parameter');
+    }
+    return IsNullFunctionExpression(parameters[0]);
+  }
+  if (functionName == 'isNullOrEmpty') {
+    if (parameters.length != 1) {
+      throw InvalidParameterCount(
+          'Function $functionName expects only 1 parameter');
+    }
+    return IsNullOrEmptyFunctionExpression(parameters[0]);
+  }
   if (functionName == 'count') {
     if (parameters.length != 1) {
       throw InvalidParameterCount(

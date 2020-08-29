@@ -20,9 +20,9 @@ void main() {
         </label>
       </container>''';
 
-  var formManagerBuilder = FormManagerBuilder(
-      XmlFormParserService([ContainerParser(), LabelParser()]));
-  var formManager = formManagerBuilder.build(xml);
-  var label2 = formManager.formElementMap['label2'] as Label;
+  var formBuilder =
+      FormBuilder(XmlFormParserService([ContainerParser(), LabelParser()]));
+  var formData = formBuilder.build(xml);
+  var label2 = formData.formElementMap['label2'] as Label;
   print(label2.value);
 }

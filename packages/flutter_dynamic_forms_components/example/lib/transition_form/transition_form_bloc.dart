@@ -9,12 +9,13 @@ import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
   static const Duration transitionDuration = Duration(milliseconds: 600);
 
-  final FormManagerBuilder formManagerBuilder;
+  final FormBuilder formBuilder;
   final TransitionFormBuilder transitionFormBuilder;
 
+  FormData formData;
   FormManager formManager;
 
-  TransitionFormBloc(this.formManagerBuilder, this.transitionFormBuilder);
+  TransitionFormBloc(this.formBuilder, this.transitionFormBuilder);
 
   @override
   TransitionFormState get initialState => TransitionFormState();
@@ -26,7 +27,8 @@ class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
           'assets/transition_form${event.formNumber}.xml',
           cache: false);
       var oldForm = formManager?.form;
-      formManager = formManagerBuilder.build(xml);
+      formData = formBuilder.build(xml);
+      formManager = ExplicitFormManager(formData: formData);
       var currentState = state;
       if (oldForm != null) {
         var transitionForm =

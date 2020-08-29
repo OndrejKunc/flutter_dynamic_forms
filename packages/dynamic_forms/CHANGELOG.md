@@ -1,3 +1,10 @@
+# 0.13.0
+
+* Changed `FormManager` to abstract class and defined set of inherited classes that take care of building the form without the need to manually create `FormBuilder`.
+* `FormManagerBuilder` renamed to `FormBuilder`.
+* `FormItemValue` renamed to `FormPropertyValue`.
+* Changed map of validations inside the `FormManager` to a list instead to avoid issues with missing ids.
+
 # 0.12.0
 
 * Increased minimum dart SDK to 2.8.4.

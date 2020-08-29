@@ -1,25 +1,29 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:dynamic_forms/src/form_manager/form_item_value.dart';
+import 'package:dynamic_forms/src/form_manager/form_data.dart';
+import 'package:dynamic_forms/src/form_manager/form_property_value.dart';
 import 'package:dynamic_forms/src/iterators/form_element_iterator.dart';
 import 'package:expression_language/expression_language.dart';
 import 'package:meta/meta.dart';
 
-class FormManager {
+abstract class FormManager {
   FormElement form;
   Map<String, FormElement> formElementMap;
-  Map<String, Validation> formValidations;
-
+  List<Validation> validations;
   List<MutableProperty> mutableValues;
 
-  FormManager(
-      this.form, this.formElementMap, this.formValidations, this.mutableValues);
-
   bool get isFormValid {
-    return formValidations.values.every((v) => (v.isValid));
+    return validations.every((v) => (v.isValid));
   }
 
-  List<FormItemValue> getFormData() {
-    var result = <FormItemValue>[];
+  void fillFromFormData(FormData formData) {
+    form = formData.form;
+    formElementMap = formData.formElementMap;
+    validations = formData.validations;
+    mutableValues = formData.mutableValues;
+  }
+
+  List<FormPropertyValue> getFormProperties() {
+    var result = <FormPropertyValue>[];
     var formElements = getFormElementIterator<FormElement>(form).toList();
 
     formElements.forEach((fe) {
@@ -28,7 +32,7 @@ class FormManager {
         if (propVal is MutableProperty &&
             !(propVal is Property<ExpressionProviderElement>) &&
             !(propVal is Property<List<ExpressionProviderElement>>)) {
-          result.add(FormItemValue(fe.id, name, propVal.value.toString()));
+          result.add(FormPropertyValue(fe.id, name, propVal.value.toString()));
         }
       });
     });
@@ -63,4 +67,6 @@ class FormManager {
 
     return;
   }
+
+  void close() {}
 }

@@ -16,52 +16,20 @@ class SimpleFormScreen extends StatefulWidget {
 }
 
 class _SimpleFormScreenState extends State<SimpleFormScreen> {
-  FormRenderService _formRenderService;
-  FormManager _formManager;
-  FormElement _form;
+  bool isLoading = true;
+  String xml;
 
   @override
   void initState() {
     super.initState();
-    _formRenderService = FormRenderService(
-      renderers: [
-        ContainerRenderer(),
-        LabelRenderer(),
-        TextFieldRenderer(),
-      ],
-      dispatcher: _onFormElementEvent,
-    );
-
-    _loadForm();
+    loadForm();
   }
 
-  Future _loadForm() async {
-    var formManagerBuilder = FormManagerBuilder(
-      XmlFormParserService([
-        ContainerParser(),
-        LabelParser(),
-        TextFieldParser(),
-        ValidationParser(),
-        RequiredValidationParser(),
-      ]),
-    );
-
-    var xml =
-        await rootBundle.loadString('assets/test_form1.xml', cache: false);
-    _formManager = formManagerBuilder.build(xml);
+  Future loadForm() async {
+    xml = await rootBundle.loadString('assets/test_form1.xml', cache: false);
     setState(() {
-      _form = _formManager.form;
+      isLoading = false;
     });
-  }
-
-  void _onFormElementEvent(FormElementEvent event) {
-    if (event is ChangeValueEvent) {
-      _formManager.changeValue(
-          value: event.value,
-          elementId: event.elementId,
-          propertyName: event.propertyName,
-          ignoreLastChange: event.ignoreLastChange);
-    }
   }
 
   @override
@@ -71,9 +39,26 @@ class _SimpleFormScreenState extends State<SimpleFormScreen> {
         title: Text('Simple dynamic form'),
       ),
       body: Center(
-        child: _form == null
+        child: isLoading
             ? CircularProgressIndicator()
-            : _formRenderService.render(_form, context),
+            : ParsedFormProvider(
+                create: (_) => XmlFormManager(),
+                content: xml,
+                parsers: [
+                  ContainerParser(),
+                  LabelParser(),
+                  TextFieldParser(),
+                  ValidationParser(),
+                  RequiredValidationParser(),
+                ],
+                child: FormRenderer<XmlFormManager>(
+                  renderers: [
+                    ContainerRenderer(),
+                    LabelRenderer(),
+                    TextFieldRenderer(),
+                  ],
+                ),
+              ),
       ),
     );
   }

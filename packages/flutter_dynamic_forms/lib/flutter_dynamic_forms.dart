@@ -4,3 +4,6 @@ export 'src/form_element_event_dispatcher.dart';
 export 'src/form_element_renderer_function.dart';
 export 'src/form_render_service.dart';
 export 'src/helpers/lazy_stream_builder.dart';
+export 'src/widgets/form_provider.dart';
+export 'src/widgets/parsed_form_provider.dart';
+export 'src/widgets/form_renderer.dart';

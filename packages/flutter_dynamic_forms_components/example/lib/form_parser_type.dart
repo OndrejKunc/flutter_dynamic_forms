@@ -1,4 +1,0 @@
-enum FormParserType {
-  xml,
-  json,
-}
