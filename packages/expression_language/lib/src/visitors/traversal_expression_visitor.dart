@@ -213,6 +213,11 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
   }
 
   @override
+  void visitIsNullFunction(IsNullFunctionExpression expression) {
+    expression.value.accept(this);
+  }
+
+  @override
   void visitMatchesFunction(MatchesFunctionExpression expression) {
     expression.value.accept(this);
     expression.regex.accept(this);
