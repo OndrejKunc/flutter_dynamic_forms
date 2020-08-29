@@ -33,9 +33,7 @@ class FormBuilder {
   FormData _build(FormElement root, Map<String, FormElement> formElementMap) {
     _buildElementsSubscriptionDependencies(root);
 
-    var formValidations = {
-      for (var x in getFormElementIterator<Validation>(root)) x.id: x
-    };
+    var formValidations = getFormElementIterator<Validation>(root).toList();
 
     var formMutableValues =
         getFormPropertyIterator<MutableProperty>(root).toList();

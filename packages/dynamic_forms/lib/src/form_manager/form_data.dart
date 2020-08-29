@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 class FormData {
   FormElement form;
   Map<String, FormElement> formElementMap;
-  Map<String, Validation> validations;
+  List<Validation> validations;
   List<MutableProperty> mutableValues;
 
   FormData({

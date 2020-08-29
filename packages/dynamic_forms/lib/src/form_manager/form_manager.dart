@@ -8,11 +8,11 @@ import 'package:meta/meta.dart';
 abstract class FormManager {
   FormElement form;
   Map<String, FormElement> formElementMap;
-  Map<String, Validation> validations;
+  List<Validation> validations;
   List<MutableProperty> mutableValues;
 
   bool get isFormValid {
-    return validations.values.every((v) => (v.isValid));
+    return validations.every((v) => (v.isValid));
   }
 
   void fillFromFormData(FormData formData) {
