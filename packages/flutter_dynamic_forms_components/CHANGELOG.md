@@ -1,3 +1,7 @@
+# 0.13.0
+
+* Updated dependency for flutter dynamic forms.
+
 # 0.12.0
 
 * Updated dependency for flutter dynamic forms and generator.
