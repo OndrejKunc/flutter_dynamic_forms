@@ -125,4 +125,15 @@ abstract class FormElement implements Element {
     }
     return ImmutableProperty(element);
   }
+
+  TFormElement getFirstParentOfType<TFormElement extends FormElement>() {
+    var currentParent = parent;
+    while (currentParent != null) {
+      if (currentParent is TFormElement) {
+        return currentParent;
+      }
+      currentParent = currentParent.parent;
+    }
+    return null;
+  }
 }
