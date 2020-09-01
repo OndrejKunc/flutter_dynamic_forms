@@ -1,4 +1,4 @@
-# 0.6.1
+# 0.7.1
 
 * Added strongly_cast_properties option to build.yaml.
 
