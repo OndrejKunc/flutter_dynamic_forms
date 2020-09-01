@@ -33,6 +33,8 @@ ElementModelGenerator getGenerator({
       default:
         {
           returnElement = FormElementModelGenerator();
+          returnElement.stronglyCastProperties =
+              buildConfiguration.stronglyCastProperties;
           returnElement.imports = [
             ...buildConfiguration.defaultImports,
             ...buildConfiguration.modelImports,
