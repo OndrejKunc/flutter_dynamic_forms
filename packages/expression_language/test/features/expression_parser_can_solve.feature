@@ -561,6 +561,11 @@ Feature: Expression
     When expression "@testElement.intValue - 5" is evaluated
     Then int expression result is "9"
 
+  Scenario: resolve dateTime dependency
+    Given form element is provided
+    When expression "!isNull(@testElement.dateValue)" is evaluated
+    Then bool expression result is "true"
+
   Scenario: resolve double dependency
     Given form element is provided
     When expression "1.5 + @testElement.doubleValue" is evaluated

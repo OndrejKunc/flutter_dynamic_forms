@@ -123,6 +123,7 @@ class TestElement extends ExpressionProviderElement {
     'emptyLabel': ConstantExpressionProvider<String>(''),
     'intValue': ConstantExpressionProvider<int>(14),
     'doubleValue': ConstantExpressionProvider<double>(6.5),
+    'dateValue': ConstantExpressionProvider<DateTime>(DateTime(2020)),
   };
 
   @override

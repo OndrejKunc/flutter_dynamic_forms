@@ -20,6 +20,9 @@ Expression createDelegateExpression(
   if (property is ExpressionProvider<String>) {
     return DelegateExpression<String>(expressionPath, property);
   }
+  if (property is ExpressionProvider<DateTime>) {
+    return DelegateExpression<DateTime>(expressionPath, property);
+  }
   if (property is ExpressionProvider<Decimal>) {
     return DelegateExpression<Decimal>(expressionPath, property);
   }

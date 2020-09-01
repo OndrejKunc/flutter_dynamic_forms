@@ -1,3 +1,7 @@
+# 0.3.2
+
+Added support for dateTime in expressions.
+
 # 0.3.1
 
 Added isNull and isNullOrEmpty functions.
