@@ -5,6 +5,7 @@ abstract class ElementModelGenerator {
   ComponentDescription componentDescription;
   List<String> imports;
   List<String> comments;
+  bool stronglyCastProperties;
 
   String generateBody();
 

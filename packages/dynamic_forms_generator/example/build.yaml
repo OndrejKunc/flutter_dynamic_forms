@@ -5,3 +5,4 @@ targets:
         options:
           default_imports:
             - "../components.dart"
+          strongly_cast_properties: false

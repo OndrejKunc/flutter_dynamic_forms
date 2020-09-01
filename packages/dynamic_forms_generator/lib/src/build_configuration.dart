@@ -9,6 +9,7 @@ class BuildConfiguration {
   final List<String> parserImports;
   final List<String> comments;
   final List<String> componentsToIgnore;
+  final bool stronglyCastProperties;
 
   BuildConfiguration({
     this.defaultImports = const [],
@@ -19,6 +20,7 @@ class BuildConfiguration {
     this.valueElementModelImports = const [],
     this.parserImports = const [],
     this.componentsToIgnore = const [],
+    this.stronglyCastProperties = false,
   });
 
   factory BuildConfiguration.fromConfig(Map<String, dynamic> config) {
@@ -57,6 +59,10 @@ class BuildConfiguration {
     if (config.containsKey('comments')) {
       comments = _getConfigList(config, 'comments');
     }
+    var stronglyCastProperties = false;
+    if (config.containsKey('strongly_cast_properties')) {
+      stronglyCastProperties = config['strongly_cast_properties'] as bool;
+    }
     return BuildConfiguration(
       defaultImports: defaultImports,
       modelImports: modelImports,
@@ -66,6 +72,7 @@ class BuildConfiguration {
       parserImports: parserImports,
       componentsToIgnore: componentsToIgnore,
       comments: comments,
+      stronglyCastProperties: stronglyCastProperties,
     );
   }
 

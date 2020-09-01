@@ -1,3 +1,7 @@
+# 0.7.1
+
+* Added strongly_cast_properties option to build.yaml.
+
 # 0.7.0
 
 * Increased petitparser dependency to ^3.0.0

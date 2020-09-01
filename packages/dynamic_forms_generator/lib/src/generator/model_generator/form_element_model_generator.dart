@@ -35,8 +35,14 @@ class FormElementModelGenerator extends ElementModelGenerator {
     for (var property in componentDescription.properties) {
       var propertyTypeName = 'Property<${property.type.toTypeString()}>';
 
-      buffer.writeln(
-          '  $propertyTypeName get ${property.name}Property => properties[${property.name}PropertyName];');
+      if (stronglyCastProperties) {
+        buffer.writeln('  $propertyTypeName get ${property.name}Property =>');
+        buffer.writeln(
+            '      properties[${property.name}PropertyName] as $propertyTypeName;');
+      } else {
+        buffer.writeln(
+            '  $propertyTypeName get ${property.name}Property => properties[${property.name}PropertyName];');
+      }
 
       buffer.writeln(
           '  set ${property.name}Property($propertyTypeName value) =>');
