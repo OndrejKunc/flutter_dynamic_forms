@@ -207,5 +207,12 @@ Expression createFunctionExpression(
     }
     return EndsWithFunctionExpression(parameters[0], parameters[1]);
   }
+  if (functionName == 'formatDateTime') {
+    if (parameters.length != 2) {
+      throw InvalidParameterCount(
+          'Function $functionName expects exactly 2 parameters');
+    }
+    return FormatDateTimeFunctionExpression(parameters[0], parameters[1]);
+  }
   throw UnknownFunctionException('Unknown function name $functionName');
 }

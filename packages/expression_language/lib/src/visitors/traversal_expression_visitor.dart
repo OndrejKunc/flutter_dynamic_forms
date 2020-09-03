@@ -345,4 +345,11 @@ abstract class TraversalExpressionsVisitor extends ExpressionVisitor {
       parameter.accept(this);
     }
   }
+
+  @override
+  void visitFormatDateTimeFunction(
+      FormatDateTimeFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.pattern.accept(this);
+  }
 }

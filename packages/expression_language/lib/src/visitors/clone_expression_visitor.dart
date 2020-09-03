@@ -526,4 +526,14 @@ class CloneExpressionVisitor extends ExpressionVisitor {
     }
     push(CustomFunctionExpression<T>(resultList, expression.function));
   }
+
+  @override
+  void visitFormatDateTimeFunction(
+      FormatDateTimeFunctionExpression expression) {
+    expression.value.accept(this);
+    expression.pattern.accept(this);
+    var pattern = pop();
+    var value = pop();
+    push(FormatDateTimeFunctionExpression(value, pattern));
+  }
 }

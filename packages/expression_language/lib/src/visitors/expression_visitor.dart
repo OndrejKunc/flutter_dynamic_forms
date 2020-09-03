@@ -72,4 +72,5 @@ abstract class ExpressionVisitor {
   void visitContainsFunction(ContainsFunctionExpression expression);
   void visitStartsWithFunction(StartsWithFunctionExpression expression);
   void visitEndsWithFunction(EndsWithFunctionExpression expression);
+  void visitFormatDateTimeFunction(FormatDateTimeFunctionExpression expression);
 }
