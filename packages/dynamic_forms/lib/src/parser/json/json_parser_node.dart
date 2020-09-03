@@ -22,6 +22,15 @@ class JsonParserNode extends ParserNode {
     if (property is String) {
       return createProperty<T>(converter(property), isImmutable);
     }
+    if (property is bool && T == bool) {
+      return createProperty<T>(property as T, isImmutable);
+    }
+    if (property is int && T == int) {
+      return createProperty<T>(property as T, isImmutable);
+    }
+    if (property is double && T == double) {
+      return createProperty<T>(property as T, isImmutable);
+    }
     if (property is Map<String, dynamic>) {
       var expression = property['expression'];
       if (expression != null) {

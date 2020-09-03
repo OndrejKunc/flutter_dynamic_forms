@@ -19,6 +19,9 @@ class LabelParser extends FormElementParser<Label> {
         'fontSize',
         FontSize.values,
         defaultValue: () => FontSize.medium,
-      );
+      )
+      ..testIntProperty = parserNode.getIntProperty('testInt')
+      ..testDoubleProperty = parserNode.getDoubleProperty('testDouble')
+      ..testBoolProperty = parserNode.getBoolProperty('testBool');
   }
 }
