@@ -1,6 +1,6 @@
 # 0.13.1
 
-Add support for `String`, `int` and `bool` types in json parser.
+Added support for `String`, `int` and `bool` types in json parser.
 
 # 0.13.0
 
