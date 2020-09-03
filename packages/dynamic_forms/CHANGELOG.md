@@ -1,3 +1,7 @@
+# 0.13.1
+
+Added support for `String`, `int` and `bool` types in json parser.
+
 # 0.13.0
 
 * Changed `FormManager` to abstract class and defined set of inherited classes that take care of building the form without the need to manually create `FormBuilder`.

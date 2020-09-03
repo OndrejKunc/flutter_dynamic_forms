@@ -84,9 +84,71 @@ void main() {
       for (var x in getFormElementIterator<FormElement>(result)) x.id: x
     };
 
-    var label2 = formElementMap['label1'] as Label;
-    var resultValue = label2.value;
+    var label = formElementMap['label1'] as Label;
+    var resultValue = label.value;
 
     expect(resultValue, 'John Doe');
+  });
+
+  test('json with various data types as strings', () {
+    var parserService = JsonFormParserService(_getDefaultParserList());
+
+    var json = '''
+    {
+        "@name": "singleItemContainer",
+        "id": "form1",
+        "child":
+        {
+          "@name": "label",
+          "id": "label1",
+          "value": "John Doe",
+          "testInt": "42",
+          "testDouble": "42.4",
+          "testBool": "true"
+        }       
+    }''';
+
+    var result = parserService.parse(json);
+
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+    };
+
+    var label = formElementMap['label1'] as Label;
+
+    expect(label.testInt, 42);
+    expect(label.testDouble, 42.4);
+    expect(label.testBool, true);
+  });
+
+  test('json with various data types as literals', () {
+    var parserService = JsonFormParserService(_getDefaultParserList());
+
+    var json = '''
+    {
+        "@name": "singleItemContainer",
+        "id": "form1",
+        "child":
+        {
+          "@name": "label",
+          "id": "label1",
+          "value": "John Doe",
+          "testInt": 42,
+          "testDouble": 42.4,
+          "testBool": true
+        }       
+    }''';
+
+    var result = parserService.parse(json);
+
+    var formElementMap = {
+      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+    };
+
+    var label = formElementMap['label1'] as Label;
+
+    expect(label.testInt, 42);
+    expect(label.testDouble, 42.4);
+    expect(label.testBool, true);
   });
 }
