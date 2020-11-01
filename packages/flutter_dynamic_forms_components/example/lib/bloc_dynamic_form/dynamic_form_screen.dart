@@ -22,14 +22,12 @@ class DynamicFormScreen extends StatelessWidget {
             },
             child: BlocBuilder<DynamicFormBloc, DynamicFormState>(
               builder: (context, state) {
-                Column result = Column(children: <Widget>[
-                  DynamicFormContainer(),
-                ]);
-
-                if (!state.isLoading) {
-                  result.children.add(DynamicFormButtonRow(state));
-                }
-                return result;
+                return Column(
+                  children: [
+                    DynamicFormContainer(),
+                    if (!state.isLoading) DynamicFormButtonRow(state)
+                  ],
+                );
               },
             ),
           ),
@@ -54,7 +52,7 @@ class DynamicFormScreen extends StatelessWidget {
               //map List of our data to the ListView
               children: resultPropertyValues
                   .map((riv) =>
-                      flutter.Text("${riv.id} ${riv.property} ${riv.value}"))
+                      flutter.Text('${riv.id} ${riv.property} ${riv.value}'))
                   .toList(),
             ),
           ),
