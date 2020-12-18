@@ -16,7 +16,33 @@ class DelegateExpression<T> extends Expression<T> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitDelegate(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      expressionProvider.getExpression(),
+    ];
+  }
+
+  @override
+  Expression<T> clone(Map<String, ExpressionProviderElement> elementMap) {
+    // Need to extract last expression provider from the original path
+    var expressionProviderElement = elementMap[expressionPath[0]];
+    ExpressionProvider expressionProvider;
+
+    var isLastItemElement = true;
+    for (var i = 1; i < expressionPath.length; i++) {
+      isLastItemElement = false;
+      var propertyName = expressionPath[i];
+      expressionProvider =
+          expressionProviderElement.getExpressionProvider(propertyName);
+      if (expressionProvider is ExpressionProvider<ExpressionProviderElement>) {
+        expressionProviderElement =
+            expressionProvider.getExpression().evaluate();
+        isLastItemElement = true;
+      }
+    }
+    if (isLastItemElement) {
+      expressionProvider = expressionProviderElement.getExpressionProvider();
+    }
+    return DelegateExpression<T>(expressionPath, expressionProvider);
   }
 }

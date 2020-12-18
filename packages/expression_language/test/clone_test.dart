@@ -8,14 +8,11 @@ void main() {
         'value': ConstantExpressionProvider<int>(14),
       },
     );
-    var visitor = CloneExpressionVisitor(
-      {'element1': testElement},
-    );
 
     var delegateExpression = DelegateExpression(
         ['element1'], testElement.getExpressionProvider('value'));
-    delegateExpression.accept(visitor);
-    var resultExpression = visitor.result;
+
+    var resultExpression = delegateExpression.clone({'element1': testElement});
     expect(resultExpression, isA<DelegateExpression>());
     expect(resultExpression, isNot(delegateExpression));
     expect(resultExpression.evaluate(), 14);
@@ -32,17 +29,15 @@ void main() {
         'parent': ConstantExpressionProvider<TestElement>(testElement2),
       },
     );
-    var visitor = CloneExpressionVisitor(
+
+    var delegateExpression = DelegateExpression(['element1', 'parent', 'value'],
+        testElement2.getExpressionProvider('value'));
+    var resultExpression = delegateExpression.clone(
       {
         'element1': testElement1,
         'element2': testElement2,
       },
     );
-
-    var delegateExpression = DelegateExpression(['element1', 'parent', 'value'],
-        testElement2.getExpressionProvider('value'));
-    delegateExpression.accept(visitor);
-    var resultExpression = visitor.result;
     expect(resultExpression, isA<DelegateExpression>());
     expect(resultExpression, isNot(delegateExpression));
     expect(resultExpression.evaluate(), 14);
@@ -59,17 +54,15 @@ void main() {
         'parent': ConstantExpressionProvider<TestElement>(testElement2),
       },
     );
-    var visitor = CloneExpressionVisitor(
+
+    var delegateExpression = DelegateExpression(
+        ['element1', 'parent'], testElement2.getExpressionProvider('value'));
+    var resultExpression = delegateExpression.clone(
       {
         'element1': testElement1,
         'element2': testElement2,
       },
     );
-
-    var delegateExpression = DelegateExpression(
-        ['element1', 'parent'], testElement2.getExpressionProvider('value'));
-    delegateExpression.accept(visitor);
-    var resultExpression = visitor.result;
     expect(resultExpression, isA<DelegateExpression>());
     expect(resultExpression, isNot(delegateExpression));
     expect(resultExpression.evaluate(), 14);

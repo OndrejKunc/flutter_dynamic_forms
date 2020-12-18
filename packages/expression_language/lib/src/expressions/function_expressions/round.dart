@@ -7,8 +7,17 @@ class RoundFunctionExpression extends Expression<Number> {
   RoundFunctionExpression(this.value, this.precision);
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitRoundFunction(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+      precision,
+    ];
+  }
+
+  @override
+  Expression<Number> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return RoundFunctionExpression(
+        value.clone(elementMap), precision.clone(elementMap));
   }
 
   @override

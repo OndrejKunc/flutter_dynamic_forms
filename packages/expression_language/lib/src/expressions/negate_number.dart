@@ -11,7 +11,14 @@ class NegateNumberExpression extends Expression<Number> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitNegateNumber(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+    ];
+  }
+
+  @override
+  Expression<Number> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return NegateNumberExpression(value.clone(elementMap));
   }
 }

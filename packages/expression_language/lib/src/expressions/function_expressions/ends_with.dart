@@ -12,7 +12,16 @@ class EndsWithFunctionExpression extends Expression<bool> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitEndsWithFunction(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+      searchValue,
+    ];
+  }
+
+  @override
+  Expression<bool> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return EndsWithFunctionExpression(
+        value.clone(elementMap), searchValue.clone(elementMap));
   }
 }

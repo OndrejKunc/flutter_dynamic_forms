@@ -12,7 +12,16 @@ class EqualNumberExpression extends Expression<bool> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitEqualNumber(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<bool> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return EqualNumberExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

@@ -11,7 +11,14 @@ class IsNullFunctionExpression<T> extends Expression<bool> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitIsNullFunction(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+    ];
+  }
+
+  @override
+  Expression<bool> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return IsNullFunctionExpression(value.clone(elementMap));
   }
 }

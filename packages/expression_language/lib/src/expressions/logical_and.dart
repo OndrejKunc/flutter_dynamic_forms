@@ -12,7 +12,16 @@ class LogicalAndExpression extends Expression<bool> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitLogicalAnd(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<bool> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return LogicalAndExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

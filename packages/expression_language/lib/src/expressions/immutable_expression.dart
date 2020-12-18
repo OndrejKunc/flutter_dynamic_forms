@@ -16,7 +16,12 @@ class ImmutableExpression<T> extends Expression<T> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitImmutable(this);
+  List<Expression<dynamic>> getChildren() {
+    return [];
+  }
+
+  @override
+  Expression<T> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return ImmutableExpression<T>(value);
   }
 }

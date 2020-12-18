@@ -1,14 +1,15 @@
 import 'package:expression_language/expression_language.dart';
 
-class MinusDurationExpression extends Expression<Duration> {
-  final Expression<Duration> left;
-  final Expression<Duration> right;
+class DiffDateTimeFunctionExpression extends Expression<Duration> {
+  final Expression<DateTime> left;
+  final Expression<DateTime> right;
 
-  MinusDurationExpression(this.left, this.right);
+  DiffDateTimeFunctionExpression(this.left, this.right);
 
   @override
   Duration evaluate() {
-    return left.evaluate() - right.evaluate();
+    var diff = left.evaluate().difference(right.evaluate());
+    return (diff < Duration(microseconds: 0)) ? (-diff) : diff;
   }
 
   @override
@@ -22,7 +23,7 @@ class MinusDurationExpression extends Expression<Duration> {
   @override
   Expression<Duration> clone(
       Map<String, ExpressionProviderElement> elementMap) {
-    return MinusDurationExpression(
+    return DiffDateTimeFunctionExpression(
         left.clone(elementMap), right.clone(elementMap));
   }
 }

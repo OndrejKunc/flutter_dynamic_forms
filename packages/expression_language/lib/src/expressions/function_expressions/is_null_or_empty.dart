@@ -1,6 +1,6 @@
 import 'package:expression_language/expression_language.dart';
 
-class IsNullOrEmptyFunctionExpression<String> extends Expression<bool> {
+class IsNullOrEmptyFunctionExpression extends Expression<bool> {
   final Expression<String> value;
 
   IsNullOrEmptyFunctionExpression(this.value);
@@ -12,7 +12,14 @@ class IsNullOrEmptyFunctionExpression<String> extends Expression<bool> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitIsNullOrEmptyFunction(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+    ];
+  }
+
+  @override
+  Expression<bool> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return IsNullOrEmptyFunctionExpression(value.clone(elementMap));
   }
 }

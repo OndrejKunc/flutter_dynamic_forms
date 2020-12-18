@@ -9,8 +9,18 @@ class RoundFunctionStringRoundingModeExpression extends Expression<Number> {
       this.value, this.precision, this.roundingMode);
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitRoundFunctionStringRoundingMode(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+      precision,
+      roundingMode,
+    ];
+  }
+
+  @override
+  Expression<Number> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return RoundFunctionStringRoundingModeExpression(value.clone(elementMap),
+        precision.clone(elementMap), roundingMode.clone(elementMap));
   }
 
   @override

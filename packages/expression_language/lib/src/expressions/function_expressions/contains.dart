@@ -12,7 +12,16 @@ class ContainsFunctionExpression extends Expression<bool> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitContainsFunction(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+      searchValue,
+    ];
+  }
+
+  @override
+  Expression<bool> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return ContainsFunctionExpression(
+        value.clone(elementMap), searchValue.clone(elementMap));
   }
 }

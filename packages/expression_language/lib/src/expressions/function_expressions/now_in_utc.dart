@@ -1,8 +1,8 @@
 import 'package:expression_language/expression_language.dart';
 
-class NowFunctionExpression extends Expression<DateTime> {
+class NowInUtcFunctionExpression extends Expression<DateTime> {
   @override
-  DateTime evaluate() => DateTime.now();
+  DateTime evaluate() => DateTime.now().toUtc();
 
   @override
   List<Expression<dynamic>> getChildren() {
@@ -12,6 +12,6 @@ class NowFunctionExpression extends Expression<DateTime> {
   @override
   Expression<DateTime> clone(
       Map<String, ExpressionProviderElement> elementMap) {
-    return NowFunctionExpression();
+    return NowInUtcFunctionExpression();
   }
 }

@@ -11,23 +11,14 @@ class DurationInDaysFunctionExpression extends Expression<Integer> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitDurationInDaysFunction(this);
-  }
-}
-
-class DurationInHoursFunctionExpression extends Expression<Integer> {
-  final Expression<Duration> value;
-
-  DurationInHoursFunctionExpression(this.value);
-
-  @override
-  Integer evaluate() {
-    return Integer(value.evaluate().inHours);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+    ];
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitDurationInHoursFunction(this);
+  Expression<Integer> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return DurationInDaysFunctionExpression(value.clone(elementMap));
   }
 }

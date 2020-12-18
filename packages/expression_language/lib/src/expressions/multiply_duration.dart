@@ -12,7 +12,17 @@ class MultiplyDurationExpression extends Expression<Duration> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitMultiplyDuration(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<Duration> clone(
+      Map<String, ExpressionProviderElement> elementMap) {
+    return MultiplyDurationExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

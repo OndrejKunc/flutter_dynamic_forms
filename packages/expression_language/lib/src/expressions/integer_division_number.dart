@@ -22,7 +22,16 @@ class IntegerDivisionNumberExpression extends Expression<Integer> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitIntegerDivisionNumber(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<Integer> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return IntegerDivisionNumberExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

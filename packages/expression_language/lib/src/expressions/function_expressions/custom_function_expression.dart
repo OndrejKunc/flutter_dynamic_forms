@@ -12,8 +12,14 @@ class CustomFunctionExpression<T> extends Expression<T> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitCustomFunction(this);
+  List<Expression<dynamic>> getChildren() {
+    return parameters;
+  }
+
+  @override
+  Expression<T> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return CustomFunctionExpression(
+        parameters.map((e) => e.clone(elementMap)).toList(), function);
   }
 }
 

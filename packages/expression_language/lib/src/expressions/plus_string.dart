@@ -12,7 +12,16 @@ class PlusStringExpression extends Expression<String> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitPlusString(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<String> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return PlusStringExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

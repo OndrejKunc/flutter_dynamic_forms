@@ -11,7 +11,15 @@ class NegateDurationExpression extends Expression<Duration> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitNegateDuration(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+    ];
+  }
+
+  @override
+  Expression<Duration> clone(
+      Map<String, ExpressionProviderElement> elementMap) {
+    return NegateDurationExpression(value.clone(elementMap));
   }
 }

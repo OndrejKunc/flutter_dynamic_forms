@@ -11,7 +11,14 @@ class LengthFunctionExpression extends Expression<Integer> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitLengthFunction(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+    ];
+  }
+
+  @override
+  Expression<Integer> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return LengthFunctionExpression(value.clone(elementMap));
   }
 }

@@ -6,8 +6,16 @@ class DurationFunctionExpression extends Expression<Duration> {
   DurationFunctionExpression(this.value);
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitDurationFunction(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+    ];
+  }
+
+  @override
+  Expression<Duration> clone(
+      Map<String, ExpressionProviderElement> elementMap) {
+    return DurationFunctionExpression(value.clone(elementMap));
   }
 
   @override

@@ -22,7 +22,15 @@ class ModuloExpression extends Expression<Number> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitModulo(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<Number> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return ModuloExpression(left.clone(elementMap), right.clone(elementMap));
   }
 }

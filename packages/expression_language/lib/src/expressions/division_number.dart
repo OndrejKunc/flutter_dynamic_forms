@@ -22,7 +22,16 @@ class DivisionNumberExpression extends Expression<Number> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitDivision(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<Number> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return DivisionNumberExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

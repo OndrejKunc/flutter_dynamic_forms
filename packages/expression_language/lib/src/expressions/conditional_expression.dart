@@ -13,7 +13,17 @@ class ConditionalExpression<T> extends Expression<T> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitConditionalExpression(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      condition,
+      trueValue,
+      falseValue,
+    ];
+  }
+
+  @override
+  Expression<T> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return ConditionalExpression<T>(condition.clone(elementMap),
+        trueValue.clone(elementMap), falseValue.clone(elementMap));
   }
 }

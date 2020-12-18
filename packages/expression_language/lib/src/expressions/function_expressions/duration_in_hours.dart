@@ -1,13 +1,13 @@
 import 'package:expression_language/expression_language.dart';
 
-class DurationInSecondsFunctionExpression extends Expression<Integer> {
+class DurationInHoursFunctionExpression extends Expression<Integer> {
   final Expression<Duration> value;
 
-  DurationInSecondsFunctionExpression(this.value);
+  DurationInHoursFunctionExpression(this.value);
 
   @override
   Integer evaluate() {
-    return Integer(value.evaluate().inSeconds);
+    return Integer(value.evaluate().inHours);
   }
 
   @override
@@ -19,6 +19,6 @@ class DurationInSecondsFunctionExpression extends Expression<Integer> {
 
   @override
   Expression<Integer> clone(Map<String, ExpressionProviderElement> elementMap) {
-    return DurationInSecondsFunctionExpression(value.clone(elementMap));
+    return DurationInHoursFunctionExpression(value.clone(elementMap));
   }
 }

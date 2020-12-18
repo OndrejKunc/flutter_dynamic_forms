@@ -11,7 +11,14 @@ class DurationInMinutesFunctionExpression extends Expression<Integer> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitDurationInMinutesFunction(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+    ];
+  }
+
+  @override
+  Expression<Integer> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return DurationInMinutesFunctionExpression(value.clone(elementMap));
   }
 }

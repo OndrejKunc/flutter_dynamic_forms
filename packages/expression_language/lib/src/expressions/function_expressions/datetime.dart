@@ -6,16 +6,24 @@ class DateTimeFunctionExpression extends Expression<DateTime> {
   DateTimeFunctionExpression(this.value);
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitDateTimeFunction(this);
-  }
-
-  @override
   DateTime evaluate() {
     var returnValue = DateTime.tryParse(value.evaluate());
     if (returnValue == null) {
       throw InvalidParameterException('Invalid format of date-time string');
     }
     return returnValue;
+  }
+
+  @override
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+    ];
+  }
+
+  @override
+  Expression<DateTime> clone(
+      Map<String, ExpressionProviderElement> elementMap) {
+    return DateTimeFunctionExpression(value.clone(elementMap));
   }
 }
