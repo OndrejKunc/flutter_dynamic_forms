@@ -8,7 +8,7 @@ class TestExpression extends Expression<String> {
 
   @override
   Expression<String> clone(Map<String, ExpressionProviderElement> elementMap) {
-    return TestExpression(left, right);
+    return TestExpression(left.clone(elementMap), right.clone(elementMap));
   }
 
   @override
