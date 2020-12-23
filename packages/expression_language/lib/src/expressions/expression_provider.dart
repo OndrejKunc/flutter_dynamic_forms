@@ -5,6 +5,7 @@ abstract class ExpressionProvider<T> {
 }
 
 abstract class ExpressionProviderElement {
+  String get id;
   ExpressionProvider getExpressionProvider([String propertyName]);
   ExpressionProviderElement clone(
       ExpressionProvider<ExpressionProviderElement> parent);

@@ -14,6 +14,9 @@ class TestElement extends ExpressionProviderElement {
   };
 
   @override
+  String id;
+
+  @override
   ExpressionProvider getExpressionProvider([String propertyName]) {
     if (propertyName == null || propertyName == '') {
       propertyName = 'value';

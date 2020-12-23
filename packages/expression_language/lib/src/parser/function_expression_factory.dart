@@ -20,16 +20,20 @@ class ExplicitFunctionExpressionFactory<T>
   final String name;
   final FunctionExpressionFactoryMethod<T> createFunctionExpression;
   final int parametersLength;
+  final bool checkParametersLength;
 
   ExplicitFunctionExpressionFactory({
     @required this.name,
     @required this.createFunctionExpression,
-    @required this.parametersLength,
-  });
+    this.parametersLength,
+    this.checkParametersLength = true,
+  }) : assert(parametersLength != null || !checkParametersLength);
 
   @override
   Expression<T> createExpression(List<Expression> parameters) {
-    checkParameterLength(parameters, parametersLength);
+    if (checkParametersLength) {
+      checkParameterLength(parameters, parametersLength);
+    }
     return createFunctionExpression(parameters);
   }
 

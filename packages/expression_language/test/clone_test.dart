@@ -83,6 +83,9 @@ class TestElement extends ExpressionProviderElement {
   }
 
   @override
+  String id;
+
+  @override
   ExpressionProviderElement clone(
       ExpressionProvider<ExpressionProviderElement> parent) {
     //Nothing to do

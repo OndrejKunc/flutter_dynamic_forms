@@ -10,6 +10,7 @@ abstract class FormElement implements Element {
   static const String parentPropertyName = 'parent';
   static const String isVisiblePropertyName = 'isVisible';
 
+  @override
   String id;
 
   Property<FormElement> get parentProperty => properties[parentPropertyName];
