@@ -20,16 +20,16 @@ class AdvancedExpressionForm extends StatelessWidget {
             {
               "@name": "slider",
               "id": "slider1",
-              "value": "15.0",
-              "minValue": "0.0",
-              "maxValue": "100.0"
+              "value": 15.0,
+              "minValue": 0.0,
+              "maxValue": 100.0
             },
             {
               "@name": "slider",
               "id": "slider2",
-              "value": "15.0",
-              "minValue": "0.0",
-              "maxValue": "100.0"
+              "value": 15.0,
+              "minValue": 0.0,
+              "maxValue": 100.0
             }
           ]
         },

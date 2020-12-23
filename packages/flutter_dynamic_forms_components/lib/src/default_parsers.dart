@@ -13,8 +13,6 @@ List<FormElementParser<FormElement>> getDefaultParserList() {
     RadioButtonParser<RadioButton>(),
     ValidationParser<Validation>(),
     RequiredValidationParser(),
-    // ignore: deprecated_member_use_from_same_package
-    TextParser<Text>(),
     TextFieldParser<TextField>(),
     SingleSelectChipGroupParser<SingleSelectChipGroup>(),
     SingleSelectChipChoiceParser<SingleSelectChipChoice>(),

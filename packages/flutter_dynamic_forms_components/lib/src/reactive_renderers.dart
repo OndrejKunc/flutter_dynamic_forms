@@ -8,8 +8,6 @@ List<FormElementRenderer<FormElement>> getReactiveRenderers() {
     ReactiveFormGroupRenderer(),
     ReactiveCheckBoxRenderer(),
     ReactiveLabelRenderer(),
-    // ignore: deprecated_member_use_from_same_package
-    ReactiveTextRenderer(),
     ReactiveTextFieldRenderer(),
     ReactiveRadioButtonGroupRenderer(),
     ReactiveRadioButtonRenderer(),
