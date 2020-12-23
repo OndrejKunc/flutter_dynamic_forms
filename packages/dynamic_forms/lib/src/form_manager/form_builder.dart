@@ -7,8 +7,12 @@ import 'package:expression_language/expression_language.dart';
 
 class FormBuilder {
   final FormParserService formParserService;
+  final List<FunctionExpressionFactory> expressionFactories;
 
-  FormBuilder(this.formParserService);
+  FormBuilder(
+    this.formParserService, {
+    this.expressionFactories = const [],
+  });
 
   FormData build(String content) {
     var root = formParserService.parse(content);
@@ -16,7 +20,8 @@ class FormBuilder {
     var formElementMap = {
       for (var x in getFormElementIterator<FormElement>(root)) x.id: x
     };
-    var parser = ExpressionParser(formElementMap);
+    var parser = ExpressionParser(formElementMap,
+        expressionFactories: expressionFactories);
     _buildStringExpressions(root, parser);
     return _build(root, formElementMap);
   }

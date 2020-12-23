@@ -26,6 +26,7 @@ class TextWidget extends StatefulWidget {
   _TextWidgetState createState() => _TextWidgetState();
 }
 
+// ignore: deprecated_member_use_from_same_package
 class _TextWidgetState extends State<TextWidget> {
   TextEditingController _controller = TextEditingController();
 

@@ -8,6 +8,7 @@ List<FormElementRenderer<FormElement>> getDefaultRenderers() {
     DefaultFormGroupRenderer(),
     DefaultCheckBoxRenderer(),
     DefaultLabelRenderer(),
+    // ignore: deprecated_member_use_from_same_package
     DefaultTextRenderer(),
     DefaultTextFieldRenderer(),
     DefaultRadioButtonGroupRenderer(),

@@ -1,3 +1,4 @@
+import 'package:example/custom_expression_form/custom_expression_form.dart';
 import 'package:example/simple_submit_form/simple_submit_form.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
@@ -93,6 +94,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   );
                 },
                 child: Text('Simple Submit Form'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CustomExpressionForm(),
+                    ),
+                  );
+                },
+                child: Text('Custom Expression Form'),
               ),
             ),
             Padding(
