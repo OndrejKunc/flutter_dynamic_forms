@@ -1,4 +1,4 @@
-Feature: Base Arithmetic
+Feature: Basic Arithmetic
     Tests using basic arithmetic operations
 
     Scenario Outline: Evaluate int expression

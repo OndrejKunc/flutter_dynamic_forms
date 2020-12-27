@@ -17,7 +17,16 @@ class MinusNumberExpression extends Expression<Number> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitMinusNumber(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<Number> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return MinusNumberExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

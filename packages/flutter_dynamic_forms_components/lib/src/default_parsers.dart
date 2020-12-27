@@ -13,7 +13,6 @@ List<FormElementParser<FormElement>> getDefaultParserList() {
     RadioButtonParser<RadioButton>(),
     ValidationParser<Validation>(),
     RequiredValidationParser(),
-    TextParser<Text>(),
     TextFieldParser<TextField>(),
     SingleSelectChipGroupParser<SingleSelectChipGroup>(),
     SingleSelectChipChoiceParser<SingleSelectChipChoice>(),

@@ -12,7 +12,16 @@ class EqualDateTimeExpression extends Expression<bool> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitEqualDateTime(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<bool> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return EqualDateTimeExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

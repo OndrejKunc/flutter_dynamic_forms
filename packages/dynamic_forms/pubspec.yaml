@@ -1,6 +1,6 @@
 name: dynamic_forms
 description: Dart library providing infrastructure to parse complex external form with expressions into a custom model.
-version: 0.13.1
+version: 0.14.0
 homepage: https://github.com/OndrejKunc/flutter_dynamic_forms
 
 environment:
@@ -8,8 +8,6 @@ environment:
 
 dependencies:
   xml: ^4.1.0
-  uuid: ^2.0.4
-  quiver: ^2.0.5
   rxdart: ^0.23.1
   meta: ^1.1.8
 

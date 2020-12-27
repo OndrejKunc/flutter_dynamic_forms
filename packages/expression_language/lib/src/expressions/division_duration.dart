@@ -15,7 +15,17 @@ class DivisionDurationExpression extends Expression<Duration> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitDivisionDuration(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<Duration> clone(
+      Map<String, ExpressionProviderElement> elementMap) {
+    return DivisionDurationExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

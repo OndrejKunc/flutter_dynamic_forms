@@ -12,7 +12,16 @@ class EqualDurationExpression extends Expression<bool> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitEqualDuration(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<bool> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return EqualDurationExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

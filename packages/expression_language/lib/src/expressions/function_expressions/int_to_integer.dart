@@ -11,7 +11,14 @@ class IntToIntegerExpression extends Expression<Integer> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitIntToInteger(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+    ];
+  }
+
+  @override
+  Expression<Integer> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return IntToIntegerExpression(value.clone(elementMap));
   }
 }

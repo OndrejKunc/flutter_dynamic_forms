@@ -11,7 +11,14 @@ class ConversionExpression<TFrom, TTo extends TFrom> extends Expression<TTo> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitConversion(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+    ];
+  }
+
+  @override
+  Expression<TTo> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return ConversionExpression<TFrom, TTo>(value.clone(elementMap));
   }
 }

@@ -1,3 +1,8 @@
+# 0.14.0
+
+* Increased `dynamic_forms` dependency to ^0.14.0.
+* Added `expressionFactories` parameter to `FormBuilder` constructor.
+
 # 0.13.0
 
 * Added new widgets: `FormProvider`, `ParsedFormProvider`, `FormRenderer`.

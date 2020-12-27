@@ -11,7 +11,14 @@ class DecimalToDoubleExpression extends Expression<double> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitDecimalToDouble(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+    ];
+  }
+
+  @override
+  Expression<double> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return DecimalToDoubleExpression(value.clone(elementMap));
   }
 }

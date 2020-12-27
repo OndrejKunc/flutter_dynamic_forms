@@ -16,7 +16,12 @@ class MutableExpression<T> extends Expression<T> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitMutable(this);
+  List<Expression<dynamic>> getChildren() {
+    return [];
+  }
+
+  @override
+  Expression<T> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return MutableExpression<T>(value);
   }
 }

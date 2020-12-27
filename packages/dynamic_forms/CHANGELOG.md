@@ -1,3 +1,8 @@
+# 0.14.0
+
+* Increased expression_language dependency to ^0.4.0.
+* Removed dependencies to uuid and quiver packages
+
 # 0.13.1
 
 Added support for `String`, `int` and `bool` types in json parser.

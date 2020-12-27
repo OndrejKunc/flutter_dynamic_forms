@@ -12,7 +12,16 @@ class LessThanDurationExpression extends Expression<bool> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitLessThanDuration(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<bool> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return LessThanDurationExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

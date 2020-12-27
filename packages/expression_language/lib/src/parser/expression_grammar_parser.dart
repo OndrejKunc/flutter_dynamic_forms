@@ -4,14 +4,35 @@ import 'package:expression_language/src/grammar/expression_grammar_definition.da
 import 'package:expression_language/src/number_type/decimal.dart';
 import 'package:expression_language/src/number_type/integer.dart';
 import 'package:expression_language/src/number_type/number.dart';
+import 'package:expression_language/src/parser/function_expression_factories/default_function_expression_factories.dart';
 import 'package:expression_language/src/parser/expression_factory.dart';
 import 'package:expression_language/src/parser/expression_parser_exceptions.dart';
+import 'package:expression_language/src/parser/function_expression_factory.dart';
 import 'package:petitparser/petitparser.dart';
 
 class ExpressionGrammarParser extends ExpressionGrammarDefinition {
   final Map<String, ExpressionProviderElement> expressionProviderElementMap;
+  final List<FunctionExpressionFactory> customFunctionExpressionFactories;
+  final Map<String, FunctionExpressionFactoryMethod> _expressionFactories;
+  ExpressionGrammarParser(
+    this.expressionProviderElementMap, {
+    this.customFunctionExpressionFactories = const [],
+  }) : _expressionFactories = _createFunctionExpressionFactoriesMap(
+            customFunctionExpressionFactories);
 
-  ExpressionGrammarParser(this.expressionProviderElementMap);
+  static Map<String, FunctionExpressionFactoryMethod>
+      _createFunctionExpressionFactoriesMap(
+          List<FunctionExpressionFactory> customFunctionExpressionFactories) {
+    var customMap = {
+      for (var v in customFunctionExpressionFactories)
+        v.functionName: v.createExpression
+    };
+    var defaultMap = {
+      for (var v in getDefaultFunctionExpressionFactories())
+        v.functionName: v.createExpression
+    };
+    return defaultMap..addAll(customMap);
+  }
 
   @override
   Parser failureState() => super.failureState().map((c) {
@@ -346,9 +367,8 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
   Parser literal() => super.literal().map((c) => c.value);
 
   @override
-  Parser function() => super
-      .function()
-      .map((c) => createFunctionExpression(c[0], c[2] ?? <Expression>[]));
+  Parser function() => super.function().map((c) => createFunctionExpression(
+      c[0], c[2] ?? <Expression>[], _expressionFactories));
 
   @override
   Parser TRUE() =>

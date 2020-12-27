@@ -8,7 +8,6 @@ List<FormElementRenderer<FormElement>> getReactiveRenderers() {
     ReactiveFormGroupRenderer(),
     ReactiveCheckBoxRenderer(),
     ReactiveLabelRenderer(),
-    ReactiveTextRenderer(),
     ReactiveTextFieldRenderer(),
     ReactiveRadioButtonGroupRenderer(),
     ReactiveRadioButtonRenderer(),

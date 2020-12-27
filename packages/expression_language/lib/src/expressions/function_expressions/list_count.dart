@@ -11,7 +11,14 @@ class ListCountFunctionExpression<T> extends Expression<int> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitListCountFunction(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+    ];
+  }
+
+  @override
+  Expression<int> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return ListCountFunctionExpression<T>(value.clone(elementMap));
   }
 }

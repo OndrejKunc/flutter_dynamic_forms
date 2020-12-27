@@ -17,7 +17,16 @@ class PlusNumberExpression extends Expression<Number> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitPlusNumber(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<Number> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return PlusNumberExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

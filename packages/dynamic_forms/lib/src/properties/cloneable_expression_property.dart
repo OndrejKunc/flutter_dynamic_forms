@@ -8,9 +8,8 @@ class CloneableExpressionProperty<T> extends ExpressionProperty<T> {
 
   void buildExpression(
       Map<String, ExpressionProviderElement> expressionProviderElementMap) {
-    var cloneVisitor = CloneExpressionVisitor(expressionProviderElementMap);
-    _oldExpression.accept(cloneVisitor);
-    _expression = cloneVisitor.result as Expression<T>;
+    var clonedExpression = _oldExpression.clone(expressionProviderElementMap);
+    _expression = clonedExpression;
   }
 
   @override

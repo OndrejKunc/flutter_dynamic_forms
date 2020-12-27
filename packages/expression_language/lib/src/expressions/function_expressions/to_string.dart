@@ -11,7 +11,16 @@ class ToStringFunctionExpression<T> extends Expression<String> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitToStringFunction(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+    ];
+  }
+
+  @override
+  Expression<String> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return ToStringFunctionExpression<T>(
+      value.clone(elementMap),
+    );
   }
 }

@@ -12,7 +12,17 @@ class PlusDurationExpression extends Expression<Duration> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitPlusDuration(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<Duration> clone(
+      Map<String, ExpressionProviderElement> elementMap) {
+    return PlusDurationExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

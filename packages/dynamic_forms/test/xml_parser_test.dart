@@ -290,10 +290,8 @@ void main() {
     var formProperties = getFormPropertyIterator<Property>(result);
 
     for (var property in formProperties) {
-      var elementsValuesCollectorVisitor = ExpressionProviderCollectorVisitor();
-      property.getExpression().accept(elementsValuesCollectorVisitor);
       for (var sourceProperty
-          in elementsValuesCollectorVisitor.expressionProviders) {
+          in property.getExpression().getExpressionProviders()) {
         (sourceProperty as Property).addSubscriber(property);
       }
     }

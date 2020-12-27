@@ -17,7 +17,16 @@ class MultiplyNumberExpression extends Expression<Number> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitMultiply(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<Number> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return MultiplyNumberExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

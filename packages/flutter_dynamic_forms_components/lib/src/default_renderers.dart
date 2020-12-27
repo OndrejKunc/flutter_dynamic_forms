@@ -8,7 +8,6 @@ List<FormElementRenderer<FormElement>> getDefaultRenderers() {
     DefaultFormGroupRenderer(),
     DefaultCheckBoxRenderer(),
     DefaultLabelRenderer(),
-    DefaultTextRenderer(),
     DefaultTextFieldRenderer(),
     DefaultRadioButtonGroupRenderer(),
     DefaultRadioButtonRenderer(),

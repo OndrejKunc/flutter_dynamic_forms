@@ -12,7 +12,16 @@ class StartsWithFunctionExpression extends Expression<bool> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitStartsWithFunction(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+      searchValue,
+    ];
+  }
+
+  @override
+  Expression<bool> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return StartsWithFunctionExpression(
+        value.clone(elementMap), searchValue.clone(elementMap));
   }
 }

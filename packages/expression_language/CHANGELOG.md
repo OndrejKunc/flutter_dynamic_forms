@@ -1,3 +1,9 @@
+# 0.4.0
+
+* Added support for custom expressions.
+* Removed visitor functionality from expressions.
+* Improved documentation.
+
 # 0.3.2
 
 Added support for dateTime in expressions.

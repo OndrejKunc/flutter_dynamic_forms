@@ -1,4 +1,3 @@
-import 'package:quiver/strings.dart';
 import 'package:xml/xml.dart';
 
 class RemoveBlankElementsVisitor with XmlVisitor {
@@ -24,7 +23,8 @@ class RemoveBlankElementsVisitor with XmlVisitor {
   void _removeEmpty(List<XmlNode> children) {
     for (var i = 0; i < children.length;) {
       final node = children[i];
-      if (node.nodeType == XmlNodeType.TEXT && isBlank(node.text)) {
+      if (node.nodeType == XmlNodeType.TEXT &&
+          (node.text == null || node.text.trim().isEmpty)) {
         children.removeAt(i);
       } else {
         i++;

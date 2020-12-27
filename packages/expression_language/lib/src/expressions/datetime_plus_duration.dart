@@ -11,7 +11,17 @@ class DateTimePlusDurationExpression extends Expression<DateTime> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitDateTimePlusDuration(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<DateTime> clone(
+      Map<String, ExpressionProviderElement> elementMap) {
+    return DateTimePlusDurationExpression(
+        left.clone(elementMap), right.clone(elementMap));
   }
 }

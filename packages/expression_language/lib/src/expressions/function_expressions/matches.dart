@@ -12,8 +12,17 @@ class MatchesFunctionExpression extends Expression<bool> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitMatchesFunction(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      value,
+      regex,
+    ];
+  }
+
+  @override
+  Expression<bool> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return MatchesFunctionExpression(
+        value.clone(elementMap), regex.clone(elementMap));
   }
 
   bool _isFullMatch(String value, String regexSource) {

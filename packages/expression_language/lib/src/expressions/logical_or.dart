@@ -12,7 +12,15 @@ class LogicalOrExpression extends Expression<bool> {
   }
 
   @override
-  void accept(ExpressionVisitor visitor) {
-    visitor.visitLogicalOr(this);
+  List<Expression<dynamic>> getChildren() {
+    return [
+      left,
+      right,
+    ];
+  }
+
+  @override
+  Expression<bool> clone(Map<String, ExpressionProviderElement> elementMap) {
+    return LogicalOrExpression(left.clone(elementMap), right.clone(elementMap));
   }
 }
