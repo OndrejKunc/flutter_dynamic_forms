@@ -9,6 +9,7 @@ environment:
 dependencies:
   petitparser: ^3.0.0
   rational: ^0.3.7
+  meta: ^1.1.8
 
 dev_dependencies:
   test: ^1.9.4
