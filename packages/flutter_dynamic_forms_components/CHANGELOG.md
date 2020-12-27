@@ -1,3 +1,8 @@
+# 0.14.0
+
+* Updated dependency for flutter dynamic forms.
+* Added custom expressions example into the example project.
+
 # 0.13.0
 
 * Updated dependency for flutter dynamic forms.
