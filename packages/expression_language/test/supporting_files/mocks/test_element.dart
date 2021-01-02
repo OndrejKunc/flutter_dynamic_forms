@@ -6,7 +6,7 @@ class TestElement extends ExpressionProviderElement {
   Map<String, ExpressionProvider> properties = {
     'value': ConstantExpressionProvider<Integer>(Integer(27)),
     'label': ConstantExpressionProvider<String>('LabelText'),
-    'nullLabel': ConstantExpressionProvider<String>(null),
+    'nullLabel': ConstantExpressionProvider<String?>(null),
     'emptyLabel': ConstantExpressionProvider<String>(''),
     'intValue': ConstantExpressionProvider<int>(14),
     'doubleValue': ConstantExpressionProvider<double>(6.5),
@@ -14,20 +14,19 @@ class TestElement extends ExpressionProviderElement {
   };
 
   @override
-  String id;
+  String? id;
 
   @override
-  ExpressionProvider getExpressionProvider([String propertyName]) {
+  ExpressionProvider getExpressionProvider([String? propertyName]) {
     if (propertyName == null || propertyName == '') {
       propertyName = 'value';
     }
-    return properties[propertyName];
+    return properties[propertyName]!;
   }
 
   @override
   ExpressionProviderElement clone(
       ExpressionProvider<ExpressionProviderElement> parent) {
-    //Nothing to do
-    return null;
+    return this;
   }
 }

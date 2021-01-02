@@ -75,21 +75,20 @@ class TestElement extends ExpressionProviderElement {
   TestElement(this.properties);
 
   @override
-  ExpressionProvider getExpressionProvider([String propertyName]) {
+  ExpressionProvider getExpressionProvider([String? propertyName]) {
     if (propertyName == null || propertyName == '') {
       propertyName = 'value';
     }
-    return properties[propertyName];
+    return properties[propertyName]!;
   }
 
   @override
-  String id;
+  String? id;
 
   @override
   ExpressionProviderElement clone(
       ExpressionProvider<ExpressionProviderElement> parent) {
-    //Nothing to do
-    return null;
+    return this;
   }
 }
 

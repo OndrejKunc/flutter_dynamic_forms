@@ -7,7 +7,7 @@ abstract class FunctionExpressionFactory<T> {
 
   @protected
   void checkParameterLength(
-      List<Expression<dynamic>> parameters, int expectedLength) {
+      List<Expression<dynamic>> parameters, int? expectedLength) {
     if (parameters.length != expectedLength) {
       throw InvalidParameterCount(
           'Function $functionName expects $expectedLength ${expectedLength == 1 ? 'parameter' : 'parameters'}');
@@ -19,12 +19,12 @@ class ExplicitFunctionExpressionFactory<T>
     extends FunctionExpressionFactory<T> {
   final String name;
   final FunctionExpressionFactoryMethod<T> createFunctionExpression;
-  final int parametersLength;
+  final int? parametersLength;
   final bool checkParametersLength;
 
   ExplicitFunctionExpressionFactory({
-    @required this.name,
-    @required this.createFunctionExpression,
+    required this.name,
+    required this.createFunctionExpression,
     this.parametersLength,
     this.checkParametersLength = true,
   }) : assert(parametersLength != null || !checkParametersLength);

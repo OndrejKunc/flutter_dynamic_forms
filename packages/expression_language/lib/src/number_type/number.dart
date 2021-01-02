@@ -209,7 +209,7 @@ abstract class Number implements Comparable<Number> {
   ///     123456.toStringAsExponential();  // 1.23456e+5
   ///     123456.toStringAsExponential(3); // 1.235e+5
   ///     123.toStringAsExponential(0);    // 1e+2
-  String toStringAsExponential([int fractionDigits]);
+  String toStringAsExponential([int? fractionDigits]);
 
   /// Converts `this` to a decimal and returns a string representation with
   /// exactly [precision] significant digits.
@@ -244,8 +244,10 @@ abstract class Number implements Comparable<Number> {
   static Number parse(String input) {
     var source = input.trim();
 
-    var intResult = Integer(int.tryParse(source));
-    if (intResult.value != null) return intResult;
+    var parsedInt = int.tryParse(source);
+    if (parsedInt != null) {
+      return Integer(parsedInt);
+    }
 
     var decimalResult = Decimal.parse(
         source); //this throws FormatException, if input is not decimal number

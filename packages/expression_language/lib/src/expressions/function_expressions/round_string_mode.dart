@@ -29,8 +29,8 @@ class RoundFunctionStringRoundingModeExpression extends Expression<Number> {
     var nameOfEnum = RoundingMode.nearestEven.toString().split('.').first;
     var mode = RoundingMode.values.firstWhere(
         (e) => e.toString() == nameOfEnum + '.' + roundingModeString,
-        orElse: () => throw InvalidParameterException(
-            'Rounding mode $roundingModeString does not exist'));
+        orElse: (() => throw InvalidParameterException(
+            'Rounding mode $roundingModeString does not exist')));
     return value
         .evaluate()
         .roundWithPrecision(precision.evaluate().value, mode);

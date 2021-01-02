@@ -1,7 +1,7 @@
 import 'package:expression_language/expression_language.dart';
 
 Expression createDelegateExpression(
-    List<String> expressionPath, ExpressionProvider property) {
+    List<String> expressionPath, ExpressionProvider? property) {
   if (property is ExpressionProvider<Integer>) {
     return DelegateExpression<Integer>(expressionPath, property);
   }
@@ -41,16 +41,20 @@ Expression createDelegateExpression(
 ConditionalExpression createConditionalExpression(
     Expression<bool> condition, Expression trueValue, Expression falseValue) {
   if (trueValue is Expression<Integer>) {
-    return ConditionalExpression<Integer>(condition, trueValue, falseValue);
+    return ConditionalExpression<Integer>(
+        condition, trueValue, falseValue as Expression<Integer>);
   }
   if (trueValue is Expression<bool>) {
-    return ConditionalExpression<bool>(condition, trueValue, falseValue);
+    return ConditionalExpression<bool>(
+        condition, trueValue, falseValue as Expression<bool>);
   }
   if (trueValue is Expression<String>) {
-    return ConditionalExpression<String>(condition, trueValue, falseValue);
+    return ConditionalExpression<String>(
+        condition, trueValue, falseValue as Expression<String>);
   }
   if (trueValue is Expression<Decimal>) {
-    return ConditionalExpression<Decimal>(condition, trueValue, falseValue);
+    return ConditionalExpression<Decimal>(
+        condition, trueValue, falseValue as Expression<Decimal>);
   }
   throw UnknownExpressionTypeException(
       'Unknown expression in conditional expression');
@@ -63,5 +67,5 @@ Expression createFunctionExpression(
   if (!functionExpressionMap.containsKey(functionName)) {
     throw UnknownFunctionException('Unknown function name $functionName');
   }
-  return functionExpressionMap[functionName](parameters);
+  return functionExpressionMap[functionName]!(parameters);
 }

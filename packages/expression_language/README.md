@@ -50,8 +50,9 @@ Here is the complete list:
 | int durationInSeconds(Duration value) | Returns duration in seconds of a given duration value | durationInSeconds(duration("P5D1H")) |
 | bool startsWith(String value, String searchValue) | Returns true if value starts with searchValue | startsWith("Hello", "He") |
 | bool endsWith(String value, String searchValue) | Returns true if value ends with searchValue | startsWith("Hello", "lo") |
+| bool isEmpty(String value) | Returns true if value is empty String | isEmpty("") |
+| bool isNull(String value) | Returns true if value is null | isNull(someNullExpression) |
 | bool isNullOrEmpty(String value) | Returns true if value is null or empty String | isNullOrEmpty("") |
-| bool isNull(String value) | Returns true if value is null String | isNull("") |
 | bool matches(String value, String regex) | Returns true if value fully matches regex expression | matches("test@email.com","^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$") |
 | int length(String value) | length of the string | length("Hi") |
 | int length(String value) | length of the string | length("Hi") |
