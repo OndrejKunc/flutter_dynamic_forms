@@ -1,11 +1,9 @@
 import 'package:expression_language/expression_language.dart';
-import 'package:meta/meta.dart';
 
 abstract class FunctionExpressionFactory<T> {
   String get functionName;
   Expression<T> createExpression(List<Expression<dynamic>> parameters);
 
-  @protected
   void checkParameterLength(
       List<Expression<dynamic>> parameters, int? expectedLength) {
     if (parameters.length != expectedLength) {
