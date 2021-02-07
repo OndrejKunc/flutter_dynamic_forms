@@ -3,13 +3,12 @@ import 'package:dynamic_forms/src/form_manager/form_data.dart';
 import 'package:dynamic_forms/src/form_manager/form_property_value.dart';
 import 'package:dynamic_forms/src/iterators/form_element_iterator.dart';
 import 'package:expression_language/expression_language.dart';
-import 'package:meta/meta.dart';
 
 abstract class FormManager {
-  FormElement form;
-  Map<String, FormElement> formElementMap;
-  List<Validation> validations;
-  List<MutableProperty> mutableValues;
+  late FormElement form;
+  late Map<String, FormElement> formElementMap;
+  late List<Validation> validations;
+  late List<MutableProperty> mutableValues;
 
   bool get isFormValid {
     return validations.every((v) => (v.isValid));
@@ -32,7 +31,7 @@ abstract class FormManager {
         if (propVal is MutableProperty &&
             !(propVal is Property<ExpressionProviderElement>) &&
             !(propVal is Property<List<ExpressionProviderElement>>)) {
-          result.add(FormPropertyValue(fe.id, name, propVal.value.toString()));
+          result.add(FormPropertyValue(fe.id!, name, propVal.value.toString()));
         }
       });
     });
@@ -45,9 +44,9 @@ abstract class FormManager {
   }
 
   void changeValue<T>({
-    @required T value,
-    @required String elementId,
-    String propertyName,
+    required T value,
+    required String elementId,
+    String? propertyName,
     bool ignoreLastChange = false,
   }) {
     if (!formElementMap.containsKey(elementId)) {
@@ -55,17 +54,14 @@ abstract class FormManager {
           'Value cannot be changed because element $elementId is not present');
       return;
     }
-    var formElement = formElementMap[elementId];
+    var formElement = formElementMap[elementId]!;
     var property = formElement.getProperty(propertyName);
-    var mutableValue = property as MutableProperty<T>;
-    if (mutableValue == null) {
+    if (property is MutableProperty<T>) {
+      property.setValue(value, ignoreLastChange: ignoreLastChange);
+    } else {
       print(
           'Value cannot be changed because element $elementId is not mutable');
-      return;
     }
-    mutableValue.setValue(value, ignoreLastChange: ignoreLastChange);
-
-    return;
   }
 
   void close() {}

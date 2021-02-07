@@ -1,13 +1,12 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/parser/parser_node.dart';
-import 'package:meta/meta.dart';
 
 class JsonParserNode extends ParserNode {
-  final Map<String, dynamic>/*!*/ element;
+  final Map<String, dynamic> element;
   JsonParserNode(this.element);
 
   @override
-  String getName() {
+  String? getName() {
     return element['@name'];
   }
 
@@ -41,18 +40,18 @@ class JsonParserNode extends ParserNode {
   }
 
   @override
-  String getPlainString(String propertyName) {
+  String? getPlainString(String propertyName) {
     return element[propertyName];
   }
 
   @override
-  Property<List<TFormElement>/*!*/> getChildrenProperty<TFormElement>(
-      {FormElement parent,
-      String/*!*/ childrenPropertyName,
-      ElementParserFunction/*!*/ parser,
+  Property<List<TFormElement>> getChildrenProperty<TFormElement>(
+      {FormElement? parent,
+      required String childrenPropertyName,
+      required ElementParserFunction parser,
       bool isContentProperty = false,
       bool isImmutable = true}) {
-    var childrenList = element[childrenPropertyName] as List;
+    var childrenList = element[childrenPropertyName] as List?;
     var children = childrenList == null
         ? <TFormElement>[]
         : childrenList
@@ -65,14 +64,14 @@ class JsonParserNode extends ParserNode {
 
   @override
   Property<TFormElement> getChildProperty<TFormElement>({
-    @required String propertyName,
-    @required ElementParserFunction parser,
-    @required FormElement parent,
-    @required TFormElement Function() defaultValue,
+    required String propertyName,
+    required ElementParserFunction parser,
+    required FormElement parent,
+    required TFormElement Function() defaultValue,
     bool isContentProperty = false,
     bool isImmutable = true,
   }) {
-    var childElement = element[propertyName] as Map<String, dynamic>;
+    var childElement = element[propertyName] as Map<String, dynamic>?;
 
     if (childElement != null) {
       return createProperty<TFormElement>(

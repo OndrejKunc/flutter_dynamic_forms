@@ -3,11 +3,11 @@ import 'package:dynamic_forms/src/elements/element.dart';
 import 'package:dynamic_forms/src/elements/form_element.dart';
 
 typedef ElementParserFunction = Element Function(
-    ParserNode dataNode, FormElement parent);
+    ParserNode dataNode, FormElement? parent);
 
 abstract class FormParserService {
   final List<ElementParser> _parsers;
-  Map<String, ElementParser> _parsersMap;
+  late Map<String, ElementParser> _parsersMap;
 
   FormParserService(this._parsers) {
     _parsersMap = {for (var p in _parsers) p.name: p};
@@ -20,9 +20,9 @@ abstract class FormParserService {
 
   ParserNode getRoot(String formString);
 
-  Element parseElement(ParserNode element, FormElement parent) {
+  Element parseElement(ParserNode element, FormElement? parent) {
     var elementName = element.getName();
-    var parser = _parsersMap[elementName];
+    var parser = _parsersMap[elementName!];
     if (parser == null) {
       throw Exception('No parser for element name $elementName found');
     }

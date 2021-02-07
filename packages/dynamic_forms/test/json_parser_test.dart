@@ -43,13 +43,13 @@ void main() {
     var result = parserService.parse(json);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)) x.id: x
     };
 
     var formElementExpressions =
         getFormPropertyIterator<ExpressionProperty>(result);
 
-    var parser = ExpressionParser(formElementMap);
+    var parser = ExpressionParser(formElementMap as Map<String, ExpressionProviderElement>);
 
     for (var expressionValue in formElementExpressions) {
       if (expressionValue is StringExpressionProperty) {
@@ -81,7 +81,7 @@ void main() {
     var result = parserService.parse(json);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)) x.id: x
     };
 
     var label = formElementMap['label1'] as Label;
@@ -111,7 +111,7 @@ void main() {
     var result = parserService.parse(json);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)) x.id: x
     };
 
     var label = formElementMap['label1'] as Label;
@@ -142,7 +142,7 @@ void main() {
     var result = parserService.parse(json);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)) x.id: x
     };
 
     var label = formElementMap['label1'] as Label;

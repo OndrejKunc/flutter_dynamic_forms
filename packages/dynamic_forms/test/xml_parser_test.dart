@@ -38,13 +38,13 @@ void main() {
     var result = parserService.parse(xml);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)) x.id: x
     };
 
     var formElementExpressions =
         getFormPropertyIterator<ExpressionProperty>(result);
 
-    var parser = ExpressionParser(formElementMap);
+    var parser = ExpressionParser(formElementMap as Map<String, ExpressionProviderElement>);
 
     for (var expressionValue in formElementExpressions) {
       if (expressionValue is StringExpressionProperty) {
@@ -76,7 +76,7 @@ void main() {
     var result = parserService.parse(xml);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)) x.id: x
     };
 
     var label2 = formElementMap['label2'] as Label;
@@ -109,7 +109,7 @@ void main() {
     var result = parserService.parse(xml);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)) x.id: x
     };
 
     var label2 = formElementMap['label2'] as Label;
@@ -131,7 +131,7 @@ void main() {
     var result = parserService.parse(xml);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)) x.id: x
     };
 
     var label1 = formElementMap['label1'] as Label;
@@ -152,7 +152,7 @@ void main() {
     var result = parserService.parse(xml);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)) x.id: x
     };
 
     var label1 = formElementMap['label1'] as Label;
@@ -172,7 +172,7 @@ void main() {
     var result = parserService.parse(xml);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)) x.id: x
     };
 
     var label1 = formElementMap['label1'] as Label;
@@ -193,7 +193,7 @@ void main() {
     var result = parserService.parse(xml);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)) x.id: x
     };
 
     var label1 = formElementMap['label1'] as Label;
@@ -217,7 +217,7 @@ void main() {
     var result = parserService.parse(xml);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)) x.id: x
     };
 
     var label1 = formElementMap['label1'] as Label;
@@ -244,7 +244,7 @@ void main() {
     var result = parserService.parse(xml);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)) x.id: x
     };
     var label1 = formElementMap['label1'] as Label;
     var resultValue = label1.value;
@@ -273,13 +273,13 @@ void main() {
     var result = parserService.parse(xml);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)) x.id: x
     };
 
     var formElementExpressions =
         getFormPropertyIterator<ExpressionProperty>(result);
 
-    var parser = ExpressionParser(formElementMap);
+    var parser = ExpressionParser(formElementMap as Map<String, ExpressionProviderElement>);
 
     for (var expressionValue in formElementExpressions) {
       if (expressionValue is StringExpressionProperty) {
@@ -292,7 +292,7 @@ void main() {
     for (var property in formProperties) {
       for (var sourceProperty
           in property.getExpression().getExpressionProviders()) {
-        (sourceProperty as Property).addSubscriber(property);
+        (sourceProperty as Property).addSubscriber(property as ExpressionProperty<dynamic>);
       }
     }
 

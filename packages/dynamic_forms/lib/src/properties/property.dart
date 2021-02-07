@@ -9,11 +9,11 @@ abstract class Property<T> implements ExpressionProvider<T> {
   @override
   Expression<T> getExpression();
 
-  Stream<T/*!*/> get valueChanged =>
-      valueChangedSubject ??= BehaviorSubject<T>.seeded(value);
+  Stream<T> get valueChanged =>
+      (valueChangedSubject ??= BehaviorSubject<T>.seeded(value)) as Stream<T>;
 
   @protected
-  BehaviorSubject<T> valueChangedSubject;
+  BehaviorSubject<T?>? valueChangedSubject;
 
   void addSubscriber(ExpressionProperty expressionProperty) {
     subscribers.add(expressionProperty);

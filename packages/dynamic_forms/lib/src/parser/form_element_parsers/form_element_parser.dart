@@ -6,17 +6,17 @@ abstract class FormElementParser<TFormElement extends FormElement>
 
   @override
   TFormElement parse(
-      ParserNode parserNode, Element parent, ElementParserFunction parser) {
-    TFormElement formElement = getInstance();
+      ParserNode parserNode, Element? parent, ElementParserFunction parser) {
+    var formElement = getInstance() as TFormElement;
     fillProperties(formElement, parserNode, parent, parser);
     return formElement;
   }
 
   void fillProperties(TFormElement formElement, ParserNode parserNode,
-      Element parent, ElementParserFunction parser) {
+      Element? parent, ElementParserFunction parser) {
     formElement
       ..id = parserNode.getPlainString('id')
       ..isVisibleProperty = parserNode.getIsVisibleProperty()
-      ..parentProperty = parserNode.getParentProperty(parent);
+      ..parentProperty = parserNode.getParentProperty(parent as FormElement?);
   }
 }

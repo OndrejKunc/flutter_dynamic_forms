@@ -1,9 +1,8 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:expression_language/expression_language.dart';
-import 'package:meta/meta.dart';
 
 abstract class ParserNode {
-  String getName();
+  String? getName();
   Property<T> getProperty<T>(
     String name,
     T Function(String s) converter,
@@ -12,22 +11,23 @@ abstract class ParserNode {
   });
 
   Property<List<TElement>> getChildrenProperty<TElement>({
-    @required FormElement parent,
-    @required String childrenPropertyName,
-    @required ElementParserFunction parser,
+    required FormElement parent,
+    required String childrenPropertyName,
+    required ElementParserFunction parser,
     bool isContentProperty = false,
     bool isImmutable = true,
   });
 
-  String getPlainString(String propertyName);
+  String? getPlainString(String propertyName);
 
-  Property<TElement> getChildProperty<TElement>(
-      {@required String propertyName,
-      @required ElementParserFunction parser,
-      @required FormElement parent,
-      @required TElement Function() defaultValue,
-      bool isContentProperty = false,
-      bool isImmutable = true});
+  Property<TElement> getChildProperty<TElement>({
+    required String propertyName,
+    required ElementParserFunction parser,
+    required FormElement parent,
+    required TElement Function() defaultValue,
+    bool isContentProperty = false,
+    bool isImmutable = true,
+  });
 
   Property<bool> getBoolProperty(
     String name, {
@@ -68,13 +68,13 @@ abstract class ParserNode {
     );
   }
 
-  Property<TEnum> getEnumProperty<TEnum>(
+  Property<TEnum?> getEnumProperty<TEnum>(
     String name,
-    List<TEnum/*!*/> enumValues, {
-    TEnum Function() defaultValue,
+    List<TEnum> enumValues, {
+    TEnum Function()? defaultValue,
     bool isImmutable = true,
   }) {
-    return getProperty<TEnum>(
+    return getProperty<TEnum?>(
       name,
       (s) {
         var lowerCaseInput = s.toLowerCase();
@@ -87,7 +87,7 @@ abstract class ParserNode {
             var lastPart = enumString.split('.').last;
             return lastPart == lowerCaseInput;
           },
-          orElse: defaultValue ?? () => null,
+          orElse: defaultValue ?? (() => null) as TEnum Function()?,
         );
       },
       defaultValue ?? () => null,
@@ -121,26 +121,26 @@ abstract class ParserNode {
     );
   }
 
-  Property<DateTime/*!*/> getDateTimeProperty(
+  Property<DateTime> getDateTimeProperty(
     String name, {
-    DateTime Function() defaultValue = defaultDateTime,
+    DateTime? Function() defaultValue = defaultDateTime,
     bool isImmutable = true,
   }) {
-    return getProperty<DateTime>(
+    return getProperty<DateTime?>(
       name,
       (s) => DateTime.tryParse(s) ?? defaultValue(),
       defaultValue,
       isImmutable: isImmutable,
-    );
+    ) as Property<DateTime>;
   }
 
-  Property<T/*!*/> createProperty<T>(T value, bool isImmutable) {
+  Property<T> createProperty<T>(T value, bool isImmutable) {
     return isImmutable
         ? ImmutableProperty<T>(value)
         : MutableProperty<T>(value);
   }
 
-  Property<FormElement> getParentProperty(FormElement parent) {
+  Property<FormElement>? getParentProperty(FormElement? parent) {
     if (parent == null) {
       return null;
     }
@@ -152,12 +152,12 @@ abstract class ParserNode {
 
   static String defaultString() => '';
   static String convertToString(String x) => x;
-  static bool convertToBool(String x) => x?.toLowerCase() == 'true';
+  static bool convertToBool(String x) => x.toLowerCase() == 'true';
   static int convertToColor(String x) => int.parse(x);
   static bool defaultFalse() => false;
   static bool defaultTrue() => true;
   static int defaultInt() => 0;
   static Decimal defaultDecimal() => Decimal.fromInt(0);
   static double defaultDouble() => 0.0;
-  static DateTime defaultDateTime() => null;
+  static DateTime? defaultDateTime() => null;
 }
