@@ -70,7 +70,7 @@ abstract class ParserNode {
 
   Property<TEnum> getEnumProperty<TEnum>(
     String name,
-    List<TEnum> enumValues, {
+    List<TEnum/*!*/> enumValues, {
     TEnum Function() defaultValue,
     bool isImmutable = true,
   }) {
@@ -121,7 +121,7 @@ abstract class ParserNode {
     );
   }
 
-  Property<DateTime> getDateTimeProperty(
+  Property<DateTime/*!*/> getDateTimeProperty(
     String name, {
     DateTime Function() defaultValue = defaultDateTime,
     bool isImmutable = true,
@@ -134,7 +134,7 @@ abstract class ParserNode {
     );
   }
 
-  Property<T> createProperty<T>(T value, bool isImmutable) {
+  Property<T/*!*/> createProperty<T>(T value, bool isImmutable) {
     return isImmutable
         ? ImmutableProperty<T>(value)
         : MutableProperty<T>(value);

@@ -15,7 +15,7 @@ void main() {
     var parser = ExpressionParser({});
     var expression = parser.parse('(5.2 + 8)*8');
 
-    var value = expression.evaluate() as Decimal;
+    var value = expression.evaluate() as Decimal/*!*/;
     expect(value.toString(), '105.6');
   });
 
@@ -130,7 +130,7 @@ void main() {
     var parser = ExpressionParser({});
     var testFormElement = TestFormElement();
     var stringExpression = testFormElement.getProperties()['intExpression']
-        as StringExpressionProperty<int>;
+        as StringExpressionProperty<int/*!*/>;
     stringExpression.buildExpression(parser);
     var value = stringExpression.evaluate();
     expect(value, 12);
@@ -140,7 +140,7 @@ void main() {
     var parser = ExpressionParser({});
     var testFormElement = TestFormElement();
     var stringExpression = testFormElement.getProperties()['integerExpression']
-        as StringExpressionProperty<Integer>;
+        as StringExpressionProperty<Integer/*!*/>;
     stringExpression.buildExpression(parser);
     var value = stringExpression.evaluate();
     expect(value.toInt(), 11);
@@ -150,7 +150,7 @@ void main() {
     var parser = ExpressionParser({});
     var testFormElement = TestFormElement();
     var stringExpression = testFormElement.getProperties()['doubleExpression']
-        as StringExpressionProperty<double>;
+        as StringExpressionProperty<double/*!*/>;
     stringExpression.buildExpression(parser);
     var value = stringExpression.evaluate();
     expect(value, 9.5);
@@ -160,7 +160,7 @@ void main() {
     var parser = ExpressionParser({});
     var testFormElement = TestFormElement();
     var stringExpression = testFormElement.getProperties()['decimalExpression']
-        as StringExpressionProperty<Decimal>;
+        as StringExpressionProperty<Decimal/*!*/>;
     stringExpression.buildExpression(parser);
     var value = stringExpression.evaluate();
     expect(value.toDouble(), 8.5);

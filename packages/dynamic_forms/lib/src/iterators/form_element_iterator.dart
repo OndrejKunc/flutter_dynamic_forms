@@ -3,7 +3,7 @@ import 'dart:collection';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
 Iterable<TFormElement> getFormElementIterator<TFormElement extends FormElement>(
-    FormElement formElement) sync* {
+    FormElement/*!*/ formElement) sync* {
   var stack = Queue<FormElement>.from([formElement]);
   var visitedElements = {formElement};
   while (stack.isNotEmpty) {

@@ -7,7 +7,7 @@ class CloneableExpressionProperty<T> extends ExpressionProperty<T> {
   CloneableExpressionProperty(this._oldExpression);
 
   void buildExpression(
-      Map<String, ExpressionProviderElement> expressionProviderElementMap) {
+      Map<String/*!*/, ExpressionProviderElement> expressionProviderElementMap) {
     var clonedExpression = _oldExpression.clone(expressionProviderElementMap);
     _expression = clonedExpression;
   }

@@ -13,23 +13,23 @@ abstract class FormElement implements Element {
   @override
   String id;
 
-  Property<FormElement> get parentProperty => properties[parentPropertyName];
+  Property<FormElement>/*!*/ get parentProperty => properties[parentPropertyName];
   set parentProperty(Property<FormElement> value) =>
       registerProperty(parentPropertyName, value);
   FormElement get parent => parentProperty.value;
 
-  Property<bool> get isVisibleProperty => properties[isVisiblePropertyName];
+  Property<bool/*!*/>/*!*/ get isVisibleProperty => properties[isVisiblePropertyName];
   set isVisibleProperty(Property<bool> value) =>
       registerProperty(isVisiblePropertyName, value);
   bool get isVisible => isVisibleProperty.value;
-  Stream<bool> get isVisibleChanged => isVisibleProperty.valueChanged;
+  Stream<bool>/*!*/ get isVisibleChanged => isVisibleProperty.valueChanged;
 
   @protected
   Map<String, Property> properties = {};
 
-  FormElement getInstance();
+  FormElement/*!*/ getInstance();
 
-  Stream<String> get propertyChanged {
+  Stream<String>/*!*/ get propertyChanged {
     _propertyChanged ??= _getPropertyChanged();
     return _propertyChanged;
   }
@@ -47,7 +47,7 @@ abstract class FormElement implements Element {
     return connectableObservable;
   }
 
-  Property getProperty([String propertyName]) {
+  Property/*!*/ getProperty([String propertyName]) {
     propertyName ??= defaultPropertyName;
     var properties = getProperties();
     if (properties.containsKey(propertyName)) {

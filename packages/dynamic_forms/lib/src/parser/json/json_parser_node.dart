@@ -3,7 +3,7 @@ import 'package:dynamic_forms/src/parser/parser_node.dart';
 import 'package:meta/meta.dart';
 
 class JsonParserNode extends ParserNode {
-  final Map<String, dynamic> element;
+  final Map<String, dynamic>/*!*/ element;
   JsonParserNode(this.element);
 
   @override
@@ -46,10 +46,10 @@ class JsonParserNode extends ParserNode {
   }
 
   @override
-  Property<List<TFormElement>> getChildrenProperty<TFormElement>(
+  Property<List<TFormElement>/*!*/> getChildrenProperty<TFormElement>(
       {FormElement parent,
-      String childrenPropertyName,
-      ElementParserFunction parser,
+      String/*!*/ childrenPropertyName,
+      ElementParserFunction/*!*/ parser,
       bool isContentProperty = false,
       bool isImmutable = true}) {
     var childrenList = element[childrenPropertyName] as List;

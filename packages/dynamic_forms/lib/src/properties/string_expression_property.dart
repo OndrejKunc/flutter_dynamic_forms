@@ -1,8 +1,8 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:expression_language/expression_language.dart';
 
-class StringExpressionProperty<T> extends ExpressionProperty<T> {
-  Expression<T> _expression;
+class StringExpressionProperty<T> extends ExpressionProperty<T/*!*/> {
+  Expression<T/*!*/> _expression;
   final String _expressionString;
 
   StringExpressionProperty(this._expressionString);
@@ -25,7 +25,7 @@ class StringExpressionProperty<T> extends ExpressionProperty<T> {
       _expression =
           DecimalToDoubleExpression(resultExpression) as Expression<T>;
     } else {
-      _expression = resultExpression as Expression<T>;
+      _expression = resultExpression as Expression<T/*!*/>;
     }
   }
 
