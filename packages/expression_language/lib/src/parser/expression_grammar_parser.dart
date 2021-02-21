@@ -170,6 +170,15 @@ class ExpressionGrammarParser extends ExpressionGrammarDefinition {
       });
 
   @override
+  Parser postfixOperatorExpression() =>
+      super.postfixOperatorExpression().map((c) {
+        if (c[1] == null) {
+          return c[0];
+        }
+        return createNonNullableConversionExpression(c[0]);
+      });
+
+  @override
   Parser conditionalExpression() => super.conditionalExpression().map((c) {
         if (c[1] == null) {
           return c[0];

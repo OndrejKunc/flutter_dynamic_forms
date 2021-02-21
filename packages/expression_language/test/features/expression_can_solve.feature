@@ -622,3 +622,48 @@ Feature: Expression
   Scenario: String concatenation
     When expression ""ab" + "cd"" is evaluated
     Then string expression result is "abcd"
+
+  Scenario: Nullable int
+    Given form element is provided
+    When expression "@testElement.nullableIntValue! - 5" is evaluated
+    Then int expression result is "9"
+
+  Scenario: Nullable integer
+    Given form element is provided
+    When expression "@testElement.nullableIntegerValue! - 5" is evaluated
+    Then int expression result is "22"
+
+  Scenario: Nullable bool
+    Given form element is provided
+    When expression "@testElement.nullableBoolValue!" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: Nullable double
+    Given form element is provided
+    When expression "@testElement.nullableDoubleValue! + 3" is evaluated
+    Then decimal expression result is "9.5"
+
+  Scenario: Negate Nullable bool
+    Given form element is provided
+    When expression "!@testElement.nullableBoolValue!" is evaluated
+    Then bool expression result is "false"
+
+  Scenario: Nullable Decimal
+    Given form element is provided
+    When expression "@testElement.nullableDecimalValue! + 3" is evaluated
+    Then decimal expression result is "9.5"
+
+  Scenario: Nullable DateTime
+    Given form element is provided
+    When expression "!isNull(@testElement.nullableDateValue!)" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: Null integer
+    Given form element is provided
+    When expression "isNull(@testElement.nullIntegerValue)" is evaluated
+    Then bool expression result is "true"
+
+  Scenario: Null reference exception
+    Given form element is provided
+    When expression "@testElement.nullIntegerValue! + 5" is evaluated
+    Then "NullReferenceException" exception is thrown

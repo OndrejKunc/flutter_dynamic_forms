@@ -52,23 +52,10 @@ class ExpressionGrammarDefinition extends GrammarDefinition {
 
   Parser unaryNegateOperator() => ref(token, '-') | ref(token, '!');
 
-  Parser additiveExpression() =>
-      ref(multiplicativeExpression) &
-      (ref(additiveOperator) & ref(multiplicativeExpression)).star();
-
-  Parser multiplicativeExpression() =>
-      ref(unaryExpression) &
-      (ref(multiplicativeOperator) & ref(unaryExpression)).star();
-
-  Parser unaryExpression() =>
-      ref(literal) |
-      ref(expressionInParentheses) |
-      ref(function) |
-      ref(reference) |
-      ref(unaryNegateOperator) & ref(unaryExpression);
-
   Parser expressionInParentheses() =>
       ref(token, '(') & ref(expression) & ref(token, ')');
+
+  Parser expression() => ref(conditionalExpression);
 
   Parser conditionalExpression() =>
       ref(logicalOrExpression) &
@@ -91,7 +78,23 @@ class ExpressionGrammarDefinition extends GrammarDefinition {
       ref(additiveExpression) &
       (ref(relationalOperator) & ref(additiveExpression)).optional();
 
-  Parser expression() => ref(conditionalExpression);
+  Parser additiveExpression() =>
+      ref(multiplicativeExpression) &
+      (ref(additiveOperator) & ref(multiplicativeExpression)).star();
+
+  Parser multiplicativeExpression() =>
+      ref(postfixOperatorExpression) &
+      (ref(multiplicativeOperator) & ref(postfixOperatorExpression)).star();
+
+  Parser postfixOperatorExpression() =>
+      ref(unaryExpression) & ref(token, '!').optional();
+
+  Parser unaryExpression() =>
+      ref(literal) |
+      ref(expressionInParentheses) |
+      ref(function) |
+      ref(reference) |
+      ref(unaryNegateOperator) & ref(unaryExpression);
 
   Parser reference() =>
       char('@') &
