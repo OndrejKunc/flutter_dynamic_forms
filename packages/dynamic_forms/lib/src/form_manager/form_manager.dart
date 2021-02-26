@@ -11,8 +11,10 @@ abstract class FormManager {
   List<Validation> validations;
   List<MutableProperty> mutableValues;
 
+  bool _checkValidation(Validation v) => v.isVisible ? v.isValid : true;
+
   bool get isFormValid {
-    return validations.every((v) => (v.isValid));
+    return validations.every((v) => _checkValidation(v));
   }
 
   void fillFromFormData(FormData formData) {
@@ -51,16 +53,14 @@ abstract class FormManager {
     bool ignoreLastChange = false,
   }) {
     if (!formElementMap.containsKey(elementId)) {
-      print(
-          'Value cannot be changed because element $elementId is not present');
+      print('Value cannot be changed because element $elementId is not present');
       return;
     }
     var formElement = formElementMap[elementId];
     var property = formElement.getProperty(propertyName);
     var mutableValue = property as MutableProperty<T>;
     if (mutableValue == null) {
-      print(
-          'Value cannot be changed because element $elementId is not mutable');
+      print('Value cannot be changed because element $elementId is not mutable');
       return;
     }
     mutableValue.setValue(value, ignoreLastChange: ignoreLastChange);
