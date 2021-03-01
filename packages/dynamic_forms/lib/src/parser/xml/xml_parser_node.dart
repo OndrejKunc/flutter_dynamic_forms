@@ -13,8 +13,8 @@ class XmlParserNode extends ParserNode {
   }
 
   @override
-  Property<T> getProperty<T>(
-      String name, T Function(String s) converter, T Function() defaultValue,
+  Property<T?> getProperty<T>(
+      String name, T Function(String s) converter, T? Function() defaultValue,
       {bool isImmutable = true}) {
     var property = getPropertyAsElement(element, name);
     if (property != null) {
@@ -76,7 +76,7 @@ class XmlParserNode extends ParserNode {
           .map((c) => parser!(XmlParserNode(c), parent))
           .cast<TFormElement>()
           .toList();
-      var childrenProperty = createProperty(children, isImmutable);
+      var childrenProperty = createListProperty(children, isImmutable);
       return childrenProperty;
     }
 
@@ -88,10 +88,11 @@ class XmlParserNode extends ParserNode {
           .map((c) => parser!(XmlParserNode(c as XmlElement), parent))
           .cast<TFormElement>()
           .toList();
-      return createProperty(children, isImmutable);
+      return createListProperty(children, isImmutable);
     }
 
-    return createProperty(<TFormElement>[], isImmutable);
+    return createProperty(<TFormElement>[], isImmutable)
+        as Property<List<TFormElement>>;
   }
 
   @override
@@ -100,6 +101,33 @@ class XmlParserNode extends ParserNode {
     required ElementParserFunction parser,
     required FormElement parent,
     required TFormElement Function() defaultValue,
+    bool isContentProperty = false,
+    bool isImmutable = true,
+  }) {
+    var propertyElement = getPropertyAsElement(element, propertyName);
+    if (propertyElement == null && isContentProperty) {
+      propertyElement = element;
+    }
+
+    if (propertyElement != null) {
+      var childElement = propertyElement.children
+          .firstWhereOrNull((c) => c is XmlElement) as XmlElement?;
+      if (childElement != null) {
+        return createProperty<TFormElement>(
+            parser(XmlParserNode(childElement), parent) as TFormElement,
+            isImmutable) as Property<TFormElement>;
+      }
+    }
+    return createProperty(defaultValue(), isImmutable)
+        as Property<TFormElement>;
+  }
+
+  @override
+  Property<TFormElement?> getNullableChildProperty<TFormElement>({
+    required String propertyName,
+    required ElementParserFunction parser,
+    required FormElement parent,
+    required TFormElement? Function() defaultValue,
     bool isContentProperty = false,
     bool isImmutable = true,
   }) {
