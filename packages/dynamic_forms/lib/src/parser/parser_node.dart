@@ -3,7 +3,14 @@ import 'package:expression_language/expression_language.dart';
 
 abstract class ParserNode {
   String? getName();
-  Property<T?> getProperty<T>(
+  Property<T> getProperty<T>(
+    String name,
+    T Function(String s) converter,
+    T Function() defaultValue, {
+    bool isImmutable = true,
+  });
+
+  Property<T?> getNullableProperty<T>(
     String name,
     T Function(String s) converter,
     T? Function() defaultValue, {
@@ -48,7 +55,7 @@ abstract class ParserNode {
       convertToBool,
       defaultValue,
       isImmutable: isImmutable,
-    ) as Property<bool>;
+    );
   }
 
   Property<bool?> getNullableBoolProperty(
@@ -56,7 +63,7 @@ abstract class ParserNode {
     bool? Function() defaultValue = defaultNullableBool,
     bool isImmutable = true,
   }) {
-    return getProperty(
+    return getNullableProperty(
       name,
       convertToBool,
       defaultValue,
@@ -74,7 +81,7 @@ abstract class ParserNode {
       convertToString,
       defaultValue,
       isImmutable: isImmutable,
-    ) as Property<String>;
+    );
   }
 
   Property<String?> getNullableStringProperty(
@@ -82,7 +89,7 @@ abstract class ParserNode {
     String? Function() defaultValue = defaultNullableString,
     bool isImmutable = true,
   }) {
-    return getProperty(
+    return getNullableProperty(
       name,
       convertToString,
       defaultValue,
@@ -100,7 +107,7 @@ abstract class ParserNode {
       (s) => Decimal.tryParse(s) ?? defaultValue(),
       defaultValue,
       isImmutable: isImmutable,
-    ) as Property<Decimal>;
+    );
   }
 
   Property<Decimal?> getNullableDecimalProperty(
@@ -108,7 +115,7 @@ abstract class ParserNode {
     Decimal? Function() defaultValue = defaultNullableDecimal,
     bool isImmutable = true,
   }) {
-    return getProperty<Decimal>(
+    return getNullableProperty<Decimal>(
       name,
       (s) => Decimal.tryParse(s) ?? defaultDecimal(),
       defaultValue,
@@ -140,7 +147,7 @@ abstract class ParserNode {
       },
       defaultValue,
       isImmutable: isImmutable,
-    ) as Property<TEnum>;
+    );
   }
 
   Property<TEnum?> getNullableEnumProperty<TEnum>(
@@ -149,7 +156,7 @@ abstract class ParserNode {
     TEnum Function()? defaultValue,
     bool isImmutable = true,
   }) {
-    return getProperty<TEnum>(
+    return getNullableProperty<TEnum>(
       name,
       (s) {
         var lowerCaseInput = s.toLowerCase();
@@ -180,7 +187,7 @@ abstract class ParserNode {
       (s) => double.tryParse(s) ?? defaultValue(),
       defaultValue,
       isImmutable: isImmutable,
-    ) as Property<double>;
+    );
   }
 
   Property<double?> getNullableDoubleProperty(
@@ -188,7 +195,7 @@ abstract class ParserNode {
     double? Function() defaultValue = defaultNullableDouble,
     bool isImmutable = true,
   }) {
-    return getProperty<double>(
+    return getNullableProperty<double>(
       name,
       (s) => double.tryParse(s) ?? defaultDouble(),
       defaultValue,
@@ -206,7 +213,7 @@ abstract class ParserNode {
       (s) => int.tryParse(s) ?? defaultValue(),
       defaultValue,
       isImmutable: isImmutable,
-    ) as Property<int>;
+    );
   }
 
   Property<int?> getNullableIntProperty(
@@ -214,12 +221,12 @@ abstract class ParserNode {
     int? Function() defaultValue = defaultNullableInt,
     bool isImmutable = true,
   }) {
-    return getProperty<int>(
+    return getNullableProperty<int>(
       name,
       (s) => int.tryParse(s) ?? defaultInt(),
       defaultValue,
       isImmutable: isImmutable,
-    ) as Property<int>;
+    );
   }
 
   Property<DateTime> getDateTimeProperty(
@@ -232,7 +239,7 @@ abstract class ParserNode {
       (s) => DateTime.tryParse(s) ?? defaultValue(),
       defaultValue,
       isImmutable: isImmutable,
-    ) as Property<DateTime>;
+    );
   }
 
   Property<DateTime?> getNullableDateTimeProperty(
@@ -240,7 +247,7 @@ abstract class ParserNode {
     DateTime? Function() defaultValue = defaultNullableDateTime,
     bool isImmutable = true,
   }) {
-    return getProperty<DateTime?>(
+    return getNullableProperty<DateTime?>(
       name,
       (s) => DateTime.tryParse(s) ?? defaultValue(),
       defaultValue,
@@ -248,15 +255,16 @@ abstract class ParserNode {
     );
   }
 
-  Property<T?> createProperty<T>(T? value, bool isImmutable) {
+  Property<T> createProperty<T>(T value, bool isImmutable) {
+    return isImmutable
+        ? ImmutableProperty<T>(value)
+        : MutableProperty<T>(value);
+  }
+
+  Property<T?> createNullableProperty<T>(T? value, bool isImmutable) {
     return isImmutable
         ? ImmutableProperty<T?>(value)
         : MutableProperty<T?>(value);
-  }
-
-  Property<List<T>> createListProperty<T>(List<T> value, bool isImmutable) {
-    // We want to prefer empty list over null value;
-    return createProperty(value, isImmutable) as Property<List<T>>;
   }
 
   Property<FormElement>? getParentProperty(FormElement? parent) {

@@ -11,8 +11,8 @@ class JsonParserNode extends ParserNode {
   }
 
   @override
-  Property<T?> getProperty<T>(
-      String name, T Function(String s) converter, T? Function() defaultValue,
+  Property<T> getProperty<T>(
+      String name, T Function(String s) converter, T Function() defaultValue,
       {bool isImmutable = true}) {
     var property = element[name];
     if (property == null) {
@@ -40,6 +40,35 @@ class JsonParserNode extends ParserNode {
   }
 
   @override
+  Property<T?> getNullableProperty<T>(
+      String name, T Function(String s) converter, T? Function() defaultValue,
+      {bool isImmutable = true}) {
+    var property = element[name];
+    if (property == null) {
+      return createNullableProperty<T>(defaultValue(), isImmutable);
+    }
+    if (property is String) {
+      return createNullableProperty<T>(converter(property), isImmutable);
+    }
+    if (property is bool && T == bool) {
+      return createNullableProperty<T>(property as T, isImmutable);
+    }
+    if (property is int && T == int) {
+      return createNullableProperty<T>(property as T, isImmutable);
+    }
+    if (property is double && T == double) {
+      return createNullableProperty<T>(property as T, isImmutable);
+    }
+    if (property is Map<String, dynamic>) {
+      var expression = property['expression'];
+      if (expression != null) {
+        return StringExpressionProperty<T?>(expression);
+      }
+    }
+    return createNullableProperty<T>(defaultValue(), isImmutable);
+  }
+
+  @override
   String? getPlainString(String propertyName) {
     return element[propertyName];
   }
@@ -58,7 +87,7 @@ class JsonParserNode extends ParserNode {
             .map((c) => parser(JsonParserNode(c), parent))
             .cast<TFormElement>()
             .toList();
-    var childrenProperty = createListProperty(children, isImmutable);
+    var childrenProperty = createProperty(children, isImmutable);
     return childrenProperty;
   }
 
@@ -76,10 +105,9 @@ class JsonParserNode extends ParserNode {
     if (childElement != null) {
       return createProperty<TFormElement>(
           parser(JsonParserNode(childElement), parent) as TFormElement,
-          isImmutable) as Property<TFormElement>;
+          isImmutable);
     }
-    return createProperty<TFormElement>(defaultValue(), isImmutable)
-        as Property<TFormElement>;
+    return createProperty<TFormElement>(defaultValue(), isImmutable);
   }
 
   @override
@@ -94,10 +122,10 @@ class JsonParserNode extends ParserNode {
     var childElement = element[propertyName] as Map<String, dynamic>?;
 
     if (childElement != null) {
-      return createProperty<TFormElement>(
+      return createNullableProperty<TFormElement>(
           parser(JsonParserNode(childElement), parent) as TFormElement,
           isImmutable);
     }
-    return createProperty<TFormElement>(defaultValue(), isImmutable);
+    return createNullableProperty<TFormElement>(defaultValue(), isImmutable);
   }
 }

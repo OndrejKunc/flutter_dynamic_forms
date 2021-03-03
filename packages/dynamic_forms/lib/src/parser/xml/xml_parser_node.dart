@@ -13,8 +13,8 @@ class XmlParserNode extends ParserNode {
   }
 
   @override
-  Property<T?> getProperty<T>(
-      String name, T Function(String s) converter, T? Function() defaultValue,
+  Property<T> getProperty<T>(
+      String name, T Function(String s) converter, T Function() defaultValue,
       {bool isImmutable = true}) {
     var property = getPropertyAsElement(element, name);
     if (property != null) {
@@ -39,6 +39,36 @@ class XmlParserNode extends ParserNode {
       return createProperty<T>(converter(attributeValue), isImmutable);
     }
     return createProperty<T>(defaultValue(), isImmutable);
+  }
+
+  @override
+  Property<T?> getNullableProperty<T>(
+      String name, T Function(String s) converter, T? Function() defaultValue,
+      {bool isImmutable = true}) {
+    var property = getPropertyAsElement(element, name);
+    if (property != null) {
+      var firstChild = property.firstChild;
+      if (firstChild != null) {
+        if (firstChild is XmlText || firstChild is XmlCDATA) {
+          return createNullableProperty<T>(
+              converter(firstChild.text), isImmutable);
+        }
+        if (firstChild is XmlElement) {
+          if (firstChild.name.qualified == 'expression') {
+            var expressionChild = firstChild.firstChild!;
+            if (expressionChild.nodeType == XmlNodeType.CDATA ||
+                expressionChild.nodeType == XmlNodeType.TEXT) {
+              return StringExpressionProperty<T?>(expressionChild.text);
+            }
+          }
+        }
+      }
+    }
+    var attributeValue = getAttribute(element, name);
+    if (attributeValue != null) {
+      return createNullableProperty<T>(converter(attributeValue), isImmutable);
+    }
+    return createNullableProperty<T>(defaultValue(), isImmutable);
   }
 
   @override
@@ -76,7 +106,7 @@ class XmlParserNode extends ParserNode {
           .map((c) => parser!(XmlParserNode(c), parent))
           .cast<TFormElement>()
           .toList();
-      var childrenProperty = createListProperty(children, isImmutable);
+      var childrenProperty = createProperty(children, isImmutable);
       return childrenProperty;
     }
 
@@ -88,11 +118,10 @@ class XmlParserNode extends ParserNode {
           .map((c) => parser!(XmlParserNode(c as XmlElement), parent))
           .cast<TFormElement>()
           .toList();
-      return createListProperty(children, isImmutable);
+      return createProperty(children, isImmutable);
     }
 
-    return createProperty(<TFormElement>[], isImmutable)
-        as Property<List<TFormElement>>;
+    return createProperty(<TFormElement>[], isImmutable);
   }
 
   @override
@@ -115,11 +144,10 @@ class XmlParserNode extends ParserNode {
       if (childElement != null) {
         return createProperty<TFormElement>(
             parser(XmlParserNode(childElement), parent) as TFormElement,
-            isImmutable) as Property<TFormElement>;
+            isImmutable);
       }
     }
-    return createProperty(defaultValue(), isImmutable)
-        as Property<TFormElement>;
+    return createProperty(defaultValue(), isImmutable);
   }
 
   @override
@@ -140,11 +168,11 @@ class XmlParserNode extends ParserNode {
       var childElement = propertyElement.children
           .firstWhereOrNull((c) => c is XmlElement) as XmlElement?;
       if (childElement != null) {
-        return createProperty<TFormElement>(
+        return createNullableProperty<TFormElement>(
             parser(XmlParserNode(childElement), parent) as TFormElement,
             isImmutable);
       }
     }
-    return createProperty(defaultValue(), isImmutable);
+    return createNullableProperty(defaultValue(), isImmutable);
   }
 }
