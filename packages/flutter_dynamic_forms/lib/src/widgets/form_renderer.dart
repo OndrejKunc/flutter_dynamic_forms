@@ -4,12 +4,12 @@ import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
 class FormRenderer<TFormManager extends FormManager> extends StatefulWidget {
   final List<FormElementRenderer> renderers;
-  final FormElementEventDispatcherFunction dispatcher;
-  final TFormManager formManager;
+  final FormElementEventDispatcherFunction? dispatcher;
+  final TFormManager? formManager;
 
   const FormRenderer({
-    Key key,
-    @required this.renderers,
+    Key? key,
+    required this.renderers,
     this.dispatcher,
     this.formManager,
   }) : super(key: key);
@@ -21,8 +21,8 @@ class FormRenderer<TFormManager extends FormManager> extends StatefulWidget {
 
 class _FormRendererState<TFormManager extends FormManager>
     extends State<FormRenderer<TFormManager>> {
-  FormRenderService _formRenderService;
-  TFormManager _formManager;
+  late FormRenderService _formRenderService;
+  TFormManager? _formManager;
 
   @override
   void didChangeDependencies() {
@@ -37,7 +37,7 @@ or make sure you have `FormProvider` as your ancestor widget.
   ''');
       }
     } else {
-      _formManager = widget.formManager;
+      _formManager = widget.formManager!;
     }
     _formRenderService = FormRenderService(
       renderers: widget.renderers,
@@ -47,12 +47,12 @@ or make sure you have `FormProvider` as your ancestor widget.
 
   @override
   Widget build(BuildContext context) {
-    return _formRenderService.render(_formManager.form, context);
+    return _formRenderService.render(_formManager!.form, context);
   }
 
   void _onFormElementEvent(FormElementEvent event) {
     if (event is ChangeValueEvent) {
-      _formManager.changeValue(
+      _formManager!.changeValue(
           value: event.value,
           elementId: event.elementId,
           propertyName: event.propertyName,

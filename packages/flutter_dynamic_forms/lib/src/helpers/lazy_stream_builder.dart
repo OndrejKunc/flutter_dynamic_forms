@@ -7,10 +7,13 @@ typedef StreamFactory<T> = Stream<T> Function();
 class LazyStreamBuilder<T> extends StatefulWidget {
   final StreamFactory<T> streamFactory;
   final AsyncWidgetBuilder<T> builder;
-  final T initialData;
+  final T? initialData;
 
   const LazyStreamBuilder(
-      {Key key, this.streamFactory, this.builder, this.initialData})
+      {Key? key,
+      required this.streamFactory,
+      required this.builder,
+      this.initialData})
       : super(key: key);
 
   @override
@@ -18,7 +21,7 @@ class LazyStreamBuilder<T> extends StatefulWidget {
 }
 
 class _LazyStreamBuilderState<T> extends State<LazyStreamBuilder<T>> {
-  Stream<T> _stream;
+  late Stream<T> _stream;
 
   @override
   void initState() {
