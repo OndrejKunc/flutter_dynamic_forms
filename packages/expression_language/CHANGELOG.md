@@ -1,3 +1,6 @@
+# 1.0.0
+* Stable null safety release
+
 # 0.4.0
 
 * Added support for custom expressions.
