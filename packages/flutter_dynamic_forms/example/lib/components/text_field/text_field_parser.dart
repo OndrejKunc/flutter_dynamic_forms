@@ -14,7 +14,7 @@ class TextFieldParser<TTextField extends TextField>
   void fillProperties(
     TTextField text,
     ParserNode parserNode,
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(text, parserNode, parent, parser);

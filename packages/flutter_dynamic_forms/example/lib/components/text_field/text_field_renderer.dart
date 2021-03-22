@@ -1,4 +1,4 @@
-import 'package:dynamic_forms/dynamic_forms.dart' as model;
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
@@ -16,9 +16,8 @@ class TextFieldRenderer extends FormElementRenderer<model.TextField> {
     return StreamBuilder(
       stream: element.propertyChanged,
       builder: (context, _) {
-        var errorText = element.validations
-            .firstWhere((v) => !v.isValid, orElse: () => null)
-            ?.message;
+        var errorText =
+            element.validations.firstWhereOrNull((v) => !v.isValid)?.message;
         return TextFieldWidget(
           text: element.value,
           id: element.id,

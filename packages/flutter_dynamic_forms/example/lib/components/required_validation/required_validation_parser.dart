@@ -9,11 +9,11 @@ class RequiredValidationParser extends ValidationParser<RequiredValidation> {
 
   @override
   void fillProperties(RequiredValidation validation, ParserNode parserNode,
-      Element parent, parser) {
+      Element? parent, parser) {
     validation
       ..id = parserNode.getPlainString('id')
       ..isVisibleProperty = parserNode.getIsVisibleProperty()
-      ..parentProperty = parserNode.getParentProperty(parent)
+      ..parentProperty = parserNode.getParentProperty(parent as FormElement?)
       ..messageProperty = parserNode.getStringProperty('message')
       ..isValidProperty = getIsValid(parent);
   }
@@ -28,12 +28,12 @@ class RequiredValidationParser extends ValidationParser<RequiredValidation> {
   /// It has to be declared as LazyExpressionProperty because parent
   /// properties are not initialized at this point so
   /// parent.getExpressionProvider would return null.
-  LazyExpressionProperty<bool> getIsValid(FormElement parent) {
+  LazyExpressionProperty<bool> getIsValid(FormElement? parent) {
     return LazyExpressionProperty(
       () => CustomFunctionExpression<bool>(
         [
           DelegateExpression(
-            [parent.id],
+            [parent!.id!],
             parent.getExpressionProvider(),
           ),
         ],

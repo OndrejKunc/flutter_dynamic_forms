@@ -17,7 +17,7 @@ class SimpleFormScreen extends StatefulWidget {
 
 class _SimpleFormScreenState extends State<SimpleFormScreen> {
   bool isLoading = true;
-  String xml;
+  late String xml;
 
   @override
   void initState() {
