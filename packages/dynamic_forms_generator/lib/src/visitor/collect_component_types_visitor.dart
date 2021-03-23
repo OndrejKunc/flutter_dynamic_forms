@@ -1,5 +1,5 @@
 import 'package:dynamic_forms_generator/src/model/component_type.dart';
-import 'package:dynamic_forms_generator/src/visitor/comopnent_type_visitor.dart';
+import 'package:dynamic_forms_generator/src/visitor/component_type_visitor.dart';
 
 class CollectComponentTypeVisitor extends ComponentTypeVisitor {
   final List<ComponentType> allComponentTypes = [];
@@ -30,7 +30,7 @@ class CollectComponentTypeVisitor extends ComponentTypeVisitor {
   @override
   void visitGenericParameterType(GenericParameterType type) {
     allComponentTypes.add(type);
-    type.extendsType.accept(this);
+    type.extendsType!.accept(this);
   }
 
   @override

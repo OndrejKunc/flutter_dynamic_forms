@@ -17,7 +17,7 @@ class ValueElementParserGenerator extends ElementParserGenerator {
     buffer.writeln('      ${componentDescription.type.toTypeString()}( ');
     for (var property in componentDescription.properties) {
       var parseMethod =
-          getParseMethod(property, contentProperty?.name == property?.name);
+          getParseMethod(property, contentProperty?.name == property.name);
       buffer.writeln('      ${property.name}: ${parseMethod}.value,');
     }
     buffer.writeln('    );');

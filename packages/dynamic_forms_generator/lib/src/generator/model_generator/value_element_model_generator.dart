@@ -21,7 +21,7 @@ class ValueElementModelGenerator extends ElementModelGenerator {
     }
 
     buffer.writeln(
-        'class ${componentDescription.type.toTypeString()} extends ${componentDescription.parentType.toTypeString()} {');
+        'class ${componentDescription.type.toTypeString()} extends ${componentDescription.parentType!.toTypeString()} {');
 
     for (var property in componentDescription.properties) {
       buffer.writeln(

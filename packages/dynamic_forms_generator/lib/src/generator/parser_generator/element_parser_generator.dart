@@ -4,17 +4,17 @@ import 'package:dynamic_forms_generator/src/model/component_description.dart';
 import 'package:dynamic_forms_generator/src/model/component_type.dart';
 
 abstract class ElementParserGenerator {
-  ComponentDescription componentDescription;
-  PropertyDescription contentProperty;
+  late ComponentDescription componentDescription;
+  PropertyDescription? contentProperty;
 
   static const String _valueElementName = 'valueElement';
 
   String generate();
 
-  static ElementParserGenerator getGenerator(
-      {String typeName,
-      ComponentDescription componentDescription,
-      PropertyDescription contentProperty}) {
+  static ElementParserGenerator getGenerator({
+    String? typeName,
+    required ComponentDescription componentDescription,
+    PropertyDescription? contentProperty}) {
     ElementParserGenerator returnElement;
     if (typeName != null) {
       switch (typeName) {
@@ -38,6 +38,10 @@ abstract class ElementParserGenerator {
     }
   }
 
+  String _capitalize(String s) => s[0].toUpperCase() + s.substring(1);
+
+  String _getPropertyParserMethodName(ComponentType type) => type.isNullable ? 'getNullable${_capitalize(type.typeName)}Property' : 'get${_capitalize(type.typeName)}Property';
+
   String getParseMethod(PropertyDescription property, bool isContentProperty) {
     if (property.name == 'id') {
       return 'parserNode.getPlainString(\'id\')';
@@ -52,7 +56,7 @@ abstract class ElementParserGenerator {
       var defaultValue = property.defaultValue == 'true'
           ? 'ParserNode.defaultTrue'
           : 'ParserNode.defaultFalse';
-      return '''parserNode.getBoolProperty(
+      return '''parserNode.${_getPropertyParserMethodName(property.type)}(
         '${property.name}',        
         defaultValue: $defaultValue,
         isImmutable: ${!property.isMutable},
@@ -64,7 +68,7 @@ abstract class ElementParserGenerator {
               ? 'ParserNode.defaultString'
               : '() => \'${property.defaultValue}\'';
 
-      return '''parserNode.getStringProperty(
+      return '''parserNode.${_getPropertyParserMethodName(property.type)}(
         '${property.name}',
         defaultValue: $defaultValue,
         isImmutable: ${!property.isMutable},
@@ -83,7 +87,7 @@ abstract class ElementParserGenerator {
           property.defaultValue == null || property.defaultValue == ''
               ? '0'
               : property.defaultValue;
-      return '''parserNode.getDecimalProperty(
+      return '''parserNode.${_getPropertyParserMethodName(property.type)}(
         '${property.name}',
         defaultValue: () => Decimal.fromDouble($defaultValue),
         isImmutable: ${!property.isMutable},
@@ -94,7 +98,7 @@ abstract class ElementParserGenerator {
           property.defaultValue == null || property.defaultValue == ''
               ? '0'
               : property.defaultValue;
-      return '''parserNode.getIntProperty(
+      return '''parserNode.${_getPropertyParserMethodName(property.type)}(
         '${property.name}',      
         defaultValue: () => $defaultValue,
         isImmutable: ${!property.isMutable},
@@ -105,7 +109,7 @@ abstract class ElementParserGenerator {
           property.defaultValue == null || property.defaultValue == ''
               ? '0'
               : property.defaultValue;
-      return '''parserNode.getDoubleProperty(
+      return '''parserNode.${_getPropertyParserMethodName(property.type)}(
         '${property.name}',
         defaultValue: () => $defaultValue,
         isImmutable: ${!property.isMutable},
@@ -116,7 +120,7 @@ abstract class ElementParserGenerator {
           property.defaultValue == null || property.defaultValue == ''
               ? 'null'
               : 'DateTime.parse(\'${property.defaultValue}\')';
-      return '''parserNode.getDateTimeProperty(
+      return '''parserNode.${_getPropertyParserMethodName(property.type)}(
         '${property.name}',
         defaultValue: () => $defaultValue,
         isImmutable: ${!property.isMutable},
@@ -127,8 +131,8 @@ abstract class ElementParserGenerator {
       if (property.defaultValue == null || property.defaultValue == '') {
         defaultValue = 'null';
       } else {
-        if (property.defaultValue.contains('.')) {
-          var lastPart = property.defaultValue.split('.').last;
+        if (property.defaultValue!.contains('.')) {
+          var lastPart = property.defaultValue!.split('.').last;
           defaultValue = '${property.type.toTypeString()}.$lastPart';
         } else {
           defaultValue =

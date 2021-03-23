@@ -2,7 +2,7 @@ import 'package:dynamic_forms_generator/src/model/raw_component_description.dart
 import 'package:yaml/yaml.dart';
 
 class ComponentYamlParser {
-  RawComponentDescription parse(String content, String inputPath) {
+  RawComponentDescription? parse(String content, String inputPath) {
     YamlMap parsedMap;
 
     try {
@@ -13,7 +13,7 @@ class ComponentYamlParser {
     }
 
     try {
-      YamlMap propertyMap = parsedMap['properties'];
+      YamlMap? propertyMap = parsedMap['properties'];
       var properties = <RawPropertyDescription>[];
       if (propertyMap != null) {
         for (var propertyEntry in propertyMap.entries) {
@@ -32,7 +32,7 @@ class ComponentYamlParser {
         }
       }
 
-      YamlList yamlList = parsedMap['values'];
+      YamlList? yamlList = parsedMap['values'];
       var values = <String>[];
       if (yamlList != null) {
         for (var value in yamlList) {

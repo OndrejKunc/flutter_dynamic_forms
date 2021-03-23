@@ -1,36 +1,35 @@
 import 'package:dynamic_forms_generator/src/model/component_type.dart';
-import 'package:meta/meta.dart';
 
 class ComponentDescription {
   DefinitionType type;
-  ComponentType parentType;
+  ComponentType? parentType;
   List<PropertyDescription> properties;
-  PropertyDescription contentProperty;
+  PropertyDescription? contentProperty;
   List<String> namespaces;
   List<String> values;
 
   ComponentDescription({
-    @required this.type,
+    required this.type,
     this.parentType,
-    this.properties,
+    this.properties = const [],
     this.contentProperty,
-    this.namespaces,
-    this.values,
+    this.namespaces = const [],
+    this.values = const [],
   });
 }
 
 class PropertyDescription {
   String name;
   ComponentType type;
-  String defaultValue;
+  String? defaultValue;
   bool isMutable;
   bool isEnum;
 
   PropertyDescription({
-    @required this.name,
-    @required this.type,
+    required this.name,
+    required this.type,
     this.defaultValue,
     this.isMutable = false,
-    this.isEnum,
+    this.isEnum = false,
   });
 }

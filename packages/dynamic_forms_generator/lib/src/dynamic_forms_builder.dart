@@ -37,24 +37,19 @@ class DynamicFormsBuilder implements Builder {
 
     var componentDescription = componentDescriptionBuilder
         .buildFromRawComponent(rawComponentDescription);
-    if (componentDescription == null) {
-      return;
-    }
 
     var modelGenerator = getGenerator(
       componentDescription: componentDescription,
-      typeName: componentDescription.parentType.typeName,
+      typeName: componentDescription.parentType!.typeName,
       buildConfiguration: buildConfiguration,
     );
 
     var modelContent = modelGenerator.generateBody();
-    if (modelContent == null) {
-      return;
-    }
+
     var model = inputId.changeExtension('.g.dart');
     await buildStep.writeAsString(model, modelContent);
 
-    if (componentDescription.parentType.typeName == 'enum') {
+    if (componentDescription.parentType?.typeName == 'enum') {
       return;
     }
 

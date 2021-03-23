@@ -11,12 +11,12 @@ class ComponentTypeGrammarParser extends ComponentTypeGrammarDefinition {
         (c) {
           ComponentType type;
           if (c[1] == null) {
-            type = ComponentType(c[0]);
+            type = ComponentType(c[0], c[3] != null);
           } else {
-            type = GenericType(c[0], c[1][1]);
+            type = GenericType(c[0], c[3] != null, c[1][1]);
           }
           if (c[2] != null) {
-            type = ArrayType(type);
+            type = ArrayType(type, c[3] != null);
           }
           return type;
         },
@@ -64,11 +64,11 @@ class ComponentTypeGrammarParser extends ComponentTypeGrammarDefinition {
   Parser genericParameterTypeExpression() =>
       super.genericParameterTypeExpression().map(
         (c) {
-          ComponentType extendsType;
+          ComponentType? extendsType;
           if (c[1] != null) {
             extendsType = c[1][1];
           }
-          return GenericParameterType(c[0], extendsType);
+          return GenericParameterType(c[0], false, extendsType);
         },
       );
 }

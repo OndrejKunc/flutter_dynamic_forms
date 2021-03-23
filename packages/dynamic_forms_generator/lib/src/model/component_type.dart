@@ -1,15 +1,17 @@
-import 'package:dynamic_forms_generator/src/visitor/comopnent_type_visitor.dart';
+import 'package:dynamic_forms_generator/src/visitor/component_type_visitor.dart';
 
 Set<String> lowerCaseTypes = {'int', 'bool', 'double'};
 
 class ComponentType {
   final String typeName;
-  ComponentType(this.typeName);
+  final bool isNullable;
+  ComponentType(this.typeName, this.isNullable);
 
   String get capitalizedTypeName => capitalize(typeName);
+  String get nullableTypeText => isNullable ? '?' : '';
 
   String toTypeString() {
-    return capitalize(typeName);
+    return capitalize(typeName) + nullableTypeText;
   }
 
   String capitalize(String s) {
@@ -27,13 +29,14 @@ class ComponentType {
 class GenericType extends ComponentType {
   final List<ComponentType> genericParameters;
 
-  GenericType(String typeName, this.genericParameters) : super(typeName);
+  GenericType(String typeName, bool isNullable, this.genericParameters)
+      : super(typeName, isNullable);
 
   @override
   String toTypeString() {
     var joinedTypeParameters =
         genericParameters.map((t) => t.toTypeString()).join(',');
-    return '${capitalize(typeName)}<${joinedTypeParameters}>';
+    return '${capitalize(typeName)}<${joinedTypeParameters}>$nullableTypeText';
   }
 
   @override
@@ -45,11 +48,12 @@ class GenericType extends ComponentType {
 class ArrayType extends ComponentType {
   final ComponentType innerType;
 
-  ArrayType(this.innerType) : super(innerType.typeName);
+  ArrayType(this.innerType, bool isNullable)
+      : super(innerType.typeName, isNullable);
 
   @override
   String toTypeString() {
-    return 'List<${capitalize(typeName)}>';
+    return 'List<${capitalize(typeName)}>$nullableTypeText';
   }
 
   @override
@@ -59,16 +63,17 @@ class ArrayType extends ComponentType {
 }
 
 class GenericParameterType extends ComponentType {
-  final ComponentType extendsType;
+  final ComponentType? extendsType;
 
-  GenericParameterType(String typeName, [this.extendsType]) : super(typeName);
+  GenericParameterType(String typeName, bool isNullable, [this.extendsType])
+      : super(typeName, isNullable);
 
   @override
   String toTypeString() {
     if (extendsType == null) {
       return typeName;
     }
-    return '${capitalize(typeName)} extends ${extendsType.toTypeString()}';
+    return '${capitalize(typeName)} extends ${extendsType!.toTypeString()}';
   }
 
   @override
@@ -78,7 +83,7 @@ class GenericParameterType extends ComponentType {
 }
 
 class DefinitionType extends ComponentType {
-  DefinitionType(String typeName) : super(typeName);
+  DefinitionType(String typeName) : super(typeName, false);
 
   String toConstructorString() {
     return '${capitalize(typeName)}()';
@@ -100,7 +105,7 @@ class GenericDefinitionType extends DefinitionType {
   String toTypeString() {
     var joinedTypeParameters =
         genericParameters.map((t) => t.toTypeString()).join(',');
-    return '${capitalize(typeName)}<${joinedTypeParameters}>';
+    return '${capitalize(typeName)}<${joinedTypeParameters}>$nullableTypeText';
   }
 
   @override
