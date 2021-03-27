@@ -12,7 +12,7 @@ class ValueElementParserGenerator extends ElementParserGenerator {
     buffer.writeln('''
 
   @override
-  ${componentDescription.type.toTypeString()} parse(ParserNode parserNode, FormElement parent,
+  ${componentDescription.type.toTypeString()} parse(ParserNode parserNode, FormElement? parent,
       ElementParserFunction parser) =>''');
     buffer.writeln('      ${componentDescription.type.toTypeString()}( ');
     for (var property in componentDescription.properties) {

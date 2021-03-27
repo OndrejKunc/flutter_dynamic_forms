@@ -14,7 +14,7 @@ class ExampleFormElementParser<TExampleFormElement extends ExampleFormElement>
   void fillProperties(
     TExampleFormElement exampleFormElement, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(exampleFormElement, parserNode, parent, parser);

@@ -3,6 +3,7 @@ parentType: formElement
 properties:
   label:
     type: string
+    default: "abc"
   value:
     type: bool
     default: false
@@ -22,3 +23,40 @@ properties:
   textColor:
     type: string
     default: b74903
+  nullableLabel:
+    type: string?
+    default: "abc"
+  nullableBool:
+    type: bool?
+    default: false
+    isMutable: true
+  nullableDate:
+    type: dateTime?
+    default: "1969-07-20 20:18:04Z"
+  nullableDouble:
+    type: double?
+    default: 27.0
+  nullableDecimal:
+    type: decimal?
+    default: 42
+  nullableInt:
+    type: int?
+    default: 51
+  nullableTextColor:
+    type: string?
+    default: b74903
+  nullableDefaultLabel:
+    type: string?
+  nullableDefaultBool:
+    type: bool?
+    isMutable: true
+  nullableDefaultDate:
+    type: dateTime?
+  nullableDefaultDouble:
+    type: double?
+  nullableDefaultDecimal:
+    type: decimal?
+  nullableDefaultInt:
+    type: int?
+  nullableDefaultTextColor:
+    type: string?

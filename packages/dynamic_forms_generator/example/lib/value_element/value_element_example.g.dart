@@ -21,7 +21,7 @@ class ExampleValueElement extends ValueElement {
     secondProperty: secondProperty,
   );
   @override
-  ExpressionProvider getExpressionProvider([String propertyName]) {
+  ExpressionProvider getExpressionProvider([String? propertyName]) {
     switch (propertyName) {
       case firstPropertyPropertyName:
         {
@@ -32,7 +32,7 @@ class ExampleValueElement extends ValueElement {
           return ImmutableProperty(secondProperty);
         }
     default:
-      return null;
+      throw Exception('Unknown propertyName $propertyName');
     }
   }
 }

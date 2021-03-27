@@ -5,7 +5,7 @@ import '../components.dart';
 class RadioButtonGroup extends SingleSelectGroup<RadioButton> {
   static const String arrangementPropertyName = 'arrangement';
 
-  Property<String> get arrangementProperty => properties[arrangementPropertyName];
+  Property<String> get arrangementProperty => properties[arrangementPropertyName] as Property<String>;
   set arrangementProperty(Property<String> value) =>
       registerProperty(arrangementPropertyName, value);
   String get arrangement =>

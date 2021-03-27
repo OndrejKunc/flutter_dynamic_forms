@@ -11,7 +11,7 @@ abstract class SingleSelectGroupParser<
   void fillProperties(
     TSingleSelectGroup singleSelectGroup, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(singleSelectGroup, parserNode, parent, parser);

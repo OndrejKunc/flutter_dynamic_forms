@@ -14,7 +14,7 @@ class TextParser<TText extends Text>
   void fillProperties(
     TText text, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(text, parserNode, parent, parser);
