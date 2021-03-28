@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'date_range.g.dart' as model;
 import 'date_range_popup.dart';
 
-class ReactiveDateRangeRenderer extends FormElementRenderer<model.DateRange> {
+class DateRangeRenderer extends FormElementRenderer<model.DateRange> {
   @override
   Widget render(
       model.DateRange element,
@@ -20,8 +20,8 @@ class ReactiveDateRangeRenderer extends FormElementRenderer<model.DateRange> {
 
         String _getHintText() {
           if (element.firstValue != null && element.secondValue != null) {
-            var first = format.format(element.firstValue);
-            var second = format.format(element.secondValue);
+            var first = format.format(element.firstValue!);
+            var second = format.format(element.secondValue!);
             return "$first - $second";
           }
           return 'Select Date';
@@ -45,12 +45,12 @@ class ReactiveDateRangeRenderer extends FormElementRenderer<model.DateRange> {
                     maximumDate: element.maxDate,
                     initialStartDate: element.firstValue,
                     initialEndDate: element.secondValue,
-                    onApplyClick: (DateTime startDate, DateTime endDate) {
+                    onApplyClick: (DateTime? startDate, DateTime? endDate) {
                       if (startDate != null && endDate != null) {
                         dispatcher(
                           ChangeValueEvent(
                             value: startDate,
-                            elementId: element.id,
+                            elementId: element.id!,
                             propertyName:
                                 model.DateRange.firstValuePropertyName,
                           ),
@@ -58,14 +58,13 @@ class ReactiveDateRangeRenderer extends FormElementRenderer<model.DateRange> {
                         dispatcher(
                           ChangeValueEvent(
                             value: endDate,
-                            elementId: element.id,
+                            elementId: element.id!,
                             propertyName:
                                 model.DateRange.secondValuePropertyName,
                           ),
                         );
                       }
                     },
-                    onCancelClick: () {},
                   ),
                 );
               },

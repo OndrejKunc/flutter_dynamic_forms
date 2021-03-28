@@ -16,7 +16,7 @@ class FormParser<TForm extends Form>
   void fillProperties(
     TForm form, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(form, parserNode, parent, parser);

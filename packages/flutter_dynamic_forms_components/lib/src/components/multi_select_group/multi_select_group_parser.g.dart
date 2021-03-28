@@ -13,7 +13,7 @@ abstract class MultiSelectGroupParser<
   void fillProperties(
     TMultiSelectGroup multiSelectGroup, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(multiSelectGroup, parserNode, parent, parser);

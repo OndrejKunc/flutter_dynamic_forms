@@ -3,7 +3,7 @@ import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart'
     as model;
 
-class ReactiveCheckBoxRenderer extends FormElementRenderer<model.CheckBox> {
+class CheckBoxRenderer extends FormElementRenderer<model.CheckBox> {
   @override
   Widget render(
       model.CheckBox element,
@@ -22,7 +22,7 @@ class ReactiveCheckBoxRenderer extends FormElementRenderer<model.CheckBox> {
                 onChanged: (value) => dispatcher(
                   ChangeValueEvent(
                     value: value,
-                    elementId: element.id,
+                    elementId: element.id!,
                   ),
                 ),
                 value: snapshot.data,
@@ -35,7 +35,7 @@ class ReactiveCheckBoxRenderer extends FormElementRenderer<model.CheckBox> {
               initialData: element.label,
               stream: element.labelChanged,
               builder: (context, snapshot) {
-                return Text(snapshot.data);
+                return Text(snapshot.data!);
               },
             ),
           )

@@ -16,7 +16,7 @@ class ReactiveRadioButtonRenderer
     var parent = element.parent as model.RadioButtonGroup;
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: LazyStreamBuilder<String>(
+      child: LazyStreamBuilder(
         initialData: parent.value,
         streamFactory: () =>
             MergeStream([parent.valueChanged, element.propertyChanged]),
@@ -25,10 +25,10 @@ class ReactiveRadioButtonRenderer
             title: Text(element.label),
             value: element.value,
             groupValue: parent.value,
-            onChanged: (String value) => dispatcher(
+            onChanged: (String? value) => dispatcher(
               ChangeValueEvent(
                   value: value,
-                  elementId: parent.id,
+                  elementId: parent.id!,
                   propertyName: model.SingleSelectGroup.valuePropertyName),
             ),
           );

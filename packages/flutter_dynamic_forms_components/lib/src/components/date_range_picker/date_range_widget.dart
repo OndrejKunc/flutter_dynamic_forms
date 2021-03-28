@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class CustomCalendarView extends StatefulWidget {
-  final DateTime minimumDate;
-  final DateTime maximumDate;
-  final DateTime initialStartDate;
-  final DateTime initialEndDate;
-  final Function(DateTime, DateTime) startEndDateChange;
+  final DateTime? minimumDate;
+  final DateTime? maximumDate;
+  final DateTime? initialStartDate;
+  final DateTime? initialEndDate;
+  final Function(DateTime?, DateTime?) startEndDateChange;
 
   const CustomCalendarView(
-      {Key key,
+      {Key? key,
       this.initialStartDate,
       this.initialEndDate,
-      this.startEndDateChange,
+      required this.startEndDateChange,
       this.minimumDate,
       this.maximumDate})
       : super(key: key);
@@ -22,10 +22,10 @@ class CustomCalendarView extends StatefulWidget {
 }
 
 class _CustomCalendarViewState extends State<CustomCalendarView> {
-  List<DateTime> dateList = List<DateTime>();
+  List<DateTime> dateList = [];
   var currentMonthDate = DateTime.now();
-  DateTime startDate;
-  DateTime endDate;
+  DateTime? startDate;
+  DateTime? endDate;
 
   @override
   void initState() {
@@ -161,7 +161,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   }
 
   List<Widget> getDaysNameUI() {
-    List<Widget> listUI = List<Widget>();
+    List<Widget> listUI = [];
     for (var i = 0; i < 7; i++) {
       listUI.add(
         Expanded(
@@ -182,10 +182,10 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   }
 
   List<Widget> getDaysNoUI() {
-    List<Widget> noList = List<Widget>();
+    List<Widget> noList = [];
     var cout = 0;
     for (var i = 0; i < dateList.length / 7; i++) {
-      List<Widget> listUI = List<Widget>();
+      List<Widget> listUI = [];
       for (var i = 0; i < 7; i++) {
         final date = dateList[cout];
         listUI.add(
@@ -240,33 +240,26 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                         borderRadius: BorderRadius.all(Radius.circular(32.0)),
                         onTap: () {
                           if (currentMonthDate.month == date.month) {
-                            if (widget.minimumDate != null &&
-                                widget.maximumDate != null) {
-                              var newminimumDate = DateTime(
-                                  widget.minimumDate.year,
-                                  widget.minimumDate.month,
-                                  widget.minimumDate.day - 1);
-                              var newmaximumDate = DateTime(
-                                  widget.maximumDate.year,
-                                  widget.maximumDate.month,
-                                  widget.maximumDate.day + 1);
+                            var minimumDate = widget.minimumDate;
+                            var maximumDate = widget.maximumDate;
+                            if (minimumDate != null && maximumDate != null) {
+                              var newminimumDate = DateTime(minimumDate.year,
+                                  minimumDate.month, minimumDate.day - 1);
+                              var newmaximumDate = DateTime(maximumDate.year,
+                                  maximumDate.month, maximumDate.day + 1);
                               if (date.isAfter(newminimumDate) &&
                                   date.isBefore(newmaximumDate)) {
                                 onDateClick(date);
                               }
-                            } else if (widget.minimumDate != null) {
-                              var newminimumDate = DateTime(
-                                  widget.minimumDate.year,
-                                  widget.minimumDate.month,
-                                  widget.minimumDate.day - 1);
+                            } else if (minimumDate != null) {
+                              var newminimumDate = DateTime(minimumDate.year,
+                                  minimumDate.month, minimumDate.day - 1);
                               if (date.isAfter(newminimumDate)) {
                                 onDateClick(date);
                               }
-                            } else if (widget.maximumDate != null) {
-                              var newmaximumDate = DateTime(
-                                  widget.maximumDate.year,
-                                  widget.maximumDate.month,
-                                  widget.maximumDate.day + 1);
+                            } else if (maximumDate != null) {
+                              var newmaximumDate = DateTime(maximumDate.year,
+                                  maximumDate.month, maximumDate.day + 1);
                               if (date.isBefore(newmaximumDate)) {
                                 onDateClick(date);
                               }
@@ -359,7 +352,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
 
   bool getIsInRange(DateTime date) {
     if (startDate != null && endDate != null) {
-      if (date.isAfter(startDate) && date.isBefore(endDate)) {
+      if (date.isAfter(startDate!) && date.isBefore(endDate!)) {
         return true;
       } else {
         return false;
@@ -370,15 +363,17 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   }
 
   bool getIsItStartAndEndDate(DateTime date) {
-    if (startDate != null &&
-        startDate.day == date.day &&
-        startDate.month == date.month &&
-        startDate.year == date.year) {
+    var start = startDate;
+    var end = endDate;
+    if (start != null &&
+        start.day == date.day &&
+        start.month == date.month &&
+        start.year == date.year) {
       return true;
-    } else if (endDate != null &&
-        endDate.day == date.day &&
-        endDate.month == date.month &&
-        endDate.year == date.year) {
+    } else if (end != null &&
+        end.day == date.day &&
+        end.month == date.month &&
+        end.year == date.year) {
       return true;
     } else {
       return false;
@@ -386,9 +381,8 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   }
 
   bool isStartDateRadius(DateTime date) {
-    if (startDate != null &&
-        startDate.day == date.day &&
-        startDate.month == date.month) {
+    var start = startDate;
+    if (start != null && start.day == date.day && start.month == date.month) {
       return true;
     } else if (date.weekday == 1) {
       return true;
@@ -398,9 +392,8 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   }
 
   bool isEndDateRadius(DateTime date) {
-    if (endDate != null &&
-        endDate.day == date.day &&
-        endDate.month == date.month) {
+    var end = endDate;
+    if (end != null && end.day == date.day && end.month == date.month) {
       return true;
     } else if (date.weekday == 7) {
       return true;
@@ -418,9 +411,11 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
       startDate = date;
     } else if (startDate != date && endDate == null) {
       endDate = date;
-    } else if (startDate.day == date.day && startDate.month == date.month) {
+    } else if (startDate!.day == date.day && startDate!.month == date.month) {
       startDate = null;
-    } else if (endDate.day == date.day && endDate.month == date.month) {
+    } else if (endDate != null &&
+        endDate!.day == date.day &&
+        endDate!.month == date.month) {
       endDate = null;
     }
     if (startDate == null && endDate != null) {
@@ -428,15 +423,15 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
       endDate = null;
     }
     if (startDate != null && endDate != null) {
-      if (!endDate.isAfter(startDate)) {
+      if (!endDate!.isAfter(startDate!)) {
         var d = startDate;
         startDate = endDate;
         endDate = d;
       }
-      if (date.isBefore(startDate)) {
+      if (date.isBefore(startDate!)) {
         startDate = date;
       }
-      if (date.isAfter(endDate)) {
+      if (date.isAfter(endDate!)) {
         endDate = date;
       }
     }

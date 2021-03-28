@@ -5,20 +5,18 @@ import 'package:intl/intl.dart';
 import 'date_range_widget.dart';
 
 class CalendarPopupView extends StatefulWidget {
-  final DateTime minimumDate;
-  final DateTime maximumDate;
+  final DateTime? minimumDate;
+  final DateTime? maximumDate;
   final bool barrierDismissible;
-  final DateTime initialStartDate;
-  final DateTime initialEndDate;
-  final Function(DateTime, DateTime) onApplyClick;
-  final Function onCancelClick;
+  final DateTime? initialStartDate;
+  final DateTime? initialEndDate;
+  final void Function(DateTime?, DateTime?) onApplyClick;
 
   const CalendarPopupView(
-      {Key key,
+      {Key? key,
       this.initialStartDate,
       this.initialEndDate,
-      this.onApplyClick,
-      this.onCancelClick,
+      required this.onApplyClick,
       this.barrierDismissible = true,
       this.minimumDate,
       this.maximumDate})
@@ -29,9 +27,9 @@ class CalendarPopupView extends StatefulWidget {
 
 class _CalendarPopupViewState extends State<CalendarPopupView>
     with TickerProviderStateMixin {
-  AnimationController animationController;
-  DateTime startDate;
-  DateTime endDate;
+  late AnimationController animationController;
+  DateTime? startDate;
+  DateTime? endDate;
 
   @override
   void initState() {
@@ -60,7 +58,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
         backgroundColor: Colors.transparent,
         body: AnimatedBuilder(
           animation: animationController,
-          builder: (BuildContext context, Widget child) {
+          builder: (BuildContext context, Widget? child) {
             return AnimatedOpacity(
               duration: Duration(milliseconds: 100),
               opacity: animationController.value,
@@ -116,7 +114,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                       Text(
                                         startDate != null
                                             ? DateFormat("EEE, dd MMM")
-                                                .format(startDate)
+                                                .format(startDate!)
                                             : "--/-- ",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
@@ -151,7 +149,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                       Text(
                                         endDate != null
                                             ? DateFormat("EEE, dd MMM")
-                                                .format(endDate)
+                                                .format(endDate!)
                                             : "--/-- ",
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
@@ -170,8 +168,8 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                               maximumDate: widget.maximumDate,
                               initialEndDate: widget.initialEndDate,
                               initialStartDate: widget.initialStartDate,
-                              startEndDateChange: (DateTime startDateData,
-                                  DateTime endDateData) {
+                              startEndDateChange: (DateTime? startDateData,
+                                  DateTime? endDateData) {
                                 setState(() {
                                   startDate = startDateData;
                                   endDate = endDateData;

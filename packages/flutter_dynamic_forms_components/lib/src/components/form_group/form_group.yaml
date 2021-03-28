@@ -1,5 +1,5 @@
 type: formGroup
-parentType: container
+parentType: itemsContainer
 properties:
   name:
     type: string

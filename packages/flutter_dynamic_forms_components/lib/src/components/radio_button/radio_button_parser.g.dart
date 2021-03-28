@@ -16,7 +16,7 @@ class RadioButtonParser<TRadioButton extends RadioButton>
   void fillProperties(
     TRadioButton radioButton, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(radioButton, parserNode, parent, parser);

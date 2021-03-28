@@ -4,10 +4,10 @@
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 import 'package:dynamic_forms/dynamic_forms.dart';
 
-class Container extends FormElement {
+class ItemsContainer extends FormElement {
   static const String childrenPropertyName = 'children';
 
-  Property<List<FormElement>> get childrenProperty => properties[childrenPropertyName];
+  Property<List<FormElement>> get childrenProperty => properties[childrenPropertyName] as Property<List<FormElement>>;
   set childrenProperty(Property<List<FormElement>> value) =>
       registerProperty(childrenPropertyName, value);
   List<FormElement> get children =>
@@ -16,6 +16,6 @@ class Container extends FormElement {
 
   @override
   FormElement getInstance() {
-    return Container();
+    return ItemsContainer();
   }
 }

@@ -10,28 +10,28 @@ class TextField extends FormElement {
   static const String validationsPropertyName = 'validations';
   static const String valuePropertyName = 'value';
 
-  Property<TextFieldInputType> get inputTypeProperty => properties[inputTypePropertyName];
+  Property<TextFieldInputType> get inputTypeProperty => properties[inputTypePropertyName] as Property<TextFieldInputType>;
   set inputTypeProperty(Property<TextFieldInputType> value) =>
       registerProperty(inputTypePropertyName, value);
   TextFieldInputType get inputType =>
       inputTypeProperty.value;
   Stream<TextFieldInputType> get inputTypeChanged => inputTypeProperty.valueChanged;
 
-  Property<String> get labelProperty => properties[labelPropertyName];
+  Property<String> get labelProperty => properties[labelPropertyName] as Property<String>;
   set labelProperty(Property<String> value) =>
       registerProperty(labelPropertyName, value);
   String get label =>
       labelProperty.value;
   Stream<String> get labelChanged => labelProperty.valueChanged;
 
-  Property<List<Validation>> get validationsProperty => properties[validationsPropertyName];
+  Property<List<Validation>> get validationsProperty => properties[validationsPropertyName] as Property<List<Validation>>;
   set validationsProperty(Property<List<Validation>> value) =>
       registerProperty(validationsPropertyName, value);
   List<Validation> get validations =>
       validationsProperty.value;
   Stream<List<Validation>> get validationsChanged => validationsProperty.valueChanged;
 
-  Property<String> get valueProperty => properties[valuePropertyName];
+  Property<String> get valueProperty => properties[valuePropertyName] as Property<String>;
   set valueProperty(Property<String> value) =>
       registerProperty(valuePropertyName, value);
   String get value =>

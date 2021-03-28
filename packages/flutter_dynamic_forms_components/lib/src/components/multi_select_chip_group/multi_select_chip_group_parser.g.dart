@@ -16,7 +16,7 @@ class MultiSelectChipGroupParser<TMultiSelectChipGroup extends MultiSelectChipGr
   void fillProperties(
     TMultiSelectChipGroup multiSelectChipGroup, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(multiSelectChipGroup, parserNode, parent, parser);

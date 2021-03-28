@@ -16,7 +16,7 @@ class DropdownButtonParser<TDropdownButton extends DropdownButton>
   void fillProperties(
     TDropdownButton dropdownButton, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(dropdownButton, parserNode, parent, parser);

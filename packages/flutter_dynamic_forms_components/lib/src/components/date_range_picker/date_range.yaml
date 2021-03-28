@@ -2,10 +2,10 @@ type: dateRange
 parentType: formElement
 properties:
   firstValue:
-    type: dateTime
+    type: dateTime?
     isMutable: true
   secondValue:
-    type: dateTime
+    type: dateTime?
     isMutable: true
   label:
     type: string

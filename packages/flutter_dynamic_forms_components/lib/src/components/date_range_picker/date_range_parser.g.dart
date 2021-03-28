@@ -16,12 +16,12 @@ class DateRangeParser<TDateRange extends DateRange>
   void fillProperties(
     TDateRange dateRange, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(dateRange, parserNode, parent, parser);
     dateRange
-      ..firstValueProperty = parserNode.getDateTimeProperty(
+      ..firstValueProperty = parserNode.getNullableDateTimeProperty(
         'firstValue',
         defaultValue: () => null,
         isImmutable: false,
@@ -33,7 +33,7 @@ class DateRangeParser<TDateRange extends DateRange>
       )
       ..initialDateProperty = parserNode.getDateTimeProperty(
         'initialDate',
-        defaultValue: () => null,
+        defaultValue: ParserNode.defaultDateTime,
         isImmutable: true,
       )
       ..labelProperty = parserNode.getStringProperty(
@@ -51,7 +51,7 @@ class DateRangeParser<TDateRange extends DateRange>
         defaultValue: () => DateTime.parse('19690101'),
         isImmutable: true,
       )
-      ..secondValueProperty = parserNode.getDateTimeProperty(
+      ..secondValueProperty = parserNode.getNullableDateTimeProperty(
         'secondValue',
         defaultValue: () => null,
         isImmutable: false,

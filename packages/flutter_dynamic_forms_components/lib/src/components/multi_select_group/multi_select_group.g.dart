@@ -7,7 +7,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 class MultiSelectGroup<TMultiSelectChoice extends MultiSelectChoice> extends FormElement {
   static const String choicesPropertyName = 'choices';
 
-  Property<List<TMultiSelectChoice>> get choicesProperty => properties[choicesPropertyName];
+  Property<List<TMultiSelectChoice>> get choicesProperty => properties[choicesPropertyName] as Property<List<TMultiSelectChoice>>;
   set choicesProperty(Property<List<TMultiSelectChoice>> value) =>
       registerProperty(choicesPropertyName, value);
   List<TMultiSelectChoice> get choices =>

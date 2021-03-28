@@ -3,7 +3,7 @@ import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
 import 'slider.g.dart' as model;
 
-class ReactiveSliderRenderer extends FormElementRenderer<model.Slider> {
+class SliderRenderer extends FormElementRenderer<model.Slider> {
   @override
   Widget render(
       model.Slider element,
@@ -28,7 +28,7 @@ class ReactiveSliderRenderer extends FormElementRenderer<model.Slider> {
                 dispatcher(
                   ChangeValueEvent<double>(
                     value: value,
-                    elementId: element.id,
+                    elementId: element.id!,
                     propertyName: model.Slider.valuePropertyName,
                   ),
                 );
