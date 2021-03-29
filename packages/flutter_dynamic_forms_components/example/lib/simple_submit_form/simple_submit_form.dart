@@ -12,7 +12,7 @@ class SimpleSubmitForm extends StatefulWidget {
 
 class _SimpleSubmitFormState extends State<SimpleSubmitForm> {
   bool isLoading = true;
-  String fileContent;
+  late String fileContent;
 
   @override
   void initState() {
@@ -45,7 +45,7 @@ class _SimpleSubmitFormState extends State<SimpleSubmitForm> {
                   child: Column(
                     children: [
                       FormRenderer<JsonFormManager>(
-                        renderers: components.getReactiveRenderers(),
+                        renderers: components.getRenderers(),
                       ),
                       // Using Builder to obtain a BuildContext already containg JsonFormManager
                       Builder(

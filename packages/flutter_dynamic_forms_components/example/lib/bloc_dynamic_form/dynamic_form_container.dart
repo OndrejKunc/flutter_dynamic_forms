@@ -32,7 +32,7 @@ class _DynamicFormContainerState extends State<DynamicFormContainer> {
         return Center(
           child: SingleChildScrollView(
               child: FormRenderer<CustomFormManager>(
-            renderers: getReactiveRenderers(),
+            renderers: getRenderers(),
             dispatcher: BlocProvider.of<DynamicFormBloc>(context).add,
           )),
         );

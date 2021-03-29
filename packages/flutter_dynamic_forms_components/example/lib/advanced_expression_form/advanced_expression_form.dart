@@ -36,13 +36,13 @@ class AdvancedExpressionForm extends StatelessWidget {
         {
           "@name": "label",          
           "value": {
-                "expression": "\"Slider 1: \" + toString(round(@slider1.value, 2))"
+                "expression": "\"Slider 1: \" + toString(round(@slider1.value!, 2))"
           }
         },
         {
           "@name": "label",          
           "value": {
-                "expression": "\"Slider 2: \" + toString(round(@slider2.value, 2))"
+                "expression": "\"Slider 2: \" + toString(round(@slider2.value!, 2))"
           }
         },
         {
@@ -68,7 +68,7 @@ class AdvancedExpressionForm extends StatelessWidget {
             content: _sampleJson,
             parsers: components.getDefaultParserList(),
             child: FormRenderer<JsonFormManager>(
-              renderers: components.getReactiveRenderers(),
+              renderers: components.getRenderers(),
             ),
             expressionFactories: [
               ExplicitFunctionExpressionFactory(
@@ -76,13 +76,15 @@ class AdvancedExpressionForm extends StatelessWidget {
                 parametersLength: 2,
                 createFunctionExpression: (parameters) =>
                     SelectNumberPropertyExpression(
-                        parameters[0], parameters[1]),
+                        parameters[0]
+                            as Expression<List<ExpressionProviderElement>>,
+                        parameters[1] as Expression<String>),
               ),
               ExplicitFunctionExpressionFactory(
                 name: 'sumNumbers',
                 parametersLength: 1,
-                createFunctionExpression: (parameters) =>
-                    SumNumbersExpression(parameters[0]),
+                createFunctionExpression: (parameters) => SumNumbersExpression(
+                    parameters[0] as Expression<List<Expression<Number>>>),
               ),
             ],
           ),
@@ -112,10 +114,12 @@ class SelectNumberPropertyExpression<T extends ExpressionProviderElement>
     var delegateExpressions = value
         .evaluate()
         .map((e) => createDelegateExpression(
-            [e.id], e.getExpressionProvider(propertyName)))
+            [e.id!], e.getExpressionProvider(propertyName)))
+        .cast<Expression<Number?>>()
+        .map((e) => NullableToNonNullableExpression(e))
         .toList();
 
-    return delegateExpressions.cast<Expression<Number>>();
+    return delegateExpressions;
   }
 
   @override

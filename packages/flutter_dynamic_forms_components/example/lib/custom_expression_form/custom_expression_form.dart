@@ -40,14 +40,14 @@ class CustomExpressionForm extends StatelessWidget {
             content: _sampleJson,
             parsers: components.getDefaultParserList(),
             child: FormRenderer<JsonFormManager>(
-              renderers: components.getReactiveRenderers(),
+              renderers: components.getRenderers(),
             ),
             expressionFactories: [
               ExplicitFunctionExpressionFactory(
                 name: 'toUpperCase',
                 parametersLength: 1,
                 createFunctionExpression: (parameters) =>
-                    ToUpperCaseExpression(parameters[0]),
+                    ToUpperCaseExpression(parameters[0] as Expression<String>),
               )
             ],
           ),

@@ -76,7 +76,7 @@ class DynamicFormButtonRow extends StatelessWidget {
 
   const DynamicFormButtonRow(
     this.state, {
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

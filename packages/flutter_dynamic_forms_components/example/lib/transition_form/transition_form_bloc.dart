@@ -5,6 +5,7 @@ import 'package:example/transition_form/transition_form_event.dart';
 import 'package:example/transition_form/transition_form_state.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
+import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 
 class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
   static const Duration transitionDuration = Duration(milliseconds: 600);
@@ -12,13 +13,11 @@ class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
   final FormBuilder formBuilder;
   final TransitionFormBuilder transitionFormBuilder;
 
-  FormData formData;
-  FormManager formManager;
+  late FormData formData;
+  FormManager? formManager;
 
-  TransitionFormBloc(this.formBuilder, this.transitionFormBuilder);
-
-  @override
-  TransitionFormState get initialState => TransitionFormState();
+  TransitionFormBloc(this.formBuilder, this.transitionFormBuilder)
+      : super(TransitionFormState());
 
   @override
   Stream<TransitionFormState> mapEventToState(FormElementEvent event) async* {
@@ -29,10 +28,10 @@ class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
       var oldForm = formManager?.form;
       formData = formBuilder.build(xml);
       formManager = ExplicitFormManager(formData: formData);
-      var currentState = state;
+      TransitionFormState currentState = state;
       if (oldForm != null) {
-        var transitionForm =
-            transitionFormBuilder.buildTranstionForm(oldForm, formManager.form);
+        var transitionForm = transitionFormBuilder.buildTranstionForm(
+            oldForm as Form, formManager!.form as Form);
         currentState = state.copyWith(
             isInTransition: true,
             isValid: true,
@@ -44,30 +43,30 @@ class TransitionFormBloc extends Bloc<FormElementEvent, TransitionFormState> {
 
       yield currentState.copyWith(
           isInTransition: false,
-          isValid: formManager.isFormValid,
-          form: formManager.form,
+          isValid: formManager!.isFormValid,
+          form: formManager!.form as Form?,
           selectedForm: event.formNumber);
       return;
     }
 
     if (event is ClearFormEvent) {
-      formManager.resetForm();
+      formManager!.resetForm();
       yield state.copyWith(
         isInTransition: false,
-        isValid: formManager.isFormValid,
-        form: formManager.form,
+        isValid: formManager!.isFormValid,
+        form: formManager!.form as Form?,
       );
       return;
     }
 
     if (event is ChangeValueEvent) {
-      formManager.changeValue(
+      formManager!.changeValue(
         value: event.value,
         elementId: event.elementId,
         propertyName: event.propertyName,
         ignoreLastChange: event.ignoreLastChange,
       );
-      yield state.copyWith(isValid: formManager.isFormValid);
+      yield state.copyWith(isValid: formManager!.isFormValid);
     }
   }
 }

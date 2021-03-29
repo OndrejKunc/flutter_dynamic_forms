@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
 }
 
 class WelcomeScreen extends StatefulWidget {
-  WelcomeScreen({Key key}) : super(key: key);
+  WelcomeScreen({Key? key}) : super(key: key);
 
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }

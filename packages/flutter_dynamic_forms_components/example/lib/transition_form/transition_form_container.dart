@@ -14,13 +14,13 @@ class TransitionFormContainer extends StatefulWidget {
 }
 
 class _TransitionFormContainerState extends State<TransitionFormContainer> {
-  FormRenderService _formRenderService;
+  late FormRenderService _formRenderService;
 
   @override
   void initState() {
     super.initState();
     _formRenderService = FormRenderService(
-      renderers: getDefaultRenderers()
+      renderers: getRenderers()
         ..addAll([
           TransitionFormElementRenderer(),
         ]),
@@ -41,7 +41,7 @@ class _TransitionFormContainerState extends State<TransitionFormContainer> {
         }
         return Center(
           child: SingleChildScrollView(
-            child: _formRenderService.render(state.form, context),
+            child: _formRenderService.render(state.form!, context),
           ),
         );
       },

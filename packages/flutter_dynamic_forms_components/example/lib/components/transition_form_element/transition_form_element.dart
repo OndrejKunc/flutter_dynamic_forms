@@ -12,8 +12,8 @@ class TransitionFormElement extends FormElement {
 
   @override
   ExpressionProviderElement clone(
-      ExpressionProvider<ExpressionProviderElement> parent) {
-    return TransitionFormElement(this.child.clone(parent), this.transitionType);
+      ExpressionProvider<ExpressionProviderElement>? parent) {
+    return TransitionFormElement(this.child.clone(parent) as FormElement, this.transitionType);
   }
 
   @override
