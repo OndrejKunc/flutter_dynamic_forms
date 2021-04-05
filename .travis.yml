@@ -17,6 +17,7 @@ before_script:
   - git clone https://github.com/flutter/flutter.git -b stable --depth 1
   - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
   - flutter doctor
+  - chmod +x scripts/code_coverage.sh
 script:
   - cd packages/expression_language
   - pub get
