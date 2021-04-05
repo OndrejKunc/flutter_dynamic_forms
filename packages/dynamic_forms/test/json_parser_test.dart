@@ -182,6 +182,27 @@ void main() {
         throwsA(TypeMatcher<MissingParserException>()));
   });
 
+  test('json with element without a name', () {
+    var parserService = JsonFormParserService(_getDefaultParserList());
+
+    var json = '''
+    {
+        "@name": "singleItemContainer",
+        "id": "form1",
+        "child":
+        {
+          "id": "label1",
+          "value": "John Doe",
+          "testInt": "42",
+          "testDouble": "42.4",
+          "testBool": "true"
+        }       
+    }''';
+
+    expect(() => parserService.parse(json),
+        throwsA(TypeMatcher<MissingElementNameException>()));
+  });
+
   test('invalid json', () {
     var parserService = JsonFormParserService(_getDefaultParserList());
 

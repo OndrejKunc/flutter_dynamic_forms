@@ -22,7 +22,11 @@ abstract class FormParserService {
 
   Element parseElement(ParserNode element, FormElement? parent) {
     var elementName = element.getName();
-    var parser = _parsersMap[elementName!];
+    if (elementName == null) {
+      throw MissingElementNameException(
+          'An element is missing its name so it cannot be parsed.');
+    }
+    var parser = _parsersMap[elementName];
     if (parser == null) {
       throw MissingParserException(elementName);
     }
