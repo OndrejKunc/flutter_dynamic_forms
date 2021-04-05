@@ -31,4 +31,9 @@ class StringExpressionProperty<T> extends ExpressionProperty<T> {
 
   @override
   Expression<T> getExpression() => _expression;
+
+  @override
+  String toString() {
+    return '{ expression: $_expressionString, returnType: $T }';
+  }
 }

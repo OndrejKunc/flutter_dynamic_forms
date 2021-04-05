@@ -159,4 +159,46 @@ void main() {
     expect(label.testDouble, 42.4);
     expect(label.testBool, true);
   });
+
+  test('json with unknown element', () {
+    var parserService = JsonFormParserService(_getDefaultParserList());
+
+    var json = '''
+    {
+        "@name": "singleItemContainer2",
+        "id": "form1",
+        "child":
+        {
+          "@name": "label",
+          "id": "label1",
+          "value": "John Doe",
+          "testInt": "42",
+          "testDouble": "42.4",
+          "testBool": "true"
+        }       
+    }''';
+
+    expect(() => parserService.parse(json),
+        throwsA(TypeMatcher<MissingParserException>()));
+  });
+
+  test('invalid json', () {
+    var parserService = JsonFormParserService(_getDefaultParserList());
+
+    var json = '''
+    {
+        "@name": "singleItemContainer",
+        "id": "form1",
+        "child":
+        {
+          "@name": "label",
+          "id": "label1",
+          "testInt": "42",
+          "testDouble": "42.4",
+          "testBool": "true"
+        }       
+    ''';
+    expect(() => parserService.parse(json),
+        throwsA(TypeMatcher<FormatException>()));
+  });
 }

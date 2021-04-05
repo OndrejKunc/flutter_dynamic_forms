@@ -6,6 +6,7 @@ export 'src/elements/enum_element.dart';
 export 'src/elements/value_element.dart';
 export 'src/elements/validation.dart';
 export 'src/elements/element.dart';
+export 'src/exceptions/exceptions.dart';
 export 'src/form_manager/explicit_form_manager.dart';
 export 'src/form_manager/form_data.dart';
 export 'src/form_manager/form_manager.dart';

@@ -72,7 +72,11 @@ class FormBuilder {
         getFormPropertyIterator<StringExpressionProperty>(root);
 
     for (var expressionValue in formElementExpressions) {
-      expressionValue.buildExpression(parser);
+      try {
+        expressionValue.buildExpression(parser);
+      } catch (e, s) {
+        throw ExpressionBuilderException(expressionValue, e, s);
+      }
     }
   }
 

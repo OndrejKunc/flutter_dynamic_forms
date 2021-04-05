@@ -24,7 +24,7 @@ abstract class FormParserService {
     var elementName = element.getName();
     var parser = _parsersMap[elementName!];
     if (parser == null) {
-      throw Exception('No parser for element name $elementName found');
+      throw MissingParserException(elementName);
     }
     return parser.parse(element, parent, parseElement);
   }
