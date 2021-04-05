@@ -14,7 +14,7 @@ class DropdownOptionParser<TDropdownOption extends DropdownOption>
   void fillProperties(
     TDropdownOption dropdownOption, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(dropdownOption, parserNode, parent, parser);

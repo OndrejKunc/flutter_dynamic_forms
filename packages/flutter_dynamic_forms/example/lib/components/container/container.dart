@@ -4,7 +4,7 @@ class Container extends FormElement {
   static const String childrenPropertyName = 'children';
 
   Property<List<FormElement>> get childrenProperty =>
-      properties[childrenPropertyName];
+      properties[childrenPropertyName] as Property<List<FormElement>>;
   set childrenProperty(Property<List<FormElement>> value) =>
       registerProperty(childrenPropertyName, value);
   List<FormElement> get children => childrenProperty.value;

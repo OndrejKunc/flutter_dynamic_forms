@@ -29,6 +29,8 @@ Currently there are multiple supported data types and operations.
 * `DateTime` -> maps directly to the Dart `DateTime`
 * `Duration` -> maps directly to the Dart `Duration`
 
+All the data types above are non-nullable. Since veresion 1.0 we also support nullable types that are mapped to the Dart nullable types. To cast away nullability you can use postfix exclamation mark operator `!` in an expression.
+
 Note: To be able to easily work with financial data and not to lose precision we decided to use `Decimal` data type taken from [dart-decimal](https://github.com/a14n/dart-decimal) instead of `double`. To keep our expression definitions strongly typed and to have a common way to work with all number data types we introduced base `Number` data type class which is simmilar to Dart `num` class. Since we can't modify definition of the Dart `int` we have also introduced `Integer` data type which is a simple wrapper around the `int` and which also extends `Number`. There is a conversion expression from `Integer` to `int` and from `Decimal` to `double` so higher layers can hide those data types as an implementation detail.
 To learn more about DateTime data type in expressions see this [merge request](https://github.com/OndrejKunc/flutter_dynamic_forms/pull/9).
 
@@ -36,6 +38,7 @@ To learn more about DateTime data type in expressions see this [merge request](h
 There are most of the standard operations working on the data types above. For example you can use most of the arithmetic operators like `+`,`-`, `*`, `/` , `~/`, `%` or the logical operators like `&&`, `||`, `!`, `<`, `>`, `<=`, `>=`, `==`.
 
 To be able to reference another expression from the expression itself we use a construct `@element.propertyName`. The `element` can map to any type extending `ExpressionProviderElement`.
+Both `element` and `propertyName` must consist only from alpha numeric characters or an underscore and can't start with a number.
 
 There are also special functions like `length` which returns length of the string. Each function paramter can also come from an expression. 
 Here is the complete list:
@@ -50,8 +53,9 @@ Here is the complete list:
 | int durationInSeconds(Duration value) | Returns duration in seconds of a given duration value | durationInSeconds(duration("P5D1H")) |
 | bool startsWith(String value, String searchValue) | Returns true if value starts with searchValue | startsWith("Hello", "He") |
 | bool endsWith(String value, String searchValue) | Returns true if value ends with searchValue | startsWith("Hello", "lo") |
+| bool isEmpty(String value) | Returns true if value is empty String | isEmpty("") |
+| bool isNull(String value) | Returns true if value is null | isNull(someNullExpression) |
 | bool isNullOrEmpty(String value) | Returns true if value is null or empty String | isNullOrEmpty("") |
-| bool isNull(String value) | Returns true if value is null String | isNull("") |
 | bool matches(String value, String regex) | Returns true if value fully matches regex expression | matches("test@email.com","^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$") |
 | int length(String value) | length of the string | length("Hi") |
 | int length(String value) | length of the string | length("Hi") |

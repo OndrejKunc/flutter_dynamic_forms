@@ -4,7 +4,7 @@ import 'package:petitparser/petitparser.dart';
 import 'package:test/test.dart';
 
 void main() {
-  Parser parser;
+  late Parser parser;
 
   setUp(() {
     parser = ComponentTypeGrammarParser(parseTypeDefinition: true).build();
@@ -14,6 +14,12 @@ void main() {
     var result = parser.parse('type1').value as ComponentType;
     expect(result, isA<DefinitionType>());
     expect(result.typeName, 'type1');
+    expect(result.isNullable, false);
+  });
+
+  test('definition cannot be nullable', () {
+    expect(() => parser.parse('type1?').value,
+        throwsA(TypeMatcher<ParserException>()));
   });
 
   test('single generic type', () {
@@ -22,8 +28,8 @@ void main() {
     expect(result, isA<GenericDefinitionType>());
     expect((result as GenericDefinitionType).genericParameters[0].typeName,
         'type2');
-    expect((result as GenericDefinitionType).genericParameters[0],
-        isA<GenericParameterType>());
+    expect((result).genericParameters[0], isA<GenericParameterType>());
+    expect(result.isNullable, false);
   });
 
   test('multiple generic types', () {
@@ -32,8 +38,7 @@ void main() {
     expect(result, isA<GenericDefinitionType>());
     expect((result as GenericDefinitionType).genericParameters[0].typeName,
         'type2');
-    expect((result as GenericDefinitionType).genericParameters[1].typeName,
-        'type3');
+    expect((result).genericParameters[1].typeName, 'type3');
   });
 
   test('single extends generic type', () {
@@ -43,11 +48,7 @@ void main() {
     expect(result, isA<GenericDefinitionType>());
     expect(((result as GenericDefinitionType).genericParameters[0]).typeName,
         'type2');
-    expect(
-        ((result as GenericDefinitionType).genericParameters[0])
-            .extendsType
-            .typeName,
-        'type3');
+    expect(((result).genericParameters[0]).extendsType!.typeName, 'type3');
   });
 
   test('multiple extends generic type', () {
@@ -59,15 +60,10 @@ void main() {
     expect(
         (result as GenericDefinitionType)
             .genericParameters[0]
-            .extendsType
+            .extendsType!
             .typeName,
         'type3');
-    expect(
-        (result as GenericDefinitionType)
-            .genericParameters[1]
-            .extendsType
-            .typeName,
-        'type5');
+    expect((result).genericParameters[1].extendsType!.typeName, 'type5');
   });
 
   test('nested type in extends', () {

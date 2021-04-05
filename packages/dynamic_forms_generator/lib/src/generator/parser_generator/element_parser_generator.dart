@@ -4,17 +4,17 @@ import 'package:dynamic_forms_generator/src/model/component_description.dart';
 import 'package:dynamic_forms_generator/src/model/component_type.dart';
 
 abstract class ElementParserGenerator {
-  ComponentDescription componentDescription;
-  PropertyDescription contentProperty;
+  late ComponentDescription componentDescription;
+  PropertyDescription? contentProperty;
 
   static const String _valueElementName = 'valueElement';
 
   String generate();
 
   static ElementParserGenerator getGenerator(
-      {String typeName,
-      ComponentDescription componentDescription,
-      PropertyDescription contentProperty}) {
+      {String? typeName,
+      required ComponentDescription componentDescription,
+      PropertyDescription? contentProperty}) {
     ElementParserGenerator returnElement;
     if (typeName != null) {
       switch (typeName) {
@@ -38,6 +38,18 @@ abstract class ElementParserGenerator {
     }
   }
 
+  String _capitalize(String s) => s[0].toUpperCase() + s.substring(1);
+
+  String _getPropertyParserMethodName(ComponentType type) {
+    return type.isNullable
+        ? 'getNullable${_capitalize(type.typeName)}Property'
+        : 'get${_capitalize(type.typeName)}Property';
+  }
+
+  String _getDefaultValue(String nonNullableDefaultValue, ComponentType type) {
+    return type.isNullable ? '() => null' : nonNullableDefaultValue;
+  }
+
   String getParseMethod(PropertyDescription property, bool isContentProperty) {
     if (property.name == 'id') {
       return 'parserNode.getPlainString(\'id\')';
@@ -49,22 +61,30 @@ abstract class ElementParserGenerator {
       return 'parserNode.getIsVisible()';
     }
     if (property.type.typeName == 'bool') {
-      var defaultValue = property.defaultValue == 'true'
-          ? 'ParserNode.defaultTrue'
-          : 'ParserNode.defaultFalse';
-      return '''parserNode.getBoolProperty(
+      String defaultValue;
+      if (property.defaultValue == 'true') {
+        defaultValue = 'ParserNode.defaultTrue';
+      } else if (property.defaultValue == 'false') {
+        defaultValue = 'ParserNode.defaultFalse';
+      } else {
+        defaultValue =
+            _getDefaultValue('ParserNode.defaultFalse', property.type);
+      }
+      return '''parserNode.${_getPropertyParserMethodName(property.type)}(
         '${property.name}',        
         defaultValue: $defaultValue,
         isImmutable: ${!property.isMutable},
       )''';
     }
     if (property.type.typeName == 'string') {
-      var defaultValue =
-          (property.defaultValue == '' || property.defaultValue == null)
-              ? 'ParserNode.defaultString'
-              : '() => \'${property.defaultValue}\'';
-
-      return '''parserNode.getStringProperty(
+      String defaultValue;
+      if (property.defaultValue == null || property.defaultValue == '') {
+        defaultValue =
+            _getDefaultValue('ParserNode.defaultString', property.type);
+      } else {
+        defaultValue = '() => \'${property.defaultValue}\'';
+      }
+      return '''parserNode.${_getPropertyParserMethodName(property.type)}(
         '${property.name}',
         defaultValue: $defaultValue,
         isImmutable: ${!property.isMutable},
@@ -79,85 +99,103 @@ abstract class ElementParserGenerator {
           isContentProperty: $isContentProperty)''';
     }
     if (property.type.typeName == 'decimal') {
-      var defaultValue =
-          property.defaultValue == null || property.defaultValue == ''
-              ? '0'
-              : property.defaultValue;
-      return '''parserNode.getDecimalProperty(
+      String defaultValue;
+      if (property.defaultValue == null || property.defaultValue == '') {
+        defaultValue =
+            _getDefaultValue('ParserNode.defaultDecimal', property.type);
+      } else {
+        defaultValue = '() => Decimal.fromDouble(${property.defaultValue})';
+      }
+      return '''parserNode.${_getPropertyParserMethodName(property.type)}(
         '${property.name}',
-        defaultValue: () => Decimal.fromDouble($defaultValue),
+        defaultValue: $defaultValue,
         isImmutable: ${!property.isMutable},
       )''';
     }
     if (property.type.typeName == 'int') {
-      var defaultValue =
-          property.defaultValue == null || property.defaultValue == ''
-              ? '0'
-              : property.defaultValue;
-      return '''parserNode.getIntProperty(
+      String defaultValue;
+      if (property.defaultValue == null || property.defaultValue == '') {
+        defaultValue = _getDefaultValue('ParserNode.defaultInt', property.type);
+      } else {
+        defaultValue = '() => ${property.defaultValue}';
+      }
+
+      return '''parserNode.${_getPropertyParserMethodName(property.type)}(
         '${property.name}',      
-        defaultValue: () => $defaultValue,
+        defaultValue: $defaultValue,
         isImmutable: ${!property.isMutable},
       )''';
     }
     if (property.type.typeName == 'double') {
-      var defaultValue =
-          property.defaultValue == null || property.defaultValue == ''
-              ? '0'
-              : property.defaultValue;
-      return '''parserNode.getDoubleProperty(
+      String defaultValue;
+      if (property.defaultValue == null || property.defaultValue == '') {
+        defaultValue =
+            _getDefaultValue('ParserNode.defaultDouble', property.type);
+      } else {
+        defaultValue = '() => ${property.defaultValue}';
+      }
+      return '''parserNode.${_getPropertyParserMethodName(property.type)}(
         '${property.name}',
-        defaultValue: () => $defaultValue,
+        defaultValue: $defaultValue,
         isImmutable: ${!property.isMutable},
       )''';
     }
     if (property.type.typeName == 'dateTime') {
-      var defaultValue =
-          property.defaultValue == null || property.defaultValue == ''
-              ? 'null'
-              : 'DateTime.parse(\'${property.defaultValue}\')';
-      return '''parserNode.getDateTimeProperty(
+      String defaultValue;
+      if (property.defaultValue == null || property.defaultValue == '') {
+        defaultValue =
+            _getDefaultValue('ParserNode.defaultDateTime', property.type);
+      } else {
+        defaultValue = '() => DateTime.parse(\'${property.defaultValue}\')';
+      }
+      return '''parserNode.${_getPropertyParserMethodName(property.type)}(
         '${property.name}',
-        defaultValue: () => $defaultValue,
+        defaultValue: $defaultValue,
         isImmutable: ${!property.isMutable},
       )''';
     }
     if (property.isEnum) {
       var defaultValue;
       if (property.defaultValue == null || property.defaultValue == '') {
-        defaultValue = 'null';
+        defaultValue = _getDefaultValue(
+            '() => ${property.type.toTypeString()}.unknownDefaultValue',
+            property.type);
       } else {
-        if (property.defaultValue.contains('.')) {
-          var lastPart = property.defaultValue.split('.').last;
-          defaultValue = '${property.type.toTypeString()}.$lastPart';
+        if (property.defaultValue!.contains('.')) {
+          var lastPart = property.defaultValue!.split('.').last;
+          defaultValue = '() => ${property.type.toTypeString()}.$lastPart';
         } else {
           defaultValue =
-              '${property.type.toTypeString()}.${property.defaultValue}';
+              '() => ${property.type.toTypeString()}.${property.defaultValue}';
         }
       }
       return '''parserNode.getEnumProperty(
         '${property.name}',
         ${property.type.toTypeString()}.values,
-        defaultValue: () => $defaultValue,
+        defaultValue: $defaultValue,
         isImmutable: ${!property.isMutable},
       )''';
     }
     if ((property.type.typeName.endsWith('valueElement')) ||
         ((property.type.typeName.endsWith('ValueElement')))) {
+      var defaultValue = _getDefaultValue(
+          '() => ${property.type.capitalizedTypeName}()', property.type);
       return '''parserNode.getChildProperty<${property.type.toTypeString()}>(
           parent: ${componentDescription.type.typeName},
           parser: parser,
           propertyName: '${property.name}',
           isContentProperty: $isContentProperty,
-          defaultValue: () => ${property.type.capitalizedTypeName}(),
+          defaultValue: $defaultValue,
           isImmutable: ${!property.isMutable})''';
     }
 
+    var defaultValue = _getDefaultValue(
+        '() => ${property.type.capitalizedTypeName}()', property.type);
     return '''parserNode.getChildProperty<${property.type.toTypeString()}>(
         propertyName: '${property.name}',
         parent: ${componentDescription.type.typeName},
         parser: parser,
-        defaultValue: () => null,
+        defaultValue: $defaultValue,
         isContentProperty: $isContentProperty,
         isImmutable: ${!property.isMutable},
       )''';

@@ -4,7 +4,7 @@ import 'package:petitparser/petitparser.dart';
 import 'package:test/test.dart';
 
 void main() {
-  Parser parser;
+  late Parser parser;
 
   setUp(() {
     parser = ComponentTypeGrammarParser().build();
@@ -13,6 +13,13 @@ void main() {
   test('simple type', () {
     var result = parser.parse('type1').value as ComponentType;
     expect(result.typeName, 'type1');
+    expect(result.isNullable, false);
+  });
+
+  test('simple nullable type', () {
+    var result = parser.parse('type1?').value as ComponentType;
+    expect(result.typeName, 'type1');
+    expect(result.isNullable, true);
   });
 
   test('array type', () {
@@ -20,6 +27,15 @@ void main() {
     expect(result.typeName, 'type');
     expect(result, isA<ArrayType>());
     expect((result as ArrayType).innerType.typeName, 'type');
+    expect(result.isNullable, false);
+  });
+
+  test('nullable array type', () {
+    var result = parser.parse('type[]?').value as ComponentType;
+    expect(result.typeName, 'type');
+    expect(result, isA<ArrayType>());
+    expect((result as ArrayType).innerType.typeName, 'type');
+    expect(result.isNullable, true);
   });
 
   test('single generic type', () {
@@ -27,6 +43,33 @@ void main() {
     expect(result.typeName, 'type1');
     expect(result, isA<GenericType>());
     expect((result as GenericType).genericParameters[0].typeName, 'type2');
+    expect(result.isNullable, false);
+  });
+
+  test('single nullable generic type', () {
+    var result = parser.parse('type1<type2>?').value as ComponentType;
+    expect(result.typeName, 'type1');
+    expect(result, isA<GenericType>());
+    expect((result as GenericType).genericParameters[0].typeName, 'type2');
+    expect(result.isNullable, true);
+  });
+
+  test('single inner nullable generic type', () {
+    var result = parser.parse('type1<type2?>').value as ComponentType;
+    expect(result.typeName, 'type1');
+    expect(result, isA<GenericType>());
+    expect((result as GenericType).genericParameters[0].typeName, 'type2');
+    expect(result.isNullable, false);
+    expect(result.genericParameters[0].isNullable, true);
+  });
+
+  test('single inner and outer nullable generic type', () {
+    var result = parser.parse('type1<type2?>?').value as ComponentType;
+    expect(result.typeName, 'type1');
+    expect(result, isA<GenericType>());
+    expect((result as GenericType).genericParameters[0].typeName, 'type2');
+    expect(result.isNullable, true);
+    expect(result.genericParameters[0].isNullable, true);
   });
 
   test('multiple generic types', () {
@@ -34,7 +77,18 @@ void main() {
     expect(result.typeName, 'type1');
     expect(result, isA<GenericType>());
     expect((result as GenericType).genericParameters[0].typeName, 'type2');
-    expect((result as GenericType).genericParameters[1].typeName, 'type3');
+    expect(result.genericParameters[1].typeName, 'type3');
+  });
+
+  test('multiple nullable generic types', () {
+    var result = parser.parse('type1<type2?, type3?>?').value as ComponentType;
+    expect(result.typeName, 'type1');
+    expect(result, isA<GenericType>());
+    expect((result as GenericType).genericParameters[0].typeName, 'type2');
+    expect(result.genericParameters[1].typeName, 'type3');
+    expect(result.isNullable, true);
+    expect(result.genericParameters[0].isNullable, true);
+    expect(result.genericParameters[1].isNullable, true);
   });
 
   test('nested generic types', () {

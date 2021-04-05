@@ -18,10 +18,14 @@ class FormBuilder {
     var root = formParserService.parse(content);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(root)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(root as FormElement)
+          .where((e) => e.id != null))
+        x.id!: x
     };
-    var parser = ExpressionParser(formElementMap,
-        expressionFactories: expressionFactories);
+    var parser = ExpressionParser(
+      formElementMap,
+      expressionFactories: expressionFactories,
+    );
     _buildStringExpressions(root, parser);
     return _build(root, formElementMap);
   }
@@ -29,7 +33,10 @@ class FormBuilder {
   FormData buildFromForm(FormElement root) {
     var clonedForm = root.clone(null);
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(clonedForm)) x.id: x
+      for (var x
+          in getFormElementIterator<FormElement>(clonedForm as FormElement)
+              .where((e) => e.id != null))
+        x.id!: x
     };
     _buildCloneableExpressions(clonedForm, formElementMap);
     return _build(clonedForm, formElementMap);
@@ -65,7 +72,11 @@ class FormBuilder {
         getFormPropertyIterator<StringExpressionProperty>(root);
 
     for (var expressionValue in formElementExpressions) {
-      expressionValue.buildExpression(parser);
+      try {
+        expressionValue.buildExpression(parser);
+      } catch (e, s) {
+        throw ExpressionBuilderException(expressionValue, e, s);
+      }
     }
   }
 
@@ -75,7 +86,8 @@ class FormBuilder {
     for (var property in formProperties) {
       for (var sourceProperty
           in property.getExpression().getExpressionProviders()) {
-        (sourceProperty as Property).addSubscriber(property);
+        (sourceProperty as Property)
+            .addSubscriber(property as ExpressionProperty<dynamic>);
       }
     }
   }

@@ -13,7 +13,7 @@ abstract class SingleSelectGroupParser<
   void fillProperties(
     TSingleSelectGroup singleSelectGroup, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(singleSelectGroup, parserNode, parent, parser);
@@ -23,9 +23,9 @@ abstract class SingleSelectGroupParser<
           parser: parser,
           childrenPropertyName: 'choices',
           isContentProperty: true)
-      ..valueProperty = parserNode.getStringProperty(
+      ..valueProperty = parserNode.getNullableStringProperty(
         'value',
-        defaultValue: ParserNode.defaultString,
+        defaultValue: () => null,
         isImmutable: false,
       );
   }

@@ -5,7 +5,7 @@ import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_component
 import 'package:dynamic_forms/dynamic_forms.dart';
 
 class FormGroupParser<TFormGroup extends FormGroup>
-    extends ContainerParser<TFormGroup> {
+    extends ItemsContainerParser<TFormGroup> {
   @override
   String get name => 'formGroup';
 
@@ -16,7 +16,7 @@ class FormGroupParser<TFormGroup extends FormGroup>
   void fillProperties(
     TFormGroup formGroup, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(formGroup, parserNode, parent, parser);

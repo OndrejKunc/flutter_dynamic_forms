@@ -6,9 +6,7 @@ import 'package:expression_language/src/number_type/number.dart';
 class Integer extends Number {
   int value;
 
-  Integer(int value) {
-    this.value = value;
-  }
+  Integer(this.value);
 
   factory Integer.parse(String value) => Integer(int.parse(value));
 
@@ -108,7 +106,7 @@ class Integer extends Number {
   int toInt() => value;
 
   @override
-  String toStringAsExponential([int fractionDigits]) =>
+  String toStringAsExponential([int? fractionDigits]) =>
       Decimal.fromInt(value).toStringAsExponential(fractionDigits);
 
   @override
@@ -128,7 +126,7 @@ class Integer extends Number {
     if (precision >= 0) {
       return Integer(value);
     } else {
-      final int multiplier = pow(10, -precision);
+      var multiplier = pow(10, -precision) as int;
       final adder = 5 * (multiplier ~/ 10) * ((value < 0) ? -1 : 1);
       return Integer(((value + adder) ~/ multiplier) * multiplier);
     }

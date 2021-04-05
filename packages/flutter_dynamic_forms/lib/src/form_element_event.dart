@@ -6,12 +6,12 @@ abstract class FormElementEvent {}
 class ChangeValueEvent<T> extends FormElementEvent {
   final T value;
   final String elementId;
-  final String propertyName;
+  final String? propertyName;
   final bool ignoreLastChange;
 
   ChangeValueEvent({
-    @required this.value,
-    @required this.elementId,
+    required this.value,
+    required this.elementId,
     this.propertyName,
     this.ignoreLastChange = false,
   });

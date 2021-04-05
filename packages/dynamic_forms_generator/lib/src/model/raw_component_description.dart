@@ -1,14 +1,12 @@
-import 'package:meta/meta.dart';
-
 class RawComponentDescription {
   final String type;
-  final String parentType;
+  final String? parentType;
   final List<RawPropertyDescription> properties;
   final List<String> values;
-  final String contentProperty;
+  final String? contentProperty;
 
   RawComponentDescription({
-    @required this.type,
+    required this.type,
     this.parentType,
     this.properties = const [],
     this.values = const [],
@@ -19,15 +17,15 @@ class RawComponentDescription {
 class RawPropertyDescription {
   final String name;
   final String type;
-  final String defaultValue;
+  final String? defaultValue;
   final bool isMutable;
   final bool isEnum;
 
   RawPropertyDescription({
-    @required this.name,
-    @required this.type,
+    required this.name,
+    required this.type,
     this.defaultValue,
-    this.isMutable,
-    this.isEnum,
+    this.isMutable = false,
+    this.isEnum = false,
   });
 }

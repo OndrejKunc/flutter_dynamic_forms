@@ -16,7 +16,7 @@ class MultiSelectChipChoiceParser<TMultiSelectChipChoice extends MultiSelectChip
   void fillProperties(
     TMultiSelectChipChoice multiSelectChipChoice, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(multiSelectChipChoice, parserNode, parent, parser);

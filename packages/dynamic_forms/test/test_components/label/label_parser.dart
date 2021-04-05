@@ -11,7 +11,7 @@ class LabelParser extends FormElementParser<Label> {
 
   @override
   void fillProperties(
-      Label label, ParserNode parserNode, Element parent, parser) {
+      Label label, ParserNode parserNode, Element? parent, parser) {
     super.fillProperties(label, parserNode, parent, parser);
     label
       ..valueProperty = parserNode.getStringProperty('value')

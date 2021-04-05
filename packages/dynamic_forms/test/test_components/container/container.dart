@@ -5,7 +5,7 @@ class Container extends FormElement {
   static const String children2PropertyName = 'children2';
 
   Property<List<FormElement>> get childrenProperty =>
-      properties[childrenPropertyName];
+      properties[childrenPropertyName] as Property<List<FormElement>>;
   set childrenProperty(Property<List<FormElement>> value) =>
       registerProperty(childrenPropertyName, value);
   List<FormElement> get children => childrenProperty.value;
@@ -13,7 +13,7 @@ class Container extends FormElement {
       childrenProperty.valueChanged;
 
   Property<List<FormElement>> get children2Property =>
-      properties[children2PropertyName];
+      properties[children2PropertyName] as Property<List<FormElement>>;
   set children2Property(Property<List<FormElement>> value) =>
       registerProperty(children2PropertyName, value);
   List<FormElement> get children2 => children2Property.value;

@@ -29,7 +29,7 @@ class TransitionFormScreen extends StatelessWidget {
 
 class TransitionFormButtonRow extends StatelessWidget {
   const TransitionFormButtonRow({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

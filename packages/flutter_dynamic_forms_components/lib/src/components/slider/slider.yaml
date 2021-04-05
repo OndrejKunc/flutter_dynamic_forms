@@ -2,7 +2,7 @@ type: slider
 parentType: formElement
 properties:
   value:
-    type: double
+    type: double?
     isMutable: true
   label:
     type: string

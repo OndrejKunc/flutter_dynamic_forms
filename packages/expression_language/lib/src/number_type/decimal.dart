@@ -7,9 +7,7 @@ import 'package:rational/rational.dart';
 class Decimal extends Number {
   Rational _rational;
 
-  Decimal(String value) {
-    _rational = Rational.parse(value);
-  }
+  Decimal(String value) : _rational = Rational.parse(value);
 
   factory Decimal.parse(String value) =>
       Decimal._fromRational(Rational.parse(value));
@@ -22,7 +20,7 @@ class Decimal extends Number {
 
   Decimal._fromRational(this._rational);
 
-  static Decimal tryParse(String value) {
+  static Decimal? tryParse(String value) {
     try {
       return Decimal.parse(value);
     } on FormatException {
@@ -149,7 +147,7 @@ class Decimal extends Number {
   double toDouble() => _rational.toDouble();
 
   @override
-  String toStringAsExponential([int fractionDigits]) =>
+  String toStringAsExponential([int? fractionDigits]) =>
       _rational.toStringAsExponential(fractionDigits);
 
   @override
@@ -189,14 +187,13 @@ class Decimal extends Number {
         case RoundingMode.down:
           return _roundDown(precision);
       }
-      return null; //to suppress warning
     } else {
       return toInteger().roundWithPrecision(precision);
     }
   }
 
   Number _roundTowardsZero(int precision) {
-    final multiplier = Integer(pow(10, precision));
+    final multiplier = Integer(pow(10, precision) as int);
     var tempNumber = this * multiplier;
     tempNumber =
         (tempNumber >= Integer(0)) ? tempNumber.floor() : tempNumber.ceil();
@@ -204,7 +201,7 @@ class Decimal extends Number {
   }
 
   Number _roundFromZero(int precision) {
-    final multiplier = Integer(pow(10, precision));
+    final multiplier = Integer(pow(10, precision) as int);
     var tempNumber = this * multiplier;
     tempNumber =
         (tempNumber >= Integer(0)) ? tempNumber.ceil() : tempNumber.floor();
@@ -212,24 +209,24 @@ class Decimal extends Number {
   }
 
   Number _roundUp(int precision) {
-    final multiplier = Integer(pow(10, precision));
+    final multiplier = Integer(pow(10, precision) as int);
     return (this * multiplier).ceil() / multiplier;
   }
 
   Number _roundDown(int precision) {
-    final multiplier = Integer(pow(10, precision));
+    final multiplier = Integer(pow(10, precision) as int);
     return (this * multiplier).floor() / multiplier;
   }
 
   Number _roundNearestEven(int precision) {
-    final multiplier = Integer(pow(10, precision));
+    final multiplier = Integer(pow(10, precision) as int);
     final tempNumber = this * multiplier;
     final integerPart = tempNumber.toInt().toString();
     var parts = tempNumber.toString().split('.');
     final decimalPart = (parts.length == 2) ? parts[1] : '';
 
     if (decimalPart.isNotEmpty && decimalPart[0] == '5') {
-      var lastDigit = int.tryParse(integerPart[integerPart.length - 1]);
+      var lastDigit = int.parse(integerPart[integerPart.length - 1]);
       return (lastDigit % 2 == 0)
           ? _roundTowardsZero(precision)
           : _roundFromZero(precision);
@@ -239,14 +236,14 @@ class Decimal extends Number {
   }
 
   Number _roundNearestOdd(int precision) {
-    final multiplier = Integer(pow(10, precision));
+    final multiplier = Integer(pow(10, precision) as int);
     final tempNumber = this * multiplier;
     final integerPart = tempNumber.toInt().toString();
     var parts = tempNumber.toString().split('.');
     final decimalPart = (parts.length == 2) ? parts[1] : '';
 
     if (decimalPart.isNotEmpty && decimalPart[0] == '5') {
-      var lastDigit = int.tryParse(integerPart[integerPart.length - 1]);
+      var lastDigit = int.parse(integerPart[integerPart.length - 1]);
       return (lastDigit % 2 == 1)
           ? _roundTowardsZero(precision)
           : _roundFromZero(precision);
@@ -256,12 +253,12 @@ class Decimal extends Number {
   }
 
   Number _roundNearestFromZero(int precision) {
-    final multiplier = Integer(pow(10, precision));
+    final multiplier = Integer(pow(10, precision) as int);
     return (this * multiplier).round() / multiplier;
   }
 
   Number _roundNearestDownward(int precision) {
-    final multiplier = Integer(pow(10, precision));
+    final multiplier = Integer(pow(10, precision) as int);
     final tempNumber = this * multiplier;
     var parts = tempNumber.toString().split('.');
     final decimalPart = (parts.length == 2) ? parts[1] : '';
@@ -272,7 +269,7 @@ class Decimal extends Number {
   }
 
   Number _roundNearestUpward(int precision) {
-    final multiplier = Integer(pow(10, precision));
+    final multiplier = Integer(pow(10, precision) as int);
     final tempNumber = this * multiplier;
     var parts = tempNumber.toString().split('.');
     final decimalPart = (parts.length == 2) ? parts[1] : '';

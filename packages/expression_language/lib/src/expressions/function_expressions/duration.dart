@@ -24,7 +24,7 @@ class DurationFunctionExpression extends Expression<Duration> {
   }
 
   Duration convertIso8601DurationToDuration(String input) {
-    var values = List(4);
+    var values = List<int>.filled(4, 0);
     var validator = RegExp(r'^P(([0-9]+D)?T?([0-9]+H)?([0-9]+M)?([0-9]+S)?)$');
     if (!validator.hasMatch(input)) {
       throw InvalidParameterException('Invalid format of duration string');
@@ -45,7 +45,7 @@ class DurationFunctionExpression extends Expression<Duration> {
     for (var i = 0; i < matchedStrings.length; i++) {
       if ((matchedStrings[i] != null) && (matchedStrings.isNotEmpty)) {
         values[i] = int.parse(
-            matchedStrings[i].substring(0, matchedStrings[i].length - 1));
+            matchedStrings[i]!.substring(0, matchedStrings[i]!.length - 1));
       } else {
         values[i] = 0;
       }

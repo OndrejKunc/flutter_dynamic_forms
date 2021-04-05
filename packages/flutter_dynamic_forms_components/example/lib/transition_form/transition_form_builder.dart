@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:example/components/transition_form_element/transition_form_element.dart';
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
@@ -11,7 +12,7 @@ class TransitionFormBuilder {
     var resultFormManager = formBuilder.buildFromForm(newForm);
     var resultForm = resultFormManager.form;
     addTransitionElements(oldForm, resultForm);
-    return resultForm;
+    return resultForm as Form;
   }
 
   void addTransitionElements(
@@ -22,7 +23,7 @@ class TransitionFormBuilder {
       if (!oldFormGroups.containsKey(key)) {
         return;
       }
-      var oldFormGroup = oldFormGroups[key];
+      var oldFormGroup = oldFormGroups[key]!;
       addTransitionElementsToFormGroup(oldFormGroup, formGroup);
     });
   }
@@ -54,8 +55,7 @@ class TransitionFormBuilder {
         if (formElement is TransitionFormElement) {
           continue;
         }
-        var itemInOldList = oldList.firstWhere((o) => o.id == formElement.id,
-            orElse: () => null);
+        var itemInOldList = oldList.firstWhereOrNull((o) => o.id == formElement.id);
         if (itemInOldList == null) {
           resultList[i] = TransitionFormElement(
               resultElement, FormElementTransitionType.show);
@@ -64,8 +64,8 @@ class TransitionFormBuilder {
     }
   }
 
-  Map<String, FormGroup> getAllFormGroups(FormElement formElement) {
-    var result = Map<String, FormGroup>();
+  Map<String?, FormGroup> getAllFormGroups(FormElement formElement) {
+    var result = Map<String?, FormGroup>();
     for (var formGroup in getFormElementIterator<FormGroup>(formElement)) {
       if (formGroup.id == null || formGroup.id == '') {
         continue;

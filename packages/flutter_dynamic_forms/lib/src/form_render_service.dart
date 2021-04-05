@@ -6,18 +6,22 @@ import 'package:flutter_dynamic_forms/src/form_element_event_dispatcher.dart';
 class FormRenderService {
   final List<FormElementRenderer> renderers;
   final FormElementEventDispatcherFunction dispatcher;
-  Map<Type, FormElementRenderer> _renderersMap;
+  final Map<Type, FormElementRenderer> _renderersMap;
 
-  FormRenderService({@required this.renderers, @required this.dispatcher}) {
-    _renderersMap = Map.fromIterable(renderers,
-        key: (p) => p.formElementType, value: (p) => p);
-  }
+  FormRenderService({
+    required this.renderers,
+    required this.dispatcher,
+  }) : _renderersMap = Map.fromIterable(renderers,
+            key: ((p) => p.formElementType), value: ((p) => p));
 
   Widget render<TFormElement extends FormElement>(
       TFormElement formElement, BuildContext context) {
     var renderer = _renderersMap[formElement.runtimeType];
     if (renderer == null) {
-      throw Exception('No renderer for element name $formElement found');
+      throw MissingRendererException(
+        formElement,
+        TFormElement.toString(),
+      );
     }
     return renderer.render(formElement, context, dispatcher, render);
   }

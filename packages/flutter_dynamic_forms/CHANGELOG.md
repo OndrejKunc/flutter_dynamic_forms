@@ -1,3 +1,8 @@
+# 1.0.0
+
+* Stable null safety release.
+* Added `MissingRendererException`.
+
 # 0.14.0
 
 * Increased `dynamic_forms` dependency to ^0.14.0.

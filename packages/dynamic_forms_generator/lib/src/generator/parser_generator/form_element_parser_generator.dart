@@ -18,7 +18,7 @@ class FormElementParserGenerator extends ElementParserGenerator {
         'T${componentDescription.type.capitalizedTypeName} extends ${componentDescription.type.capitalizedTypeName}');
 
     if (isGeneric) {
-      var classGenericParameters = classGenericType.genericParameters
+      var classGenericParameters = classGenericType!.genericParameters
           .map((g) => g.capitalizedTypeName)
           .join(', ');
       buffer.write('<$classGenericParameters>');
@@ -31,7 +31,7 @@ class FormElementParserGenerator extends ElementParserGenerator {
     buffer.writeln('>');
 
     buffer.write(
-        '    extends ${componentDescription.parentType.capitalizedTypeName}Parser<T${componentDescription.type.capitalizedTypeName}');
+        '    extends ${componentDescription.parentType!.capitalizedTypeName}Parser<T${componentDescription.type.capitalizedTypeName}');
 
     if (componentDescription.parentType is GenericType) {
       var parentGenericType = componentDescription.parentType as GenericType;
@@ -60,7 +60,7 @@ class FormElementParserGenerator extends ElementParserGenerator {
   void fillProperties(
     T${componentDescription.type.capitalizedTypeName} ${componentDescription.type.typeName}, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {''');
 
@@ -75,7 +75,7 @@ class FormElementParserGenerator extends ElementParserGenerator {
       var propertySetter =
           property.name == 'id' ? 'id' : '${property.name}Property';
       var parseMethod =
-          getParseMethod(property, contentProperty?.name == property?.name);
+          getParseMethod(property, contentProperty?.name == property.name);
       var endOfLine =
           i == componentDescription.properties.length - 1 ? ';' : '';
       buffer.writeln('      ..$propertySetter = ${parseMethod}$endOfLine');

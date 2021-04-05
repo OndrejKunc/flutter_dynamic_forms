@@ -19,6 +19,16 @@ Iterable<TFormElement> getFormElementIterator<TFormElement extends FormElement>(
         .map((v) => v.value)
         .toList();
 
+    var convertedNullableFormElements = formElement
+        .getProperties()
+        .values
+        .whereType<Property<FormElement?>>()
+        .where((element) => element.value != null)
+        .map((v) => v.value!)
+        .toList();
+
+    formElements.addAll(convertedNullableFormElements);
+
     var formListElements = formElement
         .getProperties()
         .values

@@ -3,13 +3,13 @@ import 'package:meta/meta.dart';
 
 @immutable
 class TransitionFormState {
-  final Form form;
+  final Form? form;
 
   final bool isInTranstion;
   final int selectedForm;
   final bool isValid;
 
-  bool get isEmpty => form.children.isEmpty;
+  bool get isEmpty => form!.children.isEmpty;
 
   TransitionFormState(
       {this.form,
@@ -18,7 +18,7 @@ class TransitionFormState {
       this.selectedForm = 1});
 
   TransitionFormState copyWith(
-      {Form form, bool isInTransition, bool isValid, int selectedForm}) {
+      {Form? form, bool? isInTransition, bool? isValid, int? selectedForm}) {
     return TransitionFormState(
         form: form ?? this.form,
         isInTranstion: isInTransition ?? this.isInTranstion,

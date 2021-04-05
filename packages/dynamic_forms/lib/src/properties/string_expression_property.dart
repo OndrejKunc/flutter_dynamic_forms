@@ -2,7 +2,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:expression_language/expression_language.dart';
 
 class StringExpressionProperty<T> extends ExpressionProperty<T> {
-  Expression<T> _expression;
+  late Expression<T> _expression;
   final String _expressionString;
 
   StringExpressionProperty(this._expressionString);
@@ -31,4 +31,9 @@ class StringExpressionProperty<T> extends ExpressionProperty<T> {
 
   @override
   Expression<T> getExpression() => _expression;
+
+  @override
+  String toString() {
+    return '{ expression: $_expressionString, returnType: $T }';
+  }
 }

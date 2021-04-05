@@ -11,14 +11,16 @@ abstract class FormElement implements Element {
   static const String isVisiblePropertyName = 'isVisible';
 
   @override
-  String id;
+  String? id;
 
-  Property<FormElement> get parentProperty => properties[parentPropertyName];
-  set parentProperty(Property<FormElement> value) =>
+  Property<FormElement>? get parentProperty =>
+      properties[parentPropertyName] as Property<FormElement>;
+  set parentProperty(Property<FormElement>? value) =>
       registerProperty(parentPropertyName, value);
-  FormElement get parent => parentProperty.value;
+  FormElement? get parent => parentProperty?.value;
 
-  Property<bool> get isVisibleProperty => properties[isVisiblePropertyName];
+  Property<bool> get isVisibleProperty =>
+      properties[isVisiblePropertyName] as Property<bool>;
   set isVisibleProperty(Property<bool> value) =>
       registerProperty(isVisiblePropertyName, value);
   bool get isVisible => isVisibleProperty.value;
@@ -31,10 +33,10 @@ abstract class FormElement implements Element {
 
   Stream<String> get propertyChanged {
     _propertyChanged ??= _getPropertyChanged();
-    return _propertyChanged;
+    return _propertyChanged!;
   }
 
-  Stream<String> _propertyChanged;
+  Stream<String>? _propertyChanged;
 
   Stream<String> _getPropertyChanged() {
     var keyStreams = <Stream<String>>[];
@@ -47,28 +49,28 @@ abstract class FormElement implements Element {
     return connectableObservable;
   }
 
-  Property getProperty([String propertyName]) {
+  Property getProperty([String? propertyName]) {
     propertyName ??= defaultPropertyName;
     var properties = getProperties();
     if (properties.containsKey(propertyName)) {
-      return properties[propertyName];
+      return properties[propertyName]!;
     }
     throw Exception("Can't get expressions for $propertyName");
   }
 
   @override
   ExpressionProviderElement clone(
-      ExpressionProvider<ExpressionProviderElement> parent) {
+      ExpressionProvider<ExpressionProviderElement>? parent) {
     var result = getInstance();
     result.id = id;
-    result.registerProperty(parentPropertyName, parent as Property);
+    result.registerProperty(parentPropertyName, parent as Property?);
     result._fillFromDictionary(this, result, parent);
 
     return result;
   }
 
   void _fillFromDictionary(FormElement oldFormElement, FormElement instance,
-      ExpressionProvider<ExpressionProviderElement> parent) {
+      ExpressionProvider<ExpressionProviderElement>? parent) {
     var formElementProperties = Map.from(oldFormElement.getProperties())
       ..removeWhere((k, v) => k == parentPropertyName);
     formElementProperties.forEach((k, v) =>
@@ -79,24 +81,24 @@ abstract class FormElement implements Element {
   Property cloneProperty(
       String key,
       Property oldProperty,
-      ExpressionProvider<ExpressionProviderElement> parent,
+      ExpressionProvider<ExpressionProviderElement>? parent,
       ExpressionProviderElement instance) {
-    if (oldProperty is Property<List<FormElement>>) {
+    if (oldProperty is Property<List<FormElement?>>) {
       return cloneChildren(oldProperty, instance);
     }
     if (oldProperty is Property<ExpressionProviderElement>) {
-      return ImmutableProperty(
-          oldProperty.value.clone(getImmutableProperty(instance)));
+      return ImmutableProperty(oldProperty.value
+          .clone(getImmutableProperty(instance as FormElement)));
     } else {
       return oldProperty.clone();
     }
   }
 
   @override
-  ExpressionProvider getExpressionProvider([String propertyName]) =>
+  ExpressionProvider getExpressionProvider([String? propertyName]) =>
       getProperty(propertyName);
 
-  Property<T> registerProperty<T>(String name, Property<T> property) {
+  Property<T>? registerProperty<T>(String name, Property<T>? property) {
     if (property == null) {
       return null;
     }
@@ -110,8 +112,8 @@ abstract class FormElement implements Element {
       Property<List> children, ExpressionProviderElement parent) {
     var childrenElements = children.value.toList();
     for (var i = 0; i < childrenElements.length; i++) {
-      childrenElements[i] =
-          childrenElements[i].clone(getImmutableProperty(parent));
+      childrenElements[i] = childrenElements[i]
+          .clone(getImmutableProperty(parent as FormElement));
     }
     if (children is ImmutableProperty) {
       return (children as ImmutableProperty).cloneWithValue(childrenElements);
@@ -121,13 +123,10 @@ abstract class FormElement implements Element {
   }
 
   Property<FormElement> getImmutableProperty(FormElement element) {
-    if (element == null) {
-      return null;
-    }
     return ImmutableProperty(element);
   }
 
-  TFormElement getFirstParentOfType<TFormElement extends FormElement>() {
+  TFormElement? getFirstParentOfType<TFormElement extends FormElement>() {
     var currentParent = parent;
     while (currentParent != null) {
       if (currentParent is TFormElement) {

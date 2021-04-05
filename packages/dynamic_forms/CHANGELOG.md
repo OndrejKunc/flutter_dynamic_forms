@@ -1,3 +1,9 @@
+# 1.0.0
+
+* Stable null safety release.
+* Improved error diagnostics.
+* Generating warning when element id contains prohibited characters.
+
 # 0.14.0
 
 * Increased expression_language dependency to ^0.4.0.

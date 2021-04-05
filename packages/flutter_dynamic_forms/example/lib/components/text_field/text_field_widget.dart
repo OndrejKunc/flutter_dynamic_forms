@@ -3,15 +3,15 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 
 class TextFieldWidget extends StatefulWidget {
-  final String id;
-  final String text;
-  final String errorText;
-  final String label;
-  final String textInputType;
-  final FormElementEventDispatcherFunction dispatcher;
+  final String? id;
+  final String? text;
+  final String? errorText;
+  final String? label;
+  final String? textInputType;
+  final FormElementEventDispatcherFunction? dispatcher;
 
   const TextFieldWidget({
-    Key key,
+    Key? key,
     this.id,
     this.text,
     this.label,
@@ -27,30 +27,30 @@ class TextFieldWidget extends StatefulWidget {
 class _TextFieldWidgetState extends State<TextFieldWidget> {
   TextEditingController _controller = TextEditingController();
 
-  VoidCallback _listener;
+  VoidCallback? _listener;
 
   @override
   void initState() {
     super.initState();
-    _listener = () => widget.dispatcher(
-          ChangeValueEvent(value: _controller.text, elementId: widget.id),
+    _listener = () => widget.dispatcher!(
+          ChangeValueEvent(value: _controller.text, elementId: widget.id!),
         );
-    _controller.addListener(_listener);
+    _controller.addListener(_listener!);
   }
 
   @override
   void dispose() {
     if (_listener != null) {
-      _controller?.removeListener(_listener);
+      _controller.removeListener(_listener!);
     }
-    _controller?.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     if (_controller.text != widget.text) {
-      _controller.text = widget.text;
+      _controller.text = widget.text!;
     }
 
     return Padding(
@@ -64,7 +64,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     );
   }
 
-  TextInputType getTextInputType(String textInputType) {
+  TextInputType getTextInputType(String? textInputType) {
     TextInputType result;
 
     switch (textInputType) {

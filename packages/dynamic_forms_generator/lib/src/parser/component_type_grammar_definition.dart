@@ -16,7 +16,8 @@ class ComponentTypeGrammarDefinition extends GrammarDefinition {
   Parser typeExpression() =>
       ref(identifier).flatten() &
       ref(genericParameters).optional() &
-      ref(arraySymbol).optional();
+      ref(arraySymbol).optional() &
+      ref(nullableSymbol).optional();
 
   Parser typeDefinitionExpression() =>
       ref(identifier).flatten() & ref(genericDefinitionParameters).optional();
@@ -25,6 +26,7 @@ class ComponentTypeGrammarDefinition extends GrammarDefinition {
       ref(token, '<') & ref(listOfTypes) & ref(token, '>');
 
   Parser arraySymbol() => ref(token, '[]');
+  Parser nullableSymbol() => ref(token, '?');
 
   Parser genericDefinitionParameters() =>
       ref(token, '<') &

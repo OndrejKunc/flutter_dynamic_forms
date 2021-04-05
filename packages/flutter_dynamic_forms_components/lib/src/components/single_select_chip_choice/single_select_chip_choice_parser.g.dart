@@ -16,7 +16,7 @@ class SingleSelectChipChoiceParser<TSingleSelectChipChoice extends SingleSelectC
   void fillProperties(
     TSingleSelectChipChoice singleSelectChipChoice, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(singleSelectChipChoice, parserNode, parent, parser);

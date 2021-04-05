@@ -1,3 +1,10 @@
+# 1.0.0
+
+* Stable null safety release.
+* Expression types are now mapped to dart nullable and non-nullable types.
+* Added a postfix exclamation mark (!) operator to cast away nullability.
+* Underscore is now valid element identifier.
+
 # 0.4.0
 
 * Added support for custom expressions.

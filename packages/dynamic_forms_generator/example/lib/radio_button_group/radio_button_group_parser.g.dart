@@ -14,7 +14,7 @@ class RadioButtonGroupParser<TRadioButtonGroup extends RadioButtonGroup>
   void fillProperties(
     TRadioButtonGroup radioButtonGroup, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(radioButtonGroup, parserNode, parent, parser);

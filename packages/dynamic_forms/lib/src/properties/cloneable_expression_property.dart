@@ -2,7 +2,7 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:expression_language/expression_language.dart';
 
 class CloneableExpressionProperty<T> extends ExpressionProperty<T> {
-  Expression<T> _expression;
+  late Expression<T> _expression;
   final Expression<T> _oldExpression;
   CloneableExpressionProperty(this._oldExpression);
 

@@ -23,8 +23,7 @@ class RemoveBlankElementsVisitor with XmlVisitor {
   void _removeEmpty(List<XmlNode> children) {
     for (var i = 0; i < children.length;) {
       final node = children[i];
-      if (node.nodeType == XmlNodeType.TEXT &&
-          (node.text == null || node.text.trim().isEmpty)) {
+      if (node.nodeType == XmlNodeType.TEXT && (node.text.trim().isEmpty)) {
         children.removeAt(i);
       } else {
         i++;
@@ -33,12 +32,12 @@ class RemoveBlankElementsVisitor with XmlVisitor {
   }
 
   void _mergeAdjacent(List<XmlNode> children) {
-    XmlText previousText;
+    XmlText? previousText;
     for (var i = 0; i < children.length;) {
       final node = children[i];
       if (node.nodeType == XmlNodeType.TEXT) {
         if (previousText == null) {
-          previousText = node;
+          previousText = node as XmlText?;
           i++;
         } else {
           previousText.text += node.text;

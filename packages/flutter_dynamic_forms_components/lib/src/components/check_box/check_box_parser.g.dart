@@ -16,7 +16,7 @@ class CheckBoxParser<TCheckBox extends CheckBox>
   void fillProperties(
     TCheckBox checkBox, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(checkBox, parserNode, parent, parser);

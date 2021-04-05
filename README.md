@@ -198,7 +198,7 @@ class CheckBoxParser extends FormElementParser<CheckBox> {
   void fillProperties(
     CheckBox checkBox,
     ParserNode parserNode,
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(checkBox, parserNode, parent, parser);

@@ -16,7 +16,7 @@ class LabelParser<TLabel extends Label>
   void fillProperties(
     TLabel label, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(label, parserNode, parent, parser);

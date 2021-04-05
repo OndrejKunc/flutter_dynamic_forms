@@ -5,17 +5,17 @@ import 'package:flutter_dynamic_forms_components/src/components/text_field/text_
 class TextFieldWidget extends StatefulWidget {
   final String id;
   final String text;
-  final String errorText;
-  final String label;
-  final TextFieldInputType textInputType;
+  final String? errorText;
+  final String? label;
+  final TextFieldInputType? textInputType;
   final FormElementEventDispatcherFunction dispatcher;
 
   const TextFieldWidget({
-    Key key,
-    this.id,
-    this.text,
+    Key? key,
+    required this.id,
+    required this.text,
     this.label,
-    this.dispatcher,
+    required this.dispatcher,
     this.errorText,
     this.textInputType,
   }) : super(key: key);
@@ -27,7 +27,7 @@ class TextFieldWidget extends StatefulWidget {
 class _TextFieldWidgetState extends State<TextFieldWidget> {
   TextEditingController _controller = TextEditingController();
 
-  VoidCallback _listener;
+  late VoidCallback _listener;
 
   @override
   void initState() {
@@ -40,10 +40,8 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   void dispose() {
-    if (_listener != null) {
-      _controller?.removeListener(_listener);
-    }
-    _controller?.dispose();
+    _controller.removeListener(_listener);
+    _controller.dispose();
     super.dispose();
   }
 
@@ -64,7 +62,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     );
   }
 
-  TextInputType getTextInputType(TextFieldInputType textInputType) {
+  TextInputType getTextInputType(TextFieldInputType? textInputType) {
     TextInputType result;
 
     switch (textInputType) {

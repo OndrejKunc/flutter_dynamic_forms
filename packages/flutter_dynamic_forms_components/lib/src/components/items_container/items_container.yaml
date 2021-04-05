@@ -1,0 +1,6 @@
+type: itemsContainer
+parentType: formElement
+properties:
+  children:
+    type: formElement[]
+contentProperty: children

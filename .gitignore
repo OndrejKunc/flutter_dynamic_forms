@@ -12,7 +12,6 @@ pubspec.lock
 .flutter-plugins
 *.iml
 coverage/
-.test_coverage.dart
 *.log
 coverage_badge.svg
 

@@ -25,14 +25,14 @@ typedef CreateFormManager<T extends FormManager> = T Function(
 /// ```
 class FormProvider<T extends FormManager> extends SingleChildStatelessWidget {
   FormProvider({
-    Key key,
-    @required CreateFormManager<T> create,
-    Widget child,
-    bool lazy,
+    Key? key,
+    required CreateFormManager<T> create,
+    Widget? child,
+    bool? lazy,
   }) : this._(
           key: key,
           create: create,
-          dispose: (_, manager) => manager?.close(),
+          dispose: (_, manager) => manager.close(),
           child: child,
           lazy: lazy,
         );
@@ -55,9 +55,9 @@ class FormProvider<T extends FormManager> extends SingleChildStatelessWidget {
   /// );
   /// ```
   FormProvider.value({
-    Key key,
-    @required T value,
-    Widget child,
+    Key? key,
+    required T value,
+    Widget? child,
   }) : this._(
           key: key,
           create: (_) => value,
@@ -67,9 +67,9 @@ class FormProvider<T extends FormManager> extends SingleChildStatelessWidget {
   /// Internal constructor responsible for creating the [FormProvider].
   /// Used by the [FormProvider] default and value constructors.
   FormProvider._({
-    Key key,
-    @required Create<T> create,
-    Dispose<T> dispose,
+    Key? key,
+    required Create<T> create,
+    Dispose<T>? dispose,
     this.child,
     this.lazy,
   })  : _create = create,
@@ -77,13 +77,13 @@ class FormProvider<T extends FormManager> extends SingleChildStatelessWidget {
         super(key: key, child: child);
 
   /// [child] and its descendants which will have access to the `formManager`.
-  final Widget child;
+  final Widget? child;
 
   /// Whether or not the `formManager` being provided should be lazily created.
   /// Defaults to `true`.
-  final bool lazy;
+  final bool? lazy;
 
-  final Dispose<T> _dispose;
+  final Dispose<T>? _dispose;
 
   final Create<T> _create;
 
@@ -115,7 +115,7 @@ class FormProvider<T extends FormManager> extends SingleChildStatelessWidget {
   }
 
   @override
-  Widget buildWithChild(BuildContext context, Widget child) {
+  Widget buildWithChild(BuildContext context, Widget? child) {
     return InheritedProvider<T>(
       create: _create,
       dispose: _dispose,

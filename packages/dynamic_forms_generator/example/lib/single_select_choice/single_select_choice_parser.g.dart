@@ -14,7 +14,7 @@ class SingleSelectChoiceParser<TSingleSelectChoice extends SingleSelectChoice>
   void fillProperties(
     TSingleSelectChoice singleSelectChoice, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(singleSelectChoice, parserNode, parent, parser);

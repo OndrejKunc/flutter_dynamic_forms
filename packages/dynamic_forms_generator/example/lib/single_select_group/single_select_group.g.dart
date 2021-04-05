@@ -6,14 +6,14 @@ class SingleSelectGroup<TSingleSelectChoice extends SingleSelectChoice> extends 
   static const String choicesPropertyName = 'choices';
   static const String valuePropertyName = 'value';
 
-  Property<List<TSingleSelectChoice>> get choicesProperty => properties[choicesPropertyName];
+  Property<List<TSingleSelectChoice>> get choicesProperty => properties[choicesPropertyName] as Property<List<TSingleSelectChoice>>;
   set choicesProperty(Property<List<TSingleSelectChoice>> value) =>
       registerProperty(choicesPropertyName, value);
   List<TSingleSelectChoice> get choices =>
       choicesProperty.value;
   Stream<List<TSingleSelectChoice>> get choicesChanged => choicesProperty.valueChanged;
 
-  Property<String> get valueProperty => properties[valuePropertyName];
+  Property<String> get valueProperty => properties[valuePropertyName] as Property<String>;
   set valueProperty(Property<String> value) =>
       registerProperty(valuePropertyName, value);
   String get value =>

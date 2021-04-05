@@ -21,7 +21,7 @@ class ValueElementModelGenerator extends ElementModelGenerator {
     }
 
     buffer.writeln(
-        'class ${componentDescription.type.toTypeString()} extends ${componentDescription.parentType.toTypeString()} {');
+        'class ${componentDescription.type.toTypeString()} extends ${componentDescription.parentType!.toTypeString()} {');
 
     for (var property in componentDescription.properties) {
       buffer.writeln(
@@ -61,7 +61,7 @@ class ValueElementModelGenerator extends ElementModelGenerator {
     buffer.writeln('  );');
     buffer.writeln('''
   @override
-  ExpressionProvider getExpressionProvider([String propertyName]) {
+  ExpressionProvider getExpressionProvider([String? propertyName]) {
     switch (propertyName) {''');
     for (var property in componentDescription.properties) {
       buffer.writeln('''
@@ -72,7 +72,7 @@ class ValueElementModelGenerator extends ElementModelGenerator {
     }
     buffer.writeln('''
     default:
-      return null;''');
+      throw Exception('Unknown propertyName \$propertyName');''');
     buffer.writeln('    }');
     buffer.write('  }');
     buffer.writeln();

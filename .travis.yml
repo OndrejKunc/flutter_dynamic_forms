@@ -4,7 +4,7 @@ os:
 sudo: required
 dist: trusty
 dart:
-  - 2.8.4
+  - 2.12.2
 addons:
   chrome: stable
   apt:
@@ -15,18 +15,21 @@ addons:
       - fonts-droid
 before_script:
   - git clone https://github.com/flutter/flutter.git -b stable --depth 1
-  - ./flutter/bin/flutter doctor
+  - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
+  - flutter doctor
+  - chmod +x scripts/code_coverage.sh
 script:
   - cd packages/expression_language
   - pub get
-  - pub run test
-  - pub run test_coverage
+  - ../../scripts/code_coverage.sh
   - cp coverage/lcov.info ../../expression_language.lcov
   - cd ../dynamic_forms
   - pub get
-  - pub run test
-  - pub run test_coverage
+  - ../../scripts/code_coverage.sh
   - cp coverage/lcov.info ../../dynamic_forms.lcov
+  - cd ../flutter_dynamic_forms
+  - flutter pub get
+  - flutter test
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 cache:

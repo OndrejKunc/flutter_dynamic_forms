@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 
 abstract class ExpressionProperty<T> extends Property<T> {
   @protected
-  T _cachedValue;
+  T? _cachedValue;
 
   @override
   T get value => _cachedValue ?? evaluate();
@@ -15,7 +15,7 @@ abstract class ExpressionProperty<T> extends Property<T> {
       valueChangedSubject?.add(_cachedValue);
       notifySubscribers();
     }
-    return _cachedValue;
+    return _cachedValue!;
   }
 
   @override

@@ -7,14 +7,14 @@ class SingleItemContainerParser extends ElementParser<SingleItemContainer> {
   String get name => 'singleItemContainer';
 
   @override
-  SingleItemContainer parse(
-      ParserNode parserNode, FormElement parent, ElementParserFunction parser) {
+  SingleItemContainer parse(ParserNode parserNode, FormElement? parent,
+      ElementParserFunction parser) {
     var container = SingleItemContainer();
     container
       ..id = parserNode.getPlainString('id')
       ..isVisibleProperty = parserNode.getIsVisibleProperty()
       ..parentProperty = parserNode.getParentProperty(parent)
-      ..childProperty = parserNode.getChildProperty<FormElement>(
+      ..childProperty = parserNode.getNullableChildProperty<FormElement>(
         propertyName: 'child',
         parent: container,
         parser: parser,

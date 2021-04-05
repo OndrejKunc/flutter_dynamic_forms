@@ -1,7 +1,7 @@
 import 'package:expression_language/expression_language.dart';
 
 class IsNullOrEmptyFunctionExpression extends Expression<bool> {
-  final Expression<String> value;
+  final Expression<String?> value;
 
   IsNullOrEmptyFunctionExpression(this.value);
 

@@ -11,6 +11,7 @@ class ExpressionGrammarDefinition extends GrammarDefinition {
   Parser failureState() =>
       (ref(expression).trim() & ref(fail).trim()) | ref(fail).trim();
   Parser fail() => any();
+  Parser letterOrSpecialChar() => ref(LETTER) | ref(token, '_');
 
   Parser decimalNumber() =>
       ref(DIGIT) &
@@ -29,7 +30,8 @@ class ExpressionGrammarDefinition extends GrammarDefinition {
           ref(TRUE) |
           ref(FALSE) |
           ref(singleLineString));
-  Parser identifier() => ref(LETTER) & (ref(LETTER) | ref(DIGIT)).star();
+  Parser identifier() =>
+      ref(letterOrSpecialChar) & (ref(letterOrSpecialChar) | ref(DIGIT)).star();
 
   Parser function() =>
       ref(identifier).flatten() &
@@ -52,23 +54,10 @@ class ExpressionGrammarDefinition extends GrammarDefinition {
 
   Parser unaryNegateOperator() => ref(token, '-') | ref(token, '!');
 
-  Parser additiveExpression() =>
-      ref(multiplicativeExpression) &
-      (ref(additiveOperator) & ref(multiplicativeExpression)).star();
-
-  Parser multiplicativeExpression() =>
-      ref(unaryExpression) &
-      (ref(multiplicativeOperator) & ref(unaryExpression)).star();
-
-  Parser unaryExpression() =>
-      ref(literal) |
-      ref(expressionInParentheses) |
-      ref(function) |
-      ref(reference) |
-      ref(unaryNegateOperator) & ref(unaryExpression);
-
   Parser expressionInParentheses() =>
       ref(token, '(') & ref(expression) & ref(token, ')');
+
+  Parser expression() => ref(conditionalExpression);
 
   Parser conditionalExpression() =>
       ref(logicalOrExpression) &
@@ -91,7 +80,23 @@ class ExpressionGrammarDefinition extends GrammarDefinition {
       ref(additiveExpression) &
       (ref(relationalOperator) & ref(additiveExpression)).optional();
 
-  Parser expression() => ref(conditionalExpression);
+  Parser additiveExpression() =>
+      ref(multiplicativeExpression) &
+      (ref(additiveOperator) & ref(multiplicativeExpression)).star();
+
+  Parser multiplicativeExpression() =>
+      ref(postfixOperatorExpression) &
+      (ref(multiplicativeOperator) & ref(postfixOperatorExpression)).star();
+
+  Parser postfixOperatorExpression() =>
+      ref(unaryExpression) & ref(token, '!').optional();
+
+  Parser unaryExpression() =>
+      ref(literal) |
+      ref(expressionInParentheses) |
+      ref(function) |
+      ref(reference) |
+      ref(unaryNegateOperator) & ref(unaryExpression);
 
   Parser reference() =>
       char('@') &

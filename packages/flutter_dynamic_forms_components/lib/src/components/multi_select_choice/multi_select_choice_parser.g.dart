@@ -16,7 +16,7 @@ class MultiSelectChoiceParser<TMultiSelectChoice extends MultiSelectChoice>
   void fillProperties(
     TMultiSelectChoice multiSelectChoice, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(multiSelectChoice, parserNode, parent, parser);

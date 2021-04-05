@@ -1,5 +1,4 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
-import 'package:meta/meta.dart';
 
 class FormData {
   FormElement form;
@@ -8,9 +7,9 @@ class FormData {
   List<MutableProperty> mutableValues;
 
   FormData({
-    @required this.form,
-    @required this.formElementMap,
-    @required this.validations,
-    @required this.mutableValues,
+    required this.form,
+    required this.formElementMap,
+    required this.validations,
+    required this.mutableValues,
   });
 }

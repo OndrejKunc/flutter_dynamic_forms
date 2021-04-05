@@ -7,7 +7,7 @@ class ExampleValueElementParser extends ElementParser<ExampleValueElement> {
   String get name => 'exampleValueElement';
 
   @override
-  ExampleValueElement parse(ParserNode parserNode, FormElement parent,
+  ExampleValueElement parse(ParserNode parserNode, FormElement? parent,
       ElementParserFunction parser) =>
       ExampleValueElement( 
       firstProperty: parserNode.getStringProperty(
@@ -17,7 +17,7 @@ class ExampleValueElementParser extends ElementParser<ExampleValueElement> {
       ).value,
       secondProperty: parserNode.getIntProperty(
         'secondProperty',      
-        defaultValue: () => 0,
+        defaultValue: ParserNode.defaultInt,
         isImmutable: true,
       ).value,
     );

@@ -2,20 +2,22 @@ import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:flutter_dynamic_forms/flutter_dynamic_forms.dart';
 import 'package:flutter_dynamic_forms_components/flutter_dynamic_forms_components.dart';
 
-List<FormElementRenderer<FormElement>> getDefaultRenderers() {
+List<FormElementRenderer<FormElement>> getRenderers() {
   return [
     DefaultFormRenderer(),
-    DefaultFormGroupRenderer(),
-    DefaultCheckBoxRenderer(),
-    DefaultLabelRenderer(),
-    DefaultTextFieldRenderer(),
-    DefaultRadioButtonGroupRenderer(),
-    DefaultRadioButtonRenderer(),
-    DefaultDropdownButtonRenderer(),
-    DefaultSingleSelectChipGroupRenderer(),
-    DefaultSingleSelectChipChoiceRenderer(),
-    DefaultMultiSelectChipChoiceRenderer(),
-    DefaultMultiSelectChipGroupRenderer(),
-    DefaultDateRenderer(),
+    FormGroupRenderer(),
+    CheckBoxRenderer(),
+    LabelRenderer(),
+    TextFieldRenderer(),
+    RadioButtonGroupRenderer(),
+    ReactiveRadioButtonRenderer(),
+    DropdownButtonRenderer(),
+    SingleSelectChipGroupRenderer(),
+    ReactiveSingleSelectChipChoiceRenderer(),
+    MultiSelectChipChoiceRenderer(),
+    MultiSelectChipGroupRenderer(),
+    ReactiveDateRenderer(),
+    DateRangeRenderer(),
+    SliderRenderer(),
   ];
 }

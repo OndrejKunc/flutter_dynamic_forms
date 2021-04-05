@@ -43,7 +43,9 @@ void main() {
     var result = parserService.parse(json);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)
+          .where((element) => element.id != null))
+        x.id!: x
     };
 
     var formElementExpressions =
@@ -81,7 +83,9 @@ void main() {
     var result = parserService.parse(json);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)
+          .where((element) => element.id != null))
+        x.id!: x
     };
 
     var label = formElementMap['label1'] as Label;
@@ -111,7 +115,9 @@ void main() {
     var result = parserService.parse(json);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)
+          .where((element) => element.id != null))
+        x.id!: x
     };
 
     var label = formElementMap['label1'] as Label;
@@ -142,7 +148,9 @@ void main() {
     var result = parserService.parse(json);
 
     var formElementMap = {
-      for (var x in getFormElementIterator<FormElement>(result)) x.id: x
+      for (var x in getFormElementIterator<FormElement>(result as FormElement)
+          .where((element) => element.id != null))
+        x.id!: x
     };
 
     var label = formElementMap['label1'] as Label;
@@ -150,5 +158,68 @@ void main() {
     expect(label.testInt, 42);
     expect(label.testDouble, 42.4);
     expect(label.testBool, true);
+  });
+
+  test('json with unknown element', () {
+    var parserService = JsonFormParserService(_getDefaultParserList());
+
+    var json = '''
+    {
+        "@name": "singleItemContainer2",
+        "id": "form1",
+        "child":
+        {
+          "@name": "label",
+          "id": "label1",
+          "value": "John Doe",
+          "testInt": "42",
+          "testDouble": "42.4",
+          "testBool": "true"
+        }       
+    }''';
+
+    expect(() => parserService.parse(json),
+        throwsA(TypeMatcher<MissingParserException>()));
+  });
+
+  test('json with element without a name', () {
+    var parserService = JsonFormParserService(_getDefaultParserList());
+
+    var json = '''
+    {
+        "@name": "singleItemContainer",
+        "id": "form1",
+        "child":
+        {
+          "id": "label1",
+          "value": "John Doe",
+          "testInt": "42",
+          "testDouble": "42.4",
+          "testBool": "true"
+        }       
+    }''';
+
+    expect(() => parserService.parse(json),
+        throwsA(TypeMatcher<MissingElementNameException>()));
+  });
+
+  test('invalid json', () {
+    var parserService = JsonFormParserService(_getDefaultParserList());
+
+    var json = '''
+    {
+        "@name": "singleItemContainer",
+        "id": "form1",
+        "child":
+        {
+          "@name": "label",
+          "id": "label1",
+          "testInt": "42",
+          "testDouble": "42.4",
+          "testBool": "true"
+        }       
+    ''';
+    expect(() => parserService.parse(json),
+        throwsA(TypeMatcher<FormatException>()));
   });
 }

@@ -16,7 +16,7 @@ class SingleSelectChipGroupParser<TSingleSelectChipGroup extends SingleSelectChi
   void fillProperties(
     TSingleSelectChipGroup singleSelectChipGroup, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(singleSelectChipGroup, parserNode, parent, parser);

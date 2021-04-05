@@ -9,13 +9,13 @@ class RequiredValidationParser extends ValidationParser<RequiredValidation> {
 
   @override
   void fillProperties(RequiredValidation validation, ParserNode parserNode,
-      Element parent, parser) {
+      Element? parent, parser) {
     validation
       ..id = parserNode.getPlainString("id")
       ..isVisibleProperty = parserNode.getIsVisibleProperty()
-      ..parentProperty = parserNode.getParentProperty(parent)
+      ..parentProperty = parserNode.getParentProperty(parent as FormElement?)
       ..messageProperty = parserNode.getStringProperty("message")
-      ..isValidProperty = getIsValid(parent);
+      ..isValidProperty = getIsValid(parent as FormElement);
   }
 
   @override
@@ -33,7 +33,7 @@ class RequiredValidationParser extends ValidationParser<RequiredValidation> {
       () => CustomFunctionExpression<bool>(
         [
           DelegateExpression(
-            [parent.id],
+            [parent.id!],
             parent.getExpressionProvider(),
           ),
         ],

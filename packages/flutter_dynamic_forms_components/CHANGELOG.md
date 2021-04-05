@@ -1,3 +1,10 @@
+# 1.0.0
+
+* Migrated to stable null safety.
+* Removed default renderers - using only reactive renderers. Reactive renderers are no longer using reactive prefix except FormRenderer which is using 'Default' prefix to avoid conflict with FormRenderer widget.
+* getReactiveRenderers renamed to getRenderers
+* Renamed container to itemsContainer to avoid conflict with Flutter container widget.
+
 # 0.14.0
 
 * Updated dependency for flutter dynamic forms.

@@ -173,6 +173,12 @@ void main() {
     var value = expression.evaluate() as Integer;
     expect(value.toInt(), 11);
   });
+
+  test('expression exception test', () {
+    var parser = ExpressionParser({'formId1': TestFormElement()});
+    expect(() => parser.parse('@formId2.value'),
+        throwsA(TypeMatcher<NullReferenceException>()));
+  });
 }
 
 class TestFormElement extends FormElement {
@@ -190,14 +196,12 @@ class TestFormElement extends FormElement {
 
   @override
   ExpressionProviderElement clone(
-      ExpressionProvider<ExpressionProviderElement> parent) {
-    //Nothing to do
-    return null;
+      ExpressionProvider<ExpressionProviderElement>? parent) {
+    return this;
   }
 
   @override
   FormElement getInstance() {
-    //Nothing to do
-    return null;
+    return this;
   }
 }

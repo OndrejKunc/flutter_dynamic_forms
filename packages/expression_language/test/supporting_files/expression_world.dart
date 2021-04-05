@@ -1,11 +1,12 @@
 import 'package:expression_language/expression_language.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:gherkin/gherkin.dart';
 import 'package:petitparser/petitparser.dart';
 
 class ExpressionWorld extends World {
-  ExpressionGrammarParser grammarParser;
-  Object result;
-  Parser parser;
+  late ExpressionGrammarParser grammarParser;
+  Object? result;
+  late Parser parser;
 
   ExpressionWorld() {
     grammarParser = ExpressionGrammarParser({});

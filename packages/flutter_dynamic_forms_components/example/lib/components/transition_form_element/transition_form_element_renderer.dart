@@ -32,7 +32,7 @@ class TransitionFormElementRenderer
 }
 
 class ExpandableSection extends StatefulWidget {
-  final Widget child;
+  final Widget? child;
   final bool expand;
   ExpandableSection({this.expand = false, this.child});
 
@@ -42,8 +42,8 @@ class ExpandableSection extends StatefulWidget {
 
 class _ExpandableSectionState extends State<ExpandableSection>
     with SingleTickerProviderStateMixin {
-  AnimationController expandController;
-  Animation<double> animation;
+  late AnimationController expandController;
+  late Animation<double> animation;
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _ExpandableSectionState extends State<ExpandableSection>
       parent: expandController,
       curve: Curves.linear,
     );
-    animation = Tween(begin: 0.0, end: 1.0).animate(curve)
+    animation = Tween(begin: 0.0, end: 1.0).animate(curve as Animation<double>)
       ..addListener(() {
         setState(() {});
       });

@@ -12,36 +12,33 @@ class ComponentDescriptionBuilder {
 
     var typeParser = ComponentTypeGrammarParser().build();
 
-    ComponentType parentType;
+    ComponentType? parentType;
     if (rawComponent.parentType != null) {
-      parentType = typeParser.parse(rawComponent.parentType).value;
+      parentType = typeParser.parse(rawComponent.parentType!).value;
     }
 
     var properties = <PropertyDescription>[];
-    if (rawComponent.properties != null) {
-      for (var rawProperty in rawComponent.properties) {
-        var propertyType = typeParser.parse(rawProperty.type).value;
-        var isMutable = rawProperty.isMutable;
-        properties.add(
-          PropertyDescription(
-            name: rawProperty.name,
-            type: propertyType,
-            defaultValue: rawProperty.defaultValue,
-            isMutable: isMutable,
-            isEnum: rawProperty.isEnum,
-          ),
-        );
-      }
+    for (var rawProperty in rawComponent.properties) {
+      var propertyType = typeParser.parse(rawProperty.type).value;
+      properties.add(
+        PropertyDescription(
+          name: rawProperty.name,
+          type: propertyType,
+          defaultValue: rawProperty.defaultValue,
+          isMutable: rawProperty.isMutable,
+          isEnum: rawProperty.isEnum,
+        ),
+      );
     }
 
-    PropertyDescription contentProperty;
+    PropertyDescription? contentProperty;
     if (rawComponent.contentProperty != null) {
       contentProperty =
           properties.firstWhere((p) => p.name == rawComponent.contentProperty);
     }
 
     return ComponentDescription(
-      type: type,
+      type: type as DefinitionType,
       parentType: parentType,
       properties: properties,
       contentProperty: contentProperty,

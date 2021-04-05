@@ -14,7 +14,7 @@ class ContainerParser<TContainer extends Container>
   void fillProperties(
     TContainer container,
     ParserNode parserNode,
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(container, parserNode, parent, parser);

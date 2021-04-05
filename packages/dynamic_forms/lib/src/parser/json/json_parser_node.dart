@@ -1,13 +1,12 @@
 import 'package:dynamic_forms/dynamic_forms.dart';
 import 'package:dynamic_forms/src/parser/parser_node.dart';
-import 'package:meta/meta.dart';
 
 class JsonParserNode extends ParserNode {
   final Map<String, dynamic> element;
   JsonParserNode(this.element);
 
   @override
-  String getName() {
+  String? getName() {
     return element['@name'];
   }
 
@@ -41,18 +40,47 @@ class JsonParserNode extends ParserNode {
   }
 
   @override
-  String getPlainString(String propertyName) {
+  Property<T?> getNullableProperty<T>(
+      String name, T Function(String s) converter, T? Function() defaultValue,
+      {bool isImmutable = true}) {
+    var property = element[name];
+    if (property == null) {
+      return createNullableProperty<T>(defaultValue(), isImmutable);
+    }
+    if (property is String) {
+      return createNullableProperty<T>(converter(property), isImmutable);
+    }
+    if (property is bool && T == bool) {
+      return createNullableProperty<T>(property as T, isImmutable);
+    }
+    if (property is int && T == int) {
+      return createNullableProperty<T>(property as T, isImmutable);
+    }
+    if (property is double && T == double) {
+      return createNullableProperty<T>(property as T, isImmutable);
+    }
+    if (property is Map<String, dynamic>) {
+      var expression = property['expression'];
+      if (expression != null) {
+        return StringExpressionProperty<T?>(expression);
+      }
+    }
+    return createNullableProperty<T>(defaultValue(), isImmutable);
+  }
+
+  @override
+  String? getPlainString(String propertyName) {
     return element[propertyName];
   }
 
   @override
   Property<List<TFormElement>> getChildrenProperty<TFormElement>(
-      {FormElement parent,
-      String childrenPropertyName,
-      ElementParserFunction parser,
+      {FormElement? parent,
+      required String childrenPropertyName,
+      required ElementParserFunction parser,
       bool isContentProperty = false,
       bool isImmutable = true}) {
-    var childrenList = element[childrenPropertyName] as List;
+    var childrenList = element[childrenPropertyName] as List?;
     var children = childrenList == null
         ? <TFormElement>[]
         : childrenList
@@ -65,14 +93,14 @@ class JsonParserNode extends ParserNode {
 
   @override
   Property<TFormElement> getChildProperty<TFormElement>({
-    @required String propertyName,
-    @required ElementParserFunction parser,
-    @required FormElement parent,
-    @required TFormElement Function() defaultValue,
+    required String propertyName,
+    required ElementParserFunction parser,
+    required FormElement parent,
+    required TFormElement Function() defaultValue,
     bool isContentProperty = false,
     bool isImmutable = true,
   }) {
-    var childElement = element[propertyName] as Map<String, dynamic>;
+    var childElement = element[propertyName] as Map<String, dynamic>?;
 
     if (childElement != null) {
       return createProperty<TFormElement>(
@@ -80,5 +108,24 @@ class JsonParserNode extends ParserNode {
           isImmutable);
     }
     return createProperty<TFormElement>(defaultValue(), isImmutable);
+  }
+
+  @override
+  Property<TFormElement?> getNullableChildProperty<TFormElement>({
+    required String propertyName,
+    required ElementParserFunction parser,
+    required FormElement parent,
+    required TFormElement? Function() defaultValue,
+    bool isContentProperty = false,
+    bool isImmutable = true,
+  }) {
+    var childElement = element[propertyName] as Map<String, dynamic>?;
+
+    if (childElement != null) {
+      return createNullableProperty<TFormElement>(
+          parser(JsonParserNode(childElement), parent) as TFormElement,
+          isImmutable);
+    }
+    return createNullableProperty<TFormElement>(defaultValue(), isImmutable);
   }
 }

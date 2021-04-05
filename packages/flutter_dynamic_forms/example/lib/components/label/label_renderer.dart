@@ -17,7 +17,7 @@ class LabelRenderer extends FormElementRenderer<model.Label> {
             initialData: element.value,
             stream: element.valueChanged,
             builder: (context, snapshot) {
-              return Text(snapshot.data);
+              return Text(snapshot.data!);
             }),
       ),
     );

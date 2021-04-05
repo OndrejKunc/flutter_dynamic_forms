@@ -14,12 +14,12 @@ class PaddingParser<TPadding extends Padding>
   void fillProperties(
     TPadding padding, 
     ParserNode parserNode, 
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(padding, parserNode, parent, parser);
     padding
-      ..childProperty = parserNode.getChildProperty<FormElement>(
+      ..childProperty = parserNode.getChildProperty<FormElement?>(
         propertyName: 'child',
         parent: padding,
         parser: parser,

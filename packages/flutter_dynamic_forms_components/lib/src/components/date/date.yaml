@@ -2,7 +2,7 @@ type: date
 parentType: formElement
 properties:
   value:
-    type: dateTime
+    type: dateTime?
     isMutable: true
   label:
     type: string
@@ -11,6 +11,6 @@ properties:
   initialDate:
     type: dateTime
   firstDate:
-    type: dateTime
+    type: dateTime?
   lastDate:
-    type: dateTime
+    type: dateTime?

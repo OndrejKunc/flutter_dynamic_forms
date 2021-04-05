@@ -13,7 +13,7 @@ class LabelParser<TLabel extends Label> extends FormElementParser<TLabel> {
   void fillProperties(
     TLabel label,
     ParserNode parserNode,
-    Element parent,
+    Element? parent,
     ElementParserFunction parser,
   ) {
     super.fillProperties(label, parserNode, parent, parser);

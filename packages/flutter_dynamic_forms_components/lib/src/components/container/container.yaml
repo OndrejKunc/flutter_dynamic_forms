@@ -1,6 +1,0 @@
-type: container
-parentType: formElement
-properties:
-  children:
-    type: formElement[]
-contentProperty: children

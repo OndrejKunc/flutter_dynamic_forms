@@ -1,3 +1,7 @@
+# 1.0.0
+
+* Stable null safety release.
+
 # 0.7.1
 
 * Added strongly_cast_properties option to build.yaml.

@@ -25,8 +25,8 @@ class DelegateExpression<T> extends Expression<T> {
   @override
   Expression<T> clone(Map<String, ExpressionProviderElement> elementMap) {
     // Need to extract last expression provider from the original path
-    var expressionProviderElement = elementMap[expressionPath[0]];
-    ExpressionProvider expressionProvider;
+    var expressionProviderElement = elementMap[expressionPath[0]]!;
+    late ExpressionProvider expressionProvider;
 
     var isLastItemElement = true;
     for (var i = 1; i < expressionPath.length; i++) {
@@ -43,6 +43,7 @@ class DelegateExpression<T> extends Expression<T> {
     if (isLastItemElement) {
       expressionProvider = expressionProviderElement.getExpressionProvider();
     }
-    return DelegateExpression<T>(expressionPath, expressionProvider);
+    return DelegateExpression<T>(
+        expressionPath, expressionProvider as ExpressionProvider<T>);
   }
 }

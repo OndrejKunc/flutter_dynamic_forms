@@ -3,7 +3,7 @@ description: A flutter example of dynamic forms project with custom components.
 version: 0.0.1
 
 environment:
-  sdk: ">=2.2.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
@@ -11,6 +11,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_dynamic_forms:
     path: ../
+  collection: ^1.15.0
 
 dev_dependencies:
   flutter_test:
