@@ -20,13 +20,11 @@ before_script:
 script:
   - cd packages/expression_language
   - pub get
-  - pub run test
-  - pub run test_coverage
+  - ../../scripts/code_coverage.sh
   - cp coverage/lcov.info ../../expression_language.lcov
   - cd ../dynamic_forms
   - pub get
-  - pub run test
-  - pub run test_coverage
+  - ../../scripts/code_coverage.sh
   - cp coverage/lcov.info ../../dynamic_forms.lcov
   - cd ../flutter_dynamic_forms
   - flutter pub get
