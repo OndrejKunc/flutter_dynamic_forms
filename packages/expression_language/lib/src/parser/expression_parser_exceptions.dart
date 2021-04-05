@@ -2,6 +2,11 @@ abstract class ExpressionParserException implements Exception {
   final String message;
   ExpressionParserException(this.message);
   String getMessage() => message;
+
+  @override
+  String toString() {
+    return '${super.toString()}, Message: $message';
+  }
 }
 
 class InvalidSyntaxException extends ExpressionParserException {

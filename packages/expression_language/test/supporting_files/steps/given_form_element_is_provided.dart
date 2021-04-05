@@ -9,6 +9,7 @@ class GivenFormElementIsProvided extends GivenWithWorld<ExpressionWorld> {
     world.buildGrammarParser(
       {
         'testElement': TestElement(),
+        'underscore_test_element': TestElement(),
       },
     );
   }

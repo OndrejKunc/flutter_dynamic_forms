@@ -667,3 +667,13 @@ Feature: Expression
     Given form element is provided
     When expression "@testElement.nullIntegerValue! + 5" is evaluated
     Then "NullReferenceException" exception is thrown
+
+  Scenario: Resolve underscore reference
+    Given form element is provided
+    When expression "@testElement.underscore_name + 5" is evaluated
+    Then int expression result is "15"
+    
+  Scenario: Resolve underscore identifier
+    Given form element is provided
+    When expression "@underscore_test_element.underscore_name + 5" is evaluated
+    Then int expression result is "15"

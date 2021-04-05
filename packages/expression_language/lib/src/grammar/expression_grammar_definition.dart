@@ -11,6 +11,7 @@ class ExpressionGrammarDefinition extends GrammarDefinition {
   Parser failureState() =>
       (ref(expression).trim() & ref(fail).trim()) | ref(fail).trim();
   Parser fail() => any();
+  Parser letterOrSpecialChar() => ref(LETTER) | ref(token, '_');
 
   Parser decimalNumber() =>
       ref(DIGIT) &
@@ -29,7 +30,8 @@ class ExpressionGrammarDefinition extends GrammarDefinition {
           ref(TRUE) |
           ref(FALSE) |
           ref(singleLineString));
-  Parser identifier() => ref(LETTER) & (ref(LETTER) | ref(DIGIT)).star();
+  Parser identifier() =>
+      ref(letterOrSpecialChar) & (ref(letterOrSpecialChar) | ref(DIGIT)).star();
 
   Parser function() =>
       ref(identifier).flatten() &

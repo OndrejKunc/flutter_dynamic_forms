@@ -24,6 +24,7 @@ class TestElement extends ExpressionProviderElement {
     'durationValue': ConstantExpressionProvider<Duration>(Duration(seconds: 1)),
     'nullableDurationValue':
         ConstantExpressionProvider<Duration?>(Duration(seconds: 1)),
+    'underscore_name': ConstantExpressionProvider<Integer>(Integer(10)),
   };
 
   @override
