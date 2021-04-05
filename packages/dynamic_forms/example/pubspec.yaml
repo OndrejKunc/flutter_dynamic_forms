@@ -1,6 +1,7 @@
 name: example
 description: example
 version: 1.0.0+1
+publish_to: none
 
 environment:
   sdk: ">=2.2.0 <3.0.0"

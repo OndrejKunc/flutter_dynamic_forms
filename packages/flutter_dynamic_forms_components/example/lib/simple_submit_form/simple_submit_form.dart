@@ -52,7 +52,7 @@ class _SimpleSubmitFormState extends State<SimpleSubmitForm> {
                         builder: (context) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: RaisedButton(
+                            child: ElevatedButton(
                               child: Text('Submit'),
                               onPressed: () {
                                 var formProperties =
@@ -92,7 +92,7 @@ class _SimpleSubmitFormState extends State<SimpleSubmitForm> {
             ),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();

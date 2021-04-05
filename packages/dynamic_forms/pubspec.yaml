@@ -15,4 +15,4 @@ dependencies:
   collection: ^1.15.0
 dev_dependencies:
   test: ^1.16.0
-  pedantic: ^1.10.0
+  pedantic: ^1.11.0

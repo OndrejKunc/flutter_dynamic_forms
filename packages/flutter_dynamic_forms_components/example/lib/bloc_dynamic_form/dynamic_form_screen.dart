@@ -15,8 +15,7 @@ class DynamicFormScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: BlocListener<DynamicFormBloc, DynamicFormState>(
             listener: (context, state) {
-              if (state.resultProperties != null &&
-                  state.resultProperties.isNotEmpty) {
+              if (state.resultProperties.isNotEmpty) {
                 _displayDialog(context, state.resultProperties);
               }
             },
@@ -57,7 +56,7 @@ class DynamicFormScreen extends StatelessWidget {
             ),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: flutter.Text('Ok'),
               onPressed: () {
                 bloc.add(ClearFormDataEvent());
@@ -86,7 +85,7 @@ class DynamicFormButtonRow extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        OutlineButton(
+        OutlinedButton(
           child: Row(
             children: <Widget>[
               flutter.Text("Cancel"),
@@ -99,7 +98,7 @@ class DynamicFormButtonRow extends StatelessWidget {
           },
         ),
         SizedBox(width: 10),
-        OutlineButton(
+        OutlinedButton(
           child: Row(
             children: <Widget>[
               flutter.Text("Clear"),
@@ -112,14 +111,14 @@ class DynamicFormButtonRow extends StatelessWidget {
           },
         ),
         SizedBox(width: 10),
-        OutlineButton(
+        OutlinedButton(
           child: Row(
             children: <Widget>[
               flutter.Text("Ok"),
               SizedBox(width: 10),
               Icon(
                 Icons.check_circle,
-                color: Colors.green,
+                color: state.isValid ? Colors.green : Colors.black26,
               ),
             ],
           ),

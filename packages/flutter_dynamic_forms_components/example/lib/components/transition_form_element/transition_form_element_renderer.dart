@@ -18,13 +18,11 @@ class TransitionFormElementRenderer
           child: child,
           expand: true,
         );
-        break;
       case FormElementTransitionType.hide:
         return ExpandableSection(
           child: child,
           expand: false,
         );
-        break;
       default:
         throw Exception('Unknown transition type');
     }

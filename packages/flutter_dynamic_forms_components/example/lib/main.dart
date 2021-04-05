@@ -58,7 +58,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
@@ -71,7 +71,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 16),
-              child: RaisedButton(
+              child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -85,7 +85,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 16),
-              child: RaisedButton(
+              child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -99,7 +99,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 16),
-              child: RaisedButton(
+              child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -113,7 +113,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 16),
-              child: RaisedButton(
+              child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -127,7 +127,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 16),
-              child: RaisedButton(
+              child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -150,7 +150,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 16),
-              child: RaisedButton(
+              child: ElevatedButton(
                 onPressed: () {
                   var formBuilder = FormBuilder(
                     XmlFormParserService(
