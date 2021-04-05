@@ -1,4 +1,4 @@
-# 0.1.0
+# 1.0.0
 
 * Migrated to stable null safety.
 * Removed default renderers - using only reactive renderers. Reactive renderers are no longer using reactive prefix except FormRenderer which is using 'Default' prefix to avoid conflict with FormRenderer widget.
