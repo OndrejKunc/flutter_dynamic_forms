@@ -9,9 +9,8 @@ environment:
 dependencies:
   xml: ^5.0.0
   rxdart: ^0.26.0
-
-  expression_language:
-    path: ../expression_language
+  meta: ^1.3.0
+  expression_language: ^1.0.0
   collection: ^1.15.0
 dev_dependencies:
   test: ^1.16.0
