@@ -15,8 +15,9 @@ class ParserGenerator {
 
   List forbiddenTypes = ['enumElement'];
 
-  bool _generateParser() => componentDescription.parentType == null ? false :
-      !forbiddenTypes.contains(componentDescription.parentType!.typeName);
+  bool _generateParser() => componentDescription.parentType == null
+      ? false
+      : !forbiddenTypes.contains(componentDescription.parentType!.typeName);
 
   String? generate() {
     if (!_generateParser()) {

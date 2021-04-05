@@ -6,7 +6,8 @@ class TextField extends FormElement {
   static const String validationsPropertyName = 'validations';
   static const String valuePropertyName = 'value';
 
-  Property<String> get labelProperty => properties[labelPropertyName] as Property<String>;
+  Property<String> get labelProperty =>
+      properties[labelPropertyName] as Property<String>;
   set labelProperty(Property<String> value) =>
       registerProperty(labelPropertyName, value);
   String get label => labelProperty.value;
@@ -27,7 +28,8 @@ class TextField extends FormElement {
   Stream<List<Validation>> get validationsChanged =>
       validationsProperty.valueChanged;
 
-  Property<String> get valueProperty => properties[valuePropertyName] as Property<String>;
+  Property<String> get valueProperty =>
+      properties[valuePropertyName] as Property<String>;
   set valueProperty(Property<String> value) =>
       registerProperty(valuePropertyName, value);
   String get value => valueProperty.value;

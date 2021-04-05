@@ -55,7 +55,8 @@ class TransitionFormBuilder {
         if (formElement is TransitionFormElement) {
           continue;
         }
-        var itemInOldList = oldList.firstWhereOrNull((o) => o.id == formElement.id);
+        var itemInOldList =
+            oldList.firstWhereOrNull((o) => o.id == formElement.id);
         if (itemInOldList == null) {
           resultList[i] = TransitionFormElement(
               resultElement, FormElementTransitionType.show);
