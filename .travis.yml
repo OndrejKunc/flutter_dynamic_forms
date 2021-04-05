@@ -15,7 +15,8 @@ addons:
       - fonts-droid
 before_script:
   - git clone https://github.com/flutter/flutter.git -b stable --depth 1
-  - ./flutter/bin/flutter doctor
+  - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
+  - flutter doctor
 script:
   - cd packages/expression_language
   - pub get
@@ -27,6 +28,9 @@ script:
   - pub run test
   - pub run test_coverage
   - cp coverage/lcov.info ../../dynamic_forms.lcov
+  - cd ../flutter_dynamic_forms
+  - flutter pub get
+  - flutter test
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 cache:
