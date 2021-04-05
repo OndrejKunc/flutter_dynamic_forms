@@ -18,7 +18,10 @@ class FormRenderService {
       TFormElement formElement, BuildContext context) {
     var renderer = _renderersMap[formElement.runtimeType];
     if (renderer == null) {
-      throw Exception('No renderer for element name $formElement found');
+      throw MissingRendererException(
+        formElement,
+        TFormElement.toString(),
+      );
     }
     return renderer.render(formElement, context, dispatcher, render);
   }
