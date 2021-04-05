@@ -130,7 +130,9 @@ There are multiple types that can be set to the `type` in the property descripti
 * `customformElement` - name of the other component
 * `customformElement[]` - array of the other components
 
-Each type is nullable and when property is not set it defaults to the `null` (unless `default` key is defined).
+Each type can be make nullable by appending `?` suffix.
+
+When `default` value is nullable and when property is not set it defaults to the `null`. For non-nullable values it defaults to `0` for numbers, empty string for `String`, `false` for `bool` and min date time for `DateTime`.
 
 ### YAML -> XML
 In XML the `name` corresponds to the element name. 
