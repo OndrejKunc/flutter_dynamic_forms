@@ -105,6 +105,10 @@ Feature: Expression
     When expression "duration("P5D1H3S") >= duration("P5D1H3S") - duration("P1S")" is evaluated
     Then bool expression result is "true"
 
+  Scenario: Not equal operator
+    When expression "3 != 2" is evaluated
+    Then bool expression result is "true"
+
   Scenario: DateTime constructor test
     When expression "dateTime("1997-07-16T19:20")" is evaluated
     Then DateTime expression result is "1997-07-16T19:20"

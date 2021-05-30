@@ -1,3 +1,7 @@
+# 1.0.1
+
+* Fixed issue when not equal operator `!=` was clashing with postfix exclamation mark operator.  
+
 # 1.0.0
 
 * Stable null safety release.
