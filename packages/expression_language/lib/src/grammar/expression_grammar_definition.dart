@@ -89,7 +89,7 @@ class ExpressionGrammarDefinition extends GrammarDefinition {
       (ref(multiplicativeOperator) & ref(postfixOperatorExpression)).star();
 
   Parser postfixOperatorExpression() =>
-      ref(unaryExpression) & ref(token, '!').optional();
+      ref(unaryExpression) & (char('!').seq(char('=').not())).optional();
 
   Parser unaryExpression() =>
       ref(literal) |
