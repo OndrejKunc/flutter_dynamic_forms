@@ -1,4 +1,6 @@
-// @dart=2.9
+/* 
+	// @dart=2.9
+*/
 
 import 'dart:async';
 import 'package:gherkin/gherkin.dart';
@@ -7,19 +9,18 @@ import 'package:glob/glob.dart';
 import 'supporting_files/index.dart';
 
 void main() async {
-  final config = TestConfiguration()
-    ..features = [Glob(r'test/features/**.feature')]
-    ..exitAfterTestRun = false
-    ..reporters = [
+  final config = TestConfiguration(
+    features : [Glob(r'test/features/**.feature')],
+    reporters : [
       StdoutReporter(MessageLevel.error),
       ProgressReporter(),
       TestRunSummaryReporter(),
       JsonReporter(path: 'test/report.json')
-    ]
-    ..createWorld = (TestConfiguration config) {
+    ],
+    createWorld : (TestConfiguration config) {
       return Future.value(ExpressionWorld());
-    }
-    ..stepDefinitions = [
+    },
+    stepDefinitions : [
       GivenFormElementIsProvided(),
       GivenCustomExpressionIsProvided(),
       WhenExpressionIsEvaluated(),
@@ -29,7 +30,8 @@ void main() async {
       ThenBoolExpressionResult(),
       ThenExceptionThrownResult(),
       ThenDateTimeExpressionResult(),
-    ];
+    ]
+  );
 
   var runner = GherkinRunner();
   await runner.execute(config);
